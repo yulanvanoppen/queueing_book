@@ -1,13 +1,21 @@
 I make the figures with
 
 * python, and its libraries scipy, numpy, matplotlib, matplotlibtikz,
+* pweave  
 * latex.
 
-The python scripts contain the python code to make a tikz figure. I
-use ``testing_ground.tex`` to test the tikz code. Once I am happy about
-the figure I include it in the book.
+The python scripts contain the python code to make tikz code for a
+figure and save it to a file. Then I input the file in
+``testing_ground.tex`` and test the tikz code with
+
+  > pdflatex testing_ground.tex
 
 
-To make the output
+Once I am happy about the figure I include it in the book. In the book
+I typically mention the script that I used to make the figure.
 
-  > python3 reflected_random_walk.py && pdflatex testing_ground.tex
+
+As an example
+
+  > python3 reflected_random_walk.py
+  > pdflatex reflected_random_walk.tx 
