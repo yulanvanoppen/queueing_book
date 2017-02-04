@@ -1,0 +1,92 @@
+%\documentclass[a4paper,12pt]{report}
+%\documentclass[a4paper,11pt]{book}
+\documentclass[a4paper,11pt]{scrbook}
+\usepackage{preamble}
+
+\SetupExSheets{
+  headings = runin,
+  question/print = true,
+  solution/print = true,
+  counter-format = ch.se.qu ,
+  counter-within = section
+}
+
+\begin{document}
+
+
+%\include{organization}
+%\include{intro}
+
+\chapter{Single-Station Queueing Systems}
+%\input{chunks/expdistribution.tx}
+%\input{poissondistribution.tex}
+% \input{kendall.tex}
+%\input{chunks/constructiondiscretetime.tx}
+%\input{chunks/constructioncontinuoustime.tx}
+%  \input{chunks/ratestability.tx}
+%  \input{chunks/empericalperfmeasures.tx}
+%\input{chunks/levelcrossing.tx}
+% \input{chunks/mm1.tx}
+%  \input{chunks/mnmn1.tx}
+%  \input{chunks/pasta.tx}
+%  \input{chunks/little.tx}
+%  \input{chunks/usefulidentities.tx}
+%  \input{chunks/mg1.tx}
+%  \input{chunks/batcharrivals.tx}
+% \input{relationmxm1andmg1.tex}
+%\input{mm1transient}
+%  \input{chunks/mg1distributionqueuelength.tx}
+%   \input{chunks/gg1.tx}
+% \input{chunks/serviceInterruptions.tx}
+%  \input{chunks/process_batches.tx}
+% \input{chunks/mg1density.tx}
+
+\chapter{Open Queueing Networks}
+\label{sec:notes-relat-chapt2}
+
+% \input{open_single_class.tex}
+% \input{chunks/tandem.tx}
+% \input{open_general.tex}
+%\input{todo/open_move_batches.tex}
+
+\chapter{Closed Queueing Networks}
+\label{ch3}
+
+% \input{gordon_newell.tex}
+% \input{chunks/convolution.tx}
+% \input{chunks/mva.tx}
+\input{chunks/mda.tx}
+
+%\include{extra_topics}
+
+%\includequestions[random=2]{single_station}
+
+\chapter{Hints}
+%\addcontentsline{toc}{chapter}{Hints}
+% \fancyhead{} % clear all header fields
+% \fancyhead[LO, LE]{HINTS}
+%\printquestionhints
+
+\chapter{Solutions}
+%\addcontentsline{toc}{chapter}{Solutions}
+% \fancyhead{} % clear all header fields
+% \fancyhead[LO, LE]{SOLUTIONS}
+%\printsolutions
+
+\chapter*{Notation}
+%\addcontentsline{toc}{chapter}{Notation}
+% \label{sec:notation}
+% \input{notation}
+
+\chapter*{Formula Sheet}
+%\addcontentsline{toc}{chapter}{Formula Sheet}
+%\input{formula_sheet}
+
+\bibliographystyle{plainnat}
+\bibliography{biblio_nicky}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

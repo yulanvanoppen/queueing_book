@@ -1,0 +1,449 @@
+\section
+[$M/G/1$ Queue: Queue Length Distribution]
+{$\mathbf{M/G/1}$ Queue: Queue Length Distribution}
+\label{sec:distr-queue-length}
+
+In Section~\ref{sec:mg1} we derived the Pollackzek-Khintchine
+Eq.~\eqref{eq:70} by which we can compute the average waiting time in
+queue for the $M/G/1$ queue. Then, with Little's law, we therefore
+also have the average queue length. However, if we need the loss
+probability $\P{L>n}$, we need expressions for the stationary
+distribution of the number of jobs in the system $p(n)=\P{L=n}$.  Here
+we present a set of recursions by which we can compute $p(n)$ for
+a given arrival rate $\lambda$ and service distribution~$F$ of the
+service times.
+
+To derive the stationary distribution $p(n)$ we work in steps, and use
+similar level-crossing arguments as in
+Section~\ref{sec:batch-arrivals}.  As we will see, the argumentation
+is quite subtle, as it uses an interplay of the PASTA property and the
+relation of Eq.~\eqref{eq:39} between $\pi(n)$, $p(n)$ and
+$\delta(n)$. The important idea is to focus on the \emph{departure}
+moments, as these moments can be considered as restarts of the service
+times, and on the number of arrivals $Y_k$ during the service time of
+the $k$th job.  Assume that $f(j) = \P{Y_k = j}$ is given and write
+$G(j) = \P{Y_k > j}$.
+
+
+
+First we concentrate on a downcrossing of level $n$, see
+Figure~\ref{fig:mg1_2}. Suppose that the `$k-1$'th job leaves $n+1$
+jobs behind after its service completion. Then, if during the service
+time of the $k$th job, no other jobs arrive, it must be that job $k$
+leaves $n$ jobs behind. Thus, job $k$ realizes a downcrossing of level
+$n$ only when $L(D_{k-1})=n+1$ and $Y_k=0$, i.e.,
+\begin{equation*}
+  L(D_{k-1})=n+1, Y_k = 0 \implies L(D_k) = n
+\end{equation*}
+Let us next count all  downcrossings up to time $t$. Clearly, 
+\begin{equation*}
+  D(n+1, 0, t) = \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k-1})=n+1}\1{Y_k=0}
+\end{equation*}
+is the number of jobs that depart before time $t$, i.e.,
+$\1{D_k\leq t}$, and whose predecessors leave $n+1$ jobs behind, i.e.,
+$\1{L(D_{k-1})=n+1}$, and such that no jobs arrive during the service
+time, i.e., $\1{Y_k=0}$. . Then, by using the definitions and limits
+developed in Sections~\ref{sec:rate-rate-out}
+and~\ref{sec:poisson-arrivals-see},
+\begin{equation*}
+  \begin{split}
+  \lim_{t\to\infty} \frac{  D(n+1, 0, t)}t 
+&=   \lim_{t\to\infty}  \frac{D(t)}t \frac{D(n+1, t)}{D(t)}\frac{ D(n+1, 0, t)}{D(n+1,t)} \\
+&=   \gamma \delta(n+1) \lim_{t\to\infty} \frac{ D(n+1, 0, t)}{D(n+1,t)} \\
+&=   \gamma \delta(n+1) \P{Y=0}\\
+& = \gamma \delta(n+1) f(0),
+  \end{split}
+\end{equation*}
+where the last limit follows from the independence of $Y_k$ and $L(D_{k-1})$. 
+
+\begin{figure}[htb]
+  \centering
+                  
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+\node[state] (0) {$\delta(0)$}; 
+\node[state] (1) [right of=0] {$\delta(1)$}; 
+\node[state] (2) [right of=1] {$\delta(2)$}; 
+\node[state] (3) [right of=2] {$\delta(3)$}; 
+\node[state] (4) [right of=3] {$\delta(4)$}; 
+\node[state] (5) [right of=4] {$\cdots$}; 
+
+\path 
+(0) edge [bend left] node[above, very near start] {$G(3)$} (5)
+(1) edge [bend left] node[above, very near start] {$G(3)$} (5)
+(2) edge [bend left] node[above, very near start] {$G(2)$} (5)
+(3) edge [bend left] node[above, very near start] {$G(1)$} (5)
+(4) edge [bend left] node[below, near start] {$f(0)$} (3);
+
+\draw[-, dotted, gray] (9.7,-2.)--(9.7,2.0) node[above, black] {level $3$};
+
+
+\end{tikzpicture}
+\caption{Level $3$ is crossed from below with rates
+  $\delta(0)G(3) + \delta(1)G(3) + \cdots \delta(3) G(1)$ and crossed
+  from above with rate $\delta(4) f(0)$. }
+\label{fig:mg1_2}
+\end{figure}
+
+
+For the upcrossings, suppose first that $L(D_{k-1})=n>0$. If there are
+no arrivals during the service of job $k$, i.e., $Y_k=0$, then job $k$
+must leave $n-1$ jobs behind. Thus, no upcrossing occurs in this
+case. Next, if $Y_k=1$, then job $k$ leaves $n$ jobs behind. Thus,
+still no upcrossing occurs. In fact, to upcross level $n$ when
+$L(D_{k-1})=n>0$, at least two new jobs must arrive during the service
+of job $k$. More generally, if $0<m\leq n$,
+\begin{equation*}
+  L(D_{k-1})=m, Y_k > n-m+1 \implies L(D_k) > n,
+\end{equation*}
+while if $m=0$ (think about this),
+\begin{equation*}
+  L(D_{k-1})=0, Y_k > n \implies L(D_k) > n.
+\end{equation*}
+Similar to our earlier work, by defining proper counting functions,
+c.f., Exercise~\ref{q:555}, and taking suitable limits, we find for
+the upcrossing rate that
+\begin{equation}\label{eq:555}
+\gamma \delta(0) G(n) + \gamma \sum_{m=1}^n \delta(m) G(n-m+1).
+\end{equation}
+
+Equating the down-crossings and up-crossing and dividing by $\gamma$
+gives
+\begin{equation}\label{eq:72}
+  f(0) \delta(n+1) = \delta(0) G(n) + \sum_{m=1}^{n} \delta(m) G(n+1-m).
+\end{equation}
+Finally, noting that $\pi(n) = \delta(n)$ from~\eqref{eq:39} and the
+fact that the $M/G/1$ queue length process has one-step transitions,
+we arrive at
+\begin{equation*}
+  f(0) \pi(n+1) = \pi(0) G(n) + \sum_{m=1}^{n} \pi(m) G(n+1-m).
+\end{equation*}
+
+Again, we obtain a recursion by which we can compute, iteratively, the
+state probabilities.  Setting $\pi(0)=1$ at first, $\pi(1)$ follows
+from the above recursion. Then, with $\pi(0)=1$ and $\pi(1)$ we find
+$\pi(2)$, and so on, up to some limit $N$. Then, set
+$G=\sum_{n=0}^N \pi(n)$ as the normalization constant. As a practical
+approach to determine whether $N$ is sufficiently large, compute
+$p(n)$ also for a couple for values above $N$. If these values
+decrease when $n$ becomes larger and they are very small compared to
+the $p(n)$ with $n<N$, $N$ is most surely sufficiently large. However,
+getting formal bounds on a proper size of $N$ requires more work than
+we can do here.
+
+\begin{question}\label{q:555}
+Provide the details behind the derivation of Eq.~\ref{eq:555}.
+\begin{solution}
+Define, for the first term,
+\begin{equation*}
+  D(0, n, t) = \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k-1})=0}\1{Y_k>n}
+\end{equation*}
+Then
+\begin{equation*}
+  \begin{split}
+  \lim_{t\to\infty} \frac{  D(0, n, t)}t 
+&=   \lim_{t\to\infty}  \frac{D(t)}t \frac{D(0, t)}{D(t)}\frac{ D(0, n, t)}{D(0,t)} \\
+&=   \gamma \delta(0) \lim_{t\to\infty} \frac{ D(0, n, t)}{D(0,t)} \\
+&=   \gamma \delta(0) \P{Y>n}\\
+& = \gamma \delta(0) G(n).
+  \end{split}
+\end{equation*}
+For the second term, define
+\begin{equation*}
+  D(m, n, t) = \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k-1})=m}\1{Y_k>n-m+1}
+\end{equation*}
+then
+\begin{equation*}
+  \begin{split}
+  \lim_{t\to\infty} \frac{  D(m, n, t)}t 
+&=   \lim_{t\to\infty}  \frac{D(t)}t \frac{D(m, t)}{D(t)}\frac{ D(m, n, t)}{D(m,t)} \\
+&=   \gamma \delta(m) \lim_{t\to\infty} \frac{ D(m, n, t)}{D(m,t)} \\
+&=   \gamma \delta(m) \P{Y>n-m+1}\\
+& = \gamma \delta(m) G(n-m+1).
+  \end{split}
+\end{equation*}
+
+
+\end{solution}
+\end{question}
+
+
+\begin{question}
+  Suppose that for the $M/G/1$ queue, $L(D_{k-1})>0$. Why is
+  $S_k = D_k - D_{k-1}$?  If $L(D_{k-1}) = 0$, the time between
+  $D_{k-1}$ and $D_k$ is \emph{not} equal to $S_k$. What is then the
+  distribution of $D_k-D_{k-1}$?
+\hint{  Realize that if $L(D_{k-1})=0$, job $k-1$ leaves behind an empty
+  system. Thus, before job $k$ can leave, it has to arrive. In other
+  words, $D_{k-1}<A_k$.  Since job $k$ arrives to an empty system,
+  his service starts right away, to that the time between $A_k$ and
+  $D_k$ is equal to the service time of job $k$.}
+\begin{solution}
+  When $L(D_{k-1})>0$, job $k$ is already in the system when job $k-1$
+  finishes its service and leaves. Thus, at the departure time
+  $D_{k-1}$ of job $k-1$, the service of job $k$ can start right away
+  at $D_{k-1}$. Then, $D_k=D_{k-1}+S_k$.
+
+
+    When job $k-1$ leaves an empty system behind, $D_k= A_k + S_k$,
+    since job $k$ sees an empty system, hence its service can start
+    right away after its arrival time at time $A_k$. Since the arrival
+    process is Poisson by assumption, the time to the next arrival
+    after $D_{k-1}$ is exponentially distributed with rate
+    $\lambda$. (Recall the memoryless property of the interarrival
+    times.) Thus, $A_k - D_{k-1}$ has the same distribution as $X_k$,
+    so that $\P{D_k - D_{k-1} \leq x} = \P{X_k + S_k\leq x}$. BTW: Can
+    you simplify this expression by using conditioning on $X_k$?
+\end{solution}
+\end{question}
+
+\begin{question}
+ Explain that if the service time is $s$, then
+\begin{equation}\label{eq:4}
+  \P{Y_k = j\given S=s} = e^{-\lambda s}\frac{(\lambda s)^j}{j!}.
+\end{equation}
+\hint{ If $s$ is deterministic, the number of arrival during a fixed
+    period of time with length $s$ must be Poisson distributed.}
+  \begin{solution}
+If the service time is $s$ units long, we need to know the number of arrivals during this interval. By assumption, the arrival process is Poisson. 
+  \end{solution}
+\end{question}
+
+\begin{question}
+ Explain that 
+\begin{equation}\label{eq:10}
+  \P{Y_k = j} = \int_0^\infty e^{-\lambda s}\frac{(\lambda s)^j}{j!}\, \d F(s).
+\end{equation}
+where $F$ is the distribution of the service times.
+\begin{solution}
+  We use a conditioning argument to arrive at this result. The
+    probability that the service time is $s$ units long is written
+    like $\d F(s) = \P{S\in \d s}$. (To properly define this we need
+    measure theory\ldots). Thus
+    $\P{Y_k=j} = \int_0^\infty \P{Y_k =j\given S=s}\P{S\in \d s} =
+    \int_0^\infty \P{Y_k =j\given S=s} \d F(s)$.
+    Using the answer of the previous problem we arrive at the result.
+\end{solution}
+\end{question}
+
+\begin{question}
+ If $S$ is deterministic and equal to $s$, show that
+  Eq.~\eqref{eq:10} reduces to Eq.~\eqref{eq:4}.
+  \begin{solution}
+    If $\P{S=s}=1$, then $\int_0^\infty g(x) \d F(x) = g(s)$ for any
+    sensible function $g$. More specifically, since $\P{S=s}=1$, the
+    distribution $F$ has an atom at $s$. The size of the atom is
+    $F(s)-F(s-)=1$. Thus, for instance,
+    $\int_0^\infty x \d F(x) = s (F(s)-F(s-)) =s$. The function $x$ in
+    this integral can be replaced by any function $g(x)$ (provided $g$
+    satisfies some technical regularity conditions. If you are
+    mathematically interested: it must be measurable.)  Applying this
+    result to the function $e^{-\lambda x}(\lambda x)^j/j!$ we obtain
+    the answer.
+  \end{solution}
+\end{question}
+
+\begin{question}
+ If $S\sim \exp(\mu)$, show that 
+  \begin{equation} \label{eq:41}
+f(j) = \P{Y_k = j} = \frac{\mu}{\lambda+\mu}\left(\frac{\lambda}{\lambda+\mu}\right)^j.
+  \end{equation}
+  \begin{solution}
+Use conditional probability to see that 
+\begin{equation*}
+  \begin{split}
+  \P{Y_n = j} 
+&= \int_0^\infty e^{-\lambda s}\frac{(\lambda s)^j}{j!}\, \d F(s) = \int_0^\infty e^{-\lambda s}\frac{(\lambda s)^j}{j!} \mu e^{-\mu s}\, \d s \\
+&= \frac{\mu}{j!}\lambda^j \int_0^\infty e^{-(\lambda+\mu) s}s^j\,\d s = \frac{\mu}{j!}\left(\frac{\lambda}{\lambda+\mu}\right)^j \int_0^\infty e^{-(\lambda+\mu) s}((\lambda+\mu)s)^j\,\d s \\
+&= \frac{\mu}{j!}\left(\frac{\lambda}{\lambda+\mu}\right)^j \frac{j!}{\lambda+\mu}.
+\end{split}
+\end{equation*}
+Here I also used the hints and  results of Exercise~\ref{ex:33}.
+
+In hindsight, this result could have been derived in another way, in
+fact by using the result of Exercise~\ref{ex:3} in which we analyzed a
+merged Poisson process. Consider the Poisson process with rate
+$\lambda+\mu$ that arises when the arrival and service process are
+merged. The probability that an arrival corresponds to an epoch of the
+merged process is $\lambda/(\lambda+\mu$ and the probability that a
+departure corresponds to an epoch of the merged process is
+$\mu/(\lambda+\mu)$.  The probability that $j$ arrivals occur before a
+service occurs, is the same as the probability that a geometrically
+distributed random variable with success probability
+$\mu/(\lambda+\mu) = 1-p$ takes the value $j$.
+  \end{solution}
+\end{question}
+
+\begin{question}
+ If $S\sim \exp(\mu)$, show that 
+  \begin{equation}
+G(j) = \sum_{k=j+1}^\infty f(k) =  \left(\frac{\lambda}{\lambda+\mu}\right)^{j+1}.
+  \end{equation}
+\begin{solution}
+  Take $\alpha = \lambda/(\lambda+\mu)$ so that
+  $f(j) = (1-\alpha) \alpha^j$.
+\begin{equation*}
+  \begin{split}
+  G(j) 
+&= \sum_{k=j+1}^\infty f(k)  = (1-\alpha) \sum_{k=j+1}^\infty \alpha^k \\
+& = (1-\alpha) \sum_{k=0}^\infty \alpha^{k+j+1}, \text{ by change of variable}\\
+& = (1-\alpha) \sum_{k=0}^\infty \alpha^{k}\alpha^{j+1}= (1-\alpha)\alpha^{j+1} \sum_{k=0}^\infty \alpha^k \\
+&= (1-\alpha)\alpha^{j+1} \frac{1}{1-\alpha} = \alpha^{j+1}.
+  \end{split}
+\end{equation*}
+    \end{solution}
+\end{question}
+
+\begin{question}
+  Use Eq.~\eqref{eq:41} to derive a closed-form expression for the
+  queue length distribution for the $M/M/1$ queue.  \hint{ Define
+    shorthands such as $\alpha=\lambda/(\lambda+\mu)$, so that
+    $1-\alpha = \mu/(\lambda+\mu)$, and
+    $\alpha/(1-\alpha) = \lambda /\mu = \rho$.  Then, with the
+    previous exercise that $f(n) = \alpha^n(1-\alpha)$ and
+    $G(n) = \alpha^{n+1}$.  (I did not get this result for
+    `free'. Indeed, it's just algebra, but please try to derive this
+    yourself. Its good to hone your computational skills.)}
+
+    \begin{solution}
+      Take $n=0$. Then $f(0) \pi(1) = (1-\alpha)\pi(1)$, and
+      $\pi(0)G(0) = \pi(0)\alpha$. Thus,
+      $\pi(1) = \pi(0)\alpha/(1-\alpha) = \rho \pi(0)$. 
+
+For $n=1$,
+\begin{equation*}
+  \begin{split}
+  (1-\alpha)  \pi(2) 
+&= \pi(0)G(1) + \pi(1)G(1) = \pi(0)G(1)(1+\rho) \\
+&= \pi(0)\alpha^2(1+\rho) = \pi(0)\alpha \alpha (1+\rho) = \pi(0)\alpha \rho.
+  \end{split}
+\end{equation*}
+Dividing by $1-\alpha$, we get
+\begin{equation*}
+  \pi(2) = \pi(0)\rho^2
+\end{equation*}
+
+Finally, now that we suspect that $\pi(n) = \rho^n \pi(0)$, let's fill
+it in, and see whether it checks. We divide both sides by $\pi(0)$ so
+that we are left with checking that
+\begin{equation*}
+  \begin{split}
+    (1-\alpha)\rho^{n+1} 
+&= \alpha^{n+1} + \sum_{m=1}^n \rho^m \alpha^{n-m+2}  \\
+&= \alpha^{n+1} + \alpha^{n+2}\sum_{m=1}^n (\rho/\alpha)^m  \\
+&= \alpha^{n+1} + \alpha^{n+1}\rho \sum_{m=0}^{n-1} (\rho/\alpha)^m \\
+&= \alpha^{n+1} + \alpha^{n+1}\rho \sum_{m=0}^{n-1} (\rho/\alpha)^m\\
+&= \alpha^{n+1} + \alpha^{n+1}\rho \frac{1-(\rho/\alpha)^n}{1-\rho/\alpha)}\\
+&= \alpha^{n+1} - \alpha^{n+1}(1-(\rho/\alpha)^n), \quad\text{as } \rho/\alpha = 1+\rho,\\
+&= \alpha^{n+1}(\rho/\alpha)^n = \alpha \rho^n.\\
+  \end{split}
+\end{equation*}
+Since $\rho=\alpha/(1-\alpha)$ we see that the left and right hand sides are the same. 
+
+Thus we get that $\pi(n) = \delta(n) = (1-\rho) \pi(0)$; a result we
+obtained earlier for the $M/M/1$ queue in
+Section~\ref{sec:perf-meas-exampl}.
+\end{solution}
+\end{question}
+
+
+\begin{question}
+ With the above results we can compute
+  Eq.~\eqref{eq:10} for deterministic service times or exponential
+  service times. When, however, the service distribution $F$ is some
+  general distribution function, we need numerical methods to evaluate
+  Eq.~\eqref{eq:10}. Can you design a suitable numerical method for
+  this problem?
+  \begin{solution}
+  A simple numerical method is as follows. Make a grid of
+  size $\d x$, for some small number $\d x$, e.g. $\d x=1/100$, and write
+  $f_i = \P{S\in(i\d x, (i+1)\d x]} = F((i+1)\d x) - F(i\d x)$. Then 
+  \begin{equation*}
+    \begin{split}
+  \P{Y_k = j} 
+&= \int_0^\infty e^{-\lambda s}\frac{(\lambda s)^j}{j!} \d F(s) 
+\approx \sum_{i=1}^\infty e^{-\lambda i \d x}\frac{(\lambda i\d x)^j}{j!} f_i \d x
+    \end{split}
+\end{equation*}
+
+Lets try a numerical experiment. Topics like these are, of course, not
+necessary for the course, but I hope that you study it nonetheless.
+You will have to use it for other courses later anyway.
+
+<<wrap=False>>=
+import numpy as np
+
+labda = 3
+mu = 4
+j = 5
+dx = 1 / 100
+
+
+def F(x):
+    return 1 - np.exp(-mu * x)
+
+
+def f(x):
+    return F(x + dx) - F(x)
+
+
+def term(i):
+    res = np.exp(-labda * i * dx)
+    res *= (labda * i * dx)**j / np.math.factorial(j)
+    res *= f(i*dx) * dx
+    return res
+@
+
+<<term=True, wrap=False>>=
+print(sum(term(i) for i in range(50)))
+print(sum(term(i) for i in range(500)))
+print(sum(term(i) for i in range(5000)))
+@
+
+Since I don't know when to stop the integral I just try a few values;
+of course stopping the integration at $x=50$ is too small, since
+$50\d x=50/100=1/2$, but I include it for illustrative
+purposes. Stopping at $500$ seems ok, since the results of the last
+two integrals are nearly the same. This also suggestst that
+$\d x=1/100$ is sufficiently small. In general, however, one must take
+care and try various values for $\d x$ and the integration limits.
+
+
+In general, for more complicated situations is it best to use a
+numerical library to compute the above integral. The methods have been
+designed to produce good and reliable results, and, typically, it is
+very hard to improve these methods. Thus, let's try a real number
+cruncher.
+
+<<term=True, wrap=False>>=
+from scipy.integrate import quad
+
+def g(x):
+    return np.exp(-labda*x) * (labda*x)**j/np.math.factorial(j) * f(x)
+
+print(quad(g, 0, np.inf))
+@
+
+Comparing these results to our simple estimates we see that they are
+the same.
+\end{solution}
+\end{question}
+
+
+\begin{question}[use=false]
+  To analyze the distribution of $L$ of the $M/G/1$ we concentrated on
+  the departure epochs. Why will this not help to find the
+  distribution of $L$ for the $M/G/c$ queue?
+  \begin{solution}
+    \TBD.
+  \end{solution}
+\end{question}
+
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "book"
+%%% End:

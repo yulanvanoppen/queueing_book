@@ -1,0 +1,650 @@
+\section{Poisson Distribution}
+\label{sec:poisson-distribution}
+
+In this section we provide a derivation of, and motivation for, the
+Poisson process, and clarify its relation with the exponential
+distribution at the end.
+
+Consider a machine that fails occasionally. Let us write $N(s, t)$ for
+the number of failures occurring during a time interval of $(s,t]$. We
+assume, without loss of generality, that repairs are
+instantaneous. Clearly, as we do not know in advance how often the
+machine will fail, we model $N(s,t)$ as a random variable for all
+times $s$ and $t$.
+
+Our first assumption is that the failure behavior of the machine does not
+significantly change over time. Then it is reasonable to assume that
+the expected number of failure is proportional to the  length of
+the interval $T$. Thus, it is reasonable to assume that there exists some
+constant $\lambda$ such that
+\begin{equation}
+  \label{eq:6}
+ \E{N(s,t)} = \lambda (t-s)
+\end{equation}
+The constant $\lambda$ is often called the \recall{arrival rate}, or
+failure rate in this case.
+
+
+The second assumption is that $\{N(s,t), s\leq t\}$ has
+\recall{stationary} and \emph{independent increments}. Stationarity
+means that the distribution of the number of arrivals are the same for
+all intervals of equal length. Formally, $N(s_1,t_1)$ has the same
+distribution as $N(s_2, t_2)$ if $t_2-s_2 = t_1-s_1$. Independence
+means, roughly speaking, that knowing that $N(s_1,t_1)= n$, does not
+help to make any predictions about $N(s_2, t_2)$ if the intervals
+$(s_1,t_1)$ and $(s_2, t_2)$ have no overlap.
+
+To find the distribution of $N(0,t)$, let us split the interval
+$[0,t]$ into $n$ sub-intervals, all of equal length, and ask: `What is
+the probability that the machine will fail in some given
+sub-interval.'  By our second assumption, the failure behavior is
+constant over time. Therefore, the probability $p$ to fail in each
+interval should be equal. Moreover, if $n$ is large, $p$ must be
+small, for otherwise \eqref{eq:6} could not be true. As a consequence,
+if the time intervals are very small, we can safely neglect the
+probability that two or more failures occur in one such tiny interval.
+
+As a consequence, then, we can model the occurrence of a failure in
+some period $i$ as a Bernoulli distributed random variable $B_i$ such
+that $\P{B_i =1}$ and $\P{B_i=0} = 1-\P{B_i = 1}$, and we assume that
+$\{B_i\}$ are independent. The total number of failures $N_n(t)$ that
+occur in $n$ intervals is then binomially distributed
+\begin{equation}\label{eq:bin}
+  \P{N_n(t) = k} = {n \choose k} p^k (1-p)^{n-k}.
+\end{equation}
+In the exercises we ask you to use this to motivate that, in some
+appropriate sense, $N_n(t)$ converges to $N(t)$ for $n\to \infty$ such
+that
+\begin{equation}\label{eq:pois}
+  \P{N(t) = k} = 
+e^{-\lambda t} \frac{(\lambda t)^k}{k!}.
+\end{equation}
+We say that $N(t)$ is \recall{Poisson distributed} with rate
+$\lambda$, and write $N(t)\sim P(\lambda t)$. 
+
+Moreover, if there are no failures in some interval
+$[0,t]$, then it must be that $N(t) = 0$ and $A_1$, i.e., the
+occurance of the first failure, must be larger than $t$.  Therefore,
+\begin{equation*}
+  \P{A_1>t} = \P{X_1> t} = P(N(t) = 0) = e^{-\lambda t} \frac{(\lambda t)^0}{0!}= e^{-\lambda t}.
+\end{equation*}
+
+The relations we discussed above are of paramount importance in the
+analysis of queueing process. We summarize this by a theorem.
+\begin{theorem}\label{thr:1}
+  A counting process $\{N(t)\}$ is a Poisson process with rate $\lambda$ if and only if
+  the inter-arrival times $\{X_i\}$, i.e., the times between consecutive
+  arrivals, are i.i.d. and $\P{ X_1\leq t} = 1 - e^{-\lambda t}$. In other words, $X_i\sim \exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t)$ 
+\end{theorem}
+
+\begin{question}
+Show that $\E{N_n(t)} = \sum_{i=1}^n \E{B_i} = n p$.
+\begin{solution}
+  \begin{equation*}
+    \E{N_n(t)} = \E{\sum_{i=1}^n {B_i}} = \sum_{i=1}^n \E{B_i} = n \E{B_i} = n p.
+  \end{equation*}
+\end{solution}
+\end{question}
+
+
+\begin{question}
+What is the difference between $N_n(t)$ and $N(t)$?
+\begin{solution}
+  $N_n(t)$ is a binomially distributed random variable with parameters
+  $n$ and $p$. The maximum value of $N_n(t)$ is $n$. The random
+  variable $N(t)$ models the number of failures that can occur during
+  $[0,t]$. As such it is not necessarily bounded by $n$. Thus, $N_n(t)$ and $N(t)$ cannot represent the same random variable. 
+\end{solution}
+\end{question}
+
+\begin{question}
+  Show how the binomial distribution~\eqref{eq:bin} converges to the
+  Poisson distribution~\eqref{eq:pois} if $n\to\infty$, $p\to0$ such
+  that $np=\lambda$.
+
+  \begin{solution} Now we like to relate $N_n(t)$ and $N(t)$ It is
+    clear that we at least want the expectations to be the same, that
+    is, $np = \lambda t$. This implies that
+\begin{equation*}
+  p = \frac{\lambda t}n,
+\end{equation*}
+so that 
+\begin{equation*}
+  \P{N_n(t) = k} = {n \choose k} \left(\frac{\lambda t}{n}\right)^k \left(1-\frac{\lambda t}n\right)^{n-k}.
+\end{equation*}
+To see that 
+\begin{equation*}\label{eq:52}
+  \lim_{n\to\infty} {n \choose k} \left(\frac{\lambda t}{n}\right)^k \left(1-\frac{\lambda t}n\right)^{n-k} = e^{-\lambda t} \frac{(\lambda t)^k}{k!}.
+\end{equation*}
+use that
+    \begin{equation*}
+      \begin{split}
+      {n \choose k} \left(\frac{\lambda t}{n}\right)^k \left(1-\frac{\lambda t}n\right)^{n-k} 
+&= \frac{n!}{k!(n-k)!} \left(\frac{\lambda t}{n}\frac{n}{n-\lambda t}\right)^k \left(1-\frac{\lambda t}n\right)^{n} \\
+&= \frac{(\lambda t)^k}{k!} \left(\frac n{n-\lambda t} \right)^k  \frac{n!}{n^k(n-k)!}\left(1-\frac{\lambda t}n\right)^{n}\\
+&= \frac{(\lambda t)^k}{k!} \left(\frac n{n-\lambda t} \right)^k \frac{n}{n}\frac{n-1}{n}\cdots\frac{n-k+1}{n} \left(1-\frac{\lambda t}n\right)^{n}  \\
+&\to \frac{(\lambda t)^k}{k!} e^{-\lambda t} \text{ when } n \to \infty, 
+      \end{split}
+    \end{equation*}
+    where we use that $(1+x/n)^n\to e^{x}$ so that ,
+    $\left(1-\frac{\lambda t}n\right)^{n} \to e^{-\lambda t}$.  The
+    rest is easy.
+  \end{solution}
+\end{question}
+
+
+\begin{question}
+  If the inter-arrival times are i.i.d. and exponentially distributed
+  with mean $1/\lambda$, prove that the number $N(t)$ of arrivals
+  during interval $[0,t]$ is Poisson distributed.
+    \begin{solution}
+      We want to show that
+    \begin{equation*}
+      \P{N(t)=k} = e^{-\lambda t}\frac{(\lambda t)^k}{k!}.
+    \end{equation*}
+    Now observe that
+    $\P{N(t)=k} = \P{A_k \leq t} - \P{A_{k+1} \leq t}$.  Using the
+    density of $A_{k+1}$ as obtained previously and applying partial
+    integration leads to
+\begin{equation*}
+  \begin{split}
+\P{A_{k+1} \leq t} 
+&= \lambda \int_0^t \frac{(\lambda s)^{k}}{k!}e^{-\lambda s}\, \d s \\
+&= \lambda \frac{(\lambda s)^{k}}{k!}\frac{e^{-\lambda s}}{-\lambda} \Big|_{0}^t + \lambda \int_0^t \frac{(\lambda s)^{k-1}}{(k-1)!}e^{-\lambda s}\, \d s \\
+&= - \frac{(\lambda t)^{k}}{k!} e^{-\lambda t} + \P{A_k \leq t}
+  \end{split}
+\end{equation*}
+We are done.
+    \end{solution}
+\end{question}
+
+
+\begin{question}[use=false]
+ (Heuristic motivation for the Poisson distribution).  
+
+ Consider a counting process $\{N(s,t], 0\leq s, \leq t\}$ such that
+ $N(s,t]$ is the number of arrivals that arrrive during an interval
+ $(s,t]$. I consider the following two properties quite natural:
+ \begin{enumerate}
+ \item The number of arrivals in disjoint intervals are independent,
+   i.e., the random variables $N(s,t]$ and $N(u,v]$ are
+   independent if $s\leq t < u \leq v$. 
+ \item The arrival process $\{N(s,t]\}$ is time-homogenenous, i.e.,
+   \begin{equation*}
+   \P{N(u,u+s] = j} = \P{N(0,s] = j}
+   \end{equation*}
+ for all $s\geq 0$ and $j=0,1,2,\ldots$. 
+\item Choose some $s$ such that $0<s<t$. If $N(s)=j$, and $N(t) = n$, then $N(s,t] = n-j$, thus,
+  \begin{equation*}
+    \P{N(0,t]=n} = \sum_{j=0}^n \P{N(0,s] = j, N(s,t] = n-j},
+  \end{equation*}
+ for all $s\geq 0$ and $j=0,1,2,\ldots$. 
+ \end{enumerate}
+Use these properties to derive the Poisson distribution.  
+
+ \begin{solution}
+This problem is pretty challenging; it is not required for the exam.
+
+Define for notational convenience, 
+ \begin{equation*}
+   f_n(t) = \P{N(0,t] = n}
+ \end{equation*}
+Then
+\begin{equation*}
+  \begin{split}
+   f_n(t) &= \P{N(0,t] = n} \\
+   &= \sum_{j=0}^n \P{N(0,s] = j, N(s,t] = n-j} \\ 
+   &= \sum_{j=0}^n \P{N(0,s] = j\} \P\{N(s,t] = n-j} \text{ by independence}\\ 
+   &= \sum_{j=0}^n \P{N(0,s] = j\} \P\{N(0,t-s] = n-j} \text{ by time homogeneity}\\ 
+   &= \sum_{j=0}^n f_j(s) f_{n-j}(t-s) \text{ by the definition of } f_n.
+  \end{split}
+\end{equation*}
+Thus, we seek a function $f_n$  that solves
+\begin{equation*}
+   f_n(t) = \sum_{j=0}^n f_j(s) f_{n-j}(t-s),  \tag{*}
+\end{equation*}
+for all $s\in[0,t]$ and $n=0,1,2,\ldots$.  Of course
+$\{f_n(t), t\geq 0, n=0,1,2,\ldots\}$ should satisfy some
+further simple and natural properties:
+
+\begin{equation*}
+   \sum_{n=0}^\infty f_n(t) = 1, \text{ for all } t\geq 0,
+\end{equation*}
+as the $f_n(t)$ should correspond to probabilies. Moreover, no arrival
+can occur at time $t=0$, hence
+\begin{equation*}
+   f_0(0) = 1
+\end{equation*}
+
+
+One solution of the above equation  can be found by using the analogy:
+\begin{equation*}
+   t^n = (s + (t-s) )^n = \sum_{j=0}^n {n \choose j} s^j (t-s)^{n-j}
+\end{equation*}
+Dividing both sides by $n!$ leads to 
+\begin{equation*}
+   \frac{t^n}{n!} = \sum_{j=0}^n \frac{s^j}{j!}\frac{(t-s)^{n-j}}{(n-j)!}. 
+\end{equation*}
+Cleary, then, take $f_n(t) \sim t^n/n!$. A straightforward
+normalization then fixes $f_n$ to be
+\begin{equation*}
+   \P{N(0,t] = n } = f_n(t) = e^{-t} \frac{t^n}{n!}
+\end{equation*}
+Finally, rescaling the time axis enables us to consider other arrival
+rates than 1, so that in general
+\begin{equation*}
+   \P{N(0,t] = n } = f_n(t) = e^{-\lambda t} \frac{(\lambda t)^n}{n!}
+\end{equation*}
+
+It remains to prove that there is no other solution of (*), thereby
+proving that the only distribution that can satisfy our above
+assumptions is the Poisson distribution.  As far as I can see, this is
+not so easy. Perhaps you can find a proof.
+
+
+% Suppose then there is another
+% solution $g_n(t)$ of (*). Then, but subtraction, we get that
+% \begin{equation*}
+%   \begin{split}
+%     f_n(t) -g_n(t) 
+% &= \sum_{j=0}^n f_j(s) f_{n-j}(t-s) -  \sum_{j=0}^n g_j(s) g_{n-j}(t-s) \\
+% &= \sum_{j=0}^n [f_j(s) (f_{n-j}(t-s) - g_{n-j}(t-s)) +  g_{n-j}(t-s)( g_j(s) - f_j(s))].
+%   \end{split}
+% \end{equation*}
+% Clearly, if $f_{j} = g_{j}$ for $j=1,\ldot, n-1$, then this can be reduced to
+
+
+ \end{solution}
+\end{question}
+
+
+\begin{question}
+ Show from the above that  for small $h$, 
+  \begin{enumerate}
+  \item $\P{N(h) = n \given N(0) = n} = 1-\lambda h + o(h)$ 
+  \item $\P{N(h) = n+1 \given N(0) = n} = \lambda h + o(h)$ 
+  \item $\P{N(h) \geq n+2 \given N(0) = n} = o(h)$,
+  \end{enumerate}
+ where $o(h)$ is a function
+    $f(h)$ such $f(h)/h \to 0$ as $h\to 0$.
+\begin{solution}
+\begin{enumerate}
+  \item 
+  $\P{N(h) = n | N(0) = n} = \P{N(h) = 0} = e^{-\lambda h} (\lambda
+  h)^0/0! = e^{-\lambda h} = 1-\lambda h + o(h)$,
+  as follows from a standard argument in analysis that
+  $e^{-\lambda h} = 1 -\lambda h + o(h)$  for $h$ small. 
+\item 
+  $\P{N(h) = n +1 | N(0) = n} = \P{N(h) = 1} = e^{-\lambda h} (\lambda h)^1/1! = 
+(1-\lambda h + o(h))\lambda h  = \lambda h - \lambda^2 h^2 + o(h) = \lambda h + o(h)$. 
+\item 
+  $\P{N(h) \geq n+2 | N(0) = n} = \P{N(h) \geq 2} = e^{-\lambda h} \sum_{i=2}^\infty \frac{(\lambda h)^i}{i!} = e^{-\lambda h}(e^{\lambda h} - 1 - \lambda h).$ Hence,
+  \begin{equation*}
+    \begin{split}
+\P{N(h) \geq 2} &= 1 - e^{-\lambda h}(1 + \lambda h) = 1 - (1-\lambda h + o(h))(1+\lambda h) \\
+&= 1 - (1-\lambda^2 h^2 + o(h)) = \lambda^2 h^2 + o(h) = o(h).
+    \end{split}
+  \end{equation*}
+\end{enumerate}
+\end{solution}
+\end{question}
+
+
+\begin{question}
+  Assume a timer fires at times $0=T_0<T_1<T_2< \cdots$, such that
+  $T_{k}-T_{k-1}\sim\exp(\lambda)$. Define
+  $N(t) = \sum_{k=0}^\infty k \1{T_k \leq t < T_{k+1}}$, where $\1{}$
+  is the \recall{indicator function}, that is, $\1{A}=1$ if the event
+  $A$ is true, and $\1{A}=0$ if $A$ is not true. What is the
+  distribution of $N(t)$?
+\begin{solution}
+$N(t) \sim \text{P}(\lambda t)$. 
+\end{solution}
+\end{question}
+
+
+\begin{question} (Merged Poisson streams form a new Poisson process
+  with the sum of the rates.) Assume that
+  $N_a(t)\sim \text{P}(\lambda t)$ , $N_s(t) \sim \text{P}(\mu t)$ and
+  independent.  Show that
+  $N_a(t) + N_s(t) \sim \text{P}((\lambda + \mu)t)$.  
+
+\hint{ Use a
+    conditioning argument or use moment generating functions.}
+
+    \begin{solution}
+ We use conditioning.
+  \begin{equation*}
+    \begin{split}
+\P{N_a(t) + N_s(t) = n} 
+&= \sum_{i=0}^n \P{N_a(t) + N_s(t) = n|N_a(t) = i}\P{N_a(t)=i} \\
+&= \sum_{i=0}^n \P{ N_s(t) = n-i}\P{N_a(t)=i} \\
+&= \sum_{i=0}^n \frac{(\mu t)^{n-i}}{(n-i)!} \frac{(\lambda t)^i}{i!} e^{-(\mu+\lambda)t} \\
+&= e^{-(\mu+\lambda)t} \sum_{i=0}^n \frac{(\mu t)^{n-i}}{(n-i)!} \frac{(\lambda t)^i}{i!}  \\
+&= e^{-(\mu+\lambda)t}\frac 1{n!} \sum_{i=0}^n {n \choose i }(\mu t)^{n-i}(\lambda t)^i  \\
+&= \frac{((\mu+\lambda)t))^n}{n!}e^{-(\mu+\lambda)t}.
+    \end{split}
+  \end{equation*}
+
+  With moment generating functions.
+      \begin{equation*}
+        \begin{split}
+          M_a(z) 
+&= \E{z^{N_a(t)}} = \sum_{k=0}^\infty z^k \P{N_a(t) = k} \\
+&= \sum_{k=0}^\infty z^k e^{-\lambda t} \frac{(\lambda t)^k}{k!} \\
+&= e^{-\lambda t} \sum_{k=0}^\infty  \frac{(z \lambda t)^k}{k!} \\
+&=\exp(\lambda t (z-1)). 
+        \end{split}
+      \end{equation*}
+      Use this, and the similar expression for $N_s(t)$ and
+      independence to see that
+\begin{equation*}
+M(z) = \E{z^{N(t)}} = \E{z^{N_a(t)}} \E{z^{N_s(t)}} = \exp((\lambda +\lambda)t (z-1)). 
+\end{equation*}
+Finally, since the moment generating function uniquely characterizes
+the distribution, and since the above expression has the same form as
+$M_1(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\sim P((\lambda +\mu) t)$.
+    \end{solution}
+\end{question}
+
+
+\begin{question} Assume that
+  $N_a(t)\sim \text{P}(\lambda t)$ , $N_s(t) \sim \text{P}(\mu t)$ and
+  independent. Use that  $N_a(t) + N_s(t) \sim \text{P}((\lambda + \mu)t)$ to conclude
+    \begin{equation*}
+    \P{N_a(h) = 1,  N_s(h) = 0 | N_a(h) + N_s(h) = 1} =
+\frac{\lambda}{\lambda+\mu}.
+    \end{equation*}
+    Note that the right-hand-side does not depend on $h$, hence it
+    holds for any time $h$, whether it is small or not.
+    \begin{solution}
+  With the above:
+  \begin{equation*}
+    \begin{split}
+&    \P{N_a(h) = 1,  N_s(h) = 0 | N_a(h) + N_s(h) = 1} \\
+&= \frac{\P{N_a(h) = 1,  N_s(h) = 0, N_a(h) + N_s(h) = 1} }{ \P{N_a(h) + N_s(h) = 1}} \\ 
+&= \frac{\P{N_a(h) = 1,  N_s(h) = 0}}{ \P{N_a(h) + N_s(h) = 1}} \\ 
+&= \frac{\P{N_a(h) = 1}\P{N_s(h) = 0}}{ \P{N_a(h) + N_s(h) = 1}} \\ 
+&= \frac{\lambda h \exp{-\lambda h} \exp{-\mu h}}{((\lambda+\mu)h)\exp{(-(\lambda+\mu)h)}}\\
+&= \frac{\lambda h \exp{(-(\lambda + \mu)h)}}{((\lambda+\mu)h)\exp{(-(\lambda+\mu)h)}}\\
+&= \frac{\lambda}{\lambda+\mu}
+    \end{split}
+  \end{equation*}
+    \end{solution}
+\end{question}
+
+
+\begin{question}%[use=false]
+ Assume that $N_a(t)\sim \text{P}(\lambda t)$ ,
+  $N_s(t) \sim \text{P}(\mu t)$ and independent.  What is actually the
+  meaning of the event
+  $\{N_a(h) = 1, N_s(h) = 0\}\cap\{N_a(h) + N_s(h) = 1\}$?
+    \begin{solution}
+ This means that, given that an event occurred, the event was an arrival, i.e., $N_a$ was the first.
+    \end{solution}
+\end{question}
+
+
+\begin{question} (A Bernouilli-thinned Poisson process is still a
+  Poisson process) Consider a Poisson process. Split the process in
+  the following way. When a job arrives, throw a coin that lands heads
+  with probability $p$ and tails with $q=1-p$. When the coin lands
+  heads, call the job of type 1, otherwise of type 2.  Another way of
+  thinning is by modeling the stream of people passing a shop as a
+  Poisson process with rate $\lambda$. With probability $p$ a person
+  decides, independent of anything else, to enter the shop.
+
+  Show that the Poisson process obtained by thinning the original
+  process is $\sim P(\lambda t p)$ for any $t$.
+ 
+\hint{ Condition on the total number of arrivals $N(t)=m$ up to time
+      $t$. Realize that the probability that a job is of type 1 is
+      Bernouilli distributed, hence when you consider $m$ jobs in
+      total, the number of type 1 jobs is binomially distributed.}
+
+    \begin{solution}
+\begin{equation*}
+  \begin{split}
+    \P{N(t) = n}
+&= \sum_{m=0}^n \P{N(t) =n \given N_1(t) = m}\P{N_1(t) = m} \\
+&= \sum_{m=0}^n \P{N_2(t) =n-m}\P{N_1(t) = m} \\
+&= \sum_{m=0}^n 
+e^{-\lambda_2 t}\frac{(\lambda_2 t)^{n-m}}{(m-n)!} 
+e^{-\lambda_1 t}\frac{(\lambda_1 t)^{m}}{m!} \\
+&= e^{-(\lambda_2+\lambda_1) t} \frac{1}{n!}\sum_{m=0}^n 
+{n \choose m} (\lambda_2 t)^{n-m} (\lambda_1 t)^{m}\\
+&= e^{-(\lambda_2+\lambda_1) t} \frac{1}{n!}(\lambda_2 t + \lambda_1 t)^n.
+  \end{split}
+\end{equation*}
+We see that the thinned stream is Poisson with parameter $\lambda t p$. 
+\end{solution}
+\end{question}    
+
+
+\begin{question}\label{ex:3}
+   If $A\sim \exp(\lambda)$, $S\sim\exp(\mu)$ and independent, show that 
+    \begin{equation*}
+      \P{A\leq S} = \frac{\lambda}{\lambda+\mu}.
+    \end{equation*}
+
+    \hint{ Define the joint distribution of $A$ and $S$ and carry out
+      the computations, or use conditioning, or use the result of the
+      previous exercise.}
+
+\begin{solution}
+There is more than one way to show that $\P{A\leq S} = \lambda/(\lambda+\mu)$.  
+
+Method 1. (I admit that, although the simplest, least technical,
+method, I did not think of this right away. I am `conditioned' to use
+conditioning\ldots) Observe first that $A$ and $S$, being
+exponentially distributed, both have a density. Moreover, as they are
+independent, we can sensibly speak of the joint density
+$f_{A,S}(x,y) = f_A(x)f_S(y) = \lambda \mu e^{-\lambda x} e^{-\mu
+  y}$. With this,
+\begin{equation*}
+  \begin{split}
+    \P{A\leq S} 
+&= \E{\1{A\leq S}} \\
+&= \int_0^\infty \int_0^\infty \1{x\leq y} f_{A,S}(x,y)\, \d y\,\d x\\
+&= \lambda \mu \int_0^\infty \int_0^\infty \1{x\leq y} e^{-\lambda x} e^{-\mu y} \, \d y\,\d x\\
+&= \lambda \mu \int_0^\infty e^{-\mu y} \int_0^y e^{-\lambda x}\, \d x \, \d y \\
+&= \mu \int_0^\infty e^{-\mu y} (1-e^{-\lambda y})\,\d y\\
+&= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
+&= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
+&= 1 - \frac{\mu}{\lambda + \mu} 
+  \end{split}
+\end{equation*}
+This argument is provided in the probability book you use in the first year.
+
+Method 2. Applying a standard conditioning argument
+\begin{equation*}
+\P{A\leq S} = \int_0^\infty \P{A\leq S| S=s} \mu e^{-\mu s} \,  \d s.
+\end{equation*}
+Now, $\P{A\leq S| S=s}$ is a conditional probability
+distribution. This is a bit of tricky object, but very useful once you
+get used to it. The tricky part is that $\P{S=s} = 0$. Therefore
+$\P{A\leq S\given S=s}$ cannot be defined as $\frac{\P{A\leq s,
+  S=s}}{\P{S=s}}$. However, if we proceed nonetheless and use the
+independence of $S$ and $A$, we get
+\begin{equation*}
+   \P{A\leq S| S=s} = \frac{\P{A\leq s, S=s}}{\P{S=s}} = \frac{\P{A\leq s} \P{S=s}}{\P{S=s}} = \
+\P{A\leq s}
+ \end{equation*}
+ and thus, indeed, $\P{A\leq S| S=s} = \P{A\leq s}$. Then,
+\begin{equation*}
+  \begin{split}
+\P{A\leq S} 
+&= \int_0^\infty \P{A\leq S| S=s} \mu e^{-\mu s} \,  \d s \\
+&= \int_0^\infty \P{A\leq s} \mu e^{-\mu s} \,  \d s \\
+&= \int_0^\infty (1-e^{-\lambda s})\mu e^{-\mu s} \,  \d s \\
+  \end{split}
+\end{equation*}
+and we arrive at the integral we have seen above. 
+
+So we get the correct answer, but by the wrong method.  How can we
+repair this?  As a first step, let's not fix $S$ to a set of measure
+zero, but let's assume that $S\in [s,t]$ for $s<t$. Then it follows
+that
+\begin{equation*}
+  1\{A\leq s\} 1\{S\in[s,t]\} \leq  1\{A\leq S\} 1\{S\in[s,t]\} \leq 1\{A\leq t\} 1\{S\in[s,t]\}
+\end{equation*}
+As a second step,  using that $\P{S\in[s,t]} > 0$ if $s<t$ and the independence of $A$ and $S$,
+\begin{equation*}
+  \begin{split}
+    \P{A\leq s} &= \frac{\P{A\leq s} \P{S\in[s,t]}}{\P{S\in[s,t]}} = \frac{\P{A\leq s,  S\in[s,t]}}{\P{S\in[s,t]}} \\
+    \P{A\leq t} &= \frac{\P{A\leq t} \P{S\in[s,t]}}{\P{S\in[s,t]}} = \frac{\P{A\leq t,  S\in[s,t]}}{\P{S\in[s,t]}}
+  \end{split}
+\end{equation*}
+Now with the result of the first step
+\begin{equation*}
+  \begin{split}
+    \P{A\leq s} 
+&= \frac{\P{A\leq s,  S\in[s,t]}}{\P{S\in[s,t]}} \\
+&\leq \frac{\P{A\leq S,  S\in[s,t]}}{\P{S\in[s,t]}} \\
+&= \P{A\leq S| S\in[s,t]} \\
+&\leq \frac{\P{A\leq t,  S\in[s,t]}}{\P{S\in[s,t]}} \\
+&= \P{A\leq t}.
+  \end{split}
+\end{equation*}
+Hence, 
+\begin{equation*}
+  \begin{split}
+    \P{A\leq s} \leq \P{A\leq S| S\in[s,t]} \leq \P{A\leq t}.
+  \end{split}
+\end{equation*}
+Finally, taking the limit $t\downarrow s$, and defining $\P{A\leq S|
+S = s} = \lim_{t\downarrow s} \P{A\leq S| S\in[s,t]}$, it follows
+that
+\begin{equation*}
+    \P{A\leq s} = \P{A\leq S| S = s}
+\end{equation*}
+
+A more direct way to properly define $\P{A\leq S| S=s}$ is as follows. For any $y$ such that $f_S(y) > 0$, we can define the conditional probability density function of $A$, given that $S=s$, as 
+\begin{equation*}
+  f_{A|S}(x|s) = \frac{f_{A, S}( x, s)}{f_Y(s)},
+\end{equation*}
+where, as before, $f_{A, S}( x, s)$ is the joint density of $A$ and $S$. Now that the conditional probability density is defined, we can properly define
+\begin{equation*}
+  \E {A| S=s } = \int_0^\infty x   f_{A|S}(x|s)\, \d x
+\end{equation*}
+and also
+\begin{equation*}
+  \begin{split}
+  \P{A\leq S| S=s } = \E{\1{A \leq S}| S=s } = \int_0^\infty \1{x \leq s}   f_{A|S}(x|s)\, \d x.
+  \end{split}
+\end{equation*}
+Using the definition of $f_{A|S}(x|s)$ and the independence of $A$ and $S$ it follows that
+\begin{equation*}
+  f_{A|S}(x|s) = \frac{f_{A, S}( x, s)}{f_Y(s)} = \frac{\lambda e^{-\lambda x} \mu e^{-\mu s}}{\mu e^{-\mu s}} = \lambda e^{-\lambda x}
+\end{equation*}
+from which we get that 
+\begin{equation*}
+  \begin{split}
+  \E{\1{A \leq S}| S=s } 
+&= \int_0^\infty \1{x \leq s}   f_{A|S}(x|s)\, \d x \\
+&= \int_0^\infty \1{x \leq s} \lambda e^{-\lambda x}\, \d x \\
+&= \int_0^s \lambda e^{-\lambda x}\, \d x \\
+&= 1 - e^{-\lambda s},
+  \end{split}
+\end{equation*}
+that is,
+\begin{equation*}
+  \begin{split}
+  \P{A\leq S| S=s} = \E{\1{A \leq S}| S=s } = 1 - e^{-\lambda s}  = \P{A \leq s}.
+  \end{split}
+\end{equation*}
+
+All of these problems can be put on solid ground by using measure
+theory. We do not pursue these matters any further, but trust on our
+intuition that all is well.
+
+
+Finally, using the results of the previous exercise, note that the
+event $\{A<S\}$ is equal to the event
+$\{N_a(t) = 1, N_s(t)=0\}\cap\{N_a(t) + N_s(t)=1\}$. 
+
+\end{solution}
+\end{question}
+
+
+\begin{question}
+  Show that $\E{N(t)} = \lambda t$ and $\V{N(t)} = \lambda t$. Why is
+  the SCV of $N(t)$ equal to $1/\lambda t$? Conclude that the relative
+  variability of $N(t)$ becomes smaller as $t$ becomes larger. Observe
+  that the SCV of a Poisson distributed random variable is not the
+  same as the SCV of an exponentially distribued random variable.
+
+  \hint{You might use generating functions here.}
+
+  \begin{solution} I expect that this is easy for you by now. The
+    exercise is just meant to help you recall this.
+
+    When a random variable $N$ is Poisson distributed with parameter
+    $\lambda$,
+    \begin{equation*}
+      \begin{split}
+      \E N 
+&= \sum_{n=0}^\infty n e^{-\lambda}\frac{\lambda^n}{n!}  \\
+&= \sum_{n=1}^\infty n e^{-\lambda}\frac{\lambda^n}{n!}, \text{ since the term with $n=0$ cannot contribute} \\
+&= e^{-\lambda} \lambda \sum_{n=1}^\infty \frac{\lambda^{n-1}}{(n-1)!} \\
+&= e^{-\lambda} \lambda \sum_{n=0}^\infty \frac{\lambda^{n}}{n!}, \text{ by a change of variable}\\
+&= e^{-\lambda} \lambda e^{\lambda} \\
+&= \lambda.
+      \end{split}
+    \end{equation*}
+Similarly, using that $\V N = \E{N^2} - (\E N)^2$, 
+    \begin{equation*}
+      \begin{split}
+      \E{N^2}
+&= \sum_{n=0}^\infty n^2 e^{-\lambda}\frac{\lambda^n}{n!}  \\
+&= e^{-\lambda} \sum_{n=1}^\infty n \frac{\lambda^n}{(n-1)!}  \\
+&= e^{-\lambda} \sum_{n=0}^\infty (n+1) \frac{\lambda^{n+1}}{n!}  \\
+&= e^{-\lambda} \lambda \sum_{n=0}^\infty n \frac{\lambda^{n}}{n!}  +e^{-\lambda}\lambda \sum_{n=0}^\infty\frac{\lambda^{n}}{n!}  \\
+&= \lambda^2  + \lambda.
+\end{split}
+\end{equation*}
+
+The Poisson \emph{process} $\{N(t)\}$ is a much more complicated
+object than the Poisson distributed random variable $N(t)$. The
+process contains it is an \emph{ uncountable set} of random variables,
+whereas $N(t)$ is just \emph{one} random variable. However, for a
+fixed $t$ the element $N(t)$ is a random variable that is Poisson
+distributed with parameter $\lambda t$. Using the above, the answer of
+the question follows immediately.
+
+
+With generating functions we get the result without too much
+effort. Suppose $N$ is a Poisson distributed random variable. Then 
+\begin{equation*}
+  \begin{split}
+\phi(z)
+&=  \E{z^N} \\
+&= \sum_{k=0}^\infty z^k \P{N=k} \\
+&= \sum_{k=0}^\infty z^k \frac{\lambda^k}{k!} e^{-\lambda}  \\
+&= e^{-\lambda} \sum_{k=0}^\infty  \frac{(z\lambda^k}{k!}  \\
+&= e^{-\lambda} e^{z \lambda} \\
+&= e^{(z-1)\lambda}.
+  \end{split}
+\end{equation*}
+Then $\E N = \d \phi(z)/\d z$ at $z=1$. Now, $\phi'(1) = \lambda$. Also $\E{N(N-1)}= \phi''(1) = \lambda^2$. From this we see that $\E{N^2} = \phi''(1) + \phi(1) = \lambda^2 + \lambda$. 
+
+The SCV is defined as $\V{N(t)}/(\E{N(t)})^2$. From the above it
+follows that this is $(\lambda t)/(\lambda t)^2 = 1/\lambda t$.
+Clearly, as $t$
+increases, $1/\lambda t$ decreases.
+
+
+
+Finally, the SCV of an exponentially distributed random variable is
+1. The SCV of the related Poisson process is \emph{not} identically~1
+for all $t$.
+
+\end{solution}
+\end{question}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "book"
+%%% End:

@@ -1,0 +1,234 @@
+\section{Little's Law}
+\label{sec:littles-law}
+
+
+There is an important relation between the average time $\E W$ a job
+spends in the system and the long-run time-average number $\E L$ of jobs
+that is contained in the system. This is Little's law:
+\begin{equation}
+  \E L = \lambda \E W.
+\end{equation}
+Here we provide a sketch of the proof, c.f.,
+\cite{el-taha98:_sampl_path_analy_queuein_system} for the details. In
+the forthcoming sections we will apply Little's law frequently. Part
+of the usefulness of Little's law is that it applies to all
+input-output systems, whether it is a queueing system or an inventory
+system or some much more general system. In particular, it holds for
+the $G/G/c/K$ queue.
+
+We start with defining a few intuitively useful concepts.  Clearly, from~\eqref{eq:11}, 
+\begin{equation*}
+  \mathscr{L}(t) = \frac 1 t\int_0^t L(s)\, \d s =  \frac 1 t\int_0^t (A(s)-D(s)) \, \d s
+\end{equation*}
+is the time-average of the number of jobs in the system during
+$[0,t]$. Observe once again from the second equation that
+$\int_0^t L(s)\,\d s$ is the area enclosed between the graphs of $A(s)$
+and $D(s)$.
+
+
+The waiting time of the $k$th job is the time between the moment the
+job arrives and departs, that is
+\begin{equation*}
+  W_k = \int_0^\infty \1{A_k \leq s < D_k}\,\d s.
+\end{equation*}
+
+We can actually relate $W_k$ to $ \mathscr{L}(t)$.  Consider a departure
+time $T$ at which the system is empty. Observe that $A(T) = D(T)$, as
+at time $T$ all jobs that arrived up to $T$ also have left. Thus, for
+all jobs $k\leq A(T)$ we have that $D_k \leq A(T)$, so that we can
+replace the integration bounds in the above expression for $W_k$ by
+\begin{equation*}
+  W_k = \int_0^T \1{A_k \leq s < D_k}\,\d s.
+\end{equation*}
+Moreover, if $s\leq T$,
+\begin{equation*}
+L(s) = \sum_{k=1}^\infty \1{A_k \leq s < D_k} = \sum_{k=1}^{A(T)}\1{A_k \leq s < D_k}.
+\end{equation*}
+Therefore,
+\begin{equation*}
+  \begin{split}
+  \int_0^T L(s)\, \d s & = \int_0^T \sum_{k=1}^{A(T)} 1\{A_k \leq s < D_k\} \, \d s \\
+& =  \sum_{k=1}^{A(T)}\int_0^T  1\{A_k \leq s < D_k\} \, \d s =  \sum_{k=1}^{A(T)} W_k.
+  \end{split}
+\end{equation*}
+Thus, in words, the area between the graphs of $A(s)$ and $D(s)$ must
+be equal to the total waiting time spent by all jobs in the system
+until $T$. 
+From this, 
+\begin{equation*}
+  \mathscr{L}(T) = \frac 1 T  \int_0^T L(s)\, \d s  = \frac{A(T)} T \frac{1}{A(T)} \sum_{k=1}^{A(T)} W_k.
+\end{equation*}
+Finally, assuming there are an infinite number of times
+$0\leq T_i<T_{i+1}<\cdots$ at which $A(T_i) = D(T_i)$ and the following
+limits exist
+\begin{align*}
+T_i &\to \infty\\
+ \mathscr{L}(T_i) &\to \E L,\\
+\frac{A(T_i)}{T_i} &\to \lambda, \\
+\frac{1}{A(T_i)} \sum_{k=1}^{A(T_i)} W_k &\to \E W,
+\end{align*}
+when $i\to \infty$, we obtain \recall{Little's law}
+\begin{equation*}
+\E L = \lambda \E W.
+\end{equation*}
+
+As a useful first application, consider a server of the $G/G/1$ queue
+as a system by itself. Clearly, jobs depart from the server at rate
+$\delta$. By rate stability, the arrival rate at the server is
+therefore also $\lambda$. Next, the time a job remains in at the
+server is $\E S$.  Thus, the averate number of jobs at the server is
+$\E{L_S} = \lambda \E S$. As $\lambda \E{S} = \rho$, we get
+$\E{L_S} = \rho$.
+
+\begin{remark}
+  Sometimes (often?) students memorize Little's law in the wrong
+  way. Thus, as an easy check, use the dimensions of the concepts:
+  $\E L$ is an average \emph{number}, $\lambda$ is a \emph{rate},
+  i.e., \emph{numbers per unit time}, and $\E W$ is waiting
+  \emph{time}. \recall{Checking the dimensions} in the formula
+  prevents painfull mistakes.
+
+  Note also that $\E L\neq L(t)$; to clarify, the expected number of
+  items in the system is not necessarily equal to the number of items
+  in the system at some arbitrary time $t$. Thus, Little's law need
+  not hold at all moments in time; it is a statement about
+  \emph{averages}.
+\end{remark}
+
+
+
+
+\begin{question}
+  For a given single server queueing system the average number of
+  customers in the system is $\E L = 10$, customers arrive at rate
+  $\lambda$ and are served at rate $\mu$.
+  \begin{enumerate}
+  \item What is the average time customers spend in the system?
+  \item Suppose at the moment you join the system, the number of
+    customers in the system is 10. What is your expected time in the
+    system? 
+  \item Why are the answers between these two questions different?
+  \end{enumerate}
+  \hint{ Think about the data that is given in either situation.}
+
+    \begin{solution}
+      \begin{enumerate}
+      \item This was my initial answer:
+    `$\E W = \lambda \E L = \lambda 10$, and \emph{not} $10\mu$.'
+    Interestingly, it is wrong\ldots I wrote Little's law in the wrong
+    way\ldots So, be aware! It's all too easy to make mistakes with Little's law.
+
+    This is correct: $\E W = \E L/\lambda = 10/\lambda$, and
+    \emph{not} $10\mu$.
+  \item  The time you spend in the system is the expected remaining
+    service time $\E S_r$, i.e., the time to serve the customer in
+    service at the moment of arrival, plus $10/\mu_1$, i.e., the time
+    to clear the queue of 10 customers.
+  \item 
+ In the second question, it is \emph{given} that the queue
+    length is 10 at the moment of arrival. The queue length as `seen'
+    by a given customer upon arrival need not be the same as the
+    time-average queue length.
+  \end{enumerate}
+    \end{solution}
+
+\end{question}
+
+\begin{question}
+  Provide a graphical interpration of the proof of Little's law.
+  \hint{ Make a drawing of $A(t)$ and $D(t)$ until time $T$, i.e., the
+    first time the system is empty.}
+  \begin{solution}
+    The area enclosed between the graphs of $A(t)$ and $D(t)$ until
+    $T$ can be `chopped up' in two ways: in the horizontal direction
+    and the vertical direction. (Please make the drawing as you go
+    along\ldots) A horizontal line between $A(t)$ and $D(t)$
+    corresponds to the waiting time of a job, while a vertical line
+    corresponds to the number of jobs in the system at time $t$. Now
+    adding all horizontal lines (by integrating along the $y$-axis)
+    makes up the total amount of waiting done by all the jobs until
+    time $T$, while adding the vertical lines (by integrating along
+    the $x$-axis) is equal to the summation of all jobs in the
+    system. Since the area is the same no matter whether you sum it
+    in the horizontal or vertical direction:
+    \begin{equation*}
+      \sum_{k=1}^{A(T)}  W_k = \text{eclosed area} = \int_0^T (A(t)-D(t))\,dt. 
+    \end{equation*}
+ Dividing both sides by $A(T)$ gives
+    \begin{equation*}
+\frac{1}{A(T)} \sum_{k=1}^{A(T)}  W_k =\frac{1}{A(T)} \int_0^T (A(t)-D(t))\,dt. 
+    \end{equation*}
+
+    Finally, observe that this equality holds between any two times
+    $T_i, T_{i+1}$, where times $\{T_i\}$ are such that
+    $A(T_i)=D(T_i)$. Then, as $T_i\to \infty$ which we assumed from
+    the on-set, $\frac{1}{A(T_i)} \sum_{k=1}^{A(T_i)} W_k\to \E W$,
+    and
+    \begin{equation*}
+\frac{T_i}{A(T_i)}\frac{1}{T_i} \int_0^{T_i} (A(t)-D(t))\,dt \to \lambda^{-1} \E L.
+    \end{equation*}
+Hence, Little's law follows.
+  \end{solution}
+\end{question}
+
+
+\begin{question}
+  Little's law can be applied to any system in which jobs arrive and
+  depart. In particular, we can apply it to the system consisting of
+  just the server.  What result do you get for this case?
+  \begin{solution}
+  \begin{enumerate}
+  \item Observe that the average time at the server, i.e., the waiting
+    time in service, is $\E S$.
+  \item Jobs arrive at rate $\lambda$. 
+  \item So, the time-average number of jobs at the server
+    $\E L_S = \lambda \E S$. 
+  \item Applied to a single server, $\E L_S$ is the long run fraction
+    of time a job is at the server.
+  \item Thus, the long-run fraction of time the server is occupied is
+    $\E L_S=\lambda \E S$. The latter is also defined as $\rho$. Hence,
+    $\rho = \E L_S$. 
+  \end{enumerate}
+  \end{solution}
+\end{question}
+
+\begin{question}
+  \begin{enumerate}
+  \item Which assumptions did we use to prove that $\rho=\lambda \E S$?  
+  \item Can you make an arrival process such that $A(t)/t$ does not
+    have a limit? 
+  \end{enumerate}
+  \begin{solution}
+    \begin{enumerate}
+    \item 
+  \begin{itemize}
+  \item $A(t)/t \to \lambda$ as $t\to \infty$, i.e., $A(t)/t$ has a limit as $t$ converges to $\infty$. 
+  \item There exists a sequence of points $T_k, k=0,1,2,\ldots$ in time such that the server is idle. 
+  \item Either of the limits $\sum_k^n W_k/n = \sum_k^n S_k /n $ or
+    $t^{-1}\int_0^t L(s) \d s$ exists, in which case the other exists.
+  \end{itemize}
+  \item If $N(t) = 3 t^2$, then clearly $N(t)/t = 3t$. This does not
+    converge to a limit. For the mathematically interested, we seek a
+    function for which its Cesaro limit does not exist.
+  Another example, let the arrival rate $\lambda(t)$ be given as
+    follows:
+    \begin{equation*}
+      \lambda(t) = 
+    \begin{cases}
+      1 & \text{if } 2^{2k} \leq t < 2^{2k+1} \\
+      0 & \text{if } 2^{2k+1} \leq t < 2^{2(k+1)},
+    \end{cases}
+    \end{equation*}
+    for $k=0,1,2,\ldots$. Let $N(t) = \lambda(t) t$. Then $A(t)/t$
+    does not have limit. Of course, these examples are quite
+    pathological, and are not representable for `real life cases'
+    (Although this is also quite vague. What, then, is a real life
+    case?)
+    \end{enumerate}
+  \end{solution}
+\end{question}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "book"
+%%% End:

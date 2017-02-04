@@ -1,0 +1,79 @@
+\documentclass[a4paper,11pt]{scrbook}
+\usepackage{preamble}
+
+\setcounter{tocdepth}{1}
+
+\author{Nicky D. van  Foreest}
+\title{Analysis of Queueing Systems with  Sample Paths and Simulation }
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\include{intro}
+
+
+\chapter{Single-Station Queueing Systems}
+\label{cha:single-stat-queu}
+
+\input{chunks/expdistribution.tx}
+\input{poissondistribution.tex}
+\input{kendall.tex}
+\input{chunks/constructiondiscretetime.tx}
+\input{chunks/constructioncontinuoustime.tx}
+ \input{chunks/ratestability.tx}
+ \input{chunks/empericalperfmeasures.tx}
+\input{chunks/levelcrossing.tx}
+\input{chunks/mm1.tx}
+ \input{chunks/mnmn1.tx}
+ \input{chunks/pasta.tx}
+ \input{chunks/little.tx}
+ \input{chunks/usefulidentities.tx}
+ \input{chunks/mg1.tx}
+ \input{chunks/batcharrivals.tx}
+\input{relationmxm1andmg1.tex}
+ \input{chunks/mg1distributionqueuelength.tx}
+  \input{chunks/gg1.tx}
+\input{chunks/serviceInterruptions.tx}
+ \input{chunks/process_batches.tx}
+\input{chunks/mg1density.tx}
+
+
+\chapter{Open Queueing Networks}
+\label{sec:notes-relat-chapt2}
+
+Read the appropriate sections of Zijm's book. 
+\input{open_single_class.tex}
+\input{chunks/tandem.tx}
+\input{open_general.tex}
+
+
+\chapter{Closed Queueing Networks}
+\label{ch3}
+
+\input{gordon_newell.tex}
+\input{chunks/convolution.tx}
+\input{chunks/mva.tx}
+\input{chunks/mda.tx}
+
+\chapter{Hints}
+\printquestionhints
+
+\chapter{Solutions}
+\printsolutions
+
+\chapter{Notation}
+\label{sec:notation}
+\input{notation}
+
+\chapter{Formula Sheet}
+\input{formula_sheet}
+
+\bibliographystyle{plainnat}
+\bibliography{biblio_nicky}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

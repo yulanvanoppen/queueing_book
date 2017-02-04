@@ -1,0 +1,216 @@
+\section
+[$M/G/1$ Queue: The density of the waiting time]
+{$\mathbf{M/G/1}$ Queue: The density of the waiting time}
+
+Level-crossing analysis is a powerful method to tackle probability
+problems. Here we show how to use this method to derive an integral
+equation that should be satisfied by the steady state density $f_Q$ of
+the waiting time of the M/G/1 queue. This section is included for
+curious readers; it can be safely skipped without interrupting the
+main flow of the course. Most of the derivation below is based on
+hand-waiving arguments, but all can be made mathematically rigorous,
+see, e.g., \cite{brill08:_level_cross_method_stoch_model}.
+
+The result we want to derive is the functional equation of which the
+density $f_Q$ is the solution:
+\begin{equation}\label{eq:51}
+\begin{split}
+   f_Q(x) &= \lambda \int_0^x f_Q(y) G(x-y) \,\d y + \lambda p(0) G(x), \\
+   f_Q(0) &= \lambda p(0),
+\end{split}
+\end{equation}
+where $G(x) = 1 - F(x)$ is the survivor function of the service time
+$S$, and $p(0)$ is the long-run fraction of time the system is empty. 
+Once we have established the above, we show how this equation can be
+used to obtain the Pollaczek-Khintchine equation. In the last section
+we use it to find an explicit expression for the density of the
+waiting time of the M/M/1 queue.
+
+Thus, the first step is to show how to obtain~\eqref{eq:51} by means
+of level-crossing.  Write $F_Q(x,t) = \P{W_Q(t) \leq x}$ for the
+probability that at time $t$ the waiting time $W_Q(t)$ is smaller or
+equal to $x$. Let
+%
+\begin{equation*}
+G_Q(x,t) = 1 - F_Q(x,t) = \P{W_Q(t) > x}.
+\end{equation*}
+Take $h\ll 1$. Some thought will reveal that the following must hold
+%
+\begin{align*}
+ G_Q(x, t+h)
+ &= \P{W_Q(t+h) > x} \quad\text{by definition}\\
+&= \P{W_Q(t) > x+h} \quad\text{the waiting time decreases } h\text{ units in } h\text{ time units}\\
+&+ \lambda h\int_0^x \P{S>x-y} \P{W_Q(t) \in \d y}\quad \text{for any customer that sees a positive waiting time} \\
+&+ \lambda h \P{W_Q(t) = 0} \P{S> x}\quad \text{for any customer that arrives at an empty system}\\
+&+o(h).
+\end{align*}
+Here $\P{W_Q(t) \in \d y}$ is a notation used to indicate that
+the integration should be taken with respect to the measure induced by
+the distribution $\P{W_Q(t)\leq y}$. Assuming that
+$F_Q(x,t)$ has a density $f_Q(x,t)$ for all
+$y>0, t\geq 0$, we can write $\P{W_Q(t) \in \d y} =
+f_Q(y,t)\d y$. Using this, we see that
+%
+\begin{equation*}
+G_Q(x, t+h)
+= G_Q(x+h, t) + \lambda h \int_0^x G(x-y) f_Q(y,t) \,\d y  + \lambda h F_Q(0,t) G(x) + o(h).
+\end{equation*}
+Subtracting $G_Q(x+h,t)$ from both sides gives
+%
+\begin{equation*}
+G_Q(x, t+h) -  G_Q(x+h, t) =  \lambda h \int_0^x G(x-y) f_Q(y,t) \,\d y  + \lambda h F_Q(0,t) G(x) + o(h).
+\end{equation*}
+Assuming that all required derivatives exist, and writing $\partial_t = \partial/\partial t$ and
+$\partial_x = \partial/\partial x$, we can expand the left hand as
+%
+\begin{align*}
+G_Q(x, t+h) -  G_Q(x+h, t)
+&= G_Q(x, t+h) - G_Q(x,t) + G_Q(x,t) - G_Q(x+h, t) \\
+&= h \partial_t G_Q(x, t)  - h \partial_x G_Q(x,t) + o(h)
+\end{align*}
+Substituting this in the above,  dividing both sides by $h$,
+and taking the limit for $h\to 0$ gives
+%
+\begin{equation*}
+\partial_t G_Q(x, t)  - \partial_x G_Q(x,t) = \lambda  \int_0^x G(x-y) f_Q(y,t) \,\d y  + \lambda F_Q(0,t) G(x).
+\end{equation*}
+Assume finally that a steady state limit $G_Q(x) = \lim_{t\to
+\infty} G_Q(x,t)$ exists. It must then be that $\partial_t
+G_Q(x, t) \to 0$ as $t\to \infty$. Suppressing the dependence on
+$t$, the above becomes in this limit:
+%
+\begin{equation*}
+- \partial_x G_Q(x) = \lambda  \int_0^x G(x-y) f_Q(y) \,\d y  + \lambda F_Q(0) G(x).
+\end{equation*}
+Since $G_Q(x)$ only depends on $x$ we can
+replace the partial derivative by an ordinary derivative. Moreover,
+noting that
+%
+\begin{equation*}
+\frac \d{\d x} G_Q(x) = \frac \d{\d x} \P{W_Q > x} = \frac \d{\d x}
+(1-\P{W_Q \leq x}) = - \frac \d{\d x} \P{W_Q \leq x} = -\frac{\d}{\d x}F_Q(x) = - f_Q(x),
+\end{equation*}
+we  get for $x>0$,
+%
+\begin{equation*}
+f_Q(x)  = \lambda  \int_0^x G(x-y) f_Q(y) \,\d y  + \lambda F_Q(0) G(x).
+\end{equation*}
+Finally, observe that the fraction of customers that see no waiting
+time, i.e., $F_Q(0)$, is equal to the fraction of customers that
+see an empty system, i.e., $p(0)$. With this, we see that
+%
+\begin{equation*}
+f_Q(x)  = \lambda  \int_0^x G(x-y) f_Q(y) \,\d y  + \lambda p(0) G(x).
+\end{equation*}
+With similar arguments we can derive that $f_Q(0) = \lambda p(0) G(0) = \lambda p(0)$ as $G(0) = 1$.
+
+Now for the PK-formula. Since the density of waiting time $f_Q$ must
+satisfy~\eqref{eq:51} we see that
+\begin{equation*}
+  \begin{split}
+   \E W_Q 
+   &= \int_0^\infty x f_Q(x) \, \d x \\ 
+   &= \lambda \int_0^\infty x \left[ \int_0^x f_Q(y) G(x-y) \,\d y + p(0) G(x)\right] \, \d x \\
+   &= \lambda \int_0^\infty x \int_0^\infty 1\{y\leq x\} f_Q(y) G(x-y) \,\d y\, \d x + \lambda p(0) \int_0^\infty x G(x)\, \d x \\
+   &= \lambda \int_0^\infty x \int_0^\infty 1\{y\leq x\} f_Q(y) G(x-y) \,\d y\, \d x + \lambda p(0) \frac{\E S^2}2,
+  \end{split}
+\end{equation*}
+where we apply the above lemma to the service time $S$.  Next,
+focussing on the middle term, we find that
+\begin{align*}
+& \int_0^\infty x \int_0^\infty 1\{y\leq x\} f_Q(y) G(x-y) \,\d y\, \d x \\
+&= \int_0^\infty f_Q(y) \int_0^\infty x 1\{y\leq x\}  G(x-y) \, \d x\, \d y \\
+&= \int_0^\infty f_Q(y) \int_0^\infty (u+y) 1\{y\leq u+y\}  G(u) du\, \d y \\
+\end{align*}
+where we substituted $u=x-y$. As $u\geq 0$,
+\begin{align*}
+& \int_0^\infty f_Q(y) \int_0^\infty (u+y) 1\{y\leq u+y\}  G(u) du\, \d y \\
+&= \int_0^\infty f_Q(y) \int_0^\infty (u+y) G(u) du\, \d y.
+\end{align*}
+Renaming $u$ to $x$ again leads to
+%
+\begin{align*}
+&\int_0^\infty f_Q(y) \int_0^\infty (x+y)  G(x) \, \d x\, \d y \\
+&= \int_0^\infty f_Q(y) \left[\int_0^\infty x G(x) \, \d x + y \int_0^\infty G(x) \, \d x\right]\, \d y \\
+&= \int_0^\infty f_Q(y) \left[\frac{\E S^2}2 + y \E S \right]\,\d y \\
+&= \frac{\E S^2}2 \int_0^\infty f_Q(y) \,\d y   +  \E S \int_0^\infty y f_Q(y) \,\d y \\
+&= \frac{\E S^2}2 (1-p(0))  +  \E S \E W_Q
+\end{align*}
+Substituting this into  we find that
+\begin{align*}
+\E W_Q  &= \lambda \frac{\E S^2}2 (1-p(0))  +  \lambda \E S \E W_Q + \lambda p(0) \frac{\E S^2}2 \\
+&= \lambda \frac{\E S^2}2  +  \lambda \E S \E W_Q \\
+&= \lambda \frac{\E S^2}2  +  \rho \E W_Q.
+\end{align*}
+Assuming that $\rho<1$, which is required anyway to ensure that
+a steady state solution of
+exists, it now follows
+right away that
+\begin{equation*}
+\E W_Q = \frac{\lambda}{1-\rho} \frac{\E S^2}2.
+\end{equation*}
+
+As a last point of interest let's derive the density of the waiting
+time for the $M/M/1$ queue. Assume that the service time
+$S\sim \exp(\mu)$. Filling this in Eq.~\eqref{eq:51} we find:
+\begin{align*}
+f_Q(x) &= \lambda \int_0^x f_Q(y) G(x-y) \,\d y + \lambda p(0) G(x)
+= \lambda \int_0^x f_Q(y) e^{-(x-y)\mu} \,\d y + \lambda p(0) e^{-\mu x}.
+\end{align*}
+Multiplying both sides by $e^{\mu x}$ and defining $g(x) =
+e^{\mu x} f_Q(x)$ this can be rewritten to
+\begin{equation*}
+g(x) = \lambda p(0)  + \lambda \int_0^x g(y) \,\d y.
+\end{equation*}
+Differentiating left and right leads to the differential equation $g'(x) = \lambda g(x)$. Hence, $g(x) = A e^{\lambda x}$, hence,
+\begin{equation*}
+f_Q(x) = A e^{-(\mu-\lambda)x} = A e^{- \mu(1-\rho)x}.
+\end{equation*}
+From Eq.~\eqref{eq:51} we also have that $f_Q(0) = \lambda
+p(0)$.
+Since $p(0)=1-\rho$, $f_Q(0) = \lambda (1-\rho)$. Combining this with
+the equation above, it must be that $A=\lambda(1-\rho)$, so that
+\begin{equation}\label{eq:64}
+f_Q(x) = \lambda(1-\rho) e^{- \mu(1-\rho)x}.
+\end{equation}
+
+
+\begin{question}
+  Can you derive $f_Q$ in Eq.~(\ref{eq:64}) by conditioning on the
+  number $L_Q$ of jobs found in queue at arrival, and then using that
+  the total service of these $L_Q$ customers have a gamma density?
+  \begin{solution}
+\begin{align*}
+f_Q(x)
+&= \sum_{k=1}^\infty \P{W_Q = x | L_Q = k}\P{L_Q = k  } \\
+&= \sum_{k=1}^\infty \P{S_1 + S_2 + \cdots + S_k = x}\P{L_Q = k  } \\
+&= (1-\rho) \sum_{k=1}^\infty \rho^k \P{S_1 + S_2 + \cdots + S_k = x } \\
+&= (1-\rho) \sum_{k=1}^\infty \rho^k \mu \frac{(\mu x)^{k-1}}{(k-1)!}e^{-\mu x}\\
+&= (1-\rho) \mu \rho \sum_{k=1}^\infty \rho^{k-1} \frac{(\mu x)^{k-1}}{(k-1)!}e^{-\mu x}\\
+&= (1-\rho) \lambda e^{-\mu x}\sum_{k=0}^\infty \rho^{k} \frac{(\mu x)^{k}}{k)!}\\
+&= (1-\rho) \lambda e^{-\mu x}\sum_{k=0}^\infty \frac{(\rho \mu x)^{k}}{k)!}\\
+&= (1-\rho) \lambda e^{-\mu x} e^{\rho \mu x}\\
+&= (1-\rho) \lambda e^{-\mu (1-\rho)x}
+\end{align*}
+      \end{solution}
+    \end{question}
+    
+\begin{question}
+  Observe that $f_Q$ in Eq.~(\ref{eq:64}) is the waiting time density, not the
+  density of the sojourn time $f_s$. Try to obtain $f_s$.
+  \begin{solution}
+    To obtain $f_s$ we use conditioning:
+\begin{align*}
+f_s(x)
+&= \int_0^x f_Q(x-y) \d F(y) + p(0) \mu e^{-\mu x} \\
+&= \lambda \mu (1-\rho) \int_0^x  e^{- \mu(1-\rho)(x-y)} e^{-\mu y} \,\d y + p(0) \mu e^{-\mu x} \\
+&= \lambda \mu (1-\rho) \int_0^x  e^{- \mu(1-\rho)x} e^{\mu(1-\rho)y} e^{-\mu y} \,\d y + p(0) \mu e^{-\mu x} \\
+&= \lambda \mu (1-\rho) e^{- \mu(1-\rho)x} \int_0^x  e^{- \mu \rho y} \, \d y + p(0) \mu e^{-\mu x} \\
+&= \lambda \mu (1-\rho) e^{- \mu(1-\rho)x} \int_0^x  e^{- \lambda y} \,\d y + p(0) \mu e^{-\mu x} \\
+&= \lambda \mu (1-\rho) e^{- \mu(1-\rho)x} \frac{1 - e^{- \lambda x}}{\lambda} + p(0) \mu e^{-\mu x} \\
+&= \mu (1-\rho) e^{- \mu(1-\rho)x} - \mu (1-\rho) e^{- \mu(1-\rho)x - \lambda x} + \mu (1-\rho) e^{-\mu x} \\
+&= \mu (1-\rho) e^{- \mu(1-\rho)x} - \mu (1-\rho) e^{- (\mu - \lambda) x - \lambda x} + \mu (1-\rho) e^{-\mu x} \\
+&= \mu (1-\rho) e^{- \mu(1-\rho)x}.
+\end{align*}
+  \end{solution}
+\end{question}

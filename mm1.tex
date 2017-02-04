@@ -1,0 +1,147 @@
+\section
+[$M/M/1$ queue]
+{$\mathbf{M/M/1}$ queue}
+\label{sec:mm1}
+
+In the $M/M/1$ queue, one server serves jobs arriving with
+exponentially distributed interarrival times and each requiring an
+exponentially distributed processing time.  With Eq.~(\ref{eq:25}),
+i.e., $\lambda(n)p(n)= \mu(n+1)p(n+1)$ we can derive a number of
+important results for this queue.
+
+For the $M/M/1$ queue it is reasonable to assume that
+$\lambda(n) = \lambda$ and $\mu(n)= \mu$, so that from \eqref{eq:25},
+\begin{equation*}
+  p(n+1) = \frac{\lambda(n)}{\mu(n+1)} p(n) = \frac{\lambda}{\mu} p(n) = \rho p(n),
+\end{equation*}
+as $\rho=\lambda/\mu$. Since this holds for any $n\geq 0$, it follows with
+recursion that
+\begin{equation*}
+  p(n+1) = \rho^{n+1} p(0).
+\end{equation*}
+Then, from the normalization condition
+\begin{equation*}
+1=  \sum_{n=0}^\infty p(n) = p(0)\sum_{n=0}^\infty \rho^n = \frac{p(0)}{1-\rho},
+\end{equation*}
+so 
+\begin{align}\label{eq:23}
+p(0) &=1-\rho, &   p(n) &=  (1-\rho)\rho^{n}.
+\end{align}
+
+How can we use these equations? First, note that $p(0)$ must be the
+fraction of time the server is idle. Hence, the fraction of time the
+server is busy, i.e., the utilization, is
+\begin{equation*}
+  1-p(0) = \rho = \sum_{n=1}^\infty p(n).
+\end{equation*}
+Here the last equation has the interpretation of the fraction of time
+the system contains at least 1 job. Next, in the exercises below we
+derive that
+\begin{equation}\label{eq:el}
+  \E L = \frac \rho{1-\rho}.
+\end{equation}
+and 
+\begin{equation}\label{eq:pn}
+  \P{L\geq n} = \rho^n.
+\end{equation}
+
+Let us interpret these expressions. First of all, we only need
+estimates of $\lambda$ and $\mu$ to characterize the utilization of
+the server, the average queue length and the queue length
+distribution. In fact, only the ratio $\rho=\lambda/\mu$ is required.
+As such, assuming that interarrival times and services are
+exponentially distribtued, by measuring the fraction of time the
+server is busy, we obtain an estimate for $1-p(0)$, hence for $\rho$.
+With this, we can estimate $\E L$ and $\P{L\geq n}$.  Next, the fact
+that $\E L \sim (1-\rho)^{-1}$ for $\rho\to 1$ implies that the
+average waiting time \recall{increases asymptotically fast} to
+infinity when $\rho\to1$.  In practical terms, this means that
+striving for a high load results in (very) long average waiting
+times. As a consequence, this formula tells us that, in the design and
+operation of queueing systems, we should avoid the situation in which
+$\rho\approx 1$. Thus, we need to make a trade-off between the server
+utilization $1-p(0) = \rho$ and the waiting time. In high load
+regimes, the server is used efficiently, but the queue lengths are
+excessive. In any sensible system, we should keep $\rho$ quite a bit
+below 1, and accept lower utilization then might seem necessary.
+
+The expression for $\P{L\geq n}$ shows that the probability that the
+queue length exceeds some threshold decreases exponentially fast (for
+any reasonable $\rho$). Moreover, if we make the simple assumption
+that customers decide to leave (or rather, not join) the system when
+the queue is longer than $9$ say, then $\P{L\geq 10} = \rho^{10}$ is
+an estimator of the fraction of customers lost. Again, for the $M/M/1$
+queue, the knowledge of $\rho$ suffices to compute this estimate.
+
+In the context of inventory theory these equations are particularly useful, see Question~\ref{q:basestock}.
+
+\begin{question}
+  Derive expression~\ref{eq:el} for the average number of jobs in an
+  $M/M/1$ queue.  
+  \begin{solution}
+    \begin{equation*}
+      \begin{split}
+\E L 
+&= \sum_{n=0}^\infty n\pi(n) 
+= \sum_{n=0}^\infty \sum_{i=1}^n 1\{i\leq n\} \pi(n) \\        
+&= \sum_{i=1}^\infty \sum_{n=0}^\infty  1\{i\leq n\} \pi(n) 
+= \sum_{i=1}^\infty \sum_{n=i}^\infty \pi(n) \\
+&= \sum_{i=1}^\infty \sum_{n=i}^\infty (1-\rho)\rho^n         
+= \sum_{i=1}^\infty (1-\rho)\rho^i \sum_{n=0}^\infty \rho^n \\
+&= \sum_{i=1}^\infty (1-\rho)\rho^i \frac1{1-\rho}   
+= \sum_{i=1}^\infty \rho^i = \rho \sum_{i=0}^\infty \rho^i = \frac{\rho}{1-\rho}.
+      \end{split}
+    \end{equation*}
+  \end{solution}
+\end{question}
+
+\begin{question}
+  Derive expression~\ref{eq:pn}.
+  \begin{solution}
+    \begin{equation*}
+      \begin{split}
+\P{L\geq n} 
+&= \sum_{k=n}^\infty p(n) = \sum_{k=n}^\infty p(0)\rho^n = (1-\rho)\sum_{k=n}^\infty \rho^k \\
+&= (1-\rho)\rho^n \sum_{k=0}^\infty\rho^k = \rho^n \sum_{k=0}^\infty(1-\rho) \rho^k = \rho^n \sum_{k=0}^\infty p(k)  = \rho^n.
+\end{split}
+\end{equation*}
+\end{solution}
+\end{question}
+
+\begin{question}
+\label{q:basestock}
+Customers of, for example, a fast-food restaurant or a production
+facility, prefer to be served from stock. For this reason such
+companies often use a `produce-up-to' policy: When the on-hand
+inventory $I$ is equal or lower than some threshold $r$, the company
+produces items until the inventory level equals $r+1$ again. The level
+$r$ is the known as the reorder level.
+
+Suppose that customers arrive as a Poisson process with rate $\lambda$
+and the production times of single items are i.i.d. and exponentially
+distributed with parameter $\mu$. Assume also that customers that
+cannot be served from on-hand stock are backlogged, that is, they wait
+until their item has been produced. What are the average on-hand
+inventory level, the average number of customer in backlog, and the
+fraction of customers that are backlogged?
+
+If $h$ is the cost per item per unit time in stock and $b$ the cost
+per customer per unit time in backlog and $\pi$ the cost per customer
+backlogged, what are the average costs of using a reorder level $r$? 
+
+What is the optimal reorder level $r^*$, i.e., the level that achieves
+minimal average cost?
+
+\hint{Realize that the inventory level $I(t)$ at time $t$ can be
+  modeled as $I(t) = r+1-L(t)$, where $L$ is the number of jobs in an
+  $M/M/1$ queue.}
+
+  \begin{solution}
+\tbd
+  \end{solution}
+\end{question}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "book"
+%%% End:

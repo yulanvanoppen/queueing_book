@@ -1,0 +1,208 @@
+\section{Service Interruptions}
+\label{sec:serv-interr}
+
+No notes; only questions.
+
+\begin{question}
+  Determine the expectation and variance of $S_N = \sum_{i=1}^N X_i$
+  where $N$ is a random variable (with finite second moment) and
+  $\{X_i\}$ are i.i.d. as the generic random variable $X$.
+\begin{solution}
+We first consider the
+expectation.  If it is given that $N=n$, then
+\begin{equation*}
+  \E{S_N \given N=n} =  \E{\sum_{i=1}^n X_i}= \E{X_1} + \E{X_2} + \cdots \E{X_n} = n \E X,
+\end{equation*}
+where the last equation follows from the fact that the $X_i$ have the same distribution. With this, 
+\begin{equation*}
+  \E{\sum_{i=1}^N X_i} =   \E{\E{\sum_{i=1}^N X_i \given N}} =  \E{N\E{X}} = \E X \E N.
+\end{equation*}
+This result in known as Wald's equation. 
+
+To compute the variance we use that $\V{S_N} =\E{S_N^2} - (\E{S_N})^2$. Thus, we first compute
+\begin{equation*}
+  \begin{split}
+  \E{ S_N^2 \given  N=n} 
+&=  \E{\left(\sum_{i=1}^n X_i\right)^2}  
+=  \E{\sum_{i=1}^n X_i^2 + \sum_{i\neq j}^n X_i X_j}  \\
+&= \sum_{i=1}^n \E{X^2_i} + \sum_{i \neq j} \E{X_i} \E{X_j},
+  \end{split}
+\end{equation*}
+since $\E{X_iX_j} = \E{X_i} \E{X_j}$ by independence. Therefore, using
+that the $\{X_i\}$ are i.i.d. as $X$,
+\begin{equation*}
+  \E{ S_N^2 \given N=n} = n \E{X^2} + n(n-1) (\E X)^2. 
+\end{equation*}
+With this, 
+\begin{equation*}
+  \begin{split}
+  \E{ S_N^2}  &= \E{\E{ S_N^2 \given N=n}}  \\
+&= \E{N \E X^2 + N(N-1)(\E X)^2 } \\
+& = \E N \E{ X^2} + \E{N^2} (\E X)^2 - \E N (\E X)^2 \\
+& = \E N (\E{ X^2}  - (\E X)^2) + \E{N^2} (\E X)^2 \\
+& = \E N \V X + \E{N^2} (\E X)^2.
+  \end{split}
+\end{equation*}
+And finally,
+\begin{equation}
+  \begin{split}
+  \V{S_N} 
+&= \E{S_N^2}  - (\E{S_N})^2 \\
+&= \E N \V X + \E{N^2} (\E X)^2   - (\E N)^2 (\E X)^2 \\
+&= \E N \V X + \V N (\E X)^2.
+  \end{split}
+\end{equation}
+
+\end{solution}
+\end{question}
+
+
+\begin{question} 
+
+  A small company receives orders at a rate $\lambda$.  After a batch
+  of $B$ orders have been assembled, the company produces the batch.
+  The average service time of an order is $1/\mu$. Between two batches
+  the company has to re-adjust some of the machines before it can
+  process another batch. A setup costs  $S$ time units.
+
+\begin{enumerate}
+\item Should the batch size be limited from above or below to ensure that the system remains stable? 
+\item How many orders arrive on average during a setup?
+\item Use the above two points to determine a criterion on the batch size $B$. 
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}
+\item Only from below. If batches are very large, the fraction of time spent on setups becomes very small.
+\item \begin{equation*}
+    \lambda \E S
+  \end{equation*}
+Ensure you realized that you used Wald's rule.
+\item  The number of jobs that arrive, on average, during one
+  production cycle must be smaller than the total amount of jobs that
+  can be served, on average, during one cycle.   The number of arrivals during the setup is $\lambda \E S$. The number of arrivals during serving the batch is $\lambda B/\mu$. Thus, 
+  \begin{equation*}
+    \lambda ( B/\mu + S) < B.
+  \end{equation*}
+\end{enumerate}
+\end{solution}
+\end{question}
+
+\begin{question}
+Zijm.Ex.1.11.1
+ \begin{solution}
+Yes. The availability is $93\%$. Since $\E{S_e} = \E S/A$, and if $\E S $ is known, $\E{S_e}$ follows.
+\end{solution}
+\end{question}
+
+\begin{question}
+Zijm.Ex.1.11.2
+ \begin{solution}
+   No, from Zijm.Eq.1.51, the average repair time has to be known. The
+   repair time here is of course the time it takes for a mechanic to
+   show up at work again.
+\end{solution}
+\end{question}
+\begin{question}
+Zijm.Ex.1.11.3
+ \begin{solution}
+   It might, but perhaps a normal distribution would be better. It
+   makes sense to make a histogram of the recover times to see whether
+   some clear pattern is present. 
+
+   Besides this, I don't know how sensitive the result for $C_e^2$ is
+   on the distribution of the repair times. Perhaps it is not that
+   sensitive, so in that case it would be ok to simply use the
+   exponential distribution. 
+
+The sensitivity study would be an interesting topic for simulation. 
+\end{solution}
+\end{question}
+\begin{question}
+Zijm.Ex.1.11.4 and 1.11.5
+ \begin{solution}
+   We need to make an assumption about the distribution of the repair
+   times. Inferring from the text, the repair time is always $2$
+   days. Lets also assume that all jobs accumulate in front of the
+   broken machine, in other words, the broken machine is part of the
+   job routing of each job. Then
+   \begin{equation*}
+     \P{N(2) > 20} = 
+\sum_{n=21}^\infty e^{-5\cdot 2} \frac{10^n}{n!}.
+1  - \sum_{n=0}^{20} e^{-5\cdot 2} \frac{10^n}{n!} = 1-0.9984,
+   \end{equation*}
+i.e., very small.  This is the code I used: 
+
+<<term=True>>=
+from math import exp, factorial
+exp(-10) * sum((10)**n / factorial(n) for n in range(21))
+@
+\end{solution}
+\end{question}
+
+\begin{question}
+Zijm.Ex.1.11.4
+
+ \begin{solution}
+If the shop already contains 10 jobs, somewhere upstream of the broken machine, then 
+   \begin{equation*}
+     \P{N(2) > 10} = 1- 0.58.
+   \end{equation*}
+where  I used
+<<term=True>>=
+exp(-10) * sum((10)**n / factorial(n) for n in range(11))
+@
+\end{solution}
+\end{question}
+
+\begin{question}
+Zijm.Ex.1.11.6
+ \begin{solution}
+   Cleaning times will be pretty constant. Changing dies, or other
+   machine parts, is also typically quite predictable, although it can
+   take a lot of time, in particular in case a crane or other heavy
+   machinery is needed to replace parts. If the machine require
+   temporary adjustments, then the variation in setup times may be
+   quite a bit higher.
+\end{solution}
+\end{question}
+
+\begin{question}
+Zijm.Ex.1.11.7
+ \begin{solution}
+   Then the effective service times, and in particular, $C_e^2$ will
+   be quite a bit bigger. It is preferable to avoid such a situation. 
+
+   Mathematically, it is only given that $N_s$ is a random
+   variable. As, however, this does not state anything about its
+   distribution, we cannot make any general claim. The intent of the
+   problem is to have you check the relevant formulas and notice that
+   the variance of $N_s$ appears in the formulas.
+\end{solution}
+\end{question}
+
+\begin{question}[use=false]
+  Suppose a single machine workstation has to process $n$ different
+  product families. Jobs of family $i$ arrive as a Poisson process
+  with rate $\lambda_i$.  Service times are exponentially distributed
+  with average $\mu_i^{-1}$ for family $i$. A setup of time $S$ is
+  required if the machine switches from one family to another. If the
+  machine works according to a cyclic schedule, i.e., produce family
+  1, then 2, then 3, and so on until family $n$, Can you find batch
+  sizes $B_i$ for family $i$ such that an average waiting time can be
+  guaranteed?
+  \begin{solution}
+    \TBD. 
+
+    This problem can be generalized and has been widely studied as one
+    of the core problems in stochastic machine scheduling. For
+    instance, what to do if the setup times are family-dependent, or
+    even more general, dependent on the sequence in which the families
+    are planned? This is a very hard problem. 
+  \end{solution}
+\end{question}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "notes_all"
+%%% End:

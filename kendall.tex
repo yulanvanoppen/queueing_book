@@ -1,0 +1,85 @@
+
+\section{Kendall's Notation to Characterize Queueing Processes}
+\label{sec:kendalls-notation}
+
+As will become apparent in Sections~\ref{sec:constr-discr-time}
+and~\ref{sec:constr-gg1-queu}, the construction of any queueing
+process involves three main elements: the distribution of the
+inter-arrival times between consecutive jobs, the distribution of the
+service times of the individual jobs, and the number of servers
+present to process jobs. In this characterization it is implicit that
+the inter-arrival times form a set of i.i.d. (independent and
+identically distributed) random variables, the service times are also
+i.i.d., and finally, the interarrival times and service times are
+mutually independent.
+
+To characterize the type of queueing process it is common to use the
+\recall{abbreviation} $A/B/c/K$ where $A$ is the distribution of the
+interarrival times, $B$ the distribution of the services, $c$ the
+number of servers, and $K$ the size of the queue. In this notation it
+is assumed that jobs are served in first-in-first-out (FIFO) order;
+FIFO scheduling is also often called first-come-first-serve (FCFS).
+
+Let us illustrate the shorthand $A/B/c/K$ with some examples:
+\begin{itemize}
+\item $M/M/1$: the distribution of the interarrival times is
+  \emph{M}emory-less, hence exponential, the service times are also
+  \emph{M}emoryless, and there is 1 server. As $K$ is unspecified, it
+  is assumed to be infinite.
+\item $M/M/c$: A \recall{multi-server} queue with $c$ servers in which
+  all servers have the same capacity. Jobs arrive according to a
+  Poisson process and have exponentially distributed processing times.
+\item $M(n)/M(n)/1$: the interarrival times are exponential, just as
+  the service times, but the rates of the arrival and service processes
+  may depend on the queue length $n$. 
+\item $M/M/c/K$: interarrival times and process times are exponential,
+  and the \recall{system capacity} is $K$ jobs. Thus, the queue can
+  contain at most $K-c$ jobs.\footnote{Sometimes, the $K$ stands for
+    the capacity in the queue, not the entire system. The notation differs among
+    authors. Due to the lack of consistency, I might also not be
+    consistent; be warned.}
+\item $M^X/M/1$: Customers arrive with exponentially distributed
+  interarrival times. However, each customer brings in a number of
+  jobs, known as a batch. The number of jobs in each batch is
+  distributed as the random variable $X$. Thus, the arrival process of
+  work is \recall{compound Poisson}.
+\item $M/G/1$: the interarrival times are exponentially distributed,
+  the service times can have any \emph{G}eneral distribution (with
+  finite mean), and there is 1 server.
+\item $M/G/\infty$: exponential interarrival times, service times can
+  have any distribution, and there is an unlimited supply of
+  servers. This is also known as an \recall{ample} server. Observe
+  that in this queueing process, jobs actually never have wait in
+  queue; upon arrival there is always a free server available.
+\item $M/D/1-LIFO$.  Now job service times are \emph{D}eterministic, and the service sequence is last-in-first-out (LIFO).
+\item $G/G/1$: generally distributed interarrival and service times, 1 server.
+\end{itemize}
+
+In the sequel we will use Kendall's notation frequently to distinguish
+the different queueing models. Ensure that you familiarize yourself
+with this notation.
+
+\begin{question}
+  What are some advantages and disadvantages of using the Shortest
+  Processing Time First (SPTF) rule to serve jobs? (Look up the
+  definition on wikipedia or
+  \citet{hall91:_queuein_method_servic_manuf})
+  \begin{solution}
+  \begin{itemize}
+  \item Advantage: SPTF minimizes the number of jobs in queue. Thus,
+    if you want to keep the shop floor free of jobs (Work In Progress,
+    WIP), then this is certainly a good rule. 
+  \item Disadvantage: large jobs get near to terrible waiting times,
+    and the variance of the waiting time increases. Thus, the $C_s^2$
+    is larger than under FIFO. Also, SPTF does not take duedates into
+    account, thus giving a reliable duedate quotation to a customer is
+    hard (near to impossible.)
+  \end{itemize}
+  \end{solution}
+\end{question}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "book"
+%%% End:
