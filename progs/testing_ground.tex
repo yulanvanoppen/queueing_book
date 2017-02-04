@@ -1,0 +1,17 @@
+%\documentclass[crop=true,border=2mm]{standalone}
+\documentclass{article}
+% \usepackage[utf8]{inputenc}
+% \usepackage{fontspec}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{groupplots}
+%\usepgfplotslibrary{plotmarks} # does not work for some reasonx
+
+\begin{document}
+% \newlength\figureheight
+% \newlength\figurewidth
+% \setlength\figureheight{4cm}
+% \setlength\figurewidth{6cm}
+\input{reflected_random_walk.tex}
+\input{reflected_bernoulli_walk.tex}
+\end{document}
