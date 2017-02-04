@@ -2,7 +2,7 @@ import numpy as np
 from scipy.stats import bernoulli
 import matplotlib.pyplot as plt
 from matplotlib2tikz import save as tikz_save
-#import seaborn as sns
+#  import seaborn as sns
 
 
 from matplotlib import style
@@ -55,5 +55,6 @@ plt.plot(z, 'o-', markersize=2, label="Z")
 plt.plot(q, 'o-', markersize=4, label='Q')
 plt.ylabel('Queue')
 
-tikz_save('reflected_bernoulli_walk.tex', figureheight='5cm', figurewidth='12cm')
+tikz_save('reflected_bernoulli_walk.tex', figureheight='5cm',
+          figurewidth='12cm')
 
