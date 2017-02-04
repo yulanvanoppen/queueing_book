@@ -599,7 +599,7 @@ print(waiting_time)
     skipping it is OK, as is always the case with the code I include.
 
 
-<<evaluate=False>>=
+<<evaluate=False,fig=False>>=
 from collections import Counter
 from matplotlib.pylab import plt
 import seaborn as sns
@@ -661,6 +661,7 @@ plt.legend()
 # plt.show()
 filename = "figures/gg1convergence.pdf"
 plt.savefig(filename)
+plt.close()
 @
 
 \end{solution}

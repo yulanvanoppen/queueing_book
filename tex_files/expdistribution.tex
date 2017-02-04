@@ -520,6 +520,7 @@ makePlot(A, N)
 
 filename = "figures/uniform_N_{}_n_{}.pdf".format(N, n)
 plt.savefig(filename)
+plt.close()
 
 # normal distribution
 
@@ -541,8 +542,6 @@ makePlot(A, N)
 
 filename = "figures/normal_N_{}_n_{}.pdf".format(N, n)
 plt.savefig(filename)
-plt.cla()
-plt.clf()
 plt.close()
 @
 

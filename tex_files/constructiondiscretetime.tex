@@ -189,8 +189,6 @@ the behavior of the queue length process.
 import numpy as np
 import matplotlib.pylab as plt
 
-#from matplotlib import style
-#style.use('ggplot')
 
 import seaborn as sns
 sns.set_context("paper")
@@ -955,12 +953,8 @@ I_k &>= 0.
     same size as the number of arrival $a$ initially set to zeros. The
     rest of the code is nearly identical to the formulas in the text.
 
-<<fig=False>>=
+<<>>=
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-sns.set_context("paper")
-
 
 np.random.seed(3) # fix the seed
 

@@ -2,6 +2,7 @@
 import os
 from pweave import Pweb, PwebTexPweaveFormatter
 
+
 filenames = [
     "expdistribution",
     "constructiondiscretetime",
@@ -28,14 +29,17 @@ filenames = [
     "mda",
 ]
 
-filenames = [
-    "mda",
-      ]
+# to select some files temporarily
 
-to_dir = r"chunks/"
+#filenames = [
+#    "constructiondiscretetime",
+#      ]
 
-if not os.path.exists(to_dir):
-    os.makedirs(to_dir)
+
+current_dir = os.path.dirname(os.path.realpath(__file__))
+chunk_dir = current_dir + "/chunks/"
+tex_dir = current_dir + "/tex_files/"
+
 
 class ToFile(PwebTexPweaveFormatter):
     chunks = []
@@ -43,8 +47,9 @@ class ToFile(PwebTexPweaveFormatter):
     def preformat_chunk(self, chunk):
         ToFile.chunks.append(chunk.copy())  # Store the chunks
         if chunk['type'] == 'code':
-            source = os.path.splitext(self.source)[0]
-            fname = "chunks/{}_{}.tex".format(source, chunk['number'])
+            source = os.path.basename(self.source)
+            source = os.path.splitext(source)[0]
+            fname = chunk_dir + "{}_{}.tex".format(source, chunk['number'])
             with open(fname, "w") as f:
                 if chunk['term']:
                     f.write(chunk['result'])
@@ -58,7 +63,8 @@ class ToFile(PwebTexPweaveFormatter):
 
 
 for fname in filenames:
-    doc = Pweb(fname+r".tex", format="texpweave", output=to_dir+fname+r".tx")
+    doc = Pweb(tex_dir + fname+r".tex", format="texpweave",
+               output=chunk_dir+fname+r".tx")
     doc.setformat(Formatter=ToFile)
     doc.updateformat({
         "outputstart": "\n",
