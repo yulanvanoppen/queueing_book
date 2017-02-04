@@ -1,5 +1,10 @@
-# queueing_book
+Queueing Book
+===================
+
 A book on the analysis of queueing systems with sample paths and simulation. 
+
+Comments are more than welcome of course at `n.d.van.foreest@rug.nl`
+
 
 To make the book:
 
