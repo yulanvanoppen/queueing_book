@@ -34,6 +34,8 @@ filenames = [
 
 to_dir = r"chunks/"
 
+if not os.path.exists(to_dir):
+    os.makedirs(to_dir)
 
 class ToFile(PwebTexPweaveFormatter):
     chunks = []
