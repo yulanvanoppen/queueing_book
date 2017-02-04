@@ -9,4 +9,6 @@ the figure I include it in the book.
 
 To make the output
 
+.. code-block:: python
+
   > python3 reflected_random_walk.py && pdflatex testing_ground.tex
