@@ -1,10 +1,12 @@
 I make the figures with the following tools:
 
-* .. _python: http://www.python.org
-* , and its libraries scipy, numpy, matplotlib, matplotlibtikz,
-* pweave  
-* latex.
-
+* `Python <http://www.python.org/>`_
+* `Scipy <http://www.scipy.org/>`_
+* `numpy <http://www.numpy.org/>`_
+* `matplotlib <http://matplotlib.org/>`_
+* `matplotlibtikz <https://github.com/nschloe/matplotlib2tikz>`_
+* `latex <https://www.latex-project.org/>`_
+* `pweave <http://mpastell.com/pweave/>`_
 
 
 The python scripts contain the python code to make tikz code for a
