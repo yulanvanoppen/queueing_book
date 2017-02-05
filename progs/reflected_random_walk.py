@@ -31,7 +31,7 @@ plt.plot(q, 'o-', markersize=4, label='Q')
 
 plt.xlabel('Time')
 plt.ylabel('Queue')
-plt.title('Reflected Random Walk')
+plt.title('Regulated Random Walk')
 plt.grid(True)
 plt.legend(loc='lower left')
 
@@ -55,16 +55,19 @@ plt.grid(True)
 plt.legend(loc='lower left')
 
 plt.subplot(2, 1, 1)
-plt.title('Reflected Bernoulli Walk')
+plt.title('Regulated Bernoulli Walk')
 plt.plot(a, '2', markersize=4, label="A")
 plt.plot(-s, '1', markersize=4, label="S")
 plt.plot(z, 'o-', markersize=2, label="Z")
+plt.ylim(ymax=2)
 plt.ylabel('Arrivals/services')
+plt.legend(loc='lower left')
 
 plt.subplot(2, 1, 2)
 plt.plot(z, 'o-', markersize=2, label="Z")
 plt.plot(q, 'o-', markersize=4, label='Q')
 plt.ylabel('Queue')
+plt.legend(loc='lower left')
 
 tikz_save('reflected_bernoulli_walk.tex', figureheight='5cm',
           figurewidth='12cm')
