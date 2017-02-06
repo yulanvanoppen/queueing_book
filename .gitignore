@@ -1,4 +1,10 @@
 auto/
+*.blg
+*.out
+*.rel
 *.aux
 *.log
 *.gz
+*.toc
+booktest*.*
+progs/testing_ground.pdf

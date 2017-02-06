@@ -183,23 +183,21 @@ $\{S_k\}$.  A bit of experimentation with computer programs such as
 $R$ or python reveals that this is easy.
 
 
-As an example on the type of conclusions we can draw from using the
-above recursions, take $\{X_k\}$ and $\{S_k\}$ as in
-Exercise~\ref{ex:5}. Starting with $W_{Q,0}=5$ we use
+As an example, supposethat $X_k\sim U\{1,2,4\}$ and
+$S_k\sim U\{1,2,3\}$.  Starting with $W_{Q,0}=5$ we use
 Eq.~(\ref{eq:56}) to compute the distribution of $W_{Q,k}$ for
 $k=1,2,\ldots 20$, c.f., the left panel in
-Figure~\ref{fig:convergence} for the results. Here we see that when
-$k=5$, the `hump' of $\P{W_{Q,5}=x}$ around $x=5$ is due the starting
-value of $W_{Q,0}=5$. However, for $k>10$ the distribution of
-$W_{Q,k}$ hardly changes, at least not visually. Apparently, the
-convergence of the sequence of distributions of $W_{Q,k}$ is rather
-fast. In the middle panel we show the results of a set of simulations
-for increasing simulation length, up to $N=1000$ samples. Here we also
-see that the distribution to be defined in Eq.~(\ref{eq:48}) converges
-quite fast to some limiting function. Finally, in the right hand panel
-we compare the densities as obtained by the exact method and
-simulation. Clearly, for all practical purposes, these densities can
-be treated as the same.
+Figure~\ref{fig:convergence}. We see that when $k=5$, the `hump' of
+$\P{W_{Q,5}=x}$ around $x=5$ is due the starting value of
+$W_{Q,0}=5$. However, for $k>10$ the distribution of $W_{Q,k}$ hardly
+changes, at least not visually. Apparently, the convergence of the
+sequence of distributions of $W_{Q,k}$ is rather fast. In the middle
+panel we show the results of a set of simulations for increasing
+simulation length, up to $N=1000$ samples. Apparently the distribution
+to be defined in Eq.~(\ref{eq:48}) converges quite fast to some
+limiting function. Finally, in the right hand panel we compare the
+densities as obtained by the exact method and simulation. Clearly, for
+all practical purposes, these densities can be treated as the same.
 
 The most important lesson of these experiments is that the convergence
 of the random variables $W_{Q,k}$ to some the steady-state random
@@ -212,7 +210,11 @@ these notes.
 
 \begin{figure}
   \centering
-  \includegraphics{gg1convergence}
+% see progs/waiting_time_simulation.py
+\input{progs/waiting_time_1.tex}
+\input{progs/waiting_time_2.tex}
+\input{progs/waiting_time_3.tex}
+%  \includegraphics{progs/gg1convergence}
   \caption{The density of $W_{Q,k}$ for $k=5, 10, 15, 20$ computed by
     an exact method as compared the density obtained by simulation of
     different run lengths $N=200, 400, \ldots 1000$. The right panel
@@ -595,75 +597,10 @@ print(waiting_time)
 \begin{question}
   Validate the results of  Figure~\ref{fig:convergence} with simulation.
   \begin{solution}
-    This is the code I used. You can study it if you like, but
-    skipping it is OK, as is always the case with the code I include.
-
-
-<<evaluate=False,fig=False>>=
-from collections import Counter
-from matplotlib.pylab import plt
-import seaborn as sns
-sns.set_context("paper")
-
-from lea import Lea
-
-W0 = 5  # Lea.fromVals(0, 1, 2)
-S = Lea.fromVals(1,  2, 3)
-X = Lea.fromVals(1,  2, 4)
-U = S - X
-
-def simulate():
-    count = Counter()
-    N = 1000
-    W = max(W0 + U.random(), 0)
-    for k in range(1, N + 1):
-        W = max(W + U.random(), 0)
-        count[W] += 1
-        if k % (N // 5) == 0: # make 5 plots
-            x = [w for w in count]
-            tot = sum(count.values())
-            y = [count[w] / tot for w in count]
-            plt.plot(x, y, label="N={}".format(k))
-    return x, y
-
-
-def exact():
-    W = Lea.fastMax(W0 + U, 0)
-    for k in range(1, 21):
-        if k % 5 == 0:
-            plt.plot(W.support(), W.pmf(), label="k={}".format(k))
-        W = Lea.fastMax(W + U, 0)
-    return W.support(), W.pmf()
-
-
-plt.figure(figsize=(6, 2))
-
-plt.subplot(131)
-plt.axis([0, 20, 0, 0.3])
-plt.title("Exact")
-xex, yex = exact()
-plt.legend()
-
-
-plt.subplot(132)
-plt.axis([0, 20, 0, 0.3])
-plt.title("Simulation")
-xsim, ysim = simulate()
-plt.legend()
-
-plt.subplot(133)
-plt.axis([0, 20, 0, 0.3])
-plt.title("Sim/Exact")
-plt.plot(xsim, ysim, label="sim")
-plt.plot(xex, yex, label="ex")
-plt.legend()
-
-# plt.show()
-filename = "figures/gg1convergence.pdf"
-plt.savefig(filename)
-plt.close()
-@
-
+    You can study \texttt{waiting\_time\_simulation.py} at
+    \href{https://github.com/ndvanforeest/queueing_book/tree/master/progs}{github}
+    if you like, but skipping it is OK. Trying to make the graph in
+    your favorate programming language is fun.
 \end{solution}
 \end{question}
 

@@ -159,104 +159,6 @@ We are done.
 \end{question}
 
 
-\begin{question}[use=false]
- (Heuristic motivation for the Poisson distribution).  
-
- Consider a counting process $\{N(s,t], 0\leq s, \leq t\}$ such that
- $N(s,t]$ is the number of arrivals that arrrive during an interval
- $(s,t]$. I consider the following two properties quite natural:
- \begin{enumerate}
- \item The number of arrivals in disjoint intervals are independent,
-   i.e., the random variables $N(s,t]$ and $N(u,v]$ are
-   independent if $s\leq t < u \leq v$. 
- \item The arrival process $\{N(s,t]\}$ is time-homogenenous, i.e.,
-   \begin{equation*}
-   \P{N(u,u+s] = j} = \P{N(0,s] = j}
-   \end{equation*}
- for all $s\geq 0$ and $j=0,1,2,\ldots$. 
-\item Choose some $s$ such that $0<s<t$. If $N(s)=j$, and $N(t) = n$, then $N(s,t] = n-j$, thus,
-  \begin{equation*}
-    \P{N(0,t]=n} = \sum_{j=0}^n \P{N(0,s] = j, N(s,t] = n-j},
-  \end{equation*}
- for all $s\geq 0$ and $j=0,1,2,\ldots$. 
- \end{enumerate}
-Use these properties to derive the Poisson distribution.  
-
- \begin{solution}
-This problem is pretty challenging; it is not required for the exam.
-
-Define for notational convenience, 
- \begin{equation*}
-   f_n(t) = \P{N(0,t] = n}
- \end{equation*}
-Then
-\begin{equation*}
-  \begin{split}
-   f_n(t) &= \P{N(0,t] = n} \\
-   &= \sum_{j=0}^n \P{N(0,s] = j, N(s,t] = n-j} \\ 
-   &= \sum_{j=0}^n \P{N(0,s] = j\} \P\{N(s,t] = n-j} \text{ by independence}\\ 
-   &= \sum_{j=0}^n \P{N(0,s] = j\} \P\{N(0,t-s] = n-j} \text{ by time homogeneity}\\ 
-   &= \sum_{j=0}^n f_j(s) f_{n-j}(t-s) \text{ by the definition of } f_n.
-  \end{split}
-\end{equation*}
-Thus, we seek a function $f_n$  that solves
-\begin{equation*}
-   f_n(t) = \sum_{j=0}^n f_j(s) f_{n-j}(t-s),  \tag{*}
-\end{equation*}
-for all $s\in[0,t]$ and $n=0,1,2,\ldots$.  Of course
-$\{f_n(t), t\geq 0, n=0,1,2,\ldots\}$ should satisfy some
-further simple and natural properties:
-
-\begin{equation*}
-   \sum_{n=0}^\infty f_n(t) = 1, \text{ for all } t\geq 0,
-\end{equation*}
-as the $f_n(t)$ should correspond to probabilies. Moreover, no arrival
-can occur at time $t=0$, hence
-\begin{equation*}
-   f_0(0) = 1
-\end{equation*}
-
-
-One solution of the above equation  can be found by using the analogy:
-\begin{equation*}
-   t^n = (s + (t-s) )^n = \sum_{j=0}^n {n \choose j} s^j (t-s)^{n-j}
-\end{equation*}
-Dividing both sides by $n!$ leads to 
-\begin{equation*}
-   \frac{t^n}{n!} = \sum_{j=0}^n \frac{s^j}{j!}\frac{(t-s)^{n-j}}{(n-j)!}. 
-\end{equation*}
-Cleary, then, take $f_n(t) \sim t^n/n!$. A straightforward
-normalization then fixes $f_n$ to be
-\begin{equation*}
-   \P{N(0,t] = n } = f_n(t) = e^{-t} \frac{t^n}{n!}
-\end{equation*}
-Finally, rescaling the time axis enables us to consider other arrival
-rates than 1, so that in general
-\begin{equation*}
-   \P{N(0,t] = n } = f_n(t) = e^{-\lambda t} \frac{(\lambda t)^n}{n!}
-\end{equation*}
-
-It remains to prove that there is no other solution of (*), thereby
-proving that the only distribution that can satisfy our above
-assumptions is the Poisson distribution.  As far as I can see, this is
-not so easy. Perhaps you can find a proof.
-
-
-% Suppose then there is another
-% solution $g_n(t)$ of (*). Then, but subtraction, we get that
-% \begin{equation*}
-%   \begin{split}
-%     f_n(t) -g_n(t) 
-% &= \sum_{j=0}^n f_j(s) f_{n-j}(t-s) -  \sum_{j=0}^n g_j(s) g_{n-j}(t-s) \\
-% &= \sum_{j=0}^n [f_j(s) (f_{n-j}(t-s) - g_{n-j}(t-s)) +  g_{n-j}(t-s)( g_j(s) - f_j(s))].
-%   \end{split}
-% \end{equation*}
-% Clearly, if $f_{j} = g_{j}$ for $j=1,\ldot, n-1$, then this can be reduced to
-
-
- \end{solution}
-\end{question}
-
 
 \begin{question}
  Show from the above that  for small $h$, 
@@ -374,7 +276,7 @@ $M_1(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\
 \end{question}
 
 
-\begin{question}%[use=false]
+\begin{question}
  Assume that $N_a(t)\sim \text{P}(\lambda t)$ ,
   $N_s(t) \sim \text{P}(\mu t)$ and independent.  What is actually the
   meaning of the event
