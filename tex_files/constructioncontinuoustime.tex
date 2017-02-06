@@ -180,49 +180,7 @@ obtained a set of recursions by which we can run a simulation of a
 queueing process of whatever length we need, provided we have a
 sequence of have inter-arrival times $\{X_k\}$ and service times
 $\{S_k\}$.  A bit of experimentation with computer programs such as
-$R$ or python reveals that this is easy.
-
-
-As an example, supposethat $X_k\sim U\{1,2,4\}$ and
-$S_k\sim U\{1,2,3\}$.  Starting with $W_{Q,0}=5$ we use
-Eq.~(\ref{eq:56}) to compute the distribution of $W_{Q,k}$ for
-$k=1,2,\ldots 20$, c.f., the left panel in
-Figure~\ref{fig:convergence}. We see that when $k=5$, the `hump' of
-$\P{W_{Q,5}=x}$ around $x=5$ is due the starting value of
-$W_{Q,0}=5$. However, for $k>10$ the distribution of $W_{Q,k}$ hardly
-changes, at least not visually. Apparently, the convergence of the
-sequence of distributions of $W_{Q,k}$ is rather fast. In the middle
-panel we show the results of a set of simulations for increasing
-simulation length, up to $N=1000$ samples. Apparently the distribution
-to be defined in Eq.~(\ref{eq:48}) converges quite fast to some
-limiting function. Finally, in the right hand panel we compare the
-densities as obtained by the exact method and simulation. Clearly, for
-all practical purposes, these densities can be treated as the same.
-
-The most important lesson of these experiments is that the convergence
-of the random variables $W_{Q,k}$ to some the steady-state random
-variable $W$ appears to be rather fast. This validates, to some
-extent, that most queueing theory is concerned with the analysis of
-the system in \emph{stationarity}. As a matter of fact, the study of
-queueing systems in stationary state will occupy us for the rest of
-these notes.
-
-
-\begin{figure}
-  \centering
-% see progs/waiting_time_simulation.py
-\input{progs/waiting_time_1.tex}
-\input{progs/waiting_time_2.tex}
-\input{progs/waiting_time_3.tex}
-%  \includegraphics{progs/gg1convergence}
-  \caption{The density of $W_{Q,k}$ for $k=5, 10, 15, 20$ computed by
-    an exact method as compared the density obtained by simulation of
-    different run lengths $N=200, 400, \ldots 1000$. The right panel
-    compares the exact density of $W_{Q,20}$ to the density obtained by simulation
-    for $N=1000$.}
-\label{fig:convergence}
-\end{figure}
-
+$R$ or python will reveal that this is easy.
 
 
 \begin{question}

@@ -196,38 +196,6 @@ edge[pil,bend left=25, <-] (mu.east);
 \end{figure}
 
 
-A final important topic is the, so called, limiting behavior of a
-queueing system. What happens if we simulate the system for a long
-time? The notation of Eq.~\eqref{eq:48} suggests that there is a
-random variable $W$ such that $W_k\to W$ in some sense, and likewise
-for $L$ and so on. However, it requires a considerable amount of
-mathematics to make this procedure precise. First, we need to define
-$\{W_k\}$ as random variables in their own right; up to now we just
-considered each $W_k$ as a \emph{number}, i.e., a measurement or
-simulation of the waiting time of the $k$th job. Defining $W_k$ as a
-random variable is not as simple as the definition of, for instance,
-the inter-arrival times $\{X_k\}$; these random variables can be
-safely \emph{assumed} to be i.i.d. However, the waiting times
-$\{W_k\}$ are certainly not i.i.d., but, as should be apparent from
-Eq.~\eqref{eq:59}, they are \emph{constructed} in terms of
-recursions. Next, based on these recursions, we need to show that the
-sequence of distribution functions associated with the random
-variables $\{W_k\}$ converges to a limiting distribution function~$G$,
-say. Finally, it is necessary to show that it is possible to construct
-a random variable~$W$ that has~$G$ as its distribution function.  In
-this sense, then, we can say that~$W_k \to W$. The random variable $W$
-is known as the \recall{steady-state limit} of the sequence of random
-variables $\{W_k\}$, and the distribution of~$W$ is known as the
-\recall{limiting} or \emph{stationary distribution} of $\{W_k\}$.
-
-
-In these notes we sidestep all these fundamental issues, as these
-issues require measure theory and more advanced probability theory
-than we can deal with in this course. However, it can all be made
-precise.  Notwithstanding these theoretical points, we can use
-numerical methods and simulation to obtain insight into the limiting
-behavior; we have all the tools available, see Figure~\ref{fig:convergence}. 
-
 \begin{question}
 \label{ex:1}
 Design a queueing system in which the load as seen the server is very
