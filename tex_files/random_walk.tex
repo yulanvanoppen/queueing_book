@@ -281,6 +281,49 @@ With this,
   
 \end{question}
 
+\begin{question}
+  Can you relate the construction of $\{Q_k\}$ as a discrete-time
+  random walk to a continuous-time construction of the $M/M/1$ queue?
+
+  \hint{Consider $Z(t)=Z(0) + N_\lambda( t) -N_\mu(t)$ at the embedded
+    set of epochs at which either $N_\lambda$ or $N_\mu$ changes. What
+    is the probablity that $N_\lambda$ fires, given that one of the
+    two Poisson processes fires? Relate this to $\{a_k\}$ and
+    $\{c_k\}$.}
+
+    \begin{solution}
+      We use that merging two Poisson processes leads to another
+      Poisson process and that a Poisson process can be split with
+      Bernoulli random variables to form a thinned Poisson
+      process. See one of the exercises of
+      Section~\ref{sec:poisson-distribution}. 
+
+      Consider the Poisson process $N_{\lambda+\mu}(t)$. This counting
+      process has, for fixed $t$, the same distribution as
+      $N_\lambda(t)+N_\mu(t)$. Let $\{A_k\}$ be the epochs at which
+      the arrivals of $N_{\lambda+\mu}(t)$ occur. At $A_k$, throw a
+      coin that lands heads with probability $\lambda/(\lambda+\mu)$
+      and tails with probability $\mu/(\lambda+\mu)$. Set $a_k=1$ and
+      $c_k=0$ if the coin lands heads, and set $a_k=0$ and $c_k=1$ if
+      it turns tails. The processes
+      \begin{align*}
+        N_\lambda(t) &= \sum_{k=1}^\infty a_k \1{A_k \leq t},\\
+        N_\mu(t) &= \sum_{k=1}^\infty c_k \1{A_k \leq t},
+      \end{align*}
+      are our original Poisson processes.  Observe that with this
+      procedure we have established a relation between the sequences
+      $\{a_k\}$ and $\{c_k\}$ and the Poisson processes $N_\lambda$ and $N_\mu$. 
+
+      The process $Z_k = Z_{k-1}+a_k - c_k$ is a random walk in
+      discrete time and its reflection results in the discrete-time
+      $M/M/1$ queue. The process
+      $Z(t) = Z(0) + N_\lambda(t) - N_\mu(t)$, with $N_\lambda$ and
+      $N_\mu$ constructed based on the sequences $\{a_k\}$ and
+      $\{c_k\}$, is the continuous-time random walk underlying the
+      $M/M/1$ queue.
+
+    \end{solution}
+\end{question}
 
 %%% Local Variables:
 %%% mode: latex
