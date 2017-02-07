@@ -297,12 +297,18 @@ $M_1(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\
   decides, independent of anything else, to enter the shop.
 
   Show that the Poisson process obtained by thinning the original
-  process is $\sim P(\lambda t p)$ for any $t$.
+  process is $\sim P(\lambda t p)$ for any~$t$.
  
 \hint{ Condition on the total number of arrivals $N(t)=m$ up to time
       $t$. Realize that the probability that a job is of type 1 is
       Bernouilli distributed, hence when you consider $m$ jobs in
-      total, the number of type 1 jobs is binomially distributed.}
+      total, the number of type 1 jobs is binomially distributed.
+
+You might also consider the random variable 
+  \begin{equation*}
+    Y = \sum_{i=1}^N Z_i,
+  \end{equation*}
+  with $N\sim P(\lambda)$ and $Z_i\sim B(p)$. Show that the moment generating function of $Y$ is equal to the moment generating function of a Poisson random variable with parameter $\lambda p$. }
 
     \begin{solution}
 \begin{equation*}
@@ -319,155 +325,37 @@ e^{-\lambda_1 t}\frac{(\lambda_1 t)^{m}}{m!} \\
   \end{split}
 \end{equation*}
 We see that the thinned stream is Poisson with parameter $\lambda t p$. 
+
+Now consider $Y=\sum_{i=1}^N Z_i$. Suppose that $N=n$, so that $n$
+arrivals occured. Then we throw $n$ coins with success probability
+$p$. It follows that $Y$ is indeed a thinned Poisson random variable.
+Model the coins as a generic Bernoulli distributed random variable
+$Z$.  We first need
+\begin{equation*}
+  \E{e^{s Z}} = e^0 \P{Z=0} + e^{s} \P{Z=1} = (1-p) + e^sp.
+\end{equation*}
+Suppose that $N=n$, then since the $Z_i$ are i.i.d.,
+\begin{equation*}
+\E{e^{s\sum_{i=1}^n Z_i}} = \left(\E{e^{s Z}}\right)^n = \left(1 + p (e^s - 1)\right)^n
+\end{equation*}
+Then, using conditioning on $N$, 
+\begin{equation*}
+  \begin{split}
+  \E{e^{sY}}
+&= \E{\E{e^{s\sum_{i=1}^n Z_i} \given N=n }} 
+ = \E{\E{\left(1+p(e^s-1)\right)^n \given N=n }} \\
+&= \sum_{n=0}^\infty \left(1+p(e^s-1)\right)^n e^{-\lambda} \frac{\lambda^n}{n!}
+= e^{-\lambda} \sum_{n=0}^\infty \frac{\left(1+p(e^s-1)\right)^n \lambda^n}{n!}\\
+&= e^{-\lambda} e^{\lambda (1+p(e^s-1))} = e^{\lambda p (e^s - 1)}.
+  \end{split}
+\end{equation*}
+Thus, $Y$ has the same moment generating function as a Poisson
+distributed random variable with parameter $\lambda p$. Since
+moment-generating functions specify the distribution uniquely,
+$Y\sim P(\lambda p)$.
+
 \end{solution}
 \end{question}    
-
-
-\begin{question}\label{ex:3}
-   If $A\sim \exp(\lambda)$, $S\sim\exp(\mu)$ and independent, show that 
-    \begin{equation*}
-      \P{A\leq S} = \frac{\lambda}{\lambda+\mu}.
-    \end{equation*}
-
-    \hint{ Define the joint distribution of $A$ and $S$ and carry out
-      the computations, or use conditioning, or use the result of the
-      previous exercise.}
-
-\begin{solution}
-There is more than one way to show that $\P{A\leq S} = \lambda/(\lambda+\mu)$.  
-
-Method 1. (I admit that, although the simplest, least technical,
-method, I did not think of this right away. I am `conditioned' to use
-conditioning\ldots) Observe first that $A$ and $S$, being
-exponentially distributed, both have a density. Moreover, as they are
-independent, we can sensibly speak of the joint density
-$f_{A,S}(x,y) = f_A(x)f_S(y) = \lambda \mu e^{-\lambda x} e^{-\mu
-  y}$. With this,
-\begin{equation*}
-  \begin{split}
-    \P{A\leq S} 
-&= \E{\1{A\leq S}} \\
-&= \int_0^\infty \int_0^\infty \1{x\leq y} f_{A,S}(x,y)\, \d y\,\d x\\
-&= \lambda \mu \int_0^\infty \int_0^\infty \1{x\leq y} e^{-\lambda x} e^{-\mu y} \, \d y\,\d x\\
-&= \lambda \mu \int_0^\infty e^{-\mu y} \int_0^y e^{-\lambda x}\, \d x \, \d y \\
-&= \mu \int_0^\infty e^{-\mu y} (1-e^{-\lambda y})\,\d y\\
-&= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
-&= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
-&= 1 - \frac{\mu}{\lambda + \mu} 
-  \end{split}
-\end{equation*}
-This argument is provided in the probability book you use in the first year.
-
-Method 2. Applying a standard conditioning argument
-\begin{equation*}
-\P{A\leq S} = \int_0^\infty \P{A\leq S| S=s} \mu e^{-\mu s} \,  \d s.
-\end{equation*}
-Now, $\P{A\leq S| S=s}$ is a conditional probability
-distribution. This is a bit of tricky object, but very useful once you
-get used to it. The tricky part is that $\P{S=s} = 0$. Therefore
-$\P{A\leq S\given S=s}$ cannot be defined as $\frac{\P{A\leq s,
-  S=s}}{\P{S=s}}$. However, if we proceed nonetheless and use the
-independence of $S$ and $A$, we get
-\begin{equation*}
-   \P{A\leq S| S=s} = \frac{\P{A\leq s, S=s}}{\P{S=s}} = \frac{\P{A\leq s} \P{S=s}}{\P{S=s}} = \
-\P{A\leq s}
- \end{equation*}
- and thus, indeed, $\P{A\leq S| S=s} = \P{A\leq s}$. Then,
-\begin{equation*}
-  \begin{split}
-\P{A\leq S} 
-&= \int_0^\infty \P{A\leq S| S=s} \mu e^{-\mu s} \,  \d s \\
-&= \int_0^\infty \P{A\leq s} \mu e^{-\mu s} \,  \d s \\
-&= \int_0^\infty (1-e^{-\lambda s})\mu e^{-\mu s} \,  \d s \\
-  \end{split}
-\end{equation*}
-and we arrive at the integral we have seen above. 
-
-So we get the correct answer, but by the wrong method.  How can we
-repair this?  As a first step, let's not fix $S$ to a set of measure
-zero, but let's assume that $S\in [s,t]$ for $s<t$. Then it follows
-that
-\begin{equation*}
-  1\{A\leq s\} 1\{S\in[s,t]\} \leq  1\{A\leq S\} 1\{S\in[s,t]\} \leq 1\{A\leq t\} 1\{S\in[s,t]\}
-\end{equation*}
-As a second step,  using that $\P{S\in[s,t]} > 0$ if $s<t$ and the independence of $A$ and $S$,
-\begin{equation*}
-  \begin{split}
-    \P{A\leq s} &= \frac{\P{A\leq s} \P{S\in[s,t]}}{\P{S\in[s,t]}} = \frac{\P{A\leq s,  S\in[s,t]}}{\P{S\in[s,t]}} \\
-    \P{A\leq t} &= \frac{\P{A\leq t} \P{S\in[s,t]}}{\P{S\in[s,t]}} = \frac{\P{A\leq t,  S\in[s,t]}}{\P{S\in[s,t]}}
-  \end{split}
-\end{equation*}
-Now with the result of the first step
-\begin{equation*}
-  \begin{split}
-    \P{A\leq s} 
-&= \frac{\P{A\leq s,  S\in[s,t]}}{\P{S\in[s,t]}} \\
-&\leq \frac{\P{A\leq S,  S\in[s,t]}}{\P{S\in[s,t]}} \\
-&= \P{A\leq S| S\in[s,t]} \\
-&\leq \frac{\P{A\leq t,  S\in[s,t]}}{\P{S\in[s,t]}} \\
-&= \P{A\leq t}.
-  \end{split}
-\end{equation*}
-Hence, 
-\begin{equation*}
-  \begin{split}
-    \P{A\leq s} \leq \P{A\leq S| S\in[s,t]} \leq \P{A\leq t}.
-  \end{split}
-\end{equation*}
-Finally, taking the limit $t\downarrow s$, and defining $\P{A\leq S|
-S = s} = \lim_{t\downarrow s} \P{A\leq S| S\in[s,t]}$, it follows
-that
-\begin{equation*}
-    \P{A\leq s} = \P{A\leq S| S = s}
-\end{equation*}
-
-A more direct way to properly define $\P{A\leq S| S=s}$ is as follows. For any $y$ such that $f_S(y) > 0$, we can define the conditional probability density function of $A$, given that $S=s$, as 
-\begin{equation*}
-  f_{A|S}(x|s) = \frac{f_{A, S}( x, s)}{f_Y(s)},
-\end{equation*}
-where, as before, $f_{A, S}( x, s)$ is the joint density of $A$ and $S$. Now that the conditional probability density is defined, we can properly define
-\begin{equation*}
-  \E {A| S=s } = \int_0^\infty x   f_{A|S}(x|s)\, \d x
-\end{equation*}
-and also
-\begin{equation*}
-  \begin{split}
-  \P{A\leq S| S=s } = \E{\1{A \leq S}| S=s } = \int_0^\infty \1{x \leq s}   f_{A|S}(x|s)\, \d x.
-  \end{split}
-\end{equation*}
-Using the definition of $f_{A|S}(x|s)$ and the independence of $A$ and $S$ it follows that
-\begin{equation*}
-  f_{A|S}(x|s) = \frac{f_{A, S}( x, s)}{f_Y(s)} = \frac{\lambda e^{-\lambda x} \mu e^{-\mu s}}{\mu e^{-\mu s}} = \lambda e^{-\lambda x}
-\end{equation*}
-from which we get that 
-\begin{equation*}
-  \begin{split}
-  \E{\1{A \leq S}| S=s } 
-&= \int_0^\infty \1{x \leq s}   f_{A|S}(x|s)\, \d x \\
-&= \int_0^\infty \1{x \leq s} \lambda e^{-\lambda x}\, \d x \\
-&= \int_0^s \lambda e^{-\lambda x}\, \d x \\
-&= 1 - e^{-\lambda s},
-  \end{split}
-\end{equation*}
-that is,
-\begin{equation*}
-  \begin{split}
-  \P{A\leq S| S=s} = \E{\1{A \leq S}| S=s } = 1 - e^{-\lambda s}  = \P{A \leq s}.
-  \end{split}
-\end{equation*}
-
-All of these problems can be put on solid ground by using measure
-theory. We do not pursue these matters any further, but trust on our
-intuition that all is well.
-
-
-Finally, using the results of the previous exercise, note that the
-event $\{A<S\}$ is equal to the event
-$\{N_a(t) = 1, N_s(t)=0\}\cap\{N_a(t) + N_s(t)=1\}$. 
-
-\end{solution}
-\end{question}
-
 
 \begin{question}
   Show that $\E{N(t)} = \lambda t$ and $\V{N(t)} = \lambda t$. Why is
@@ -537,9 +425,10 @@ increases, $1/\lambda t$ decreases.
 
 
 
-Finally, the SCV of an exponentially distributed random variable is
-1. The SCV of the related Poisson process is \emph{not} identically~1
-for all $t$.
+There is point of confusion for some students. The SCV of an
+exponentially distributed random variable is 1; the SCV of the related
+Poisson process $N_\lambda(t)$ is \emph{not} identically~1 for all
+$t$.
 
 \end{solution}
 \end{question}

@@ -7,17 +7,25 @@ than welcome of course: `n.d.van.foreest@rug.nl`
 Quite a few of the source tex files contain python code. These files
 should be weaved with `pweave <http://mpastell.com/pweave/>`_. The
 weaved files are sent to the ``chunks`` directory with extension
-``.tx``. These ``.tx`` files are read by ``book.tex``.
+``.tx``. These ``.tx`` files are read by ``book.tex``. Thus, if you
+edit the ``.tx`` files, they will be overwritten when you weave the
+``.tex`` files. However, if you don't run ``pweaveAll.py`` this will
+not happen.
 
+To make the book from the weaved files, run:
 
-To make the book:
+  pdflatex book
 
-  python3 pweaveAll.py && pdflatex book
+To make the book from scratch, run
+
+  python3 pweaveAll.py
+  pdflatex book
 
 
 When writing/testing a certain file I typically uncomment the related
-file as an ``input`` command in ``booktest.tex`` and include the file to
-be weaved in ``pweaveAll.py``.
+file as an ``input`` command in ``booktest.tex`` and modify 
+``pweaveAll.py`` such only this file is weaved. 
 
-``makeClean`` does what its name says it does: delete ``*.aux`` and the like. 
+``makeClean`` does what its name says it does: delete ``*.aux`` and
+the like.
 

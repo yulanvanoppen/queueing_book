@@ -387,7 +387,12 @@ Of course, $\E A_i = \E{\sum_{k=1}^i X_k} = i \E{X} = 1/\lambda$.
 Z=\min\{X,Y\}\sim\exp(\lambda+\mu),
   \end{equation*}
 hence $\E Z = (\lambda+\mu)^{-1}$.
+
+\hint{Use that if $Z=\min\{X, Y\}>x$ that then it must be that $X>x$
+  and $Y>x$. Then use independence of $X$ and $Y$.}
+
   \begin{solution}
+Use that $X$ and $Y$ are independent to get
     \begin{equation*}
       \begin{split}
       \P{Z>x} 
@@ -398,6 +403,147 @@ hence $\E Z = (\lambda+\mu)^{-1}$.
   \end{solution}
 
 \end{question}
+
+\begin{question}\label{ex:3}
+   If $A\sim \exp(\lambda)$, $S\sim\exp(\mu)$ and independent, show that 
+    \begin{equation*}
+      \P{A\leq S} = \frac{\lambda}{\lambda+\mu}.
+    \end{equation*}
+
+    \hint{ Define the joint distribution of $A$ and $S$ and carry out
+      the computations, or use conditioning, or use the result of the
+      previous exercise.}
+
+\begin{solution}
+There is more than one way to show that $\P{A\leq S} = \lambda/(\lambda+\mu)$.  
+
+Method 1. (I admit that, although the simplest, least technical,
+method, I did not think of this right away. I am `conditioned' to use
+conditioning\ldots) Observe first that $A$ and $S$, being
+exponentially distributed, both have a density. Moreover, as they are
+independent, we can sensibly speak of the joint density
+$f_{A,S}(x,y) = f_A(x)f_S(y) = \lambda \mu e^{-\lambda x} e^{-\mu
+  y}$. With this,
+\begin{equation*}
+  \begin{split}
+    \P{A\leq S} 
+&= \E{\1{A\leq S}} \\
+&= \int_0^\infty \int_0^\infty \1{x\leq y} f_{A,S}(x,y)\, \d y\,\d x\\
+&= \lambda \mu \int_0^\infty \int_0^\infty \1{x\leq y} e^{-\lambda x} e^{-\mu y} \, \d y\,\d x\\
+&= \lambda \mu \int_0^\infty e^{-\mu y} \int_0^y e^{-\lambda x}\, \d x \, \d y \\
+&= \mu \int_0^\infty e^{-\mu y} (1-e^{-\lambda y})\,\d y\\
+&= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
+&= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
+&= 1 - \frac{\mu}{\lambda + \mu} 
+  \end{split}
+\end{equation*}
+This argument is provided in the probability book you use in the first year.
+
+Method 2. Applying a standard conditioning argument
+\begin{equation*}
+\P{A\leq S} = \int_0^\infty \P{A\leq S| S=s} \mu e^{-\mu s} \,  \d s.
+\end{equation*}
+Now, $\P{A\leq S| S=s}$ is a conditional probability
+distribution. This is a bit of tricky object, but very useful once you
+get used to it. The tricky part is that $\P{S=s} = 0$. Therefore
+$\P{A\leq S\given S=s}$ cannot be defined as $\frac{\P{A\leq s,
+  S=s}}{\P{S=s}}$. However, if we proceed nonetheless and use the
+independence of $S$ and $A$, we get
+\begin{equation*}
+   \P{A\leq S| S=s} = \frac{\P{A\leq s, S=s}}{\P{S=s}} = \frac{\P{A\leq s} \P{S=s}}{\P{S=s}} = \
+\P{A\leq s}
+ \end{equation*}
+ and thus, indeed, $\P{A\leq S| S=s} = \P{A\leq s}$. Then,
+\begin{equation*}
+  \begin{split}
+\P{A\leq S} 
+&= \int_0^\infty \P{A\leq S| S=s} \mu e^{-\mu s} \,  \d s \\
+&= \int_0^\infty \P{A\leq s} \mu e^{-\mu s} \,  \d s \\
+&= \int_0^\infty (1-e^{-\lambda s})\mu e^{-\mu s} \,  \d s \\
+  \end{split}
+\end{equation*}
+and we arrive at the integral we have seen above. 
+
+So we get the correct answer, but by the wrong method.  How can we
+repair this?  As a first step, let's not fix $S$ to a set of measure
+zero, but let's assume that $S\in [s,t]$ for $s<t$. Then it follows
+that
+\begin{equation*}
+  1\{A\leq s\} 1\{S\in[s,t]\} \leq  1\{A\leq S\} 1\{S\in[s,t]\} \leq 1\{A\leq t\} 1\{S\in[s,t]\}
+\end{equation*}
+As a second step,  using that $\P{S\in[s,t]} > 0$ if $s<t$ and the independence of $A$ and $S$,
+\begin{equation*}
+  \begin{split}
+    \P{A\leq s} &= \frac{\P{A\leq s} \P{S\in[s,t]}}{\P{S\in[s,t]}} = \frac{\P{A\leq s,  S\in[s,t]}}{\P{S\in[s,t]}} \\
+    \P{A\leq t} &= \frac{\P{A\leq t} \P{S\in[s,t]}}{\P{S\in[s,t]}} = \frac{\P{A\leq t,  S\in[s,t]}}{\P{S\in[s,t]}}
+  \end{split}
+\end{equation*}
+Now with the result of the first step
+\begin{equation*}
+  \begin{split}
+    \P{A\leq s} 
+&= \frac{\P{A\leq s,  S\in[s,t]}}{\P{S\in[s,t]}} \\
+&\leq \frac{\P{A\leq S,  S\in[s,t]}}{\P{S\in[s,t]}} \\
+&= \P{A\leq S| S\in[s,t]} \\
+&\leq \frac{\P{A\leq t,  S\in[s,t]}}{\P{S\in[s,t]}} \\
+&= \P{A\leq t}.
+  \end{split}
+\end{equation*}
+Hence, 
+\begin{equation*}
+  \begin{split}
+    \P{A\leq s} \leq \P{A\leq S| S\in[s,t]} \leq \P{A\leq t}.
+  \end{split}
+\end{equation*}
+Finally, taking the limit $t\downarrow s$, and defining $\P{A\leq S|
+S = s} = \lim_{t\downarrow s} \P{A\leq S| S\in[s,t]}$, it follows
+that
+\begin{equation*}
+    \P{A\leq s} = \P{A\leq S| S = s}
+\end{equation*}
+
+A more direct way to properly define $\P{A\leq S| S=s}$ is as follows. For any $y$ such that $f_S(y) > 0$, we can define the conditional probability density function of $A$, given that $S=s$, as 
+\begin{equation*}
+  f_{A|S}(x|s) = \frac{f_{A, S}( x, s)}{f_Y(s)},
+\end{equation*}
+where, as before, $f_{A, S}( x, s)$ is the joint density of $A$ and $S$. Now that the conditional probability density is defined, we can properly define
+\begin{equation*}
+  \E {A| S=s } = \int_0^\infty x   f_{A|S}(x|s)\, \d x
+\end{equation*}
+and also
+\begin{equation*}
+  \begin{split}
+  \P{A\leq S| S=s } = \E{\1{A \leq S}| S=s } = \int_0^\infty \1{x \leq s}   f_{A|S}(x|s)\, \d x.
+  \end{split}
+\end{equation*}
+Using the definition of $f_{A|S}(x|s)$ and the independence of $A$ and $S$ it follows that
+\begin{equation*}
+  f_{A|S}(x|s) = \frac{f_{A, S}( x, s)}{f_Y(s)} = \frac{\lambda e^{-\lambda x} \mu e^{-\mu s}}{\mu e^{-\mu s}} = \lambda e^{-\lambda x}
+\end{equation*}
+from which we get that 
+\begin{equation*}
+  \begin{split}
+  \E{\1{A \leq S}| S=s } 
+&= \int_0^\infty \1{x \leq s}   f_{A|S}(x|s)\, \d x \\
+&= \int_0^\infty \1{x \leq s} \lambda e^{-\lambda x}\, \d x \\
+&= \int_0^s \lambda e^{-\lambda x}\, \d x \\
+&= 1 - e^{-\lambda s},
+  \end{split}
+\end{equation*}
+that is,
+\begin{equation*}
+  \begin{split}
+  \P{A\leq S| S=s} = \E{\1{A \leq S}| S=s } = 1 - e^{-\lambda s}  = \P{A \leq s}.
+  \end{split}
+\end{equation*}
+
+All of these problems can be put on solid ground by using measure
+theory. We do not pursue these matters any further, but trust on our
+intuition that all is well.
+
+\end{solution}
+\end{question}
+
 
 \begin{question}
   A machine serves two types of jobs. The processing time of jobs of

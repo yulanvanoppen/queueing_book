@@ -2,7 +2,10 @@
 %\documentclass[a4paper,11pt]{book}
 \documentclass[a4paper,11pt]{scrbook}
 \usepackage{preamble}
-\externaldocument{book} % use references of book
+
+% include  book references
+\usepackage{xr-hyper}
+\externaldocument{book}
 
 \SetupExSheets{
   headings = runin,
@@ -19,18 +22,19 @@
 %\include{intro}
 
 \chapter{Single-Station Queueing Systems}
-%\input{chunks/expdistribution.tx}
-%\input{poissondistribution.tex}
+%\input{tex_files/single_station_intro.tex}
+\input{chunks/expdistribution.tx}
+\input{tex_files/poissondistribution.tex}
 % \input{kendall.tex}
 %\input{chunks/constructiondiscretetime.tx}
 %\input{chunks/constructioncontinuoustime.tx}
-\input{tex_files/random_walk.tex}
+%\input{tex_files/random_walk.tex}
 %  \input{chunks/ratestability.tx}
 %  \input{chunks/empericalperfmeasures.tx}
 %\input{chunks/levelcrossing.tx}
 % \input{chunks/mm1.tx}
 %  \input{chunks/mnmn1.tx}
-  \input{chunks/pasta.tx}
+%  \input{chunks/pasta.tx}
 %  \input{chunks/little.tx}
 %  \input{chunks/usefulidentities.tx}
 %  \input{chunks/mg1.tx}
