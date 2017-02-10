@@ -172,10 +172,10 @@ $t\to\infty$. Now, provided the limit exists, we define
 \begin{equation*}
 \lim_{t\to\infty} \frac{A(m,n,t)}{A(m,t)} = 
 \lim_{t\to\infty} \frac{\sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = m, B_k > n-m}}
-{\sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = m}}=\P{B>n-m\given L(-)=m},
+{\sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = m}}=\P{B>n-m\given L(A_k-)=m},
 \end{equation*}
-where $L(-)$ has the interpretation of the number of items in the
-system at an arrival epoch.  By \emph{assumption} $B$ and $L(-)$ are
+where $L(A_k-)$ has the interpretation of the number of items in the
+system at the $k$th arrival epoch.  By \emph{assumption} $B$ and $L(A_k-)$ are
 independent. Therefore,
 \begin{equation*}
 \lim_{t\to\infty} \frac{A(m,n,t)}{A(n,t)} = \P{B>n-m} = G(n-m).

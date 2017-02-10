@@ -64,7 +64,7 @@ $\lambda$, and write $N(t)\sim P(\lambda t)$.
 
 Moreover, if there are no failures in some interval
 $[0,t]$, then it must be that $N(t) = 0$ and $A_1$, i.e., the
-occurance of the first failure, must be larger than $t$.  Therefore,
+occurrence of the first failure, must be larger than $t$.  Therefore,
 \begin{equation*}
   \P{A_1>t} = \P{X_1> t} = P(N(t) = 0) = e^{-\lambda t} \frac{(\lambda t)^0}{0!}= e^{-\lambda t}.
 \end{equation*}
@@ -169,6 +169,8 @@ We are done.
   \end{enumerate}
  where $o(h)$ is a function
     $f(h)$ such $f(h)/h \to 0$ as $h\to 0$.
+
+\hint{Use that $e^{x} = 1 +x + o(x)$ for $|x| << 1$. Furthermore, use that $\sum_{i=2}^\infty x^i/i! = \sum{i=0}^\infty x^i/i! - x -1 = e^x - 1 -x$.}
 \begin{solution}
 \begin{enumerate}
   \item 
@@ -180,11 +182,17 @@ We are done.
   $\P{N(h) = n +1 | N(0) = n} = \P{N(h) = 1} = e^{-\lambda h} (\lambda h)^1/1! = 
 (1-\lambda h + o(h))\lambda h  = \lambda h - \lambda^2 h^2 + o(h) = \lambda h + o(h)$. 
 \item 
-  $\P{N(h) \geq n+2 | N(0) = n} = \P{N(h) \geq 2} = e^{-\lambda h} \sum_{i=2}^\infty \frac{(\lambda h)^i}{i!} = e^{-\lambda h}(e^{\lambda h} - 1 - \lambda h).$ Hence,
   \begin{equation*}
     \begin{split}
-\P{N(h) \geq 2} &= 1 - e^{-\lambda h}(1 + \lambda h) = 1 - (1-\lambda h + o(h))(1+\lambda h) \\
-&= 1 - (1-\lambda^2 h^2 + o(h)) = \lambda^2 h^2 + o(h) = o(h).
+  \P{N(h) \geq n+2 | N(0) = n} 
+&= \P{N(h) \geq 2} \\
+&= e^{-\lambda h} \sum_{i=2}^\infty \frac{(\lambda h)^i}{i!} 
+= e^{-\lambda h} \left(\sum_{i=0}^\infty \frac{(\lambda h)^i}{i!} - \lambda h - 1\right)\\
+&= e^{-\lambda h}(e^{\lambda h} - 1 - \lambda h) 
+= 1 - e^{-\lambda h}(1 + \lambda h) \\
+&= 1 - (1-\lambda h + o(h))(1+\lambda h) 
+= 1 - (1-\lambda^2 h^2 + o(h)) \\
+&= \lambda^2 h^2 + o(h) = o(h).
     \end{split}
   \end{equation*}
 \end{enumerate}
@@ -287,7 +295,7 @@ $M_1(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\
 \end{question}
 
 
-\begin{question} (A Bernouilli-thinned Poisson process is still a
+\begin{question} (A Bernoulli-thinned Poisson process is still a
   Poisson process) Consider a Poisson process. Split the process in
   the following way. When a job arrives, throw a coin that lands heads
   with probability $p$ and tails with $q=1-p$. When the coin lands
@@ -301,7 +309,7 @@ $M_1(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\
  
 \hint{ Condition on the total number of arrivals $N(t)=m$ up to time
       $t$. Realize that the probability that a job is of type 1 is
-      Bernouilli distributed, hence when you consider $m$ jobs in
+      Bernoulli distributed, hence when you consider $m$ jobs in
       total, the number of type 1 jobs is binomially distributed.
 
 You might also consider the random variable 
@@ -327,12 +335,12 @@ e^{-\lambda_1 t}\frac{(\lambda_1 t)^{m}}{m!} \\
 We see that the thinned stream is Poisson with parameter $\lambda t p$. 
 
 Now consider $Y=\sum_{i=1}^N Z_i$. Suppose that $N=n$, so that $n$
-arrivals occured. Then we throw $n$ coins with success probability
+arrivals occurred. Then we throw $n$ coins with success probability
 $p$. It follows that $Y$ is indeed a thinned Poisson random variable.
 Model the coins as a generic Bernoulli distributed random variable
 $Z$.  We first need
 \begin{equation*}
-  \E{e^{s Z}} = e^0 \P{Z=0} + e^{s} \P{Z=1} = (1-p) + e^sp.
+  \E{e^{s Z}} = e^0 \P{Z=0} + e^{s} \P{Z=1} = (1-p) + e^s p.
 \end{equation*}
 Suppose that $N=n$, then since the $Z_i$ are i.i.d.,
 \begin{equation*}
@@ -341,7 +349,7 @@ Suppose that $N=n$, then since the $Z_i$ are i.i.d.,
 Then, using conditioning on $N$, 
 \begin{equation*}
   \begin{split}
-  \E{e^{sY}}
+  \E{e^{s Y}}
 &= \E{\E{e^{s\sum_{i=1}^n Z_i} \given N=n }} 
  = \E{\E{\left(1+p(e^s-1)\right)^n \given N=n }} \\
 &= \sum_{n=0}^\infty \left(1+p(e^s-1)\right)^n e^{-\lambda} \frac{\lambda^n}{n!}
@@ -362,7 +370,7 @@ $Y\sim P(\lambda p)$.
   the SCV of $N(t)$ equal to $1/\lambda t$? Conclude that the relative
   variability of $N(t)$ becomes smaller as $t$ becomes larger. Observe
   that the SCV of a Poisson distributed random variable is not the
-  same as the SCV of an exponentially distribued random variable.
+  same as the SCV of an exponentially distributed random variable.
 
   \hint{You might use generating functions here.}
 
