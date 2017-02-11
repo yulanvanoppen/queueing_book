@@ -19,6 +19,7 @@ To make the book from the weaved files, run:
 To make the book from scratch, run
 
   python3 pweaveAll.py
+
   pdflatex book
 
 
@@ -28,4 +29,16 @@ file as an ``input`` command in ``booktest.tex`` and modify
 
 ``makeClean`` does what its name says it does: delete ``*.aux`` and
 the like.
+
+Here are the tools that I use to make the text and the figures:
+
+* `Python <http://www.python.org/>`_
+* `Scipy <http://www.scipy.org/>`_
+* `numpy <http://www.numpy.org/>`_
+* `matplotlib <http://matplotlib.org/>`_
+* `matplotlib2tikz <https://github.com/nschloe/matplotlib2tikz>`_
+* `pweave <http://mpastell.com/pweave/>`_
+* `latex <https://www.latex-project.org/>`_
+* `tikz <http://www.texample.net/tikz/>`_
+    
 

@@ -17,6 +17,7 @@
 \usepackage{pgf}
 \usepackage{tikz}
 \usetikzlibrary{arrows,automata,positioning}
+\usetikzlibrary{decorations.markings}
 \usepackage{pgfplots}
 \pgfplotsset{compat=newest}
 \usepgfplotslibrary{groupplots}
@@ -139,4 +140,11 @@
 
 
 \setcounter{tocdepth}{1}
+
+% handle indentation below figure captions
+%\setcapwidth[c]{.8\textwidth}
+\setcapwidth{0.95\textwidth}
+\setcapindent{0pt}
+%\addtokomafont{caption}{\centering}
+
 \graphicspath{{figures/}}

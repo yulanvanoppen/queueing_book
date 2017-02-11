@@ -16,26 +16,49 @@ Recall that Eq.~\eqref{eq:35} states that
 \begin{equation*}
   \E{W_Q} = \frac{\E{S_r}}{1-\rho}
 \end{equation*}
-This equation applies to the $M/G/1$ queue, as in the derivation we
+This equation is valid for the $M/G/1$ queue, as in the derivation we
 used the PASTA property but did not make any assumption about the
-service time distribution, expect that it has a finite mean. Clearly,
-our problem is to compute the average remaining service time for
+service time distribution, except that it has a finite mean. To use
+it, we need to compute the average remaining service time for
 generally distributed service times. This is what we will do here.
 
 Consider the $k$the job of some sample path the $M/G/1$ queueing
-process. Let is service time start at time $A_k$ and require $S_k$
-units of service. The, the $k$th job departs the server at time
-$D_k=A_k + S_k$. Define
+process. This job requires $S_k$ units of service, let its service
+time start at time $A_k$ so that it departs the server at time
+$D_k=A_k + S_k$, c.f. Figure~\ref{fig:remainingservicetime}. Define
 \begin{equation*}
 R_k(s) = (D_k-s)\1{A_k \leq s < D_k}
 \end{equation*}
 as the remaining service time at time $s$ of job $k$. So see this,
 observe that when the time $s\in [A_k, D_k)$, the remaining service
 time until job $k$ departs is $D_k-s $, while if
-$s\not \in [A_k, D_k)$, job $k$ is not in service so that there cannot
-be any remaining service of this job.
+$s\not \in [A_k, D_k)$, job $k$ is not in service so it cannot have
+any remaining service as well.
 
-For the average remaining service time, we need to add all remaining
+\begin{figure}[ht]
+  \centering
+\begin{tikzpicture}[scale=1,
+  open/.style={shape=circle, fill=white, inner sep=1pt, draw, node contents=},
+  closed/.style={shape=circle, fill=black, inner sep=1pt, draw, node contents=}]
+    \draw (-1,0) -- (4,0); 
+    %x\draw (1,0) -- (3,0) node[midway, fill=white] {$s$};
+    \draw node (c1) at (0,3) [closed, label={}]
+          node (c2) at (3,0)[open, label={}]
+     (c1) to (c2);
+    \draw[dotted] (0,0) -- (0,3) node[midway, rotate=90, fill=white] {$S_k$};
+    \node[below] at (0,0) {$A_k$};
+    \node[below] at (3,0) {$D_k$};
+
+    \draw[<->, dotted] (0.75,0) -- (0.75,2.25) node[midway,fill=white,rotate=90] {$D_k-s$};
+    \node[below] at (0.75,0) {$s$};
+  \end{tikzpicture}
+
+  \caption{Remaining service time.}
+  \label{fig:remainingservicetime}
+\end{figure}
+
+
+For the average remaining service time, we can add all remaining
 service times up to some time $t$, and then divide by $t$,
 specifically,
 \begin{equation*}
@@ -45,7 +68,7 @@ so that we can define
 \begin{equation*}
   \E{S_r} = \lim_{t\to\infty} R_t,
 \end{equation*}
-provide this limit exists along the sample path.
+provided this limit exists along the sample path.
 
 Now observe that as $t$ can be somewhere in a service interval, it is
 easiest to consider $R(t)$ at departure times $\{D_n\}$, as at a time
@@ -85,11 +108,13 @@ where
  C_s^2 = \frac{\V S }{(\E S)^2},
 \end{equation*}
 
-With the above we have obtained the \recall{Pollackzek-Khintchine
-  formula} for the average waiting time in queue:
+With the above we have obtained the \recall{Pollackzek-Khintchine}
+(PK) formula for the average waiting time in queue:
 \begin{equation} \label{eq:710}
   \E{W_Q} = \frac1{1-\rho} \E{S_r} =\frac{1 + C_s^2}2 \frac{\rho}{1-\rho}  \E S.
 \end{equation}
+This proves to be a very useful result; a few of the problems below
+will clarify how to use it.
 
 \begin{question}\label{ex:9}
 Show  from Eq.~\eqref{eq:34} that

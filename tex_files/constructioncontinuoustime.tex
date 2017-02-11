@@ -58,7 +58,7 @@ define $A(t)$ is
 
 Thus, we see that from the inter-arrival times $\{X_k\}$ it is
 possible to construct $\{A(t)\}$, and the other way around, from
-$\{A(t)\}$ we can find $\{X_k\}$. In Figure~\ref{fig:constructiongg1}
+$\{A(t)\}$ we can find $\{X_k\}$. In Figure~\ref{fig:waitingtimegg1}
 we show how these concepts, and many others to discussed below, relate
 to each other.
 
@@ -69,13 +69,88 @@ the arrivals. Observe that the waiting time of the $k$th arrival must
 be equal to the waiting time of the $k-1$th customer plus the amount
 of \recall{service time} required by job $k-1$ minus the time that elapses
 between the arrival of job $k-1$ and job $k$, unless the server
-becomes idle between jobs $k-1$ and $k$ (Make a drawing to see this.).
+becomes idle between jobs $k-1$ and $k$, see Figure.
 In other words,
 \begin{equation}\label{eq:56}
   W_{Q,k} = \max\{W_{Q, k-1} + S_{k-1} - X_k, 0\},
 \end{equation}
 If we set $W_{Q,0}=0$, we can compute $W_{Q,1}$ from this formula, and
 then $W_{Q,2}$ and so on.
+
+\begin{figure}[ht]
+  \centering
+
+\begin{tikzpicture}[scale=1,
+  open/.style={shape=circle, fill=white, inner sep=1pt, draw, node contents=},
+  closed/.style={shape=circle, fill=black, inner sep=1pt, draw, node contents=}]
+\draw (-1,0)--(12,0);
+
+\draw 
+node (c1) at (0,3) {}
+node (Wk) at (1,2) [open, label={}]
+(c1) to (Wk);
+
+%\node[below] (Ak) at (1,-0.4) {$A_k$};
+\draw[dotted] (1,0) -- (Wk) node[midway,fill=white,rotate=90] {$W_{Q,k}$};
+\node (Sk) at (1,5) [closed, label={}];
+\node (Ak1) at (5,1) [open, label={}];
+%\node[above] at (4,0) {$D_k$};
+%\draw[dotted,<->] (1, -0.25)--(3,-0.25) node[midway, fill=white] {$W_{Q,k}$};
+%\draw[dotted,<->] (3, -0.25)--(6,-0.25) node[midway, fill=white] {$S_k$};
+\draw[dashed] (1, 2)--(3,0); 
+
+\draw[|-|]
+node[left] (c1) at (1,-0.5) {$A_k$}
+node[right] (c2) at (6,-0.5) {$D_k$}
+(c1) -- (c2)
+node[midway, fill=white] {$W_k$};
+
+\draw[dotted] (Wk) -- (Sk) node[midway,fill=white,rotate=90] {$S_k$};
+\draw[dashed] (Ak1) -- (6,0); % node[midway,fill=white,rotate=90] {$S_k$};
+
+\draw[-] (Sk) to (Ak1);
+\node (Sk1) at (5,3) [closed, label={}];
+\draw[dotted] (Ak1) -- (Sk1) node[midway,fill=white,rotate=90] {$S_{k+1}$};
+\draw[dotted] (5,0) -- (Ak1);
+\draw (Sk1) -- (8,0);
+
+\draw[|-|]
+node[left] (c1) at (5,-1) {$A_{k+1}$}
+node[right] (c2) at (8,-1) {$D_{k+1}$}
+(c1) -- (c2)
+node[midway, fill=white] {$W_{k+1}$};
+
+
+\draw (9,2) -- (11,0);
+
+\draw[dotted]
+node (c1) at (9,0) [open, label={}]
+node (c2) at (9,2) [closed, label={}]
+(c1) -- (c2)
+node[midway, fill=white, rotate=90] {$S_{k+2}$};
+
+\draw[|-|]
+node[left] (c1) at (9,-1.5) {$A_{k+2}$}
+node[right] (c2) at (11,-1.5) {$D_{k+2}$}
+(c1) -- (c2)
+node[midway, fill=white] {$W_{k+2}$};
+
+\draw[|-|]
+node[left] (c1) at (1,-1.5) {$A_{k}$}
+node[right] (c2) at (5,-1.5) {$A_{k+1}$}
+(c1) -- (c2)
+node[midway, fill=white] {$X_{k+1}$};
+\end{tikzpicture}
+\caption{Construction of the $G/G/1$ queue in continuous time. The
+  sojourn time $W_{k}$ of the $k$th job is sum of the work in queue
+  $W_{Qk,k}$ at its arrival epoch $A_k$ and the its service time
+  $S_k$; its depature time is then $D_k=A_k + W_k$. The waiting time
+  of job $k+1$ is clearly equal to $W_k-X_{k+1}$. We also see that job
+  $k+2$ arrives at an empty system, hence its sojourn time
+  $W_{k+2}=S_{k+2}$. The lines with slope $-1$ show the behavior the
+  virtual waiting time.}
+  \label{fig:waitingtimegg1}
+\end{figure}
 
 The time job $k$ \emph{leaves the queue and moves on to the server} is
 \begin{equation*}
@@ -158,20 +233,15 @@ $L(t)$ and $L_Q(t)$ then show that
 L_s(t) = L(t) - L_Q(t).
 \end{equation*}
 
-Finally, the \recall{virtual waiting time process} $\{V(t)\}$ is the amount of
-waiting that an arrival would see if it would arrive at time $t$. To
-construct $\{V(t)\}$, we simply draw lines that start at points $W_k$
-and have slope -1, unless the line hits the $x$-axis, in which case
-the virtual waiting time remains zero until the next arrival occurs.
-Figure~\ref{fig:Virtual} shows an example.
+Finally, the \recall{virtual waiting time process} $\{V(t)\}$ is the
+amount of waiting that an arrival would see if it would arrive at time
+$t$. To construct $\{V(t)\}$, we simply draw lines that start at
+points $W_k$ and have slope -1, unless the line hits the $x$-axis, in
+which case the virtual waiting time remains zero until the next
+arrival occurs.  Thus, the lines with slope $-1$ in
+Figure~\ref{fig:waitingtimegg1} shown an example of (a sample path of)
+the virtual waiting time. 
 
-
-\begin{figure}[h]
-  \centering
-  \includegraphics{virtualWaitingTime}
-  \caption{The virtual waiting time $V(t)$ as  a function of time. }
-  \label{fig:Virtual}
-\end{figure}
 
 
 
@@ -479,76 +549,18 @@ The recursions for the two-server system are this:
 
 \begin{question}
   Implement the above recursions in excel or some other computer
-  program such as R or python and check the results of the previous
-  exercise.
+  program such as R, python, or julia, and check the results of the
+  previous exercise.
     \begin{solution}
-      Below I include three versions, one in python, one in R and one
-      in Julia. Take your pick, and start playing with it. These
-      examples are meant to be simple to understand, not necessarily
-      super efficient.  
-
-In python:
-
-<<evaluate =  False>>=
-import numpy as np
-from numpy.random import exponential
-import matplotlib.pylab as plt
-
-N = 10
-labda, mu = 2, 3
-
-A = np.zeros(N)
-D = np.zeros_like(A)
-W = np.zeros_like(A)
-
-for k in range(1, N):
-    Xk = exponential(1. / labda)
-    Sk = exponential(1. / mu)
-    A[k] = A[k - 1] + Xk
-    D[k] = max(A[k], D[k - 1]) + Sk
-    W[k] = D[k] - A[k]
-@
-  
-In R: 
-
-<<evaluate=False>>=
-N <- 10
-lambda <- 2
-mu <- 3
-
-A <- rep(0, N)
-D <- rep(0, N)
-W <- rep(0, N)
-
-for(k in 2:N){
-  Xk <- rexp(1,lambda)
-  Sk <- rexp(1,mu)
-  A[k] <- A[k-1] + Xk
-  D[k] <- max(A[k], D[k-1]) + Sk
-  W[k] <- D[k] - A[k]
-}
-print(W)
-@
-
-In Julia:
-<<evaluate=False>>=
-N = 10
-lambda, mu = 2, 3
-
-arrival = zeros(N) #absolute time of arrival
-departure = zeros(N) #absolute time of departure
-waiting_time = zeros(N)
-
-for k in 2:N
-    time_to_arrival_k = rand(Exponential(1. / lambda)) #time between arrival k-1 and k
-    service_time_k = rand(Exponential(1. / mu))
-    arrival[k] = arrival[k - 1] + time_to_arrival_k
-    departure[k] = max(arrival[k], departure[k - 1]) + service_time_k
-    waiting_time[k] = departure[k] - arrival[k]
-end
-print(waiting_time)
-@
-
+You can check the files on github, in the progs directory. 
+\begin{itemize}
+\item \texttt{mm1.py} is the python implementation
+\item \texttt{mm1.R} is the julia implementation
+\item \texttt{mm1.jl} is the julia implementation
+\item 
+\end{itemize}
+Take your pick, and start playing with it. These examples are meant to
+be simple to understand, not necessarily super efficient.
 \end{solution}
 \end{question}
 
