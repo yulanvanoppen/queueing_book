@@ -1,0 +1,58 @@
+
+from math import exp, factorial
+import matplotlib.pylab as plt
+import seaborn as sns
+sns.set_context("paper")
+
+
+def G(labda, mu, c):
+    rho = labda / mu / c
+    res = sum((c * rho)**n / factorial(n) for n in range(c))
+    res += (c * rho)**c / ((1 - rho) * factorial(c))
+    return res
+
+
+def ELQ(labda, mu, c):
+    rho = labda / mu / c
+    g = G(labda, mu, c)
+    return (c * rho)**c / (factorial(c) * g) * rho / (1 - rho)**2
+
+
+def ELS(labda, mu, c):
+    rho = labda / mu / c
+    return rho * c
+
+
+def EL(labda, mu, c):
+    return ELS(labda, mu, c) + ELQ(labda, mu, c)
+
+
+labda = 10
+mu = 11
+
+c = 3
+
+R = range(5, c * mu)
+Q = []
+L = []
+load = []
+for labda in R:
+    Q.append(ELQ(labda, mu, c) / ELQ(labda, c * mu, 1))
+    L.append(EL(labda, mu, c) / EL(labda, c * mu, 1))
+    load.append(labda / mu / c)
+
+plt.figure(figsize=(6, 2))
+plt.subplot(111)
+plt.axis([0, 1, 0, 3])
+plt.title("$M/M/c$ vs $M/M/1$")
+plt.plot(load, L, label="$E(L(M/M/c))/E(L(M/M/1))$")
+plt.plot(load, Q, label="$EL_Q(M/M/c)/EL_Q(M/M/1)$")
+plt.xlabel("$\\rho$")
+plt.legend()
+plt.subplots_adjust(bottom=0.24)
+
+# plt.show()
+filename = "figures/multi_vs_single.pdf"
+plt.savefig(filename)
+plt.close()
+

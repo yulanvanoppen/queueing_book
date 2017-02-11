@@ -1,0 +1,21 @@
+
+import numpy as np
+import matplotlib.pylab as plt
+import seaborn as sns
+sns.set_context("paper")
+
+mu = 1.2 # per minute
+t  = np.linspace(0, 10)
+
+plt.figure(figsize=(6, 2))
+for labda in np.linspace(0.5, 1., 10.):
+   rho = labda/mu
+   Ws = rho/(1.-rho)/labda
+   res = 1 - rho + rho*(1.-np.exp(-1./Ws*t))
+   plt.plot(t, res, label="%3.2f"%labda)
+plt.legend()
+filename = "figures/waiting_time.pdf"
+plt.savefig(filename)
+plt.close()
+
+

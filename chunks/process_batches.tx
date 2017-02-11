@@ -1,0 +1,62 @@
+\section{Process Batching}
+\label{sec:process-batching}
+
+No notes; only exercises.
+
+\begin{exercise}
+Zijm.Ex.1.12.1
+ \begin{solution}
+Zijm, Eq. 1.66
+
+
+
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/process_batches_1.tex}
+
+
+At least 30 jobs need to be served in a batch.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Zijm.Ex.1.12.2
+ \begin{solution}
+
+
+
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/process_batches_2.tex}
+
+
+When inspecting the SCV, I find it a bit small. To see whether I made a mistake, I'll try to make Figure 1.6 of Zijm.
+
+
+
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/process_batches_3.tex}
+
+
+This is not the same as the results of Figure 1.6. After closely
+inspecting my results above, I can't find a mistake\ldots Perhaps you see what's wrong.
+
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Zijm.Ex.1.12.3
+ \begin{solution}
+   Definitely bigger. Observe that the waiting time is very sensitive
+   to the batch size, hence to the estimates of all involved
+   parameters such as the arrival rate, service times, setup time, and
+   so on. Since, in general, it is very hard to obtain good estimates
+   of these data (the order portfolio changes continuously, personnel
+   does not always produce the same quality, rework may result, and so
+   on and so forth), one must stay away from such situations. It is
+   much better to be on the safe side of things.
+\end{solution}
+\end{exercise}
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:

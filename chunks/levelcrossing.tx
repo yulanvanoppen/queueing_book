@@ -1,0 +1,484 @@
+\section{Level-Crossing and Balance Equations}
+\label{sec:level-cross-balance}
+
+Consider a system at which customers arrive and depart in single
+entities, such as customers in a shop or jobs at some machine.  If the
+system starts empty, then we know that the number $L(t)$ is the system
+at time $t$ is equal to $A(t) - D(t)$. Let us denote an arrival as an
+`up-crossing' and a departure as a `down-crossing'.  Then, clearly
+$L(t)$ is the number of up-crossings up to time $t$ minus the number
+of down-crossings up to time $t$. If $L(t)$ remains finite, or more
+generally $\lim_t L(t)/t = 0$, then it must be that the
+\begin{equation*}
+  \lambda =  \lim_t \frac{A(t)}t  = \lim_t \frac{D(t)+L(t)}t =  \lim_t \frac{D(t)}t + \lim_t \frac{L(t)}t 
+  = \gamma.  
+\end{equation*}
+Hence, when $L(t)/t\to0$, the \recall{up crossing rate}
+$\lim_t A(t)/t = \lambda$ is equal to the \emph{down-crossing rate}
+$\lim_t D(t)/t = \gamma$.  We will generalize these notions of up- and
+downcrossing now to derive the \recall{stationary}, also know as
+\emph{long-run time average} or \emph{steady-state}, distribution of
+the number of people in queue.  
+
+
+Define 
+\begin{subequations}
+\begin{align}
+  A(n,t) &= \sum_{k=1}^\infty \1{A_k \leq t, L(A_k-) = n}, \label{eq:19} \\
+   Y(n,t) &= \int_0^t  \1{L(s) = n}\, \d s, \label{eq:17} \\
+   p(n,t) &= \frac 1 t \int_0^t  \1{L(s) = n}\, \d s, \label{eq:18}
+\end{align}
+\end{subequations}
+respectively, so that $A(n,t)$ is the number of arrivals up to time
+$t$ that saw $n$ customers in the system at their arrival, $Y(n,t)$ is
+the total time the number in the system $L(s) =n$ during $[0,t]$ so
+that $p(n,t)$ is the fraction of time that $L(s) =n$ in $[0,t]$.
+(Recall in the definition of $A(n,t)$ that $L(t)$ is
+\emph{right-continuous}.)  
+
+The above definitions may seem a bit abstract, but they obtain an
+immediate interpretation when relating them to applications. To see this, we discuss two examples.
+
+Consider the sorting process of post parcels at a distribution center
+of a post delivery company.  Each day tens of thousands of incoming
+parcels have to be sorted to their final destination. In the first
+stage of the process, parcels are sorted to a region in the
+Netherlands. Incoming parcels are deposited on a conveyor belt. From
+the belt they are carried to outlets (chutes), each chute
+corresponding to a specific region. Employees take out the parcels
+from the chutes and put the parcels in containers.  The arrival rate
+of parcels for a certain chute may temporarily exceed the working
+capacity of the employees, as such the chute serves as a queue.  When
+the chute overflows, parcels are directed to an overflow container and
+are sorted the next day. The target of the sorting center is to
+deliver at least a certain percentage of the parcels within one
+day. Thus, the fraction of parcels rejected at the chute should remain
+small.
+
+Suppose a chute can contain at most 20 parcels, say. Then, each parcel
+on the belt that `sees' 20 parcels in its chute will be blocked. Let
+$L(t)$ be the number of parcels in the chute at time $t$. Then,
+$A(20,t)$ as defined in Eq.~(\ref{eq:19}) is number of blocked parcels
+up to time $t$, and $A(20,t)/A(t)$ is the fraction of rejected
+parcels. In fact, $A(20,t)$ and $A(t)$ are continuously tracked by the
+sorting center and used to adapt employee capacity to control the
+fraction of rejected parcels. Thus, in simulations, if one want to
+estimate loss fractions, $A(n,t)/A(t)$ is the most natural concept to
+consider.
+
+For the second example, suppose there is a cost associated with
+keeping jobs in queue. Let $w$ be the cost per job in queue per unit
+time. Then $ wnY(n,t)$ is the total cost up to time $t$ to have $n$
+jobs in queue. The total cost is therefore
+  \begin{equation*}
+C(t) =     w \sum_{n=0}^\infty n Y(n,t),
+  \end{equation*}
+and the average cost is
+\begin{equation*}
+\frac{C(t)}t =    w \sum_{n=0}^\infty n \frac{Y(n,t)}t = w \sum_{n=0}^\infty n p(n,t).
+\end{equation*}
+All in all, the concepts developed above have natural interpretations
+in practical queueing situations; they are useful in theory and in
+simulation, as they relate the theoretical concepts to actual measurements.
+
+
+Continuing with the above notions we define in turn
+\begin{equation*}
+  \lambda(n) = \lim_{t\to\infty} \frac{A(n,t)}{Y(n,t)}
+\end{equation*}
+as the arrival rate in state $n$. Similarly,
+\begin{equation*}
+  \begin{split}
+    D(n,t) &= \sum_{k} \1{D_k \leq t, L(D_k) = n}, \\
+    \mu(n) &= \lim_{t\to\infty} \frac{D(n-1,t)}{Y(n,t)},
+  \end{split}
+\end{equation*}
+are the number of departures up to time $t$ that leave $n$ customers
+behind and the departure rate in state $n$. Figure~\ref{fig:A_n_t}
+shows how $A(n,t)$ and $\lambda(n)$ relate to $D(n,t)$ and $\mu(n)$.
+
+\begin{figure}[h]
+  \centering
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.8cm,
+                    semithick]
+  \node[state] (0) {$p(0)$} ;
+  \node[state] (1) [right of=0] {$p(1)$};
+  \node[state] (2) [right of=1] {$p(2)$};
+  \node[state] (3) [right of=2] {$p(3)$};
+  \node[state] (4) [right of=3] {$\cdots$};
+
+\path 
+ (0) edge [bend left] node {$\lambda(0)$} (1)
+ (1) edge [bend left] node {$\mu(1)$} (0)
+ (1) edge [bend left] node {$\lambda(1)$} (2)
+ (2) edge [bend left] node {$\mu(2)$} (1)
+ (2) edge [bend left] node {$\lambda(2)$} (3)
+ (3) edge [bend left] node {$\mu(3)$} (2)
+ (3) edge [bend left] node {$\lambda(3)$} (4)
+ (4) edge [bend left] node {$\mu(4)$} (3);
+
+\draw[-, dotted, gray] (2.7,-2.)--(2.7,2.0) node[above, black] {level $2$};
+\draw[->] (2,1.5)  node[left] {$A(1,t)$} -- (4,1.5);
+\draw[<-] (2,-1.2) node[left] {$D(1,t)$} --(4,-1.2) ;
+
+\end{tikzpicture}
+\caption{ $A(1,t)$ counts the number of jobs up to time $t$ that saw 1
+  job in the system; thus, right after the arrival of such a job the
+  system contains 2 jobs. Similarly, $D(1,t)$ counts the number of
+  departures that leave 1 job behind.  Each time $A(1,t)$ increases by
+  one or $D(1,t)$ decreases by one, level $2$ (the dotted line
+  separating states 1 and 2) is crossed.  The number of times this
+  level is crossed from below must be the same (plus or minus 1) the
+  number of times it is crossed from above. }
+\label{fig:A_n_t}
+\end{figure}
+
+
+
+Observe that customers arrive and depart as single units. Thus, if
+$\{T_k\}$ consists of the ordered set of arrival and departure times
+of the customers, then $L(T_k) = L(T_k-) \pm 1$. But then we must also
+have that $|A(n,t) - D(n,t)| \leq 1$ (Think about this.). From this
+observation it follows immediately that
+\begin{equation}\label{eq:15}
+  \lim_{t\to\infty} \frac{A(n,t)}t = \lim_{t\to\infty} \frac{D(n,t)}t.
+\end{equation}
+With this equation we can obtain two nice and fundamental
+identities. The first we develop now; the second follows in
+Section~\ref{sec:poisson-arrivals-see}.
+
+The rate of jobs that `see the system with $n$ jobs' can be defined as
+$A(n,t)/t$. Taking limits we get
+\begin{subequations}
+\label{eq:21}
+\begin{equation}\label{eq:63}
+  \frac{A(n,t)}t =   \frac{A(n,t)}{Y(n,t)}\frac{Y(n,t)}t \to \lambda(n) p(n),
+\end{equation}
+where we use the above defitions for $\lambda(n)$ and $p(n)$.
+Similarly, the departure rate of jobs that leave $n$ jobs behind is
+\begin{equation}\label{eq:22}
+  \frac{D(n,t)}t =   \frac{D(n,t)}{Y(n+1,t)}\frac{Y(n+1,t)}t \to \mu(n+1) p(n+1).
+\end{equation}
+\end{subequations}
+Combining this with~\eqref{eq:15} we arrive at \recall{the
+  level-crossing equations}
+\begin{equation}\label{eq:12}
+  \lambda(n) p(n) = \mu(n+1)p(n+1).
+\end{equation}
+
+This result turns out to be exceedingly useful. Once we can specify
+$\lambda(n)$ and $\mu(n)$, we can compute the long-run fraction of
+time $p(n)$ that the system contains $n$ jobs. To see this, rewrite
+the above into
+\begin{equation}\label{eq:25}
+  p(n+1) = \frac{\lambda(n)}{\mu(n+1)}p(n). 
+\end{equation}
+Thus, if we have $p(n)$ we can compute $p(n+1)$, and so on. In other
+words, if $p(0)$ is known, than $p(1)$ follows, from which $p(2)$
+follows, and so on. A straightaway iteration then leads to
+\begin{equation}\label{eq:38}
+  p(n+1) = \frac{\lambda(n)\lambda(n-1)\cdots \lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)}p(0).
+\end{equation}
+Finally, to determine $p(0)$ we can use the fact that numbers $p(n)$
+have to be normalized.  Let the \recall{normalization constant} be given by
+\begin{equation}
+  \label{eq:20}
+G = 1 + \frac{\lambda(0)}{\mu(1)} + \frac{\lambda(0)\lambda(1)}{\mu(1)\mu(2)} + \cdots. 
+\end{equation}
+Then,  $p(0)=G^{-1}$ and $p(n)$ follows from Eq.~\eqref{eq:38}. 
+
+Let us now express a few important performance measures in terms of
+$p(n)$: the average number of items $\E L$ in the system and the
+fraction of time $\P{L\leq n}$ the system contains at least $n$ jobs.
+As $L(s)$ counts the number of jobs in the system at time $s$ (thus
+$L(s)$ is an integer),
+\begin{equation*}
+  L(s) = \sum_{n=0}^\infty n\, \1{L(s) = n}.
+\end{equation*}
+With this we can write for the time-average number of jobs in the system
+\begin{equation}\label{eq:1}
+  \mathscr{L}(t) = \frac 1 t \int_0^t \left(\sum_n n\, \1{L(s) = n}\right)\, \d s
+= \sum_n \frac n t \int_0^t   \1{L(s) = n}\, \d s,
+\end{equation}
+where we interchange the integral and the summation\footnote{This is
+  allowed as the integrand is non-negative. More generally, the
+  interested reader should check Fubini's theorem.}.  It then follows
+  from Eq.~(\ref{eq:18}) that
+\begin{equation*}
+  \mathscr{L}(t) =  \sum_n n\, p(n,t).
+\end{equation*}
+Finally, assuming that the limit $p(n,t) \to p(n)$ exists as
+$t\to\infty$ (and that the summation and limit can be interchanged in
+the above), it follows that 
+\begin{equation*}
+  \mathscr{L}(t) \to  \sum_{n=0}^\infty n p(n) = \E L, \text{ as } t \to \infty.
+\end{equation*}
+In words, $ \mathscr{L}(t)$ converges to the long-run time average
+$\E L$ of the number in the system. In a loose sense we can say that
+$\E L$ is the average number in the system as perceived by the
+\emph{server}. (Recall again from Exercise~\ref{ex:1} that this is not
+necessarily the same as what \emph{arriving} jobs `see').  Similarly,
+the probability that the system contains at least $n$ jobs:
+\begin{equation*}
+  \P{ L \geq n} := \sum_{i=n}^\infty p(i).
+\end{equation*}
+
+From the above we conclude that from the probabilities $p(n)$, more
+specifically, from a specification of $\lambda(n)$ and $\mu(n)$, we
+can compute numerous performance measures. Thus, determining $p(n)$
+from Eqs.~\eqref{eq:25} and~\eqref{eq:20} for concrete queueing
+examples is the task of the next sections.
+
+Before we embark on this task, we note that the level-crossing cannot
+always be used as we do here. The reason is that it is not always
+natural, or easy, to decompose the state space into two parts. For a
+more general approach, we focus on single states and count how often
+this state is entered and left. Specifically, define
+\begin{align*}
+  I(n,t) &= A(n-1,t) + D(n,t),
+%  O(n,t) &= A(n,t) + D(n-1,t),
+\end{align*}
+as the number of times the queueing process entered state $n$ either from an
+arrival from state $n-1$ or a departure that leaves $n$ jobs behind. Similarly, 
+\begin{align*}
+ O(n,t) &= A(n,t) + D(n-1,t),
+\end{align*}
+is counts how often state $n$ is left either by an arrival in state
+$n$ or a departure to state $n-1$. 
+
+Of course, $|I(n,t)-O(n,t)|\leq 1$. Thus, from the fact that
+\begin{equation*}
+  \frac{I(n,t)}t = \frac{A(n-1,t)}t + \frac{D(n,t)}t \to \lambda(n-1) p(n-1) + 
+\mu(n+1) p(n+1)
+\end{equation*}
+and 
+\begin{equation*}
+  \frac{O(n,t)}t = \frac{A(n,t)}t + \frac{D(n-1,t)}t \to \lambda(n) p(n) + 
+\mu(n) p(n)
+\end{equation*}
+we get that
+\begin{equation*}
+  \lambda(n-1)p(n-1)+\mu(n+1)p(n+1) = (\lambda(n)+\mu(n))p(n).
+\end{equation*}
+These equations hold for any $n\geq 0$ and are known as the
+\recall{balance equations}.  We will use these equations when studying
+queueing systems in which level crossing cannot be used, for instance
+for queueing networks.
+
+Again, just by using properties that hold along any sensible sample
+path, i.e., counting differences, we obtain very useful
+statistical/probabilistic results after taking limits. 
+
+%\nvf{where is the relation with the balance equation?}
+
+%\nvf{What is valid for ggg1, and what not?, make the assumption explicit for each result.}
+
+
+\begin{figure}[p]
+  \centering
+
+  \begin{tikzpicture}[node distance = 2.5cm]
+
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    %Define style for boxes
+    % Define arrow style
+    pil/.style={
+           ->,
+           thick,
+           shorten <=2pt,
+           shorten >=2pt,}
+}
+\tikzstyle{block} = [rectangle, draw,text centered, rounded corners, minimum height=3em]
+
+    % nodes
+    \node [block, text width=5.5cm, align=center] (level) {LEVEL CROSSING: Counting up- and downcrossings};
+\node[block, below=1cm of level] (An) {$|A(n,t)-D(n,t)|\leq 1$}
+edge[pil,<-] (level); 
+
+\node[block, left=1.5cm of An] (A) {$|A(t)-D(t)|\leq 1$} 
+edge[pil,<-] (level); 
+
+\node[block, right=1.5cm of An] (Anm) {$|A(m,n,t)-D(n,t)|\leq 1$}
+edge[pil,<-] (level); 
+
+\node[block, below=1cm of A] (At) {$\frac{A(t)}t \approx \frac{D(t)}t$} 
+edge[pil,<-] (A); 
+
+\node[block, below=1.5cm of At] (lambda) {$\lambda=\gamma$} 
+edge[pil,<-] node[fill=white] {$t\to\infty$} (At); 
+
+\node[block, below=1cm of An] (AnDn) {$\frac{A(n,t)}t\approx\frac{D(n,t)}t$}
+edge[pil,<-] (An); 
+
+\node[block, below=1.5cm of AnDn] (AnDn2) {$\frac{A(n,t)}{Y(n,t)}\frac{Y(n,t)}t\approx\frac{D(n,t)}{Y(n+1)}\frac{Y(n+1)}t$}
+edge[pil,<-] (AnDn); 
+
+\node[block, below=1.5cm of AnDn2, text width=4cm] (lp) {Recursion: \\
+$\lambda(n)p(n) = \mu(n+1)p(n+1)$}
+edge[pil,<-] node[fill=white] {$t\to\infty$} (AnDn2); 
+
+\node[block, below=1cm of lp, text width=3cm] (poisson) {Poisson: \\
+$\lambda=\lambda(n)$, \\
+$\mu=\mu(n)$}
+edge[pil,<-] (lp);
+
+\node[block, below=1cm of poisson, text width=4cm] (mm1) {$M/M/1$, $M/M/c$, $M/M/c/k$, \ldots} edge[pil,<-] (poisson);
+;
+
+\node[block, right=0.6cm of lp, text width=5cm, align=center] (batch) {Recursion: \\ $\lambda\sum_{m=0}^nG(n-m)p(m) = \mu(n+1)p(n+1)$}
+edge[pil,<-] node[fill=white] {$t\to\infty$} (Anm); 
+
+\node[block, right=2.3cm of mm1] (batch2) {$M^X/M/1$}
+edge[pil,<-]  (poisson)
+edge[pil,<-]  (batch); 
+
+
+\node[block, below=1cm of mm1, text width=4.5cm] (perf) {Performance
+  measures:
+$\E L= \sum_{n=0}^\infty n p(n)$, $\P{L\geq m}$, \ldots} 
+edge[pil,<-] (mm1)
+edge[pil,<-] (batch2);
+
+\node[block, below=1.5cm of lambda] (pasta1) {$\frac{A(t)}t\frac{A(n,t)}{A(t)} = \frac{A(n,t)}{Y(n,t)}\frac{Y(n,t)}t$} 
+edge[pil,<-] (AnDn2)
+edge[pil,<-,bend left=20] (At.south west)
+;
+
+\node[block, below=1.5cm of pasta1] (pasta2) {$\lambda \pi(n) = \lambda(n)p(n)$} 
+edge[pil,<-] node[fill=white] {$t\to\infty$} (pasta1);
+
+\node[block, below=1.5cm of pasta2, text width=3cm] (pasta3) {PASTA: $\pi(n) = p(n)$} 
+edge[pil,<-] (poisson)
+edge[pil,<-] (pasta2)
+edge[pil,->] (perf);
+
+\end{tikzpicture}
+  \caption{With level-crossing arguments we can derive a number of
+    useful relations. This figure presents an overview of these
+    relations that we derive in this and the next sections.}
+\end{figure}
+
+\begin{question}
+  Should we  take $L(A_k-)=n$ or $L(A_k)$ in the definition of $A(n,t)$?
+    \begin{solution}
+    $L(t)$ is the number of customers in the system at time $t$. As
+    such the function $t\to L(t)$ is \textsl{right-continuous}. The
+    definition of $L(A_k-) = \lim_{t\uparrow A_k} L(t)$, i.e., the
+    limit from the left.  The customer therefore `sees' $L(A_k-)$ just
+    before he arrives. 
+\end{solution}  
+\end{question}
+
+\begin{question}
+Should  we take $D(n-1,t)$ or  $D(n,t)$ in the definition of $\mu(n,t)$?
+    \begin{solution}
+      $D(n-1,t)$ counts the departures that leave $n-1$ behind. Thus,
+      just before the customer leaves, the system contains $n$
+      customers.
+\end{solution}
+\end{question}
+
+\begin{question}
+What is the difference between $A(n,t)$ and $A(t)$? 
+\begin{solution}
+  $A(t)$ counts all customers that arrive up to time $t$, i.e., during
+  $[0,t]$. Note that this \textsl{includes} time $t$. $A(n,t)$ counts
+  the jobs that see $n$ jobs in the system just before they arrive.
+    \end{solution}
+\end{question}
+  
+\begin{question}
+ Show that $A(n,t) \leq A(t)$. 
+\begin{solution}
+       Observe that
+      $1\{A_k\leq t, L(A_k-) = n\} =1\{A_k\leq t\}1\{L(A_k-) = n\}
+      \leq 1\{A_k\leq t\}$;
+      the last inequality follows from the fact that
+      $1\{L(A_k-) = n\}\leq 1$. In fact, most of the time, for a
+      particular $n$, $1\{L(A_k-) = n\} = 0$. Therefore
+    \begin{equation*}
+  A(n,t) = \sum_{k=1}^\infty 1\{A_k \leq t, L(A_k-) = n\} 
+\leq \sum_{k=1}^\infty 1\{A_k \leq t = A(t)\}. 
+    \end{equation*}
+    For any `normal' queueing system, $A(t) > A(t,n)$, because the
+    queue length fluctuates.
+    \end{solution}
+\end{question}
+
+\begin{question}
+  Is in general $\pi(n)\geq \delta(n)$?
+  \begin{solution}
+    We have shown for one-step transition processes that
+    $\lambda \pi(n) = \gamma \delta(n)$. Thus,
+    $\pi(n) = \gamma/\lambda \delta(n)$. Since $\lambda\geq \gamma$,
+    we have that $\pi(n) \geq \delta(n)$.
+  \end{solution}
+\end{question}
+
+\begin{question}
+ Suppose that $\lambda > \gamma$, i.e., the system is not
+    rate-stable. Why is then $ \lim_{t\to\infty} \frac{A(n,t)}t = 0$?
+  \begin{solution}
+ If $\lambda > \gamma$, then $L(t)\to\infty$. But then there
+      must be last time, $s$ say, that $L(s) = n+1$, and $L(t) > n+1$
+      for all $t>s$. Hence, after time $s$ no job will see the system
+      with $n$ jobs. Thus $A(t,n) = A(s,n)$ for all $t>s$.  This is a
+      finite number, while $t\to\infty$, so that $A(n,t)/t \to 0$.
+  \end{solution}
+ \end{question}
+
+\begin{question}
+Is it always true that 
+    $\lambda = \lim_{t} \frac{A(t)}t = \lim_{t} \frac{A(n,t)}t$.
+  \begin{solution}
+ When $\gamma < \lambda$, $\lambda$ can still be finite, but
+    the server is simply to slow. In that case both limits can exists,
+    the first limit is positive but the second is $0$.
+  \end{solution}
+\end{question}
+
+
+\begin{question}
+    Consider the following (silly) queueing process. At times
+    $0, 2,4, \ldots$ customers arrives, each customer requires $1$
+    unit of service, and there is one server. Find an expression for
+    $Y(n,t)$.What acronym would describe this queueing situation?
+    \begin{solution}
+      First, it is the $D/D/1$ queue, since there is one server and
+      the interarrival times and service times are constant, i.e.,
+      \emph{D}eterministic.
+
+      Next, to get the $Y(n,t)$, observe that the system never
+      contains more than 1 job. Hence, $Y(n,t)=0$ for all $n\geq 2$.
+      Then, for $n=1$, make a plot of $L(s)$ as a function of
+      time. Then the solution will be easy enough.  Specifically, we
+      have that $Y(1,t) = \int_0^t 1\{L(s) = 1\}\, ds.$ Now observe
+      that for our queueing system $L(s)=1$ for $s\in[0,1)$, $L(s)=0$
+      for $s\in[1,2)$, $L(s)=1$ for $s\in[2,3)$, and so on, Thus, when
+      $t<1$, $Y(1,t)=\int_0^t 1\{L(s)=1\}\, ds = \int_0^t 1\,ds =
+      t$.
+      When $t\in[1,2)$, $L(s) = 0$, so that $Y(1,t) = 1$ for
+      $s\in[1,2)$, and so on. Thus, all in all,
+    \begin{equation*}
+      Y(1,t) =
+      \begin{cases}
+        t &\leq t\in[0,1), \\
+        1 &\leq t\in[1,2), \\
+        1+(t-2) &\leq t\in[2,3), \\
+        2 &\leq t\in[3,4), \\
+        2+(t-4) &\leq t\in[4,5), \\
+      \end{cases}
+    \end{equation*}
+    and so on.  Since $Y(n,t)=0$ for all $n\geq 2$, $L(s) = 1$ or
+    $L(s)=0$ for all $s$. Therefore, $Y(0,t) = 1-Y(1,t)$.
+    \end{solution}
+\end{question}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "book"
+%%% End:

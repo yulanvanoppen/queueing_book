@@ -1,0 +1,8 @@
+
+@lru_cache(maxsize=None)
+def f(i, n_i):
+    if n_i == 0:
+        return 1
+    return V[i] / mu[i] / min(n_i, c[i]) * f(i, n_i - 1)
+
+

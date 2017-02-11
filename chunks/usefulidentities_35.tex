@@ -1,0 +1,10 @@
+
+def WQ(m, labda, ES):
+    rho = labda*ES
+    tot = sum(rho**n/factorial(n) for n in range(m)) +
+rho**m/factorial(m)/(1.-rho/m)
+    P0 = 1./tot
+    Lq = rho**(m+1)/m/(factorial(m)*(1.-rho/m)**2)*P0
+    return Lq/labda # Wq
+
+

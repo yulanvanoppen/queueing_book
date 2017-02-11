@@ -1,0 +1,23 @@
+
+num = 1000
+a = np.random.poisson(labda, num)
+c = mu * np.ones_like(a)
+Q = np.zeros_like(a)
+d = np.zeros_like(a)
+Q[0] = 10  # initial queue length
+
+for k in range(1, len(a)):
+    d[k] = min(Q[k - 1], c[k])
+    Q[k] = Q[k - 1] - d[k] + a[k]
+
+print(d.mean(), Q.mean(), Q.std(), (Q > 40).mean()*100)
+
+plt.figure(figsize=(6, 2))
+plt.plot(Q)
+# plt.show()
+filename = "figures/md1_sim.pdf"
+plt.savefig(filename)
+plt.close()
+
+20.178 28.42 10.1558653004 13.1
+

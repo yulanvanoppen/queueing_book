@@ -1,0 +1,10 @@
+
+labda = 12. # per hour
+mu = 15. # per hour
+rho = labda/mu
+
+def p(i,j):
+    q  = 3 - j + i
+    return rho**q*(1.-rho)
+
+

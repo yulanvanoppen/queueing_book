@@ -1,0 +1,8 @@
+
+from math import sqrt
+
+def MMc(labda, ES, c):
+    rho = labda*ES/c
+    return  rho**(sqrt(2*(c+1))-1)/(c*(1-rho)) * ES
+
+

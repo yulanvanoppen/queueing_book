@@ -1,0 +1,22 @@
+
+@lru_cache(maxsize=None)
+def EL(j, n):
+    if n <= 0:
+        return 0
+    else:
+        return TH(j, n) * EW(j, n)
+
+
+@lru_cache(maxsize=None)
+def EW(j, n):
+    return (EL(j, n - 1) + 1) / mu[j]
+
+
+@lru_cache(maxsize=None)
+def TH(j, n):
+    if j == 0:
+        return n / sum(V[j] * EW(j, n) for j in range(len(mu)))
+    else:
+        return V[j] * TH(0, n)
+
+

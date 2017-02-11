@@ -1,0 +1,10 @@
+
+Q = np.zeros_like(a)
+d = np.zeros_like(a)
+Q[0] = 10  # initial queue length
+
+for k in range(1, len(a)):
+    d[k] = min(Q[k - 1], c[k])
+    Q[k] = Q[k - 1] - d[k] + a[k]
+
+

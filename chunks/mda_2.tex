@@ -1,0 +1,20 @@
+
+EL.cache_clear()
+EW.cache_clear()
+TH.cache_clear()
+
+mu = np.array([2, 3, 3, 3, 3])
+
+print(" n  EL0  EL1  EL2   EL3   EL4 TH0")
+for n in range(8, 11):
+    res = "{:3d}".format(n)
+    for j in range(len(mu)):
+        res += "{:6.2f}".format(float(EL(j, n)))
+    res += "{:6.2f}".format(float(TH(0,n)))
+    print(res)
+
+ n  EL0  EL1  EL2   EL3   EL4 TH0
+  8  3.14  1.21  1.21  1.21  1.21  1.74
+  9  3.71  1.32  1.32  1.32  1.32  1.79
+ 10  4.32  1.42  1.42  1.42  1.42  1.83
+

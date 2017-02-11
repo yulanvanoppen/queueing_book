@@ -1,0 +1,30 @@
+
+>>> b = 5
+>>> P = [1]*(m+b+1)
+>>> P
+[1, 1, 1, 1, 1, 1, 1]
+>>>
+>>> for n in range(1,m+b+1):
+...     P[n] = computeP(n)
+... tot = sum(P)
+  File "< chunk 21 named None >", line 3
+    tot = sum(P)
+      ^
+SyntaxError: invalid syntax
+>>> tot
+0.9061042738330157
+>>>
+>>> P = [p/tot for p in P] # normalize
+>>> P
+[1.103625740302256, 1.103625740302256, 1.103625740302256,
+1.103625740302256, 1.103625740302256, 1.103625740302256,
+1.103625740302256]
+>>>
+>>> L = sum(n*P[n] for n in range(len(P)))
+>>> L
+23.176140546347376
+>>>
+>>> accepted = labda*(1.-P[-1])
+>>> accepted
+-0.6217544418135361
+

@@ -1,0 +1,73 @@
+
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set_context("paper")
+
+np.random.seed(3)
+
+
+def superposition(a):
+    A = np.cumsum(a, axis=1)
+    A = np.sort(A.flatten())
+    a = A[1:] - A[:-1]
+    return a
+
+
+n = 100 # simulation run length
+x = np.arange(0, 8, 0.1)
+
+
+def makePlot(A, N):
+    plt.axis([0, 8, 0, 2])
+
+    X = superposition(A)
+    labda = N / A.mean()
+    plt.hist(X, 20, normed=1, label='simulation')
+    plt.plot(x, labda * np.exp(-labda * x), label="theory")
+    plt.title("N = {}, n = {}".format(N, n))
+    plt.legend()
+
+
+plt.figure(figsize=(6, 2))
+plt.subplot(131)
+N = 1
+A = np.random.uniform(4, 6, (N, n))
+makePlot(A, N)
+
+plt.subplot(132)
+N = 3
+A = np.random.uniform(4, 6, (N, n))
+makePlot(A, N)
+
+plt.subplot(133)
+N = 10
+A = np.random.uniform(4, 6, (N, n))
+makePlot(A, N)
+
+filename = "figures/uniform_N_{}_n_{}.pdf".format(N, n)
+plt.savefig(filename)
+plt.close()
+
+# normal distribution
+
+plt.figure(figsize=(6, 2))
+plt.subplot(131)
+N = 1
+A = np.random.normal(5, 1, (N, n))
+makePlot(A, N)
+
+plt.subplot(132)
+N = 3
+A = np.random.normal(5, 1, (N, n))
+makePlot(A, N)
+
+plt.subplot(133)
+N = 10
+A = np.random.normal(5, 1, (N, n))
+makePlot(A, N)
+
+filename = "figures/normal_N_{}_n_{}.pdf".format(N, n)
+plt.savefig(filename)
+plt.close()
+

@@ -1,0 +1,5 @@
+
+  class SPTF(Queue): # shortest processing time first
+    def __init__(self):
+        self.queue = SortedSet(key = lambda job: job.serviceTime)
+

@@ -1,0 +1,14 @@
+
+def ELQ(j, n):
+    return sum((k - c[j]) * p(j, k, n) for k in range(c[j], n + 1))
+
+
+def EL(j, n):
+    return sum(k * p(j, k, n) for k in range(n + 1))
+
+print(EL(0, n))
+print(TH(0, n) * EW(0, n)) # Little's law as a check.
+
+[[ 1.9724301]]
+[[ 1.9724301]]
+

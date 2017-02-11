@@ -1,0 +1,23 @@
+
+import numpy as np
+
+labda = 3
+mu = 4
+j = 5
+dx = 1 / 100
+
+
+def F(x):
+    return 1 - np.exp(-mu * x)
+
+
+def f(x):
+    return F(x + dx) - F(x)
+
+
+def term(i):
+    res = np.exp(-labda * i * dx)
+    res *= (labda * i * dx)**j / np.math.factorial(j)
+    res *= f(i*dx) * dx
+    return res
+

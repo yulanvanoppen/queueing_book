@@ -1,0 +1,308 @@
+\section{(Limits of) Emperical Performance Measures}
+\label{sec:limits-of-emperical}
+
+If the arrival and service processes are such that the queueing system
+is rate-stable, we can sensibly define other performance measures such
+as the average waiting time. In this section we define the set of
+second most important performance measures; the most important being
+the utilization $\rho$. We provide an overview of the relations
+between these performance measures in
+Figure~\ref{fig:constructiongg1}.
+
+
+With the construction of queueing processes in
+Section~\ref{sec:constr-gg1-queu} we can compute the waiting time as
+observed by the first $n$, say, jobs. Thus, the average waiting time
+of the first $n$ arrivals is given by $n^{-1}\sum_{k=1}^n W_k$. We
+therefore define the \recall{average waiting time} as
+\begin{equation}\label{eq:49}
+  \E W = \lim_{n\to\infty} n^{-1}\sum_{k=1}^n W_k,
+\end{equation}
+and the average time in queue as
+\begin{equation}\label{eq:50}
+  \E{W_Q} = \lim_{n\to\infty} n^{-1}\sum_{k=1}^n W_{Q,k}.
+\end{equation}
+Note that these performance measures are limits of \emph{emperical}
+measures.  Note also that these measures are \recall{averages as
+  observed by arriving jobs}: the first job has a waiting time $W_1$
+at the moment of its arrival, the second a waiting time $W_2$, and so
+on. For this reason we say colloquially that $\E W$ is the average
+waiting time as `seen by arrivals'.  The \recall{distribution of the
+  waiting times at arrival times} can  be found by counting:
+\begin{equation}\label{eq:48}
+  \P{W \leq x}  = \lim_{n\to\infty} n^{-1}\sum_{k=1}^n \1{W_k\leq x}.
+\end{equation}
+Finally, the (sample) \recall{average number of jobs} in the system as seen by
+arrivals is given by
+\begin{equation}\label{eq:EQ}
+\E L =  \lim_{n\to\infty}\frac 1 n \sum_{k=1}^n L_k,
+\end{equation}
+where $L_k$ is computed according to~\eqref{eq:55}.  The
+\recall{distribution of $\{L(t)\}$ as seen by customers upon arrival},
+is
+\begin{equation}\label{eq:Qm}
+\P{L\leq m} = \lim_{n\to\infty} \frac 1 n \sum_{k=1}^n \1{Lx_k \leq m}.
+\end{equation}
+
+
+
+A related set of performance measures follows by tracking the system's
+behavior over time and taking the \emph{time-average}, rather than the
+average at sampling (observation) moments. Thus, if we simulate the
+queueing system up to time $t$, the \recall{time-average number of
+jobs in the system} is given by
+\begin{equation}\label{eq:11}
+\mathcal{L}(t) = \frac 1 t\int_0^t L(s)\d s =  \frac 1 t\int_0^t (A(s)-D(s)) \d s,
+\end{equation}
+where we use that $L(t)=A(t) - D(t)$ is the total number of jobs in
+the system at time $t$.  Observe from the second equation that
+$\int_0^t L(s)\d s$ is the area enclosed between the graphs of $\{A(s)\}$
+and $\{D(s)\}$. Assuming the limit exists for $t\to\infty$, we define
+\begin{equation}
+  \label{eq:46}
+  \E L = \lim_{t\to\infty} \frac 1 t\int_0^t L(s)\d s 
+\end{equation}
+Observe that, notwithstanding that the symbols are the same, this
+expectation need not be the same as~\eqref{eq:EQ},
+c.f. Exercise~\ref{ex:1}. Next, define the following probability as
+the \recall{time-average fraction of time the system contains at most $m$
+jobs}:
+\begin{equation}
+  \label{eq:47}
+  \P{L\leq m} =\lim_{t\to\infty} \frac 1 t\int_0^t \1{L(s)\leq m}\,\d s.
+\end{equation}
+Again, this probability need not be the same as what customers see
+upon arrival.  
+
+It is evident how to formulate the counterparts for the waiting time
+process $\{W(t)\}$.
+
+
+
+\begin{figure}[hp]
+  \centering
+  \begin{tikzpicture}[node distance = 2.5cm]
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    %Define style for boxes
+    % Define arrow style
+    pil/.style={
+           ->,
+           thick,
+           shorten <=2pt,
+           shorten >=2pt,}
+}
+
+% Define block styles
+\tikzstyle{block} = [rectangle, draw,text centered, rounded corners, minimum height=3em]
+
+    % nodes
+    \node [block, fill=red!50] (X_k) {$\{X_k\}$};
+    \node [block, right=2.5cm of  X_k,fill=red!50] (A_k) {$\{A_k\}$}
+    edge[pil,bend left=45] node[below] {$X_k := A_k - A_{k-1}$} (X_k)
+    edge[pil,<-, bend right=45] node[above] {$A_k := A_{k-1} + X_{k-1}$} (X_k); 
+    \node [block, right=2.5cm of  A_k ] (A_t) {$\{A(t)\}$}
+    edge[pil,bend left=45] node[below] {$A_k := \inf\{t: A(t)\geq k\}$} (A_k)
+    edge[pil,<-, bend right=45] node[above] {$A(t) := \sup\{k: A_k\leq t\}$} (A_k); 
+    \node [block, below=2cm of  X_k ] (EX) {$\frac 1n \sum_{k=1}^n X_k \to \E X$}
+    edge[pil, <-] (X_k);
+    \node [block, below=2cm of  A_t ] (lambda) {$\frac{A(t)}t  \to \lambda$}
+    edge[pil, <-] (A_t);
+    \node [block, below=2cm of  A_k ] {$\E X = \lambda^{-1}$}
+    edge[pil, <-] (EX)
+    edge[pil, <-] (lambda);
+
+    \node[below=1cm of lambda] (dummy) {}; 
+
+    \node [block, below=1cm of EX, fill=red!50] (S_k) {$\{S_k\}$};
+    \node [block, right=2.5cm of  S_k ] (U_k) {$\{U_k\}$}
+    edge[pil,<->] (S_k);
+    \node [block, right=2.5cm of  U_k ] (U_t) {$\{U(t)\}$}
+    edge[pil,<->]  (U_k);
+    \node [block, below=1cm of  S_k ] (ES) {$\frac 1n \sum_{k=1}^n S_k \to \E S$}
+    edge[pil, <-] (S_k);
+    \node [block, below=1cm of  U_t ] (mu) {$\frac{U(t)}t  \to \mu$}
+    edge[pil, <-] (U_t);
+    \node [block, below=1cm of  U_k ] {$\E S = \mu^{-1}$}
+    edge[pil, <-] (ES)
+    edge[pil, <-] (mu);
+
+    \node [block, right=of dummy] {Stability:\newline $\lambda < \mu$}
+edge[pil,bend right=25, <-] (lambda.east)
+edge[pil,bend left=25, <-] (mu.east);
+
+    \node[block, below=1cm of  ES, fill=red!50 ] (W_k) {$W_{k}=\max\{W_{k-1} - X_k,0\} +S_k$};
+    %edge[pil, bend left=45,<-]  (X_k)
+    %edge[pil, bend right=55,<-]  (S_k.west);
+    \draw[->] (S_k.west) [out=180, in=110] to  (W_k.north west);
+    \draw[->] (X_k.west) [out=230, in=110] to  (W_k.north west);
+    \node[block, right=1cm of  W_k, fill=red!50 ] (D_k) {$D_{k}=A_k + W_{k}$} 
+    edge[pil,bend right=25, <-]  (A_k)
+    edge[pil,<-]  (W_k);
+    \node[block, right=1cm of  D_k ] (D_t) {$D(t)=\sup\{k: D_k\leq t\}$} 
+    edge[pil, <-]  (D_k);
+
+    \node[block, below=1cm of  W_k, fill=blue!40] (W) {$\frac1n\sum_{k=1}^n W_k \to \E W$} 
+    edge[pil, <-]  (W_k);
+    \node[block, below=1cm of  D_t] (Q_t) {$L(t) := A(t) - D(t)$} 
+    edge[pil, <-]  (D_t);
+    \draw[->] (A_t.east) [out=20, in = 40] to  (Q_t);
+    %edge[pil, bend right=95, <-]  (A_t.north);
+
+    \node[block, right=1cm of  D_t] (gamma) {$\frac{D(t)}t \to \gamma$} 
+    edge[pil, <-]  (D_t);
+
+
+    \node[block, below=1cm of  D_k, fill=blue!40] (L) {$\frac 1 t \int_0^t L(s)\,\d s \to \E L$} 
+    edge[pil, <-]  (Q_t);
+    % \node[block, below=1cm of  L] (Little) {$\E L = \lambda \E W$} 
+    % edge[pil, <-]  (L)
+    % edge[pil, <-]  (W);
+
+    \node[block, right=1cm of  Q_t] (hoi) {$\gamma \leq \lambda$} 
+    edge[pil, <-]  (gamma)
+    edge[pil, bend right=10, <-]  (lambda)
+    edge[pil, bend left = 30, <-]  node[below] {$L(t)>0$} (Q_t);
+
+    \node[block, below=1cm of W, fill=blue!40] (PW) {$\frac 1n \sum_{k=1}^n 1\{W_k \leq w\} \to \P{W\leq w}$}
+    edge[pil, <-] (W);
+
+    \node[block, below=1cm of Q_t, fill=blue!40] (PL) {$\frac 1t \int_{0}^t \1{L(s) \leq l} \to \P{L\leq l}$}
+    edge[pil, <-] (Q_t);
+
+% \node[block, below=1cm of PW, fill=gray!40] (PM) {Performance measures};
+% \node[block, below=1cm of PM, fill=gray!40] {$G/G/1$ Construction \& simulation};
+
+    % \node[block, below=1cm of L, text width=2cm, fill=gray!40] (perf) {Performance measures}
+    % edge[pil, ->] (L)
+    % edge[pil, ->] (PL)
+    % edge[pil, ->] (PW)
+    % edge[pil, ->] (W);
+
+  \end{tikzpicture}  
+
+  \caption{Here we sketch the relations between the construction of
+    the $G/G/1$ queue from the primary data, i.e., the interarrival
+    times $\{X_k; k\geq 0\}$ and the service times $\{S_k; k\geq 0\}$,
+    and different performance measure. 
+% The performance measures are
+%     shown in \protect\tikz \protect\node[fill=blue!40] {blue};, the
+%     essential components for the construction of the $G/G/1$ are shown
+%     in \protect\tikz \protect\node[fill=red!40] {red}.
+} 
+    \label{fig:constructiongg1}
+
+\end{figure}
+
+
+\begin{question}
+\label{ex:1}
+Design a queueing system in which the load as seen the server is very
+different from what the customers see.
+  \begin{solution}
+    Let the interarrival times $\{X_i\}$ be all identical to 1 hour
+    and service times all identical to $S_i=59$ minutes.
+  \end{solution}
+\end{question}
+
+
+\begin{question}\label{ex:2}
+  \begin{enumerate}
+  \item Assume that $X_i = 10$ minutes and $S_i = 11$ minutes for all
+    $i$. What are $\lambda$ and $\mu$?  Compute $A_k$, $W_k$, $D_k$
+    and $L_k$. How do these numbers behave as a function of $k$?.
+  \item Yet another simple case is to take $X_i=10$ minutes and
+    $S_i=9$ minutes for all $k$. Answer the same questions as in the
+    previous part.
+  \end{enumerate}
+  \begin{solution}
+    \begin{enumerate}
+    \item $\lambda=6$ per hour, and $\mu=60/11$ per hour. Note that
+      $\mu < \lambda$. $A_0 = 0$, $A_1=10$, $A_2=20$, etc., hence
+      $A_k = 10k$. $W_{Q,0} = 0$, $W_{Q,1} = \max\{0 + 0-10,0\} = 0$.
+      $W_{Q,2} = \max\{0+11-10,0\} =1$.
+      $W_{Q,3} = \max\{1+11-10,0\} =2$. Hence, $W_{Q,k} = k-1$ for
+      $k\geq1$. Thus, $W_k = k-1+11 = k + 10$ for $k\geq1$, and
+      $D_k = 10k + k+10 = 11k+10$. Note that $W_k$ increases linearly
+      as a function of $k$.  You can infer that, for the queue length
+      to remain bounded, it is necessary that the service rate
+      $\mu > \lambda$.
+    \item Trivial.
+    \end{enumerate}
+  \end{solution}
+\end{question}
+
+
+
+
+\begin{question}\label{ex:4}
+  Construct a queueing system for which 
+\begin{equation*}
+  \lim_{t\to\infty} \frac 1 t\int_0^t L(s)\, \d s \neq   \lim_{n\to\infty}\frac 1n  \sum_{k=1}^n L_k.
+\end{equation*}
+hence, in general:
+  \begin{equation*}
+    \lim_{t\to\infty} \int_0^t 1\{L(s)\leq m\}\,\d s \neq \lim_{n\to\infty} \frac 1n \sum_{k=1}^n 1\{L_k \leq m\},
+  \end{equation*}
+  \hint{Use Exercise~\ref{ex:2}.}
+\begin{solution}
+  Take $X_i = 10$ and $S_i = 10-\epsilon$ for some tiny
+  $\epsilon$. Then $L(t) = 1$ nearly all of the time. In fact,
+  $\E L = 1-\epsilon/10$. However, $L_k=0$ for all $k$.
+\end{solution}
+\end{question}
+
+
+\begin{question}
+  Consider a discrete-time model of a queueing system, as we developed
+  in Section~\ref{sec:constr-discr-time}.  In that case batches of
+  jobs can arrive in a period, and the average number of customers
+  that \emph{see upon arrival} more than~$m$ customers in the system
+  cannot be defined as~\eqref{eq:Qm}. Provide a better definition. As
+  a start, why is \eqref{eq:Qm} not the same as the number of
+  batches that see a queue length less than $m$?
+
+  \begin{solution} Since we deal with a system in discrete time $L_k$
+    is the queue length at the end of period~$k$. Thus,
+    $\sum_{k=1}^n \1{L_k > m}$ counts the number of \emph{periods}
+    that the queue is larger than $m$. This is of course not the same
+    as the number of \emph{jobs} that see a queue larger than $m$;
+    only when $a_k>0$ the customers in a batch would see a queue
+    $L_k>m$. Thus,
+    \begin{equation*}
+      \sum_{k=1}^n \1{L_k > m, a_k > 0},
+    \end{equation*}
+    counts the number of batches. 
+
+    Next, by assumption, $a_k$ customers arrive during period $k$. The
+    first of these customers sees a queue length of $L_{k-1} - d_k$,
+    the second $L_{k-1}-d_k + 1$, and so on until the last customer
+    who sees a queue length of $L_{k-1} - d_k + a_k -1 = L_k
+    -1$.
+    Thus, of all jobs the last sees the largest queue. Hence, if
+    $L_k \leq m$, all customers of the batch see a queue less than
+    $m$. If, however, $L_k > m$, then $L_k -m$ customers saw $m$ or
+    more jobs in the system.. Therefore, the fraction of arrivals that
+    see a queue with $m$ or more jobs is equal to
+\begin{equation*}
+  \frac 1{A(n)} \sum_{k=1}^n 1_{L_k > m} (L_k - m).
+\end{equation*}
+We could also define this a bit differently. Suppose that we don't
+want to distinguish between jobs in a batch, but simply want to say
+that if one job sees a long queue, all see a long queue. In that case,
+\begin{equation*}
+\frac 1{A(n)}\sum_{k=1}^n 1{L_k > m} a_k .
+\end{equation*}
+Thus, when jobs arrive in batches, the definition of loss fraction
+requires some care; not all definitions need to measure the same.
+  \end{solution}
+\end{question}
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "book"
+%%% End:
