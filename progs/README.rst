@@ -1,3 +1,12 @@
+Programs
+======================
+
+*  ``mm1.R`` is an R program to simulate the M/M/1 queue
+*  ``mm1.py`` is a python program to simulate the M/M/1 queue
+*  ``mm1.jl`` is a julia program to simulate the M/M/1 queue
+
+
+
 The python scripts contain the python code to make tikz code for a
 figure and save it to a file. Then I input the file in
 ``testing_ground.tex`` and test the tikz code with
@@ -11,5 +20,3 @@ As an example:
 
   python3 reflected_random_walk.py && pdflatex testing_ground.tex
 
-
-*  ``mm1.R`` is an R program to simulate the M/M/1 queue
