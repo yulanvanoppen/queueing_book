@@ -1,59 +1,12 @@
 \section
-[Batch Arrivals, The $M^X/M/1$ queue]
-{Batch Arrivals, The $\mathbf{M^X/M/1}$ queue}
+[$M^X/M/1$ Queue Length Distribution]
+{$M^X/M/1$ Queue Length Distribution}
 \label{sec:batch-arrivals}
 
-It is not always the case that jobs arrive in single units, they can
-also arrive as batches. For instance, cars and busses arrive at a fast
-food restaurant so that the batch size consists of the number of
-people in the vehicle.  In this section we present a numerical,
-recursive, scheme to compute the stationary distribution of the number
-of items in queue. Again, the stationary distribution is all we need
-to compute the relevant performance measures such as the queue
-length distribution.
-
-
-Assume that jobs arrive as a Poisson process with rate $\lambda$ and
-each job contains multiple items.  Let $A_k$ be the arrival time of
-job $k$ and $A(t)$ the number of job arrivals up to time $t$. Denote
-by $B_k$ the number of items that job $k$ brings into the system.  We
-assume that $\{B_i\}$ is an i.i.d. sequence of discrete random
-variables distributed as a generic random variable $B$ such that
-$\P{B = k} = f(k)$, where $f(k)$ is a given set of probabilities. We
-write
-\begin{equation*}
-  G(k) = \P{B>k} = \sum_{m=k+1}^\infty f(m),
-\end{equation*}
-for the \emph{survivor function} of $B$.
-We also assume that the service times of one unit
-of work is exponentially distributed with average $1/\mu$. This
-queueing situation is known as the M/M/1 queue with batch arrivals and
-denoted by the symbols $M^X/M/1$.
-
-The first criterion we must check for the $M^X/M/1$ queue is the
-stability: the service rate must be larger than the arrival rate of
-work. To determine the latter, the total number if items $W(t)$
-arrived up to time $t$ must be equal to the number of arrivals up to
-time $t$ times the batch size of each arrival, i.e.,
-\begin{equation*}
-W(t)=  \sum_{k=0}^\infty B_k \1{A_k \leq t} = \sum_{i=k}^{A(t)} B_k.
-\end{equation*}
-The (stochastic) process $\{W(t)\}$ is known as the \recall{compound
-  Poisson process}. Clearly, the rate at which items arrive is,
-approximately,
-\begin{equation*}
-  \frac{W(t)}t = \frac{A(t)}t \frac1{A(t)}\sum_{i=k}^{A(t)} B_k.
-\end{equation*}
-In the limit, 
-\begin{align*}
-  \frac{A(t)}t &\to \lambda,  & \frac1{A(t)}\sum_{i=k}^{A(t)} B_k &\to \E{B}.
-\end{align*}
-Hence, $W(t)/t \to \lambda \E B$. For stability, it is necessary that
-the average service time per item $\E S=1/\mu$ is less than the rate at which items arrive. Hence we require that  the load is such that
-\begin{equation*}
-\rho = \lambda \E B \E S = \frac{\lambda \E S} \mu < 1.
-\end{equation*}
-
+In this section we extend the analysis of the $M^X/M/1$ batch queue
+that we started in Section~\ref{sec:mxm1-queue:-expected}.  We present
+a numerical, recursive, scheme to compute the stationary distribution
+of the number of items in queue. 
 
 To find the distribution $p(n)$, which is equal to $\pi(n)$ by PASTA,
 we turn to level-crossing arguments. However, the arguments that lead
@@ -183,8 +136,8 @@ follows.
   \end{split}
 \end{equation*}
 In other words, paths that upcross level $n$ require that any job that
-sees $m\leq n$ in the system upon arrival must bring a more a batch
-larger than $n-m$ items. 
+sees $m\leq n$ in the system upon arrival must bring a batch larger
+than $n-m$ items.
 
 Define 
 \begin{equation*}
@@ -202,11 +155,11 @@ Simplifying this comes down to finding the right quantities by which
 to divide. Some experimentation will reveal that the following gives
 the most relevant insights:
 \begin{equation}\label{eq:16}
-  \frac{A(m,n,t)}t =   \frac{A(m,n,t)}{A(m,t)}\frac{A(m,t)}{A(t)}\frac{A(t)}t. 
+  \frac{A(m,n,t)}t =   \frac{A(t)}t \frac{A(m,t)}{A(t)}\frac{A(m,n,t)}{A(m,t)}.
 \end{equation}
-Here $A(m,t)/A(t)$ and $A(t)/t$ have the same meaning as in
+Here $A(t)/t$ and $A(m,t)/A(t)$ have the same meaning as in
 Section~\ref{sec:poisson-arrivals-see}, hence the first of these
-fractions converges to $\pi(m)$ and the second to $\lambda$ as
+fractions converges to $\lambda$ and the second to $\pi(m)$ as
 $t\to\infty$. Now, provided the limit exists, we define
 \begin{equation*}
 \lim_{t\to\infty} \frac{A(m,n,t)}{A(m,t)} = 
@@ -222,7 +175,7 @@ independent. Therefore,
 By combining the above and making the usual assumptions about the
 existence of all limits involved we find
 \begin{equation*}
-\lim_{t\to\infty}   \frac{A(m,n,t)}t = G(n-m) \pi(m) \lambda.
+\lim_{t\to\infty}   \frac{A(m,n,t)}t = \lambda \pi(m) G(n-m).
 \end{equation*}
 Thus, Eq.~(\ref{eq:16}) has the interpretation that the rate at which
 level $n$ is crossed from below from state $m$ is equal the rate at
@@ -243,32 +196,6 @@ same. Hence,
 \begin{equation}\label{eq:42}
 \lambda  \sum_{m=0}^n G(n-m) \pi(m) = \mu \pi(n+1).
 \end{equation}
-
-
-Let us use the above recursion to derive an expression for the
-expected number of units of work $\E L$ in the system. By substituting
-the recursion Eq.~(\ref{eq:42}) in the definition of $\E L$ we see
-that
-\begin{equation}\label{eq:67}
-  \mu \E L =\mu \sum_{n=0}^\infty n \pi(n) = \lambda \frac{\E{B^2}}2  + \lambda \E B \E L +\lambda \frac{\E B}2,
-\end{equation}
-where we use the results of Exercises~\ref{ex:6}, \ref{ex:8}
-and~\ref{ex:7}. With this and using the definition for
-$\rho=\lambda \E B/\mu$,
-\begin{equation*}
-(1- \rho) \E L = \frac{\lambda}\mu \frac{\E{B^2}}2 + \frac\rho2.
-\end{equation*}
-In Exercise~\ref{q:batch} you are asked to rewrite this to
-\begin{equation}\label{eq:43}
-\E L = \frac{1+C_s^2}2 \frac{\rho}{1-\rho} \E B + \frac12\frac\rho{1-\rho},
-\end{equation}
-where
-\begin{equation*}
-C_s^2 = \frac{\V B}{(\E B)^2},
-\end{equation*}
-is the square coefficient of variation of the batch sizes.  Observe
-that this is nearly the same as the Pollackzek-Khintchine
-formula~\label{eq:710}!
 
 
 For the excess probabilities $\P{L>n}$ we need to compute the actual
@@ -296,39 +223,14 @@ easy, but a pragmatic approach is to simply stop at some (large)
 number $N$ and take $G=\sum_{i=0}^N \pi(i)$ as the normalization
 constant. Then $\pi(0)=1/G$, $\pi(1)=\alpha/G$, and so on.
 
+\begin{remark}
 An interesting extension is to consider a queueing process with batch
 services, i.e., the $M/M^Y/1$ queue. Construction a recursion for the
 steady-state probabilities $p(n)$ for this case is not hard, in fact,
 mostly analogous to Eq.~(\ref{eq:42}).  However, solving the recursion
 is much less simple, hence we will not discuss this further.
+\end{remark}
 
-
-\begin{question}
-  Why is $\rho = \lambda \E B \E S$ the appropriate definition
-  of load for the $M^X/M/1$ queue?
-  \begin{solution}
-    Jobs arrive at rate $\lambda$. The average number of items per job
-    is $\E B$. Hence, work arrives as rate $\lambda \E B \E S$.This
-    rate must be less than 1 for stability.
-  \end{solution}
-\end{question}
-
-\begin{question}
-  Relate $f(k)$, the distribution $F(k)$ of the batch size $B$ and the
-  survivor function~$G$. Which of the three alternatives is true:
-  $G(k) = 1-F(k)$, $G(k) = 1-F(k-1)$, $G(k) = 1-F(k+1)$?
-\hint{ This exercise is just meant to become familiar with the notation.}
-  \begin{solution}
-    \begin{align*}
-    f(k) &= \P{B=k} = \P{B\leq k} - \P{B\leq k-1} = F(k)-F(k-1), \\
-    G(k) &= \P{B>k} = 1 - \P{B\leq k} = 1-F(k).        
-    \end{align*}
-    It is all too easy to make, so called, off-by-one errors, such as
-    in the three alternatives above.  I nearly always check simple
-    cases to prevent such simple mistakes. I advise you to acquire the
-    same habit.
-  \end{solution}
-\end{question}
 
 \begin{question}
   Show that Eq.~(\ref{eq:42}) reduces to $\mu p(n+1)=\lambda p(n)$ for the $M/M/1$ case.
@@ -359,61 +261,30 @@ is much less simple, hence we will not discuss this further.
 \end{solution}
 \end{question}
 
-\begin{question}\label{ex:6}
- Use indicator functions to prove that
-    \begin{equation*}
-      \sum_{n=0}^\infty G(n) = \E B.
-    \end{equation*}
-    \hint{
-Write 
-$\sum_{n=0}^\infty G(n) = \sum_{n=0}^\infty \sum_{i=n+1}^\infty \P{B=i}$ and then do the algebra.}
-\begin{solution}
-  Realize that this sort of problem is just a regular probability
-  theory problem, nothing fancy. We use/adapt the tools you learned in
-  calculus to carry out 2D integrals (or in this case 2D summations.)
-\begin{align*}
-\sum_{n=0}^\infty G(n) 
-&= \sum_{n=0}^\infty \P{B>n} \\
-&= \sum_{n=0}^\infty \sum_{i=n+1}^\infty \P{B=i}  \\
-& = \sum_{n=0}^\infty \sum_{i=0}^\infty 1\{n<i\} \P{B=i} \\
-&= \sum_{i=0}^\infty \sum_{n=0}^\infty 1 \{n<i\} \P{B=i} \\
-&= \sum_{i=0}^\infty i \P{B=i} = \E B.
-\end{align*}
-In case you are interested in mathematical justifications: the
-interchange of the two summations is allowed because the summands are
-all positive. (Interchanging the order of summations or integration is
-not allways allowed because the results can be different when part of
-the integrand is negative. Check Fubini's theorem for more on this if
-you are interested.)
-
-\end{solution}
-\end{question}
-
-\begin{question}\label{ex:8}
- Use indicator functions to prove that
-    \begin{equation*}
-\sum_{i=0}^\infty i G(i) =  \frac{\E B^2}2 - \frac{\E B}{2}.
-    \end{equation*}
-\hint{$\sum_{i=0}^\infty i G(i) = \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^\infty i 1\{n\geq i+1\}$.}
-\begin{solution}
-\begin{align*}
-\sum_{i=0}^\infty i G(i)
-&= \sum_{i=0}^\infty i \sum_{n=i+1}^\infty \P{B=n} = \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^\infty i 1\{n\geq i+1\} \\
-&= \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^{n-1}i  = \sum_{n=0}^\infty \P{B=n} \frac{(n-1)n}{2} \\
-&= \sum_{n=0}^\infty  \frac{n^2}{2} \P{B=n} - \frac{\E B}{2}
-= \frac{\E B^2}2 - \frac{\E B}{2}.
-\end{align*}
-\end{solution}
-\end{question}
-
 
 \begin{question}\label{ex:7}
-  Use the recursion Eq.~(\ref{eq:42}) to derive Eq.~(\ref{eq:67}).
-  \hint{Substitute the recursion, and carry on with the algebra. We
-    urge the reader to try it, its good (necessary) practice.}
+  Let us use the above recursion Eq.~(\ref{eq:42}) for $\pi(n)$ to
+  derive an expression for the expected number of units of work $\E L$
+  in the system. By substituting the recursion Eq.~(\ref{eq:42}) in
+  the definition of $\E L$ we see that
+\begin{equation}\label{eq:67}
+  \mu \E L =\mu \sum_{n=0}^\infty n \pi(n) = \lambda \frac{\E{B^2}}2  + \lambda \E B \E L +\lambda \frac{\E B}2,
+\end{equation}
+where we use the results of the exercises of Section~\ref{sec:mxm1-queue:-expected}
+and~\ref{ex:7}. With this and using the definition for
+$\rho=\lambda \E B/\mu$,
+\begin{equation*}
+(1- \rho) \E L = \frac{\lambda}\mu \frac{\E{B^2}}2 + \frac\rho2.
+\end{equation*}
+This is the same result as what we obtained in
+Section~\ref{sec:mxm1-queue:-expected}.
+  \hint{Substitute the
+  recursion, and carry on with the algebra. We urge the reader to try
+  it, its good (necessary) practice.}
 \begin{solution}
   We use that $\mu \pi(n) =\lambda \sum_{i=0}^{n-1} \pi(i) G(n-1-i)$
-  and the results of Exercise~\ref{ex:6} to see that
+  and the results of the exercises of
+  Section~\ref{sec:mxm1-queue:-expected} to see that
 \begin{align*}
   \mu \E L
   &=\sum_{n=0}^\infty n\, \mu \pi(n), \text{now substitute for $\mu \pi(n)$ the above recursion}, \\
@@ -428,63 +299,6 @@ you are interested.)
   &= \lambda \frac{\E B^2 -\E B}2  + \lambda \E B \E L +\lambda \E B \\
   &= \lambda \frac{\E B^2 }2  + \lambda \E B \E L +\lambda \frac{\E B}2,
 \end{align*}
-\end{solution}
-\end{question}
-
-
-\begin{question}
- Use indicator functions to prove that for  a continuous random
-    variable $S$ with distribution function $F$, 
-\begin{align*}
-    \E S &= \int_0^\infty x dF  = \int_0^\infty G(y) \d y,\\
-\end{align*}
-where $G(x) = 1 - F(x)$. 
-\hint{$\E S = \int_0^\infty x \d F  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d F(x)$.}
-\begin{solution}
-\begin{equation*}
-  \begin{split}
-    \E S &= \int_0^\infty x \d F  = \int_0^\infty \int_0^x \d y \d F(x) \\
-    & = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d F(x)   = \int_0^\infty \int_0^\infty 1_{y\leq x} \d F(x) \d y\\
-    & = \int_0^\infty \int_y^\infty \d F(x) \d y = \int_0^\infty G(y) \d y
-  \end{split}
-\end{equation*}
-\end{solution}
-\end{question}
-
-\begin{question}
- Use indicator functions to prove that for  a continuous random
-    variable $S$ with distribution function $F$, 
-\begin{align*}
-    \E S^2 &= \int_0^\infty x^2 dF  = 2 \int_0^\infty y G(y) \d y,
-\end{align*}
-where $G(x) = 1 - F(x)$. 
-\hint{$\int_0^\infty y G(y) \d y \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d x \d y$.
-}
-\begin{solution}
-  \begin{equation*}
-    \begin{split}
-\int_0^\infty y G(y) \d y 
-&=  \int_0^\infty y \int_y^\infty f(x)\, \d x \d y =  \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d x \d y\\
-&=  \int_0^\infty f(x) \int_0^\infty y 1\{y \leq x\}\, \d x \d y
-=  \int_0^\infty f(x) \int_0^x y\, \d x \d y\\
-&=  \int_0^\infty f(x) \frac{x^2}2 \d x =\frac{\E S^2}2.
-    \end{split}
-  \end{equation*}
-\end{solution}
-\end{question}
-
-
-\begin{question}
- Use the above to check that if $F(x) = 1 - e^{-\mu x}$,
-\begin{equation*}
-  \E S = \mu^{-1}.
-\end{equation*}
-\begin{solution}
-If $F(x) = 1 - e^{-\mu x}$, we obtain that 
-\begin{equation*}
-  \E S = \int_0^\infty e^{-\mu x} \d x =
-  \mu^{-1}\int_0^\infty e^{-x} \d x = \mu^{-1}.
-\end{equation*}
 \end{solution}
 \end{question}
 

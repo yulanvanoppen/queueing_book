@@ -1,4 +1,5 @@
-\section{Some Useful Identities}\label{sec:some-usef-ident}
+\section{Some Useful Identities}
+\label{sec:some-usef-ident}
 
 With the PASTA property and Little's law we can derive a number of
 useful and simple results for the $M/G/1$ queue. Recall, to use the
