@@ -78,37 +78,76 @@ it can only be down-crossed from state $n+1$.
 % was the case for queueing systems in which jobs arrive as single
 % units. We need to generalize this inequality.
 
-\begin{figure}
+\begin{figure}[ht]
   \centering
-  \begin{tabular}{cc}
-    \includegraphics[scale=0.9]{mxm1_2}
-&
-    \includegraphics[scale=0.9]{mxm1_1}
-  \end{tabular}
-  \caption{Level crossing of level $n$.  In the left panel, observe
+\begin{tikzpicture}[scale=1,
+    %Define standard arrow tip
+    >=stealth',
+    %Define style for boxes
+    circ/.style={
+      circle, 
+      draw=black,
+      thick,
+      minimum size=1.cm,
+      inner sep=0pt,
+      text centered
+    },
+    % Define arrow style
+    pil/.style={
+           ->,
+           thick,
+           shorten <=2pt,
+           shorten >=2pt}
+]
+
+\draw[dashed, thick] node at (5,-1.5) [below]  {level $n$} 
+(5,-1.5) -- (5,3);
+
+\node[circ] (n-2) {$n-2$};
+\node[circ, right=of n-2] (n-1) {$n-1$}
+edge[loop below, thick]  node[midway, fill=white] {$\lambda f(0)$} (n-1); 
+\node[circ, right=of n-1] (n) {$ n $}
+   edge[pil,<-, bend left=45] node[below] {$\lambda f(1)$} (n-1.south east);
+\node[circ, right=of n] (n+1) {$n+1$}
+   edge[pil,bend left=45] node[midway, fill=white] {$\mu$} (n.south east);
+\node[above=of n+1] (inf) {}
+   edge[pil, <-, bend right=45] node[midway, fill=white] {$\lambda G(0)$} (n.north east)
+   edge[pil, <-, bend right=45] node[midway, fill=white] {$\lambda G(1)$} (n-1.north east)
+   edge[pil, <-, bend right=45] node[midway, fill=white] {$\lambda G(2$} (n-2.north east)
+;
+\end{tikzpicture}
+%  \begin{tabular}
+%    \includegraphics[scale=0.9]{mxm1_2}
+%&
+%    \includegraphics[scale=0.9]{mxm1_1}
+%  \end{tabular}
+  \caption{Level crossing of level $n$.  Observe
     that when the system is in state $n-2$, the arrival of any batch
     larger than $2$ ensures that level $n$ is crossed from below.  The
-    rate such events happen is $\lambda \P{X>2} = \lambda G(2)$.
-    Similarly, in state $n-1$ any batch larger than one item work
-    crosses level $n$; this occurs with rate $\lambda G(1)$, and so
-    on.  In the right panel we see all the transitions from state $n$
-    (the state in which the system contains $n$ units of work) such
-    that level $n$ is crossed from below.  Clearly, with rate
-    $\lambda \P{X=1} = \lambda f(1)$ jobs containing one item arrive;
-    if such an event occurs, the system moves from $n$ items to $n+1$
-    items.  With with rate $\lambda f(2)$ jobs with two items work
-    arrive, so that the system contains $n+2$ units of work after the
-    arrival of such jobs, and so on. Level $n$ is crossed from above,
-    i.e., the system moves from state $n+1$ to $n$, when a unit of
-    work is processed, which happens at rate $\mu$. To relate the left
-    and the right panel, observe in the right panel that any `arrow'
-    from state $n$ to the right crosses level $n$. All these rates
-    added together are such that
-    $\lambda \sum_{i=1}^\infty f(i) = \lambda \P{B\geq 1} = \lambda
-    \P{B>0} = \lambda G(0)$.
-    A similar reasoning applied to state $n-1$ shows that only the
-    arrows such that $\lambda \sum_{i=2}^\infty f(i) = \lambda G(1)$
-    cross level $n$, and so on.  }
+    rate at which such events happen is $\lambda \P{X>2} = \lambda G(2)$.
+    Similarly, in state $n-1$ the arrival of any batch larger than one
+    item ensures that level $n$ is crossed, and this occurs with rate
+    $\lambda G(1)$, and so on.  
+% In the right panel we see all the
+%     transitions from state $n$ (the state in which the system contains
+%     $n$ units of work) such that level $n$ is crossed from below.
+%     Clearly, with rate $\lambda \P{X=1} = \lambda f(1)$ jobs
+%     containing one item arrive; if such an event occurs, the system
+%     moves from $n$ items to $n+1$ items.  With with rate
+%     $\lambda f(2)$ jobs with two items work arrive, so that the system
+%     contains $n+2$ units of work after the arrival of such jobs, and
+%     so on. Level $n$ is crossed from above, i.e., the system moves
+%     from state $n+1$ to $n$, when a unit of work is processed, which
+%     happens at rate $\mu$. To relate the left and the right panel,
+%     observe in the right panel that any `arrow' from state $n$ to the
+%     right crosses level $n$. All these rates added together are such
+%     that
+%     $\lambda \sum_{i=1}^\infty f(i) = \lambda \P{B\geq 1} = \lambda
+%     \P{B>0} = \lambda G(0)$.
+%     A similar reasoning applied to state $n-1$ shows that only the
+%     arrows such that $\lambda \sum_{i=2}^\infty f(i) = \lambda G(1)$
+%     cross level $n$, and so on. 
+  }
   \label{fig:levelcrossing}
 \end{figure}
 
@@ -213,27 +252,24 @@ that
 \begin{equation}\label{eq:67}
   \mu \E L =\mu \sum_{n=0}^\infty n \pi(n) = \lambda \frac{\E{B^2}}2  + \lambda \E B \E L +\lambda \frac{\E B}2,
 \end{equation}
-where we use the results of Exercises~\ref{ex:6} and~\ref{ex:7}. With this and using the definition for $\rho=\lambda \E B/\mu$
+where we use the results of Exercises~\ref{ex:6}, \ref{ex:8}
+and~\ref{ex:7}. With this and using the definition for
+$\rho=\lambda \E B/\mu$,
 \begin{equation*}
 (1- \rho) \E L = \frac{\lambda}\mu \frac{\E{B^2}}2 + \frac\rho2.
 \end{equation*}
-The last step is some optical polishing to show the similarity with
-the waiting time formula of the $M/G/1$ queue, i.e., the Pollackzek-Khintchine formula. We have
-\begin{equation*}
-  \begin{split}
-  \frac{\lambda}\mu \E{B^2} 
-&=   \frac{\lambda\E B}{\mu} \frac{\E{B^2}}{(\E B)^2} \E B  = \rho \frac{\E{B^2}}{(\E B)^2} \E B \\
-&= \rho \frac{(\E B)^2+\V B}{(\E B)^2}\E B = \rho (1+C_s^2)\E B, 
-  \end{split}
-\end{equation*}
-where we define $C_s^2 = \V B/(\E B)^2$ as the square coefficient of
-variation of the batch sizes.  With this we finally arrive at the
+In Exercise~\ref{q:batch} you are asked to rewrite this to
 \begin{equation}\label{eq:43}
-\E L = \frac{1+C_s^2}2 \frac{\rho}{1-\rho} \E B + \frac12\frac\rho{1-\rho}.
+\E L = \frac{1+C_s^2}2 \frac{\rho}{1-\rho} \E B + \frac12\frac\rho{1-\rho},
 \end{equation}
-Interestingly, this is nearly the same as the Pollackzek-Khintchine
-formula~\label{eq:70}. (Can you see why this could have been
-anticipated?)
+where
+\begin{equation*}
+C_s^2 = \frac{\V B}{(\E B)^2},
+\end{equation*}
+is the square coefficient of variation of the batch sizes.  Observe
+that this is nearly the same as the Pollackzek-Khintchine
+formula~\label{eq:710}!
+
 
 For the excess probabilities $\P{L>n}$ we need to compute the actual
 probabilities $\pi(n)$ from the recursion~(\ref{eq:42}). To apply
@@ -260,17 +296,15 @@ easy, but a pragmatic approach is to simply stop at some (large)
 number $N$ and take $G=\sum_{i=0}^N \pi(i)$ as the normalization
 constant. Then $\pi(0)=1/G$, $\pi(1)=\alpha/G$, and so on.
 
-\begin{remark}
-  An interesting extension is to consider a queueing process with
-  batch services, i.e., the $M/M^Y/1$ queue. Construction a recursion
-  for the steady-state probabilities $p(n)$ for this case is not hard,
-  in fact, mostly analogous to Eq.~(\ref{eq:42}).  However, solving
-  the recursion is much less simple.
-\end{remark}
+An interesting extension is to consider a queueing process with batch
+services, i.e., the $M/M^Y/1$ queue. Construction a recursion for the
+steady-state probabilities $p(n)$ for this case is not hard, in fact,
+mostly analogous to Eq.~(\ref{eq:42}).  However, solving the recursion
+is much less simple, hence we will not discuss this further.
 
 
 \begin{question}
-  Why is $\rho = \lambda \E B \E S$ be the appropriate definition
+  Why is $\rho = \lambda \E B \E S$ the appropriate definition
   of load for the $M^X/M/1$ queue?
   \begin{solution}
     Jobs arrive at rate $\lambda$. The average number of items per job
@@ -281,10 +315,10 @@ constant. Then $\pi(0)=1/G$, $\pi(1)=\alpha/G$, and so on.
 
 \begin{question}
   Relate $f(k)$, the distribution $F(k)$ of the batch size $B$ and the
-  survivor function $G$. Which of the three alternatives is true:
+  survivor function~$G$. Which of the three alternatives is true:
   $G(k) = 1-F(k)$, $G(k) = 1-F(k-1)$, $G(k) = 1-F(k+1)$?
+\hint{ This exercise is just meant to become familiar with the notation.}
   \begin{solution}
-    This exercise is just meant to become familiar with the notation.
     \begin{align*}
     f(k) &= \P{B=k} = \P{B\leq k} - \P{B\leq k-1} = F(k)-F(k-1), \\
     G(k) &= \P{B>k} = 1 - \P{B\leq k} = 1-F(k).        
@@ -318,8 +352,8 @@ constant. Then $\pi(0)=1/G$, $\pi(1)=\alpha/G$, and so on.
 \end{question}
 
 \begin{question}
- Why is Eq.~\eqref{eq:39}, i.e., $\pi(n)=\delta(n)$, not true
-    for the current case?
+  Why is Eq.~\eqref{eq:39}, i.e., $\pi(n)=\delta(n)$, not true for the
+  $M^X/M/1$ batch queue?
 \begin{solution}
  Because arrivals do not occur in single units, but in batches.
 \end{solution}
@@ -330,12 +364,13 @@ constant. Then $\pi(0)=1/G$, $\pi(1)=\alpha/G$, and so on.
     \begin{equation*}
       \sum_{n=0}^\infty G(n) = \E B.
     \end{equation*}
+    \hint{
+Write 
+$\sum_{n=0}^\infty G(n) = \sum_{n=0}^\infty \sum_{i=n+1}^\infty \P{B=i}$ and then do the algebra.}
 \begin{solution}
-  Please realize that these type of problems are all regular
-  probability theory, nothing fancy. We use/adapt the tools you
-  learned in calculus to carry out 2D integrals (or in this case 2D
-  summations.)
-
+  Realize that this sort of problem is just a regular probability
+  theory problem, nothing fancy. We use/adapt the tools you learned in
+  calculus to carry out 2D integrals (or in this case 2D summations.)
 \begin{align*}
 \sum_{n=0}^\infty G(n) 
 &= \sum_{n=0}^\infty \P{B>n} \\
@@ -354,11 +389,12 @@ you are interested.)
 \end{solution}
 \end{question}
 
-\begin{question}
+\begin{question}\label{ex:8}
  Use indicator functions to prove that
     \begin{equation*}
 \sum_{i=0}^\infty i G(i) =  \frac{\E B^2}2 - \frac{\E B}{2}.
     \end{equation*}
+\hint{$\sum_{i=0}^\infty i G(i) = \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^\infty i 1\{n\geq i+1\}$.}
 \begin{solution}
 \begin{align*}
 \sum_{i=0}^\infty i G(i)
@@ -370,6 +406,32 @@ you are interested.)
 \end{solution}
 \end{question}
 
+
+\begin{question}\label{ex:7}
+  Use the recursion Eq.~(\ref{eq:42}) to derive Eq.~(\ref{eq:67}).
+  \hint{Substitute the recursion, and carry on with the algebra. We
+    urge the reader to try it, its good (necessary) practice.}
+\begin{solution}
+  We use that $\mu \pi(n) =\lambda \sum_{i=0}^{n-1} \pi(i) G(n-1-i)$
+  and the results of Exercise~\ref{ex:6} to see that
+\begin{align*}
+  \mu \E L
+  &=\sum_{n=0}^\infty n\, \mu \pi(n), \text{now substitute for $\mu \pi(n)$ the above recursion}, \\
+& =\lambda \sum_{n=0}^\infty n \sum_{i=0}^{n-1} \pi(i) G(n-1-i) 
+  =\lambda \sum_{n=0}^\infty n \sum_{i=0}^\infty 1\{i<n\} \pi(i) G(n-1-i) \\
+& =\lambda \sum_{i=0}^\infty \pi(i) \sum_{n=0}^\infty 1\{i<n\} n G(n-1-i) 
+  =\lambda \sum_{i=0}^\infty \pi(i) \sum_{n=i+1}^\infty n G(n-1-i) \\
+& =\lambda \sum_{i=0}^\infty \pi(i) \sum_{n=0}^\infty (n+i+1) G(n) 
+  =\lambda \sum_{i=0}^\infty \pi(i) \left[\sum_{n=0}^\infty n G(n) +(i+1) \sum_{n=0}^\infty G(n)\right]  \\
+  &=\lambda \sum_{i=0}^\infty \pi(i)\sum_{n=0}^\infty n G(n) +\lambda  \E B \sum_{i=0}^\infty \pi(i) (i+1)  \\ 
+  &=\lambda \sum_{i=0}^\infty \pi(i) \frac{\E B^2 -\E B}2  + \lambda \E B (\E L +1)  \\ 
+  &= \lambda \frac{\E B^2 -\E B}2  + \lambda \E B \E L +\lambda \E B \\
+  &= \lambda \frac{\E B^2 }2  + \lambda \E B \E L +\lambda \frac{\E B}2,
+\end{align*}
+\end{solution}
+\end{question}
+
+
 \begin{question}
  Use indicator functions to prove that for  a continuous random
     variable $S$ with distribution function $F$, 
@@ -377,6 +439,7 @@ you are interested.)
     \E S &= \int_0^\infty x dF  = \int_0^\infty G(y) \d y,\\
 \end{align*}
 where $G(x) = 1 - F(x)$. 
+\hint{$\E S = \int_0^\infty x \d F  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d F(x)$.}
 \begin{solution}
 \begin{equation*}
   \begin{split}
@@ -395,8 +458,9 @@ where $G(x) = 1 - F(x)$.
     \E S^2 &= \int_0^\infty x^2 dF  = 2 \int_0^\infty y G(y) \d y,
 \end{align*}
 where $G(x) = 1 - F(x)$. 
+\hint{$\int_0^\infty y G(y) \d y \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d x \d y$.
+}
 \begin{solution}
- For $\E S^2$, 
   \begin{equation*}
     \begin{split}
 \int_0^\infty y G(y) \d y 
@@ -424,29 +488,6 @@ If $F(x) = 1 - e^{-\mu x}$, we obtain that
 \end{solution}
 \end{question}
 
-\begin{question}\label{ex:7}
-Use the recursion Eq.~(\ref{eq:42}) to derive Eq.~(\ref{eq:67}). 
-\begin{solution}
-  We urge the reader to check all steps in the computations below.  We
-  use that $\mu \pi(n) =\lambda \sum_{i=0}^{n-1} \pi(i) G(n-1-i)$ and the
-  results of Exercise~\ref{ex:6} to see that
-\begin{align*}
-  \mu \E L
-  &=\mu \sum_{n=0}^\infty n \pi(n) \\
-  &=\sum_{n=0}^\infty n\, \mu \pi(n), \text{ substitute for $\mu \pi(n)$ the above summation}, \\
-& =\lambda \sum_{n=0}^\infty n \sum_{i=0}^{n-1} \pi(i) G(n-1-i) \\
-  &=\lambda \sum_{n=0}^\infty n \sum_{i=0}^\infty 1\{i<n\} \pi(i) G(n-1-i) \\
-& =\lambda \sum_{i=0}^\infty \pi(i) \sum_{n=0}^\infty 1\{i<n\} n G(n-1-i) \\
-  &=\lambda \sum_{i=0}^\infty \pi(i) \sum_{n=i+1}^\infty n G(n-1-i) \\
-& =\lambda \sum_{i=0}^\infty \pi(i) \sum_{n=0}^\infty (n+i+1) G(n) \\
-  &=\lambda \sum_{i=0}^\infty \pi(i) \left[\sum_{n=0}^\infty n G(n) +(i+1) \sum_{n=0}^\infty G(n)\right]  \\
-  &=\lambda \sum_{i=0}^\infty \pi(i)\sum_{n=0}^\infty n G(n) +\lambda  \E B \sum_{i=0}^\infty \pi(i) (i+1)  \\ 
-  &=\lambda \sum_{i=0}^\infty \pi(i) \frac{\E B^2 -\E B}2  + \lambda \E B (\E L +1)  \\ 
-  &= \lambda \frac{\E B^2 -\E B}2  + \lambda \E B \E L +\lambda \E B \\
-  &= \lambda \frac{\E B^2 }2  + \lambda \E B \E L +\lambda \frac{\E B}2,
-\end{align*}
-\end{solution}
-\end{question}
 
 \begin{question}(Finite queueing systems) We consider the $M^X/M/1/K$
 queue, i.e., a batch queue in which at most $K$ jobs fit into the
@@ -458,14 +499,18 @@ acceptance, or equivalently a rejection, policy. Three common rules are
 \item Complete acceptance: accept all batches that arrive when the
   system contains $K$ or less jobs, and reject otherwise.
 \end{enumerate}
- Derive a set of recursions, analogous to Eq.~(\ref{eq:42}),
-to compute $\pi(n)$ for these three different acceptance rules.
-\begin{solution}
-  This exercise tests your creativity and modeling skills, it is not
+Derive a set of recursions, analogous to Eq.~(\ref{eq:42}), to compute
+$\pi(n)$ for these three different acceptance rules.  
+
+\hint{This
+  exercise tests your creativity and modeling skills, it is not
   analytically difficult.  The best approach to problems like this is
   to try some simple cases first. For instance, consider the case with
-  batchsizes of $1$ first, then batches of sizes $1$ or $2$, and so
-  on.
+  batch sizes of $1$ first, then batches of sizes $1$ or $2$, and so
+  on. If system contains $K$ jobs, which batches can be accepted? If
+  the system contains $K-3$, say, which batch sizes can be accepted,
+  which will be refused, under which acceptance policy? }
+\begin{solution}
 
   Let's first deal with complete rejection. Suppose a batch of size
   $k$ arrives when the system contains $n$ jobs. When $k+n \leq K$,
@@ -484,22 +529,23 @@ to compute $\pi(n)$ for these three different acceptance rules.
   i.e. from some state $l\geq n+1$ to some state $m\leq n$.
 
 
-  If the system contains $n$ jobs, the rate at which level $n$ is
-  crossed from below is $\lambda \pi(n) \P{B \leq K-n}$.  More generally,
+  If the system contains $n$ jobs,  level $n$ is
+  crossed from below with rate $\lambda \pi(n) \P{B \leq K-n}$.  More generally,
   when the system is in state $m\leq n$, we need a batch of at least
   $n+1-m$ to cross the $n$. Moreover, any batch larger than $K+1-m$
   gets rejected. Thus, when the system contains $m \leq n $ jobs, the
   rate at which level $n$ is crossed from below is
-  $\lambda \pi(m) \P{n+1-m\leq B \leq K+1-m} = \lambda \pi(m)
-  [G(n-m)-G(K-m)]$.
+  \begin{equation*}
+  \lambda \pi(m) \P{n+1-m\leq B \leq K+1-m} = \lambda \pi(m)
+  [G(n-m)-G(K-m)].
+  \end{equation*}
 
-  Since the server serves only single jobs, level $n$ can only be
+  Since the server serves only single items, level $n$ can only be
   crossed from above from state $n+1$. This happens at rate $\mu p(n+1)$. 
 
   Finally, since on the long run the number of up- and crossings must
-  be the same (with a difference of at most 1), the up- and
-  downcrossing rates must match. This implies that the balance
-  equations becomes
+  be the same, the up- and downcrossing rates must match. This implies
+  that the balance equations becomes
   \begin{equation*}
     \mu \pi(n+1) = \lambda \sum_{m=0}^n \pi(m)   [G(n-m)-G(K-m)],
   \end{equation*}
@@ -547,7 +593,10 @@ to compute $\pi(n)$ for these three different acceptance rules.
 
 \begin{question}
   Implement the recursion~(\ref{eq:42}) in a computer program for the
-  case $f(1)=f(2)=f(3)=1/3$, $\lambda =1$ and $\mu = 3$.
+  case $f(1)=f(2)=f(3)=1/3$, $\lambda =1$ and $\mu = 3$.  \hint{This
+    is an important problem, it helps to check (numerically) the
+    algebraic results we have been deriving up to now. Implementing
+    the recursion is not hard, just try and see how far you get.}
   \begin{solution}
 The recursion for $n$ becomes $\pi(n) = \lambda/\mu \sum_{i=0}^{n-1} \pi(n-1-i)G(i)$. Since $G(i) =0$ for $i\geq 3$ we rewrite this to 
 \begin{equation*}
@@ -658,5 +707,5 @@ that all results are ok.
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "notes"
+%%% TeX-master: "booktest"
 %%% End:
