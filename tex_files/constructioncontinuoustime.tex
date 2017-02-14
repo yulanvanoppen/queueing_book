@@ -14,34 +14,31 @@ continuous time.  The goal of this section is to develop a set of
 recursions for the $G/G/1$ single-server queue.
 
 Assume we are given, as basic data, the \recall{arrival process}
-$\{A(t);  t\geq 0\}$ of the number of jobs that arrived during
-$[0,t]$.  Thus, $\{A(t); t\geq 0\}$ is a \emph{counting process}. 
+$\{A(t); t\geq 0\}$: the number of jobs that arrived during $[0,t]$.
+Thus, $\{A(t); t\geq 0\}$ is a \emph{counting process}.
 
 From this arrival process we can obtain various other interesting
 concepts, such as the arrival times of individual jobs. Specially, if
 we know that $A(s) = k-1$ and $A(t) = k$, then the arrival time $A_k$
-of the $k$th job must be somewhere between $s$ and $t$. We write $A_k$
-to denote the smallest time $t$ such that $A(t) = k$:
+of the $k$th job must lie somewhere in $(s,t]$. Thus, from $\{A(t)\}$, we can define
 \begin{equation}\label{eq:27}
-  A_k = \min\{t: A(t) \geq k\}.
+  A_k = \min\{t: A(t) \geq k\},
 \end{equation}
-Thus, with this definition we can find the sequence of arrival time
-$\{A_k; k=0,1,\ldots\}_k$ from the number of arrivals $\{A(t)\}$.  Once we have
-the set of arrival times $\{A_k\}$ the
-\recall{inter-arrival times} $\{X_k\}$ between consecutive customers
-can be constructed as
+and set $A_0 = 0$. Once we have the set of arrival times $\{A_k\}$,
+the \recall{inter-arrival times} $\{X_k, k=1, 2, \ldots\}$ between
+consecutive customers can be constructed as
 \begin{equation}
   X_k = A_k - A_{k-1}.
 \end{equation}
 
 Often the basic data consists of the inter-arrival times
 $\{X_k; k=1,2,\ldots\}$ rather than the arrival times $\{A_k\}$ or
-the number of arrivals $\{A(t)\}$. Then we can construct the arrival
+the number of arrivals $\{A(t)\}$. Then we  construct the arrival
 times as
 \begin{equation*}
   A_k = A_{k-1} + X_k,
 \end{equation*}
-and we set $A_0 = 0$.  From the arrival times $\{A_k\}$ we can, in
+with $A_0 = 0$.  From the arrival times $\{A_k\}$ we can, in
 turn, construct the arrival process $\{A(t)\}$ as 
 \begin{subequations}
   \label{eq:2}
@@ -49,35 +46,34 @@ turn, construct the arrival process $\{A(t)\}$ as
   A(t) = \sum_{k=1}^\infty \1{A_k \leq t},
 \end{equation}
 where $\1{}$ is the indicator function. Thus, in the above we count
-all arrivals that occur up to time $t$. Another, equivalent, way to
+all arrivals that occur up to time~$t$. Another, equivalent, way to
 define $A(t)$ is
 \begin{equation}
   A(t) = \max\{k: A_k \leq t\}.
 \end{equation}
 \end{subequations}
 
-Thus, we see that from the inter-arrival times $\{X_k\}$ it is
-possible to construct $\{A(t)\}$, and the other way around, from
-$\{A(t)\}$ we can find $\{X_k\}$. In Figure~\ref{fig:waitingtimegg1}
-we show how these concepts, and many others to discussed below, relate
-to each other.
+Clearly, we see that from the inter-arrival times $\{X_k\}$ it is
+possible to construct $\{A_k\}$ and $\{A(t)\}$, and the other way
+around, from $\{A(t)\}$ we can find $\{A_k\}$ and $\{X_k\}$.
+Figure~\ref{fig:waitingtimegg1} shows these relations graphically.
 
-We next consider the departure times of jobs. The computation of the
-departure times $\{D_k\}$ proceeds in stages. The first stage is to
-construct the \recall{waiting times in queue} $\{W_{Q,k}\}$ as seen by
-the arrivals. Observe that the waiting time of the $k$th arrival must
-be equal to the waiting time of the $k-1$th customer plus the amount
-of \recall{service time} required by job $k-1$ minus the time that elapses
-between the arrival of job $k-1$ and job $k$, unless the server
-becomes idle between jobs $k-1$ and $k$, see Figure.
+To compute the departure times $\{D_k\}$ we proceed in stages. The
+first stage is to construct the \recall{waiting time in queue}
+$\{W_{Q,k}\}$ as seen by the arrivals. In
+Figure~\ref{fig:waitingtimegg1} observe that the waiting time of the
+$k$th arrival must be equal to the waiting time of the $k-1$th
+customer plus the amount of \recall{service time} required by job
+$k-1$ minus the time that elapses between the arrival of job $k-1$ and
+job $k$, unless the server becomes idle between jobs $k-1$ and $k$.
 In other words,
 \begin{equation}\label{eq:56}
-  W_{Q,k} = \max\{W_{Q, k-1} + S_{k-1} - X_k, 0\},
+  W_{Q,k} = [W_{Q,k-1} + S_{k-1}-X_k]^+,
 \end{equation}
-If we set $W_{Q,0}=0$, we can compute $W_{Q,1}$ from this formula, and
-then $W_{Q,2}$ and so on.
+where $[x]^+ = \max\{x, 0\}$. If we set $W_{Q,0}=0$, we can compute
+$W_{Q,1}$ from this formula, and then $W_{Q,2}$ and so on.
 
-\begin{figure}[ht]
+\begin{figure}[t]
   \centering
 
 \begin{tikzpicture}[scale=1,
@@ -91,7 +87,7 @@ node (Wk) at (1,2) [open, label={}]
 (c1) to (Wk);
 
 %\node[below] (Ak) at (1,-0.4) {$A_k$};
-\draw[dotted] (1,0) -- (Wk) node[midway,fill=white,rotate=90] {$W_{Q,k}$};
+\draw[dotted] (1,0) -- (Wk) node[midway,fill=white,rotate=90] {$W_{Q,k-1}$};
 \node (Sk) at (1,5) [closed, label={}];
 \node (Ak1) at (5,1) [open, label={}];
 %\node[above] at (4,0) {$D_k$};
@@ -100,25 +96,25 @@ node (Wk) at (1,2) [open, label={}]
 \draw[dashed] (1, 2)--(3,0); 
 
 \draw[|-|]
-node[left] (c1) at (1,-0.5) {$A_k$}
-node[right] (c2) at (6,-0.5) {$D_k$}
+node[left] (c1) at (1,-0.5) {$A_{k-1}$}
+node[right] (c2) at (6,-0.5) {$D_{k-1}$}
 (c1) -- (c2)
-node[midway, fill=white] {$W_k$};
+node[midway, fill=white] {$W_{k-1}$};
 
-\draw[dotted] (Wk) -- (Sk) node[midway,fill=white,rotate=90] {$S_k$};
+\draw[dotted] (Wk) -- (Sk) node[midway,fill=white,rotate=90] {$S_{k-1}$};
 \draw[dashed] (Ak1) -- (6,0); % node[midway,fill=white,rotate=90] {$S_k$};
 
 \draw[-] (Sk) to (Ak1);
 \node (Sk1) at (5,3) [closed, label={}];
-\draw[dotted] (Ak1) -- (Sk1) node[midway,fill=white,rotate=90] {$S_{k+1}$};
+\draw[dotted] (Ak1) -- (Sk1) node[midway,fill=white,rotate=90] {$S_{k}$};
 \draw[dotted] (5,0) -- (Ak1);
 \draw (Sk1) -- (8,0);
 
 \draw[|-|]
-node[left] (c1) at (5,-1) {$A_{k+1}$}
-node[right] (c2) at (8,-1) {$D_{k+1}$}
+node[left] (c1) at (5,-1) {$A_{k}$}
+node[right] (c2) at (8,-1) {$D_{k}$}
 (c1) -- (c2)
-node[midway, fill=white] {$W_{k+1}$};
+node[midway, fill=white] {$W_{k}$};
 
 
 \draw (9,2) -- (11,0);
@@ -127,28 +123,28 @@ node[midway, fill=white] {$W_{k+1}$};
 node (c1) at (9,0) [open, label={}]
 node (c2) at (9,2) [closed, label={}]
 (c1) -- (c2)
-node[midway, fill=white, rotate=90] {$S_{k+2}$};
+node[midway, fill=white, rotate=90] {$S_{k+1}$};
 
 \draw[|-|]
-node[left] (c1) at (9,-1.5) {$A_{k+2}$}
-node[right] (c2) at (11,-1.5) {$D_{k+2}$}
+node[left] (c1) at (9,-1.5) {$A_{k+1}$}
+node[right] (c2) at (11,-1.5) {$D_{k+1}$}
 (c1) -- (c2)
-node[midway, fill=white] {$W_{k+2}$};
+node[midway, fill=white] {$W_{k+1}$};
 
 \draw[|-|]
-node[left] (c1) at (1,-1.5) {$A_{k}$}
-node[right] (c2) at (5,-1.5) {$A_{k+1}$}
+node[left] (c1) at (1,-1.5) {$A_{k-1}$}
+node[right] (c2) at (5,-1.5) {$A_{k}$}
 (c1) -- (c2)
-node[midway, fill=white] {$X_{k+1}$};
+node[midway, fill=white] {$X_{k}$};
 \end{tikzpicture}
 \caption{Construction of the $G/G/1$ queue in continuous time. The
   sojourn time $W_{k}$ of the $k$th job is sum of the work in queue
-  $W_{Qk,k}$ at its arrival epoch $A_k$ and the its service time
-  $S_k$; its depature time is then $D_k=A_k + W_k$. The waiting time
-  of job $k+1$ is clearly equal to $W_k-X_{k+1}$. We also see that job
-  $k+2$ arrives at an empty system, hence its sojourn time
-  $W_{k+2}=S_{k+2}$. The lines with slope $-1$ show the behavior the
-  virtual waiting time.}
+  $W_{Q,k}$ at its arrival epoch $A_k$ and its service time $S_k$;
+  its departure time is then $D_k=A_k + W_k$. The waiting time of job
+  $k$ is clearly equal to $W_{k-1}-X_{k}$. We also see that job $k+1$
+  arrives at an empty system, hence its sojourn time
+  $W_{k+1}=S_{k+1}$. Finally, the virtual waiting time process is
+  shown by the lines with slope $-1$.}
   \label{fig:waitingtimegg1}
 \end{figure}
 
@@ -180,36 +176,22 @@ where each of these equations has its own interpretation.
 A bit of similar reasoning gives another recursion for $W_k$:
 \begin{equation}
   \label{eq:59}
-  W_{k} = \max\{W_{k-1} - X_k, 0\} + S_k,
+  \begin{split}
+  W_{Q,k} &= [W_{k-1} - X_k]^+,\\
+  W_{k} &= W_{Q,k-1} + S_k = [W_{k-1} - X_k]^+ + S_k.
+  \end{split}
 \end{equation}
 from which follows a recursion for $D_k$
 \begin{equation}
   D_k = A_k + W_k.
 \end{equation}
-
-
-Our next concern is to use the above recursions to find the \recall{queue
-length} at arrival moments. We know that at time $A_k$, $k$ customers
-have arrived (because $A_k$ is the time of the $k$th arrival). From
-$W_1, \ldots W_{k-1}$ we can find the departure times
-$\{D_k\}$. Therefore, $L_k$, the number in the system as observed by
-the $k$th arrival, is
-\begin{equation}\label{eq:55}
-  L_k = k-1-\sum_{i=1}^{k-1} \1{D_i \leq A_k},
-\end{equation}
-i.e., the total number of arrivals before time $A_k$ minus all
-departures before $A_k$. (Note that customer~$k$ does not see itself,
-thus we take $k-1$ and not $k$)
-
-
-With the arrival and departure times $\{A_k\}$ and $\{D_k\}$ we can
-compute the arrival process $\{A(t)\}$, with Eq.~\eqref{eq:2}, and the
-departure process $\{D(t)\}$ with the definition
+This in turn specifies the departure process $\{D(t)\}$ as
 \begin{equation*}
-D(t) = \max\{k; D_k \leq t\}.
+  D(t) = \max\{k; D_k \leq t\} = \sum_{k=1}^\infty \1{D_k \leq t}.
 \end{equation*}
+
 Once we have the arrival and departure processes it is easy to compute
-the number of jobs in the system at any time $t$, as
+the \recall{number of jobs in the system} at time $t$ as
 \begin{equation}\label{eq:14}
   L(t) = A(t) - D(t) + L(0),
 \end{equation}
@@ -236,16 +218,14 @@ L_s(t) = L(t) - L_Q(t).
 Finally, the \recall{virtual waiting time process} $\{V(t)\}$ is the
 amount of waiting that an arrival would see if it would arrive at time
 $t$. To construct $\{V(t)\}$, we simply draw lines that start at
-points $W_k$ and have slope -1, unless the line hits the $x$-axis, in
-which case the virtual waiting time remains zero until the next
-arrival occurs.  Thus, the lines with slope $-1$ in
-Figure~\ref{fig:waitingtimegg1} shown an example of (a sample path of)
-the virtual waiting time. 
+points $(A_k, W_k)$ and have slope -1, unless the line hits the
+$x$-axis, in which case the virtual waiting time remains zero until
+the next arrival occurs.  Thus, the lines with slope $-1$ in
+Figure~\ref{fig:waitingtimegg1} show (a sample path of) the virtual
+waiting time.
 
 
-
-
-Just as in Section~\ref{sec:constr-discr-time}, we again have
+Observe that, just as in Section~\ref{sec:constr-discr-time}, we have
 obtained a set of recursions by which we can run a simulation of a
 queueing process of whatever length we need, provided we have a
 sequence of have inter-arrival times $\{X_k\}$ and service times
@@ -379,14 +359,11 @@ $R$ or python will reveal that this is easy.
 
 \begin{question}
   \begin{enumerate}
-  \item 
-  The definition of $L_k$ in Eq.~(\ref{eq:55}) is, algorithmically
-  speaking, quite inefficient: for each $k$ we count all departures
-  from $i=1$ all the way up to $k-1$. The following is more efficient: 
+  \item Can you derive following (algorithmic efficient) procedure to
+    compute the number of jobs in the system as seen by arrivals,
   \begin{equation*}
-    L_k = L_{k-1}+1 - \sum_{i= k-1 - L_{k-1}}^{k-1} 1\{D_i< A_k\}.
+    L_k = L_{k-1}+1 - \sum_{i= k-1 - L_{k-1}}^{k-1} 1\{D_i< A_k\}?
   \end{equation*}
-  Can you derive this?
 \item Why do we take $i=k-1-L_{k-1}$ in  the sum, and not $i=k-2-L_{k-1}$?
 \end{enumerate}
 \begin{solution}
@@ -439,8 +416,7 @@ $R$ or python will reveal that this is easy.
       time decreases with slope $1$, until it hits 0.  Thus,
       \begin{equation*}
         V(t) 
-= \max\{V(A_{A(t)}) + (A_{A(t)}-t), 0\} 
-= \max\{W_{A(t)} + (A_{A(t)}-t), 0\}.
+= [V(A_{A(t)}) + (A_{A(t)}-t)]^+= [W_{A(t)} + (A_{A(t)}-t)]^+
       \end{equation*}
       The notation may be a bit confusing, but it is in fact very
       simple. Take some $t$, look back at the last arrival time before
@@ -470,12 +446,8 @@ $W_k = D_k - A_k$.
   \item Why do the recursions Eq.~(\ref{eq:45}) work? 
   \item  (Difficult) Extend the above recursions to a situation in which one queue is
   served by two servers.  
-\item (Very hard) Extend the above recursions to a situation in which
-  one queue is served by $m>2$ servers.
-\item (Impossible?) As a real challenge you can attempt to extend these recursions to
-  a situation in which the two servers have different working
-  rates. (I don't know whether this can be done, though, without using
-  a full-fledged simulator.)
+\item (Impossible?)  Extend the above recursions to a situation in
+  which one queue is served by $m>2$ servers.
   \end{enumerate}
   \begin{solution}
     \begin{enumerate}
@@ -528,18 +500,17 @@ The recursions for the two-server system are this:
       that leaves after $D_{k-2}$ ( provided of course that
       $C_{k+1} < C_k$). Thus, all in all
       $D_{k-1} = \min\{M_{k-1}, C_k\}$.
-\item Similar reasoning for the $G/G/m$ queue leads to the following.
+    \item Similar reasoning for the $G/G/m$ queue seems to lead to the
+      following.
       \begin{equation*}
         \begin{split}
           A_k &= A_{k-1} + X_k, \\
           C_k &= \max\{A_k, D_{k-m}\} + S_k,\\
           M_k &= \max\{M_{k-m+1}, C_k\}, \\
-          D_{k-m+1} &= \min\{M_{k-m+1}, C_k\}.
+          D_{k-m+1} &= \min\{M_{k-m+1}, C_k\},
         \end{split}
       \end{equation*}
-    This is not correct, though. Can you find a counter example?
-  \item See my remark in the exercise. I think it is somewhere between
-    too hard and impossible.
+      but it is not correct. Can you find a counter example?
     \end{enumerate}
   \end{solution}
 \end{question}
@@ -552,12 +523,12 @@ The recursions for the two-server system are this:
   program such as R, python, or julia, and check the results of the
   previous exercise.
     \begin{solution}
-You can check the files on github, in the progs directory. 
+      You can check the files on \texttt{github} in the \texttt{progs}
+      directory.
 \begin{itemize}
 \item \texttt{mm1.py} is the python implementation
 \item \texttt{mm1.R} is the julia implementation
 \item \texttt{mm1.jl} is the julia implementation
-\item 
 \end{itemize}
 Take your pick, and start playing with it. These examples are meant to
 be simple to understand, not necessarily super efficient.
@@ -570,11 +541,11 @@ be simple to understand, not necessarily super efficient.
     You can study \texttt{waiting\_time\_simulation.py} at
     \href{https://github.com/ndvanforeest/queueing_book/tree/master/progs}{github}
     if you like, but skipping it is OK. Trying to make the graph in
-    your favorate programming language is fun.
+    your favorite programming language is fun.
 \end{solution}
 \end{question}
 
-\begin{question}(Multiple queues) Suppose one server serves two
+\begin{question}(Multiple queues, for the interested) Suppose one server serves two
   queues, such that jobs in queue A are served with priority over jobs
   in queue B. Assume that service is not-preemptive.  Can you develop
   a similar set of recursions for each of the queues, or, otherwise,

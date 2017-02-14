@@ -283,7 +283,8 @@ Section~\ref{sec:mxm1-queue:-expected}.
   it, its good (necessary) practice.}
 \begin{solution}
   We use that $\mu \pi(n) =\lambda \sum_{i=0}^{n-1} \pi(i) G(n-1-i)$
-  and the results of Exercise~\ref{ex:6} to see that
+  and the results of the exercises of
+  Section~\ref{sec:mxm1-queue:-expected} to see that
 \begin{align*}
   \mu \E L
   &=\sum_{n=0}^\infty n\, \mu \pi(n), \text{now substitute for $\mu \pi(n)$ the above recursion}, \\

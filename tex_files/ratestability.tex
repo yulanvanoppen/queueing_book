@@ -3,27 +3,23 @@
 
 In the analysis of any queueing process the first step should be to
 check the relations between the arrival, service and departure
-rates. In particular, the load, defined as the ratio of the arrival
-rate and service rate is of importance. In this section we define
-these concepts and establish the most relevation relations between
-these concepts.
-
-We first formalize the concepts of \emph{arrival rate} and
-\emph{departure rate} and relate them to the \emph{counting
-  processes} $\{A(t)\}$ and $\{D(t)\}$. The concept of rate is crucial
-because it captures our intuition that when, on the long run, jobs
-arrive faster than they can leave, the system must `explode'. Thus,
-the first performance measures we need to estimate when analyzing a
-queueing system are the arrival and departure rate, and then we need
-to check that the arrival rate is not larger than the departure rate.
-As a reminder, we keep the discussion in these notes mostly at an
-intuitive level, and refer to
-\cite{el-taha98:_sampl_path_analy_queuein_system} for proofs and
-further background discussion.
+rates. The concept of rate is crucial because it captures our
+intuition that when, on the long run, jobs arrive faster than they can
+leave, the system must `explode'. Thus, the first performance measures
+we need to estimate when analyzing a queueing system are the arrival
+and departure rate, and then we need to check that the arrival rate is
+not larger than the departure rate. In particular, the load, defined
+as the ratio of the arrival rate and service rate is of importance. In
+this section we define and relate these concepts.  As a reminder, we
+keep the discussion in these notes mostly at an intuitive level, and
+refer to \cite{el-taha98:_sampl_path_analy_queuein_system} for proofs
+and further background discussion.
 
 
+We first formalize the \emph{arrival rate} and \emph{departure rate}
+in terms of the \emph{counting processes} $\{A(t)\}$ and $\{D(t)\}$.
 The \recall{arrival rate} is the long-run average number of jobs that
-arrive per unit time, i.e., 
+arrive per unit time, i.e.,
 \begin{equation}
   \label{eq:3}
   \lambda = \lim_{t\to\infty} \frac{A(t)}t.
@@ -32,9 +28,9 @@ We remark in passing that this limit does not necessarily exist if
 $A(t)$ is some pathological function. If, however, the inter-arrival
 times $\{X_k\}$ are the basic data, and $\{X_k\}$ are i.i.d.  and
 distributed as a generic random variable $X$ with finite mean $\E{X}$,
-we can construct $\{A_k\}$ and $A(t)$ as described in
+we can construct $\{A_k\}$ and $\{A(t)\}$ as described in
 Section~\ref{sec:constr-gg1-queu}; the strong law of large numbers
-then guarantees that the above limit exists.
+guarantees that the above limit exists.
 
 Observe that at time $t=A_n$, precisely $n$ arrivals occurred. Thus,
 by applying the definition of $A(t)$ at the epochs $A_n$, we see that
@@ -44,7 +40,7 @@ $A(A_n) = n$. Thus,
 \end{equation*}
 But since $A_n\to\infty$ if $n\to\infty$, it follows from
 Eq.~(\ref{eq:3}) that the average inter-arrival time between two
-consecutive jobs is such that
+consecutive jobs is
 \begin{equation}\label{eq:54}
   \E X = \lim_{n\to\infty}  \frac{1}n\sum_{k=1}^n X_k = \lim_{n\to \infty} \frac{A_n}{A(A_n)} = \lim_{t\to\infty} \frac t{A(t)} = \frac 1 \lambda,
 \end{equation}
@@ -79,7 +75,7 @@ In the same way as we derived that $\E X= 1/\lambda$, we obtain for
 the expected (or average) amount of service required by an individual
 job
 \begin{equation*}
-  \E S = \lim_{n\to\infty} \frac 1 n \sum_{k=1}^n S_k = \lim_{n\to\infty} \frac{U_n}{n} = \lim_{n\to\infty} \frac{U_n}{S(U_n)} = \lim_{t\to\infty} \frac t{U(t)} = \frac 1 \mu.
+  \E S = \lim_{n\to\infty} \frac 1 n \sum_{k=1}^n S_k = \lim_{n\to\infty} \frac{U_n}{n} = \lim_{n\to\infty} \frac{U_n}{U(U_n)} = \lim_{t\to\infty} \frac t{U(t)} = \frac 1 \mu.
 \end{equation*}
 
 Now observe that, if the system is empty at time $0$, it must be that
@@ -105,13 +101,13 @@ fact that $\gamma \leq \lambda$, we get
 \end{equation*}
 When $\mu \geq \lambda$ the above inequality reduces to
 $\gamma = \lambda$ for rate-stable systems. (It is interesting to
-prove this.) As it turns out, when $\mu = \lambda$ and $\V S_n > 0$ or
-$\V X_n >0$ then $\lim_t L(t)/t$ does not necessarily exist. For this
+prove this.) As it turns out, when $\mu = \lambda$ and $\V{S_n} > 0$ or
+$\V{X_n} >0$ then $\lim_t L(t)/t$ does not necessarily exist. For this
 reason we henceforth require that $\mu > \lambda$.
 
 The concept of \recall{load} or \emph{utilization}, denoted by the
 symbol $\rho$, is a fundamental notion. Conceptually, the load is the
-rate at which jobs arrive multiplies by the average amount of work per
+rate at which jobs arrive multiplied by the average amount of work per
 job.  More specifically, since $A(t)$ is the number of jobs that have
 arrived up to time $t$, the total amount of work arrived up to time
 $t$ is given by $\sum_{k=1}^{A(t)} S_k$. We therefore define the load
@@ -293,8 +289,8 @@ so up to now.
   \begin{solution}
  Let $T_1>A_1$ be the first time after the arrival of job 1
     that arrives at an empty system. (Observe that job 1 also arrives
-    at an empty system.)  Suppose, for ease writing, that this job is
-    the $n+1$th job, so that up to time $T_1-$ the number of arrivals
+    at an empty system.)  Suppose, for ease of writing, that this job is
+    the $n+1$th job, so that up to time $T_1$ the number of arrivals
     is $n$. Since the first job arrived at time $A_1=X_1$, the first
     $n$ jobs arrived during $[X_1, T_1)$. The total amount of service
     that arrived during this period is $\sum_{i=1}^n S_i$.  Thus the
@@ -323,7 +319,7 @@ so up to now.
         start also do not form a sequence of renewal times. But then
         it is not true, in general, that the busy times $\{B_i\}$ have
         the same distribution, neither do the idles times
-        $\{I_n\}$. Showing that in the limit all is ok gap requires a
+        $\{I_n\}$. Showing that in the limit all is OK requires a
         substantial amount of mathematics. The above claim is still
         true however.)
   \end{solution}
@@ -447,7 +443,7 @@ This exercise is meant  to give the reader some idea about what needs to be done
     \item In
     Eq. (\ref{eq:54}) we replaced the limit with respect to $n$ by a
     limit with respect to $t$.  But why is this actually allowed?  Use
-    the notation $A_{A(t)}$ to show that all is ok.
+    the notation $A_{A(t)}$ to show that all is OK.
   \item 
   Show that the function $t\to A(t)$ as defined by Eqs.~(\ref{eq:2})
   is right-continuous. 

@@ -90,7 +90,7 @@ C_s^2 = \frac{\V B}{(\E B)^2},
 \end{equation*}
 is the square coefficient of variation of the batch sizes.  Observe
 that this is nearly the same as $M/G/1$ waiting time
-formula~\label{eq:710}, a result we derive in Section~\ref{sec:mg1}. 
+formula~\ref{eq:710}, a result we derive in Section~\ref{sec:mg1}. 
 
 Thus, to compute the average number of items in the system, we only
 need to know the first and second moment (or the variance) of the
@@ -231,6 +231,77 @@ the above expression we obtain~\eqref{eq:br}.
   \end{solution}
 \end{question}
 
+\begin{question}
+  A common operational problem is a machine that receives batches of
+  various sizes. Management likes to know how a reduction of the
+  variability of the batch sizes affects the average queueing time.
+  Suppose, for the sake of an example, that the batch size $B=1,2,$ or
+  $3$, with equal probability. Batches arrive at rate 1 per hour. The
+  average processing for an item is $25$ minutes.  How much does the
+  waiting time decrease if batch sizes are $2$ always?
+
+  \begin{solution}
+    Start with the simple case, $B\equiv 2$. Then $\V{B}=0$ and
+    $\E B = 2$. The load is $\rho=\lambda \E B \E S = 1\cdot 2 \cdot 25/60 = 5/6$.  hence,
+    \begin{equation*}
+      \E{L_s} = \frac 12 \frac{5/6}{1/6} 2 + \frac 12 \frac{5/6}{1/6} = 5 + \frac52.
+    \end{equation*}
+
+Now the other case. $\E{B^2} = (1+4+9)/3 = 14/3$. Hence, $\V B=14/3 - 4=2/3$. Hence, 
+\begin{equation*}
+C_s^2=\frac{\V B}{(\E B)^2} = \frac{2/3}4 = \frac 16.
+\end{equation*}
+And thus, 
+    \begin{equation*}
+      \E{L_s} = \frac {1+1/6}2 \frac{5/6}{1/6} 2 + \frac 12 \frac{5/6}{1/6} = \frac76 5 + \frac 52.
+    \end{equation*}
+    If we devide these two answers, we see that the ratio between
+    $\E{L_s}$ for both answers is $10/9$. In other words, we can
+    reduce about 10\% of the number of items in the system by working
+    in fixed batch sizes. 
+
+    Observe how easy it is with these models to get insight into the
+    order of magnitude that can be achieved with changing work habits,
+    such as working in contant batch sizes. 
+
+    Observe also that its up to management to decide whether this
+    reduction outweighs any efforts to reduce the variation in batch
+    sizes. (In our model we assume that $B=2$, i.e., we removed all
+    variability. This is the best possible. Real life reductions will
+    typically achieve less than the 10\% reduction.)
+  \end{solution}
+\end{question}
+
+\begin{question}
+  In a production enviroment, a machine replenishes an inventory of
+  items (e.g., hamburgers) at a fixed rate of $1$ per 3 minutes. If
+  the inventory reaches some level $r$, the machine stops.  Customers
+  arrive at rate of 6 per hour. A customer can buy items in different
+  quanties, $B=1,2,3,4$, all with equal probability. What is a
+  sensible value for the stopping level $r$?  
+
+  \hint{Realize that the inventory process $I(t)$ behaves as
+    $I(t)=r-L(t)$ where $L(t)$ is a suitable queueing process.}
+  \begin{solution}
+    Consider a queueing system with job arrival rate $\lambda=6$ per
+    hour and the jobs have batch sizes as indicated in the
+    problem. The average number of items in the system  follows like this
+    \begin{align*}
+      \E B &= \frac{1+2+3+4}{4} = \frac 52 \\
+      \E{B^2} &= \frac{1+4+9+16}{4} = \frac{30}4\\
+      \V{B^2} &= \frac{30}4 - \frac{25}4 = \frac 5 4\\
+      C_s^2 &= \frac{5/4}{25/4} = \frac 15\\
+      \rho &= \lambda \E B \E S = 6 \frac 52 \frac 1{20} = \frac 34.
+    \end{align*}
+Hence, 
+\begin{equation*}
+  \E{L_s} = \frac {1+1/5}2 \frac{3/4}{1/4} \frac 52 + \frac 12 \frac{3/4}{1/4} 
+\end{equation*}
+
+    
+  \end{solution}
+\end{question}
+
 \begin{question}\label{ex:6}
  Use indicator functions to prove that
     \begin{equation*}
@@ -261,7 +332,7 @@ you are interested.)
 \end{solution}
 \end{question}
 
-\begin{question}\label{ex:8}
+\begin{question}
  Use indicator functions to prove that
     \begin{equation*}
 \sum_{i=0}^\infty i G(i) =  \frac{\E B^2}2 - \frac{\E B}{2}.

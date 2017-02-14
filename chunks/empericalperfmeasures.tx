@@ -37,9 +37,9 @@ arrivals is given by
 \begin{equation}\label{eq:EQ}
 \E L =  \lim_{n\to\infty}\frac 1 n \sum_{k=1}^n L_k,
 \end{equation}
-where $L_k$ is computed according to~\eqref{eq:55}.  The
-\recall{distribution of $\{L(t)\}$ as seen by customers upon arrival},
-is
+where $L_k = L(A_k)$, i.e., the number in system at the arrival epoch
+of the $k$th job.  The \recall{distribution of $\{L(t)\}$ as seen by
+  customers upon arrival}, is
 \begin{equation}\label{eq:Qm}
 \P{L\leq m} = \lim_{n\to\infty} \frac 1 n \sum_{k=1}^n \1{Lx_k \leq m}.
 \end{equation}
