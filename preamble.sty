@@ -14,6 +14,9 @@
 \usepackage{fouriernc}
 \usepackage{manfnt} %for the dangerous bend
 \usepackage{fontawesome} % for the linux hint symbol
+\newcommand{\hintsymbol}{\marginpar{\center{\faLinux}}}
+\newcommand{\tbdsymbol}{\marginpar{\center{\dbend}}}
+\newcommand{\recallsymbol}{\marginpar{\center{\bomb}}}
 
 \usepackage{pgf}
 \usepackage{tikz}
@@ -85,7 +88,7 @@
      }%
 }
 
-\newcommand{\hint}[1]{\marginpar{\center{\faLinux}}\SetQuestionProperties{ hint = {#1}}}
+\newcommand{\hint}[1]{\hintsymbol\SetQuestionProperties{ hint = {#1}}}
 
 \theoremstyle{definition} % font type for theorems and related environments
 \newtheorem{theorem}{Theorem}[section]
@@ -95,9 +98,8 @@
 
 \newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1} \nameref*{#1}}} % One single link
 
-\usepackage{manfnt} %for the dangerous bend
-\newcommand{\tbd}{tbd. \marginpar{\dbend}}
-\newcommand{\TBD}{tbd. \marginpar{\dbend}}
+\newcommand{\tbd}{\tbdsymbol}
+\newcommand{\TBD}{\tbdsymbol}
 
 \newcommand{\argmin}{\operatornamewithlimits{argmin}}
 \newcommand{\argmax}{\operatornamewithlimits{arg\,max}}
@@ -132,14 +134,8 @@
 \renewcommand{\th}{\text{TH}}
 \newcommand{\scv}{\text{SCV}}
 
-%\newcommand{\recall}[1]{\emph{#1}\marginpar{\hspace{0.5cm}\danger}}
-\newcommand{\recall}[1]{\emph{#1}\marginpar{\center{\bomb}}}
-\newcommand{\nvf}[1]{\marginpar{\dbend}}
-% \newcommand{\E}{\,\mathbb{E}\,}
-% \renewcommand{\TH}{\,\textrm{TH}\,}
-% \renewcommand{\P}{\,\mathbb{P}\,}
-% \newcommand{\V}{\ensuremath{\,\textrm{Var\,}}}
-% \renewcommand{\d}[1]{\,\text{d}#1}
+\newcommand{\recall}[1]{\emph{#1}\recallsymbol}
+\newcommand{\nvf}[1]{\tbdsymbol}
 
 
 \setcounter{tocdepth}{1}

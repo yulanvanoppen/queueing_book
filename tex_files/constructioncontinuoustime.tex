@@ -203,7 +203,59 @@ the \recall{number of jobs in the system} at time $t$ as
 where $L(0)$ is the number of jobs in the system at time $t=0$;
 typically we assume that $L(0)=0$. Thus, if we were to plot $A(t)$ and
 $D(t)$ as functions of $t$, then the difference $L(t)$ between the
-graphs of $A(t)$ and $D(t)$ tracks the number in the system.  
+graphs of $A(t)$ and $D(t)$ tracks the number in the system, see
+Figure~\ref{fig:atltdt}.
+
+\begin{figure}[t]
+  \centering
+\begin{tikzpicture}[scale=0.9,
+  open/.style={shape=circle, fill=white, inner sep=1pt, draw, node contents=},
+  closed/.style={shape=circle, fill=black, inner sep=1pt, draw, node contents=},
+  soldot/.style={color=blue,only marks,mark=*}
+]
+
+\def\rightend{14}
+\def\top{7}
+\path [clip] (-1,-1) rectangle (\rightend,\top);
+
+\draw[->] (-1,0) -- (\rightend,0);
+\draw[->] (-0.5,-0.5) -- (-0.5, \top);
+
+% arrivals
+\def\lastx{0}
+\foreach \x [count=\y, remember=\x as \lastx] in {1,3,4, 7, 9, 18} { 
+  \node at (\lastx, 0) [below] {$A_{\y}$};
+  \node (a) at (\lastx,\y) [closed] {};
+  \draw[dotted] (\lastx,0) -- (a); 
+  \draw (a)-- (\x,\y) node[open, label={}]; 
+}
+% draw first arrival. Since I want the circle to be open, I draw it at
+% the end.
+\node at (0, 0) [open] {};
+\node at (5.5, 4) [fill=white] {$A(t)$};
+
+
+% departures
+\def\lastx{5}
+\foreach \x [count=\y, remember=\x as \lastx] in {6, 8, 10, 11, 13,15} { 
+  \draw[dotted] (\lastx,\y) -- (\lastx,0); 
+  \draw (\lastx,\y) node[closed, label={}] -- (\x,\y) node[open, label={}]; 
+  \node at (\lastx, -0.5) [below] {$D_{\y}$};
+}
+\node at (5, 0) [open] {};
+\node at (12, 5) [fill=white] {$D(t)$};
+  
+\draw[dashed, <->] (3,2.5)--node[midway, fill=white] {$W_3$} (8,2.5);
+\draw[dashed, <->] (7.5,2)--node[midway, fill=white,rotate=90] {$L(t)$} (7.5,5);
+
+\end{tikzpicture}
+
+  
+  \caption{Relation between the arrival process $\{A(t)\}$, the
+    departure process $\{D(t)\}$, the number in the system $\{L(t)\}$
+    and the waiting times $\{W_k\}$.}
+  \label{fig:atltdt}
+\end{figure}
 
 Observe that in a queueing system, jobs can be in queue or in
 service. For this reason we distinguish between the number in the

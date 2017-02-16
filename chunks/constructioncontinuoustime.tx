@@ -203,7 +203,58 @@ the \recall{number of jobs in the system} at time $t$ as
 where $L(0)$ is the number of jobs in the system at time $t=0$;
 typically we assume that $L(0)=0$. Thus, if we were to plot $A(t)$ and
 $D(t)$ as functions of $t$, then the difference $L(t)$ between the
-graphs of $A(t)$ and $D(t)$ tracks the number in the system.  
+graphs of $A(t)$ and $D(t)$ tracks the number in the system, see Figure
+
+\begin{figure}[t]
+  \centering
+\begin{tikzpicture}[scale=0.9,
+  open/.style={shape=circle, fill=white, inner sep=1pt, draw, node contents=},
+  closed/.style={shape=circle, fill=black, inner sep=1pt, draw, node contents=},
+  soldot/.style={color=blue,only marks,mark=*}
+]
+
+\def\rightend{14}
+\def\top{7}
+\path [clip] (-1,-1) rectangle (\rightend,\top);
+
+\draw[->] (-1,0) -- (\rightend,0);
+\draw[->] (-0.5,-0.5) -- (-0.5, \top);
+
+% arrivals
+\def\lastx{0}
+\foreach \x [count=\y, remember=\x as \lastx] in {1,3,4, 7, 9, 18} { 
+  \node at (\lastx, 0) [below] {$A_{\y}$};
+  \node (a) at (\lastx,\y) [closed] {};
+  \draw[dotted] (\lastx,0) -- (a); 
+  \draw (a)-- (\x,\y) node[open, label={}]; 
+}
+% draw first arrival. Since I want the circle to be open, I draw it at
+% the end.
+\node at (0, 0) [open] {};
+\node at (5.5, 4) [fill=white] {$A(t)$};
+
+
+% departures
+\def\lastx{5}
+\foreach \x [count=\y, remember=\x as \lastx] in {6, 8, 10, 11, 13,15} { 
+  \draw[dotted] (\lastx,\y) -- (\lastx,0); 
+  \draw (\lastx,\y) node[closed, label={}] -- (\x,\y) node[open, label={}]; 
+  \node at (\lastx, -0.5) [below] {$D_{\y}$};
+}
+\node at (5, 0) [open] {};
+\node at (12, 5) [fill=white] {$D(t)$};
+  
+\draw[dashed, <->] (3,2.5)--node[midway, fill=white] {$W_3$} (8,2.5);
+\draw[dashed, <->] (7.5,2)--node[midway, fill=white,rotate=90] {$L(t)$} (7.5,5);
+
+\end{tikzpicture}
+
+  
+  \caption{Relation between the arrival process $\{A(t)\}$, the
+    departure process $\{D(t)\}$, the number in the system $\{L(t)\}$
+    and the waiting times $\{W_k\}$.}
+  \label{fig:atltdt}
+\end{figure}
 
 Observe that in a queueing system, jobs can be in queue or in
 service. For this reason we distinguish between the number in the
@@ -261,10 +312,9 @@ $R$ or python will reveal that this is easy.
   are  the distributions of $W_{Q,1}$ and  $W_{Q,2}$?
 \hint{Use that $W_{Q,1} = [W_{Q,0} + S_1 - X_1]^+$ and likewise for $W_{Q,2}$. 
 
-This is a basic probability problem. Ensure you can do it.}
-\begin{solution} This is first year probability stuff. It should be elementary for you. 
+This first year probability. It should be elementary for you. Ensure you can do it.}
 
-  First find the distribution of $U=S-X$ so that we can write
+\begin{solution}  First find the distribution of $U=S-X$ so that we can write
   $W_{Q,k}=[W_{Q,k-1}+U_k]^+$.  Use independence of $S$ and $X$:
 \begin{align*}
   \P{U=-2} &=\P{S-X=-2} = \P{S=1, X=3} = \P{S=1}\P{X=3} = \frac14\\
@@ -304,11 +354,12 @@ Typing the solution becomes  boring\ldots, let's use the computer.
 \begin{question}
   If $S\sim U[0,7]$ and $X\sim U[0,10]$, where $U[I]$ stands for the
   uniform distribution concentrated on the interval $I$, compute
-  $\P{S-X\leq x}$.
+  $\P{S-X\leq x}$.  \hint{This should be trivial, of course, but I
+    didn't find it easy\ldots In fact, I found it a major headache,
+    hence it is good to try yourself before looking at the
+    answer. Check your probability book if you don't know what to
+    do. }
   \begin{solution}
-    This is trivial, of course, but I didn't find it easy\ldots In
-    fact, I found it a major headache, hence it is good to try yourself
-    before looking at the answer.
 
     Let us write $f(x)$ for the density of $\P{S-X\leq x}$, i.e.,
     $\P{S-X\leq x} = \int_{-\infty}^x f(y) \d y$. (A formal point, why
@@ -436,17 +487,13 @@ so up to now.
 
 
 
-\begin{question}
-  \begin{enumerate}
-  \item 
-  Show that $L(t) = A(t)-D(t)$ implies that 
+\begin{question} Show that $L(t) = A(t)-D(t)$ implies that 
   \begin{equation*}
     L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}.
   \end{equation*}
-\item Show that if $L(A_k)>0$, i.e., the system contains at least one
+ Show also that if $L(A_k)>0$, i.e., the system contains at least one
   job at the time of the $k$th arrival, then $A_k \leq D_{k-1}$, i.e.,
   job $k$ arrives before job $k-1$ departs.
-  \end{enumerate}
 \begin{solution}
   \begin{enumerate}
   \item 
@@ -574,7 +621,7 @@ Now the computation of the waiting times is trivial:
 $W_k = D_k - A_k$.
   \begin{enumerate}
   \item Why do the recursions Eq.~(\ref{eq:45}) work? 
-  \item  (Difficult) Extend the above recursions to a situation in which one queue is
+  \item  (Very difficult) Extend the above recursions to a situation in which one queue is
   served by two servers.  
 \item (Impossible?)  Extend the above recursions to a situation in
   which one queue is served by $m>2$ servers.
@@ -594,7 +641,7 @@ $W_k = D_k - A_k$.
       that in a multi-server queueing systems, unlike for
       single-server queues, jobs can overtake each other: a small job
       that arrives after a very large job can still leave the system
-      sooner. After trying for several hours, I obtained an inelegant
+      earlier. After trying for several hours, I obtained an inelegant
       method. A subsequent search on the web helped a lot. The
       solution below is a modification of N. Krivulin, `Recursive
       equations based models of queueing systems'. 
@@ -665,15 +712,6 @@ be simple to understand, not necessarily super efficient.
 \end{solution}
 \end{question}
 
-\begin{question}
-  Validate the results of  Figure~\ref{fig:convergence} with simulation.
-  \begin{solution}
-    You can study \texttt{waiting\_time\_simulation.py} at
-    \href{https://github.com/ndvanforeest/queueing_book/tree/master/progs}{github}
-    if you like, but skipping it is OK. Trying to make the graph in
-    your favorite programming language is fun.
-\end{solution}
-\end{question}
 
 \begin{question}(Multiple queues, for the interested) Suppose one server serves two
   queues, such that jobs in queue A are served with priority over jobs
