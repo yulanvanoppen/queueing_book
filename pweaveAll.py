@@ -10,6 +10,7 @@ filenames = [
     "ratestability",
     "empericalperfmeasures",
     "levelcrossing",
+    "random_walk",
     "ratestability",
     "mm1",
     "mnmn1",

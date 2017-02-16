@@ -355,6 +355,42 @@ With this,
     \end{solution}
 \end{question}
 
+
+\begin{question}
+  Suppose that $X_k\in\{1,3\}$ such that $\P{X_k=1}=\P{X_k=3}$ and
+  $S_k\in\{1,2\}$ with $\P{S_k=1}=\P{S_k=2}$. Write a computer program
+  to see how fast the distributions of $W_{Q,k}$ converge to a limiting distribution funcion.
+
+  \begin{solution}
+Here is an example with python. In R it must be equaly simple.
+I compute the following
+\begin{equation*}
+  \max_x\{ |\P{W_{Q,k}\leq x} - \P{W_{Q,k-1}\leq x}|\},
+\end{equation*}
+for $x$ in the support of $W_{Q,k}$. 
+
+<<term=True>>=
+from lea import Lea
+
+S = Lea.fromVals(1,  2)
+X = Lea.fromVals(1,  3)
+U = S-X
+
+W = Lea.fromVals(3)
+for k in range(1, 10):
+    W_new = Lea.fastMax(W + U, 0)
+    m = max(abs(W_new.cdf(x)-W.cdf(x)) for x in range(W_new.support()[-1]))
+    print(k, m)
+    W = W_new
+@
+
+So, after some 10 customers, the distribution hardly changes anymore. 
+
+  \end{solution}
+
+
+  \end{question}
+
 \begin{question}
   Validate the results of  Figure~\ref{fig:convergence} with simulation.
   \begin{solution}

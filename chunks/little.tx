@@ -13,8 +13,7 @@ Here we provide a sketch of the proof, c.f.,
 the forthcoming sections we will apply Little's law frequently. Part
 of the usefulness of Little's law is that it applies to all
 input-output systems, whether it is a queueing system or an inventory
-system or some much more general system. In particular, it holds for
-the $G/G/c/K$ queue.
+system or some much more general system. 
 
 We start with defining a few intuitively useful concepts.  Clearly, from~\eqref{eq:11}, 
 \begin{equation*}
@@ -32,11 +31,12 @@ job arrives and departs, that is
   W_k = \int_0^\infty \1{A_k \leq s < D_k}\,\d s.
 \end{equation*}
 
-We can actually relate $W_k$ to $ \mathscr{L}(t)$.  Consider a departure
-time $T$ at which the system is empty. Observe that $A(T) = D(T)$, as
-at time $T$ all jobs that arrived up to $T$ also have left. Thus, for
-all jobs $k\leq A(T)$ we have that $D_k \leq A(T)$, so that we can
-replace the integration bounds in the above expression for $W_k$ by
+We can actually relate $W_k$ to $ \mathscr{L}(t)$, see
+Figure~\ref{fig:atltdt}. Consider a departure time $T$ at which the
+system is empty. Observe that $A(T) = D(T)$, as at time $T$ all jobs
+that arrived up to $T$ also have left. Thus, for all jobs $k\leq A(T)$
+we have that $D_k \leq A(T)$, so that we can replace the integration
+bounds in the above expression for $W_k$ by
 \begin{equation*}
   W_k = \int_0^T \1{A_k \leq s < D_k}\,\d s.
 \end{equation*}
