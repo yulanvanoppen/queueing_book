@@ -13,6 +13,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{fouriernc}
 \usepackage{manfnt} %for the dangerous bend
+\usepackage{fontawesome} % for the linux hint symbol
 
 \usepackage{pgf}
 \usepackage{tikz}
@@ -55,15 +56,16 @@
  
 \DeclareQuestionProperty{hint}
 
+
 \SetupExSheets{
   headings = runin,
   question/print = true,
   solution/print = false,
-  counter-format = ch.se.qu ,
+  counter-format = ch.se.qu,
   counter-within = section
 }
 
- 
+
 % a command to print all given hints
 \NewDocumentCommand\printquestionhints{}{%
    \ForEachQuestion
@@ -82,7 +84,8 @@
        }%
      }%
 }
-\newcommand{\hint}[1]{\SetQuestionProperties{ hint = {#1}}}
+
+\newcommand{\hint}[1]{\marginpar{\center{\faLinux}}\SetQuestionProperties{ hint = {#1}}}
 
 \theoremstyle{definition} % font type for theorems and related environments
 \newtheorem{theorem}{Theorem}[section]
@@ -130,7 +133,7 @@
 \newcommand{\scv}{\text{SCV}}
 
 %\newcommand{\recall}[1]{\emph{#1}\marginpar{\hspace{0.5cm}\danger}}
-\newcommand{\recall}[1]{\emph{#1}\marginpar{\hspace{0.5cm}\bomb}}
+\newcommand{\recall}[1]{\emph{#1}\marginpar{\center{\bomb}}}
 \newcommand{\nvf}[1]{\marginpar{\dbend}}
 % \newcommand{\E}{\,\mathbb{E}\,}
 % \renewcommand{\TH}{\,\textrm{TH}\,}

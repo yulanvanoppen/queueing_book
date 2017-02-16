@@ -66,7 +66,7 @@ Moreover, if there are no failures in some interval
 $[0,t]$, then it must be that $N(t) = 0$ and $A_1$, i.e., the
 occurrence of the first failure, must be larger than $t$.  Therefore,
 \begin{equation*}
-  \P{A_1>t} = \P{X_1> t} = P(N(t) = 0) = e^{-\lambda t} \frac{(\lambda t)^0}{0!}= e^{-\lambda t}.
+  \P{A_1>t} = \P{X_1> t} = \P{N(t) = 0} = e^{-\lambda t} \frac{(\lambda t)^0}{0!}= e^{-\lambda t}.
 \end{equation*}
 
 The relations we discussed above are of paramount importance in the
@@ -122,13 +122,18 @@ use that
       {n \choose k} \left(\frac{\lambda t}{n}\right)^k \left(1-\frac{\lambda t}n\right)^{n-k} 
 &= \frac{n!}{k!(n-k)!} \left(\frac{\lambda t}{n}\frac{n}{n-\lambda t}\right)^k \left(1-\frac{\lambda t}n\right)^{n} \\
 &= \frac{(\lambda t)^k}{k!} \left(\frac n{n-\lambda t} \right)^k  \frac{n!}{n^k(n-k)!}\left(1-\frac{\lambda t}n\right)^{n}\\
-&= \frac{(\lambda t)^k}{k!} \left(\frac n{n-\lambda t} \right)^k \frac{n}{n}\frac{n-1}{n}\cdots\frac{n-k+1}{n} \left(1-\frac{\lambda t}n\right)^{n}  \\
-&\to \frac{(\lambda t)^k}{k!} e^{-\lambda t} \text{ when } n \to \infty, 
-      \end{split}
-    \end{equation*}
-    where we use that $(1+x/n)^n\to e^{x}$ so that ,
-    $\left(1-\frac{\lambda t}n\right)^{n} \to e^{-\lambda t}$.  The
-    rest is easy.
+&= \frac{(\lambda t)^k}{k!} \left(\frac n{n-\lambda t} \right)^k \frac{n}{n}\frac{n-1}{n}\cdots\frac{n-k+1}{n} \left(1-\frac{\lambda t}n\right)^{n}.
+\end{split}
+\end{equation*}
+Observe now that, as $\lambda t$ is finite, $n/(n-\lambda t)\to 1$ as
+$n\to \infty$. Also for any finite $k$, $(n-k)n\to1$. Finally, we use
+that $(1+x/n)^n\to e^{x}$ so that ,
+$\left(1-\frac{\lambda t}n\right)^{n} \to e^{-\lambda t}$.  The rest
+is easy, so that, as $n\to\infty$,  the above converges to 
+\begin{equation*}
+\frac{(\lambda t)^k}{k!} e^{-\lambda t}.
+\end{equation*}
+
   \end{solution}
 \end{question}
 
@@ -161,7 +166,7 @@ We are done.
 
 
 \begin{question}
- Show from the above that  for small $h$, 
+  Show that if $N(t) \sim P(\lambda t)$, we have for small $h$,
   \begin{enumerate}
   \item $\P{N(h) = n \given N(0) = n} = 1-\lambda h + o(h)$ 
   \item $\P{N(h) = n+1 \given N(0) = n} = \lambda h + o(h)$ 
@@ -170,8 +175,20 @@ We are done.
  where $o(h)$ is a function
     $f(h)$ such $f(h)/h \to 0$ as $h\to 0$.
 
-\hint{Use that $e^{x} = 1 +x + o(x)$ for $|x| << 1$. Furthermore, use that $\sum_{i=2}^\infty x^i/i! = \sum{i=0}^\infty x^i/i! - x -1 = e^x - 1 -x$.}
+    \hint{Think about the meaning of the formula
+      $\P{N(h) = n \given N(0) = n}$. It is a conditional probability
+      that should be read like this: given that up to time $0$ we have
+      seen $n$ arrivals (i.e, $N(0)=n$), what is the probability that
+      just a little later ($h$) the number of arrivals is still $n$,
+      i.e, $N(h)=n$? Then use the definition of the Poisson
+      distribtuion to compute this probability. Finally, use Taylor's
+      expension of $e^{x}$ to see that $e^{x} = 1 +x + o(x)$ for
+      $|x| << 1$.  Furthermore, use that
+      $\sum_{i=2}^\infty x^i/i! = \sum{i=0}^\infty x^i/i! - x -1 = e^x
+      - 1 -x$.}
+
 \begin{solution}
+
 \begin{enumerate}
   \item 
   $\P{N(h) = n | N(0) = n} = \P{N(h) = 0} = e^{-\lambda h} (\lambda
@@ -219,11 +236,18 @@ $N(t) \sim \text{P}(\lambda t)$.
   independent.  Show that
   $N_a(t) + N_s(t) \sim \text{P}((\lambda + \mu)t)$.  
 
-\hint{ Use a
-    conditioning argument or use moment generating functions.}
+  \hint{Use an conditioning argument or use moment generating
+    functions. In particular, for condition, use that $\P{AB} = \P{A\given B}\P{B}$. More generally, if the set $A$ can be split into disjoint sets $B_i$, i.e, $A=\bigcup_{i=1}^n B_i$, then
+    \begin{equation*}
+      \P{A} = \sum_{i=1}^n \P{A\given B_i} \P{B_i}.
+    \end{equation*}
+Now choose practical sets $B_i$. 
+}
 
     \begin{solution}
- We use conditioning.
+First we show how to  use conditioning. 
+
+
   \begin{equation*}
     \begin{split}
 \P{N_a(t) + N_s(t) = n} 
@@ -236,7 +260,7 @@ $N(t) \sim \text{P}(\lambda t)$.
     \end{split}
   \end{equation*}
 
-  With moment generating functions.
+Now   with moment generating functions.
       \begin{equation*}
         \begin{split}
           M_a(z) 
@@ -312,27 +336,39 @@ $M_1(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\
       Bernoulli distributed, hence when you consider $m$ jobs in
       total, the number of type 1 jobs is binomially distributed.
 
+      Again use that if the set $A$ can be split into disjoint sets
+      $B_i$, i.e, $A=\bigcup_{i=1}^n B_i$, then
+    \begin{equation*}
+      \P{A} = \sum_{i=1}^n \P{A\given B_i} \P{B_i}.
+    \end{equation*}
+Now choose practical sets $B_i$. 
+
+
 You might also consider the random variable 
   \begin{equation*}
     Y = \sum_{i=1}^N Z_i,
   \end{equation*}
-  with $N\sim P(\lambda)$ and $Z_i\sim B(p)$. Show that the moment generating function of $Y$ is equal to the moment generating function of a Poisson random variable with parameter $\lambda p$. }
+  with $N\sim P(\lambda)$ and $Z_i\sim B(p)$. Show that the moment generating function of $Y$ is equal to the moment generating function of a Poisson random variable with parameter $\lambda p$. 
+
+}
 
     \begin{solution}
+Suppose that  $N_1$ is the  thinned stream, and $N$ the total stream. Then
 \begin{equation*}
   \begin{split}
-    \P{N(t) = n}
-&= \sum_{m=0}^n \P{N(t) =n \given N_1(t) = m}\P{N_1(t) = m} \\
-&= \sum_{m=0}^n \P{N_2(t) =n-m}\P{N_1(t) = m} \\
-&= \sum_{m=0}^n 
-e^{-\lambda_2 t}\frac{(\lambda_2 t)^{n-m}}{(m-n)!} 
-e^{-\lambda_1 t}\frac{(\lambda_1 t)^{m}}{m!} \\
-&= e^{-(\lambda_2+\lambda_1) t} \frac{1}{n!}\sum_{m=0}^n 
-{n \choose m} (\lambda_2 t)^{n-m} (\lambda_1 t)^{m}\\
-&= e^{-(\lambda_2+\lambda_1) t} \frac{1}{n!}(\lambda_2 t + \lambda_1 t)^n.
+    \P{N_1 = k}
+&= \sum_{n=k}^\infty \P{N_1 =k, N = n} 
+= \sum_{n=k}^\infty \P{N_1 =k\given N = n}\P{N=n} \\
+&= \sum_{n=k}^\infty \P{N_1 =k\given N = n}e^{-\lambda} \frac{\lambda^n}{n!}
+= \sum_{n=k}^\infty {n \choose k} p^k (1-p)^{n-k} e^{-\lambda} \frac{\lambda^n}{n!}\\
+&= e^{-\lambda}\sum_{n=k}^\infty  \frac{p^k (1-p)^{n-k}}{k! (n-k)!} \lambda^n
+= e^{-\lambda} \frac{(\lambda p)^k}{k!} \sum_{n=k}^\infty  \frac{(\lambda (1-p))^{n-k}}{(n-k)!}\\
+&= e^{-\lambda} \frac{(\lambda p)^k}{k!} \sum_{n=0}^\infty  \frac{(\lambda (1-p))^{n}}{n!}
+= e^{-\lambda} \frac{(\lambda p)^k}{k!} e^{\lambda(1-p)} \\
+&= e^{-\lambda p} \frac{(\lambda p)^k}{k!}.
   \end{split}
 \end{equation*}
-We see that the thinned stream is Poisson with parameter $\lambda t p$. 
+We see that the thinned stream is Poisson with parameter $\lambda p$. (For notational ease, we left out the $t$, otherwise it is $P(\lambda t p)$. 
 
 Now consider $Y=\sum_{i=1}^N Z_i$. Suppose that $N=n$, so that $n$
 arrivals occurred. Then we throw $n$ coins with success probability

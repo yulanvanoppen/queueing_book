@@ -56,7 +56,12 @@ define $A(t)$ is
 Clearly, we see that from the inter-arrival times $\{X_k\}$ it is
 possible to construct $\{A_k\}$ and $\{A(t)\}$, and the other way
 around, from $\{A(t)\}$ we can find $\{A_k\}$ and $\{X_k\}$.
-Figure~\ref{fig:waitingtimegg1} shows these relations graphically.
+Figure~\ref{fig:waitingtimegg1} shows these relations graphically. To
+memorize it may be helpfull to write it like this:
+\begin{align*}
+  A_k : \N \to \R, \quad{\text{job id (integer) to arrival time (real number)}}, \\
+  A(t) : \R\to \N, \quad{\text{time (real number) to number of jobs (integer)}}.
+\end{align*}
 
 To compute the departure times $\{D_k\}$ we proceed in stages. The
 first stage is to construct the \recall{waiting time in queue}
@@ -250,7 +255,142 @@ $R$ or python will reveal that this is easy.
       simulator are different, there is a problem.
     \end{solution}
   \end{question}
-  
+\begin{question}
+  Suppose that $X_k\in\{1,3\}$ with equal probability and
+  $S_k\in\{1,2\}$, also with equal probabilities. If $W_{Q,0}=3$, what
+  are  the distributions of $W_{Q,1}$ and  $W_{Q,2}$?
+\hint{Use that $W_{Q,1} = [W_{Q,0} + S_1 - X_1]^+$ and likewise for $W_{Q,2}$. 
+
+This is a basic probability problem. Ensure you can do it.}
+\begin{solution} This is first year probability stuff. It should be elementary for you. 
+
+  First find the distribution of $U=S-X$ so that we can write
+  $W_{Q,k}=[W_{Q,k-1}+U_k]^+$.  Use independence of $S$ and $X$:
+\begin{align*}
+  \P{U=-2} &=\P{S-X=-2} = \P{S=1, X=3} = \P{S=1}\P{X=3} = \frac14\\
+  \P{U=-1} &=\P{S=2}\P{X=3} = \frac14\\
+  \P{U=0} &=\P{S=1}\P{X=1} = \frac14\\
+  \P{U=1} &=\P{S=2}\P{X=1} = \frac14.
+\end{align*}
+With this
+  \begin{align*}
+    \P{W_{Q,1} = 1} &=\P{W_{Q,0} + U = 1} = \P{3 + U =1} = \P{U=-2} \\
+    \P{W_{Q,1} = 2} &= \P{3 + U =2} = \P{U=-1} \\
+    \P{W_{Q,1} = 3} &= \P{3 + U = 3} = \P{U=0} \\
+    \P{W_{Q,1} = 4} &= \P{3 + U = 4} = \P{U=1} \\
+  \end{align*}
+And, then
+  \begin{equation*}
+    \begin{split}
+    \P{W_{Q,2} = 1} 
+&=\P{W_{Q,1} + U = 1} = \sum_{i=1}^4 \P{W_{Q,1} + U = 1\given W_{Q,1}=i}\P{W_{Q,1}=i}\\
+&=\sum_{i=1}^4 \P{i + U = 1\given W_{Q,1}=i}\frac14
+=\sum_{i=1}^4 \P{U = 1-i\given W_{Q,1}=i}\frac14\\
+&=\frac14\sum_{i=1}^4 \P{U = 1-i} = \frac14(\P{U = 0} + \P{U=-1} +\P{U=-2}) = \frac{3}{16}.
+    \end{split}
+  \end{equation*}
+
+Typing the solution becomes  boring\ldots, let's use the computer.
+
+
+
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructioncontinuoustime_1.tex}
+
+
+\end{solution}
+\end{question}
+
+
+\begin{question}
+  If $S\sim U[0,7]$ and $X\sim U[0,10]$, where $U[I]$ stands for the
+  uniform distribution concentrated on the interval $I$, compute
+  $\P{S-X\leq x}$.
+  \begin{solution}
+    This is trivial, of course, but I didn't find it easy\ldots In
+    fact, I found it a major headache, hence it is good to try yourself
+    before looking at the answer.
+
+    Let us write $f(x)$ for the density of $\P{S-X\leq x}$, i.e.,
+    $\P{S-X\leq x} = \int_{-\infty}^x f(y) \d y$. (A formal point, why
+    does $\P{S-X \leq x }$ actually have a density? You can skip this
+    detail if you like, but it is interesting to think about.) 
+
+With conditioning, 
+\begin{equation*}
+  f(x) 
+= \frac1{10}\int_{0}^{10} \P{S-X = x|X=u} \d u 
+= \frac1{10}\int_{0}^{10} \P{S-u=  x }\d u 
+= \frac1{10}\int_{0}^{10} \P{S= x +u} \d u.
+\end{equation*}
+(Observe that we just use the formulas we are used to from conditioning
+on sets with positive probability. Recall, $\P{A|B} = \P{AB}/\P{B}$
+only when $\P{B}>0$, and here $\P{X=x} = 0$ for all $x$, since $x$
+consists of a single point and $X$ is uniformly distributed.) This
+works in this case, but you should be careful when using it.)
+
+Next, interpret $\P{S= y}$ as the density of $\P{S\leq y}$. Then, 
+\begin{equation*}
+  \P{S= y} =
+  \begin{cases}
+    0, &\text{ for } y \not \in [0,7], \\
+    \frac17, &\text{ for } y \in [0,7].
+  \end{cases}
+\end{equation*}
+Therefore, while using that in the above integral that $x$ is fixed, 
+\begin{equation*}
+  \P{S= x+u} = \frac 17 1\{-x \leq u \leq 7-x\},
+\end{equation*}
+from which
+\begin{equation*}
+  \begin{split}
+  f(x)  
+&= \frac1{70}\int_{0}^{10} 1\{-x \leq u \leq 7-x\} \d u \\
+&= \frac1{70}\int_{-\infty}^{\infty} 1\{0\leq u \leq 10\} 1\{-x \leq u \leq 7-x\} \d u \\
+&= \frac1{70}\int_{-\infty}^{\infty} 1\{\max\{0, -x\} \leq u \leq \min\{10, 7-x\} \d u.\\
+  \end{split}
+\end{equation*}
+First we make some simple observations. If $x>7$ then
+$\min\{10, 7-x\} <0$. This is smaller then $\max\{0, -x\}$. Thus,
+$f(x) = 0$ for $x\geq 7$. Likewise, when $x\leq -10$, $f(x) =
+0$. Also, when $x\in[-3,0]$ the $\max$ and $\min$ overlap. Thus, all in all,
+\begin{equation*}
+  f(x) = 
+  \begin{cases}
+    0, &\text{ if } x\leq -10, \\
+ \frac {x+10}{70} &\text{ if } x \in [-10, -3], \\
+\frac 1{10} &\text{ if } x \in [-3, 0], \\
+ \frac {7-x}{70} &\text{ if } x \in [0, 7], \\
+    0, &\text{ if } x>7, 
+  \end{cases}
+\end{equation*}
+
+To check my solution, I went to Wolframalpha. This is what what I typed: 
+
+
+
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructioncontinuoustime_2.tex}
+
+
+so, once you know \LaTeX\/ you can use wolframalpha.  Wolframalpha turned it to 
+
+
+
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructioncontinuoustime_3.tex}
+
+
+For your convenience, I also include the following code from Wolframalpa
+
+
+
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructioncontinuoustime_4.tex}
+
+
+Wolframalpha is a great site. Please check it out if you haven't done
+so up to now.
+ \end{solution}
+\end{question}
+
+
 \begin{question}
  What are  the meanings of $A_{A(t)}$ and $A(A_n)$?
  \begin{solution}
@@ -357,18 +497,12 @@ $R$ or python will reveal that this is easy.
 
 
 
-\begin{question}
-  \begin{enumerate}
-  \item Can you derive following (algorithmic efficient) procedure to
+\begin{question} Can you derive following (algorithmic efficient) procedure to
     compute the number of jobs in the system as seen by arrivals,
   \begin{equation*}
     L_k = L_{k-1}+1 - \sum_{i= k-1 - L_{k-1}}^{k-1} 1\{D_i< A_k\}?
-  \end{equation*}
-\item Why do we take $i=k-1-L_{k-1}$ in  the sum, and not $i=k-2-L_{k-1}$?
-\end{enumerate}
+  \end{equation*} Why do we take $i=k-1-L_{k-1}$ in  the sum, and not $i=k-2-L_{k-1}$?
 \begin{solution}
-  \begin{enumerate}
-  \item 
   Let $L_{k} = L(A_{k}-)$, i.e., the number of jobs in the system as
   `seen by' job $k$. It must be that $L_{k}=k-1 - D(A_{k})$. To see
   this, assume first that no job has departed when job $k$
@@ -382,7 +516,7 @@ $R$ or python will reveal that this is easy.
   \begin{equation*}
     L_k = L_{k-1} + 1 - \sum_{i= k-1 - L_{k-1}}^{k-1} 1\{D_i< A_k\}.
   \end{equation*}
-\item 
+
     Suppose $L_{k-1}=0$, i.e., job $k-1$ finds an empty system at its
     arrival and $D_{k-1}>A_{k}$, i.e., job $k-1$ is still in the
     system when job $k$ arrives. In this case, $L_{k}=1$, which checks
@@ -395,8 +529,6 @@ $R$ or python will reveal that this is easy.
     $k-1-L_{k-1}, k-L_{k-1}, \ldots, k-1$, could have left the system
     between the arrival of job $k-1$ and job $k$.
 
-\TBD: check with simulation.
-\end{enumerate}
 \end{solution}
 \end{question}
 
@@ -429,9 +561,7 @@ $R$ or python will reveal that this is easy.
 
 
 
-\begin{question}
-
-  Another set of recursions to compute the arrival and departure times
+\begin{question}  Another set of recursions to compute the arrival and departure times
   for a given set of inter-arrival and service times is the following:
 \begin{equation}
   \label{eq:45}
@@ -578,7 +708,7 @@ be simple to understand, not necessarily super efficient.
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructioncontinuoustime_1.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructioncontinuoustime_5.tex}
 
 
 Interestingly, once we have a proper environment to carry out
@@ -599,13 +729,13 @@ simulations, changing the queueing discipline is a one-liner!.
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructioncontinuoustime_2.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructioncontinuoustime_6.tex}
 
 
 Another interesting queueing rule is to sort in increasing job size;
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructioncontinuoustime_3.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructioncontinuoustime_7.tex}
 
 
 Do you see how sort in descending order of job size (it just a matter

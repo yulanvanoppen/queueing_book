@@ -10,9 +10,24 @@
 \SetupExSheets{
   headings = runin,
   question/print = true,
+  % question/pre-body-hook = 
+  % {jaap
+  %      \IfQuestionPropertyT{hint}{##1}{%
+  %        \ExSheetsHeading
+  %          {runin}               % headings style
+  %          {Hint}                % heading
+  %          {\QuestionNumber{##1}}% number
+  %          {0}                   % points -- need to be zero here
+  %          {0}                   % bonus points -- need to be zero here
+  %          {##1}%                % ID
+  %        \GetQuestionProperty{hint}{##1}%
+  %        \par
+  %        \medskip
+  %      }%
+  % },
   solution/print = true,
-  counter-format = ch.se.qu ,
-  counter-within = section
+  counter-within = section,
+  counter-format = ch.se.qu
 }
 
 \begin{document}
@@ -25,12 +40,12 @@
 %\input{todo/appendix.tex}
 %\input{tex_files/single_station_intro.tex}
 %input{chunks/expdistribution.tx}
-%\input{tex_files/poissondistribution.tex}
+\input{tex_files/poissondistribution.tex}
 % \input{kendall.tex}
 %\input{chunks/constructiondiscretetime.tx}
 %\input{chunks/constructioncontinuoustime.tx}
 %\input{tex_files/random_walk.tex}
-  \input{chunks/ratestability.tx}
+%\input{chunks/ratestability.tx}
 %  \input{chunks/empericalperfmeasures.tx}
 %\input{chunks/levelcrossing.tx}
 % \input{chunks/mm1.tx}

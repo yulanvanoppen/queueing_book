@@ -1,5 +1,5 @@
 
-  class SPTF(Queue): # shortest processing time first
+class Lifo(Queue):
     def __init__(self):
-        self.queue = SortedSet(key = lambda job: job.serviceTime)
+        self.queue = SortedSet(key = lambda job: -job.arrivalTime)
 
