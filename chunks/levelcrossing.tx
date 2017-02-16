@@ -4,11 +4,12 @@
 Consider a system at which customers arrive and depart in single
 entities, such as customers in a shop or jobs at some machine.  If the
 system starts empty, then we know that the number $L(t)$ is the system
-at time $t$ is equal to $A(t) - D(t)$. Let us denote an arrival as an
-`up-crossing' and a departure as a `down-crossing'.  Then, clearly
-$L(t)$ is the number of up-crossings up to time $t$ minus the number
-of down-crossings up to time $t$. If $L(t)$ remains finite, or more
-generally $\lim_t L(t)/t = 0$, then it must be that the
+at time $t$ is equal to $A(t) - D(t)$, see Figure~\ref{fig:box}. Let
+us denote an arrival as an `up-crossing' and a departure as a
+`down-crossing'.  Then, clearly $L(t)$ is the number of up-crossings
+up to time $t$ minus the number of down-crossings up to time $t$. If
+$L(t)$ remains finite, or more generally $\lim_t L(t)/t = 0$, then it
+must be that
 \begin{equation*}
   \lambda =  \lim_t \frac{A(t)}t  = \lim_t \frac{D(t)+L(t)}t =  \lim_t \frac{D(t)}t + \lim_t \frac{L(t)}t 
   = \gamma.  
@@ -16,17 +17,29 @@ generally $\lim_t L(t)/t = 0$, then it must be that the
 Hence, when $L(t)/t\to0$, the \recall{up crossing rate}
 $\lim_t A(t)/t = \lambda$ is equal to the \emph{down-crossing rate}
 $\lim_t D(t)/t = \gamma$.  We will generalize these notions of up- and
-downcrossing now to derive the \recall{stationary}, also know as
+downcrossing in this section to derive the \recall{stationary}, also know as
 \emph{long-run time average} or \emph{steady-state}, distribution of
 the number of people in queue.  
+
+\begin{figure}[h]
+  \centering
+  \tikz{
+\draw[->] (0,0)--node[midway, fill=white] {$A(t)$}  (2,0); 
+\draw (2,-0.25) rectangle node {$L(t)=A(t)-D(t)$} (5,0.25);
+\draw[->] (5,0)--node[midway, fill=white] {$D(t)$}  (7,0); 
+} 
+\caption{What goes in the box, $A(t)$, and has not yet left, $D(t)$,
+  must be in the box, hence $L(t)=A(t)-D(t)$. }
+  \label{fig:box}
+\end{figure}
 
 
 Define 
 \begin{subequations}
 \begin{align}
-  A(n,t) &= \sum_{k=1}^\infty \1{A_k \leq t, L(A_k-) = n}, \label{eq:19} \\
-   Y(n,t) &= \int_0^t  \1{L(s) = n}\, \d s, \label{eq:17} \\
-   p(n,t) &= \frac 1 t \int_0^t  \1{L(s) = n}\, \d s, \label{eq:18}
+  A(n,t) &= \sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = n}, \label{eq:19} \\
+   Y(n,t) &= \int_0^t  \1{L(s) = n} \d s, \label{eq:17} \\
+   p(n,t) &= \frac 1 t \int_0^t  \1{L(s) = n} \d s = \frac{Y(n,t)}t, \label{eq:18}
 \end{align}
 \end{subequations}
 respectively, so that $A(n,t)$ is the number of arrivals up to time
@@ -58,18 +71,19 @@ small.
 Suppose a chute can contain at most 20 parcels, say. Then, each parcel
 on the belt that `sees' 20 parcels in its chute will be blocked. Let
 $L(t)$ be the number of parcels in the chute at time $t$. Then,
-$A(20,t)$ as defined in Eq.~(\ref{eq:19}) is number of blocked parcels
-up to time $t$, and $A(20,t)/A(t)$ is the fraction of rejected
-parcels. In fact, $A(20,t)$ and $A(t)$ are continuously tracked by the
-sorting center and used to adapt employee capacity to control the
-fraction of rejected parcels. Thus, in simulations, if one want to
-estimate loss fractions, $A(n,t)/A(t)$ is the most natural concept to
-consider.
+$A(20,t)$ as defined in Eq.~(\ref{eq:19}) is number of\emph{ blocked
+  parcels} up to time $t$, and $A(20,t)/A(t)$ is the fraction of
+rejected parcels. In fact, $A(20,t)$ and $A(t)$ are continuously
+tracked by the sorting center and used to adapt employee capacity to
+control the fraction of rejected parcels. Thus, in simulations, if one
+want to estimate loss fractions, $A(n,t)/A(t)$ is the most natural
+concept to consider.
 
 For the second example, suppose there is a cost associated with
 keeping jobs in queue. Let $w$ be the cost per job in queue per unit
-time. Then $ wnY(n,t)$ is the total cost up to time $t$ to have $n$
-jobs in queue. The total cost is therefore
+time so that the cost rate is $n w$ when $n$ jobs are in queue. But
+then is $ wnY(n,t)$ the total cost up to time $t$ to have $n$ jobs in
+queue, hence the total cost up up to time $t$
   \begin{equation*}
 C(t) =     w \sum_{n=0}^\infty n Y(n,t),
   \end{equation*}
@@ -86,16 +100,19 @@ Continuing with the above notions we define in turn
 \begin{equation*}
   \lambda(n) = \lim_{t\to\infty} \frac{A(n,t)}{Y(n,t)}
 \end{equation*}
-as the arrival rate in state $n$. Similarly,
+as the \emph{arrival rate in state $n$.} Similarly, denoting by
 \begin{equation*}
-  \begin{split}
-    D(n,t) &= \sum_{k} \1{D_k \leq t, L(D_k) = n}, \\
-    \mu(n) &= \lim_{t\to\infty} \frac{D(n-1,t)}{Y(n,t)},
-  \end{split}
+    D(n,t) = \sum_{k} \1{D_k \leq t} \1{L(D_k) = n}
+  \end{equation*}
+  the number of departures up to time $t$ that leave $n$ customers
+  behind, we have that
+\begin{equation*}
+  \mu(n+1) = \lim_{t\to\infty} \frac{D(n,t)}{Y(n+1,t)},
 \end{equation*}
-are the number of departures up to time $t$ that leave $n$ customers
-behind and the departure rate in state $n$. Figure~\ref{fig:A_n_t}
-shows how $A(n,t)$ and $\lambda(n)$ relate to $D(n,t)$ and $\mu(n)$.
+is \emph{ the departure rate from state $n+1$}. (It is easy to get
+confused here: to leave $n$ jobs behind, the system must contain $n+1$
+jobs just prior to the departure.) Figure~\ref{fig:A_n_t} shows how
+$A(n,t)$ and~$\lambda(n)$ relate to $D(n+1,t)$ and $\mu(n)$.
 
 \begin{figure}[h]
   \centering
@@ -118,8 +135,8 @@ shows how $A(n,t)$ and $\lambda(n)$ relate to $D(n,t)$ and $\mu(n)$.
  (4) edge [bend left] node {$\mu(4)$} (3);
 
 \draw[-, dotted, gray] (2.7,-2.)--(2.7,2.0) node[above, black] {level $2$};
-\draw[->] (2,1.5)  node[left] {$A(1,t)$} -- (4,1.5);
-\draw[<-] (2,-1.2) node[left] {$D(1,t)$} --(4,-1.2) ;
+\draw[->] (2,1.5)  node[left] {$A(1,t)$} -- (3.5,1.5);
+\draw[<-] (2,-1.2) node[left] {$D(1,t)$} --(3.5,-1.2) ;
 
 \end{tikzpicture}
 \caption{ $A(1,t)$ counts the number of jobs up to time $t$ that saw 1
@@ -136,9 +153,9 @@ shows how $A(n,t)$ and $\lambda(n)$ relate to $D(n,t)$ and $\mu(n)$.
 
 
 Observe that customers arrive and depart as single units. Thus, if
-$\{T_k\}$ consists of the ordered set of arrival and departure times
-of the customers, then $L(T_k) = L(T_k-) \pm 1$. But then we must also
-have that $|A(n,t) - D(n,t)| \leq 1$ (Think about this.). From this
+$\{T_k\}$ is the ordered set of arrival and departure times of the
+customers, then $L(T_k) = L(T_k-) \pm 1$. But then we must also have
+that $|A(n,t) - D(n,t)| \leq 1$ (Think about this.). From this
 observation it follows immediately that
 \begin{equation}\label{eq:15}
   \lim_{t\to\infty} \frac{A(n,t)}t = \lim_{t\to\infty} \frac{D(n,t)}t.
@@ -197,8 +214,8 @@ $L(s)$ is an integer),
 \end{equation*}
 With this we can write for the time-average number of jobs in the system
 \begin{equation}\label{eq:1}
-  \mathscr{L}(t) = \frac 1 t \int_0^t \left(\sum_n n\, \1{L(s) = n}\right)\, \d s
-= \sum_n \frac n t \int_0^t   \1{L(s) = n}\, \d s,
+  \mathscr{L}(t) = \frac 1 t \int_0^t \left(\sum_n n\, \1{L(s) = n}\right) \d s
+= \sum_n \frac n t \int_0^t   \1{L(s) = n} \d s,
 \end{equation}
 where we interchange the integral and the summation\footnote{This is
   allowed as the integrand is non-negative. More generally, the
@@ -216,9 +233,9 @@ the above), it follows that
 In words, $ \mathscr{L}(t)$ converges to the long-run time average
 $\E L$ of the number in the system. In a loose sense we can say that
 $\E L$ is the average number in the system as perceived by the
-\emph{server}. (Recall again from Exercise~\ref{ex:1} that this is not
-necessarily the same as what \emph{arriving} jobs `see').  Similarly,
-the probability that the system contains at least $n$ jobs:
+\emph{server}. (Recall that this is not necessarily the same as what
+\emph{arriving} jobs `see').  Similarly, the probability that the
+system contains at least $n$ jobs is 
 \begin{equation*}
   \P{ L \geq n} := \sum_{i=n}^\infty p(i).
 \end{equation*}
@@ -231,15 +248,16 @@ examples is the task of the next sections.
 
 Before we embark on this task, we note that the level-crossing cannot
 always be used as we do here. The reason is that it is not always
-natural, or easy, to decompose the state space into two parts. For a
-more general approach, we focus on single states and count how often
-this state is entered and left. Specifically, define
+natural, or easy, to decompose the state space into two disjoint
+parts. For a more general approach, we focus on a single state and
+count how often this state is entered and left, c.f. Figure~\ref{fig:balance}. Specifically, define
 \begin{align*}
   I(n,t) &= A(n-1,t) + D(n,t),
 %  O(n,t) &= A(n,t) + D(n-1,t),
 \end{align*}
-as the number of times the queueing process entered state $n$ either from an
-arrival from state $n-1$ or a departure that leaves $n$ jobs behind. Similarly, 
+as the number of times the queueing process enters state $n$ either
+due to an arrival from state $n-1$ or due to a departure leaving $n$
+jobs behind. Similarly,
 \begin{align*}
  O(n,t) &= A(n,t) + D(n-1,t),
 \end{align*}
@@ -264,6 +282,37 @@ These equations hold for any $n\geq 0$ and are known as the
 \recall{balance equations}.  We will use these equations when studying
 queueing systems in which level crossing cannot be used, for instance
 for queueing networks.
+
+\begin{figure}[h]
+  \centering
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.8cm,
+                    semithick]
+  \node[state] (0) {$p(0)$} ;
+  \node[state] (1) [right of=0] {$p(1)$};
+  \node[state] (2) [right of=1] {$p(2)$};
+  \node[state] (3) [right of=2] {$p(3)$};
+  \node[state] (4) [right of=3] {$\cdots$};
+
+\draw[dashed] (2.6,-1.2) rectangle (4.5,1.2);
+
+\path 
+ (0) edge [bend left] node {$\lambda(0)$} (1)
+ (1) edge [bend left] node {$\mu(1)$} (0)
+ (1) edge [bend left] node[fill=white] {$\lambda(1)$} (2)
+ (2) edge [bend left] node[fill=white] {$\mu(2)$} (1)
+ (2) edge [bend left] node[fill=white] {$\lambda(2)$} (3)
+ (3) edge [bend left] node[fill=white] {$\mu(3)$} (2)
+ (3) edge [bend left] node[above] {$\lambda(3)$} (4)
+ (4) edge [bend left] node[below] {$\mu(4)$} (3);
+
+
+\end{tikzpicture}
+\caption{ For the balance equations count how often a box around a
+  state is crossed from inside and outside. On the long run the
+  entering and leaving rates should be equal. For the example here, the rate out is $p(2)\lambda(2) = p(2) \mu(2)$ while the rate in is $p(1)\lambda(1)+p(3)\mu(3)$.}
+\label{fig:balance}
+\end{figure}
+
 
 Again, just by using properties that hold along any sensible sample
 path, i.e., counting differences, we obtain very useful
@@ -393,29 +442,20 @@ What is the difference between $A(n,t)$ and $A(t)$?
  Show that $A(n,t) \leq A(t)$. 
 \begin{solution}
        Observe that
-      $1\{A_k\leq t, L(A_k-) = n\} =1\{A_k\leq t\}1\{L(A_k-) = n\}
-      \leq 1\{A_k\leq t\}$;
+      $\1{A_k\leq t}\1{L(A_k-) = n} =\1{A_k\leq t}\1{L(A_k-) = n}
+      \leq \1{A_k\leq t}$;
       the last inequality follows from the fact that
-      $1\{L(A_k-) = n\}\leq 1$. In fact, most of the time, for a
-      particular $n$, $1\{L(A_k-) = n\} = 0$. Therefore
+      $\1{L(A_k-) = n}\leq 1$. In fact, most of the time, for a
+      particular $n$, $\1{L(A_k-) = n} = 0$. Therefore
     \begin{equation*}
-  A(n,t) = \sum_{k=1}^\infty 1\{A_k \leq t, L(A_k-) = n\} 
-\leq \sum_{k=1}^\infty 1\{A_k \leq t = A(t)\}. 
+  A(n,t) = \sum_{k=1}^\infty \1{A_k \leq t} \1{L(A_k-) = n} 
+\leq \sum_{k=1}^\infty \1{A_k \leq t = A(t)}. 
     \end{equation*}
     For any `normal' queueing system, $A(t) > A(t,n)$, because the
     queue length fluctuates.
     \end{solution}
 \end{question}
 
-\begin{question}
-  Is in general $\pi(n)\geq \delta(n)$?
-  \begin{solution}
-    We have shown for one-step transition processes that
-    $\lambda \pi(n) = \gamma \delta(n)$. Thus,
-    $\pi(n) = \gamma/\lambda \delta(n)$. Since $\lambda\geq \gamma$,
-    we have that $\pi(n) \geq \delta(n)$.
-  \end{solution}
-\end{question}
 
 \begin{question}
  Suppose that $\lambda > \gamma$, i.e., the system is not
@@ -441,24 +481,29 @@ Is it always true that
 
 
 \begin{question}
-    Consider the following (silly) queueing process. At times
-    $0, 2,4, \ldots$ customers arrives, each customer requires $1$
-    unit of service, and there is one server. Find an expression for
-    $Y(n,t)$.What acronym would describe this queueing situation?
+  Consider the following (silly) queueing process. At times
+  $0, 2,4, \ldots$ customers arrive, each customer requires $1$ unit
+  of service, and there is one server. Find an expression for
+  $Y(n,t)$.What acronym would describe this queueing situation?
+
+  \hint{For the acronym, observe that the service times and
+    interarrival are \emph{D}eterministic and there is one server. For
+    the computation of $Y(n,t)$, make make a plot of $L(s)$ as a
+    function of time for $n=1$.}
+
     \begin{solution}
       First, it is the $D/D/1$ queue, since there is one server and
       the interarrival times and service times are constant, i.e.,
       \emph{D}eterministic.
 
-      Next, to get the $Y(n,t)$, observe that the system never
-      contains more than 1 job. Hence, $Y(n,t)=0$ for all $n\geq 2$.
-      Then, for $n=1$, make a plot of $L(s)$ as a function of
-      time. Then the solution will be easy enough.  Specifically, we
-      have that $Y(1,t) = \int_0^t 1\{L(s) = 1\}\, ds.$ Now observe
-      that for our queueing system $L(s)=1$ for $s\in[0,1)$, $L(s)=0$
-      for $s\in[1,2)$, $L(s)=1$ for $s\in[2,3)$, and so on, Thus, when
-      $t<1$, $Y(1,t)=\int_0^t 1\{L(s)=1\}\, ds = \int_0^t 1\,ds =
-      t$.
+      Next, to get $Y(n,t)$, observe that the system never contains
+      more than 1 job. Hence, $Y(n,t)=0$ for all $n\geq 2$.  Then,
+      make a plot of $L(s)$ for $n=1$ as a function of time.  function
+      of time. Then we see that
+      $Y(1,t) = \int_0^t \1{L(s) = 1}\d s.$ Now observe that for our
+      queueing system $L(s)=1$ for $s\in[0,1)$, $L(s)=0$ for
+      $s\in[1,2)$, $L(s)=1$ for $s\in[2,3)$, and so on, Thus, when
+      $t<1$, $Y(1,t)=\int_0^t \1{L(s)=1} \d s = \int_0^t 1\d s = t$.
       When $t\in[1,2)$, $L(s) = 0$, so that $Y(1,t) = 1$ for
       $s\in[1,2)$, and so on. Thus, all in all,
     \begin{equation*}
@@ -472,7 +517,7 @@ Is it always true that
       \end{cases}
     \end{equation*}
     and so on.  Since $Y(n,t)=0$ for all $n\geq 2$, $L(s) = 1$ or
-    $L(s)=0$ for all $s$. Therefore, $Y(0,t) = 1-Y(1,t)$.
+    $L(s)=0$ for all $s$, therefore, $Y(0,t) = 1-Y(1,t)$.
     \end{solution}
 \end{question}
 

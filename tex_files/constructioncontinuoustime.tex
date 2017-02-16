@@ -465,6 +465,15 @@ so up to now.
   \end{solution}
 \end{question}
 
+\begin{question}
+  Would it make sense to define $A(t)=\min\{k : A_k \geq t\}$?
+\hint{Compare this to the definition in (\ref{eq:2}).}
+  \begin{solution}
+    Suppose $A_3 = 10$ and $A_4 = 20$. Take $t=15$. Then
+    $\min\{k : A_k \geq 15\} = 4$ since $A_3 < t=15 < A_4$. On the
+    other hand $\max\{k : A_k \leq t\} = 3.$
+  \end{solution}
+\end{question}
 
 \begin{question}
   Define $L_Q(t)$ as the number of job in queue, and $L_s(t)$ as the

@@ -57,10 +57,12 @@ arrival. Then the expected time the job spends in queue is
 \begin{equation*}
   \E{W_{Q,b}} = \E{L} \E S;
 \end{equation*}
-note that this is not the same as $\E{W_Q}$, which is the expected
-time an \emph{item} spends in queue.  If $B_r$ is the number of items
-of the batch currently in service ($B_r=0$ is the server is idle), and
-$L_{Q,b}$ the number of batches in queue, then
+\nvf{Is this true? How about the item currently in service. Shouldn't
+  it be $\E{L_Q}\E S+ \E{S_r}$.}  note that this is not the same as
+$\E{W_Q}$, which is the expected time an \emph{item} spends in queue.
+If $B_r$ is the number of items of the batch currently in service
+($B_r=0$ is the server is idle), and $L_{Q,b}$ the number of batches
+in queue, then
 \begin{equation*}
   \E{L} = \E{L_{Q,b}}\E B + \E{B_r}.
 \end{equation*}
@@ -141,7 +143,7 @@ waiting time can be computed with the above result.
     \draw (-0.5, 2.5) -- (18.5, 2.5) 
     node[pos=0.65, fill=white]
     {$\sum_{k=1}^n \1{B_k \geq i}$};
-    \draw[<->] (14., 0) -- (14., 2.5) node[fill=white, midway] {$i$};
+    \draw[<->] (14., 0) -- (14., 2.5) node[fill=white, midway, rotate=90] {$i$};
 
 
     % bottom line
@@ -188,7 +190,7 @@ With this expression for $\P{R=i}$, the expected remaining time becomes
 &=\sum_{i=0}^\infty (i+1) \frac{G(i)}{\E B} 
 =\sum_{i=0}^\infty i \frac{G(i)}{\E B} +
 \sum_{i=0}^\infty \frac{G(i)}{\E B}\\
-&= \frac{\E{B^2}}2 - \frac{\E B}2 + \E B = \frac{\E{B^2}}2 + \frac{\E B}2,
+&= \frac{\E{B^2}}{2\E B} - \frac{\E B}{2\E B} + \frac{\E B}{\E B} = \frac{\E{B^2}}{2\E B} + \frac{1}2,
   \end{split}
 \end{equation*}
 where we use the results of the exercises below.
@@ -402,10 +404,8 @@ where $G(x) = 1 - F(x)$.
 
 
 \begin{question}
- Use the above to check that if $F(x) = 1 - e^{-\mu x}$,
-\begin{equation*}
-  \E S = \mu^{-1}.
-\end{equation*}
+  Use that $\E S = \int_0^\infty x dF = \int_0^\infty G(y) \d y$ to
+  check that  $\E S = \mu^{-1}$ if $F(x) = 1 - e^{-\mu x}$.
 \begin{solution}
 If $F(x) = 1 - e^{-\mu x}$, we obtain that 
 \begin{equation*}

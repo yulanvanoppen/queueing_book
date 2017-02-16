@@ -3,34 +3,33 @@
 
 If the arrival and service processes are such that the queueing system
 is rate-stable, we can sensibly define other performance measures such
-as the average waiting time. In this section we define the set of
-second most important performance measures; the most important being
-the utilization $\rho$. We provide an overview of the relations
-between these performance measures in
-Figure~\ref{fig:constructiongg1}.
+as the average waiting time. In this section we define the second most
+important performance measures; the most important being the
+utilization $\rho$. We provide an overview of the relations between
+these performance measures in Figure~\ref{fig:constructiongg1}.
 
 
 With the construction of queueing processes in
 Section~\ref{sec:constr-gg1-queu} we can compute the waiting time as
 observed by the first $n$, say, jobs. Thus, the average waiting time
 of the first $n$ arrivals is given by $n^{-1}\sum_{k=1}^n W_k$. We
-therefore define the \recall{average waiting time} as
+therefore define the \recall{expected waiting time} as
 \begin{equation}\label{eq:49}
-  \E W = \lim_{n\to\infty} n^{-1}\sum_{k=1}^n W_k,
+  \E W = \lim_{n\to\infty} \frac 1n\sum_{k=1}^n W_k,
 \end{equation}
-and the average time in queue as
+and the expected time in queue as
 \begin{equation}\label{eq:50}
-  \E{W_Q} = \lim_{n\to\infty} n^{-1}\sum_{k=1}^n W_{Q,k}.
+  \E{W_Q} = \lim_{n\to\infty} \frac 1 n\sum_{k=1}^n W_{Q,k}.
 \end{equation}
 Note that these performance measures are limits of \emph{emperical}
-measures.  Note also that these measures are \recall{averages as
-  observed by arriving jobs}: the first job has a waiting time $W_1$
-at the moment of its arrival, the second a waiting time $W_2$, and so
-on. For this reason we say colloquially that $\E W$ is the average
-waiting time as `seen by arrivals'.  The \recall{distribution of the
-  waiting times at arrival times} can  be found by counting:
+measures.  Note also that these statistics are as \recall{observed by
+  arriving jobs}: the first job has a waiting time $W_1$ at its
+arrival epoch, the second a waiting time $W_2$, and so on. For this
+reason we colloquially say that $\E W$ is the average waiting time as
+`seen by arrivals'.  The \recall{distribution of the waiting times at
+  arrival times} can be found by counting:
 \begin{equation}\label{eq:48}
-  \P{W \leq x}  = \lim_{n\to\infty} n^{-1}\sum_{k=1}^n \1{W_k\leq x}.
+  \P{W \leq x}  = \lim_{n\to\infty} \frac 1n\sum_{k=1}^n \1{W_k\leq x}.
 \end{equation}
 Finally, the (sample) \recall{average number of jobs} in the system as seen by
 arrivals is given by
@@ -41,7 +40,7 @@ where $L_k = L(A_k)$, i.e., the number in system at the arrival epoch
 of the $k$th job.  The \recall{distribution of $\{L(t)\}$ as seen by
   customers upon arrival}, is
 \begin{equation}\label{eq:Qm}
-\P{L\leq m} = \lim_{n\to\infty} \frac 1 n \sum_{k=1}^n \1{Lx_k \leq m}.
+\P{L\leq m} = \lim_{n\to\infty} \frac 1 n \sum_{k=1}^n \1{L_k \leq m}.
 \end{equation}
 
 
@@ -55,21 +54,21 @@ jobs in the system} is given by
 \mathcal{L}(t) = \frac 1 t\int_0^t L(s)\d s =  \frac 1 t\int_0^t (A(s)-D(s)) \d s,
 \end{equation}
 where we use that $L(t)=A(t) - D(t)$ is the total number of jobs in
-the system at time $t$.  Observe from the second equation that
-$\int_0^t L(s)\d s$ is the area enclosed between the graphs of $\{A(s)\}$
-and $\{D(s)\}$. Assuming the limit exists for $t\to\infty$, we define
+the system at time $t$, c.f. Figure~\ref{fig:atltdt}.  Observe from the second equation that
+$\int_0^t L(s)\d s$ is the area enclosed between the graphs of $\{A(t)\}$
+and $\{D(t)\}$. Assuming the limit exists for $t\to\infty$, we define
 \begin{equation}
   \label{eq:46}
-  \E L = \lim_{t\to\infty} \frac 1 t\int_0^t L(s)\d s 
+  \E L = \lim_{t\to\infty} \frac 1 t\int_0^t L(s) \d s 
 \end{equation}
 Observe that, notwithstanding that the symbols are the same, this
-expectation need not be the same as~\eqref{eq:EQ},
-c.f. Exercise~\ref{ex:1}. Next, define the following probability as
-the \recall{time-average fraction of time the system contains at most $m$
-jobs}:
+expectation need not be the same as~\eqref{eq:EQ}, c.f. on of the
+exercises below. Next, define the following probability as the
+\recall{time-average fraction of time the system contains at most $m$
+  jobs}:
 \begin{equation}
   \label{eq:47}
-  \P{L\leq m} =\lim_{t\to\infty} \frac 1 t\int_0^t \1{L(s)\leq m}\,\d s.
+  \P{L\leq m} =\lim_{t\to\infty} \frac 1 t\int_0^t \1{L(s)\leq m} \d s.
 \end{equation}
 Again, this probability need not be the same as what customers see
 upon arrival.  
@@ -165,7 +164,7 @@ edge[pil,bend left=25, <-] (mu.east);
     edge[pil, bend right=10, <-]  (lambda)
     edge[pil, bend left = 30, <-]  node[below] {$L(t)>0$} (Q_t);
 
-    \node[block, below=1cm of W, fill=blue!40] (PW) {$\frac 1n \sum_{k=1}^n 1\{W_k \leq w\} \to \P{W\leq w}$}
+    \node[block, below=1cm of W, fill=blue!40] (PW) {$\frac 1n \sum_{k=1}^n \1{W_k \leq w} \to \P{W\leq w}$}
     edge[pil, <-] (W);
 
     \node[block, below=1cm of Q_t, fill=blue!40] (PL) {$\frac 1t \int_{0}^t \1{L(s) \leq l} \to \P{L\leq l}$}
@@ -197,23 +196,33 @@ edge[pil,bend left=25, <-] (mu.east);
 
 
 \begin{question}
-\label{ex:1}
 Design a queueing system in which the load as seen the server is very
-different from what the customers see.
-  \begin{solution}
-    Let the interarrival times $\{X_i\}$ be all identical to 1 hour
-    and service times all identical to $S_i=59$ minutes.
-  \end{solution}
+different from what the customers see. Show that for such a queueing system typically
+\begin{equation*}
+  \lim_{t\to\infty} \frac 1 t\int_0^t L(s)\, \d s \neq   \lim_{n\to\infty}\frac 1n  \sum_{k=1}^n L_k.
+\end{equation*}
+hence, in general:
+  \begin{equation*}
+    \lim_{t\to\infty} \int_0^t \1{L(s)\leq m}\,\d s \neq \lim_{n\to\infty} \frac 1n \sum_{k=1}^n \1{L_k \leq m},
+  \end{equation*}
+  \hint{Consider a queueing system with constant service and
+    interarrival times.}
+\begin{solution}
+  Take $X_k = 10$ and $S_k = 10-\epsilon$ for some tiny
+  $\epsilon$. Then $L(t) = 1$ nearly all of the time. In fact,
+  $\E L = 1-\epsilon/10$. However, $L_k=0$ for all $k$.
+\end{solution}
 \end{question}
 
 
 \begin{question}\label{ex:2}
   \begin{enumerate}
-  \item Assume that $X_i = 10$ minutes and $S_i = 11$ minutes for all
-    $i$. What are $\lambda$ and $\mu$?  Compute $A_k$, $W_k$, $D_k$
-    and $L_k$. How do these numbers behave as a function of $k$?.
-  \item Yet another simple case is to take $X_i=10$ minutes and
-    $S_i=9$ minutes for all $k$. Answer the same questions as in the
+  \item Assume that $X_k = 10$ minutes and $S_k = 11$ minutes for all
+    $k$, i.e., $X_k$ and $S_k$ are deterministic and constant. What
+    are $\lambda$ and $\mu$?  Compute $A_k$, $W_k$, $D_k$ and
+    $L_k$. How do these numbers behave as a function of $k$?.
+  \item Yet another simple case is to take $X_k=10$ minutes and
+    $S_k=9$ minutes for all $k$. Answer the same questions as in the
     previous part.
   \end{enumerate}
   \begin{solution}
@@ -234,34 +243,15 @@ different from what the customers see.
 \end{question}
 
 
-
-
-\begin{question}\label{ex:4}
-  Construct a queueing system for which 
-\begin{equation*}
-  \lim_{t\to\infty} \frac 1 t\int_0^t L(s)\, \d s \neq   \lim_{n\to\infty}\frac 1n  \sum_{k=1}^n L_k.
-\end{equation*}
-hence, in general:
-  \begin{equation*}
-    \lim_{t\to\infty} \int_0^t 1\{L(s)\leq m\}\,\d s \neq \lim_{n\to\infty} \frac 1n \sum_{k=1}^n 1\{L_k \leq m\},
-  \end{equation*}
-  \hint{Use Exercise~\ref{ex:2}.}
-\begin{solution}
-  Take $X_i = 10$ and $S_i = 10-\epsilon$ for some tiny
-  $\epsilon$. Then $L(t) = 1$ nearly all of the time. In fact,
-  $\E L = 1-\epsilon/10$. However, $L_k=0$ for all $k$.
-\end{solution}
-\end{question}
-
-
 \begin{question}
   Consider a discrete-time model of a queueing system, as we developed
   in Section~\ref{sec:constr-discr-time}.  In that case batches of
   jobs can arrive in a period, and the average number of customers
   that \emph{see upon arrival} more than~$m$ customers in the system
-  cannot be defined as~\eqref{eq:Qm}. Provide a better definition. As
-  a start, why is \eqref{eq:Qm} not the same as the number of
-  batches that see a queue length less than $m$?
+  cannot be defined as~\eqref{eq:Qm}. Provide a better definition. 
+
+\hint{Why is \eqref{eq:Qm} not the same as the number of
+  batches that see a queue length less than $m$?}
 
   \begin{solution} Since we deal with a system in discrete time $L_k$
     is the queue length at the end of period~$k$. Thus,
@@ -271,7 +261,7 @@ hence, in general:
     only when $a_k>0$ the customers in a batch would see a queue
     $L_k>m$. Thus,
     \begin{equation*}
-      \sum_{k=1}^n \1{L_k > m, a_k > 0},
+      \sum_{k=1}^n \1{L_k > m} \1{a_k > 0},
     \end{equation*}
     counts the number of batches. 
 
@@ -286,13 +276,13 @@ hence, in general:
     more jobs in the system.. Therefore, the fraction of arrivals that
     see a queue with $m$ or more jobs is equal to
 \begin{equation*}
-  \frac 1{A(n)} \sum_{k=1}^n 1_{L_k > m} (L_k - m).
+  \frac 1 {A(n)} \sum_{k=1}^n (L_k - m) \1{L_k > m} .
 \end{equation*}
 We could also define this a bit differently. Suppose that we don't
 want to distinguish between jobs in a batch, but simply want to say
 that if one job sees a long queue, all see a long queue. In that case,
 \begin{equation*}
-\frac 1{A(n)}\sum_{k=1}^n 1{L_k > m} a_k .
+\frac 1{A(n)}\sum_{k=1}^n a_k \1{L_k > m}.
 \end{equation*}
 Thus, when jobs arrive in batches, the definition of loss fraction
 requires some care; not all definitions need to measure the same.

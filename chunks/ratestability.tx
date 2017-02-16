@@ -8,12 +8,12 @@ intuition that when, on the long run, jobs arrive faster than they can
 leave, the system must `explode'. Thus, the first performance measures
 we need to estimate when analyzing a queueing system are the arrival
 and departure rate, and then we need to check that the arrival rate is
-not larger than the departure rate. In particular, the load, defined
-as the ratio of the arrival rate and service rate is of importance. In
+smaller than the departure rate. In particular, the load, defined as
+the ratio of the arrival rate and service rate is of importance. In
 this section we define and relate these concepts.  As a reminder, we
 keep the discussion in these notes mostly at an intuitive level, and
 refer to \cite{el-taha98:_sampl_path_analy_queuein_system} for proofs
-and further background discussion.
+and further background.
 
 
 We first formalize the \emph{arrival rate} and \emph{departure rate}
@@ -62,12 +62,11 @@ service time of the $k$th job to be served, and define
 U_n = \sum_{k=1}^n S_k
 \end{equation*}
 as the total service time required by the first $n$ jobs. With this,
-the number of jobs that the server can \emph{potentially} serve during
-$[0,t]$ becomes
+let 
 \begin{equation*}
   U(t) = \sup\{n: U_n \leq t\}.
 \end{equation*}
-Then, define the \recall{service } or \emph{processing rate} as
+and  define the \recall{service } or \emph{processing rate} as
 \begin{equation*}
   \mu = \lim_{t\to\infty} \frac{U(t)}t.
 \end{equation*}
@@ -106,37 +105,40 @@ $\V{X_n} >0$ then $\lim_t L(t)/t$ does not necessarily exist. For this
 reason we henceforth require that $\mu > \lambda$.
 
 The concept of \recall{load} or \emph{utilization}, denoted by the
-symbol $\rho$, is a fundamental notion. Conceptually, the load is the
-rate at which jobs arrive multiplied by the average amount of work per
-job.  More specifically, since $A(t)$ is the number of jobs that have
-arrived up to time $t$, the total amount of work arrived up to time
-$t$ is given by $\sum_{k=1}^{A(t)} S_k$. We therefore define the load
-as
+symbol $\rho$, is fundamental. One way to define it is as the limiting
+fraction of time the server is busy, i.e.,
 \begin{equation*}
-  \rho = \lim_{t\to\infty} \frac 1 t\sum_{k=1}^{A(t)} S_k.
+  \rho = \lim_{t\to\infty} \frac 1 t \int_0^t \1{L(s)>0} \d s.
 \end{equation*}
-We can relate this to the arrival rate $\lambda$ and the expected
-service time $ \E S$ by observing that, as $A(t)\to \infty$ as
-$t\to\infty$,
+Interestingly, we can express this in terms of the arrival rate
+$\lambda$ and service rate $\mu$. Observe that
+\begin{equation*}
+  \sum_{k=1}^{A(t)} S_k \geq \int_0^t \1{L(s)>0} \d s \geq   \sum_{k=1}^{D(t)} S_k,
+\end{equation*}
+since $t$ can lie half way a service interval and $A(t) \geq D(t)$. As
+$A(t)\to \infty$ as $t\to\infty$,
 \begin{equation*}
   \lim_{t\to\infty} \frac 1 t\sum_{k=1}^{A(t)} S_k = 
   \lim_{t\to\infty} \frac{A(t)}t \frac{1}{A(t)} \sum_{k=1}^{A(t)} S_k = 
   \lim_{t\to\infty} \frac{A(t)}t \cdot \lim_{t\to\infty}\frac{1}{A(t)} \sum_{k=1}^{A(t)} S_k = \lambda \E S.
 \end{equation*}
-Thus, 
+Applying similar limits to the other inequality gives
 \begin{equation*}
-  \rho = \lambda \E S.
+\lambda \E S \geq \rho \geq \gamma \E S.
 \end{equation*}
-Moreover, as $\lambda^{-1} = \E X$ and $\mu^{-1} = \E S$, we get the
-following set of relations
+Hence, if $\gamma=\lambda$, $\rho = \lambda \E S$.  
+
+From the identies $\lambda^{-1} = \E X$ and $\mu^{-1} = \E S$, we get
+a further set of relations:
 \begin{equation*}
   \rho = \lambda \E S = \frac{\lambda}{\mu} = \frac{\E S}{\E X}.
 \end{equation*}
-
-Finally, recall that for a system to be rate-stable, it is necessary
-that $\mu> \lambda$, implying in turn that $\rho < 1$. The relation
+Thus, the load has also the interpretation as the rate at which jobs
+arrive multiplied by the average amount of work per job.  Finally,
+recall that for a system to be rate-stable, it is necessary that
+$\mu> \lambda$, implying in turn that $\rho < 1$. The relation
 $\rho=\E S/ \E X < 1$ then tells us that the average time it takes to
-serve a job  must be less than the average time between two consecutive
+serve a job must be less than the average time between two consecutive
 arrivals, i.e., $\E S < \E X$.
 
 
@@ -144,9 +146,9 @@ arrivals, i.e., $\E S < \E X$.
   Define the departure time $D_{k}$ of the $k$th job in terms of
   $\{D(t)\}$. (Use the analogy with Eq.~\eqref{eq:27}.)
 \begin{solution}
-  Let $D_{k} = \inf\{t; D(t) \geq k\}$. Then the inter-departure times
-  are $\{D_{k}-D_{k-1}\}$. Conversely, given a set of inter-departure
-  times, we can construct $\{D_k\}$ and from this $\{D(t)\}$.
+  \begin{equation*}
+ D_{k} = \inf\{t; D(t) \geq k\}.
+  \end{equation*}
 \end{solution}
 \end{question}
 

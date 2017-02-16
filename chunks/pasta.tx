@@ -201,6 +201,16 @@ the same, i.e. 0 versus 29.
 \end{question}
 
 \begin{question}
+  Is in general $\pi(n)\geq \delta(n)$?
+  \begin{solution}
+    We have shown for one-step transition processes that
+    $\lambda \pi(n) = \gamma \delta(n)$. Thus,
+    $\pi(n) = \gamma/\lambda \delta(n)$. Since $\lambda\geq \gamma$,
+    we have that $\pi(n) \geq \delta(n)$.
+  \end{solution}
+\end{question}
+
+\begin{question}
   Why is $\mu(n) = \mu$ for the $M/M/1$ queue?  \hint{Think about the
     construction of the $M/M/1$ queue as a random walk, see
     Section~\ref{sec:queu-proc-as}.}

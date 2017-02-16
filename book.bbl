@@ -1,4 +1,4 @@
-\begin{thebibliography}{6}
+\begin{thebibliography}{5}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -17,11 +17,6 @@ G.~Bolch, S.~Greiner, H.~de~Meer, and K.~S. Trivedi.
 \newblock \emph{Queueing Networks and {M}arkov Chains: {M}odeling and
   Performance Evaluation with Computer Science Applications}.
 \newblock John Wiley \& Sons, 2006.
-
-\bibitem[Brill(2008)]{brill08:_level_cross_method_stoch_model}
-P.H. Brill.
-\newblock \emph{Level Crossing Methods in Stochastic Models}.
-\newblock Springer, 2008.
 
 \bibitem[Cox(1962)]{cox62:_renew_theor}
 D.R. Cox, editor.
