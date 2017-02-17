@@ -1,6 +1,30 @@
 \documentclass[a4paper,11pt]{scrbook}
 \usepackage{preamble}
 
+\renewcommand\exsheetsprintsolution[2]{
+\ExSheetsHeading
+{runin}               % headings style
+{Hint}                % heading
+{\GetQuestionProperty{counter}{\CurrentQuestionID}}% number
+{0}                   % points -- need to be zero here
+{0}                   % bonus points -- need to be zero here
+{##1}%                % ID
+\GetQuestionProperty{hint}{\CurrentQuestionID}%
+#1#2
+}
+\SetupExSheets{
+  headings = runin,
+  question/print = true,
+  question/pre-hook=\noindent\rule{\textwidth}{0.4pt},
+  solution/pre-hook=\vspace{3cm},
+  solution/print = true,
+  counter-within = section,
+  counter-format = ch.se.qu
+}
+
+\renewcommand{\hint}[1]{\SetQuestionProperties{ hint = {#1}}}
+
+
 \author{Nicky D. van  Foreest}
 \title{Analysis of Queueing Systems with  Sample Paths and Simulation }
 
@@ -56,12 +80,6 @@ Read the appropriate sections of Zijm's book.
 \input{chunks/convolution.tx}
 \input{chunks/mva.tx}
 \input{chunks/mda.tx}
-
-\chapter{Hints}
-\printquestionhints
-
-\chapter{Solutions}
-\printsolutions
 
 \chapter{Notation}
 \label{sec:notation}

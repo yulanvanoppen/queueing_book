@@ -348,7 +348,17 @@ different queueing systems.
   the quality requirements after the first service but need some extra
   service time but less than an entirely new arriving job. Make a
   model to analyze this case. Compare this case with the yield loss
-  problem above.
+  problem above. 
+
+  Let's assume that the repair of a faulty requires half of the work
+  of a new job, and that the faulty jobs are processed with priority
+  over the new jobs. (There are of course many different policies to
+  treat rework; here we make this assumption. For your interest:
+  another possibility is that faulty items are processed at the end of
+  the day. Yet another possibility is that faulty items are collected
+  until there are $N$, say, and then the entire batch of $N$ is
+  repaired.)
+
   \begin{solution}
     Suppose again that a fraction $p$ is faulty. Since these faulty
     items require less processing time than a new job, the service
@@ -759,32 +769,37 @@ Similarly, the average waiting time for the $b$ jobs must be
 
 
 
-\begin{question}(Inventory control) The approach demonstrated in the
+\begin{question}(Inventory control) The recursions used in the
   exercises above can also be applied to analyze inventory control
   policies. Consider a production system that can produce maximally
-  $M_k$ items per week during normal working hours, and maximally $N_k$
-  items during extra (weekend and evening hours). Let, for period $k$,
+  $M_k$ items per week during normal working hours, and maximally
+  $N_k$ items during extra (weekend and evening hours). Let, for
+  period $k$,
   \begin{align*}
-    S_k &= \text{Sales, i.e., number of items sold, in  period $k$}, \\
-    p_k &= \text{Profit per item sold in  period $k$}, \\
-    D_k &= \text{Demand in  period $k$}, \\
-    X_k &= \text{Production capacity during normal hours}, \\
-    Y_k &= \text{Production capacity during extra  hours}, \\
-    c_k &= \text{Production cost per unit during normal  hours}, \\
-    d_k &= \text{Production cost per unit during extra  hours}, \\
-    h_k &= \text{holding cost per  unit at the end of the period}, \\
-    I_k &= \text{On hand inventory level at the end of the period}. \\
+    D_k &= \text{Demand in  week $k$}, \\
+    S_k &= \text{Sales, i.e., number of items sold, in week $k$}, \\
+    r_k &= \text{Revenue per item sold in week $k$}, \\
+    X_k &= \text{Number of items produced in week $k$  during normal hours}, \\
+    Y_k &= \text{Number of items produced in week $k$ during extra  hours}, \\
+    c_k &= \text{Production cost per item during normal  hours}, \\
+    d_k &= \text{Production cost per item during extra  hours}, \\
+    h_k &= \text{holding cost per  item, due at the end of week $k$}, \\
+    I_k &= \text{On hand inventory level at the end of week $k$}. \\
   \end{align*}
-  Management needs a production plan for the next $T$ periods
-  specifying the number of items to be produced for the next
-  periods. Formulate this problem as an optimization problem, and take
-  into account the inventory dynamics.
+  Management needs a production plan that specifies for the next $T$
+  weeks the number of items to be produced per week. Formulate this
+  problem as an LP problem, taking into account the inventory
+  dynamics.  
+
+\hint{Formuale the decision variables/controls, the
+    objective and the constraints.}
+
   \begin{solution}
     The decision variables are $X_k$, $Y_K$ and $S_k$ (note, it is not
-    necessary to meet all demand. As the production cost and profit
+    necessary to meet all demand:  the production cost and profit
     may vary per period.)  The objective is 
     \begin{equation*}
-      \max \sum_{k=1}^T (p_kS_k -c_k X_k - d_k Y_k - h_k I_k).
+      \max \sum_{k=1}^T (r_kS_k -c_k X_k - d_k Y_k - h_k I_k).
     \end{equation*}
 The constraints are 
 \begin{align*}

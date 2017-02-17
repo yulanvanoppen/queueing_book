@@ -79,13 +79,13 @@ analysis of queueing process. We summarize this by a theorem.
 
 \begin{question}
 Show that $\E{N_n(t)} = \sum_{i=1}^n \E{B_i} = n p$.
+\hint{Recall that $\E{X+Y} = \E X + \E Y$. Just as a reminder, $\E{XY} \neq \E X \E Y$ in general. Only when $X$ and $Y$ are uncorrelated (which is implied by independence), the product of the expectations is the expection of the products.}
 \begin{solution}
   \begin{equation*}
     \E{N_n(t)} = \E{\sum_{i=1}^n {B_i}} = \sum_{i=1}^n \E{B_i} = n \E{B_i} = n p.
   \end{equation*}
 \end{solution}
 \end{question}
-
 
 \begin{question}
 What is the difference between $N_n(t)$ and $N(t)$?
@@ -100,9 +100,14 @@ What is the difference between $N_n(t)$ and $N(t)$?
 \begin{question}
   Show how the binomial distribution~\eqref{eq:bin} converges to the
   Poisson distribution~\eqref{eq:pois} if $n\to\infty$, $p\to0$ such
-  that $np=\lambda$.
+  that $np=\lambda$. 
 
-  \begin{solution} Now we like to relate $N_n(t)$ and $N(t)$ It is
+  \hint{First find $p$, $n$, $\lambda$ and $t$ are such that the rate
+    at which event occur in both processes are the same. Then consider
+    the binomial distribution and use the standard limit
+    $(1-x/n)^n \to e^{-x}$ as $n\to \infty$. }
+
+  \begin{solution} Now we like to relate $N_n(t)$ and $N(t)$. It is
     clear that we at least want the expectations to be the same, that
     is, $np = \lambda t$. This implies that
 \begin{equation*}
@@ -142,6 +147,7 @@ is easy, so that, as $n\to\infty$,  the above converges to
   If the inter-arrival times are i.i.d. and exponentially distributed
   with mean $1/\lambda$, prove that the number $N(t)$ of arrivals
   during interval $[0,t]$ is Poisson distributed.
+\hint{Realize that     $\P{N(t)=k} = \P{A_k \leq t} - \P{A_{k+1} \leq t}$.}
     \begin{solution}
       We want to show that
     \begin{equation*}
@@ -184,8 +190,8 @@ We are done.
       distribtuion to compute this probability. Finally, use Taylor's
       expension of $e^{x}$ to see that $e^{x} = 1 +x + o(x)$ for
       $|x| << 1$.  Furthermore, use that
-      $\sum_{i=2}^\infty x^i/i! = \sum{i=0}^\infty x^i/i! - x -1 = e^x
-      - 1 -x$.}
+      $\sum_{i=2}^\infty x^i/i! = \sum_{i=0}^\infty x^i/i! - x -1 = e^x -x 
+      - 1$.}
 
 \begin{solution}
 
@@ -236,13 +242,17 @@ $N(t) \sim \text{P}(\lambda t)$.
   independent.  Show that
   $N_a(t) + N_s(t) \sim \text{P}((\lambda + \mu)t)$.  
 
-  \hint{Use an conditioning argument or use moment generating
-    functions. In particular, for condition, use that $\P{AB} = \P{A\given B}\P{B}$. More generally, if the set $A$ can be split into disjoint sets $B_i$, i.e, $A=\bigcup_{i=1}^n B_i$, then
+  \hint{Use a conditioning argument or use moment generating
+    functions. In particular, for conditioning, use that
+    $\P{AB} = \P{A\given B}\P{B}$. More generally, if the set $A$ can
+    be split into disjoint sets $B_i$, i.e, $A=\bigcup_{i=1}^n B_i$,
+    then
     \begin{equation*}
-      \P{A} = \sum_{i=1}^n \P{A\given B_i} \P{B_i}.
+      \P{A} = \sum_{i=1}^n \P{A B_i} = \sum_{i=1}^n \P{A\given B_i} \P{B_i},
     \end{equation*}
-Now choose practical sets $B_i$. 
-}
+    where we use the conditioning formula to see that
+    $\P{A B_i} = \P{A \given B_i} \P{B_i}$.  Now choose practical sets
+    $B_i$.  }
 
     \begin{solution}
 First we show how to  use conditioning. 
@@ -290,7 +300,14 @@ $M_1(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\
 \frac{\lambda}{\lambda+\mu}.
     \end{equation*}
     Note that the right-hand-side does not depend on $h$, hence it
-    holds for any time $h$, whether it is small or not.
+    holds for any time $h$, whether it is small or not.  \hint{Suppose
+      we write $N(t)=N_a(t) + N_s(t)$. Then
+      $\P{N_a(h) = 1, N_s(h) = 0 | N_a(h) + N_s(h) = 1}$ is the
+      probability that $N_a(h)=1$ and $N_s(h)=0$ \emph{given} that
+      $N(t)=1$. In other words, the question is find out that, given
+      one of the two processes `fired', what is the probability that
+      $N_a$ was the one that `fired'.}
+
     \begin{solution}
   With the above:
   \begin{equation*}

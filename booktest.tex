@@ -7,28 +7,48 @@
 \usepackage{xr-hyper}
 \externaldocument{book}
 
+\usepackage{bigfoot}
+% \DeclareNewFootnote{default} % if `normal' footnotes should be printed first
+\DeclareNewFootnote{solution}
+\renewcommand\thefootnotesolution{}
+
+%\renewcommand\exsheetsprintsolution[2]{\footnotesolution{#1#2}}
+% \renewcommand\exsheetsprintsolution[2]{
+% \footnotesolution{
+% \ExSheetsHeading
+%   {runin}               % headings style
+%   {Hint}                % heading
+%   {\GetQuestionProperty{counter}{\CurrentQuestionID}}% number
+%   {0}                   % points -- need to be zero here
+%   {0}                   % bonus points -- need to be zero here
+%   {\CurrentQuestionID}%                % ID
+% \GetQuestionProperty{hint}{\CurrentQuestionID}%
+% #1#2
+% }
+% }
+
+\renewcommand\exsheetsprintsolution[2]{
+\ExSheetsHeading
+{runin}               % headings style
+{Hint}                % heading
+{\GetQuestionProperty{counter}{\CurrentQuestionID}}% number
+{0}                   % points -- need to be zero here
+{0}                   % bonus points -- need to be zero here
+{##1}%                % ID
+\GetQuestionProperty{hint}{\CurrentQuestionID}
+#1#2
+}
+\renewcommand{\hint}[1]{\SetQuestionProperties{ hint = {#1}}}
+
+
 \SetupExSheets{
   headings = runin,
   question/print = true,
-  % question/pre-body-hook = 
-  % {jaap
-  %      \IfQuestionPropertyT{hint}{##1}{%
-  %        \ExSheetsHeading
-  %          {runin}               % headings style
-  %          {Hint}                % heading
-  %          {\QuestionNumber{##1}}% number
-  %          {0}                   % points -- need to be zero here
-  %          {0}                   % bonus points -- need to be zero here
-  %          {##1}%                % ID
-  %        \GetQuestionProperty{hint}{##1}%
-  %        \par
-  %        \medskip
-  %      }%
-  % },
   solution/print = true,
   counter-within = section,
   counter-format = ch.se.qu
 }
+
 
 \begin{document}
 
@@ -39,7 +59,7 @@
 \chapter{Single-Station Queueing Systems}
 %\input{todo/appendix.tex}
 %\input{tex_files/single_station_intro.tex}
-%input{chunks/expdistribution.tx}
+\input{chunks/expdistribution.tx}
 %\input{tex_files/poissondistribution.tex}
 % \input{kendall.tex}
 %\input{chunks/constructiondiscretetime.tx}
@@ -47,7 +67,7 @@
 %\input{chunks/random_walk.tx}
 %\input{chunks/ratestability.tx}
 %\input{chunks/empericalperfmeasures.tx}
-\input{chunks/levelcrossing.tx}
+%\input{chunks/levelcrossing.tx}
 % \input{chunks/mm1.tx}
 %  \input{chunks/mnmn1.tx}
 %  \input{chunks/pasta.tx}
@@ -93,17 +113,17 @@
 %\input{tex_files/open_move_batches.tex}
 
 
-\chapter{Hints}
+%\chapter{Hints}
 %\addcontentsline{toc}{chapter}{Hints}
 % \fancyhead{} % clear all header fields
 % \fancyhead[LO, LE]{HINTS}
-\printquestionhints
+%\printquestionhints
 
-\chapter{Solutions}
+%\chapter{Solutions}
 %\addcontentsline{toc}{chapter}{Solutions}
 % \fancyhead{} % clear all header fields
 % \fancyhead[LO, LE]{SOLUTIONS}
-\printsolutions
+%\printsolutions
 
 \chapter*{Notation}
 %\addcontentsline{toc}{chapter}{Notation}
