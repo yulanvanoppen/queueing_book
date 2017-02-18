@@ -52,7 +52,7 @@ where we use~(\ref{eq:37}) in the last equation.
 The average waiting time $\E W$ in the entire system, i.e., in queue
 plus in service, is therefore
 \begin{equation*}
-  \E W = \E{W_Q}+ \E S = \frac{\E{S_r}}{1-\rho} + \E S..
+  \E W = \E{W_Q}+ \E S = \frac{\E{S_r}}{1-\rho} + \E S.
 \end{equation*}
 
 The situation can be significantly simplified for the $M/M/1$ queue as
@@ -77,9 +77,9 @@ where we use Little's law $\E L = \lambda \E W$.  Hence,
 \E W = \frac{\E S}{1-\rho}.
 \end{equation*}
 Also,
-\begin{equation*}
+\begin{equation}\label{eq:wqes}
   \E{W_Q} = \E L \E S = \lambda \E W \E S= \rho \E W = \frac{\rho}{1-\rho} \E S = \frac{\rho^2}{1-\rho} \frac 1 \lambda,
-\end{equation*}
+\end{equation}
 which is consistent with our earlier result.  
 
 For the average queue length we use Little's law. Then

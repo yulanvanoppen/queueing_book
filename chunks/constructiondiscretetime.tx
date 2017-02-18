@@ -814,28 +814,26 @@ I_k &>= 0.
 
 \begin{question} (Estimating the lead time distribution.)  Take
   $d_k = \min\{Q_{k-1}+a_k, c_k\}$, and assume that jobs are served in
-  FIFO sequence.
-  \begin{enumerate}
-  \item Find an expression for the earliest possible departure time
-    $l_-(k)$ of a job that arrives at time $k$.
-  \item Find an expression for the latest possible departure time
-    $l_+(k)$ of a job that arrives at time $k$.
-  \item How can you use $l_-$ and $l_+$ to  bound the waiting times?
-  \end{enumerate}
+  FIFO sequence. Find an expression for the shortest possible waiting
+  time $W_-(k)$ of a job that arrives at time $k$, and an expression
+  for the largest possible waiting time $W_+(k)$
+  \hint{Consider a numerical example. Suppose $Q_{k-1}=20$. Suppose
+    that the capacity is $c_k=3$ for all $k$. Then a job that arrives
+    in the $k$th period, must wait at least $20/3$ (plus rounding)
+    periods before it can leave the system. Now generalize this
+    numerical example.}
     \begin{solution}
-      \begin{enumerate}
-      \item     A job that arrives at time $k$ cannot be served before period
+    A job that arrives at time $k$ cannot be served before period
     \begin{equation*}
-    l_-(k):= \max\left\{l: \sum_{i=n}^l d_i < Q_{k-1}\right\}.
+    W_-(k):= \max\left\{l: \sum_{i=k}^{k+l} d_i < Q_{k-1}\right\},
     \end{equation*}
-  \item  It will be served before period
+and it must have been  served before period
     \begin{equation*}
-      l_+(k):= \min\left\{l: \sum_{i=n+1}^l d_i \geq
+      W_+(k):= \min\left\{l: \sum_{i=k}^{k+l} c_i \geq
         Q_{k}\right\}.
     \end{equation*}
-  \item Thus, the waiting time of jobs arriving in period $k$ must lie
-    in $[l_-(k), l_+(k)]$.
-      \end{enumerate}
+    Thus, the waiting time of jobs arriving in period $k$ must lie in
+    $[W_-(k), W_+(k)]$.
   \end{solution}
 \end{question}
 
@@ -864,6 +862,7 @@ I_k &>= 0.
 
 
 These are the number of arrivals in each period.
+
 
 
 \lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_4.tex}
@@ -903,7 +902,7 @@ Here I
 define loss as the number of periods in which the queue length exceeds
 20. Of course, any other threshold can by taken. Counting the number
 of such periods is very easy in python: \texttt{(Q>20)} gives all
-entries of $Q$ such $Q>20$, the function \texttt{sum} just adds
+entries of $Q$ such $Q>20$, the function \texttt{sum()} just adds
 them. 
 
 
@@ -926,26 +925,45 @@ Now I am going to run the same code, but for a larger instance.
 \lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_11.tex}
 
 
-\includegraphics{md1_sim} 
-
-I multiply the mean of \texttt{(Q>20)} by 100 to get a percentage.
-
-And finally an example with the same arrival pattern but with a Poisson distributed number of jobs served per day.
-
 
 
 \lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_12.tex}
 
 
-\includegraphics{mm1_sim} 
 
-You should compare the scales of these two graphs. The second queue
-behaves more wildly, as expected.
+I multiply with 100 to get a percentage. Clearly, many jobs see a long
+queue, the mean is already some 24 jobs. For this arrival rate a
+service capacity of $\mu=21$ is certainly too small. 
 
-You can try to implement the other cases below and analyze them in the
-same way. Hopefully you understand from the above that once you have
-the recursions to construct/simulate the queueing process, you are `in
-business'. The rest is easy, just make plots, do some counting, and so on.
+Next, an example with the same arrival pattern but with a Poisson
+distributed number of jobs served per day, so the service rate is
+still $21$, but the period capacity $c$ is random variable with
+Poisson distribution with $P(21)$
+
+
+
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_13.tex}
+
+
+
+
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_14.tex}
+
+
+Compared to the case with constant service capacity, i.e., $c=21$ in
+each period, we see that the average waiting time increases, just as
+the number of periods in which the queue length exceeds 30. Clearly,
+variability in service capacity does not improve the performance of
+the queueing system, quite on the contrary. In later sections we will
+see why this is so.
+
+You can try to implement some of the other cases of the exercises in
+this section and analyze them in the same way. Hopefully you
+understand from this discussion that once you have the recursions to
+construct/simulate the queueing process, you are `in business'. The
+rest is easy: make plots, do some counting, i.e., assemble statistics,
+vary parameters for sensitivity analysis, and so on.
+
   \end{solution}
 \end{question}
 

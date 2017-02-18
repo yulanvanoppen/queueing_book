@@ -309,6 +309,29 @@ What are $\rho$,
 \end{question}
 
 \begin{question}
+  Suppose for the $G/G/1$ that a job sees $n$ jobs in the system upon
+  arrival. Can you use the central limit law to estimate the
+  distribution of waiting time in queue for this job?  
+
+\hint{ Let
+    $S_n = \sum_{k=1}^n X_k$. Then, under conditions you can find on
+    the internet, $(S_n - n \E X)/\sqrt{n\V X} \to N(0,1)$ as
+  $n\to \infty$, where and $N(0,1)$ is a normally distributed random
+  variable with $\mu=0$ and $\sigma=1$. But then,
+  $S_n \sim \sqrt{n\V X} N(0,1) + n \E X$.}
+
+\begin{solution} If the number in the system is $n$, then the total
+  service time required to process these $n$ jobs is the sum of the
+  service times, i.e.,$W_{Q,k} = \sum_{k=1}^n S_k$ where $k$ counts over the
+  $n$ jobs in the system. Then, with the hint,
+  \begin{equation*}
+    W_{Q, k} \sim \sqrt{n \V S} N(0,1) + n \E S.
+  \end{equation*}
+Thus, the waiting time in queue is approximately normally distributed with mean $n \E S$ and variance $\sqrt{n \V S}$. 
+\end{solution}
+\end{question}
+
+\begin{question}
   (Hall 5.19) When a bus reaches the end of its line, it undergoes a
   series of inspections. The entire inspection takes 5 minutes on
   average, with a standard deviation of 2 minutes. Buses arrive with

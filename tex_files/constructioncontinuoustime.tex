@@ -326,10 +326,10 @@ This first year probability. It should be elementary for you. Ensure you can do 
 \end{align*}
 With this
   \begin{align*}
-    \P{W_{Q,1} = 1} &=\P{W_{Q,0} + U = 1} = \P{3 + U =1} = \P{U=-2} \\
-    \P{W_{Q,1} = 2} &= \P{3 + U =2} = \P{U=-1} \\
-    \P{W_{Q,1} = 3} &= \P{3 + U = 3} = \P{U=0} \\
-    \P{W_{Q,1} = 4} &= \P{3 + U = 4} = \P{U=1} \\
+    \P{W_{Q,1} = 1} &=\P{W_{Q,0} + U = 1} = \P{3 + U =1} = \P{U=-2} =\frac14\\
+    \P{W_{Q,1} = 2} &= \P{3 + U =2} = \P{U=-1}  =\frac14\\
+    \P{W_{Q,1} = 3} &= \P{3 + U = 3} = \P{U=0}  =\frac14\\
+    \P{W_{Q,1} = 4} &= \P{3 + U = 4} = \P{U=1}  =\frac14.\\
   \end{align*}
 And, then
   \begin{equation*}
@@ -360,6 +360,7 @@ W
 W = Lea.fastMax(W + S - X, 0)
 W
 @
+Great! Our handiwork matches with the computer's results. 
 
 \end{solution}
 \end{question}

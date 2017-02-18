@@ -1,8 +1,7 @@
 
->>> from math import sqrt
->>> var_L = sum((n-L)**2*P[n] for n in range(len(P)))
->>> var_L
-1.2475
->>> sqrt(var_L)
-1.116915395184434
+>>> var_q = sum((max(n-m,0)-Lq)**2*P[n] for n in range(len(P)))
+>>> var_q
+0.22750000000000004
+>>> sqrt(var_q)
+0.4769696007084729
 

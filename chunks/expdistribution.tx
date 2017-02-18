@@ -133,7 +133,6 @@ variables to simulate queueing systems.
 
 
 \begin{question}(Conditional probability)
-
   We have to give one present to one of three children. As we cannot
   divide the present into parts, we decide to let `fate decide'. That
   is, we choose a random number in the set $\{1, 2, 3\}$. The first

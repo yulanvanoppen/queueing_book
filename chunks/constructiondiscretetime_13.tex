@@ -1,7 +1,5 @@
 
-num = 1000
-a = np.random.poisson(labda, num)
-c = mu * np.ones_like(a)
+c = np.random.poisson(mu, num)
 Q = np.zeros_like(a)
 d = np.zeros_like(a)
 Q[0] = 10  # initial queue length

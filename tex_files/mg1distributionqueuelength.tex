@@ -67,16 +67,16 @@ where the last limit follows from the independence of $Y_k$ and $L(D_{k-1})$.
 \node[state] (3) [right of=2] {$\delta(3)$}; 
 \node[state] (4) [right of=3] {$\delta(4)$}; 
 %\node[state] (5) [right of=4] {$\cdots$}; 
-\node[state] (5) [above of=4] {};
+\node (5) [above of=4] {};
 
 \path 
-(0) edge [bend left] node[above, very near start] {$G(3)$} (5)
-(1) edge [bend left] node[above, very near start] {$G(3)$} (5)
-(2) edge [bend left] node[above, very near start] {$G(2)$} (5)
-(3) edge [bend left] node[above, very near start] {$G(1)$} (5)
+(0) edge [bend left] node[above, very near start, fill=white] {$G(3)$} (5)
+(1) edge [bend left] node[above, very near start, fill=white] {$G(3)$} (5)
+(2) edge [bend left] node[above, very near start, fill=white] {$G(2)$} (5)
+(3) edge [bend left] node[above, very near start, fill=white] {$G(1)$} (5)
 (4) edge [bend left] node[below, near start] {$f(0)$} (3);
 
-\draw[-, dotted, gray] (9.7,-0.5)--(9.7,3.0) node[below, black] {level $3$};
+\draw[-, dotted, gray] (9.7,-1)--(9.7, 4.0) node[below, black] {level $3$};
 
 
 \end{tikzpicture}

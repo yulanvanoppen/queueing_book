@@ -52,7 +52,7 @@ where we use~(\ref{eq:37}) in the last equation.
 The average waiting time $\E W$ in the entire system, i.e., in queue
 plus in service, is therefore
 \begin{equation*}
-  \E W = \E{W_Q}+ \E S = \frac{\E{S_r}}{1-\rho} + \E S..
+  \E W = \E{W_Q}+ \E S = \frac{\E{S_r}}{1-\rho} + \E S.
 \end{equation*}
 
 The situation can be significantly simplified for the $M/M/1$ queue as
@@ -77,9 +77,9 @@ where we use Little's law $\E L = \lambda \E W$.  Hence,
 \E W = \frac{\E S}{1-\rho}.
 \end{equation*}
 Also,
-\begin{equation*}
+\begin{equation}\label{eq:wqes}
   \E{W_Q} = \E L \E S = \lambda \E W \E S= \rho \E W = \frac{\rho}{1-\rho} \E S = \frac{\rho^2}{1-\rho} \frac 1 \lambda,
-\end{equation*}
+\end{equation}
 which is consistent with our earlier result.  
 
 For the average queue length we use Little's law. Then
@@ -685,24 +685,31 @@ the fraction of customers that sees a full system.
     \end{solution}
 \end{question}
 
-\begin{question}
-  Consider an $M/M/1$ queue with $\mu=1.2$ per hour. Make plots of
-  $\E{W_Q}$ for various values of $\lambda$ to show the dependency on
-  the arrival rate. The idea of making such plots is to analyze
+\begin{question}[use=false]
+\nvf{The code is in \texttt{progs/mm1\_waiting\_time.py}. In
+  mm1\_waiting\_time_distribution.py we compute the waiting time
+  distribution. At this point in the text this distribution has not
+  yet been derived.  This problem should be moved to another section.}
+
+Consider an $M/M/1$ queue with $\mu=1.2$ per hour. Make plots of the
+waiting time distribution $\P{W_Q\leq t}$ for various values of
+$\lambda$ to show the dependency on the arrival rate. Compare this to
+the dependence of average waiting time $\E{W_Q}$ on $\lambda$.
+
+The idea of making such plots is to analyze
   whether the service capacity suffices for a situation in which one
-  doesn't know the arrival rate, but one can control the service rate,
-  e.g., by hiring personel.
+  doesn't know the arrival rate very accurately, but one can control
+  the service rate, e.g., by hiring personel.
   \begin{solution}
-Lets just plot the waiting time for various values of $\lambda$.
+    Let's just plot the waiting time distribution
+for various values of $\lambda$. 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_22.tex}
 
 
 \begin{figure}[ht]
   \centering
-\includegraphics{waiting_time}
+\includegraphics{progs/mm1_waiting_time.tex}
   \caption{The waiting time distribution for various values of the arrival rate.}
   \label{fig:waitingtime}
 \end{figure}
@@ -731,6 +738,12 @@ Lets just plot the waiting time for various values of $\lambda$.
     \item 
 
 
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_22.tex}
+
+
+\item 
+
+
 \lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_23.tex}
 
 
@@ -750,12 +763,6 @@ Lets just plot the waiting time for various values of $\lambda$.
 
 
 \lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_26.tex}
-
-
-\item 
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_27.tex}
 
   \end{enumerate}
     \end{solution}
@@ -778,9 +785,15 @@ Lets just plot the waiting time for various values of $\lambda$.
 
 
 
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_27.tex}
+
+
+
+
 \lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_28.tex}
 
 
+\item 
 
 
 \lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_29.tex}
@@ -792,17 +805,11 @@ Lets just plot the waiting time for various values of $\lambda$.
 \lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_30.tex}
 
 
-\item 
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_31.tex}
-
-
 And now the waiting times:
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_32.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_31.tex}
 
 
 To check my implementation of the code, I compute the results of the
@@ -810,7 +817,7 @@ example on Page 144 of Hall's book.
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_33.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_32.tex}
 
 
 This checks.
@@ -836,7 +843,7 @@ This checks.
       Would one server/person do? 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_34.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_33.tex}
 
 
 Clearly not: The load is between 1 and 2 so we need at least two servers. 
@@ -853,7 +860,7 @@ expensive, customers have to do the waiting.)
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_35.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_34.tex}
 
 
 Considering the scenario with one server is superfluous as $\rho>1$ in
@@ -861,7 +868,7 @@ that case.
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_36.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_35.tex}
 
 
 \item 
@@ -892,18 +899,18 @@ $m$.
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_37.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_36.tex}
 
 Now the maintenance employees wait more than the tool crib employees.
 
 
 
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_37.tex}
+
+
+
+
 \lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_38.tex}
-
-
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_39.tex}
 
 
 Clearly, $m=3$ should do.
@@ -923,7 +930,7 @@ Clearly, $m=3$ should do.
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_40.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_39.tex}
 
 
 Compute Ls and so on
@@ -931,14 +938,14 @@ Compute Ls and so on
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_41.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_40.tex}
 
 
 \item 
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_42.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_41.tex}
 
 It is of interest to compare the M/M/2 system to the M/M/1 system with twice the capacity. 
   \end{enumerate}
