@@ -767,40 +767,31 @@ accepted
     \end{solution}
 \end{question}
 
-\begin{question}
-  Consider an $M/M/1$ queue with $\mu=1.2$ per hour. Make plots of
-  $\E{W_Q}$ for various values of $\lambda$ to show the dependency on
-  the arrival rate. The idea of making such plots is to analyze
+\begin{question}[use=false]
+\nvf{The code is in \texttt{progs/mm1\_waiting\_time.py}. In
+  mm1\_waiting\_time_distribution.py we compute the waiting time
+  distribution. At this point in the text this distribution has not
+  yet been derived.  This problem should be moved to another section.}
+
+Consider an $M/M/1$ queue with $\mu=1.2$ per hour. Make plots of the
+waiting time distribution $\P{W_Q\leq t}$ for various values of
+$\lambda$ to show the dependency on the arrival rate. Compare this to
+the dependence of average waiting time $\E{W_Q}$ on $\lambda$.
+
+The idea of making such plots is to analyze
   whether the service capacity suffices for a situation in which one
-  doesn't know the arrival rate, but one can control the service rate,
-  e.g., by hiring personel.
+  doesn't know the arrival rate very accurately, but one can control
+  the service rate, e.g., by hiring personel.
   \begin{solution}
-Lets just plot the waiting time for various values of $\lambda$.
+    Let's just plot the waiting time distribution
+for various values of $\lambda$. 
 
-<<term=False,fig=False>>=
-import numpy as np
-import matplotlib.pylab as plt
-import seaborn as sns
-sns.set_context("paper")
 
-mu = 1.2 # per minute
-t  = np.linspace(0, 10)
 
-plt.figure(figsize=(6, 2))
-for labda in np.linspace(0.5, 1., 10.):
-   rho = labda/mu
-   Ws = rho/(1.-rho)/labda
-   res = 1 - rho + rho*(1.-np.exp(-1./Ws*t))
-   plt.plot(t, res, label="%3.2f"%labda)
-plt.legend()
-filename = "figures/waiting_time.pdf"
-plt.savefig(filename)
-plt.close()
-@
 
 \begin{figure}[ht]
   \centering
-\includegraphics{waiting_time}
+\includegraphics{progs/mm1_waiting_time.tex}
   \caption{The waiting time distribution for various values of the arrival rate.}
   \label{fig:waitingtime}
 \end{figure}
