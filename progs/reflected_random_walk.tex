@@ -1,0 +1,94 @@
+% This file was created by matplotlib2tikz v0.5.15.
+\begin{tikzpicture}
+
+\definecolor{color0}{rgb}{0.886274509803922,0.290196078431373,0.2}
+\definecolor{color1}{rgb}{0.203921568627451,0.541176470588235,0.741176470588235}
+
+\begin{axis}[
+title={Regulated Random Walk},
+xlabel={Time},
+ylabel={Queue},
+xmin=0, xmax=30,
+ymin=-6, ymax=3,
+width=12cm,
+height=5cm,
+tick align=outside,
+xmajorgrids,
+x grid style={white},
+ymajorgrids,
+y grid style={white},
+axis line style={white},
+axis background/.style={fill=white!89.803921568627459!black},
+legend style={at={(0.03,0.03)}, anchor=south west, draw=white, fill=white!89.803921568627459!black},
+legend entries={{Z},{Q}},
+legend cell align={left}
+]
+\addplot [color0, mark=*, mark size=1, mark options={solid,draw=black}]
+table {%
+0 0
+1 1
+2 0
+3 1
+4 2
+5 3
+6 2
+7 1
+8 0
+9 -1
+10 -2
+11 -3
+12 -2
+13 -3
+14 -2
+15 -1
+16 -2
+17 -1
+18 -2
+19 -3
+20 -4
+21 -3
+22 -4
+23 -5
+24 -4
+25 -3
+26 -4
+27 -5
+28 -6
+29 -5
+};
+\addplot [color1, mark=*, mark size=2, mark options={solid,draw=black}]
+table {%
+0 0
+1 1
+2 0
+3 1
+4 2
+5 3
+6 2
+7 1
+8 0
+9 0
+10 0
+11 0
+12 1
+13 0
+14 1
+15 2
+16 1
+17 2
+18 1
+19 0
+20 0
+21 1
+22 0
+23 0
+24 1
+25 2
+26 1
+27 0
+28 0
+29 1
+};
+\end{axis}
+
+\end{tikzpicture}
