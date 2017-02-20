@@ -2,11 +2,17 @@ Analysis of queueing systems with sample paths and simulation.
 ===================
 
 This book supports my course on queueing theory. Comments are more
-than welcome of course: `n.d.van.foreest@rug.nl`
+than welcome of course: `n.d.van.foreest@rug.nl`.
+
+* ``tex_files/``: source files for the text
+* ``progs/``:  programs, mainly python, to make the graphs and the simulations
+* ``figures/``: the figures read by the latex files
+* ``chunks/``: weaved files, will be overwritten by ``pweaveAll.py``. Do not edit if you intend to run   ``pweaveAll.py``.
+  
 
 Quite a few of the source tex files contain python code. These files
 should be weaved with `pweave <http://mpastell.com/pweave/>`_. The
-weaved files are sent to the ``chunks`` directory with extension
+weaved files are sent to the ``chunks/`` directory with extension
 ``.tx``. These ``.tx`` files are read by ``book.tex``. Thus, if you
 edit the ``.tx`` files, they will be overwritten when you weave the
 ``.tex`` files. However, if you don't run ``pweaveAll.py`` this will
