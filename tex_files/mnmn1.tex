@@ -63,18 +63,13 @@ G &= e^{\rho} \\
 \end{align}
 \end{subequations}
 
-A modelk, often used to determine the number of beds at hospitals, is
-the $M/M/K/K$ model, also known as the Erlang $B$-formula. Watch-out,
-here $M/M/K/K$ means that at most $K$-jobs fit into the entire
-system. In our notation, we should write $M/M/K/0$ where the $0$ means
-that the queue length is bounded by zero. As mentioned before, the
-meaning of the last letter is not defined consistently in the literature.
+A model, often used to determine the number of beds at hospitals, is
+the $M/M/c/c$ model, also known as the Erlang $B$-formula; here jobs cannot be in queue, only in service, and the system has $c$ servers.
 
 
-Finally, we consider queues with \recall{balking}, that is, a queue in
+Finally, we consider queues with \recall{balking}, that is, queues in
 which customers leave when they find the queue too long at the moment
-they arrive. One simple choice to model customer balking could be as
-follows, 
+they arrive. A simple example model with  customer balking is given by x
   \begin{equation*}
     \lambda(n) = 
   \begin{cases}
@@ -86,19 +81,19 @@ follows,
   \end{equation*}
 and $\mu(n)=\mu$.   
 
-In these examples we made a subtle implicit assumption, on which we
-elaborate in Section~\ref{sec:poisson-arrivals-see}. To make the
-problem clear, observe in example 3 that balking customers
-\emph{decide at the moment they arrive}, in other words, based on what
-they `see upon arrival' they either join or leave. In yet other words,
-they make decisions based on the state of the system at arrival
-moments, not on time-averages. However, the notion of $p(n)$ is a
-long-run \emph{time-average}, and is typically not the same as what
-customers `see upon arrival'. As a consequence, the performance
-measure $\P{L\leq n}$ is also not necessarily in accordance with the
-perception of customers. To relate these two `views', i.e.,
+Observe that in the example with balking we made a subtle implicit
+assumption; in Section~\ref{sec:poisson-arrivals-see} we elaborate on
+this assumption. To make the problem clear, note that balking
+customers \emph{decide at the moment they arrive} to either join or
+leave; in other words, they decide based on what they `see upon
+arrival'. In yet other words, they make decisions based on the state
+of the system at arrival moments, not on time-averages. However, the
+notion of $p(n)$ is a long-run \emph{time-average}, and is typically
+not the same as what customers `see upon arrival'. As a consequence,
+the performance measure $\P{L\leq n}$ is not necessarily in accordance
+with the perception of customers. To relate these two `views', i.e.,
 time-average versus observer-average, we need a new concept,
-\emph{PASTA}, to be developed in the next section. 
+\emph{PASTA}, to be developed in in Section~\ref{sec:poisson-arrivals-see}.
 
 \begin{question}
 Consider the $M/M/2/1$ queue with arrival rate $\lambda$ and
@@ -134,34 +129,14 @@ Derive a simple and closed form expressions for the state
 
 
 \begin{question}
-  Derive the steady state probabilities $p(0), p(1), \ldots$, for the
-  $M/M/k/K$ queue. You do not have to compute the normalization
-  constant $G$.
-  \hint{ Use $\lambda(n) p(n) = \mu(n+1)p(n+1)$ and find suitable
-    expressions for $\lambda(n)$ and $\mu(n+1)$. }
-  \begin{solution}
-    $\lambda(n) \equiv \lambda$ for all $n<K+k$. When $n=K+k$,
-    $\lambda(K)=0$, since then the system is full, and all arriving
-    jobs will be dropped.  When $n\leq k$, $\mu(n)=n \mu$ since only $n$
-    servers are active/occupied. When $n> k$, $\mu(n) = k
-    \mu$. Thus,
-    \begin{align*}
-      p(n) &= \frac{\lambda}{n\mu} p(n-1) = \frac{(\lambda/\mu)^n}{n!} p(0)=\frac{(k\rho)^n}{n!}p(0), \, n\leq k, \\
-      p(n) &= \frac{\lambda}{k\mu} p(n-1) = \frac{k^k \rho^n}{k!} p(0), \, k<n\leq K+k,
-    \end{align*}
-where $\rho = \lambda/k \mu$.  
-
-The normalization is trivial, numerically at least.
-  \end{solution}
-\end{question}
-
-
-
-\begin{question}
   \begin{enumerate}
   \item Derive Eq.~\eqref{eq:8}
   \item   Show that as $K\to\infty$, the performance measures of the $M/M/1/K$ converge to those of the $M/M/1$ queue. 
   \end{enumerate}
+  \hint{Use that $\sum_{i=0}^n x^i = (1-x^{n+1})/(1-x$. BTW, is it
+    necessary for this expression to be true that $|x|<1$? What should
+    you require for $|x|$ when you want to take the limit
+    $n\to\infty$?}
   \begin{solution}
 Note that 
 \begin{equation*}
@@ -177,6 +152,29 @@ Thus, $G=1/p(0)$ and the result follows.
   \end{solution}
 \end{question}
 
+\begin{question}(Multi-server queue with blocking)
+  Derive the steady state probabilities $p(0), p(1), \ldots$, for the
+  $M/M/c/c+K$ queue. You do not have to compute the normalization
+  constant $G$.
+  \hint{ Use $\lambda(n) p(n) = \mu(n+1)p(n+1)$ and find suitable
+    expressions for $\lambda(n)$ and $\mu(n+1)$. }
+  \begin{solution}
+    $\lambda(n) \equiv \lambda$ for all $n<c+K$. When $n=c+K$,
+    $\lambda(n)=0$, since then the system is full, and all arriving
+    jobs will be dropped.  When $n\leq c$, $\mu(n)=n \mu$ since only
+    $n$ servers are active/occupied when the system contains $n$
+    jobs. When $n\geq c$, $\mu(n) = c \mu$. Thus,
+    \begin{align*}
+      p(n) &= \frac{\lambda}{n\mu} p(n-1) = \frac{(\lambda/\mu)^n}{n!} p(0)=\frac{(k\rho)^n}{n!}p(0), \, n\leq c, \\
+      p(n) &= \frac{\lambda}{c\mu} p(n-1) = \frac{c^c \rho^n}{c!} p(0), \, c<n\leq c+K,
+    \end{align*}
+where $\rho = \lambda/c \mu$.  
+
+The normalization is trivial, numerically at least.
+  \end{solution}
+\end{question}
+
+
 \begin{question}
   Derive Eq.\eqref{eq:9}
   \hint{ Use $\lambda(n)p(n) = \mu(n+1)p(n+1)=\min\{c, n+1\}\mu p(n+1)$.}
@@ -184,12 +182,12 @@ Thus, $G=1/p(0)$ and the result follows.
     \begin{equation*}
       \begin{split}
        p(n+1) 
-&= \frac{\lambda}{\mu(n+1)}p(n) \\
-&= \frac{\lambda}{\min\{c, n+1\} \mu }p(n) \\
-&= \frac{1}{\min\{c, n+1\}}\frac\lambda\mu p(n) \\
-&= \frac{1}{\min\{c, n+1\}}(c\rho) p(n) \\
-&= \frac{1}{\min\{c, n+1\}\min\{c, n\}}(c\rho)^2 p(n-1) \\
-&= \frac{1}{\Pi_{k=1}^{n+1}\min\{c, k\}}\rho^{n+1} p(0).
+&= \frac{\lambda}{\mu(n+1)}p(n) 
+= \frac{\lambda}{\min\{c, n+1\} \mu }p(n) \\
+&= \frac{1}{\min\{c, n+1\}}\frac\lambda\mu p(n) 
+= \frac{1}{\min\{c, n+1\}}(c\rho) p(n) \\
+&= \frac{1}{\min\{c, n+1\}\min\{c, n\}}(c\rho)^2 p(n-1) 
+= \frac{1}{\Pi_{k=1}^{n+1}\min\{c, k\}}\rho^{n+1} p(0).
       \end{split}
     \end{equation*}
 Write $p(0) = 1/G$.  
@@ -200,10 +198,10 @@ For  $G$,
   G 
 &= 
 \sum_{i=0}^{c-1}\frac{(c\rho)^n}{n!} + 
- sum_{i=c}^{\infty} \frac{(c\rho)^c}{c!} \rho^{n-c} \\
-&= 
+ \sum_{i=c}^{\infty} \frac{(c\rho)^c}{c!} \rho^{n-c} 
+= 
 \sum_{i=0}^{c-1}\frac{(c\rho)^n}{n!} + 
-\frac{(c\rho)^c}{c!} sum_{i=c}^{\infty} \rho^n \\
+\frac{(c\rho)^c}{c!} \sum_{i=c}^{\infty} \rho^n \\
 &= 
 \sum_{i=0}^{c-1}\frac{(c\rho)^n}{n!} + 
 \frac{(c\rho)^c}{c!(1-\rho)}.
@@ -214,22 +212,22 @@ Next,
 \begin{equation*}
   \begin{split}
   \E{L_Q} 
-&=\sum_{n=c}^\infty (n-c) p(n) \\
-&=\frac{c^c\rho^c}{Gc!} \sum_{n=c}^\infty (n-c) \rho^{n-c} \\
-&=\frac{c^c\rho^c}{Gc!} \sum_{n=0}^\infty n \rho^n \\
+&=\sum_{n=c}^\infty (n-c) p(n) 
+=\frac{c^c\rho^c}{Gc!} \sum_{n=c}^\infty (n-c) \rho^{n-c} 
+=\frac{c^c\rho^c}{Gc!} \sum_{n=0}^\infty n \rho^n.
   \end{split}
 \end{equation*}
 Then, 
 \begin{equation*}
   \begin{split}
   \sum_{n=0}^\infty n \rho^n 
-&= \sum_{n=0}^\infty \sum_{i=1}^\infty \1{i\leq n} \rho^n\\
-&= \sum_{i=1}^\infty   \sum_{n=0}^\infty \1{i\leq n} \rho^n\\
-&= \sum_{i=1}^\infty   \sum_{n=i}^\infty \rho^n\\
-&= \sum_{i=1}^\infty   \rho^i \sum_{n=0}^\infty \rho^n\\
-&= \frac1{1-\rho} \sum_{i=1}^\infty   \rho^i \\
-&= \frac\rho{1-\rho} \sum_{i=0}^\infty   \rho^i \\
-&= \frac\rho{(1-\rho)^2}.
+&= \sum_{n=0}^\infty \sum_{i=1}^\infty \1{i\leq n} \rho^n
+= \sum_{i=1}^\infty   \sum_{n=0}^\infty \1{i\leq n} \rho^n\\
+&= \sum_{i=1}^\infty   \sum_{n=i}^\infty \rho^n
+= \sum_{i=1}^\infty   \rho^i \sum_{n=0}^\infty \rho^n\\
+&= \frac1{1-\rho} \sum_{i=1}^\infty   \rho^i 
+= \frac\rho{1-\rho} \sum_{i=0}^\infty   \rho^i 
+= \frac\rho{(1-\rho)^2}.
   \end{split}
 \end{equation*}
 Observe again that using indicators and Fubinaci's theorem
@@ -247,10 +245,10 @@ by
       \begin{split}
       G \E{L_S}
 &= G \sum_{n=0}^{c} n p(n) + \sum_{n=c+1}^{\infty} c p(n) \\
-&= \sum_{n=1}^{c} n \frac{(c\rho)^n}{n!}  + \sum_{n=c+1}^{\infty} c \frac{c^c\rho^n}{c!} \\
-&= \sum_{n=1}^{c} \frac{(c\rho)^n}{(n-1)!}  + \frac{c^{c+1}}{c!}\sum_{n=c+1}^{\infty} \rho^n\\
-&= \sum_{n=0}^{c-1} \frac{(c\rho)^{n+1}}{n!}  + \frac{(c\rho)^{c+1}}{c!}\sum_{n=0}^{\infty} \rho^n\\
-&= c\rho \left(\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!}  + \frac{(c\rho)^{c}}{c!(1-\rho)}\right).
+&= \sum_{n=1}^{c} n \frac{(c\rho)^n}{n!}  + \sum_{n=c+1}^{\infty} c \frac{c^c\rho^n}{c!} 
+= \sum_{n=1}^{c} \frac{(c\rho)^n}{(n-1)!}  + \frac{c^{c+1}}{c!}\sum_{n=c+1}^{\infty} \rho^n\\
+&= \sum_{n=0}^{c-1} \frac{(c\rho)^{n+1}}{n!}  + \frac{(c\rho)^{c+1}}{c!}\sum_{n=0}^{\infty} \rho^n
+= c\rho \left(\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!}  + \frac{(c\rho)^{c}}{c!(1-\rho)}\right).
       \end{split}
     \end{equation*}
 Observe that the right hand side is precisely equal to $\rho c G$. 
@@ -284,12 +282,6 @@ Observe that the right hand side is precisely equal to $\rho c G$.
   \end{solution}
 \end{question}
 
-\begin{question}[use=false]
-  Shift scheduling problem. 
-\TBD.
-\end{question}
-
-
 
 \begin{question}
   \begin{enumerate}
@@ -297,6 +289,7 @@ Observe that the right hand side is precisely equal to $\rho c G$.
 \item Show that the $M/M\infty$ queue is stable for any finite $\lambda$. 
 \item Why is $\E L=\rho$ for the $M/M/\infty$ queue? 
   \end{enumerate}
+\hint{Use that for any $x$, $x^n/n!\to 0$ as $n\to\infty$.}
  \begin{solution}
    \begin{enumerate}
    \item 
@@ -337,72 +330,6 @@ Observe that the right hand side is precisely equal to $\rho c G$.
 \end{question}
 
 
-
-\begin{question}\label{ex:calling}
-  \begin{enumerate}
-  \item Derive the steady state probabilities $p(n)$ for a
-    single-server queue with a finite calling population with $N$
-    members, i.e., jobs that are in service cannot arrive to the system.
-  \item Check the answer you obtained for the cases $N=1$ and
-    $N=2$. Interpret the results.
-  \item Derive the steady state probabilities $p(n)$ for a queue with
-    a finite calling population with $N$ members and $N$ servers,
-    i.e., the number of servers in the queueing system is equal the
-    size of the calling population.
-  \end{enumerate}
-  
-    \hint{Use $\lambda(n) p(n) = \mu(n+1)p(n+1)$, and realize that for
-      this case $\lambda(n) = (N-n)\lambda$ and $\mu(n) = \mu$.}
-    \begin{solution}
-      \begin{enumerate}
-      \item 
-Take $\lambda(n) = (N-n)\lambda$ and $\mu(n) = \mu$, and solve
-    Eq.~\eqref{eq:25} and \eqref{eq:20}.  Thus: 
-    \begin{equation*}
-      \begin{split}
-       p(n+1) 
-& = \frac{(N-n)\lambda}\mu p(n) \\
-& = \rho (N-n) p(n) \\
-& = \rho^2 (N-n)(N-(n-1))p(n-1) \\
-& = \rho^3 (N-n)(N-(n-1))(N-(n-2)) p(n-2) \\
-& = \rho^{n+1} (N-n)(N-(n-1))\cdots(N-(0)) p(0) \\
-&= \rho^{n+1} \frac{N!}{(N-(n+1))!}p(0). 
-      \end{split}
-    \end{equation*}
-    Next, we need to normalize this. Observe that
-    $p(N+1)=P(N+2) = \ldots = 0$ since there are just $N$ customers,
-    so that the system can never contain more than $N$
-    customers. Thus, we want $p(0)$ to be such that
-\begin{equation*}
-  1 = \sum_{n=0}^N p(n) = p(0) \sum_{n=0}^N \rho^n \frac{N!}{(N-n)!}
-\end{equation*}
-We see from this that $p(0)$ times some constant must be $1$. Hence, dividing by this constant, we get 
-\begin{equation*}
-  p(0) = \left(\sum_{n=0}^N \rho^n \frac{N!}{(N-n)!}\right)^{-1}.
-\end{equation*}
-I asked WolframAlpha to simplify this, but the answer I got was not particularly revealing. 
-\item 
-      \TBD
-    \item  Take $\lambda(n) = (N-n)\lambda$ and $\mu(n) = n \mu$. Then 
-    \begin{equation*}
-      \begin{split}
-      p(n+1) 
-&= \frac{\lambda(n)}{\mu(n+1)} p(n) \\
-&= \frac{(N-n)\lambda}{(n+1)\mu} p(n) \\
-&= \frac{(N-n)(N-(n-1))}{(n+1)n}\frac{\lambda^2}{\mu^2} p(n-1) \\
-&= \frac{N!}{(N-(n+1))!}\frac1{(n+1)!}\rho^{n+1} p(0) \\
-&  = {N \choose n+1}\rho^{n+1} p(0).
-      \end{split}
-    \end{equation*}
-    Hence, after normalization, i.e., requiring that $p(0)$ is such
-    that $\sum_{n=0}^N p(n) = 1$, so that $p(0) = \left(\sum_{k=0}^N \rho^k { N \choose k} \right)^{-1}$, the final result becomes
-\begin{equation*}
-  p(n) = \frac{\rho^n {N \choose n}}{\sum_{k=0}^N \rho^k {N \choose k}}.
-\end{equation*}
-  \end{enumerate}
-    \end{solution}
-\end{question}
-
 \begin{question}(Hall 5.1) Give two examples of systems that
   ordinarily have a finite buffer size. Give two examples of systems
   that have a finite calling population.
@@ -442,7 +369,7 @@ that can arrive to the queueing system is only 8.
 
 
 
-\begin{question}[use=false]
+\begin{question} [use=false]
   (Hall 5.21) The queueing operator of the previous problem has
   decided to institute a policy whereby employees are removed from
   service, to perform cleanup work, whenever they complete service and
@@ -501,6 +428,70 @@ than under the policy with a fixed number of servers (i.e., the M/M/2
 queue).
 
   \end{solution}
+\end{question}
+
+
+\begin{question}(Systems with finite calling population)
+  \begin{enumerate}
+  \item Derive the steady state probabilities $p(n)$ for a
+    single-server queue with a finite calling population with $N$
+    members, i.e., jobs that are in service cannot arrive to the system.
+  \item Check the answer you obtained for the cases $N=1$ and
+    $N=2$. Interpret the results.
+  \item Derive the steady state probabilities $p(n)$ for a queue with
+    a finite calling population with $N$ members and $N$ servers,
+    i.e., the number of servers in the queueing system is equal the
+    size of the calling population.
+  \end{enumerate}
+  
+    \hint{Use $\lambda(n) p(n) = \mu(n+1)p(n+1)$, and realize that for
+      this case $\lambda(n) = (N-n)\lambda$ and $\mu(n) = \mu$.}
+    \begin{solution}
+1) Take $\lambda(n) = (N-n)\lambda$ and $\mu(n) = \mu$, and solve
+    Eq.~\eqref{eq:25} and \eqref{eq:20}.  Thus: 
+    \begin{equation*}
+      \begin{split}
+       p(n+1) 
+& = \frac{(N-n)\lambda}\mu p(n) 
+ = \rho (N-n) p(n) \\
+& = \rho^2 (N-n)(N-(n-1))p(n-1) \\
+& = \rho^3 (N-n)(N-(n-1))(N-(n-2)) p(n-2) \\
+& = \rho^{n+1} (N-n)(N-(n-1))\cdots(N-(0)) p(0) \\
+&= \rho^{n+1} \frac{N!}{(N-(n+1))!}p(0). 
+      \end{split}
+    \end{equation*}
+    Next, we need to normalize this. Observe that
+    $p(N+1)=P(N+2) = \ldots = 0$ since there are just $N$ customers,
+    so that the system can never contain more than $N$
+    customers. Thus, we want $p(0)$ to be such that
+\begin{equation*}
+  1 = \sum_{n=0}^N p(n) = p(0) \sum_{n=0}^N \rho^n \frac{N!}{(N-n)!}
+\end{equation*}
+We see from this that $p(0)$ times some constant must be $1$. Hence, dividing by this constant, we get 
+\begin{equation*}
+  p(0) = \left(\sum_{n=0}^N \rho^n \frac{N!}{(N-n)!}\right)^{-1}.
+\end{equation*}
+I asked WolframAlpha to simplify this, but the answer I got was not particularly revealing. 
+
+2) \tbd
+
+3)   Take $\lambda(n) = (N-n)\lambda$ and $\mu(n) = n \mu$. Then 
+    \begin{equation*}
+      \begin{split}
+      p(n+1) 
+&= \frac{\lambda(n)}{\mu(n+1)} p(n) 
+= \frac{(N-n)\lambda}{(n+1)\mu} p(n) \\
+&= \frac{(N-n)(N-(n-1))}{(n+1)n}\frac{\lambda^2}{\mu^2} p(n-1) 
+= \frac{N!}{(N-(n+1))!}\frac1{(n+1)!}\rho^{n+1} p(0) \\
+&  = {N \choose n+1}\rho^{n+1} p(0).
+      \end{split}
+    \end{equation*}
+    Hence, after normalization, i.e., requiring that $p(0)$ is such
+    that $\sum_{n=0}^N p(n) = 1$, so that $p(0) = \left(\sum_{k=0}^N \rho^k { N \choose k} \right)^{-1}$, the final result becomes
+\begin{equation*}
+  p(n) = \frac{\rho^n {N \choose n}}{\sum_{k=0}^N \rho^k {N \choose k}}.
+\end{equation*}
+    \end{solution}
 \end{question}
 
 

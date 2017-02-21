@@ -36,7 +36,7 @@ file as an ``input`` command in ``booktest.tex`` and modify
 ``makeClean`` does what its name says it does: delete ``*.aux`` and
 the like.
 
-Here are the tools that I use to make the text and the figures:
+Here are the tools I use to make the text and the figures:
 
 * `Python <http://www.python.org/>`_
 * `Scipy <http://www.scipy.org/>`_
