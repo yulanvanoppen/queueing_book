@@ -50,7 +50,7 @@ estimates of $\lambda$ and $\mu$ to characterize the utilization of
 the server, the average queue length and the queue length
 distribution. In fact, only the ratio $\rho=\lambda/\mu$ is required.
 As such, assuming that interarrival times and services are
-exponentially distribtued, by measuring the fraction of time the
+exponentially distributed, by measuring the fraction of time the
 server is busy, we obtain an estimate for $1-p(0)$, hence for $\rho$.
 With this, we can estimate $\E L$ and $\P{L\geq n}$.  Next, the fact
 that $\E L \sim (1-\rho)^{-1}$ for $\rho\to 1$ implies that the
@@ -74,6 +74,166 @@ an estimator of the fraction of customers lost. Again, for the $M/M/1$
 queue, the knowledge of $\rho$ suffices to compute this estimate.
 
 In the context of inventory theory these equations are particularly useful, see Question~\ref{q:basestock}.
+
+\paragraph{Supermarket Planning}
+
+Let us consider the example of cashier planning of a supermarket to
+demonstrate how to use the tools we developed up to now. Out of
+necessity, our approach is a bit heavy-handed---Turning the example
+into a practically useful scheme requires more sophisticated queueing
+models and data assembly---but the present example contains the
+essential analytic steps to solve the planning problem.
+
+The \emph{service objective} is to determine the minimal service
+capacity such that the fraction of the time the queue length exceeds
+10 is less than 1\%.
+
+The next step is to find the \emph{relevant data}. For a supermarket
+this is relatively easy: the cash registers track all customers
+payments. Thus, we know the number of customers that left the shop,
+hence entered the shop. (We neglect the time customers spend in the
+shop.) Based on these data we can make a \emph{demand profile}: the
+customer arrival rate per hour, c.f. Figure~\ref{fig:loadprofile}. It
+is also easy to find the service distribution from the cash
+registers. The first item scanned after a payment determines the start
+of a new service, and the payment closes the service. (As there is
+always a bit of time between the payment and the start of a new
+service we might add 15 seconds, say, to any service.)
+
+\begin{figure}[t]
+  \centering
+\begin{tikzpicture}[scale=.7]
+ 	%axis
+	\draw[->] (0,0) -- coordinate (x axis mid) (13.5,0);
+    	\draw[->] (0,0) -- coordinate (y axis mid) (0,5.5);
+    	%ticks
+    	\foreach \x in {0,...,13}
+        \pgfmathsetmacro{\my}{int(\x+8)}
+     		\draw (\x,1pt) -- (\x,-3pt)
+			node[anchor=north] {$\my$};
+    	\foreach \y in {0,...,5}
+        \pgfmathsetmacro{\my}{int(\y*40)}
+     		\draw (1pt,\y) -- (-3pt,\y) 
+     			node[anchor=east] {\my}; 
+%labels      
+\node[below=0.6cm] at (x axis mid) {hour};
+\node[rotate=90, left=1.2cm] at (y axis mid) {$\lambda$};
+
+\draw (0,1)--(1,1);
+\draw (1,2)--(2,2);
+\draw (2,2.6)--(3,2.6);
+\draw (3,2.8)--(4,2.8);
+\draw (4,3.)--(5,3.);
+\draw (5,3.1)--(6,3.1);
+\draw (6,2.7)--(7,2.7);
+\draw (7,1.9)--(8,1.9);
+\draw (8,2.5)--(9,2.5);
+\draw (9,3.3)--(10,3.3);
+\draw (10,3.5)--(11,3.5);
+\draw (11,2.3)--(12,2.3);
+\draw (12,1.2)--(13,1.2);
+\end{tikzpicture}
+  \caption{A  demand profile of the arrival rate $\lambda$ modeled as constant over each hour.}
+  \label{fig:loadprofile}
+\end{figure}
+
+To keep things simple, we model the arrival process as Poisson with an
+arrival rate that is constant during an hour and is specified by the
+demand profile, and we take the service time distribution as
+exponential with a mean of $1.5$ minutes. We also \emph{model} the
+behavior of the multi-server as a single fast server. Thus, we neglect
+any differences between a station with, for instance, 5 cashiers and a
+single server that works 5 times as fast as a normal cashier.  As yet
+another simplification, we change the objective somewhat such that the
+number of jobs in the queueing system should not exceed 10. (Thus, the
+objective is no longer formulated in terms of queue lengths.)
+
+To determine the required number of servers per hour let us consider
+the hour from 12 to 13. In the demand profile we see that the arrival
+rate in this hour is $\lambda_{12}= 120$ customers per hour. The
+objective $\P{L>10}\leq 1\%$ translates into $\rho^{11}\leq 1\%$,
+hence, $\rho \leq 0.67$. Using that $\E{S}=1.5$ minutes, we need the
+number of servers $c$ to be such that
+\begin{equation*}
+  \frac{120}{60} 1.5 \frac 1 c = \rho < 0.66,
+\end{equation*}
+hence $c\approx5$.  Interestingly, for this model we only need to be
+concerned with $\lambda \E S$ to meet the objective. Therefore $c$ is
+very simple to compute by the result
+\begin{equation*}
+  c \geq \lambda \frac{\E S}{0.66}  = \lambda 2.3 \approx 2.5 \lambda.
+\end{equation*}
+where $\lambda$ is the arrival rate (per minute, \emph{not} per hour).
+Thus, the conversion of the demand profile to a \emph{load} profile is
+trivial: divide the hourly arrival rate by $60$ and multiply by
+2.5. The load profile tells us the minimal number of cashiers needed
+per hour.
+
+Now we need to \emph{cover the load profile with service shifts}. This
+is typically not easy since shifts have to satisfy all kinds of rules,
+e.g.: after 2 hours of work a cashier should take a break of at least
+10 minutes; a shift length must be at least four hours, and not longer
+than 9 hours including breaks; when the shift is longer than 4 hours
+it needs to contain at least one break of 30 minutes; and so on. These
+shifts also have different costs, e.g.: shifts with hours after 18h
+are more expensive per hour; when the supermarket covers traveling
+costs, short shifts have higher marginal travel-ling costs; and so on.
+
+The usual way to solve the covering problem is by means of an integer
+problem. First generate all (or a subset of the) allowed shift types
+with associated starting times. For instance, suppose only 4 shift
+plans are available
+\begin{enumerate}
+\item $++-++$
+\item $+++-+$
+\item $++-+++$
+\item $+++-++$,
+\end{enumerate}
+where a $+$ indicate a working hour and $-$ a break of an hour. Then
+generate shift types for each of these plans with starting times
+$8$am, $9$am, and on on, until the end of the day. Thus, a shift type
+is a shift plan that starts at a certain hour. Let $x_i$ be the number
+of shift type $i$ and $c_i$ the cost of this type. Write $t\in s_i$ if
+hour $t$ is covered by shift type $i$.  Then the problem is given by
+\begin{equation*}
+  \min \sum_i c_i x_i.
+\end{equation*}
+such that 
+\begin{equation*}
+  \sum_i x_i \1{t \in s_i} \geq \frac{\lambda_t}{20}
+\end{equation*}
+for all hours $t$ the shop is open and $\lambda_t$ is the demand for
+hour $t$.
+
+Conceptually it is easy how to make this approach more accurate and
+realistic. The queueing model is too simple, so as start we could
+replace it by the multi-server model (with exponential service times)
+we will discuss in Section~\ref{sec:mnmn1}. If the data tells us that
+the exponential distribution for the service times is very inaccurate,
+we might use the results of Section~\ref{sec:gg1}, however, this only
+provides us with the mean waiting times for the $M/G/c$ queue, not the
+queue length distribution, which is a drawback. (The analytic results
+for the queue lenght distribution of the $G/G/c$ queue are not so easy
+and also not very accurate. Whether it makes sense to prefer these
+expressions over the closed-form results of the $M/M/c$ queue is not
+so easy to say. It depends on the context.) Finally, the objective
+should depend on the number of cashiers that are open. Assuming that
+customers spread evenly over the queues, the objective is such that no
+queue is longer than 3 say. The objective is therefore such that the
+queue length should be smaller than $3$ times the number of cashiers
+$c$. Finally, in many shops, the cashier capacity is made dependent on
+the queue length; when the queues are long, stockers open extra
+cashier positions until the first server becomes idle. Thus, as there
+is spare capacity, the factor $2.5 \lambda$ can be made smaller,
+perhaps set to $2\lambda$. However, this factor only changes the load
+profile, not the method to solve it.
+
+Clearly, it does not require much effort to make the model very
+complicated, and it is easy to make it complicated to the extent that
+the model becomes useless. Mind: a good model is simple (but not too
+simple). So, notwithstanding the weaknesses of the above model, it is
+pretty powerful already. 
+
 
 \begin{question}
   Derive expression~\ref{eq:el} for the average number of jobs in an
