@@ -153,14 +153,14 @@ arrivals, i.e., $\E S < \E X$.
 \end{question}
 
 \begin{question} 
-  For stability of the queueing process it is essential that the
-  random variables
+Define the random variables $\{\tilde X_k,k=1,\ldots\}$ as
   \begin{equation*}
-    U_k = S_{k-1}-X_k    
+    \tilde X_k = S_{k-1}-X_k.
   \end{equation*}
-have negative expectation, i.e.,
-  $\E{U_k} = \E{S_{k-1}-X_k} < 0$.
- What is the conceptual meaning of this inequality?
+  For stability of the queueing process it is essential that
+  $\tilde X_k$ has negative expectation, i.e.,
+  $\E{\tilde X_k} = \E{S_{k-1}-X_k} < 0$.  What is the conceptual
+  meaning of this inequality?
   \begin{solution}
  That the average time customers spend in service is smaller
       than the average time between the arrival of two subsequent
@@ -169,29 +169,35 @@ have negative expectation, i.e.,
 \end{question}
 
 \begin{question} 
-Let 
- \begin{equation*}
-    U_k = S_{k-1}-X_k    
-  \end{equation*}
-have negative expectation, i.e.,
-  $\E{U_k} = \E{S_{k-1}-X_k} < 0$.
- Show that $\E{U_k} <0$ implies that $\lambda<\mu$. 
+Define $\tilde X_k = S_{k-1}-X_k$.
+ Show that $\E{\tilde X_k} <0$ implies that $\lambda<\mu$. 
+\hint{Remember that $\{X_k\}$ and $\{S_k\}$ are sequences of i.i.d. random variables. What are the implications for the expectations?}
   \begin{solution}
-  $0> \E{U_k} = \E {S_{k-1}-X_k} =  \E{ S_{k-1}}- \E {X_k} = \E S - \E X$, where we use the fact that the $\{S_k\}$ and $\{X_k\}$ are i.i.d. sequences. Hence, $\E S - \E X = (\E S/\E X - 1)\E X = (\lambda/\mu - 1)\E X = (\lambda/\mu-1)\E X$. 
+  $0> \E{\tilde X_k} = \E {S_{k-1}-X_k} =  \E{ S_{k-1}}- \E {X_k} = \E S - \E X$, where we use the fact that the $\{S_k\}$ and $\{X_k\}$ are i.i.d. sequences. Hence, 
+  \begin{equation*}
+    \E X > \E S \iff \frac 1{\E S} > \frac1{\E X} \iff \mu > \lambda.
+  \end{equation*}
+
   \end{solution}
 \end{question}
 
 
 \begin{question}
   Show that $\E{S}/\E{X}$ is the fraction of time the server is busy.
-  \begin{solution}
- Let $T_1>A_1$ be the first time after the arrival of job 1
+
+  \hint{ Let $T_1>A_1$ be the first time after the arrival of job 1
     that arrives at an empty system. (Observe that job 1 also arrives
-    at an empty system.)  Suppose, for ease of writing, that this job is
-    the $n+1$th job, so that up to time $T_1$ the number of arrivals
-    is $n$. Since the first job arrived at time $A_1=X_1$, the first
-    $n$ jobs arrived during $[X_1, T_1)$. The total amount of service
-    that arrived during this period is $\sum_{i=1}^n S_i$.  Thus the
+    at an empty system.)  Suppose, for ease of writing, that this job
+    is the $n+1$th job, so that up to time $T_1$ the number of
+    arrivals is $n$. Since the first job arrived at time $A_1=X_1$,
+    the first $n$ jobs arrived during $[X_1, T_1)$. The total amount
+    of service that arrived during this period is $\sum_{i=1}^n S_i$.
+    What is the fraction of time the server has been busy in this
+    cycle?}
+
+
+  \begin{solution}
+ The
     fraction of time that the server has been busy during $[X_1, T_1)$
     is
         \begin{equation*}
@@ -350,6 +356,12 @@ This exercise is meant  to give the reader some idea about what needs to be done
   Show that the function $t\to A(t)$ as defined by Eqs.~(\ref{eq:2})
   is right-continuous. 
     \end{enumerate}
+
+    \hint{ Use that $A_{A(t)} \leq t < A_{A(t)+1}$. Divide by $A(t)$
+      and take suitable limits. BTW, such type of proof is used quite
+      often to show that the existence of one limit implies, and is
+      implied by, the existence of another type of limit.  }
+
  \begin{solution}
  Observing that $A_{A(t)}$ is the arrival time of the last job
     before time $t$ and that $A_{A(t)+1}$ is the arrival time of the

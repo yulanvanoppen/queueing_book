@@ -1,6 +1,6 @@
 \section
 [$M^X/M/1$ Queue Length Distribution]
-{$M^X/M/1$ Queue Length Distribution}
+{$\mathbf{M^X/M/1}$ Queue Length Distribution}
 \label{sec:batch-arrivals}
 
 In this section we extend the analysis of the $M^X/M/1$ batch queue

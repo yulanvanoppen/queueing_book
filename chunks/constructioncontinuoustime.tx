@@ -265,11 +265,10 @@ departed from the queue up to time $t$, then
 \begin{equation*}
   L_Q(t) = A(t) - D_Q(t)
 \end{equation*}
-must be the number of jobs in queue. It is clear that $D(t) - D_Q(t)$
-must be the number of jobs in service. The above expressions for
-$L(t)$ and $L_Q(t)$ then show that 
+must be the number of jobs in queue. The above expressions for $L(t)$
+and $L_Q(t)$ then show that the number in service must be
 \begin{equation*}
-L_s(t) = L(t) - L_Q(t).
+L_s(t) = D_Q(t) - D(t) = L(t) - L_Q(t).
 \end{equation*}
 
 Finally, the \recall{virtual waiting time process} $\{V(t)\}$ is the
@@ -506,6 +505,13 @@ so up to now.
  Show also that if $L(A_k)>0$, i.e., the system contains at least one
   job at the time of the $k$th arrival, then $A_k \leq D_{k-1}$, i.e.,
   job $k$ arrives before job $k-1$ departs.
+
+  \hint{Use Boolean algebra.  Write, for notational ease,
+    $A=\1{A_k \leq t}$ and $\bar A = 1- A = \1{A_k > t}$, and define
+    something similar for $D$.  Then show that
+    $A - D = A \bar D - \bar A D$, and show that $\bar A D
+    =0$. Finally sum over $k$.}
+
 \begin{solution}
   \begin{enumerate}
   \item 
@@ -561,6 +567,10 @@ so up to now.
   \begin{equation*}
     L_k = L_{k-1}+1 - \sum_{i= k-1 - L_{k-1}}^{k-1} 1\{D_i< A_k\}?
   \end{equation*} Why do we take $i=k-1-L_{k-1}$ in  the sum, and not $i=k-2-L_{k-1}$?
+% \hint{ Realize that $L_k = k - 1 - D(A_k)$. 
+% what happens to job k-1?
+% }
+
 \begin{solution}
   Let $L_{k} = L(A_{k}-)$, i.e., the number of jobs in the system as
   `seen by' job $k$. It must be that $L_{k}=k-1 - D(A_{k})$. To see
@@ -595,6 +605,12 @@ so up to now.
 \begin{question}
   Provide a specification of the virtual waiting time process $\{V(t)\}$ for
     all $t$.
+
+\hint{
+Make a plot of the function $A_{A(t)}-t$. What is the meaning of $V(A_{A(t)})?$ What is
+$V(A_{A(t)} + A_{A(t)}-t$?
+}
+
     \begin{solution}
       There is a funny way to do this. Recall from a previous exercise
       that if $A(t)=n$, then $A_n$ is the arrival time of the $n$th
