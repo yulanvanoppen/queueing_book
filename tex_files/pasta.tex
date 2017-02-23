@@ -3,18 +3,20 @@
 
 Suppose the following limit exists:
 \begin{equation*}
-  \pi(n) = \lim_{m\to\infty} \frac1m\sum_{k=1}^m \1{L(A_k-) = n},
+  \pi(n) 
+= \lim_{m\to\infty} 
+\frac1m\sum_{k=1}^m \1{L(A_k-) = n},
 \end{equation*}
-thus,  $\pi(n)$ is the long-run fraction of jobs that observe $n$
+where $\pi(n)$ is the long-run fraction of jobs that observe $n$
 customers in the system at the moment of arrival.  It is natural to
-ask whether $\pi(n)$ and $p(n)$ are related, that is, what is the
-relation between what customers see upon arrival and the time-average
-behavior of the system?
+ask whether $\pi(n)$ and $p(n)$ are related, that is, whether what
+customers see upon arrival is related to the time-average behavior of
+the system.
 
 
 We can make some progress with this question by rewriting $\pi(n)$ in
-the following way. Since $A(t)\to \infty$ as $t\to\infty$, we have
-that
+the following way. Since $A(t)\to \infty$ as $t\to\infty$, it is reasonable 
+that\footnote{See below for the proof.}
 \begin{equation}\label{eq:132}
   \begin{split}
   \pi(n) &= \lim_{t\to\infty} \frac1{A(t)}\sum_{k=1}^{A(t)} \1{L(A_k-) = n} \\
@@ -22,51 +24,57 @@ that
   &= \lim_{t\to\infty} \frac{A(n,t)}{A(t)},
   \end{split}
 \end{equation}
-where we use~\eqref{eq:19} in the last row. Considering that
-\begin{equation*}
-\frac{A(n,t)}{A(t)}\frac{A(t)}{t} =   \frac{A(n,t)}{t},
-\end{equation*}
-it follows from this, Eq.~\eqref{eq:3}. 
+where we use~\eqref{eq:19} in the last row. But, 
 \begin{equation}\label{eq:1333}
-\lambda  \pi(n) 
-= \lim_{t\to\infty} \frac{A(t)}t \lim_{t\to\infty} \frac{A(n,t)}{A(t)} 
-= \lim_{t\to\infty} \frac{A(t)}t  \frac{A(n,t)}{A(t)}.
+ \frac{A(n,t)}{t} 
+=   \frac{A(n,t)}{A(t)} \frac{A(t)}t 
+= \frac{A(t)}t \frac{A(n,t)}{A(t)}
+\to \lambda  \pi(n), \quad\text{as } t \to \infty, 
 \end{equation}
-Since we have, by  Eq.~\eqref{eq:21}, that 
+where we use Eq.~\eqref{eq:3} (i.e., $A(t)/t \to \lambda$). that
+Next, by  Eq.~\eqref{eq:21}, 
 \begin{equation*}
-\lim_{t\to\infty} \frac{A(n,t)}t = \lambda(n) p(n),
+\frac{A(n,t)}t = \frac{A(n,t)}{Y(n,t)}\frac{Y(n,t)}t \to \lambda(n) p(n), \quad\text{as } t \to \infty.
 \end{equation*}
-it follows that
+Thus
 \begin{equation}\label{eq:13}
-\lambda  \pi(n) = \lambda(n) p(n).
+\lambda  \pi(n) = \lambda(n) p(n), 
 \end{equation}
+from which  follows our final result:
+\begin{equation*}
+  \lambda(n) = \lambda \iff \pi(n) = p(n), 
+\end{equation*}
 
-So, why is this useful? In fact, we obtain from this the important
-insight that when $\lambda(n) = \lambda$ for all $n$, the averages
-$\pi(n)$ as \emph{observed by customers are the same as the averages
-  observed by the server}, i.e., the time-average $p(n)$. In other
-words, only when the arrival rate does not depend on the state of the
-system, we have that $\lambda(n)=\lambda$ for all $n$. Of course, this
-property is not satisfied for any general queueing system,
-c.f. Exercise~\ref{ex:8}, however, it is true when the arrival process
-is Poisson. This fact is typically called \recall{PASTA}: Poisson
+So, why is this useful? Well, in words, it means that if the arrival
+rate does not depend on the state of the system, i.e.,
+$\lambda=\lambda(n)$, the sample average $\pi(n)$ is equal to the
+time-average $p(n)$, i.e., $\pi(n)=p(n)$. But, when $\pi(n)=p(n)$, the
+customer perception at arrival moments, i.e., $\pi(n)$, is the same as
+the server perception, i.e., $p(n)$.
+
+Of course, this property is not satisfied for any general queueing
+system, see the exercise below in which $X_k=1$ hour for all $k$ and
+$S_k=59$ minutes.  However, it is true when the arrival process is
+Poisson. This fact is typically called \recall{PASTA}: Poisson
 Arrivals See Time Averages.
 % Interestingly, the result can be generalized to general sets
 % $B$ of the state space, not just the number $n$ of jobs in the system.
+
 Thus, when customers arrive in accordance to a Poisson process (so
-that the inter-arrival times are exponentially distributed), it must be
-that $\pi(n) = p(n)$, hence, from~\eqref{eq:23}, we see that
+that the inter-arrival times are exponentially distributed), it must
+be that $\pi(n) = p(n)$, hence, for the $M/M/1$ queue, we see that
 \begin{equation*}
-  \pi(n) = \rho^n \pi(0) =  (1-\rho)\rho^n.
+  \pi(n) = p(n) = (1-\rho)\rho^n.
 \end{equation*}
 
 
-There is a further relation between $\pi(n)$ and the statistics of the
-system as obtained by the departures, i.e., $\delta(n)$, to be defined
-presently. For this we turn again to Eq.~\eqref{eq:15}, i.e.,
-$|A(n,t) - D(n,t)| \leq 1$. To obtain Eq.~\eqref{eq:12} we divided
-both sides of this equation by the time the system spends in a certain
-state. We can also use another form:
+With the above reasoning, we can also establish a relation between
+$\pi(n)$ and the statistics of the system as obtained by the
+departures, i.e., $\delta(n)$, to be defined presently. For this we
+turn again to Eq.~\eqref{eq:15}, i.e., $|A(n,t) - D(n,t)| \leq 1$. To
+obtain Eq.~\eqref{eq:12} we divided both sides of this equation by the
+time the system spends in a certain state. We can also use another
+form:
 \begin{equation*}
 \frac{A(t)}t \frac{A(n,t)}{A(t)} = \frac{A(n,t)}t \approx \frac{D(n,t)}t 
 = \frac{D(t)}t \frac{D(n,t)}{D(t)}.
@@ -81,7 +89,7 @@ Eq.~\eqref{eq:28} and define, analogous to \eqref{eq:132},
 Thus, $\delta(n)$ is the long-run fraction of jobs that leave $n$ jobs
 \emph{behind}. Clearly, then, if the limits exist, the right hand side
 tends to $\gamma \delta(n)$ as $t\to\infty$. Hence, for (queueing)
-systems in which customers arrive and leave as single units,
+systems in which customers arrive and leave as single units, we have
 \begin{equation}
   \label{eq:36}
   \lambda \pi(n) = \gamma \delta(n).
@@ -89,9 +97,9 @@ systems in which customers arrive and leave as single units,
 Moreover, if the system is rate-stable, i.e., the output rate $\gamma$ is equal to the input rate $\lambda$, we obtain
 \begin{equation}
   \label{eq:39}
-  \pi(n) = \delta(n).
+\lambda = \gamma \iff  \pi(n) = \delta(n).
 \end{equation}
-This means that the system as seen by arrivals, i.e.,. $\pi(n)$, is
+This means that the system as seen by arrivals, i.e., $\pi(n)$, is
 the same as what jobs leave behind, i.e., $\delta(n)$.
 
 There is a subtle problem in~\eqref{eq:132} and the derivation
@@ -100,30 +108,41 @@ while in $A(n,t)/t$ we take the limit over time. Now the observant
 reader might ask why these limits should relate at all.  The
 resolution lies in the \recall{renewal reward theorem}. As this
 theorem is intuitive and very useful in its own right we state this
-theorem first, and then apply to show~\eqref{eq:1333}. For the (simple) proof we refer to \citet{el-taha98:_sampl_path_analy_queuein_system}.
+theorem first, and then apply it to show~\eqref{eq:1333}. For the (simple) proof we refer to \citet{el-taha98:_sampl_path_analy_queuein_system}.
 
 \begin{theorem}[Renewal Reward Theorem, $Y=\lambda X$]
   Suppose the counting process $\{N(t), t\geq 0\}$ is such that
   $N(t)/t\to\lambda$ as $t\to\infty$, where $0<\lambda < \infty$. Let
   $\{Y(t), t\geq 0\}$ be a non-decreasing right-continuous
-  (deterministic) process. Define $X_k = Y(T_k)-Y(T_{k-1}$, $k\geq 1$,
-  where $T_k$ are the epochs at which $N$ increases, i.e.,
-  $N(t) = \{k : T_k \leq t\}$. Then $\lim_t Y(t)/t=Y$ iff
-  $\lim_n n^{-1}\sum_k^n X_k =X$, in which case $Y=\lambda X$.
+  (deterministic) process. Define $X_k = Y(T_k)-Y(T_{k-1})$,
+  $k\geq 1$, where $T_k$ are the epochs at which $N$ increases, i.e.,
+  $N(t) = \{k : T_k \leq t\}$. Then $Y(t)/t$ has a limit iff
+  $n^{-1}\sum_k^n X_k$ has a limit in which case $Y=\lambda X$, i.e.,
+  \begin{equation*}
+  \lim_t \frac{Y(t)}t=Y \iff \lim_n \frac 1n\sum_k^n X_k =X \implies Y=\lambda X.
+  \end{equation*}
 \end{theorem}
 
-If we take 
-\begin{align*}
-  Y &= \lim_{t\to\infty} \frac{A(n,t)}{t} = \lim_{t\to\infty} \frac 1 t \sum_{k=1}^\infty \1{L(A_k-) = n}\1{A_k\leq t} \\
-X_k &= A(n, A_k) - A(n, A_{k-1}) \\
-X &= \pi(n) = \lim_{m\to\infty} \frac 1 m \sum_{k=1}^m X_k(n) =\lim_{m\to\infty} \frac 1 m \sum_{k=1}^m \1{L(A_k-)=n} \\
-\lambda &= \lim_{t\to\infty}\frac{A(t)}t.
-\end{align*}
-Eq.~\eqref{eq:1333} follows right away from the renewal reward theorem.
 
-In many (stochastic) system the relation $Y=\lambda X$ is useful. In
-particular, in the optimization of queueing, inventory system, and
-Markov chains, this relation of often used.
+Now, to show that~(\ref{eq:132}) is valid, define
+\begin{align*}
+  Y(t) &:= A(n,t) = \sum_{k=1}^{A(t)} \1{L(A_k-) = n} \\
+X_k &:= Y(A_k) - Y(A_{k-1}) = A(n, A_k) - A(n, A_{k-1}) = \1{L(A_k-)=n}
+\end{align*}
+Then, 
+\begin{equation*}
+X= \lim_{m\to\infty} \frac 1 m \sum_{k=1}^m X_k =\lim_{m\to\infty} \frac 1 m \sum_{k=1}^m \1{L(A_k-)=n} = \pi(n).
+\end{equation*}
+Since $Y=\lim_t Y(t)/t = \lim_t A(n,t)/t$ it follows from the renewal reward theorem that
+\begin{equation*}
+  Y=\lambda X \implies \lim_t \frac{A(n,t)} t = \lambda X = \lambda \pi(n).
+\end{equation*}
+Thus, Eq.~\eqref{eq:1333} follows from the renewal reward theorem.
+
+In many (stochastic) systems the relation $Y=\lambda X$ is useful. As
+a further example, suppose customers pay on average an amount $X$ and
+customers arrive at rate $\lambda$, then the system earns money at
+rate $\lambda X = Y$. 
 
 \begin{question} 
 Check that the conditions of the renewal reward theorem are satisfied in the above proof of~\eqref{eq:1333}. 
@@ -150,6 +169,7 @@ Check that the conditions of the renewal reward theorem are satisfied in the abo
   customer requires precisely 1 minute. At the start of each hour, 59
   customers arrive. What is $p(n)$, what is $\pi(n)$?
 \end{enumerate}
+\hint{Check the definitions of $Y(0,t)$, $Y(1,t)$, $A(0,t)$ and so on.}
   \begin{solution}
 \begin{enumerate}
 \item $A(t)=\lfloor t\rfloor$ provided the unit of $t$ is in
@@ -201,7 +221,9 @@ the same, i.e. 0 versus 29.
 \end{question}
 
 \begin{question}
-  Is in general $\pi(n)\geq \delta(n)$?
+  Is in general $\pi(n)\geq \delta(n)$?  \hint{Use that
+    $\lambda \geq \gamma$ always, and $\lambda=\gamma$ when the system
+    is rate-stable.}
   \begin{solution}
     We have shown for one-step transition processes that
     $\lambda \pi(n) = \gamma \delta(n)$. Thus,
@@ -237,6 +259,7 @@ Show that
 \lambda  \pi(n) = \lambda(n) p(n) = \mu(n+1) p(n+1) = \mu \delta(n).
 \end{equation*}
 What is the important condition for this to be true?
+\hint{Check all definitions of $Y(n,t)/t$ and so on.}
 \begin{solution}
   The important condition is that transitions occur as single
   steps. In other words, the relation is true for processes with

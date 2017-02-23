@@ -10,10 +10,10 @@ that is contained in the system. This is Little's law:
 \end{equation}
 Here we provide a sketch of the proof, c.f.,
 \cite{el-taha98:_sampl_path_analy_queuein_system} for the details. In
-the forthcoming sections we will apply Little's law frequently. Part
-of the usefulness of Little's law is that it applies to all
-input-output systems, whether it is a queueing system or an inventory
-system or some much more general system. 
+the forthcoming sections we will apply Little's law often. Part of the
+usefulness of Little's law is that it applies to all input-output
+systems, whether it is a queueing system or an inventory system or
+some much more general system.
 
 We start with defining a few intuitively useful concepts.  Clearly, from~\eqref{eq:11}, 
 \begin{equation*}
@@ -59,24 +59,23 @@ From this,
   \mathscr{L}(T) = \frac 1 T  \int_0^T L(s)\, \d s  = \frac{A(T)} T \frac{1}{A(T)} \sum_{k=1}^{A(T)} W_k.
 \end{equation*}
 Finally, assuming there are an infinite number of times
-$0\leq T_i<T_{i+1}<\cdots$ at which $A(T_i) = D(T_i)$ and the following
-limits exist
+$0\leq T_i<T_{i+1}<\cdots$, $T_i\to\infty$, at which $A(T_i) = D(T_i)$
+and the following limits exist
 \begin{align*}
-T_i &\to \infty\\
- \mathscr{L}(T_i) &\to \E L,\\
-\frac{A(T_i)}{T_i} &\to \lambda, \\
+ \mathscr{L}(T_i) &\to \E L,&
+\frac{A(T_i)}{T_i} &\to \lambda, &
 \frac{1}{A(T_i)} \sum_{k=1}^{A(T_i)} W_k &\to \E W,
 \end{align*}
-when $i\to \infty$, we obtain \recall{Little's law}
+we obtain \recall{Little's law}
 \begin{equation*}
 \E L = \lambda \E W.
 \end{equation*}
 
 As a useful first application, consider a server of the $G/G/1$ queue
-as a system by itself. Clearly, jobs depart from the server at rate
-$\delta$. By rate stability, the arrival rate at the server is
-therefore also $\lambda$. Next, the time a job remains in at the
-server is $\E S$.  Thus, the averate number of jobs at the server is
+as a system by itself. Assume the system is rate-stable, for otherwise
+the above limits do not exists.  The arrival rate at the server is
+$\lambda$ and the time a job remains in at the server is $\E S$.
+Thus, the averate number of jobs at the server is
 $\E{L_S} = \lambda \E S$. As $\lambda \E{S} = \rho$, we get
 $\E{L_S} = \rho$.
 
@@ -95,13 +94,25 @@ $\E{L_S} = \rho$.
   \emph{averages}.
 \end{remark}
 
+\paragraph{Summary}
 
+Perhaps a summary of the most useful results and concepts of the previous sections
+are in order here:
+\begin{itemize}
+\item Arrival rate,  departure  rate, rate stability:  $\lambda = \gamma$
+\item PASTA: $\lambda \pi(n) = \lambda(n) p(n)$,
+\item Recursions $\lambda(n)p(n) = \mu(n+1) p(n+1)$,
+\item Renewal reward: $Y=\lambda X$
+\item Little's law: $\E L =\lambda \E W$.
+\end{itemize}
+\recall{Memorize these results.} We will use them often in the sequel,
+but in other courses these results will also prove very useful.
 
 
 \begin{question}
   For a given single server queueing system the average number of
   customers in the system is $\E L = 10$, customers arrive at rate
-  $\lambda$ and are served at rate $\mu$.
+  $\lambda=5$ per hour and are served at rate $\mu=6$ per hour.
   \begin{enumerate}
   \item What is the average time customers spend in the system?
   \item Suppose at the moment you join the system, the number of
@@ -109,30 +120,46 @@ $\E{L_S} = \rho$.
     system? 
   \item Why are the answers between these two questions different?
   \end{enumerate}
-  \hint{ Think about the data that is given in either situation.}
+  \hint{ Think about the data that is given in either situation. Check
+    the units when applying Little's law.}
 
     \begin{solution}
       \begin{enumerate}
-      \item This was my initial answer:
-    `$\E W = \lambda \E L = \lambda 10$, and \emph{not} $10\mu$.'
-    Interestingly, it is wrong\ldots I wrote Little's law in the wrong
-    way\ldots So, be aware! It's all too easy to make mistakes with Little's law.
+      \item This was my initial answer (which is wrong):
+        `$\E W = \lambda \E L = \lambda 10$'.  Interestingly, I typed
+        in Little's law in the wrong way\ldots So, be aware! It's all
+        too easy to make mistakes with Little's law.
 
-    This is correct: $\E W = \E L/\lambda = 10/\lambda$, and
-    \emph{not} $10\mu$.
-  \item  The time you spend in the system is the expected remaining
-    service time $\E S_r$, i.e., the time to serve the customer in
-    service at the moment of arrival, plus $10/\mu_1$, i.e., the time
-    to clear the queue of 10 customers.
-  \item 
- In the second question, it is \emph{given} that the queue
-    length is 10 at the moment of arrival. The queue length as `seen'
-    by a given customer upon arrival need not be the same as the
-    time-average queue length.
+    This is correct: 
+    \begin{equation*}
+      \E W = \E L/\lambda = 10/\lambda = 10/5 = 2
+    \end{equation*}
+    and \emph{not} $\E W = 10/\mu=10/6=5/3$ hour.
+  \item The time you spend in the system is the expected remaining
+    service time $\E{S_r}$, i.e., the time to serve the customer in
+    service at the moment of arrival, plus $9/\mu$, i.e., the time to
+    clear the queue of 9 customers (recall, 1 job is in service.)
+  \item In the second question, it is \emph{given} that the system
+    length is 10 at the moment of arrival. Now, $L$ as `seen' by a
+    given customer upon arrival need not be the same as the
+    time-average $L$.
   \end{enumerate}
     \end{solution}
-
 \end{question}
+
+\begin{question}
+ Which assumptions did we use to prove Little's law?
+  \begin{solution}
+    \begin{itemize}
+    \item 
+ $A(t)/t \to \lambda$ as $t\to \infty$, i.e., $A(t)/t$ has a limit as $t$ converges to $\infty$. 
+  \item There exists a sequence of points $T_k, k=0,1,2,\ldots$ in time such that the server is idle. 
+  \item Either of the limits $\sum_k^n W_k/n = \sum_k^n S_k /n $ or
+    $t^{-1}\int_0^t L(s) \d s$ exists, in which case the other exists.
+    \end{itemize}
+  \end{solution}
+\end{question}
+
 
 \begin{question}
   Provide a graphical interpration of the proof of Little's law.
@@ -147,10 +174,10 @@ $\E{L_S} = \rho$.
     corresponds to the number of jobs in the system at time $t$. Now
     adding all horizontal lines (by integrating along the $y$-axis)
     makes up the total amount of waiting done by all the jobs until
-    time $T$, while adding the vertical lines (by integrating along
-    the $x$-axis) is equal to the summation of all jobs in the
-    system. Since the area is the same no matter whether you sum it
-    in the horizontal or vertical direction:
+    time $T$. On the other hand, adding the vertical lines (by
+    integrating along the $x$-axis) is equal to the summation of all
+    jobs in the system. Since the area is the same no matter whether
+    you sum it in the horizontal or vertical direction:
     \begin{equation*}
       \sum_{k=1}^{A(T)}  W_k = \text{eclosed area} = \int_0^T (A(t)-D(t))\,dt. 
     \end{equation*}
@@ -172,61 +199,7 @@ Hence, Little's law follows.
 \end{question}
 
 
-\begin{question}
-  Little's law can be applied to any system in which jobs arrive and
-  depart. In particular, we can apply it to the system consisting of
-  just the server.  What result do you get for this case?
-  \begin{solution}
-  \begin{enumerate}
-  \item Observe that the average time at the server, i.e., the waiting
-    time in service, is $\E S$.
-  \item Jobs arrive at rate $\lambda$. 
-  \item So, the time-average number of jobs at the server
-    $\E L_S = \lambda \E S$. 
-  \item Applied to a single server, $\E L_S$ is the long run fraction
-    of time a job is at the server.
-  \item Thus, the long-run fraction of time the server is occupied is
-    $\E L_S=\lambda \E S$. The latter is also defined as $\rho$. Hence,
-    $\rho = \E L_S$. 
-  \end{enumerate}
-  \end{solution}
-\end{question}
 
-\begin{question}
-  \begin{enumerate}
-  \item Which assumptions did we use to prove that $\rho=\lambda \E S$?  
-  \item Can you make an arrival process such that $A(t)/t$ does not
-    have a limit? 
-  \end{enumerate}
-  \begin{solution}
-    \begin{enumerate}
-    \item 
-  \begin{itemize}
-  \item $A(t)/t \to \lambda$ as $t\to \infty$, i.e., $A(t)/t$ has a limit as $t$ converges to $\infty$. 
-  \item There exists a sequence of points $T_k, k=0,1,2,\ldots$ in time such that the server is idle. 
-  \item Either of the limits $\sum_k^n W_k/n = \sum_k^n S_k /n $ or
-    $t^{-1}\int_0^t L(s) \d s$ exists, in which case the other exists.
-  \end{itemize}
-  \item If $N(t) = 3 t^2$, then clearly $N(t)/t = 3t$. This does not
-    converge to a limit. For the mathematically interested, we seek a
-    function for which its Cesaro limit does not exist.
-  Another example, let the arrival rate $\lambda(t)$ be given as
-    follows:
-    \begin{equation*}
-      \lambda(t) = 
-    \begin{cases}
-      1 & \text{if } 2^{2k} \leq t < 2^{2k+1} \\
-      0 & \text{if } 2^{2k+1} \leq t < 2^{2(k+1)},
-    \end{cases}
-    \end{equation*}
-    for $k=0,1,2,\ldots$. Let $N(t) = \lambda(t) t$. Then $A(t)/t$
-    does not have limit. Of course, these examples are quite
-    pathological, and are not representable for `real life cases'
-    (Although this is also quite vague. What, then, is a real life
-    case?)
-    \end{enumerate}
-  \end{solution}
-\end{question}
 
 %%% Local Variables:
 %%% mode: latex

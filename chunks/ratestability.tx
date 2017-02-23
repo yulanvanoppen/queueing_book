@@ -343,10 +343,38 @@ such that
   \end{solution}
 \end{question}
 
+\begin{question}
+ Can you make an arrival process such that $A(t)/t$ does not
+    have a limit? 
+  \begin{solution}
+ If $N(t) = 3 t^2$, then clearly $N(t)/t = 3t$. This does not
+    converge to a limit. 
+
+  Another example, let the arrival rate $\lambda(t)$ be given as
+    follows:
+    \begin{equation*}
+      \lambda(t) = 
+    \begin{cases}
+      1 & \text{if } 2^{2k} \leq t < 2^{2k+1} \\
+      0 & \text{if } 2^{2k+1} \leq t < 2^{2(k+1)},
+    \end{cases}
+    \end{equation*}
+    for $k=0,1,2,\ldots$. Let $N(t) = \lambda(t) t$. Then $A(t)/t$
+    does not have limit. Of course, these examples are quite
+    pathological, and are not representable for `real life cases'
+    (Although this is also quite vague. What, then, is a real life
+    case?)
+
+For the mathematically interested, we seek a
+    function for which its Ces\`aro limit does not exist.
+  \end{solution}
+\end{question}
+
 
 \begin{question}
-This exercise is meant  to give the reader some idea about what needs to be done to
-    put everything on solid ground. 
+  This exercise is meant to give the reader some idea about what needs
+  to be done to put everything on solid ground.  If you are not
+  interested in the maths, you can skip the problem.
     \begin{enumerate}
     \item In
     Eq. (\ref{eq:54}) we replaced the limit with respect to $n$ by a
