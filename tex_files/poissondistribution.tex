@@ -235,6 +235,35 @@ $N(t) \sim \text{P}(\lambda t)$.
 \end{solution}
 \end{question}
 
+\begin{question}(\tbd I added this to clarify the next question, you can skip it for year 16/17.)
+Show that  for a Poisson process $N$, 
+\begin{equation*}
+  \P{N(0,s] =1\given N(0,t]=1} = \frac st.
+\end{equation*}
+Thus, if you know that $N(0,t]=1$, the arrival is distributed
+uniformly on the interval $[0,t]$.
+
+
+\hint{Use Bayes' law for conditional probability. Observe that 
+  \begin{equation*}
+\{N(0,s]+N(s,t]=1\}\cap\{N(0,s]=1\} = \{1+N(s,t]=1\}\cap\{N(0,s]=1\}=\{N(s,t]=0\}\cap\{N(0,s]=1\}.
+  \end{equation*}
+}
+
+\begin{solution}
+\begin{equation*}
+  \begin{split}
+  \P{N(0,s] =1\given N(0,t]=1} 
+&= \frac{\P{N(0,s] =1, N(0,t]=1}}{\P{N(0,t]=1}} \\
+&=   \P{N(0,t] =1\given N(0,s]=1} \frac{\P{N(0,s] =1}}{\P{N(0,t]=1}} \\
+&=   \P{N(0,s] + N(s,t] =1\given N(0,s]=1} \frac{e^{-\lambda s}\lambda s}{e^{-\lambda t} \lambda t} \\
+&=   \P{1 + N(s,t] =1\given N(0,s]=1} e^{-\lambda (s-t)} \frac{s}{t} \\
+&=   \P{N(s,t] =0} e^{-\lambda (s-t)} \frac{s}{t} = e^{-\lambda(t-s)} e^{-\lambda (s-t)} \frac{s}{t} = \frac st.
+  \end{split}
+\end{equation*}
+\end{solution}
+\end{question}
+
 
 \begin{question} (Merged Poisson streams form a new Poisson process
   with the sum of the rates.) Assume that
@@ -262,6 +291,18 @@ First we show how to  use conditioning.
     \begin{split}
 \P{N_a(t) + N_s(t) = n} 
 &= \sum_{i=0}^n \P{N_a(t) + N_s(t) = n|N_a(t) = i}\P{N_a(t)=i} \\
+\end{split}
+\end{equation*}
+Now, if $N_a(t)=i$, then 
+\begin{equation*}
+N_a(t)+N_s(t) = n \iff 
+i+N_s(t) = n \iff 
+N_s(t) = n-i.
+\end{equation*}
+Thus,
+  \begin{equation*}
+    \begin{split}
+\P{N_a(t) + N_s(t) = n} 
 &= \sum_{i=0}^n \P{ N_s(t) = n-i}\P{N_a(t)=i} \\
 &= \sum_{i=0}^n \frac{(\mu t)^{n-i}}{(n-i)!} \frac{(\lambda t)^i}{i!} e^{-(\mu+\lambda)t} \\
 &= e^{-(\mu+\lambda)t} \sum_{i=0}^n \frac{(\mu t)^{n-i}}{(n-i)!} \frac{(\lambda t)^i}{i!}  \\
@@ -348,6 +389,14 @@ $M_1(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\
   Show that the Poisson process obtained by thinning the original
   process is $\sim P(\lambda t p)$ for any~$t$.
  
+  The concept of thinning is particularly useful to analyze queueing
+  networks. Suppose the departure stream of a machine is split into
+  two substreams, e.g., a fraction $p$ of the jobs move on another
+  machine and the rest ($1-p$) of the jobs leave the system. Then we
+  can model the arrival stream at the second machine as a thinned
+  stream (with probability $p$) of the departures of the first
+  machine.
+
 \hint{ Condition on the total number of arrivals $N(t)=m$ up to time
       $t$. Realize that the probability that a job is of type 1 is
       Bernoulli distributed, hence when you consider $m$ jobs in

@@ -10,7 +10,7 @@ $ \lambda(n) p(n) = \mu(n+1)p(n+1)$. For these queueing systems we
 just present the results. In the exercises we ask you to derive the
 formulas.
 
-For the $M/M/1/K$, i.e., a system that cannot more than $K$ jobs, take
+For the $M/M/1/K$, i.e., a system that cannot contain more than $K$ jobs, take
   \begin{align*}
     \lambda(n) &= 
   \begin{cases}
@@ -133,7 +133,7 @@ Derive a simple and closed form expressions for the state
   \item Derive Eq.~\eqref{eq:8}
   \item   Show that as $K\to\infty$, the performance measures of the $M/M/1/K$ converge to those of the $M/M/1$ queue. 
   \end{enumerate}
-  \hint{Use that $\sum_{i=0}^n x^i = (1-x^{n+1})/(1-x$. BTW, is it
+  \hint{Use that $\sum_{i=0}^n x^i = (1-x^{n+1})/(1-x)$. BTW, is it
     necessary for this expression to be true that $|x|<1$? What should
     you require for $|x|$ when you want to take the limit
     $n\to\infty$?}
@@ -142,9 +142,9 @@ Note that
 \begin{equation*}
 1 = \sum_{i=0}^K p(i) = p(0)\sum_{i=0}^K \rho^i  = p(0) \frac{1-\rho^{K+1}}{1-\rho}. 
 \end{equation*}
-Thus, $G=1/p(0)$ and the result follows. 
+Thus, for the normalization constant $G$ we take $G=1/p(0)$ and the result follows. 
 
-    From Eq.~\eqref{eq:8}, $G\to (1-\rho)^{-1}$ as $\rho\to K$.
+    From Eq.~\eqref{eq:8}, $G\to (1-\rho)^{-1}$ as $K\to \infty$.
     Therefore $p(n)=\rho^n/G \to \rho^n(1-\rho)$, and the latter are
     the steady-state probabilities of the $M/M/1$ queue. Finally, if
     the steady state probabilities are the same, the performance
@@ -237,13 +237,13 @@ painless.
 We next show that the expected number of jobs in the system is given
 by
     \begin{equation*}
-      \E{L_S} = \sum_{n=0}^{c-1} n p(n) + \sum_{n=c}^{\infty} c p(n).
+      \E{L} = \sum_{n=0}^{c-1} n p(n) + \sum_{n=c}^{\infty} c p(n).
     \end{equation*}
     This expression is not the easiest to start with. With a slight
     modification the entire derivation becomes easier. I also premultiply by the normalization constant $G$ to get rid of it on the right hand side. 
     \begin{equation*}
       \begin{split}
-      G \E{L_S}
+      G \E{L}
 &= G \sum_{n=0}^{c} n p(n) + \sum_{n=c+1}^{\infty} c p(n) \\
 &= \sum_{n=1}^{c} n \frac{(c\rho)^n}{n!}  + \sum_{n=c+1}^{\infty} c \frac{c^c\rho^n}{c!} 
 = \sum_{n=1}^{c} \frac{(c\rho)^n}{(n-1)!}  + \frac{c^{c+1}}{c!}\sum_{n=c+1}^{\infty} \rho^n\\
@@ -301,12 +301,19 @@ Observe that the right hand side is precisely equal to $\rho c G$.
    to wait in queue, and only spend time in service. Since
    $\E S < \infty$ by assumption, jobs spend a finite time (with
    probability one) at a server.
- \item 
-   Write $\rho = \lambda /\mu$. Then $p(n) = e^{-\rho} \rho^n/n!$.
-   Thus, $p(n)$ is the Poisson distribution with parameter $\rho$,
-   and $L$ is a random variable with this Poisson distribution. Thus,
+ \item Write $\rho = \lambda /\mu$. Then, from the formulas for the
+   $M/M/\infty$ queue, it follows that $p(n) = e^{-\rho} \rho^n/n!$.
+   Interestingly, we see that this is equal to $\P{N=n}$ where $N$ is
+   a Poisson r.v.  with parameter $\rho$. Thus, the number in the
+   system $L$ is Poisson distributed with parameter $\rho$, thus
    $\E L = \rho$.
 
+   Another way to see that $\E L=\rho$ is by noting that in the
+   $M/M/\infty$ queue jobs do not interact with each other in the
+   queue. When they arrive, there is always a free server
+   available. Since work arrives at rate $\rho$, and all jobs are in
+   service simultaneously, the average number of busy servers must
+   also be $\rho$.
    \end{enumerate}
 
 \end{solution}

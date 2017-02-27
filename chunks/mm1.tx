@@ -262,19 +262,21 @@ pretty powerful already.
 \end{question}
 
 \begin{question}
-  Derive expression~\ref{eq:pn}.
+  Derive expression~\ref{eq:pn} for the excess probability $\P{L\geq n}$, i.e., the probability that a long queue occurs. 
+\hint{$\P{L\geq n} = \sum_{k\geq n} p(k)$.}
   \begin{solution}
     \begin{equation*}
       \begin{split}
-\P{L\geq n} 
-&= \sum_{k=n}^\infty p(n) = \sum_{k=n}^\infty p(0)\rho^n = (1-\rho)\sum_{k=n}^\infty \rho^k \\
-&= (1-\rho)\rho^n \sum_{k=0}^\infty\rho^k = \rho^n \sum_{k=0}^\infty(1-\rho) \rho^k = \rho^n \sum_{k=0}^\infty p(k)  = \rho^n.
+ \P{L\geq n} 
+ &= \sum_{k=n}^\infty p(k) = \sum_{k=n}^\infty p(0)\rho^k = (1-\rho)\sum_{k=n}^\infty \rho^k \\
+ &= (1-\rho)\rho^n \sum_{k=0}^\infty\rho^k = (1-\rho) \rho^n \frac1{1-\rho}.
 \end{split}
 \end{equation*}
 \end{solution}
 \end{question}
 
-\begin{question}
+
+\begin{question}[use=false]
 \label{q:basestock}
 Customers of, for example, a fast-food restaurant or a production
 facility, prefer to be served from stock. For this reason such

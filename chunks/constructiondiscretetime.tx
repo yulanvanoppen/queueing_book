@@ -400,7 +400,7 @@ Q_k &= Q_{k-1}+a_k - d_k.
 The cost to operate the server during period $k$ is $\beta c_k$.
 Thus, the total cost up to some time $T$ for the server must be
 $\beta \sum_{k=1}^T c_k$. In period $k$ we also have to pay $h Q_k$,
-since $h$ is the cost per customer per period in the queue. Thus, the
+since $h$ is the cost per customer per period in the system. Thus, the
 long-run average cost is
     \begin{equation*}
       \frac 1T\sum_{k=1}^T \left(\beta c_k + h Q_k\right).

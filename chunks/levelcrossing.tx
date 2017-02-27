@@ -17,25 +17,47 @@ must be that
 Hence, when $L(t)/t\to0$, the \recall{up crossing rate}
 $\lim_t A(t)/t = \lambda$ is equal to the \emph{down-crossing rate}
 $\lim_t D(t)/t = \gamma$.  We will generalize these notions of up- and
-downcrossing in this section to derive the \recall{stationary}, also know as
-\emph{long-run time average} or \emph{steady-state}, distribution of
-the number of people in queue.  
+downcrossing in this section to derive the \recall{stationary}, also
+know as \emph{long-run time average} or \emph{steady-state},
+distribution $p(n)$ that the system contains $n$ jobs. 
 
-\begin{figure}[h]
+\begin{figure}[tb]
   \centering
   \tikz{
 \draw[->] (0,0)--node[midway, fill=white] {$A(t)$}  (2,0); 
 \draw (2,-0.25) rectangle node {$L(t)=A(t)-D(t)$} (5,0.25);
 \draw[->] (5,0)--node[midway, fill=white] {$D(t)$}  (7,0); 
 } 
-\caption{What goes in the box, $A(t)$, and has not yet left, $D(t)$,
-  must be in the box, hence $L(t)=A(t)-D(t)$. }
+\caption{What goes in the box (i.e., $A(t)$) and has not yet left
+  (i.e., $D(t)$) must be in the box, hence $L(t)=A(t)-D(t)$. }
   \label{fig:box}
 \end{figure}
 
+Let us say that the system is in \emph{state $n$ when it contains $n$
+  jobs}, c.f. Figure~\ref{fig:A_n_t}, and the system \emph{crosses}
+level $n$ when the state changes from $n$ to $n+1$, either `from
+below' when an arrival occurs, or `from above' when a departure
+occurs.  The main result we derive in this section is the rate at
+which level $n$ is crossed from below and above must match, i.e.,
+\begin{equation*}
+  \lambda(n) p(n) = \mu(n+1) p(n),
+\end{equation*}
+where $\lambda(n)$ is the arrival rate in state $n$, $p(n)$ the
+fraction of time the system is in state $n$ and $\mu(n+1)$ the
+departure rate from $n+1$. To establish this we need a few definitions
+that are quite subtle and might seem a bit abstract, but below we will
+provide intuitive interpretations in terms of system KPIs. Once we
+have the proper definitions, the above result will follow
+straightaway.
 
-Define 
-\begin{subequations}
+
+Define\footnote{It is common to write
+  $f(x+) = \lim_{h\downarrow0} f(x+h)$ for the right limit of a
+  function $f$ at $x$ and $f(x-) = \lim_{h\downarrow0} f(x-h)$ for the
+  left limit. When $f(x-)=f(x+)$, $f$ is continuous at $x$. Since in
+  queueing systems we are concerned with processes with jumps, we need
+  to be quite particular about left and right limits at jump epochs.}
+\begin{subequations}\label{eq:rates_}
 \begin{align}
   A(n,t) &= \sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = n}, \label{eq:19} \\
    Y(n,t) &= \int_0^t  \1{L(s) = n} \d s, \label{eq:17} \\
@@ -47,69 +69,35 @@ $t$ that saw $n$ customers in the system at their arrival, $Y(n,t)$ is
 the total time the number in the system $L(s) =n$ during $[0,t]$ so
 that $p(n,t)$ is the fraction of time that $L(s) =n$ in $[0,t]$.
 (Recall in the definition of $A(n,t)$ that $L(t)$ is
-\emph{right-continuous}.)  
-
-The above definitions may seem a bit abstract, but they obtain an
-immediate interpretation when relating them to applications. To see this, we discuss two examples.
-
-Consider the sorting process of post parcels at a distribution center
-of a post delivery company.  Each day tens of thousands of incoming
-parcels have to be sorted to their final destination. In the first
-stage of the process, parcels are sorted to a region in the
-Netherlands. Incoming parcels are deposited on a conveyor belt. From
-the belt they are carried to outlets (chutes), each chute
-corresponding to a specific region. Employees take out the parcels
-from the chutes and put the parcels in containers.  The arrival rate
-of parcels for a certain chute may temporarily exceed the working
-capacity of the employees, as such the chute serves as a queue.  When
-the chute overflows, parcels are directed to an overflow container and
-are sorted the next day. The target of the sorting center is to
-deliver at least a certain percentage of the parcels within one
-day. Thus, the fraction of parcels rejected at the chute should remain
-small.
-
-Suppose a chute can contain at most 20 parcels, say. Then, each parcel
-on the belt that `sees' 20 parcels in its chute will be blocked. Let
-$L(t)$ be the number of parcels in the chute at time $t$. Then,
-$A(20,t)$ as defined in Eq.~(\ref{eq:19}) is number of\emph{ blocked
-  parcels} up to time $t$, and $A(20,t)/A(t)$ is the fraction of
-rejected parcels. In fact, $A(20,t)$ and $A(t)$ are continuously
-tracked by the sorting center and used to adapt employee capacity to
-control the fraction of rejected parcels. Thus, in simulations, if one
-want to estimate loss fractions, $A(n,t)/A(t)$ is the most natural
-concept to consider.
-
-For the second example, suppose there is a cost associated with
-keeping jobs in queue. Let $w$ be the cost per job in queue per unit
-time so that the cost rate is $n w$ when $n$ jobs are in queue. But
-then is $ wnY(n,t)$ the total cost up to time $t$ to have $n$ jobs in
-queue, hence the total cost up up to time $t$
-  \begin{equation*}
-C(t) =     w \sum_{n=0}^\infty n Y(n,t),
-  \end{equation*}
-and the average cost is
-\begin{equation*}
-\frac{C(t)}t =    w \sum_{n=0}^\infty n \frac{Y(n,t)}t = w \sum_{n=0}^\infty n p(n,t).
-\end{equation*}
-All in all, the concepts developed above have natural interpretations
-in practical queueing situations; they are useful in theory and in
-simulation, as they relate the theoretical concepts to actual measurements.
+\emph{right-continuous}.)   
 
 
-Continuing with the above notions we define in turn
+Continuing with the above notions  define
 \begin{equation*}
   \lambda(n) = \lim_{t\to\infty} \frac{A(n,t)}{Y(n,t)}
 \end{equation*}
-as the \emph{arrival rate in state $n$.} Similarly, denoting by
+as the \emph{arrival rate in state $n$}. To clarify this notion,
+observe that $A(n,t)$ counts the number of arrivals that see $n$ jobs
+in the system, while $Y(n,t)$ tracks the amount of time the system
+contains $n$ jobs. Suppose that at $T$ a job arrives that sees $n$ in
+the system. Then $A(n,T)=A(n, T-)+1$, and this job arrives in an
+interval that it tracked by $Y(n,t)$, precisely because this job sees
+$n$ in the system just prior to its arrival. Thus, just as $A(t)/t$ is
+the total number of arrivals during $[0,t]$ divided by $t$,
+$A(n,t)/Y(n,t)$ is the number of arrivals that see $n$ divided by the
+time the system contains $n$ jobs. 
+
+
+Similarly, denoting by
 \begin{equation*}
     D(n,t) = \sum_{k} \1{D_k \leq t} \1{L(D_k) = n}
   \end{equation*}
-  the number of departures up to time $t$ that leave $n$ customers
-  behind, we have that
+  the number of departures up to time $t$ that\emph{ leave $n$
+    customers behind}, we define
 \begin{equation*}
   \mu(n+1) = \lim_{t\to\infty} \frac{D(n,t)}{Y(n+1,t)},
 \end{equation*}
-is \emph{ the departure rate from state $n+1$}. (It is easy to get
+as \emph{ the departure rate from state $n+1$}. (It is easy to get
 confused here: to leave $n$ jobs behind, the system must contain $n+1$
 jobs just prior to the departure.) Figure~\ref{fig:A_n_t} shows how
 $A(n,t)$ and~$\lambda(n)$ relate to $D(n+1,t)$ and $\mu(n)$.
@@ -171,7 +159,7 @@ $A(n,t)/t$. Taking limits we get
 \begin{equation}\label{eq:63}
   \frac{A(n,t)}t =   \frac{A(n,t)}{Y(n,t)}\frac{Y(n,t)}t \to \lambda(n) p(n),
 \end{equation}
-where we use the above defitions for $\lambda(n)$ and $p(n)$.
+where we use the above definitions for $\lambda(n)$ and $p(n)$.
 Similarly, the departure rate of jobs that leave $n$ jobs behind is
 \begin{equation}\label{eq:22}
   \frac{D(n,t)}t =   \frac{D(n,t)}{Y(n+1,t)}\frac{Y(n+1,t)}t \to \mu(n+1) p(n+1).
@@ -411,6 +399,57 @@ edge[pil,->] (perf);
     relations that we derive in this and the next sections.}
 \end{figure}
 
+\paragraph{Interpretation}
+
+The definitions in~(\ref{eq:rates_}) may seem a bit abstract, but they
+obtain an immediate interpretation when relating them to
+applications. To see this, we discuss two examples.
+
+Consider the sorting process of post parcels at a distribution center
+of a post delivery company.  Each day tens of thousands of incoming
+parcels have to be sorted to their final destination. In the first
+stage of the process, parcels are sorted to a region in the
+Netherlands. Incoming parcels are deposited on a conveyor belt. From
+the belt they are carried to outlets (chutes), each chute
+corresponding to a specific region. Employees take out the parcels
+from the chutes and put the parcels in containers.  The arrival rate
+of parcels for a certain chute may temporarily exceed the working
+capacity of the employees, as such the chute serves as a queue.  When
+the chute overflows, parcels are directed to an overflow container and
+are sorted the next day. The target of the sorting center is to
+deliver at least a certain percentage of the parcels within one
+day. Thus, the fraction of parcels rejected at the chute should remain
+small.
+
+Suppose a chute can contain at most 20 parcels, say. Then, each parcel
+on the belt that `sees' 20 parcels in its chute will be blocked. Let
+$L(t)$ be the number of parcels in the chute at time $t$. Then,
+$A(20,t)$ as defined in Eq.~(\ref{eq:19}) is number of\emph{ blocked
+  parcels} up to time $t$, and $A(20,t)/A(t)$ is the fraction of
+rejected parcels. In fact, $A(20,t)$ and $A(t)$ are continuously
+tracked by the sorting center and used to adapt employee capacity to
+control the fraction of rejected parcels. Thus, in simulations, if one
+want to estimate loss fractions, $A(n,t)/A(t)$ is the most natural
+concept to consider.
+
+For the second example, suppose there is a cost associated with
+keeping jobs in queue. Let $w$ be the cost per job in queue per unit
+time so that the cost rate is $n w$ when $n$ jobs are in queue. But
+then is $ wnY(n,t)$ the total cost up to time $t$ to have $n$ jobs in
+queue, hence the total cost up up to time $t$
+  \begin{equation*}
+C(t) =     w \sum_{n=0}^\infty n Y(n,t),
+  \end{equation*}
+and the average cost is
+\begin{equation*}
+\frac{C(t)}t =    w \sum_{n=0}^\infty n \frac{Y(n,t)}t = w \sum_{n=0}^\infty n p(n,t).
+\end{equation*}
+All in all, the concepts developed above have natural interpretations
+in practical queueing situations; they are useful in theory and in
+simulation, as they relate the theoretical concepts to actual measurements.
+
+
+
 \begin{question}
   Should we  take $L(A_k-)=n$ or $L(A_k)$ in the definition of $A(n,t)$?
     \begin{solution}
@@ -423,7 +462,7 @@ edge[pil,->] (perf);
 \end{question}
 
 \begin{question}
-Should  we take $D(n-1,t)$ or  $D(n,t)$ in the definition of $\mu(n,t)$?
+Should  we take $D(n-1,t)$ or  $D(n,t)$ in the definition of $\mu(n)$?
     \begin{solution}
       $D(n-1,t)$ counts the departures that leave $n-1$ behind. Thus,
       just before the customer leaves, the system contains $n$
@@ -476,8 +515,12 @@ Is it always true that
     $\lambda = \lim_{t} \frac{A(t)}t = \lim_{t} \frac{A(n,t)}t$.
   \begin{solution}
  When $\gamma < \lambda$, $\lambda$ can still be finite, but
-    the server is simply to slow. In that case both limits can exists,
+    the server is simply too slow. In that case both limits can exists,
     the first limit is positive but the second is $0$.
+
+    Note that $\gamma\leq \lambda$ (always): jobs cannot depart faster
+    than they arrive. Hence, we do not have to consider the case
+    $\gamma>\lambda$ in the above.
   \end{solution}
 \end{question}
 
@@ -506,8 +549,11 @@ Is it always true that
       queueing system $L(s)=1$ for $s\in[0,1)$, $L(s)=0$ for
       $s\in[1,2)$, $L(s)=1$ for $s\in[2,3)$, and so on, Thus, when
       $t<1$, $Y(1,t)=\int_0^t \1{L(s)=1} \d s = \int_0^t 1\d s = t$.
-      When $t\in[1,2)$, $L(s) = 0$, so that $Y(1,t) = 1$ for
-      $s\in[1,2)$, and so on. Thus, all in all,
+      When $t\in[1,2)$, 
+      \begin{equation*}
+        L(t)=0 \implies \1{L(t)=0} \implies Y(1,t) \text{ does not change}.
+      \end{equation*}
+Continuing to $[2,3)$ and so on gives
     \begin{equation*}
       Y(1,t) =
       \begin{cases}
@@ -519,7 +565,10 @@ Is it always true that
       \end{cases}
     \end{equation*}
     and so on.  Since $Y(n,t)=0$ for all $n\geq 2$, $L(s) = 1$ or
-    $L(s)=0$ for all $s$, therefore, $Y(0,t) = 1-Y(1,t)$.
+    $L(s)=0$ for all $s$, therefore, 
+    \begin{equation*}
+      Y(0,t) = t-Y(1,t).
+    \end{equation*}
     \end{solution}
 \end{question}
 

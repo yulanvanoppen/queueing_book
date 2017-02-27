@@ -11,7 +11,8 @@ where $\pi(n)$ is the long-run fraction of jobs that observe $n$
 customers in the system at the moment of arrival.  It is natural to
 ask whether $\pi(n)$ and $p(n)$ are related, that is, whether what
 customers see upon arrival is related to the time-average behavior of
-the system.
+the system. We will derive a condition in this section under which
+$\pi(n)=p(n)$. 
 
 
 We can make some progress with this question by rewriting $\pi(n)$ in
@@ -122,6 +123,11 @@ theorem first, and then apply it to show~\eqref{eq:1333}. For the (simple) proof
   \lim_t \frac{Y(t)}t=Y \iff \lim_n \frac 1n\sum_k^n X_k =X \implies Y=\lambda X.
   \end{equation*}
 \end{theorem}
+ 
+As an aside, in this theorem, $X_k$ does not represent an interarrival
+time, instead it corresponds to the increment of the (graph of) $Y$
+between two consecutive epochs $T_{k-1}$ and $T_k$ at which $Y$ is
+observed. \nvf{Add a graph}
 
 
 Now, to show that~(\ref{eq:132}) is valid, define
@@ -227,8 +233,8 @@ the same, i.e. 0 versus 29.
   \begin{solution}
     We have shown for one-step transition processes that
     $\lambda \pi(n) = \gamma \delta(n)$. Thus,
-    $\pi(n) = \gamma/\lambda \delta(n)$. Since $\lambda\geq \gamma$,
-    we have that $\pi(n) \geq \delta(n)$.
+    $\pi(n) = \delta(n)\gamma /\lambda$. Since $\lambda\geq \gamma$,
+    we have that $\pi(n) \leq \delta(n)$.
   \end{solution}
 \end{question}
 

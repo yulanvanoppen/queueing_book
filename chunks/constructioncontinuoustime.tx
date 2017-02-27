@@ -356,50 +356,76 @@ Great! Our handiwork matches with the computer's results.
 \begin{question}
   If $S\sim U[0,7]$ and $X\sim U[0,10]$, where $U[I]$ stands for the
   uniform distribution concentrated on the interval $I$, compute
-  $\P{S-X\leq x}$.  \hint{This should be trivial, of course, but I
-    didn't find it easy\ldots In fact, I found it a major headache,
-    hence it is good to try yourself before looking at the
-    answer. Check your probability book if you don't know what to
-    do. }
-  \begin{solution}
+  $\P{S-X\leq x}$. 
 
+  \hint{This appears to be trivial\ldots, but I didn't find it
+    easy\ldots In fact, I found it a major headache, hence it is good
+    to try yourself before looking at the answer. Check your
+    probability book if you don't know what to do. }
+
+  \begin{solution}
     Let us write $f(x)$ for the density of $\P{S-X\leq x}$, i.e.,
     $\P{S-X\leq x} = \int_{-\infty}^x f(y) \d y$. (A formal point, why
     does $\P{S-X \leq x }$ actually have a density? You can skip this
-    detail if you like, but it is interesting to think about.) 
-
+    detail if you are not interested in mathematical details,
+    nevertheless, it is interesting to think about.)
 With conditioning, 
 \begin{equation*}
   f(x) 
-= \frac1{10}\int_{0}^{10} \P{S-X = x|X=u} \d u 
+= \int_{0}^{10} \P{S-X = x|X=u} \P{X\in \d u}
+\end{equation*}
+This notation is, admittably, quite subtle (and to get it right
+requires much more work than we can do in this course). Intuitively,
+$\P{X\in \d u}$ means the (infinitesimal) probability that
+$X\in [u, u+\d u]$. Since $X$ is uniform on $[0,10]$,
+$\P{X\in [s,t]} = (t-s)/10$ for $s,t \in [0,10]$ and $s<t$. Now,
+taking this literaly, let $s=u$ and $t=u + \d u$, it follows that,
+\begin{equation*}
+  \P{X\in [u, u+\d u]} = \frac{ u+\d t - u}{10}=\frac{\d u}{10}.
+\end{equation*}
+Using this in the above expression for $f(x)$ gives
+\begin{equation*}
+  f(x) = \frac1{10}\int_{0}^{10} \P{S-X = x|X=u} \d u.
+\end{equation*}
+Now use that
+$S$ and $X$ are independent so that
+\begin{equation*}
+  \begin{split}
+\P{S-X = x|X=u}
+&= \frac{\P{S-X=x, X=u}}{\P{X=u}} = \frac{\P{S-u=x, X=u}}{\P{X=u}} \\
+&=\frac{\P{S-u=x}\P{X=u}}{\P{X=u}}=\P{S=u-x}.
+  \end{split}
+\end{equation*}
+Observe that we just use the formulas we are used to from
+conditioning on sets with positive probability. Recall,
+$\P{A|B} = \P{AB}/\P{B}$ only when $\P{B}>0$. But here $\P{X=x} = 0$
+for all $x$, since $x$ consists of a single point and $X$ is uniformly
+distributed. Thus, we divide by $0$! To get the mathematical details
+right, requires quite a bit more work than we can do in this course.
+Interesingly, in this case it works, as $\P{X=u}$ appears in the
+numerator and denominator, hence can be cancelled. In general, be
+careful when using such shortcuts; it can go wrong easily.
+
+With this,
+\begin{equation*}
+  f(x) 
 = \frac1{10}\int_{0}^{10} \P{S-u=  x }\d u 
 = \frac1{10}\int_{0}^{10} \P{S= x +u} \d u.
 \end{equation*}
-(Observe that we just use the formulas we are used to from conditioning
-on sets with positive probability. Recall, $\P{A|B} = \P{AB}/\P{B}$
-only when $\P{B}>0$, and here $\P{X=x} = 0$ for all $x$, since $x$
-consists of a single point and $X$ is uniformly distributed.) This
-works in this case, but you should be careful when using it.)
 
-Next, interpret $\P{S= y}$ as the density of $\P{S\leq y}$. Then, 
-\begin{equation*}
-  \P{S= y} =
-  \begin{cases}
-    0, &\text{ for } y \not \in [0,7], \\
-    \frac17, &\text{ for } y \in [0,7].
-  \end{cases}
-\end{equation*}
+Next, interpret $\P{S= y}$ as the density of the distribution function
+$\P{S\leq y}$, so that $\P{S= y} = \1{y\in [0,7]}/7$
 Therefore, while using that in the above integral that $x$ is fixed, 
 \begin{equation*}
-  \P{S= x+u} = \frac 17 1\{-x \leq u \leq 7-x\},
+  \P{S= x+u} = \frac 17 \1{-x \leq u \leq 7-x},
 \end{equation*}
 from which
 \begin{equation*}
   \begin{split}
   f(x)  
-&= \frac1{70}\int_{0}^{10} 1\{-x \leq u \leq 7-x\} \d u \\
-&= \frac1{70}\int_{-\infty}^{\infty} 1\{0\leq u \leq 10\} 1\{-x \leq u \leq 7-x\} \d u \\
-&= \frac1{70}\int_{-\infty}^{\infty} 1\{\max\{0, -x\} \leq u \leq \min\{10, 7-x\} \d u.\\
+&= \frac1{70}\int_{0}^{10} \1{-x \leq u \leq 7-x} \d u \\
+&= \frac1{70}\int_{-\infty}^{\infty} \1{0\leq u \leq 10} \1{-x \leq u \leq 7-x} \d u \\
+&= \frac1{70}\int_{-\infty}^{\infty} \1{\max\{0, -x\} \leq u \leq \min\{10, 7-x\}} \d u.\\
   \end{split}
 \end{equation*}
 First we make some simple observations. If $x>7$ then
@@ -437,6 +463,8 @@ For your convenience, I also include the following code from Wolframalpa
 
 \lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructioncontinuoustime_4.tex}
 
+
+I got the same results as Wolframalpa, but certainly not for free. 
 
 Wolframalpha is a great site. Please check it out if you haven't done
 so up to now.
