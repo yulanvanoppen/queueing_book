@@ -1,26 +1,12 @@
 
->>> from math import factorial
->>>
->>> labda = 105./60
->>> mu = 120./60
->>> rho = labda/mu
->>> rho
-0.875
->>> tot = sum(rho**n/factorial(n) for n in range(m)) +
-rho**m/factorial(m)/(1.-rho/m)
->>> P0 = 1./tot
->>> P0
-0.391304347826087
->>> Lq = rho**(m+1)/m/(factorial(m)*(1.-rho/m)**2)*P0
->>> Lq
-0.2071256038647343
->>> Ls = Lq + rho
->>> Ls
-1.0821256038647342
->>> Wq = Lq/labda
->>> Wq
-0.11835748792270531
->>> Ws = Ls/labda
->>> Ws
-0.6183574879227053
+from math import factorial
+
+def WQ(c, labda, ES):
+    rho = labda*ES
+    tot = sum([rho**n/factorial(n) for n in range(c)])
+    tot += rho**c/factorial(c)/(1.-rho/c)
+    P0 = 1./tot
+    Lq = rho**(c+1)/c/(factorial(c)*(1.-rho/c)**2)*P0
+    return Lq/labda # Wq
+
 

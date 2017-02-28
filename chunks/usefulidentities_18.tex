@@ -1,20 +1,9 @@
 
->>> P = [1]*(m+b+1) # temporary value
->>> P
-[1, 1, 1, 1]
+>>> L = sum(n*P[n] for n in range(len(P)))
+>>> L
+1.725782414307004
 >>>
->>> for n in range(1,m+b+1):
-...     P[n] = computeP(n)
-... tot = sum(P)
-  File "< chunk 18 named None >", line 3
-    tot = sum(P)
-      ^
-SyntaxError: invalid syntax
->>> tot
-0.9061042738330157
->>>
->>> P = [p/tot for p in P] # normalize
->>> P
-[1.103625740302256, 1.103625740302256, 1.103625740302256,
-1.103625740302256]
+>>> Lq = sum((n-c)*P[n] for n in range(c,len(P)))
+>>> Lq
+0.9120715350223545
 

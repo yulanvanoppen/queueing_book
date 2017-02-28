@@ -1,7 +1,23 @@
 
->>> m = 4
->>> labda*WQ(m, labda, ES)
-0.12496839913748235
->>> m-rho
-2.1333333333333333
+>>> tot = sum(rho**n/factorial(n) for n in range(c))
+>>> tot += rho**c/factorial(c)/(1.-rho/c)
+>>> P0 = 1./tot
+>>> P0
+0.043478260869565244
+>>>
+>>> Lq = rho**(c+1)/c/(factorial(c)*(1.-rho/c)**2)*P0
+>>> Lq
+9.64492753623188
+>>> Lq/labda # Wq
+0.8768115942028981
+>>>
+>>> Ls = Lq + rho
+>>> Ls
+11.478260869565213
+>>> Ls/labda # Ws
+1.0434782608695647
+>>>
+>>> ES = 1./mu # expected service time
+>>> ES
+0.16666666666666666
 

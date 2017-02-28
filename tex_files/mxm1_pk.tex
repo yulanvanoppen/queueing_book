@@ -14,7 +14,7 @@ Assume that jobs arrive as a Poisson process with rate $\lambda$ and
 each \emph{job} contains multiple \emph{items}.  Let $A_k$ be the
 arrival time of job $k$ and $A(t)$ the number of job arrivals up to
 time $t$. Denote by $B_k$ the number of items that job $k$ brings into
-the system.  We assume that $\{B_i\}$ is an i.i.d. sequence of
+the system.  We assume that $\{B_k\}$ is an i.i.d. sequence of
 discrete random variables distributed as a generic random variable $B$
 such that $\P{B = k} = f(k)$, where $f(k)$ is a given set of
 probabilities. We write
@@ -23,7 +23,9 @@ probabilities. We write
 \end{equation*}
 for the \emph{survivor function} of $B$.  We also assume that the
 service time of each item is exponentially distributed with average
-$1/\mu$. This queueing situation denoted by the symbol $M^X/M/1$.
+$1/\mu$. Thus, the average time to serve a job is
+$\E{B}\E{S}=\E B/\mu$. This queueing situation denoted by the shorthand
+$M^X/M/1$.
 
 The first criterion we must check for the $M^X/M/1$ queue is the
 stability: the service rate must be larger than the arrival rate of
@@ -31,11 +33,11 @@ work. To determine the latter, the total number of items $N(t)$
 arrived up to time $t$ must be equal to the number of arrivals $A(t)$
 up to time $t$ times the batch size of each arrival, i.e.,
 \begin{equation*}
-N(t)=  \sum_{k=0}^\infty B_k \1{A_k \leq t} = \sum_{i=k}^{A(t)} B_k.
+N(t)=  \sum_{k=0}^\infty B_k \1{A_k \leq t} = \sum_{k=0}^{A(t)} B_k.
 \end{equation*}
 The (stochastic) process $\{N(t)\}$ is known as the \recall{compound
-  Poisson process}. Clearly, the rate at which items arrive is,
-approximately,
+  Poisson process}. Clearly, the rate at which items arrive is
+approximately
 \begin{equation*}
   \frac{N(t)}t = \frac{A(t)}t \frac1{A(t)}\sum_{i=k}^{A(t)} B_k.
 \end{equation*}
@@ -55,7 +57,8 @@ $\E{W_Q}=\E{S_r}/(1-\rho)$ of Section~\ref{sec:some-usef-ident} for
 inspiration. Suppose a batch finds $\E{L}$ items in the system upon
 arrival. By the memoryless property of the service distribution, the
 expected remaining service time of the item in service (if any) is
-$\E S$. Therefore the expected time the job spends in queue is
+$\E S$. Therefore the expected time the entire batch, i.e., the job,
+spends in queue is
 \begin{equation*}
   \E{W_{Q,b}} = \E{L} \E S;
 \end{equation*}
@@ -83,7 +86,7 @@ Below we prove that
 \begin{equation}\label{eq:br}
   \E{B_r} = \rho\frac{\E{B^2}}{2\E B} + \frac\rho2.
 \end{equation}
-In Exercise~\ref{q:batch} below we rewrite this to
+In an exercise below we rewrite this to
 \begin{equation}\label{eq:43}
 \E{L}  = \frac{\E{B_r}}{1-\rho} = \frac{1+C_s^2}2 \frac{\rho}{1-\rho} \E B + \frac12\frac\rho{1-\rho},
 \end{equation}
@@ -111,23 +114,29 @@ waiting time can be computed with the above result.
 
     % y = zero line
     \draw (-0.5, 0) -- (18.5, 0); 
+    % level crossing
+    \draw (-0.5, 2.5) -- (18.5, 2.5) 
+    node[pos=0.65, fill=white, above]  {$\sum_{k=1}^n \1{B_k \geq i}$}
+    node[pos=0.92, fill=white]  {$y=i$};
 
-    \draw node (c1) at (0,3) [closed, label={}]
-          node (c2) at (3,0)[open, label={}]
+
+    \draw node (c1) at (0,3.5) [closed, label={}]
+          node (c2) at (3.5,0)[open, label={}]
      (c1) to (c2);
-    \draw[dotted] (0,0) -- (0,3) node[midway, fill=white] {$B_1$};
+    \draw[dotted] (0,0) -- (0,3.5) node[midway, fill=white] {$B_1$};
+    \draw[dotted, <->] (1, 0.05) -- (1, 2.45) node[fill=white, midway, rotate=90] {$i$};
 
 
-    \draw node (c1) at (3,2) [closed, label={}]
+    \draw node (c1) at (3.5,1.5) [closed, label={}]
           node (c2) at (5,0)[open, label={}]
      (c1) to (c2);
-    \draw[dotted] (3,0.1) -- (3,2) node[midway, fill=white] {$B_2$};
+    \draw[dotted] (3.5,0.1) -- (3.5,1.5) node[midway, fill=white] {$B_2$};
 
     \draw node (c1) at (5,4) [closed, label={}]
           node (c2) at (9,0)[open, label={}]
      (c1) to (c2);
     \draw[dotted] (5,0.1) -- (5,4) node[midway, fill=white] {$B_3$};
-    \draw[dotted] (6,0.1) -- (6,3) node[midway, fill=white] {$R$};
+    \draw[dotted, <->] (6.5, 0.05) -- (6.5, 2.45) node[fill=white, midway, rotate=90] {$i$};
 
     \draw node (c1) at (9,2.3) [closed, label={}]
           node (c2) at (11.3,0)[open, label={}]
@@ -135,31 +144,29 @@ waiting time can be computed with the above result.
     \draw[dotted] (9,0.1) -- (9,2.3) node[midway, fill=white] {$B_4$};
 
     % end
-    \draw node (c1) at (15,3) [closed, label={}]
+    \draw node (c1) at (14.5,3.5) [closed, label={}]
           node (c2) at (18,0)[open, label={}]
      (c1) to (c2);
-    \draw[dotted] (15,0.1) -- (15,3) node[midway, fill=white ] {$B_n$};
+    \draw[dotted] (14.5,0.1) -- (14.5,3.5) node[midway, fill=white ] {$B_n$};
+    \draw[dotted, <->] (15.5, 0.05) -- (15.5, 2.45) node[fill=white, midway, rotate=90] {$i$};
     
-    % level crossing
-    \draw (-0.5, 2.5) -- (18.5, 2.5) 
-    node[pos=0.65, fill=white]
-    {$\sum_{k=1}^n \1{B_k \geq i}$};
-    \draw[<->] (14., 0) -- (14., 2.5) node[fill=white, midway, rotate=90] {$i$};
-
 
     % bottom line
     \draw[<->] (0, -0.6) -- (18, -.6) node[fill=white, midway] {$\sum_{k=1}^n B_k$};
-
-
 \end{tikzpicture}
 
-\caption{The remaining job size as a function of time.}
+\caption{The remaining job size as a function of time. A batch crosses
+  the line $y=i$ iff it contains an $i$th item. Thus, the number of
+  $i$th items in $n$ batches is $\sum_{k=1}^n \1{B_k\geq i}$. The
+  total number of items arrived is $\sum_k^n B_k$. The fraction of
+  time an $i$th item is in service is therefore
+  $\sum_k^n \1{B_k\geq i}/\sum_k^n B_k$.}
   \label{fig:remainingservicetime}
 \end{figure}
 
 
 We now turn to proving~\eqref{eq:br} with sample-path arguments and
-counting; its an elegant line of reasoning. First concentrate on the
+counting; it is an elegant line of reasoning. First concentrate on the
 time the server is busy, i.e., just remove all idle times, and plot
 the remaining job size during the service of the job, c.f,
 Figure~\ref{fig:remainingservicetime}. Second, define $R$ as the
@@ -174,15 +181,16 @@ produce, during its service, a remaining number of items equal to $i$.
 Thus, by counting, we see in Figure~\ref{fig:remainingservicetime}
 that $\sum_{k=1}^n \1{B_k \geq i}$ is the number of times there are
 precisely $i$ remaining items.  We also see that $\sum_{k=1}^n B_k$ is
-the total time the server is busy. Thus, the probability that an
-arbitrary arrival sees $i$ remaining items in service is
-$\sum_{k=1}^n \1{B_k \geq i}/\sum_{k=1}^n B_k$, where we use the fact
-that Poisson arrivals are uniformly distributed, conditional on a
-given number of arrivals in an interval, to conclude that any item of
-the $\sum_{k} B_k$ items is `chosen' with the same probability.
-Assuming that the limits exist,
+the total time the server is busy. Thus, the fraction of time there
+are $i$ remaining items is
 \begin{equation*}
-  \frac{n^{-1}\sum_{k=1}^n \1{B_k \geq i}}{n^{-1}\sum_{k=1}^n B_k} \to \frac{G(i-1)}{\E B} = \P{R=i}, \quad \text{as  } n\to\infty.
+  \frac{\sum_{k=1}^n \1{B_k \geq i}}{\sum_{k=1}^n B_k}.
+\end{equation*}
+By PASTA this is also the fraction of jobs that see $i$ items in
+service.  Finally, assuming that the limits exist,
+\begin{equation*}
+\P{R=i} = \lim_{n\to\infty} \frac{\sum_{k=1}^n \1{B_k \geq i}}{\sum_{k=1}^n B_k} 
+= \lim_{n\to\infty}  \frac{n^{-1}\sum_{k=1}^n \1{B_k \geq i}}{n^{-1}\sum_{k=1}^n B_k} = \frac{G(i-1)}{\E B}.
 \end{equation*}
 
 With this expression for $\P{R=i}$, the expected remaining time becomes
@@ -270,7 +278,7 @@ And thus,
     order of magnitude that can be achieved with changing work habits,
     such as working in contant batch sizes. 
 
-    Observe also that its up to management to decide whether this
+    Observe also that it is up to management to decide whether this
     reduction outweighs any efforts to reduce the variation in batch
     sizes. (In our model we assume that $B=2$, i.e., we removed all
     variability. This is the best possible. Real life reductions will

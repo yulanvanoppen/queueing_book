@@ -10,47 +10,51 @@ $\pi(0)=p(0)$, hence the fraction of customers that enter an empty
 system is also $1-\rho$. 
 
 Suppose that at $A_k$, i.e., the arrival epoch of the $k$th job, the
-server is busy.  The remaining service time $S_{r,}$ is the
-time between $A_k$ and the epoch the job in service departs. If the
-server is free at $A_k$, we set $S_{r,k}=0$.  The limit, provided it exists, 
+server is busy.  The remaining service time $S_{r,k}$ as seen by job
+$k$ is the time between $A_k$ and the departure epoch of the job in
+service. If the server is free at $A_k$, we set $S_{r,k}=0$.  Define
+the average \recall{remaining service time} as seen at arrival epochs by
+the limit
 \begin{equation*}
-  \E{S_r} = \lim_{n\to\infty} \frac{\sum_{k=1}^n S_{r,k}}{n}
+  \E{S_r} = \lim_{n\to\infty} \frac1n \sum_{k=1}^n S_{r,k},
 \end{equation*}
-is called the average \recall{remaining service time} as seen at
-arrival epochs.  Note that $\E{S_r}$ includes a fraction of jobs that
-find the server idle. If we need the remaining service time for the
-jobs that see the server busy, use that a fraction $\rho$ of the jobs
+provided this limit exists. Note that $\E{S_r}$ includes the fraction
+of jobs that find the server idle. If we need the remaining service
+time for the jobs that see the server busy, use that a fraction~$\rho$
 sees the server occupied upon arrival, while a fraction $1-\rho$ sees
 a free server. Therefore
 \begin{equation}\label{eq:37}
 \E{S_r} =   \rho \E{S_r\given S_r >0} + (1-\rho)\cdot \E{S_r\given S_r = 0} = \rho \E{S_r\given S_r>0},
 \end{equation}
-since, evidently, $\E{S_r\given S_r=0}=0$. 
+since, evidently, $\E{S_r\given S_r=0}=0$.  Observe that we used the
+PASTA property here.
 
 Next, consider the waiting time in queue.  It is evident that the
 expected waiting time for an arriving customer is the expected
 remaining service time plus the expected time in queue. The expected
 time in queue, in turn, must be equal to the expected number of
 customers in queue at an arrival epoch times the expected service time
-per customer (assuming that service times are i.i.d.). If the arrival
+per customer, assuming that service times are i.i.d. If the arrival
 process is Poisson, it follows from PASTA that the average number of
 jobs in queue perceived by arriving customers is also the
-\emph{time-average} number of jobs in queue $\E{L_Q}$.  Thus, the time
-an arrival expects to spend in queue is 
+\emph{time-average} number of jobs in queue~$\E{L_Q}$.  Thus, the
+expected time in queue is
 \begin{equation}\label{eq:24}
   \E{W_Q} = \E{S_r} + \E{L_Q} \E S.
 \end{equation}
-Now,, from Little's law we know that $\E{L_Q} = \lambda \E{W_Q}$. Using this
+Now, from Little's law we know that $\E{L_Q} = \lambda \E{W_Q}$. Using this,
 \begin{equation*}
-  \E{W_Q} = \E{S_r} + \lambda \E{W_Q} \E S  =\E{S_r} + \rho \E{W_Q}.
+  \E{W_Q} = \E{S_r} + \lambda \E{W_Q} \E S  =\E{S_r} + \rho \E{W_Q},
 \end{equation*}
-But this gives for the $M/G/1$ queue that
+since $\rho=\lambda \E S$. But this gives for the $M/G/1$ queue that
 \begin{equation}\label{eq:35}
   \E{W_Q} = \frac{\E{S_r}}{1-\rho} = \frac{\rho}{1-\rho} \E{S_r\given S_r>0},
 \end{equation}
 where we use~(\ref{eq:37}) in the last equation.
+
+
 The average waiting time $\E W$ in the entire system, i.e., in queue
-plus in service, is therefore
+plus in service, becomes
 \begin{equation*}
   \E W = \E{W_Q}+ \E S = \frac{\E{S_r}}{1-\rho} + \E S.
 \end{equation*}
@@ -96,15 +100,19 @@ equal to the expected number of busy servers, must be
 \end{equation*}
 again in accordance with our earlier result.
 
-\begin{remark}
+\begin{question}
   It is an easy mistake to think that $\E{S_r} = \E S$ when service
-  times are exponential. However, as $\E{S_r \given S_r>0} = \E S$ for
-  the $M/M/1$ queue, and $\E{S_r} = \rho \E{S_r \given S_r>0}$ for the
-  $M/G/1$ queue, it follows that
+  times are exponential. Why is this wrong?
+\hint{Realize again that $\E{S_r}$ includes the jobs that arrive at an empty system.}
+  \begin{solution}
+    $\E{S_r \given S_r>0} = \E S$ for the $M/M/1$ queue, and
+    $\E{S_r} = \rho \E{S_r \given S_r>0}$ for the $M/G/1$ queue, it
+    follows that
   \begin{equation*}
- \E{S_r} = \frac{\E S}{\rho}.
+ \E{S_r} = \rho \E{S_r\given S_r>0} = \rho \E S.
   \end{equation*}
-\end{remark}
+  \end{solution}
+\end{question}
 
 \begin{question}
   Try to derive relation~(\ref{eq:37}) with sample path
@@ -112,12 +120,11 @@ again in accordance with our earlier result.
   \hint{ This requires some extra definitions, similar to
   $A(n,t)$ as defined in~\eqref{eq:19}.}
   \begin{solution}
-    This is, admittedly, not simple, so let us work in stages. We
-    first refine the definition of the number of arrivals $A(t)$ up to
-    time $t$ to the number of arrivals $A(+,t)$ that see a job in
-    service. As the server is only busy at time $t$ when $L(t)>0$, we define
+    This is, admittedly, not simple, so let us work in stages. Define
+    $A(+,t)$ as the number of arrivals that see a job in service. As
+    the server is only busy at time $t$ when $L(t)>0$, we define
     \begin{equation*}
-      A(+,t) = \sum_{k=1}^\infty \1{A_k\leq t, L(A_k) > 0}.
+      A(+,t) = \sum_{k=1}^\infty \1{A_k\leq t}\1{L(A_k) > 0}.
     \end{equation*}
     Next, define $\tilde D_k = \min\{D_i: D_i \geq A_k\}$ as the first
     departure after the arrival time $A_k$ of job $k$. We need to
@@ -134,7 +141,7 @@ again in accordance with our earlier result.
     \begin{equation*}
       S_r(t) = \sum_{k=1}^\infty (\tilde D_k - A_k) \1{A_k \leq t, L(A_k) > 0}.
     \end{equation*}
-    The remaining service time averaged over all arrival times up to
+    The remaining service time averaged over all arrivals up to
     time $t$ is therefore $S_r(t)/A(t)$. We can now rewrite this to
 \begin{equation*}
   \frac{S_r(t)}{A(t)} = 
@@ -155,7 +162,7 @@ With PASTA we can conclude that $1-\pi(0) = 1-p(0)= \rho$. Second,
 \frac{S_r(t)}{A(+,t)} 
 = \frac{\sum_{k=1}^\infty (\tilde D_k - A_k) \1{A_k\leq t, L(A_k) > 0}}{\sum_{k=1}^\infty \1{A_k\leq t, L(A_k)>0}},
 \end{equation*}
-is the total amount of remaining service times up to time $t$ divided by
+is the total amount of remaining service time up to time $t$ divided by
 the number of arrivals up to time $t$ that see at least one job in the system. Thus, 
 if the limit exists, we can \emph{define}
 \begin{equation*}
@@ -191,22 +198,30 @@ if the limit exists, we can \emph{define}
     \begin{equation*}
       \begin{split}
 \E{L_Q} 
-&= \sum_{n=1}^\infty (n-1)\pi(n) \\
-&= (1-\rho)\sum_{n=1}^\infty (n-1) \rho^n\\
-&= \rho (1-\rho)\sum_{n=1}^\infty (n-1) \rho^{n-1}\\
-&= \rho \sum_{n=1}^\infty (n-1) \pi(n-1)\\
-&= \rho \sum_{n=0}^\infty n \pi(n)\\
-&= \rho \frac{\rho}{1-\rho}.
+&= \sum_{n=1}^\infty (n-1)\pi(n) 
+= (1-\rho)\sum_{n=1}^\infty (n-1) \rho^n\\
+&= \rho (1-\rho)\sum_{n=1}^\infty (n-1) \rho^{n-1}
+= \rho \sum_{n=1}^\infty (n-1) \pi(n-1)\\
+&= \rho \sum_{n=0}^\infty n \pi(n)
+= \rho \frac{\rho}{1-\rho}.
       \end{split}
     \end{equation*}
-Another way to get the same result is by splitting: $\sum_{n=1}^\infty n\pi(n) -\sum_{n=1}^\infty \pi(n) = 
-\E L - (1-\pi(0)) = \E L - \rho$. 
+Another way to get the same result is by splitting: 
+\begin{equation*}
+  \begin{split}
+\E{L_Q} 
+&= \sum_{n=1}^\infty (n-1)\pi(n) 
+=\sum_{n=1}^\infty n\pi(n) -\sum_{n=1}^\infty \pi(n)\\
+&= \E L - (1-\pi(0)) = \E L - \rho.
+  \end{split}
+\end{equation*}
     \end{enumerate}
   \end{solution}
 \end{question}
 
 \begin{question}
   Why is Eq.~(\ref{eq:61}) not true in general for the $M/G/1$ queue?
+\hint{Think about the consequences of memoryless service times.}
   \begin{solution}
     Because the remaining service time of the job in service, provided
     there is a job in the system upon arrival, is not exponentially
@@ -226,7 +241,7 @@ Another way to get the same result is by splitting: $\sum_{n=1}^\infty n\pi(n) -
   \E W = \sum_{n=0}^\infty \E{W_Q \given N=n} \pi(n) + \E S,
 \end{equation*}
 where $\E{W_Q \given N=n}$ is the waiting time in queue given that an
-arrival sees $N=n$ customers in front of him. 
+arrival sees $N=n$ customers upon arrival. 
 \item Motivate that $\E{W_Q \given N=1} = \E S$. 
 \item  Combine the above to see that 
 \begin{equation*}
@@ -257,10 +272,10 @@ arrival sees $N=n$ customers in front of him.
 \begin{question}
   There is distinction between $\E{L_Q}$, i.e., the time-average queue
   length, and the expected number of jobs in the system given that the
-  server is busy, i.e., $\E{L\given B}$ is $\E{L_Q} \neq \E{L\given B}$?
+  server is busy, i.e., $\E{L\given B}$.  is $\E{L_Q} \neq \E{L\given B}$?
 \begin{solution}
   $\E{L_Q}$ is the time average of the queue length process (in steady
-  state). Hence, $\E{L_q}$ contains also the time the queue is
+  state). Hence, $\E{L_Q}$ contains also the time the queue is
   empty. $\E{L\given B}$ the other hand, is the time average of the
   queue length process, provided the server is busy. Even though the
   queue may be empty while the server is busy, the fraction of time
@@ -271,7 +286,7 @@ arrival sees $N=n$ customers in front of him.
 \end{question}
 
 \begin{question}
-  Compute the variance of the number of jobs in the system $L$. 
+  Compute the variance of the number of jobs in the system $L$ for the $M/G/1$ queue.
   \begin{solution}
     $\V{L} = \E{L^2} - (\E L)^2$. We already know $\E L$ so it remains
     to compute $\E{L^2}$. With wolfram alpha we get
@@ -347,7 +362,7 @@ random variable.
 
 Another way to derive the result is by noting that
 $\sum_{i=1}^n i= n(n+1)/2$ from which we get that
-$n^2 = -n + 2\sum_{i=1}^n i$. Substituting this in relation into
+$n^2 = -n + 2\sum_{i=1}^n i$. Substituting this relation into
 $\sum_n n^2 \rho^n$ leads to
 \begin{equation*}
   \begin{split}
@@ -427,8 +442,7 @@ that $p(n) = \pi(n)$. We are done.
     Since the service times are deterministic (and constant), I would
     guess that on average half of the service time remains at the
     moment a job arrives. If the service time is $D$ always, then
-    $\E{S_r\given S_r>0} = \lambda D/2$.  We will prove this in
-    Exercise~\ref{ex:9}.
+    $\E{S_r\given S_r>0} = \lambda D/2$.  
   \end{solution}
 \end{question}
 
@@ -557,7 +571,7 @@ idle
 \begin{solution}
   \begin{enumerate}
   \item 
-$p_n = (1-\rho)\rho^n$
+$p(n) = (1-\rho)\rho^n$
 
 \item 
 
@@ -593,18 +607,18 @@ Wq
   
     \begin{solution}
       \begin{enumerate}
-      \item 
-      $\E{W_Q} =
-      \frac{1}{\lambda}\frac{\rho^2}{1-\rho}=\frac{\rho}{1-\rho} \E
-      S$.
-      Utilization is $\rho$.  Hence, $\rho^2 = \lambda
-      (1-\rho)$.
-      Given $\E{W_Q}$ we can use this formula to solve for $\rho$ with
-      the abc-formula (and using that $\rho > 0$):
+      \item $\E{W_Q} = \frac{1}{\lambda}\frac{\rho^2}{1-\rho}$. Since
+        $\E{W_Q}$ and $\lambda$ is given we can use this formula to
+        solve for $\rho$ with the abc-formula (and using that
+        $\rho > 0$):
+
 <<term=True>>=
 labda = 5. # per minute
 Wq = 1.
-rho = -labda/2. + labda/2.*sqrt(1+4./labda)
+a = 1.
+b = labda*Wq
+c = -labda*Wq
+rho = (-b + sqrt(b*b-4*a*c))/(2*a)
 rho 
 
 ES = rho/labda
@@ -630,27 +644,26 @@ The problem is to find $n$ such that
       $\sum_{j=0}^n p_j > 0.9$.
 
 <<term = False>>=
-P0 = 1.-rho
-Pj = lambda j: rho**j*P0
-
 tot = 0.
 j = 0
 while tot <= 0.9:
-   tot += Pj(j)
+   tot += P0*rho**j
    j += 1
+n = j- 1
 @ 
-Observe that $j$ is one too high once the condition is satisfied.
+
+Observe that $j$ is one too high once the condition is satisfied, thus subtract one.
 
 <<term=True>>=
 tot
-j  # the number of chairs
+n  # the number of chairs 
 @      
 
 As a check, I use that $p(0) \sum_{j=0}^n \rho^j = 1-\rho^{n+1}$.
 
 <<term=True>>=
-1-rho**(j-1)
-1-rho**j
+1-rho**(n) #  this must be too small.
+1-rho**(n+1) # this must be ok.
 @ 
 
   \end{enumerate}
@@ -691,28 +704,23 @@ Calculate the state probabilities, i.e., $p(n)$ for $n=0,\ldots$.
 <<term=True>>=
 labda = 6.
 mu = 5.
-r = labda/mu
-m = 1
+rho = labda/mu
+c = 1
 b = 2
 @ 
 
-Set $P = 1$ initially, and normalize later
-<<term = False>>=
-from math import factorial
+Set $p(n) = \rho^n$ initially, and normalize later. Use the
+expressions for the $M(n)/M(n)/1$ queue.  Observe that $\rho>1$. Since
+the size of the system is $c+b+1$ is finite, all formulas work for
+this case too.
 
-def computeP(n):
-    if n <= m:
-       return r**n/factorial(n)
-    else:
-       return r**n/(factorial(m)*m**(n-m))
-@
+
+There are 4 states in total: $0,1,2,3$.
 
 <<term=True>>=
-P = [1]*(m+b+1) # temporary value
+P = [rho**n for n in range(c+b+1)]
 P
 
-for n in range(1,m+b+1):
-    P[n] = computeP(n)
 tot = sum(P)
 tot
 
@@ -724,7 +732,7 @@ P
 L = sum(n*P[n] for n in range(len(P)))
 L
 
-Lq = sum((n-m)*P[n] for n in range(m,len(P)))
+Lq = sum((n-c)*P[n] for n in range(c,len(P)))
 Lq
 @ 
 
@@ -737,7 +745,7 @@ the fraction of customers that sees a full system.
 lost = labda*P[-1] # the last element of P
 lost
 
-accepted = labda*(1.-P[-1])
+accepted = labda*(1.-P[-1]) # rate at which jobs are accepted
 accepted
 @  
 
@@ -746,11 +754,8 @@ accepted
  Increase $b$ to 5
 <<term=True>>=
 b = 5
-P = [1]*(m+b+1)
+P = [rho**n for n in range(c+b+1)]
 P
-
-for n in range(1,m+b+1):
-    P[n] = computeP(n)
 tot = sum(P)
 tot
 
@@ -821,8 +826,8 @@ for various values of $\lambda$.
 <<term=True>>=
 P = [0.4, 0.3, 0.2, 0.05, 0.05]
 
-m = 2
-Lq = sum((n-m)*P[n] for n in range(m,len(P)))
+c = 2
+Lq = sum((n-c)*P[n] for n in range(c,len(P)))
 Lq
 
 L= sum(n*P[n] for n in range(len(P)))
@@ -850,14 +855,14 @@ sqrt(var_L)
 
 \item 
 <<term=True>>=
-var_q = sum((max(n-m,0)-Lq)**2*P[n] for n in range(len(P)))
+var_q = sum((max(n-c,0)-Lq)**2*P[n] for n in range(len(P)))
 var_q
 sqrt(var_q)
 @
 
 \item 
 <<term=True>>=
-idle = sum( (m-n)*P[n] for n in range(m))
+idle = sum( (c-n)*P[n] for n in range(c))
 idle
 @ 
   \end{enumerate}
@@ -869,11 +874,11 @@ idle
   peculiar fashion. When there is no one in the queue, people are
   reluctant to use the stand, fearing that the food is
   unsavory. People are also reluctant to use the stand when the queue
-  is long.This yields the following arrival rates (in numbers per hour): $\lambda(0) = 10$, $\lambda(1)=15$, $\lambda(2)=15$, $\lambda(3)=10$, $\lambda(4)=5$, $\lambda(n)=0, n\geq 5$. The stand has two servers, each of which can operate at 5 per hour. Service times are exponential, and the arrival process is Poisson.
+  is long. This yields the following arrival rates (in numbers per hour): $\lambda(0) = 10$, $\lambda(1)=15$, $\lambda(2)=15$, $\lambda(3)=10$, $\lambda(4)=5$, $\lambda(n)=0, n\geq 5$. The stand has two servers, each of which can operate at 5 per hour. Service times are exponential, and the arrival process is Poisson.
   \begin{enumerate}
   \item Calculate the steady state probabilities.
-  \item What are the averate arrival and service rates?
-  \item Determine $\E L$, $\E L_Q$, $\E W$ and $\E W_Q$.
+  \item What is the average arrival rate?
+  \item Determine $\E L$, $\E{L_Q}$, $\E W$ and $\E{W_Q}$.
   \end{enumerate}
   \begin{solution}
       \begin{enumerate}
@@ -882,11 +887,13 @@ idle
 <<term=True>>=
 import numpy as np
 labda = [10., 15., 15., 10., 5.]
-m = 2
-mn = np.array([0,1,2,2,2])
+c = 2
+mn = np.array([0,1,2,2,2]) # number of active servers
 mu = 5*mn
 mu
 @
+
+Use the level crossing result for the $M(n)/M(n)/1$ queue:
 
 <<term=True>>=
 P = [1]*5
@@ -901,22 +908,23 @@ P # normed
 @ 
 
 \item 
+
+$\lambda = \sum_{n}\lambda(n) p(n)$.
+
 <<term=True>>=
 labdaBar = sum(labda[n]*P[n] for n in range(len(P)))
 labdaBar
-
-
-muBar = sum(mu[n]/mn[n]*P[n] for n in range(1,len(P)))/(1-P[0])
-muBar
 @
+
+
 
 \item 
 <<term=True>>=
 Ls = sum(n*P[n] for n in range(len(P)))
 Ls
 
-m = 2
-Lq = sum((n-m)*P[n] for n in range(m,len(P)))
+c = 2
+Lq = sum((n-c)*P[n] for n in range(c,len(P)))
 Lq
 @ 
 
@@ -930,30 +938,6 @@ Wq = Lq/labdaBar
 Wq
 @ 
 
-To check my implementation of the code, I compute the results of the
-example on Page 144 of Hall's book.
-
-<<term=True>>=
-from math import factorial
-
-labda = 105./60
-mu = 120./60
-rho = labda/mu
-rho
-tot = sum(rho**n/factorial(n) for n in range(m)) + rho**m/factorial(m)/(1.-rho/m)
-P0 = 1./tot
-P0
-Lq = rho**(m+1)/m/(factorial(m)*(1.-rho/m)**2)*P0
-Lq
-Ls = Lq + rho
-Ls
-Wq = Lq/labda
-Wq
-Ws = Ls/labda
-Ws
-@
-
-This checks.
   \end{enumerate}
     \end{solution}
 \end{question}
@@ -981,7 +965,8 @@ rho = labda*ES
 rho
 @ 
 
-Clearly not: The load is between 1 and 2 so we need at least two servers. 
+A load $\rho>1$ is clearly undesirable for one server.  We need at
+least two servers.
 
 The remark that maintenance workers are compensated at the same rate
 as the tool crib workers confused me a bit at first.  Some thought
@@ -994,11 +979,14 @@ of servers must be high, whereas if servers are relatively very
 expensive, customers have to do the waiting.)
 
 <<term = False>>=
-def WQ(m, labda, ES):
+from math import factorial
+
+def WQ(c, labda, ES):
     rho = labda*ES
-    tot = sum(rho**n/factorial(n) for n in range(m)) + rho**m/factorial(m)/(1.-rho/m)
+    tot = sum([rho**n/factorial(n) for n in range(c)])
+    tot += rho**c/factorial(c)/(1.-rho/c)
     P0 = 1./tot
-    Lq = rho**(m+1)/m/(factorial(m)*(1.-rho/m)**2)*P0
+    Lq = rho**(c+1)/c/(factorial(c)*(1.-rho/c)**2)*P0
     return Lq/labda # Wq
 @ 
 
@@ -1014,55 +1002,54 @@ WQ(4, 28./60, 4)
 WQ(4, 28./60, 4)/60. # in hours
 @ 
 
-\item 
-      It is not relevant to focus on the time in the system , as time in
-service needs to spent anyway. Hence, we focus on the waiting time in
-queue.
+\item It is not relevant to focus on the time in the system , as time
+  in service needs to be spent anyway. Hence, we focus on the waiting
+  time in queue.
 
 Since both types of workers cost the same amount of money per unit
 time, it is best to divide the amount of waiting/idleness equally over
 both types of workers.  I am inclined to reason as follows. The
 average amount of waiting time done by the maintenance workers per
-hour is $\lambda * Wq$. To see this, note that $\lambda$
+hour is $\lambda \E{W_Q}$. To see this, note that $\lambda$
 customers arrive, on average, each hour, and each customer waits on
-average $W_q$ minutes. On the other hand, the total amount of
-minutes wasted by the tool crib employees is $m-\rho$, as
+average $\E{W_Q}$ minutes. On the other hand, the total amount of
+minutes wasted by the tool crib employees is $c-\rho$, as
 $\rho = \lambda \E S$ is the average number of servers busy,
-while $m$ crib servers are available.
+while $c$ crib servers are available.
 
 Now, while this makes perfect sense, to me at least, the formulas tell
-their own story. $\lambda W_q = L_q$. In other words,
-$L_q$ is the average number of maintenance employees wasting
-their time in queue, while $m -\rho$ is the average number of
+their own story. $\lambda\E{W_Q} = \E{L_Q}$. In other words,
+$\E{L_Q}$ is the average number of maintenance employees wasting
+their time in queue, while $c -\rho$ is the average number of
 crib workers wasting their time being idle. (To paraphrase Prince,
 doing something close to nothing.) Therefore, as both types of
-employees are equally expensive, we need to choose $m$ such that
-$L_q \approx m- \rho$, where, of course, $Lq$ depends on
-$m$.
+employees are equally expensive, we need to choose $c$ such that
+$\E{L_Q} \approx c- \rho$, where, of course, $\E{L_Q}$ depends on
+$c$.
 
 <<term=True>>=
 labda = 28./60
 ES = 4.
 rho = labda*ES
-m = 2
-labda*WQ(m, labda, ES)
-m-rho
+c = 2
+labda*WQ(c, labda, ES)
+c-rho
 @ 
 Now the maintenance employees wait more than the tool crib employees.
 
 <<term=True>>=
-m = 3
-labda*WQ(m, labda, ES)
-m-rho
+c = 3
+labda*WQ(c, labda, ES)
+c-rho
 @ 
 
 <<term=True>>=
-m = 4
-labda*WQ(m, labda, ES)
-m-rho
+c = 4
+labda*WQ(c, labda, ES)
+c-rho
 @ 
 
-Clearly, $m=3$ should do.
+Clearly, $c=3$ should do.
   \end{enumerate}
     \end{solution}
 \end{question}
@@ -1081,21 +1068,22 @@ Clearly, $m=3$ should do.
 
 labda = 11.
 mu = 6
-m = 2
+c = 2
 
 rho = labda/mu
-rho < m  # is the system stable?
+rho < c  # is the system stable?
 @ 
 
 Compute Ls and so on
 
 
 <<term=True>>=
-tot = sum(rho**n/factorial(n) for n in range(m)) + rho**m/factorial(m)/(1.-rho/m)
+tot = sum(rho**n/factorial(n) for n in range(c))
+tot += rho**c/factorial(c)/(1.-rho/c)
 P0 = 1./tot
 P0
 
-Lq = rho**(m+1)/m/(factorial(m)*(1.-rho/m)**2)*P0
+Lq = rho**(c+1)/c/(factorial(c)*(1.-rho/c)**2)*P0
 Lq
 Lq/labda # Wq
 
@@ -1111,7 +1099,7 @@ ES
 \item 
 
 <<term=True>>=
-mu = m*6
+mu = c*6
 
 rho = labda/mu
 
@@ -1146,7 +1134,7 @@ We will use this result later to derive algorithms to compute the
 performance measures for the analysis of closed-queueing network.
 
   \hint{ Interpret each component at the right hand side of the equation
-    and generalize it to a multi-server queueing system. Then use Exercise~\ref{ex:10}.}
+    and generalize it to a multi-server queueing system. }
   \begin{solution}
 
     Recall that for the $M/M/1$ queue, $\E{S_r\given S_r>0} = 1/\mu$.
@@ -1157,7 +1145,7 @@ performance measures for the analysis of closed-queueing network.
     \end{equation*}
     where we use that $\rho=\lambda \E S$. In words, the first term
     (at the right-hand side) is the probability to find a job in
-    service, which is $\rho$, times the expected remaining service
+    service, which is $\rho$ times the expected remaining service
     time if the server is busy, which is $1/\mu$ for exponentially
     distributed processing times. The second term is the probability
     to find the server busy, so that the arriving job has to wait,
@@ -1173,8 +1161,8 @@ performance measures for the analysis of closed-queueing network.
     $1/c\mu$, since there are $c$ servers and the expected time to
     completion is $1/\mu$ for each individual server. Thus, the time
     until the first departure is the minimum of the remaining services
-    at each of the servers. From Exercise~\ref{ex:10} this has
-    expection $1/c\mu$. Thus, for the $M/M/c$ queue
+    at each of the servers. This has expection $1/c\mu$. Thus, for the
+    $M/M/c$ queue
     \begin{equation*}
 \rho\E{S_r\given S_r>0}  = \sum_{k=c}^\infty p(k) \frac 1{c\mu}.
     \end{equation*}
@@ -1183,10 +1171,10 @@ performance measures for the analysis of closed-queueing network.
     For the second term, since there are $c$ servers, jobs depart from
     the queue (hence enter service) at rate $c\mu$. The expected time
     in queue when there are $n$ jobs in front, is therefore
-    $n/c\mu$. Thus, on average, since the expected queue length is $\sum_{k=c}^\infty (k-c)p(k)$, we 
+    $n/c\mu$. Thus, on average, since the expected queue length is $\E{L_Q}=\sum_{k=c}^\infty (k-c)p(k)$, we 
 get 
 \begin{equation*}
-  \E{L_Q}\frac{\E S}c = \sum_{k=c}^\infty p(k)\frac{k-c}{c\mu}.
+  \E{L_Q}\frac{\E S}c = \sum_{k=c}^\infty \frac{k-c}{c\mu}p(k).
 \end{equation*}
 
 All in all,

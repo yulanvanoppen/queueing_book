@@ -1,9 +1,9 @@
 
->>> L = sum(n*P[n] for n in range(len(P)))
->>> L
-6.621754441813536
+>>> lost = labda*P[-1] # the last element of P
+>>> lost
+1.9314456035767507
 >>>
->>> Lq = sum((n-m)*P[n] for n in range(m,len(P)))
->>> Lq
-3.310877220906768
+>>> accepted = labda*(1.-P[-1]) # rate at which jobs are accepted
+>>> accepted
+4.06855439642325
 

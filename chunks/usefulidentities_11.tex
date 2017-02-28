@@ -1,7 +1,10 @@
 
 >>> labda = 5. # per minute
 >>> Wq = 1.
->>> rho = -labda/2. + labda/2.*sqrt(1+4./labda)
+>>> a = 1.
+>>> b = labda*Wq
+>>> c = -labda*Wq
+>>> rho = (-b + sqrt(b*b-4*a*c))/(2*a)
 >>> rho
 0.8541019662496847
 >>>
