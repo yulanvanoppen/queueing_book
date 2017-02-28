@@ -204,7 +204,15 @@ where $L(0)$ is the number of jobs in the system at time $t=0$;
 typically we assume that $L(0)=0$. Thus, if we were to plot $A(t)$ and
 $D(t)$ as functions of $t$, then the difference $L(t)$ between the
 graphs of $A(t)$ and $D(t)$ tracks the number in the system, see
-Figure~\ref{fig:atltdt}.
+Figure~\ref{fig:atltdt}. 
+
+The number in the system as seen by the $k$th arrival is defined as
+\begin{equation}
+  \label{eq:Lk}
+  L_k = L(A_k), 
+\end{equation}
+since the $k$th job arrives at time $A_k$ and $\{L(s)\}$ is right-continuous.
+
 
 \begin{figure}[t]
   \centering
@@ -270,6 +278,8 @@ and $L_Q(t)$ then show that the number in service must be
 \begin{equation*}
 L_s(t) = D_Q(t) - D(t) = L(t) - L_Q(t).
 \end{equation*}
+
+
 
 Finally, the \recall{virtual waiting time process} $\{V(t)\}$ is the
 amount of waiting that an arrival would see if it would arrive at time

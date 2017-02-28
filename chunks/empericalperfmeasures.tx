@@ -201,10 +201,12 @@ different from what the customers see. Show that for such a queueing system typi
 \begin{equation*}
   \lim_{t\to\infty} \frac 1 t\int_0^t L(s)\, \d s \neq   \lim_{n\to\infty}\frac 1n  \sum_{k=1}^n L_k.
 \end{equation*}
-hence, in general:
+where, by \eqref{eq:Lk}, $L_k=L(A_k)$ is the number in the system at the arrival epoch of the $k$th job. Hence, in general:
   \begin{equation*}
-    \lim_{t\to\infty} \int_0^t \1{L(s)\leq m}\,\d s \neq \lim_{n\to\infty} \frac 1n \sum_{k=1}^n \1{L_k \leq m},
+    \lim_{t\to\infty} \int_0^t \1{L(s)\leq m}\,\d s \neq \lim_{n\to\infty} \frac 1n \sum_{k=1}^n \1{L_k \leq m}.
   \end{equation*}
+
+
   \hint{Consider a queueing system with constant service and
     interarrival times.}
 \begin{solution}

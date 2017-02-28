@@ -228,6 +228,7 @@ the above expression we obtain~\eqref{eq:br}.
   \end{solution}
 \end{question}
 
+
 \begin{question}
   Relate $f(k)$, the distribution $F(k)$ of the batch size $B$ and the
   survivor function~$G$. Which of the three alternatives is true:
@@ -246,13 +247,105 @@ the above expression we obtain~\eqref{eq:br}.
 \end{question}
 
 \begin{question}
+  Show that the expression $\E{L(M^X/M/1)}$ reduces to
+  $\E{L(M/M/1)}$ when the batch size is 1.  \hint{What is the
+    distribution of the batch size $B$ for the $M/M/1$ queue?}
+  \begin{solution}
+    For the $M/M/1$ queue, each job contains just one item. Thus,
+    $B\equiv 1$, hence $\P{B=1}=1$, $\E{B^2}=\E B =1$. Therefore,
+    $\E{B_r(M/M/1)}= \rho$, and $\E{L(M/M/1)}=\rho/(1-\rho)$. 
+
+      Such checks are always important to do. Does the new result
+      reduce to the results of the models you know?
+  \end{solution}
+\end{question}
+
+
+\begin{question}\label{q:batch}
+Show that 
+\begin{equation*}
+  \frac{\lambda}\mu \E{B^2} = \rho (1+C_s^2)\E B, 
+\end{equation*}
+  \begin{solution}
+We have
+\begin{equation*}
+  \begin{split}
+  \frac{\lambda}\mu \E{B^2} 
+&=   \frac{\lambda\E B}{\mu} \frac{\E{B^2}}{(\E B)^2} \E B  = \rho \frac{\E{B^2}}{(\E B)^2} \E B \\
+&= \rho \frac{(\E B)^2+\V B}{(\E B)^2}\E B = \rho (1+C_s^2)\E B.
+  \end{split}
+\end{equation*}
+  \end{solution}
+\end{question}
+
+\begin{question}
+  If the batch size is geometrically distributed with parameter $p$, what is $\E L$?
+
+\hint{$f_k=q^{k-1}p$ with $q=1-p$. Use generating functions to compute $\E B$ and $\E{B^2}$}
+
+\begin{solution}
+  We need $\V B$ and $\E B$. Consider
+  \begin{equation*}
+    \begin{split}
+    \phi(z) 
+&= \E{z^B} = \sum_{k=0}^\infty z^k \P{B=k} = \sum_{k=0}^\infty z^k f_k \\
+&= \sum_{k=0}^\infty z^k p q^{k-1} 
+= \frac p q \sum_{k=0}^\infty (qz)^k = \frac pq \frac1{1-qz}.
+    \end{split}
+  \end{equation*}
+
+Then
+\begin{equation*}
+  \E B = \phi'(1) = \left.\frac pq \frac q{(1-qz)^2}\right|_{z=1}= \frac p{(1-q)^2} = \frac 1 p,
+\end{equation*}
+and
+\begin{equation*}
+  \E{B(B-1)} = \phi''(1) = \left.\frac pq \frac{2q^2}{(1-qz)^3}\right|_{z=1}= 2 \frac{q}{p^2}= \frac2{p^2} - \frac 2p.
+\end{equation*}
+Hence, 
+\begin{equation*}
+  \E{B^2} = \frac2{p^2} - \frac 2p + \E B = \frac2{p^2} - \frac1p,
+\end{equation*}
+and
+\begin{equation*}
+  \V B = \E{B^2} - (\E B)^2 = \frac2{p^2} - \frac1p - \frac1{p^2} = \frac1{p^2}-\frac1p,
+\end{equation*}
+and
+\begin{equation*}
+  C_s^2= \frac{\V B}{(\E B)^2} = p^2 \left(\frac1{p^2}-\frac1p\right)=1-p
+\end{equation*}
+Then,
+\begin{equation*}
+  (1+C_s^2)/2= 1-p/2.
+\end{equation*}
+and 
+\begin{equation*}
+  \E L = 
+\left(1-\frac p2\right) \frac\rho{1-\rho} \frac 1 p + \frac12\frac\rho{1-\rho}
+=\frac\rho{1-\rho} \frac 1 p.
+\end{equation*}
+
+Can we check this in a simple way? If $\P{B=1}=f_1 = p =1$, then
+$\E L=\rho/(1-\rho)$. Thus, we get the result for the $M/M/1$
+queue. The result is at least consistent with earlier work.
+
+
+\end{solution}
+
+
+\end{question}
+
+\begin{question}
   A common operational problem is a machine that receives batches of
   various sizes. Management likes to know how a reduction of the
   variability of the batch sizes affects the average queueing time.
-  Suppose, for the sake of an example, that the batch size $B=1,2,$ or
-  $3$, with equal probability. Batches arrive at rate 1 per hour. The
-  average processing for an item is $25$ minutes.  How much does the
-  waiting time decrease if batch sizes are $2$ always?
+  Suppose, for the sake of an example, that the batch size 
+  \begin{equation*}
+    \P{B=1} = \P{B=2} = \P{B=3} = \frac 13.
+  \end{equation*}
+  Batches arrive at rate 1 per hour. The average processing for an
+  item is $25$ minutes.  How much does the waiting time decrease if
+  batch sizes are $2$ always?
 
   \begin{solution}
     Start with the simple case, $B\equiv 2$. Then $\V{B}=0$ and
@@ -269,7 +362,7 @@ And thus,
     \begin{equation*}
       \E{L} = \frac {1+1/6}2 \frac{5/6}{1/6} 2 + \frac 12 \frac{5/6}{1/6} = \frac76 5 + \frac 52.
     \end{equation*}
-    If we devide these two answers, we see that the ratio between
+    If we divide these two answers, we see that the ratio between
     $\E{L}$ for both answers is $10/9$. In other words, we can
     reduce about 10\% of the number of items in the system by working
     in fixed batch sizes. 
@@ -285,6 +378,8 @@ And thus,
     typically achieve less than the 10\% reduction.)
   \end{solution}
 \end{question}
+
+
 
 \begin{question}
   In a production enviroment, a machine replenishes an inventory of
@@ -324,6 +419,7 @@ Section~\ref{sec:batch-arrivals}.
     
   \end{solution}
 \end{question}
+
 
 \begin{question}\label{ex:6}
  Use indicator functions to prove that
@@ -429,38 +525,6 @@ If $F(x) = 1 - e^{-\mu x}$, we obtain that
 
 
 
-\begin{question}\label{q:batch}
-Show that 
-\begin{equation*}
-  \frac{\lambda}\mu \E{B^2} = \rho (1+C_s^2)\E B, 
-\end{equation*}
-  \begin{solution}
-We have
-\begin{equation*}
-  \begin{split}
-  \frac{\lambda}\mu \E{B^2} 
-&=   \frac{\lambda\E B}{\mu} \frac{\E{B^2}}{(\E B)^2} \E B  = \rho \frac{\E{B^2}}{(\E B)^2} \E B \\
-&= \rho \frac{(\E B)^2+\V B}{(\E B)^2}\E B = \rho (1+C_s^2)\E B.
-  \end{split}
-\end{equation*}
-  \end{solution}
-\end{question}
-
-\begin{question}
-  Show that the expression $\E{L(M^X/M/1)}$ reduces to
-  $\E{L(M/M/1)}$ when the batch size is 1.  \hint{What is the
-    distribution of the batch size $B$ for the $M/M/1$ queue?}
-  \begin{solution}
-    For the $M/M/1$ queue, each job contains just one item. Thus,
-    $B\equiv 1$, hence $\P{B=1}=1$, $\E{B^2}=\E B =1$. Therefore,
-    $\E{B_r(M/M/1)}= \rho$, and $\E{L(M/M/1)}=\rho/(1-\rho)$. 
-
-      Such checks are always important to do. Does the new result
-      reduce to the results of the models you know?
-  \end{solution}
-
-\end{question}
-
 \begin{question}
   Compare $\E{L(M^X/M/1)}$ to $\E{L(M/M/1)}$ when the loads are the
     same. What do you conclude?
@@ -496,7 +560,7 @@ job minimally contains one item, we get
   \begin{split}
 (\E B)^2 
 &\leq  \E{B^2}, \quad{\text{by Jensen's inequality}} \\
-\leq   \E{B^2} \E B, \quad{\text{ as } B \geq 1}.
+&\leq   \E{B^2} \E B, \quad{\text{ as } B \geq 1}.
   \end{split}
 \end{equation*}
 Clearly, this is the inequality we tried to show. As a result,
