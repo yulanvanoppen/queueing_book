@@ -269,7 +269,35 @@ uniformly on the interval $[0,t]$.
   with the sum of the rates.) Assume that
   $N_a(t)\sim \text{P}(\lambda t)$ , $N_s(t) \sim \text{P}(\mu t)$ and
   independent.  Show that
-  $N_a(t) + N_s(t) \sim \text{P}((\lambda + \mu)t)$.  
+  $N_a(t) + N_s(t) \sim \text{P}((\lambda + \mu)t)$. The figure below
+  provides a graphical representation of merging (also called
+  superposition) of streams.
+
+  \begin{center}
+\begin{tikzpicture}[scale=1]
+%\draw[[-{Triangle[open]},dotted] (0,10)--(8.5,10);
+
+\draw[->] (0,2)--(10,2);
+\node[left] at (0,2) {$N_\lambda(t)$};
+\draw[->] (0,1)--(10,1);
+\node[left] at (0,1) {$N_\mu(t)$};
+\draw[->] (0,0)--(10,0);
+\node[left] at (0,0) {$N_{\lambda+\mu}(t)$};
+
+\draw[{Rays[]}-{Rays[]},dotted] (1,2.06)--(1,-0.06);
+\draw[{Rays[]}-{Rays[]},dotted] (1.5,1.06)--(1.5,-0.06);
+\draw[{Rays[]}-{Rays[]},dotted] (3.2,2.06)--(3.2,-0.06);
+\draw[{Rays[]}-{Rays[]},dotted] (3.5,1.06)--(3.5,-0.06);
+\draw[{Rays[]}-{Rays[]},dotted] (4.5,1.06)--(4.5,-0.06);
+\draw[{Rays[]}-{Rays[]},dotted] (5,1.06)--(5,-0.06);
+\draw[{Rays[]}-{Rays[]},dotted] (6.1,1.06)--(6.1,-0.06);
+\draw[{Rays[]}-{Rays[]},dotted] (7.1,2.06)--(7.1,-0.06);
+
+\end{tikzpicture}
+    
+  \end{center}
+
+
 
   \hint{Use a conditioning argument or use moment generating
     functions. In particular, for conditioning, use that
@@ -379,15 +407,52 @@ $M_1(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\
 
 \begin{question} (A Bernoulli-thinned Poisson process is still a
   Poisson process) Consider a Poisson process. Split the process in
-  the following way. When a job arrives, throw a coin that lands heads
-  with probability $p$ and tails with $q=1-p$. When the coin lands
-  heads, call the job of type 1, otherwise of type 2.  Another way of
-  thinning is by modeling the stream of people passing a shop as a
-  Poisson process with rate $\lambda$. With probability $p$ a person
-  decides, independent of anything else, to enter the shop.
+  the following way.  When a job arrives, throw a coin that lands
+  heads with probability $p$ and tails with $q=1-p$. When the coin
+  lands heads, call the job of type 1, otherwise of type 2.  Another
+  way of thinning is by modeling the stream of people passing a shop
+  as a Poisson process with rate $\lambda$. With probability $p$ a
+  person decides, independent of anything else, to enter the shop,
+  c.f. the figure below. The crosses at the upper line are passersby
+  in the street. The crosses at the lower line are the customers that
+  enter the shop. The outcome of the $k$th throw of a coin is
+  indicated by $B_k$. Since $B_1=1$ the first passerby turns into a
+  customer entering the shop; the second passerby does not enter as
+  $B_2=0$, and so on. Like this, the stream of passerby's is thinned
+  with Bernoulli distributed random variables.
 
-  Show that the Poisson process obtained by thinning the original
-  process is $\sim P(\lambda t p)$ for any~$t$.
+  \begin{center}
+\begin{tikzpicture}[scale=1]
+%\draw[[-{Triangle[open]},dotted] (0,10)--(8.5,10);
+\draw[->] (0,2)--(10,2);
+\node[left] at (0,2) {$N_\lambda(t)$};
+%\draw[->] (0,1)--(10,1);
+%\node[left] at (0,1) {$B_k$};
+\draw[->] (0,0)--(10,0);
+\node[left] at (0,0) {$N_{\lambda p}(t)$};
+
+\draw[{Rays[]}-{Rays[]},dotted] (1,2.06)--(1,-0.06) 
+node[below]  {$B_1=1$};
+
+\draw[{Rays[]}-{Circle[open]},dotted] (2.5,2.06)--(2.5,1.3) 
+node[below] {$B_2=0$};
+
+\draw[{Rays[]}-{Circle[open]},dotted] (4,2.06)--(4,1.3) 
+node[below, fill=white] {$B_3=0$};
+
+\draw[{Rays[]}-{Rays[]},dotted] (5,2.06)--(5,-0.06) 
+node[below]  {$B_4=1$};
+
+\draw[{Rays[]}-{Rays[]},dotted] (6.5,2.06)--(6.5,-0.06) 
+node[below]  {$B_5=1$};
+
+
+\draw[{Rays[]}-{Circle[open]},dotted] (7.5,2.06)--(7.5,1.3) 
+node[below, fill=white] {$B_6=0$};
+
+\end{tikzpicture}
+  \end{center}
+
  
   The concept of thinning is particularly useful to analyze queueing
   networks. Suppose the departure stream of a machine is split into
@@ -396,6 +461,9 @@ $M_1(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\
   can model the arrival stream at the second machine as a thinned
   stream (with probability $p$) of the departures of the first
   machine.
+
+  Show that the Poisson process obtained by thinning the original
+  process is $\sim P(\lambda t p)$ for any~$t$.
 
 \hint{ Condition on the total number of arrivals $N(t)=m$ up to time
       $t$. Realize that the probability that a job is of type 1 is

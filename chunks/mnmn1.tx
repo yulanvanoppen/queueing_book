@@ -516,10 +516,10 @@ I asked WolframAlpha to simplify this, but the answer I got was not particularly
       \begin{split}
       p(n+1) 
 &= \frac{\lambda(n)}{\mu(n+1)} p(n) 
-= \frac{(N-n)\lambda}{(n+1)\mu} p(n) \\
-&= \frac{(N-n)(N-(n-1))}{(n+1)n}\frac{\lambda^2}{\mu^2} p(n-1) 
-= \frac{N!}{(N-(n+1))!}\frac1{(n+1)!}\rho^{n+1} p(0) \\
-&  = {N \choose n+1}\rho^{n+1} p(0).
+= \frac{(N-n)\lambda}{(n+1)\mu} p(n) 
+= \frac{(N-n)(N-(n-1))}{(n+1)n}\frac{\lambda^2}{\mu^2} p(n-1) \\
+&= \frac{N!}{(N-(n+1))!}\frac1{(n+1)!}\rho^{n+1} p(0) 
+  = {N \choose n+1}\rho^{n+1} p(0).
       \end{split}
     \end{equation*}
     Hence, after normalization, i.e., requiring that $p(0)$ is such
