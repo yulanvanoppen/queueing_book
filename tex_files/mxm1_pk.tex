@@ -397,7 +397,7 @@ And thus,
 \begin{question}
   In a production enviroment, a machine replenishes an inventory of
   items (e.g., hamburgers) at a fixed rate of $1$ per 3 minutes. If
-  the inventory reaches some level $r$, the machine stops.  Customers
+  the inventory reaches some level $S$, the machine stops.  Customers
   arrive at rate of 6 per hour. A customer can buy items in different
   quanties, $B=1,2,3,4$, all with equal probability. What is a
   sensible value for the stopping level $S$?  
@@ -405,9 +405,44 @@ And thus,
   \hint{Realize that the inventory process $I(t)$ behaves as
     $I(t)=S-L(t)$ where $L(t)$ is a suitable queueing process.}
   \begin{solution}
-    Consider a queueing system with job arrival rate $\lambda=6$ per
-    hour and the jobs have batch sizes as indicated in the
-    problem. The average number of items in the system  follows like this
+
+    First, to see why inventory systems and queueing systems are two
+    sides of one coin, consider the figure below. Here we write $B_k$
+    for the size of the $k$th batch that arrives at the queue and
+    $D_k$ for the size of the $k$-th demand at the inventory
+    system. Note that when the machine is on, it replenishes the
+    inventory. This is similar to the server in the queueing system
+    that is processing jobs. 
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\draw[->] (0,0) -- coordinate (x axis mid) (8.5,0);
+\draw[->] (0,0) -- coordinate (y axis mid) (0,10.5);
+\node[below=0.2cm] at (x axis mid) {$t$};
+
+\draw plot coordinates {(1,0) (1,2) (2,1) (2,4) (4,2) (4,3.5) (7.5,0)};
+\node[left]  at (7,1.5) {$L(t)$};
+\node[fill=white, rotate=90]  at (1,1) {$B_1$};
+\node[fill=white, rotate=90]  at (2,2.5) {$B_2$};
+\node[fill=white, rotate=90]  at (4,2.75) {$B_3$};
+
+\node  at (4,5) {$I(t)=S-Q(t)$};
+
+\draw[dotted] (0,10)--(8.5,10);
+\node[left]  at (0,10) {$S$};
+\node[left]  at (7,8.5) {$I(t)$};
+\draw plot coordinates {(1,10) (1,8) (2,9) (2,6) (4,8) (4,6.5) (7.5,10)};
+\node[fill=white, rotate=90]  at (1,9) {$D_1$};
+\node[fill=white, rotate=90]  at (2,7.5) {$D_2$};
+\node[fill=white, rotate=90]  at (4,7.25) {$D_3$};
+
+\end{tikzpicture}
+\end{center}
+
+Now, continuing with the problem, consider a queueing system with job
+arrival rate $\lambda=6$ per hour and the jobs have batch sizes as
+indicated in the problem. The average number of items in the system
+follows like this
     \begin{align*}
       \E B &= \frac{1+2+3+4}{4} = \frac 52 \\
       \E{B^2} &= \frac{1+4+9+16}{4} = \frac{30}4\\
