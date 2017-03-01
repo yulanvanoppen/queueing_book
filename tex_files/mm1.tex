@@ -248,10 +248,10 @@ pretty powerful already.
     \begin{equation*}
       \begin{split}
 \E L 
-&= \sum_{n=0}^\infty n\pi(n) 
-= \sum_{n=0}^\infty \sum_{i=1}^n 1\{i\leq n\} \pi(n) \\        
-&= \sum_{i=1}^\infty \sum_{n=0}^\infty  1\{i\leq n\} \pi(n) 
-= \sum_{i=1}^\infty \sum_{n=i}^\infty \pi(n) \\
+&= \sum_{n=0}^\infty n p(n) 
+= \sum_{n=0}^\infty \sum_{i=1}^n 1\{i\leq n\} p(n) \\        
+&= \sum_{i=1}^\infty \sum_{n=0}^\infty  1\{i\leq n\} p(n) 
+= \sum_{i=1}^\infty \sum_{n=i}^\infty p(n) \\
 &= \sum_{i=1}^\infty \sum_{n=i}^\infty (1-\rho)\rho^n         
 = \sum_{i=1}^\infty (1-\rho)\rho^i \sum_{n=0}^\infty \rho^n \\
 &= \sum_{i=1}^\infty (1-\rho)\rho^i \frac1{1-\rho}   
@@ -294,7 +294,7 @@ inventory level, the average number of customer in backlog, and the
 fraction of customers that are backlogged?
 
 If $h$ is the cost per item per unit time in stock and $b$ the cost
-per customer per unit time in backlog and $\pi$ the cost per customer
+per customer per unit time in backlog and $\bar b$ the cost per customer
 backlogged, what are the average costs of using a reorder level $r$? 
 
 What is the optimal reorder level $r^*$, i.e., the level that achieves

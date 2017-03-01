@@ -365,16 +365,20 @@ Thus,
 What if we would use the moment generating function? 
 \begin{equation*}
   \begin{split}
-    \E{X} 
-&= \left.\frac{\d}{\d t} M(t)\right|_{t=0} \\
+    \E{A_i} 
+&= \left.\frac{\d}{\d t} M_{A_i}(t)\right|_{t=0} \\
 &= \left.\frac{\d}{\d t} \left(\frac{\lambda}{\lambda-t}\right)^i\right|_{t=0} \\
 &= i \left.\left(\frac{\lambda}{\lambda-t}\right)^{i-1}\frac{\lambda}{(\lambda-t)^2}\right|_{t=0} \\
-&= \frac i\lambda \left.\left(\frac{\lambda}{\lambda-t}\right)^{i+1}\right|_{t=0} \\
+&= \frac i\lambda \left.\left(\frac{\lambda}{\lambda-t}\right)^{i-1}\right|_{t=0} \\
 &= \frac i\lambda.
   \end{split}
 \end{equation*}
 
-Of course, $\E A_i = \E{\sum_{k=1}^i X_k} = i \E{X} = 1/\lambda$. 
+And indeed, by the fact that $\E{X+Y}= \E X + \E Y$ for any r.v. $X$ and $Y$,
+\begin{equation*}
+\E{A_i} = \E{\sum_{k=1}^i X_k} = i \E{X} = \frac 1 \lambda.
+\end{equation*}
+We get the same answer. 
   \end{solution}
 \end{question}
 

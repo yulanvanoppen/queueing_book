@@ -367,34 +367,44 @@ $\sum_n n^2 \rho^n$ leads to
 \begin{equation*}
   \begin{split}
     \sum_{n=0}^\infty n^2 \rho^n 
-&=    \sum_{n=0}^\infty \left(\sum_{i=1}^\infty 2i \1{i\leq n}  - n\right)\rho^n \\
-&=    \sum_{n=0}^\infty \sum_{i=0}^\infty 2i\1{i\leq n}\rho^n  - \sum_{n=0}^\infty n\rho^n \\
-&=    \sum_{i=0}^\infty 2i \sum_{n=i}^\infty \rho^n  - \frac{\E L}{1-\rho} \\
-&=    \sum_{i=0}^\infty 2i \rho^i \sum_{n=0}^\infty \rho^n  - \frac{\E L}{1-\rho} \\
-&=    \frac2{1-\rho} \sum_{i=0}^\infty i \rho^i   - \frac{\E L}{1-\rho} \\
-&=    \frac2{(1-\rho)^2} \E L - \frac{\E L}{1-\rho} \\
-&=    \frac{\E L}{1-\rho}  \left(\frac2{1-\rho}  - 1\right) \\
-&=    \frac{\E L}{1-\rho}  \frac{1+\rho}{1-\rho} \\
+&=    \sum_{n=0}^\infty \left(\sum_{i=1}^\infty 2i \1{i\leq n}  - n\right)\rho^n 
+=    \sum_{n=0}^\infty \sum_{i=0}^\infty 2i\1{i\leq n}\rho^n  - \sum_{n=0}^\infty n\rho^n \\
+&=    \sum_{i=0}^\infty 2i \sum_{n=i}^\infty \rho^n  - \frac{\E L}{1-\rho} 
+=    \sum_{i=0}^\infty 2i \rho^i \sum_{n=0}^\infty \rho^n  - \frac{\E L}{1-\rho} \\
+&=    \frac2{1-\rho} \sum_{i=0}^\infty i \rho^i   - \frac{\E L}{1-\rho} 
+=    \frac2{(1-\rho)^2} \E L - \frac{\E L}{1-\rho} \\
+&=    \frac{\E L}{1-\rho}  \left(\frac2{1-\rho}  - 1\right) 
+=    \frac{\E L}{1-\rho}  \frac{1+\rho}{1-\rho} \\
 &=    \frac{\rho}{1-\rho}  \frac{1+\rho}{(1-\rho)^2}.
 \end{split}
 \end{equation*}
 
 A last method is based on $z$-transforms:
 \begin{equation*}
-  Z(z) = \E{z^L} = \sum_{n=0}^\infty z^n p(n) = (1-\rho) \sum_{n=0}^\infty (\rho z)^n = \frac{1-\rho}{1-\rho z}.
+  \phi(z) = \E{z^L} = \sum_{n=0}^\infty z^n p(n) = (1-\rho) \sum_{n=0}^\infty (\rho z)^n = \frac{1-\rho}{1-\rho z}.
 \end{equation*}
 Then 
 \begin{equation*}
-  \E L = \frac d {dz} \left. Z(z)\right|_{z=1} = \frac{\rho}{1-\rho},
+  \E L = \left.\frac d {dz} \phi(z)\right|_{z=1} = \frac{\rho}{1-\rho},
 \end{equation*}
 and 
 \begin{equation*}
-  \E{L(L-1)}= \left(\frac d {dz}\right)^2  Z(z)\big|_{z=1} = \frac{2\rho^2}{(1-\rho)^2},
+  \E{L(L-1)}= \left.\phi''(z)\right|_{z=1} = \frac{2\rho^2}{(1-\rho)^2}.
 \end{equation*}
-hence
+Thus,
 \begin{equation*}
-\E L^2 =   \E L(L-1) + \E L.
+\E L^2 =   \E{L(L-1)} + \E L.
 \end{equation*}
+Hence,
+\begin{equation*}
+  \begin{split}
+\E L^2 
+&=   \frac{2\rho^2}{(1-\rho)^2} + \frac\rho{1-\rho} \\
+&=   \frac{2\rho^2}{(1-\rho)^2} + \frac\rho(1-\rho){(1-\rho)2} \\
+&=   \frac{\rho^2+\rho}{(1-\rho)^2} = \rho \frac{1+\rho}{(1-\rho)^2}.
+  \end{split}
+\end{equation*}
+
 A bit of algebra gives the previous results.
   \end{solution}
 \end{question}
@@ -613,12 +623,14 @@ Observe that $j$ is one too high once the condition is satisfied, thus subtract 
 \lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_14.tex}
 
 
-As a check, I use that $p(0) \sum_{j=0}^n \rho^j = 1-\rho^{n+1}$.
+As a check, I use that $(1-\rho) \sum_{j=0}^n \rho^j = 1-\rho^{n+1}$.
 
 
 
 \lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_15.tex}
 
+
+And indeed, we found the right $n$.
 
   \end{enumerate}
 

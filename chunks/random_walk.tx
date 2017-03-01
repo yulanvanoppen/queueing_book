@@ -134,7 +134,7 @@ $W_{Q,0}=5$. However, for $k>10$ the distribution of $W_{Q,k}$ hardly
 changes, at least not visually. Apparently, the convergence of the
 sequence of distributions of $W_{Q,k}$ is rather fast. In the middle
 panel we show the results of a set of \emph{simulations} for
-increasing simulation length, up to $N=1000$ samples. Here the \emph{emperical distribution} for the simulation is defined as
+increasing simulation length, up to $N=1000$ samples. Here the \emph{empirical distribution} for the simulation is defined as
 \begin{equation*}
 \P{W_Q\leq x} =   n^{-1}\sum_{k=1}^n \1{W_{Q,k} \leq x},
 \end{equation*}
@@ -263,7 +263,8 @@ departure process is a Poisson process $N_\mu(t)$. Show that
 = e^{-(\lambda+\mu)t} \left(\frac\lambda\mu\right)^{(n-m)/2} \sum_{k=0}^\infty 
 \frac{(t\sqrt{\lambda\mu} )^{2k+m-n}}{k!(k+m-n)!},
 \end{equation*}
-where $Z(0)=m$. 
+where $\PP{m}{\cdot}$ means that the random walk starts at $m$, i.e.,
+$Z(0)=m$.
 
 
 Now this summation is known as a modified Bessel function, but this
@@ -272,7 +273,7 @@ result as a deterrent to study transient aspects of queueing system.
 
 \hint{It is actually not hard, even though the expression looks
   hard. Use condition to see that
-  $\PP{Z(t)=n} = \P{N_\mu(t) - N_\lambda(t) = m - n}$. Then write out
+  $\PP{m}{Z(t)=n} = \P{N_\mu(t) - N_\lambda(t) = m - n}$. Then write out
   the definitions of the two Poisson distributions. Assemble
   terms. Then fiddle a bit with the terms to get
   $(t\sqrt{\lambda\mu})$. }
@@ -285,7 +286,7 @@ say about the distribution of $Q(t)$? With the above random walk,
 \begin{equation*}
   \begin{split}
     \PP{m}{Z(t)=n} 
-&= \P{N_\mu(t) - N_\lambda(t) = n - m }  \\
+&= \P{N_\mu(t) - N_\lambda(t) = m-n }  \\
 &= \sum_{k=0}^\infty \P{N_\mu(t) = k - n + m\given N_\lambda(t) = k } \P{N_\lambda(t)=k}\\
 &= \sum_{k=0}^\infty e^{-\mu t} \frac{(\mu t)^{k -n+m}}{(k-n +m)!} e^{-\lambda t} \frac{(\lambda t)^k}{k!} \\
 &= e^{-(\lambda+\mu)t} \sum_{k=0}^\infty \frac{(\lambda t)^k(\mu t)^{k  -n + m }}{k!(k-n+m)!}.

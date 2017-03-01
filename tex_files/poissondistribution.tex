@@ -131,7 +131,7 @@ use that
 \end{split}
 \end{equation*}
 Observe now that, as $\lambda t$ is finite, $n/(n-\lambda t)\to 1$ as
-$n\to \infty$. Also for any finite $k$, $(n-k)n\to1$. Finally, we use
+$n\to \infty$. Also for any finite $k$, $(n-k)/n\to1$. Finally, we use
 that $(1+x/n)^n\to e^{x}$ so that ,
 $\left(1-\frac{\lambda t}n\right)^{n} \to e^{-\lambda t}$.  The rest
 is easy, so that, as $n\to\infty$,  the above converges to 
@@ -526,14 +526,16 @@ effort. Suppose $N$ is a Poisson distributed random variable. Then
 &= e^{(z-1)\lambda}.
   \end{split}
 \end{equation*}
-Then $\E N = \d \phi(z)/\d z$ at $z=1$. Now, $\phi'(1) = \lambda$. Also $\E{N(N-1)}= \phi''(1) = \lambda^2$. From this we see that $\E{N^2} = \phi''(1) + \phi(1) = \lambda^2 + \lambda$. 
-
-The SCV is defined as $\V{N(t)}/(\E{N(t)})^2$. From the above it
-follows that this is $(\lambda t)/(\lambda t)^2 = 1/\lambda t$.
+Observe that $\phi'(z) = \E{N z^N}$, so that $\phi'(1)=\E{N}$; also
+$\phi''(z)=\E{N(N-1)z^{N-2}}$, hence $\phi''(1)=\E{N(N-1)}$. With this,
+  \begin{align*}
+    \E N &= \phi'(1)= \lambda,\\
+\E{N^2} &= \phi''(1) + \E{N} = \lambda^2 + \lambda,\\
+\V N &= \E{N^2}-(\E N)^2 = \lambda,\\
+SCV &= \frac{\V{N(t)}}{(\E{N(t)})^2} = \frac{\lambda t}{(\lambda t)^2} = \frac1{(\lambda t)^2}.
+  \end{align*}
 Clearly, as $t$
 increases, $1/\lambda t$ decreases.
-
-
 
 There is point of confusion for some students. The SCV of an
 exponentially distributed random variable is 1; the SCV of the related

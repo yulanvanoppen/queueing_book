@@ -367,14 +367,14 @@ $\sum_n n^2 \rho^n$ leads to
 \begin{equation*}
   \begin{split}
     \sum_{n=0}^\infty n^2 \rho^n 
-&=    \sum_{n=0}^\infty \left(\sum_{i=1}^\infty 2i \1{i\leq n}  - n\right)\rho^n \\
-&=    \sum_{n=0}^\infty \sum_{i=0}^\infty 2i\1{i\leq n}\rho^n  - \sum_{n=0}^\infty n\rho^n \\
-&=    \sum_{i=0}^\infty 2i \sum_{n=i}^\infty \rho^n  - \frac{\E L}{1-\rho} \\
-&=    \sum_{i=0}^\infty 2i \rho^i \sum_{n=0}^\infty \rho^n  - \frac{\E L}{1-\rho} \\
-&=    \frac2{1-\rho} \sum_{i=0}^\infty i \rho^i   - \frac{\E L}{1-\rho} \\
-&=    \frac2{(1-\rho)^2} \E L - \frac{\E L}{1-\rho} \\
-&=    \frac{\E L}{1-\rho}  \left(\frac2{1-\rho}  - 1\right) \\
-&=    \frac{\E L}{1-\rho}  \frac{1+\rho}{1-\rho} \\
+&=    \sum_{n=0}^\infty \left(\sum_{i=1}^\infty 2i \1{i\leq n}  - n\right)\rho^n 
+=    \sum_{n=0}^\infty \sum_{i=0}^\infty 2i\1{i\leq n}\rho^n  - \sum_{n=0}^\infty n\rho^n \\
+&=    \sum_{i=0}^\infty 2i \sum_{n=i}^\infty \rho^n  - \frac{\E L}{1-\rho} 
+=    \sum_{i=0}^\infty 2i \rho^i \sum_{n=0}^\infty \rho^n  - \frac{\E L}{1-\rho} \\
+&=    \frac2{1-\rho} \sum_{i=0}^\infty i \rho^i   - \frac{\E L}{1-\rho} 
+=    \frac2{(1-\rho)^2} \E L - \frac{\E L}{1-\rho} \\
+&=    \frac{\E L}{1-\rho}  \left(\frac2{1-\rho}  - 1\right) 
+=    \frac{\E L}{1-\rho}  \frac{1+\rho}{1-\rho} \\
 &=    \frac{\rho}{1-\rho}  \frac{1+\rho}{(1-\rho)^2}.
 \end{split}
 \end{equation*}
@@ -395,6 +395,16 @@ Thus,
 \begin{equation*}
 \E L^2 =   \E{L(L-1)} + \E L.
 \end{equation*}
+Hence,
+\begin{equation*}
+  \begin{split}
+\E L^2 
+&=   \frac{2\rho^2}{(1-\rho)^2} + \frac\rho{1-\rho} \\
+&=   \frac{2\rho^2}{(1-\rho)^2} + \frac\rho(1-\rho){(1-\rho)2} \\
+&=   \frac{\rho^2+\rho}{(1-\rho)^2} = \rho \frac{1+\rho}{(1-\rho)^2}.
+  \end{split}
+\end{equation*}
+
 A bit of algebra gives the previous results.
   \end{solution}
 \end{question}

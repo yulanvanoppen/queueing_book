@@ -453,7 +453,15 @@ $f(x) = 0$ for $x\geq 7$. Likewise, when $x\leq -10$, $f(x) =
   \end{cases}
 \end{equation*}
 
-To check my solution, I went to Wolframalpha. This is what what I typed: 
+The above is the answer; but, given the amount of effort I had to put
+into getting it, I want to check it. For this I used Wolframalpha. You
+can skip the rest of the solution below if you are not interested in how to
+do this (I will not ask this at the exam). However, to expand your
+skill set, I advise you to take notice of it anyway. Besides that, 
+Wolframalpha is a great site. Please check it out if you haven't done
+so up to now.
+
+So, I went to Wolframalpha, and this is what what I typed: 
 
 
 
@@ -476,9 +484,7 @@ For your convenience, I also include the following code from Wolframalpa
 
 I got the same results as Wolframalpa, but certainly not for free. 
 
-Wolframalpha is a great site. Please check it out if you haven't done
-so up to now.
- \end{solution}
+\end{solution}
 \end{question}
 
 

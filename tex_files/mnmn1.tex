@@ -103,26 +103,56 @@ service rate $\mu$.
 \item 
 Derive a simple and closed form expressions for the state 
    probabilities in steady state. 
- \item Show with a figure how to use level crossing arguments to find the steady state probabilities.
  \end{enumerate}
  
  \hint{Find suitable expressions for $\lambda(n)$ and $\mu(n)$ and use
    the level-crossing equations $\lambda(n) p(n) = \mu(n+1)p(n+1)$. }
 
   \begin{solution}
+
     \begin{enumerate}
-    \item 
+    \item Use this figure. Make sure you understand why $\mu(2)=2\mu$ and so on.
+    \begin{center}
+
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.8cm,
+                    semithick]
+  \node[state] (0) {$p(0)$} ;
+  \node[state] (1) [right of=0] {$p(1)$};
+  \node[state] (2) [right of=1] {$p(2)$};
+  \node[state] (3) [right of=2] {$p(3)$};
+
+\path 
+ (0) edge [bend left] node {$\lambda$} (1)
+ (1) edge [bend left] node {$\mu$} (0)
+ (1) edge [bend left] node {$\lambda$} (2)
+ (2) edge [bend left] node {$2\mu$} (1)
+ (2) edge [bend left] node {$\lambda$} (3)
+ (3) edge [bend left] node {$2\mu$} (2);
+\end{tikzpicture}
+      
+    \end{center}
+
+From this figure it follows right away that:
     \begin{align*}
    \lambda p(0) &= \mu p(1) \\
    \lambda p(1)  &= 2\mu p(2) \\
    \lambda p(2)  &= 2\mu p(3)\\
     \end{align*}
 
-  \item From the above, $p(1) = \rho p(0)$, with $\rho = \lambda/\mu$,
-    $p(2) = (\rho/2) p(1) = (\rho^2/2) p(0)$, and
-    $p(3) = (\rho/2) p(2) = (\rho^3/4) p(0)$. Finally, normalize to
-    arrive at $p(0) = (1+\rho + \rho^2/2 + \rho^3/4)^{-1}$.
- \item      Compare Figure \ref{fig:A_n_t}.
+  \item From the above, with $\rho=\lambda/\mu$: 
+    \begin{align*}
+      p(1) &= \rho p(0), \\
+      p(2) &= (\rho/2) p(1) = (\rho^2/2) p(0), \\
+      p(3) &= (\rho/2) p(2) = (\rho^3/4) p(0).
+    \end{align*}
+Now we normalize to find $p(0)$. Thus, we want that:
+\begin{equation*}
+  1 = p(0)+p(1)+p(2)+p(3) = p(0)\left(1 + \rho + \frac{\rho^2}2 + \frac{\rho^3}4\right),
+\end{equation*}
+hence,
+\begin{equation*}
+p(0) = (1+\rho + \rho^2/2 + \rho^3/4)^{-1}.
+\end{equation*}
 \end{enumerate}
    \end{solution}
 \end{question}
@@ -152,12 +182,14 @@ Thus, for the normalization constant $G$ we take $G=1/p(0)$ and the result follo
   \end{solution}
 \end{question}
 
-\begin{question}(Multi-server queue with blocking)
-  Derive the steady state probabilities $p(0), p(1), \ldots$, for the
-  $M/M/c/c+K$ queue. You do not have to compute the normalization
+\begin{question}(Multi-server queue with blocking) Consider the
+  $M/M/c/c+K$ queue, try to derive the steady state probabilities
+  $p(0)$, $p(1), \ldots$. You do not have to compute the normalization
   constant $G$.
-  \hint{ Use $\lambda(n) p(n) = \mu(n+1)p(n+1)$ and find suitable
-    expressions for $\lambda(n)$ and $\mu(n+1)$. }
+
+\hint{ Use $\lambda(n) p(n) = \mu(n+1)p(n+1)$ and
+    find suitable expressions for $\lambda(n)$ and $\mu(n+1)$. }
+
   \begin{solution}
     $\lambda(n) \equiv \lambda$ for all $n<c+K$. When $n=c+K$,
     $\lambda(n)=0$, since then the system is full, and all arriving
@@ -376,7 +408,7 @@ that can arrive to the queueing system is only 8.
 
 
 
-\begin{question} [use=false]
+\begin{question}[use=false]
   (Hall 5.21) The queueing operator of the previous problem has
   decided to institute a policy whereby employees are removed from
   service, to perform cleanup work, whenever they complete service and
@@ -487,10 +519,10 @@ I asked WolframAlpha to simplify this, but the answer I got was not particularly
       \begin{split}
       p(n+1) 
 &= \frac{\lambda(n)}{\mu(n+1)} p(n) 
-= \frac{(N-n)\lambda}{(n+1)\mu} p(n) \\
-&= \frac{(N-n)(N-(n-1))}{(n+1)n}\frac{\lambda^2}{\mu^2} p(n-1) 
-= \frac{N!}{(N-(n+1))!}\frac1{(n+1)!}\rho^{n+1} p(0) \\
-&  = {N \choose n+1}\rho^{n+1} p(0).
+= \frac{(N-n)\lambda}{(n+1)\mu} p(n) 
+= \frac{(N-n)(N-(n-1))}{(n+1)n}\frac{\lambda^2}{\mu^2} p(n-1) \\
+&= \frac{N!}{(N-(n+1))!}\frac1{(n+1)!}\rho^{n+1} p(0) 
+  = {N \choose n+1}\rho^{n+1} p(0).
       \end{split}
     \end{equation*}
     Hence, after normalization, i.e., requiring that $p(0)$ is such

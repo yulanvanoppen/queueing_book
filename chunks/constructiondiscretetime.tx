@@ -322,33 +322,34 @@ different queueing systems.
 
 
 \begin{question}
-  (Yield loss) A machine produces items, but part of the items turn
-  out to be faulty, and have to be made anew. Make assumptions about
-  the failure process, and develop a set of recursions to cover this
-  case.
+  (Yield loss) A machine produces items, but a fraction $p$ of the
+  items produced in a period turn out to be faulty, and have to be
+  made anew. Develop a set of recursions to cover this case.
   \begin{solution}
-    Let's assume that a fraction $p$ of the jobs is lost each
-    period. We can make $p$ time-dependent if we like, but for the
-    moment we don't. The amount produced in period $k$ is $d_k$. Thus,
-    $p d_k$ is the amount lost, neglecting rounding errors for the
-    moment. Thus, $p d_k$ items have to be fed back to the system in
-    the next period to be remade. Therefore the total amount of
-    arrivals in period $k+1$ is $a_{k+1}'=a_{k+1}+pd_k$, i.e., the
-    external arrivals plus the extra items. Now use the standard
-    recursions but with the $\{a_{k}'\}$ rather than $\{a_k\}$. 
+    The amount produced in period $k$ is $d_k$. Thus, $p d_k$ is the
+    amount lost, neglecting rounding errors for the moment. Thus,
+    $p d_k$ items have to be fed back to the system in the next period
+    to be remade. Therefore the total amount of arrivals in period
+    $k+1$ is $a_{k+1}'=a_{k+1}+pd_k$, i.e., the external arrivals plus
+    the extra items. Now use the standard recursions but with the
+    $\{a_{k}'\}$ rather than $\{a_k\}$.
 
     Can you use these recursions to show that the long-run average
     service capacity $n^{-1}\sum_{i=1}^n c_i$ must be larger than
-    $\lambda(1+p)$.
+    $\lambda(1+p)$?
+
+    If you like you can incorporate time-dependent failure rates
+    $\{p_k\}$ too. Whether this makes practical sense depends on the
+    context of course.
       \end{solution}
 \end{question}
 
 \begin{question}
-  (Rework) A machine produces items, but part of the items do not meet
-  the quality requirements after the first service but need some extra
-  service time but less than an entirely new arriving job. Make a
-  model to analyze this case. Compare this case with the yield loss
-  problem above. 
+  (Rework) A machine produces items, but a fraction $p$ of the items
+  do not meet the quality requirements after the first service but
+  need some extra service time but less than an entirely new arriving
+  job. Make a model to analyze this case. Compare this case with the
+  yield loss problem above. 
 
   Let's assume that the repair of a faulty requires half of the work
   of a new job, and that the faulty jobs are processed with priority
@@ -364,11 +365,11 @@ different queueing systems.
     items require less processing time than a new job, the service
     capacity $c_k$, i.e., the number of jobs that can be processed in
     period $k$, is a bit bigger; part of the capacity is spent at new
-    jobs but another part is spent on the faulty jobs. Let's assume
-    that the repair of a faulty requires half of the work of a new
-    job, and that the faulty jobs are processed with priority over the
-    new jobs. Assume queue $A$ contains the faulty items, and queue
-    $B$ the new jobs. Then the recursions become:
+    jobs but another part is spent on the faulty jobs. By the
+    assumptions above, the repair of a faulty requires half of the
+    work of a new job, and the faulty jobs are processed with priority
+    over the new jobs. Assume queue $A$ contains the faulty items, and
+    queue $B$ the new jobs. Then the recursions become:
 \begin{equation*}
   \begin{split}
     d_{k,A} &= \min\{Q_{k-1, A}, 2c_k\}, \text{ as faulty jobs require half of the processing time})\\
@@ -456,7 +457,7 @@ we need. The total cost up to time $T$ becomes:
 \end{question}
 
 
-\begin{question}(Queue with setups)[use=false]
+\begin{question}[use=false](Queue with setups)
   One server serves two parallel queues, one at a time. After serving
   a batch of 20 jobs of one queue the server moves to the other
   queue. The change of queue requires one period setup time.
@@ -467,7 +468,10 @@ we need. The total cost up to time $T$ becomes:
 
 
 \begin{question}
-  How would you model (in terms of recursions) a server whose capacity depends on the queue length? 
+  How would you model (in terms of recursions) a server whose capacity
+  depends on the queue length? Consider, as an example, a rule such
+  that the server only works if the queue is larger than a threshold $t$. 
+
   \begin{solution}
     One model could be to let the server only switch on when the queue
     is larger than some threshold $t$, and when the server is on, it
@@ -496,14 +500,12 @@ and likewise for the other queue.
 
   \begin{question} (Priority queuing) Another interesting situation is
     a system with two queues served by one server, but such that one
-    queue gets non-preemptive priority over the other queue. Again
-    find a set of recursions to describe this case.
+    queue, queue $A$ gets priority over the other
+    queue. Again find a set of recursions to describe this case.
+
     \begin{solution}
- If other choices for the division of the production capacity
-  over the types is made (for instance strict priority to type A), it
-  is necessary to split the queue in front of the mixing station into
-  two separate queues $Q_A$ and $Q_B$, one for each type.  The rules
-  below implement a strict priority rule for jobs type A.
+      The rules below implement a strict priority rule for jobs type
+      A, i.e., jobs sent into queue A.
 \begin{equation*}
   \begin{split}
     d_{k,A} &= \min\{Q_{k-1, A}, c_k\}, \\
@@ -513,6 +515,7 @@ and likewise for the other queue.
     Q_{k,B} &= Q_{k-1, B} + a_{k,B} - d_{k,B}.
   \end{split}
 \end{equation*}
+
 As an aside, another interesting rule to distribute the capacity $c_k$
 over the queues could be based on the principle of \textit{ equal
   division of the contested sum}. This principle is based on game
@@ -571,11 +574,12 @@ d_{k,B} &= \min\{Q_{k-1, B}, c_k-d_{k,A}\}.
   one queue cannot be used to serve the other queue. Any extra
   capacity beyond the reserved capacity is given to queue A with
   priority. Formulate a set of recursions to analyze this situation.
-  \begin{solution}
-    Let $r_A$ be the reserved for queue A, and likewise for $r_B$. We
-    assume of course that $c_k\geq r_A + r_B$, for all $k$. 
 
-Queue A can use all capacity, except what is reserved for queue B: 
+  Let $r_A$ be the reserved capacity for queue A, and likewise for
+   $r_B$. We assume of course that $c_k\geq r_A + r_B$, for all $k$.
+
+   \begin{solution} Queue A can use all capacity, except what is
+     reserved for queue B:
 \begin{equation*}
   d_{k,A} = \min\{Q_{A, k-1}, c_k - r_B\}.
 \end{equation*}
@@ -684,18 +688,61 @@ Realize that Stations A and B have their own arrivals.
 \end{solution}
 \end{question}
 
-\begin{question} (Merging incoming streams)
-  Consider a single-server queue that servers two customer `streams'
-  in a FIFO discipline. Thus, both streams enter one queue that is
-  served by the server. Let $\{a_k^a\}$ be the number of arrivals of
-  stream $a$ in period $k$ and $\{a_k^b\}$ be the number of arrivals
-  of stream $b$. Find a set of recursions by which it becomes possible
-  to analyze the waiting time distribution of each of the streams.
+\begin{question} (Estimating the lead time distribution.)  Take
+  $d_k = \min\{Q_{k-1}+a_k, c_k\}$, and assume that jobs are served in
+  FIFO sequence. Find an expression for the shortest possible waiting
+  time $W_-(k)$ of a job that arrives at time $k$, and an expression
+  for the largest possible waiting time $W_+(k)$
+  \hint{Consider a numerical example. Suppose $Q_{k-1}=20$. Suppose
+    that the capacity is $c_k=3$ for all $k$. Then a job that arrives
+    in the $k$th period, must wait at least $20/3$ (plus rounding)
+    periods before it can leave the system. Now generalize this
+    numerical example.}
+    \begin{solution}
+      Let's tag the first customer that arrives in period $k$. This
+      tagged customer sees $Q_{k-1}$ customer in the system, hence the
+      tagged customer's service can only start after all $Q_{k-1}$
+      customers have been served.  Now, if $Q_{k-1}-c_k >0$, there are
+      still people in front of the tagged customer. In fact, as long
+      as $c_k+c_{k+1}+\cdots +c_m < Q_{k-1}$ the number of customers in
+      front of the tagged customer are still in the system.
+
+      We can also tag the last customer that arrives in period
+      $k$. This customer will certainly have left if $m$ is such that
+      $c_k+\cdot+c_m > Q_{k-1}+a_k$.
+
+      In formulas the above comes down to the following.  A job that
+      arrives in period $k$ cannot be served before period
+    \begin{equation*}
+    W_{-,k}:= \max\left\{m: \sum_{i=k}^{k+m} c_i < Q_{k-1}\right\},
+    \end{equation*}
+    and it must have been served before period
+    \begin{equation*}
+      W_{+,k}:= \min\left\{m: \sum_{i=k}^{k+m} c_i \geq
+        Q_{k}\right\}.
+    \end{equation*}
+    Thus, the waiting time of jobs arriving in period $k$ must lie in
+    the interval $[W_{-,k}, W_{+,k}]$.
+  \end{solution}
+\end{question}
+
+\begin{question} (Merging incoming streams) \tbd \emph{You can skip
+    this problem for the midterm as I changed the answer quite a bit
+    after the lecture. It is still interesting though. } Consider a
+  single-server queue that servers two customer `streams' in a FIFO
+  discipline. Thus, both streams enter one queue that is served by the
+  server. Let $\{a_k^a\}$ be the number of arrivals of stream $a$ in
+  period $k$ and $\{a_k^b\}$ be the number of arrivals of stream
+  $b$. Find a set of recursions by which it becomes possible to
+  analyze the waiting time distribution of each of the streams. Assume
+  that the service capacity $c$ is contant for all periods, and that
+  jobs that arrive in period $k$ can also be served in period $k$.
+
   \begin{solution}
     The behavior of the queue length  process is easy: 
     \begin{equation*}
       \begin{split}
-      d_k &= \min\{Q_{k-1}, c\}, \\
+      d_k &= \min\{Q_{k-1}+a_k^a+a_k^b, c\}, \\
 Q_k &= Q_{k-1}+a_k^a + a_k^b - d_k.
       \end{split}
     \end{equation*}
@@ -705,30 +752,50 @@ Q_k &= Q_{k-1}+a_k^a + a_k^b - d_k.
     start of the period in queue, i.e., $Q_{k-1}-d_k$, are cleared;
     note that we assume here that the jobs served in period $k$ depart
     at the start of the interval. Thus, the minimal waiting time is
-    $l_{k,-} = \lfloor (Q_{k-1}-d_k)/c\rfloor$.  Similarly, the
-    maximal waiting time is $l_{k,+} = \lceil Q_k /c\rceil$.
+    $W_{k,-} = \lfloor Q_{k-1}/c\rfloor$.  Similarly, the maximal
+    waiting time is
+    $W_{k,+} = \lfloor (Q_{k-1}+a_k^a + a_k^b) /c\rfloor$.
 
     The only remaining problem is to make a model to `distribute' the
-    time between $l_{k,-}$ and $l_{k,+}$ over the two streams. One way
-    is to give priority to $a$ customers.  Making this completely
-    explicit, so that the recursion can be fed to the computer,
-    requires still a bit of work.  It is important to understand the
-    trick we will discuss now because we will use it to model queueing
-    systems with batching. Observe that the first job of the $a$
-    stream only has to wait for $l_{k,-}$, the second job must wait $l_{k,-}+1$, and so on. Thus, the average waiting is 
+    time between $W_{k,-}$ and~$W_{k,+}$ over the two streams. 
+
+    A simple model is to assume that the waiting time is averaged over
+    the jobs. Then each job perceives a waiting time of
     \begin{equation*}
-      \frac{l_{k,-} + (l_{k,-} + 1) + \ldots + (l_{k,-} + a_k^a-1)}{a_k^a} = l_{k,-} + \frac{a_k^a-1}2.
-    \end{equation*}
-Similarly, the average waiting time for the $b$ jobs must be
-    \begin{equation*}
-      \frac{l_{k,-} + a_k^a + l_{k,-} + a_k^a + 1 + \ldots + l_{k,-} + a_k^a + a_k^b -1}{a_k^b} = l_{k,-} + a_k^a + \frac{a_k^b-1}2.
+      \frac{W_{k,-} + W_{k,+}}2.
     \end{equation*}
 
-    Another model is to assume that the waiting time is simply
-    averaged over the jobs. Then each job perceives a waiting time of
+    Another way is to give priority to $a$ customers, but only for the
+    jobs that arrive in this period. (Hence, this is different from
+    the priority queue. There priority customers can overtake
+    customers that arrived earlier. In the present case this is not
+    allowed, jobs of type $a$ that arrive in period $k$ cannot
+    overtake $b$ jobs that arrived prior to period $k$.)  Making this
+    completely explicit (so that the recursion can be fed to the
+    computer) requires a bit of work however.  It is important to
+    understand the trick we will discuss now because we will use it to
+    model queueing systems with batching. Observe that the first job
+    of the $a$ stream only has to wait for $W_{k,-}$, the second job
+    must wait $W_{k,-}+1$, and so on. Thus, the waiting time $W_{k}^a$
+    for the $a_k^a$ items is such that
     \begin{equation*}
-      \frac{l_{k,-} + l_{k,+}}2.
+W_{k,-}^a:= \lfloor Q_{k-1}/c \rfloor \leq  W_{k}^a \leq \lfloor (Q_{k-1}+a_k^a)/c \rfloor =: W_{k,+}^a.
     \end{equation*}
+    Similarly, for the $b$ jobs must be
+    \begin{equation*}
+W_{k,-}^b := \lfloor (Q_{k-1}+a_k^a)/c \rfloor \leq  W_{k}^b \leq \lfloor (Q_{k-1}+a_k^a+a_k^b)/c \rfloor =: W_{k,+}^b.
+    \end{equation*}
+Note that $W_{k,+}^a = W_{k,-}^b$. 
+It is then sensible to set 
+\begin{align*}
+  W_{k}^a &= \frac{W_{k,-}^a + W_{k,+}^a}2, \\
+  W_{k}^b &= \frac{W_{k,-}^b + W_{k,+}^b}2.
+\end{align*}
+
+\tbd I currently lack time to check whether the above does not contain
+any off-by-one errors. For future work, implement it in a simulator\ldots
+
+
   \end{solution}
 \end{question}
 
@@ -812,30 +879,6 @@ I_k &>= 0.
   \end{solution}
 \end{question}
 
-\begin{question} (Estimating the lead time distribution.)  Take
-  $d_k = \min\{Q_{k-1}+a_k, c_k\}$, and assume that jobs are served in
-  FIFO sequence. Find an expression for the shortest possible waiting
-  time $W_-(k)$ of a job that arrives at time $k$, and an expression
-  for the largest possible waiting time $W_+(k)$
-  \hint{Consider a numerical example. Suppose $Q_{k-1}=20$. Suppose
-    that the capacity is $c_k=3$ for all $k$. Then a job that arrives
-    in the $k$th period, must wait at least $20/3$ (plus rounding)
-    periods before it can leave the system. Now generalize this
-    numerical example.}
-    \begin{solution}
-    A job that arrives at time $k$ cannot be served before period
-    \begin{equation*}
-    W_-(k):= \max\left\{l: \sum_{i=k}^{k+l} d_i < Q_{k-1}\right\},
-    \end{equation*}
-and it must have been  served before period
-    \begin{equation*}
-      W_+(k):= \min\left\{l: \sum_{i=k}^{k+l} c_i \geq
-        Q_{k}\right\}.
-    \end{equation*}
-    Thus, the waiting time of jobs arriving in period $k$ must lie in
-    $[W_-(k), W_+(k)]$.
-  \end{solution}
-\end{question}
 
 \begin{question}
   Implement Eqs.~\ref{eq:31} in a computer program and simulate a
