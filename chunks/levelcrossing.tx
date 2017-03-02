@@ -21,7 +21,7 @@ downcrossing in this section to derive the \recall{stationary}, also
 know as \emph{long-run time average} or \emph{steady-state},
 distribution $p(n)$ that the system contains $n$ jobs. 
 
-\begin{figure}[tb]
+\begin{figure}[th]
   \centering
   \tikz{
 \draw[->] (0,0)--node[midway, fill=white] {$A(t)$}  (2,0); 
@@ -172,7 +172,7 @@ $A(n,t)$ and~$\lambda(n)$ relate to $D(n+1,t)$ and $\mu(n)$.
 
 \begin{figure}[th]
   \centering
-\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.8cm,
+\begin{tikzpicture}[scale=1,->,>=stealth',shorten >=1pt,auto,node distance=1.8cm,
                     semithick]
   \node[state] (0) {$p(0)$} ;
   \node[state] (1) [right of=0] {$p(1)$};
@@ -339,7 +339,7 @@ These equations hold for any $n\geq 0$ and are known as the
 queueing systems in which level crossing cannot be used, for instance
 for queueing networks.
 
-\begin{figure}[h]
+\begin{figure}[t]
   \centering
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.8cm,
                     semithick]
@@ -363,7 +363,7 @@ for queueing networks.
 
 
 \end{tikzpicture}
-\caption{ For the balance equations count how often a box around a
+\caption{ For the balance equations we count how often a box around a
   state is crossed from inside and outside. On the long run the
   entering and leaving rates should be equal. For the example here,
   the rate out is $p(2)\lambda(2) + p(2) \mu(2)$ while the rate in is
@@ -640,7 +640,54 @@ Continuing to $[2,3)$ and so on gives
     \end{solution}
 \end{question}
 
+\begin{question}
+  Consider a single server that serves one queue and serves only in
+  batches of 2 jobs at a time (so never 1 job or more than 2 jobs),
+  i.e., the $M/M^2/1/3$ queue.  Single jobs arrive at rate $\lambda$
+  and the interarrival times are exponentially distributed. The batch
+  service times are also exponentially distributed with mean $1/\mu$.
+  At most 3 jobs fit in the system. Make a drawing
 
+  Make a graph of the state-space and show, with arrows, the
+  transitions that can occur.
+
+  \begin{solution}
+\begin{tikzpicture}[scale=1,->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+\node[state] (0) {$0$}; 
+\node[state] (1) [right of=0] {$1$}; 
+\node[state] (2) [right of=1] {$2$}; 
+\node[state] (3) [right of=2] {$3$}; 
+
+\path 
+(0) edge [bend left] node[above] {$\lambda$} (1)
+(1) edge [bend left] node[above] {$\lambda$} (2)
+(2) edge [bend left] node[above] {$\lambda$} (3)
+(3) edge [bend left] node[below] {$\mu$} (1)
+(2) edge [bend left] node[below] {$\mu$} (0);
+
+\draw[-, dotted, gray] (4,-2.)--(4,2.0) node[above, black] {level $1$};
+
+\end{tikzpicture}
+    
+  \end{solution}
+\end{question}
+
+\begin{question}
+  Use the graph of the previous question and a level-crossing argument
+  to express the steady-state probabilities $p(n),n=0,\ldots, 3$ in
+  terms of $\lambda$ and $\mu$.
+\hint{First balance the rates accross the levels. Then solve for $\pi(k)$.}
+  \begin{solution}
+With level crossing
+  \begin{align*}
+    \lambda p(0)  &= \mu p(2) \\
+    \lambda p(1)  &= \mu p(2) +\mu p(3), \quad\text{see level 1}\\
+    \lambda p(2)  &= \mu p(3)\\
+  \end{align*}
+  Solving this in terms of $p(0)$ gives $p(2) = \rho p(0)$, $p(3) = \rho p(2) = \rho^2p(0)$, and $p(1) = (\lambda+\mu)/\lambda p(0)$. 
+  \end{solution}
+\end{question}
 
 %%% Local Variables:
 %%% mode: latex
