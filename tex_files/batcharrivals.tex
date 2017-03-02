@@ -118,30 +118,33 @@ one arrow from right to left in Figure~\ref{fig:levelcrossing}) to
 downcross level $n$, namely from $n+1$ to $n$. Counting upcrossings
 requires quite some more work.
 
-Let us write $\{L(A_k-) \leq n, L(A_k)>n\}$ for the set of sample
-paths such that the $k$th job sees~$n$ or less items in the system
-upon arrival (condition $L(A_k-)\leq n$) and after the arrival the
-system contains more than $n$ items (condition $L(A_k) > n$). Thus,
-$\{L(A_k-) \leq n, L(A_k)>n\}$ contains all sample paths whose $k$th
-arrival crosses level $n$ from below. We can decompose this event as
-follows.
+Let us write $\1{L(A_k-) \leq n}\1{ L(A_k)>n}$ to track whether the
+$k$th job sees~$n$ or less items in the system upon arrival,
+i.e. condition $\1{L(A_k-)\leq n}$, and is such that after its arrival
+the system contains more than $n$ items, i.e., condition
+$\1{L(A_k) > n}$. Thus, if $\1{L(A_k-) \leq n}\1{ L(A_k)>n}=1$, job $k$ crossed level $n$ from below. Hence
+\begin{equation*}
+  \sum_{k=1}^{\infty} \1{A_k \leq t} \1{L(A_k-) \leq n}\,\1{L(A_k)>n},
+\end{equation*}
+counts all arrivals up to time $t$ that enforce a crossing of level
+$n$ from below.
+
+
+From Figure~\ref{fig:levelcrossing} we see that an upcrossing can be decomposed into:
 \begin{equation*}
   \begin{split}
-    \{L(A_k-) \leq n, L(A_k)>n\} 
-&=  \{L(A_k-) =n , B_k >0\} \\
-&\quad \cup  \{L(A_k-) =n-1 , B_k >1\} \\
-&\quad \cup \ldots\\
-&\quad \cup  \{L(A_k-) =0 , B_k > n\} \\
-& = \bigcup_{m=0}^n \{L(A_k-) =m , B_k > n-m\}.
+    \1{L(A_k-) \leq n}\1{L(A_k)>n} 
+&=  \1{L(A_k-) =n}\, \1{B_k >0} + \1{L(A_k-) =n-1}\1{ B_k >1} +\cdots + \1{L(A_k-) =0}\1{B_k > n} \\
+& = \sum_{m=0}^n \1{L(A_k-) =m}\1{B_k > n-m}.
   \end{split}
 \end{equation*}
 In other words, paths that upcross level $n$ require that any job that
-sees $m\leq n$ in the system upon arrival must bring a batch larger
+sees $m$ ($m\leq n$) in the system upon arrival must bring a batch larger
 than $n-m$ items.
 
 Define 
 \begin{equation*}
-  A(m,n,t) = \sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = m, B_k > n-m}.
+  A(m,n,t) = \sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = m}\1{B_k > n-m}.
 \end{equation*}
 as the number of jobs that, up to time $t$, see $m$ in the system upon
 arrival and have batch size larger than $n-m$. Then the number of
@@ -164,11 +167,17 @@ $t\to\infty$. Now, provided the limit exists, we define
 \begin{equation*}
 \lim_{t\to\infty} \frac{A(m,n,t)}{A(m,t)} = 
 \lim_{t\to\infty} \frac{\sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = m, B_k > n-m}}
-{\sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = m}}=\P{B>n-m\given L(A_k-)=m},
+{\sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = m}}=\P{B>n-m\given L(A-)=m},
 \end{equation*}
-where $L(A_k-)$ has the interpretation of the number of items in the
-system at the $k$th arrival epoch.  By \emph{assumption} $B$ and $L(A_k-)$ are
-independent. Therefore,
+where $\P{L(A-)=m}$ has the interpretation of the steady-state
+probability that a job sees $m$ jobs in the system upon arrival.  By
+\emph{assumption}, $B$ and $L(A-)$ are independent\footnote{Thus, 
+\begin{equation*}
+\P{B>n-m\given L(A-)=m} =
+\frac{\P{B>n-m,L(A-)=m}}{\P{L(A-)=m}}=
+\frac{\P{B>n-m}\P{L(A-)=m}}{\P{L(A-)=m}} = \P{B>n-m}.
+\end{equation*}
+}, and therefore,
 \begin{equation*}
 \lim_{t\to\infty} \frac{A(m,n,t)}{A(n,t)} = \P{B>n-m} = G(n-m).
 \end{equation*} 
@@ -209,11 +218,11 @@ since $G(0)=1$, and writing $\alpha = \lambda/\mu$, the
   \pi(1) &= \alpha \\
   \pi(2) &= \alpha G(0) \pi(1) + \alpha G(1) \pi(0) =\alpha(\alpha+ G(1)) = \alpha^2 + \alpha G(1), \\
   \pi(3) 
-&= \alpha[G(0) \pi(2) + G(1) \pi(1) + G(2) \pi(0)]  \\
-&= \alpha[ \alpha^2 + 2 \alpha G(1)) + G(2)],
+&= \alpha[G(0) \pi(2) + G(1) \pi(1) + G(2) \pi(0)]  = \alpha[ \alpha^2 + 2 \alpha G(1)) + G(2)],
   \end{split}
 \end{equation*}
- and so on.  
+and so on. (Evidently, the computer is better suited to continue with
+this.)
 
 It is left to find the normalization constant.  As this recursion does
 not lead to a closed form expression for $p(n)$, such as
@@ -261,7 +270,7 @@ is much less simple, hence we will not discuss this further.
 \end{solution}
 \end{question}
 
-\begin{question}\label{ex:7}
+\begin{question}
   Let us use the above recursion Eq.~(\ref{eq:42}) for $\pi(n)$ to
   derive an expression for the expected number of units of work $\E L$
   in the system. Substitute the recursion Eq.~(\ref{eq:42}) in the
@@ -269,19 +278,12 @@ is much less simple, hence we will not discuss this further.
 \begin{equation}\label{eq:67}
   \mu \E L =\mu \sum_{n=0}^\infty n \pi(n) = \lambda \frac{\E{B^2}}2  + \lambda \E B \E L +\lambda \frac{\E B}2,
 \end{equation}
-where we use the results of the exercises of Section~\ref{sec:mxm1-queue:-expected}
-and~\ref{ex:7}. 
 
-With this and using the definition for
-$\rho=\lambda \E B/\mu$, show that
-\begin{equation*}
-(1- \rho) \E L = \frac{\lambda}\mu \frac{\E{B^2}}2 + \frac\rho2.
-\end{equation*}
-This is the same result as what we obtained in
-Section~\ref{sec:mxm1-queue:-expected}.
-  \hint{Substitute the
+\hint{Substitute the
   recursion, and carry on with the algebra. We urge the reader to try
-  it, its good (necessary) practice.}
+  it, its good (necessary) practice.  Use also the results of the
+  exercises of Section~\ref{sec:mxm1-queue:-expected}.  }
+
 \begin{solution}
   We use that $\mu \pi(n) =\lambda \sum_{i=0}^{n-1} \pi(i) G(n-1-i)$
   and the results of the exercises of
@@ -300,12 +302,23 @@ Section~\ref{sec:mxm1-queue:-expected}.
   &= \lambda \frac{\E B^2 -\E B}2  + \lambda \E B \E L +\lambda \E B \\
   &= \lambda \frac{\E B^2 }2  + \lambda \E B \E L +\lambda \frac{\E B}2,
 \end{align*}
+\end{solution}
+\end{question}
 
-Now, dividing both sides by $\mu$ and using that $\lambda \E B/\mu = \rho$, 
+\begin{question}
+  Use Eq.~(\ref{eq:67}) and the definition for
+  $\rho=\lambda \E B/\mu$ to show that
+\begin{equation*}
+(1- \rho) \E L = \frac{\lambda}\mu \frac{\E{B^2}}2 + \frac\rho2.
+\end{equation*}
+This is the same result as what we obtained in
+Section~\ref{sec:mxm1-queue:-expected}.  
+\hint{Divide both sides by $\mu$.}
+\begin{solution}
+Dividing both sides by $\mu$ and using that $\lambda \E B/\mu = \rho$, 
 \begin{equation*}
   \E L = \frac{\lambda}{\mu}  \frac{\E B^2 }2 + \rho \E L + \frac\rho2.
 \end{equation*}
-
 \end{solution}
 \end{question}
 
@@ -414,10 +427,13 @@ $\pi(n)$ for these three different acceptance rules.
 
 \begin{question}
   Implement the recursion~(\ref{eq:42}) in a computer program for the
-  case $f(1)=f(2)=f(3)=1/3$, $\lambda =1$ and $\mu = 3$.  \hint{This
-    is an important problem, it helps to check (numerically) the
-    algebraic results we have been deriving up to now. Implementing
-    the recursion is not hard, just try and see how far you get.}
+  case $f(1)=f(2)=f(3)=1/3$ (recall $\P{B=k} =f_k$). Take $\lambda =1$
+  and $\mu = 3$.  
+
+  \hint{This is an important problem, it helps to check (numerically)
+    the algebraic results we have been deriving up to
+    now. Implementing the recursion is not hard, just try and see how
+    far you get.}
   \begin{solution}
 The recursion for $n$ becomes $\pi(n) = \lambda/\mu \sum_{i=0}^{n-1} \pi(n-1-i)G(i)$. Since $G(i) =0$ for $i\geq 3$ we rewrite this to 
 \begin{equation*}

@@ -318,6 +318,7 @@ In both cases the expected service times are equal to $T$ so that the loads are 
 \begin{question}
   Compute $\E L$ for the $M/G/1$ queue with $G=U[0,A]$, i.e., the
   uniform distribution on $[0,A]$.
+\hint{Integrate $A^{-1} \int x \d x$, and likewise for the second moment.}
 \begin{solution}
   \begin{align*}
 \E S &= A/2,\\
@@ -335,7 +336,10 @@ C_s^2 &= (A^2/12)/(A^2/4) = 1/3,\\
 
 \begin{question}
   Show that for the $M/G/1$ queue, the expected idle time is
-  $\E I = 1/\lambda$.
+  $\E I = 1/\lambda$.  \hint{What is the average time between two
+    arrivals? Observe that the interarrivals are memoryless, hence the
+    average time until the next arrival after the server becomes idle
+    is also $1/\lambda$.}
   \begin{solution}
   Since the interarrival times are memoryless, the expected
       time to the first arrival after a busy time stops is also
@@ -356,7 +360,11 @@ The result follows.
 \end{question}
 
 \begin{question}
- What is the utilization of the $M/G/1/1$ queue?
+  What is the utilization of the $M/G/1/1$ queue?  \hint{The job in
+    the system is also in service (it is an $M/G/1/1$ queue\ldots).
+    The average idle time is $1/\lambda$. The average busy time is
+    $\E S$--as there are no jobs in queue. The load $\rho$ must also
+    be equal to the fraction of time the server is busy. }
   \begin{solution}
  The system can contain at most 1 job. Necessarily, if the
       system contains a job, this job must be in service.  All jobs
@@ -372,27 +380,35 @@ The result follows.
 \end{question}
 
 \begin{question}
-  For the $M/G/1/1$ queue what is the fraction of jobs rejected; what
-  is the fraction of accepted jobs?
+  For the $M/G/1/1$ queue what is the fraction of jobs rejected
+  (hence, what is the fraction of accepted jobs)?  \hint{The rate of
+    accepted jobs is $\lambda \pi(0)$. What is the load of these jobs?
+    Equate this to $1-\pi(0$ as this must also be the load. Then solve for $\pi(0)$.}
   \begin{solution}
- Let $p(0)$ be the fraction of time the server is idle. By
-      PASTA, $\pi(0)=p(0)$. Thus, the fraction of accepted jobs is
-      $\lambda\pi(0)$. Therefore, the departure rate
-      $\gamma=\pi(0)\lambda$. The loss rate  is $\lambda-\gamma = (1-\pi(0))\lambda$. 
+    Let $p(0)$ be the fraction of time the server is idle. By PASTA,
+    $\pi(0)=p(0)$. Thus, the rate of accepted jobs is
+    $\lambda\pi(0)$. Therefore, the departure rate
+    $\gamma=\lambda\pi(0)$. The loss rate is
+    $\lambda-\gamma = \lambda (1-\pi(0))$.
 
-      Since $\lambda\pi(0)$ is the rate at which jobs enter the
-      system, the load must be $\lambda\pi(0)\E S$. Since the load is also $1-\pi(0)$, it follows from equating this, that  $\lambda \E S \pi(0) = 1-\pi(0)$, from which $\pi(0)=1/(1+\lambda\E S)$, hence $1-\pi(0) = \lambda \E S/(1+\lambda \E S)$, which is the same an in the previous problem.
+    Since $\lambda\pi(0)$ is the rate at which jobs enter the system,
+    the load must be $\lambda\pi(0)\E S$. Since the load is also
+    $1-\pi(0)$, it follows from equating that
+    \begin{equation*}
+      \lambda\pi(0) \E S = 1 - \pi(0) \iff \pi(0)=\frac1{1+\lambda\E S} 
+\iff 1-\pi(0) = \frac{\lambda \E S}{1+\lambda \E S},
+    \end{equation*}
+which is the same an in the previous problem.
 
 Note that  $\gamma < \lambda$, as it should be the case. 
-
   \end{solution}
 \end{question}
 
 
 \begin{question}
   Why is the fraction of lost jobs at the $M/G/1/1$ queue not
-  necessarily the same as for the $G/G/1/1$ queue?  Support your claim
-  with an example.
+  necessarily the same as for a $G/G/1/1$ queue with the same load?  
+\hint{Provide an  example.}
   \begin{solution}
  Typically, in the $G/G/1$ queue, the arrivals do not see  time-averages. Consequently, the fraction of arrivals that are blocked is not necessarily equal to the utilization $\rho$.
 
