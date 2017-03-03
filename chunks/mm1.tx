@@ -79,7 +79,8 @@ the queue is longer than $9$ say, then $\P{L\geq 10} = \rho^{10}$ is
 an estimator of the fraction of customers lost. Again, for the $M/M/1$
 queue, the knowledge of $\rho$ suffices to compute this estimate.
 
-In the context of inventory theory these equations are particularly useful, see Question~\ref{q:basestock}.
+% In the context of inventory theory these equations are particularly
+% useful, see one of the questions below.
 
 \paragraph{Supermarket Planning}
 
@@ -245,19 +246,24 @@ pretty powerful already.
   Derive expression~\ref{eq:el} for the average number of jobs in an
   $M/M/1$ queue.  
   \begin{solution}
-    \begin{equation*}
-      \begin{split}
-\E L 
-&= \sum_{n=0}^\infty n p(n) 
-= \sum_{n=0}^\infty \sum_{i=1}^n 1\{i\leq n\} p(n) \\        
-&= \sum_{i=1}^\infty \sum_{n=0}^\infty  1\{i\leq n\} p(n) 
-= \sum_{i=1}^\infty \sum_{n=i}^\infty p(n) \\
-&= \sum_{i=1}^\infty \sum_{n=i}^\infty (1-\rho)\rho^n         
-= \sum_{i=1}^\infty (1-\rho)\rho^i \sum_{n=0}^\infty \rho^n \\
-&= \sum_{i=1}^\infty (1-\rho)\rho^i \frac1{1-\rho}   
-= \sum_{i=1}^\infty \rho^i = \rho \sum_{i=0}^\infty \rho^i = \frac{\rho}{1-\rho}.
-      \end{split}
-    \end{equation*}
+\begin{align*}
+\E L &= \sum_{n=0}^\infty n p(n) \\
+&= \sum_{n=0}^\infty \sum_{i=1}^n \1{i\leq n} p(n)  && n=\sum_{i=1}^n \1{i\leq n}\\
+&= \sum_{n=0}^\infty \sum_{i=1}^\infty   \1{i\leq n} p(n)  && i>n\implies \1{i\leq n} = 0\\
+&= \sum_{i=1}^\infty \sum_{n=0}^\infty  \1{i\leq n} p(n) &&\text{Fubini} \\
+&= \sum_{i=1}^\infty \sum_{n=i}^\infty p(n) && n < i \implies \1{i\leq n}=0 \\
+&= \sum_{i=1}^\infty \sum_{n=i}^\infty (1-\rho)\rho^n && p(n) = (1-\rho)\rho^n \\
+&= \sum_{i=1}^\infty \sum_{n=0}^\infty (1-\rho)\rho^{n+i} && n\to n+i \\
+&= \sum_{i=1}^\infty (1-\rho)\rho^i \sum_{n=0}^\infty \rho^n && \rho^{n+i}=\rho^i \rho^n\\
+&= \sum_{i=1}^\infty (1-\rho)\rho^i \frac1{1-\rho}   \\
+&= \sum_{i=1}^\infty \rho^i \\
+&= \sum_{i=0}^\infty \rho^{i+1} && i\to i+1\\
+&= \rho \sum_{i=0}^\infty \rho^i \\
+&= \frac{\rho}{1-\rho}.
+\end{align*}
+Note that, since the summands are positive, we can use Fubini's theorm
+to justify the interchange of the summations.
+
   \end{solution}
 \end{question}
 
@@ -278,6 +284,9 @@ pretty powerful already.
 
 \begin{question}[use=false]
 \label{q:basestock}
+
+merge with inventory model of mnm1.tex file, or in the batchqueues.tex file.
+
 Customers of, for example, a fast-food restaurant or a production
 facility, prefer to be served from stock. For this reason such
 companies often use a `produce-up-to' policy: When the on-hand

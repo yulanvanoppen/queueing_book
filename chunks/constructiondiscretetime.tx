@@ -289,7 +289,20 @@ the recursions, we can analyze the system and make plots to evaluate
 suggestions for improvement.  Thus, getting the recursions is crucial
 to construct, i.e., model, queueing processes. For this reason, most
 of the exercises below focus on obtaining recursions for many
-different queueing systems.
+different queueing systems. 
+
+A comment is required about the modeling exercises below. It may be
+that the recursions you find are not identical to the recursions in
+the solution; the reason is that the assumptions you make might not be
+equal the ones I make. I don't quite know how get out of this
+paradoxical situation.  In a sense, to completely specify the model,
+we need the recursions. However, if the problem statement would
+contain the recursions, there would be nothing left to practice
+anymore. Another way is to make the problem description five times as
+long, but this is also undesirable. So, let's be pragmatic: the aim is
+that you practice with modeling, and that you learn from the
+solutions.  If you obtain \emph{reasonable} recursions, but they are
+different from mine, then your answer is just as good.
 
 \begin{question}
  What are the consequences of setting
@@ -642,7 +655,7 @@ d_{k}^A$. Thus,
   with blocking: when intermediate queue, i.e., the queue front of
   Station B, exceeds some level $M$, then station A has to stop
   producing, and when $Q^B_k < M$ station A is not allowed to produce
-  more then the intermediate queue can contain. Extend the recursions
+  more than the intermediate queue can contain. Extend the recursions
   of \eqref{eq:31} to simulate this situation.
 \begin{solution}
 \begin{equation}

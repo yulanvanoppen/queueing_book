@@ -11,7 +11,7 @@ service times by batch jobs.}
 
 There is an interesting relation between the $M^X/M/1$ and the $M/G/1$
 queueing systems. As an example, consider the $M^{10}/M/1$ queue in
-which each job corresponds to the arrival of two items of
+which each job corresponds to the arrival of ten items of
 work. Intuitevely, it is reasonable that this queueing process is
 quite similar to an $M/G/1$ queue in which each job requires
 approximately 10 time units. Below we will make this relation
@@ -26,7 +26,7 @@ of small units of work. To make this more specific, assume that the
 distibution of the service time $S$ is given. Use a grid of size $1/n$
 and take
 \begin{equation}\label{eq:69}
-  \P{X^{(n)} = i} = \P{ S\in(i/n, (i+1)/n]}
+  \P{X^{(n)} = i} = \P{ S\in\left(\frac in, \frac{i+1}n\right]}
 \end{equation}
 as the distribution of the batch $X^{(n)}$. Let the service time of
 one unit of the batch be exponentially distributed with mean $1/n$.
@@ -34,8 +34,7 @@ Thus, if $n$ becomes larger, the service time $S$ is represented by
 ever larger batches, but such that the service time of each unit
 becomes ever smaller. These arguments can be made precise in a
 probabilistic sense, but here we rely on our intuition to conclude
-that, in some sense, $X^{(n)}/n \stackrel{d}{\to} S$. \nvf{Explain,
-  intuitively, convergence in distribution.}
+that, in some sense, $X^{(n)}/n \to S$\footnote{For the interested, we mean convergence in distribution here.}. 
 
 Let us see how this limit can be used to show that the expected
 waiting in queue $\E{W_Q}$ of the batch queue leads to the

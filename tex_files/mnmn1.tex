@@ -46,11 +46,11 @@ Define the load as
 \end{equation*}
   Then,
  \begin{align}
-p(n) &= \frac{1}G \frac{(c\rho)^n}{n!}, n=0,\ldots, c-1 \\
-p(n) &= \frac{1}G \frac{c^c\rho^n}{c!}, n=c,c+1, \ldots \\
+p(n) &= \frac{1}G \frac{(c\rho)^n}{n!}, \quad n=0,\ldots, c-1 \\
+p(n) &= \frac{1}G \frac{c^c\rho^n}{c!}, \quad n=c,c+1, \ldots \\
 G &=\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{(1-\rho)c!}, \label{eq:501}\\
-\E{L_Q} &= \sum_{n=c+1}^\infty (n-c) p(n) = \frac{(c\rho)^c}{c! G}\frac{\rho}{(1-\rho)^2}, \\ 
-\E{L_S} &= \sum_{n=01}^{c-1}n p(n) = \frac{\lambda}\mu.
+\E{L_Q} &= \sum_{n=c}^\infty (n-c) p(n) = \frac{(c\rho)^c}{c! G}\frac{\rho}{(1-\rho)^2}, \\ 
+\E{L_S} &= \sum_{n=0}^{c-1}n p(n) = \frac{\lambda}\mu.
 \end{align}
 \end{subequations}
 By taking the limit $c\to\infty$ we obtain the $M/M/\infty$ queue, in which case
@@ -96,7 +96,7 @@ time-average versus observer-average, we need a new concept,
 \emph{PASTA}, to be developed in in Section~\ref{sec:poisson-arrivals-see}.
 
 \begin{question}
-Consider the $M/M/2/1$ queue with arrival rate $\lambda$ and
+Consider the $M/M/2/2+1$ queue with arrival rate $\lambda$ and
 service rate $\mu$. 
 \begin{enumerate}
 \item Derive the level-crossing equations for this queueing system. 
@@ -105,13 +105,21 @@ Derive a simple and closed form expressions for the state
    probabilities in steady state. 
  \end{enumerate}
  
- \hint{Find suitable expressions for $\lambda(n)$ and $\mu(n)$ and use
-   the level-crossing equations $\lambda(n) p(n) = \mu(n+1)p(n+1)$. }
+ \hint{Think about what would be the appropriate model choices for
+   $\lambda(n)$ and $\mu(n)$ and use the level-crossing equations
+   $\lambda(n) p(n) = \mu(n+1)p(n+1)$.  For instance, realize that
+   $\lambda(3)=0$: the system cannot contain more than 3 jobs, hence a
+   state with $4$ jobs must be impossible. We can achieve that by
+   setting $\lambda(3)=0$. For the service rate, how many servers are
+   busy when the system contains 2 or more jobs?  What does this say
+   about $\mu(k)$ for $k=2$ or $k=3$.}
 
   \begin{solution}
 
     \begin{enumerate}
-    \item Use this figure. Make sure you understand why $\mu(2)=2\mu$ and so on.
+    \item Use this figure. Make sure you understand why $\mu(2)=2\mu$ and so on. 
+
+
     \begin{center}
 
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.8cm,
@@ -172,13 +180,24 @@ Note that
 \begin{equation*}
 1 = \sum_{i=0}^K p(i) = p(0)\sum_{i=0}^K \rho^i  = p(0) \frac{1-\rho^{K+1}}{1-\rho}. 
 \end{equation*}
-Thus, for the normalization constant $G$ we take $G=1/p(0)$ and the result follows. 
+Thus, for the normalization constant $G$ we take 
+\begin{equation*}
+G=\frac 1{p(0)} = \frac{1-\rho^{K+1}}{1-\rho},
+\end{equation*}
+and the result follows. 
 
-    From Eq.~\eqref{eq:8}, $G\to (1-\rho)^{-1}$ as $K\to \infty$.
-    Therefore $p(n)=\rho^n/G \to \rho^n(1-\rho)$, and the latter are
-    the steady-state probabilities of the $M/M/1$ queue. Finally, if
-    the steady state probabilities are the same, the performance
-    measures (which are derived from $p(n)$) must be the same.
+To take the limit $K\to\infty$---mind, not the limit $n\to\infty$---, write
+\begin{equation*}
+G= \frac{1-\rho^{K+1}}{1-\rho} = \frac{1}{1-\rho} -\frac{\rho^{K+1}}{1-\rho}.
+\end{equation*}
+Since $\rho^{K+1}\to 0$ as $K\to \infty$ (recall, $\rho<1$),  we get
+\begin{equation*}
+G \to \frac{1}{1-\rho}, 
+\end{equation*}
+as $K\to\infty$.  Therefore $p(n)=\rho^n/G \to \rho^n(1-\rho)$, and
+the latter are the steady-state probabilities of the $M/M/1$
+queue. Finally, if the steady state probabilities are the same, the
+performance measures (which are derived from $p(n)$) must be the same.
   \end{solution}
 \end{question}
 
@@ -193,23 +212,54 @@ Thus, for the normalization constant $G$ we take $G=1/p(0)$ and the result follo
   \begin{solution}
     $\lambda(n) \equiv \lambda$ for all $n<c+K$. When $n=c+K$,
     $\lambda(n)=0$, since then the system is full, and all arriving
-    jobs will be dropped.  When $n\leq c$, $\mu(n)=n \mu$ since only
-    $n$ servers are active/occupied when the system contains $n$
-    jobs. When $n\geq c$, $\mu(n) = c \mu$. Thus,
-    \begin{align*}
-      p(n) &= \frac{\lambda}{n\mu} p(n-1) = \frac{(\lambda/\mu)^n}{n!} p(0)=\frac{(k\rho)^n}{n!}p(0), \, n\leq c, \\
-      p(n) &= \frac{\lambda}{c\mu} p(n-1) = \frac{c^c \rho^n}{c!} p(0), \, c<n\leq c+K,
-    \end{align*}
-where $\rho = \lambda/c \mu$.  
-
+    jobs will be dropped; in other words, there will still be jobs
+    arriving to the system when $L=c+K$, but these jobs will be
+    rejected, hence cannot generate a transition from state $c+K$ to
+    $c+K+1$.  When $n<c$, $\mu(n)=n \mu$ since only $n$ servers
+    are active/occupied when the system contains $n$ jobs. When
+    $n\geq c$, $\mu(n) = c \mu$. Thus, using $\rho=\lambda/(c\mu)$, for $n<c$,
+     \begin{equation*}
+      p(n) = \frac{\lambda}{n\mu} p(n-1) = \frac{(\lambda/\mu)^n}{n!} p(0)=\frac{(c\rho)^n}{n!}p(0).
+     \end{equation*}
+For $c\leq n\leq c+K$ and using the above to get $p(c-1)$:
+ \begin{equation*}
+   \begin{split}
+ p(n) &= \frac{\lambda}{c\mu} p(n-1) 
+= \rho p(n-1) = \rho^2 p(n-2) = \ldots\\
+&=\rho^{n-c+1} p(c-1) 
+=\rho^{n-c+1} \frac{(c\rho)^{c-1}}{(c-1)!}p(0)\\
+&=\rho^{n} \frac{(c)^{c-1}}{(c-1)!}p(0) 
+=\rho^{n} \frac{(c)^{c-1}c}{(c-1)!c}p(0) =\frac{c^c \rho^n}{c!} p(0).
+   \end{split}
+ \end{equation*}
 The normalization is trivial, numerically at least.
   \end{solution}
 \end{question}
 
+\begin{question}
+  Check that  Eq.\eqref{eq:9} for the $M/M/c$ queue reduces to the $M/M/1$ queue if you take $c=1$.
+\hint{Fill in $c=1$. Realize that this is a check on the formulas.}
+  \begin{solution}
+Take $c=1$
+ \begin{align}
+p(0) &= \frac{1}G \frac{(c\rho)^0}{0!}=\frac1 G, \quad n=0,\ldots, 1-1 \\
+p(n) &= \frac{1}G \frac{c^c\rho^n}{c!} = \frac{1}G \frac{1^1\rho^n}{1!} =\frac{\rho^n}G , \quad n=1,1+1, \ldots \\
+G &=\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{(1-\rho)c!}
+=\sum_{n=0}^{0} \frac{\rho^0}{0!} + \frac{\rho}{(1-\rho)} = 1 + \frac{\rho}{1-\rho} = \frac1{1-\rho}
+\\
+\E{L_Q} &= \frac{(c\rho)^c}{c! G}\frac{\rho}{(1-\rho)^2} = 
+= \frac{\rho}{1/(1-\rho)}\frac{\rho}{(1-\rho)^2} = \frac{\rho^2}{1-\rho} \\
+\E{L_S} &= \sum_{n=0}^{c-1}n p(n) = \frac{\lambda}\mu = \rho.
+\end{align}
+Everything is in accordance to the formulas we derived earlier for the $M/M/1$ queue.    
+  \end{solution}
+\end{question}
 
 \begin{question}
-  Derive Eq.\eqref{eq:9}
+  Derive Eq.\eqref{eq:9} for the $M/M/c$ queue.
+
   \hint{ Use $\lambda(n)p(n) = \mu(n+1)p(n+1)=\min\{c, n+1\}\mu p(n+1)$.}
+
   \begin{solution}
     \begin{equation*}
       \begin{split}
@@ -219,37 +269,57 @@ The normalization is trivial, numerically at least.
 &= \frac{1}{\min\{c, n+1\}}\frac\lambda\mu p(n) 
 = \frac{1}{\min\{c, n+1\}}(c\rho) p(n) \\
 &= \frac{1}{\min\{c, n+1\}\min\{c, n\}}(c\rho)^2 p(n-1) 
-= \frac{1}{\Pi_{k=1}^{n+1}\min\{c, k\}}\rho^{n+1} p(0).
+= \frac{1}{\Pi_{k=1}^{n+1}\min\{c, k\}}(c\rho)^{n+1} p(0).
       \end{split}
     \end{equation*}
-Write $p(0) = 1/G$.  
-
-For  $G$, 
+Thus, if $n<c$:
+\begin{equation*}
+  p(n) = \frac{1}{\Pi_{k=1}^{n}\min\{c, k\}}(c\rho)^{n} p(0) = \frac{(c\rho)^n}{n!} p(0),
+\end{equation*}
+since $\min\{c,k\}=k$ when $k<c$. If $n\geq c$:
 \begin{equation*}
   \begin{split}
-  G 
+  p(n) 
+&= \frac{1}{\Pi_{k=1}^{n}\min\{c, k\}}(c\rho)^{n} p(0) \\
+&= \frac{1}{\Pi_{k=1}^{c-1} k \cdot \Pi_{k=c}^{n} c}(c\rho)^{n} p(0) \\
+&= \frac{1}{(c-1)! c^{n-c+1}}c^n\rho^{n} p(0) \\
+&= \frac{1}{c! c^{n-c}}c^n\rho^{n} p(0) = \\
+&= \frac{c^c}{c!}\rho^{n} p(0).
+  \end{split}
+\end{equation*}
+
+
+For the normalization constant $G$ set $p(0)=1$ for the time being. 
+\begin{equation*}
+  \begin{split}
+G &= \sum_{n=0}^\infty p(n) 
+= \sum_{n=0}^{c-1} p(n) + \sum_{n=c}^\infty p(n) \\
+&=\sum_{n=0}^{c-1}\frac{(c\rho)^n}{n!} + 
+ \sum_{n=c}^{\infty} \frac{c^c}{c!} \rho^{n}  \\
+&=\sum_{n=0}^{c-1}\frac{(c\rho)^n}{n!} + 
+ \sum_{n=c}^{\infty} \frac{(c\rho)^c}{c!} \rho^{n-c}  \\
 &= 
-\sum_{i=0}^{c-1}\frac{(c\rho)^n}{n!} + 
- \sum_{i=c}^{\infty} \frac{(c\rho)^c}{c!} \rho^{n-c} 
-= 
-\sum_{i=0}^{c-1}\frac{(c\rho)^n}{n!} + 
-\frac{(c\rho)^c}{c!} \sum_{i=c}^{\infty} \rho^n \\
+\sum_{n=0}^{c-1}\frac{(c\rho)^n}{n!} + 
+\frac{(c\rho)^c}{c!} \sum_{n=0}^{\infty} \rho^n \\
 &= 
-\sum_{i=0}^{c-1}\frac{(c\rho)^n}{n!} + 
+\sum_{n=0}^{c-1}\frac{(c\rho)^n}{n!} + 
 \frac{(c\rho)^c}{c!(1-\rho)}.
   \end{split}
 \end{equation*}
+
 
 Next, 
 \begin{equation*}
   \begin{split}
   \E{L_Q} 
-&=\sum_{n=c}^\infty (n-c) p(n) 
-=\frac{c^c\rho^c}{Gc!} \sum_{n=c}^\infty (n-c) \rho^{n-c} 
-=\frac{c^c\rho^c}{Gc!} \sum_{n=0}^\infty n \rho^n.
+&=\sum_{n=c}^\infty (n-c) p(n) \\
+&=\sum_{n=c}^\infty (n-c) \frac{c^c}{c!}\rho^{n} p(0) \\
+&=\frac{c^c\rho^c}{Gc!} \sum_{n=c}^\infty (n-c) \rho^{n-c} \\
+&=\frac{c^c\rho^c}{Gc!} \sum_{n=0}^\infty n \rho^n 
+=\frac{c^c\rho^c}{Gc!} \frac{\rho}{(1-\rho)^2},
   \end{split}
 \end{equation*}
-Then, 
+where, with our common trick (if we don't want to use generating functions),
 \begin{equation*}
   \begin{split}
   \sum_{n=0}^\infty n \rho^n 
@@ -262,20 +332,23 @@ Then,
 = \frac\rho{(1-\rho)^2}.
   \end{split}
 \end{equation*}
-Observe again that using indicators and Fubinaci's theorem
+Observe again that using indicators and Fubini's theorem
 (interchanging summations/integrals) makes the above computation
-painless.
+painless. Realize, by the way, that
+\begin{equation*}
+  \sum_{n=0}^\infty n p(n) = \sum_{n=1}^\infty n p(n).
+\end{equation*}
 
-We next show that the expected number of jobs in the system is given
+We next show that the expected number of jobs in service is given
 by
     \begin{equation*}
-      \E{L} = \sum_{n=0}^{c-1} n p(n) + \sum_{n=c}^{\infty} c p(n).
+      \E{L_S} = \sum_{n=0}^{c-1} n p(n) + \sum_{n=c}^{\infty} c p(n).
     \end{equation*}
     This expression is not the easiest to start with. With a slight
     modification the entire derivation becomes easier. I also premultiply by the normalization constant $G$ to get rid of it on the right hand side. 
     \begin{equation*}
       \begin{split}
-      G \E{L}
+      G \E{L_S}
 &= G \sum_{n=0}^{c} n p(n) + \sum_{n=c+1}^{\infty} c p(n) \\
 &= \sum_{n=1}^{c} n \frac{(c\rho)^n}{n!}  + \sum_{n=c+1}^{\infty} c \frac{c^c\rho^n}{c!} 
 = \sum_{n=1}^{c} \frac{(c\rho)^n}{(n-1)!}  + \frac{c^{c+1}}{c!}\sum_{n=c+1}^{\infty} \rho^n\\
@@ -283,11 +356,12 @@ by
 = c\rho \left(\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!}  + \frac{(c\rho)^{c}}{c!(1-\rho)}\right).
       \end{split}
     \end{equation*}
-Observe that the right hand side is precisely equal to $\rho c G$. 
-
-  \end{solution}
+Observe that the right hand side is precisely equal to $\rho c G$, and hence,
+\begin{equation*}
+  \E{L_S} = c\rho = \frac\lambda\mu.
+\end{equation*}
+\end{solution}
 \end{question}
-
 
 
 \begin{question}[use=false]

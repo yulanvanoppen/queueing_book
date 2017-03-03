@@ -189,7 +189,10 @@ existence of all limits involved we find
 Thus, Eq.~(\ref{eq:16}) has the interpretation that the rate at which
 level $n$ is crossed from below from state $m$ is equal the rate at
 which jobs arrive times the fraction of jobs that see $m$ jobs in the
-system times the fraction of jobs with batch size larger than $n-m$. 
+system times the fraction of jobs with batch size larger than $n-m$.
+Observe that the stream of jobs with batch size larger than $i$, say,
+is a Poisson process thinned at rate $G(i)$. Hence, this stream of
+jobs is a Poisson process in its own right with rate $\lambda G(i)$.
 
 
 The last step is to relate the up- and downcrossing rates.  Recall

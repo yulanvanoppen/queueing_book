@@ -776,7 +776,7 @@ The recursions for the two-server system are this:
       directory.
 \begin{itemize}
 \item \texttt{mm1.py} is the python implementation
-\item \texttt{mm1.R} is the julia implementation
+\item \texttt{mm1.R} is the R implementation
 \item \texttt{mm1.jl} is the julia implementation
 \end{itemize}
 Take your pick, and start playing with it. These examples are meant to

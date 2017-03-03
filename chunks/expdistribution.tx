@@ -25,30 +25,34 @@ an \recall{exponentially distributed} random variable, i.e.,
 The constant $\lambda$ is often called the \recall{rate}. The reason
 behind this will be clarified once we relate the exponential
 distribution to the Poisson process in
-Section~\ref{sec:poisson-distribution}.  In the sequel we often write $X\sim \exp{\lambda}$ to mean that $X$ is exponentially distributed with rate $\lambda$. 
+Section~\ref{sec:poisson-distribution}.  In the sequel we often write
+$X\sim \exp(\lambda)$ to mean that $X$ is exponentially distributed
+with rate $\lambda$.
 
 
 Let us show with simulation how the exponential distribution
 originates. Consider $N$ people that regularly visit a shop. We assume
 that we can characterize the interarrival times
 $\{X_k^i, k=1,2, \ldots\}$ of customer $i$ by some distribution
-function, for instance the uniform distribution. Then,
+function, for instance the uniform distribution. Then, with
+$A_{0}^i=0$ for all~$i$,
 \begin{equation*}
 A_k^i = A_{k-1}^i + X_k^i = \sum_{j=1}^n X_j^i,
 \end{equation*}
 is the arrival moment of the $k$th visit of customer $i$.  Now the
-show owner `sees' the superposition of the arrivals of the
+shopowner `sees' the superposition of the arrivals of the
 customers. One way to compute the arrival moments of all customers is
 to put all the numbers $\{A_k^i, k=1,\ldots,n, i=1,\ldots,N\}$ into
 one set, and sort these numbers in increasing order. This results in
 the (sorted) set of arrivals $\{A_k, k=1,2,\ldots\}$ at the shop, and
 then
 \begin{equation*}
-X_k = A_k - A_{k-1}
+X_k = A_k - A_{k-1},
 \end{equation*}
-must be the inter-arrival time between the $k-1$th and $k$th visit to
-the shop.  Thus, starting from interarrival times of individual
-customers we constructed interarrival times as seen by the shop. 
+with $A_0=0$, must be the inter-arrival time between the $k-1$th and
+$k$th visit to the shop.  Thus, starting from interarrival times of
+individual customers we can construct interarrival times as seen by
+the shop.
 
 To plot the \recall{empirical distribution function}, or the histogram,
 of the inter-arrival times at the shop, consider
@@ -114,9 +118,9 @@ that is, $X$ is memoryless if it satisfies the property that
 In words, the probability that $X$ is larger than some time $t+h$,
 conditional on it being larger than a time~$t$, is equal to the
 probability that $X$ is larger than $h$. Thus, no matter how long we
-have been waiting for the next arrival to occur, the time that it
-occurs in the next $h$ seconds remains the same.  This property seems
-to be vindicated also in practice: suppose that a patient with a
+have been waiting for the next arrival to occur, the probability that
+it will occur in the next $h$ seconds remains the same.  This property
+seems to be vindicated also in practice: suppose that a patient with a
 broken arm just arrived at the emergency room of a hospital, what does
 that tell us about the time the next patient will be brought in? Not
 much, as most of us will agree.

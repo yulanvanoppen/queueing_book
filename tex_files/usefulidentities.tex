@@ -423,16 +423,18 @@ A bit of algebra gives the previous results.
     arrivals that see $n$ in the system upon arrival, hence
     immediately after such arrivals the system contains $n+1$ jobs;
     likewise, $D(n-1,t)$ counts all jobs that leave $n-1$ jobs behind,
-    hence immediately before such jobs depart, the system contains $n$
-    jobs.  In a similar way, $A(n-1,t) + D(n+1,t)$ counts all
-    transitions into state $n$.  Therefore the diffence between the
-    `in' transitions and the `out' transitions is at most 1 for all
-    $t$, so that we can write 
+    hence immediately before such jobs depart the system contains $n$
+    jobs.  In a similar way, $A(n-1,t) + D(n,t)$ counts all
+    transitions into state $n$ (Recall once again, $D(n,t)$ counts the
+    jobs that leave $n$ behind. Hence, when such departures occur,
+    state $n$ is entered).  Therefore the difference between the `in'
+    transitions and the `out' transitions is at most 1 for all $t$, so
+    that we can write
     \begin{equation*}
       \begin{split}
-      A(n,t) + D(n-1,t) &\approx A(n-1,t) + D(n+1,t), \text{ hence} \\
-      \frac{A(n,t) + D(n-1,t)}t &\approx \frac{A(n-1,t) + D(n+1,t)}t, \text{ hence} \\
-      \frac{A(n,t)}t + \frac{D(n-1,t)}t &\approx \frac{A(n-1,t)}t + \frac{D(n+1,t)}t.
+      A(n,t) + D(n-1,t) &\approx A(n-1,t) + D(n,t)  \iff \\
+      \frac{A(n,t) + D(n-1,t)}t &\approx \frac{A(n-1,t) + D(n, t)}t \iff \\
+      \frac{A(n,t)}t + \frac{D(n-1,t)}t &\approx \frac{A(n-1,t)}t + \frac{D(n,t)}t.
       \end{split}
     \end{equation*}
 Using the ideas of Section~\ref{sec:level-cross-balance} this becomes for $t\to\infty$, 
@@ -673,7 +675,7 @@ As a check, I use that $(1-\rho) \sum_{j=0}^n \rho^j = 1-\rho^{n+1}$.
 
 <<term=True>>=
 1-rho**(n) #  this must be too small.
-1-rho**(n+1) # this must be ok.
+1-rho**(n+1) # this must be OK.
 @ 
 
 And indeed, we found the right $n$.
@@ -798,7 +800,7 @@ the dependence of average waiting time $\E{W_Q}$ on $\lambda$.
 The idea of making such plots is to analyze
   whether the service capacity suffices for a situation in which one
   doesn't know the arrival rate very accurately, but one can control
-  the service rate, e.g., by hiring personel.
+  the service rate, e.g., by hiring personnel.
   \begin{solution}
     Let's just plot the waiting time distribution
 for various values of $\lambda$. 
@@ -1173,7 +1175,7 @@ performance measures for the analysis of closed-queueing network.
     $1/c\mu$, since there are $c$ servers and the expected time to
     completion is $1/\mu$ for each individual server. Thus, the time
     until the first departure is the minimum of the remaining services
-    at each of the servers. This has expection $1/c\mu$. Thus, for the
+    at each of the servers. This has expectation $1/c\mu$. Thus, for the
     $M/M/c$ queue
     \begin{equation*}
 \rho\E{S_r\given S_r>0}  = \sum_{k=c}^\infty p(k) \frac 1{c\mu}.

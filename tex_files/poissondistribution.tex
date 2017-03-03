@@ -299,11 +299,11 @@ uniformly on the interval $[0,t]$.
 
 
 
-  \hint{Use a conditioning argument or use moment generating
-    functions. In particular, for conditioning, use that
-    $\P{AB} = \P{A\given B}\P{B}$. More generally, if the set $A$ can
-    be split into disjoint sets $B_i$, i.e, $A=\bigcup_{i=1}^n B_i$,
-    then
+  \hint{Use a conditioning argument or use probability generating
+    functions (i.e. $\E{z^X}=\sum_k z^k \P{X=k}$. In particular, for
+    conditioning, use that $\P{AB} = \P{A\given B}\P{B}$. More
+    generally, if the set $A$ can be split into disjoint sets $B_i$,
+    i.e, $A=\bigcup_{i=1}^n B_i$, then
     \begin{equation*}
       \P{A} = \sum_{i=1}^n \P{A B_i} = \sum_{i=1}^n \P{A\given B_i} \P{B_i},
     \end{equation*}
@@ -339,7 +339,7 @@ Thus,
     \end{split}
   \end{equation*}
 
-Now   with moment generating functions.
+Now   with the probability generating functions.
       \begin{equation*}
         \begin{split}
           M_a(z) 
@@ -354,7 +354,7 @@ Now   with moment generating functions.
 \begin{equation*}
 M(z) = \E{z^{N(t)}} = \E{z^{N_a(t)}} \E{z^{N_s(t)}} = \exp((\lambda +\lambda)t (z-1)). 
 \end{equation*}
-Finally, since the moment generating function uniquely characterizes
+Finally, since the  generating function uniquely characterizes
 the distribution, and since the above expression has the same form as
 $M_1(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\sim P((\lambda +\mu) t)$.
     \end{solution}
@@ -482,7 +482,9 @@ You might also consider the random variable
   \begin{equation*}
     Y = \sum_{i=1}^N Z_i,
   \end{equation*}
-  with $N\sim P(\lambda)$ and $Z_i\sim B(p)$. Show that the moment generating function of $Y$ is equal to the moment generating function of a Poisson random variable with parameter $\lambda p$. 
+  with $N\sim P(\lambda)$ and $Z_i\sim B(p)$. Show that the moment
+  generating function of $Y$ is equal to the moment generating
+  function of a Poisson random variable with parameter $\lambda p$.
 
 }
 
