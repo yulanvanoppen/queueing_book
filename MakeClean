@@ -1,0 +1,4 @@
+rm *.log *.aux *.bbl *.blg *.toc *.tex~ *.rel *.tx *.out _region_.tex
+rm tex_files/*.aux
+rm tex_files/*.rel
+rm tex_files/*.log

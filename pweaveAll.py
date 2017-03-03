@@ -32,9 +32,9 @@ filenames = [
 
 # to select some files temporarily
 
-# filenames = [
-#     "mnmn1",
-#       ]
+filenames = [
+     "expdistribution",
+       ]
 
 
 current_dir = os.path.dirname(os.path.realpath(__file__))

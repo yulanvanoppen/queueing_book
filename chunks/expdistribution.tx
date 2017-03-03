@@ -85,8 +85,10 @@ results are shown in the second row of Figure~\ref{fig:uniform}.
 \begin{figure}[ht]
   \centering
   \begin{tabular}[h]{c}
-\includegraphics{uniform_N_10_n_100} \\
-\includegraphics{normal_N_10_n_100}
+\input{progs/uniform_to_exponential.tex}
+%\includegraphics{uniform_N_10_n_100} \\
+%\includegraphics{normal_N_10_n_100}
+% see progs/convergence_to_exp.py
   \end{tabular}
   \caption{The interarrival process as seen by the shop owner. Observe
     that the green line intersects the $y$-axis at level $N/5$, which
@@ -619,15 +621,8 @@ service times of jobs.
 \begin{question}
   Try to make Figure~\ref{fig:uniform} with simulation.
   \begin{solution}
-    I used python to do the simulations. I include the code for you to
-    study if you are interested, but you are free to skip it; it is
-    not part of the core of the course. 
-
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/expdistribution_1.tex}
-
-
+    I used python to do the simulations. The source code is in
+    \texttt{progs/converge\_to\_exp.py}.
 \end{solution}
 \end{question}
   
