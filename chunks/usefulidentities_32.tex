@@ -1,12 +1,6 @@
 
-from math import factorial
-
-def WQ(c, labda, ES):
-    rho = labda*ES
-    tot = sum([rho**n/factorial(n) for n in range(c)])
-    tot += rho**c/factorial(c)/(1.-rho/c)
-    P0 = 1./tot
-    Lq = rho**(c+1)/c/(factorial(c)*(1.-rho/c)**2)*P0
-    return Lq/labda # Wq
-
+>>> WQ(2, 28./60, 4)
+0.214661214953271
+>>> WQ(2, 28./60, 4)/60. # in hours
+0.00357768691588785
 

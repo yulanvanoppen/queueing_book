@@ -40,7 +40,7 @@ below' when an arrival occurs, or `from above' when a departure
 occurs.  The main result we derive in this section is the rate at
 which level $n$ is crossed from below and above must match, i.e.,
 \begin{equation*}
-  \lambda(n) p(n) = \mu(n+1) p(n),
+  \lambda(n) p(n) = \mu(n+1) p(n+1),
 \end{equation*}
 where $\lambda(n)$ is the arrival rate in state $n$, $p(n)$ the
 fraction of time the system is in state $n$ and $\mu(n+1)$ the
@@ -59,19 +59,18 @@ Define\footnote{It is common to write
   to be quite particular about left and right limits at jump epochs.}
 \begin{subequations}\label{eq:rates_}
 \begin{align}
-  A(n,t) &= \sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = n}, \label{eq:19} \\
-   Y(n,t) &= \int_0^t  \1{L(s) = n} \d s, \label{eq:17} \\
+  A(n,t) &= \sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = n} \label{eq:19} \\
+\intertext{as the number of arrivals up to time
+$t$ that saw $n$ customers in the system at their arrival, c.f. Figure~\ref{fig:Y_1_t},}
+   Y(n,t) &= \int_0^t  \1{L(s) = n} \d s \label{eq:17} \\
+\intertext{as the total time the system contains n jobs during $[0,t]$, and}
    p(n,t) &= \frac 1 t \int_0^t  \1{L(s) = n} \d s = \frac{Y(n,t)}t, \label{eq:18}
 \end{align}
 \end{subequations}
-respectively, so that $A(n,t)$ is the number of arrivals up to time
-$t$ that saw $n$ customers in the system at their arrival, $Y(n,t)$ is
-the total time the number in the system $L(s) =n$ during $[0,t]$ so
-that $p(n,t)$ is the fraction of time that $L(s) =n$ in $[0,t]$.
-(Recall in the definition of $A(n,t)$ that $L(t)$ is
-\emph{right-continuous}.)   
+as the fraction of time that $L(s) =n$ in $[0,t]$ (Recall that $L(t)$
+is \emph{right-continuous} in the definition of $A(n,t)$.)
 
-\begin{figure}[th]
+\begin{figure}[t]
   \centering
 \begin{tikzpicture}[scale=1,
   open/.style={shape=circle, fill=white, inner sep=1pt, draw, node contents=},
@@ -140,20 +139,21 @@ node (c3) at (6.3,2)  {};
 
 
 
-Continuing with the above notions  define
+Define also the limits:
 \begin{equation*}
-  \lambda(n) = \lim_{t\to\infty} \frac{A(n,t)}{Y(n,t)}
+  \lambda(n) = \lim_{t\to\infty} \frac{A(n,t)}{Y(n,t)}, \quad p(n) =\lim_{t\to\infty} p(n,t),
 \end{equation*}
-as the \emph{arrival rate in state $n$}. To clarify this notion,
-observe that $A(n,t)$ counts the number of arrivals that see $n$ jobs
-in the system, while $Y(n,t)$ tracks the amount of time the system
-contains $n$ jobs. Suppose that at $T$ a job arrives that sees $n$ in
-the system. Then $A(n,T)=A(n, T-)+1$, and this job arrives in an
-interval that it tracked by $Y(n,t)$, precisely because this job sees
-$n$ in the system just prior to its arrival. Thus, just as $A(t)/t$ is
-the total number of arrivals during $[0,t]$ divided by $t$,
-$A(n,t)/Y(n,t)$ is the number of arrivals that see $n$ divided by the
-time the system contains $n$ jobs. 
+as the \emph{arrival rate in state $n$} and the \emph{long-run fraction of
+  time the system spends in state $n$}. To clarify the former
+definition, observe that $A(n,t)$ counts the number of arrivals that
+see $n$ jobs in the system, while $Y(n,t)$ tracks the amount of time
+the system contains $n$ jobs. Suppose that at $T$ a job arrives that
+sees $n$ in the system. Then $A(n,T)=A(n, T-)+1$, and this job arrives
+in an interval that it tracked by $Y(n,t)$, precisely because this job
+sees $n$ in the system just prior to its arrival. Thus, just as
+$A(t)/t$ is the total number of arrivals during $[0,t]$ divided by
+$t$, $A(n,t)/Y(n,t)$ is the number of arrivals that see $n$ divided by
+the time the system contains $n$ jobs.
 
 
 Similarly, denoting by
@@ -568,8 +568,8 @@ What is the difference between $A(n,t)$ and $A(t)$?
 
 
 \begin{question}
- Suppose that $\lambda > \gamma$, i.e., the system is not
-    rate-stable. Why is then $ \lim_{t\to\infty} \frac{A(n,t)}t = 0$?
+  Why is $ \lim_{t\to\infty} \frac{A(n,t)}t = 0$ if
+  $\lambda > \gamma$, i.e., if the system is not rate-stable?
   \begin{solution}
  If $\lambda > \gamma$, then $L(t)\to\infty$. But then there
       must be last time, $s$ say, that $L(s) = n+1$, and $L(t) > n+1$

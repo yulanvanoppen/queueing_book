@@ -15,10 +15,13 @@ As an example:
 
   python3 reflected_random_walk.py && pdflatex testing_ground.tex
 
+The following code is used for the book.
 
 *  ``mm1.R`` is an R program to simulate the M/M/1 queue
 *  ``mm1.py`` is a python program to simulate the M/M/1 queue
 *  ``mm1.jl`` is a julia program to simulate the M/M/1 queue
+* ``multi_server_queue.py`` compares the performance of a M/M/c queue
+  to an M/M/1 queue with a fast server.
 * ``converge_to_exp.py`` shows by simulation that the interarrival
   times of a superposition of arrival processes converge rapidly to
   exponentially distributed interarrival times.

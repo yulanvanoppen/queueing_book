@@ -1,5 +1,9 @@
 
->>> idle = sum( (c-n)*P[n] for n in range(c))
->>> idle
-1.1
+>>> import numpy as np
+>>> labda = [10., 15., 15., 10., 5.]
+>>> c = 2
+>>> mn = np.array([0,1,2,2,2]) # number of active servers
+>>> mu = 5*mn
+>>> mu
+array([ 0,  5, 10, 10, 10])
 

@@ -183,7 +183,7 @@ A bit of similar reasoning gives another recursion for $W_k$:
   \label{eq:59}
   \begin{split}
   W_{Q,k} &= [W_{k-1} - X_k]^+,\\
-  W_{k} &= W_{Q,k-1} + S_k = [W_{k-1} - X_k]^+ + S_k.
+  W_{k} &= W_{Q,k} + S_k = [W_{k-1} - X_k]^+ + S_k.
   \end{split}
 \end{equation}
 from which follows a recursion for $D_k$
@@ -423,9 +423,9 @@ With this,
 = \frac1{10}\int_{0}^{10} \P{S= x +u} \d u.
 \end{equation*}
 
-Next, interpret $\P{S= y}$ as the density of the distribution function
-$\P{S\leq y}$, so that $\P{S= y} = \1{y\in [0,7]}/7$
-Therefore, while using that in the above integral that $x$ is fixed, 
+Next, interpret $\P{S= y}$ as the density of $\P{S\leq y}$ so that
+$\P{S= y} = \1{y\in [0,7]}/7$ Therefore, while using that in the above
+integral that $x$ is fixed,
 \begin{equation*}
   \P{S= x+u} = \frac 17 \1{-x \leq u \leq 7-x},
 \end{equation*}

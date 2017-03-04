@@ -115,17 +115,19 @@
 \newcommand{\p}{\mathbb{P}}
 
 \newcommand{\abs}[1]{\left\vert#1\right\vert}
-\newcommand{\E}[1]{\,\mathbb{E}\left[#1\right]}
 \newcommand{\given}{\,\middle|\,}
 \renewcommand{\P}[1]{\,\mathbb{P}\left\{#1\right\}}
-\newcommand{\V}[1]{\,\mathbb{V}\left[#1\right]}
+\newcommand{\V}[1]{\,\mathbb{V}\left\{#1\right\}}
 \newcommand{\var}{\ensuremath{\textrm{Var}}}
-\newcommand{\PP}[2]{\,\mathbb{P}_{#1}\left(#2\right)}
-\newcommand{\EE}[2]{\,\mathbb{E}_{#1}\left[#2\right]}
+\newcommand{\PP}[2]{\,\mathbb{P}_{#1}\left\{#2\right\}}
+%\newcommand{\E}[1]{\,\mathbb{E}\left[#1\right]}
+\newcommand{\E}[1]{\,\mathbb{E}\left\{#1\right\}}
+\newcommand{\EE}[2]{\,\mathbb{E}_{#1}\left\{#2\right\}}
 \renewcommand{\d}[1]{\,\text{d}#1}
 \newcommand{\1}[1]{\,\mathbb{1}_{#1}} % indicator
-%\newcommand{\1}[1]{\,\left[{#1}\right]} % indicator
 \newcommand{\2}[2]{\,\mathbb{1}_{#1}\left(#2\right)} % indicator
+%\newcommand{\1}[1]{\,\left[#1\right]} % iverson's notation
+%\newcommand{\2}[2]{\,\left[#2\right]\left(#1\right)} % indicator
 
 \newcommand{\wip}{\text{WIP}}
 \newcommand{\WIP}{\text{WIP}}

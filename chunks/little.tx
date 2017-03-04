@@ -199,6 +199,25 @@ Hence, Little's law follows.
 \end{question}
 
 
+\begin{question}\nvf{You can skip this exercise. I moved it from the G/G/1 section to here.}
+  Discuss the results of Figure~\ref{fig:multisingle} in terms of
+  waiting time ratios. Recall, in this figure we compare queue and
+  system length, not waiting times.
+
+  \begin{solution}
+    By Little's law, the ratio between the waiting times is the same.
+
+The processing capacity of $c$ servers that work at rate 1 is equal to
+one server that works at rate $c$. The, intuitive, difference between
+the $M/M/c$ queue and the $M/M/1$ queue with a fast server is that
+jobs spend shorter time in queue in the $M/M/c$ case---jobs can be
+served in parallel, hence do not always have to wait in queue for
+server capacity---, but spend longer time in service---simply because
+the servers in the $M/M/c$ case works at rate $1$, not at rate $c$.
+
+\end{solution}
+\end{question}
+
 
 
 %%% Local Variables:

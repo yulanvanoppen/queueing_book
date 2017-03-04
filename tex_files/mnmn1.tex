@@ -100,8 +100,7 @@ Consider the $M/M/2/2+1$ queue with arrival rate $\lambda$ and
 service rate $\mu$. 
 \begin{enumerate}
 \item Derive the level-crossing equations for this queueing system. 
-\item 
-Derive a simple and closed form expressions for the state 
+\item Derive a simple and closed form expressions for the state 
    probabilities in steady state. 
  \end{enumerate}
  
@@ -261,6 +260,7 @@ Everything is in accordance to the formulas we derived earlier for the $M/M/1$ q
   \hint{ Use $\lambda(n)p(n) = \mu(n+1)p(n+1)=\min\{c, n+1\}\mu p(n+1)$.}
 
   \begin{solution}
+First we use the hint to  establish a generic relation for $p(n+1)$:
     \begin{equation*}
       \begin{split}
        p(n+1) 
@@ -362,6 +362,7 @@ Observe that the right hand side is precisely equal to $\rho c G$, and hence,
 \end{equation*}
 \end{solution}
 \end{question}
+
 
 
 \begin{question}[use=false]
@@ -605,6 +606,108 @@ I asked WolframAlpha to simplify this, but the answer I got was not particularly
   p(n) = \frac{\rho^n {N \choose n}}{\sum_{k=0}^N \rho^k {N \choose k}}.
 \end{equation*}
     \end{solution}
+\end{question}
+
+
+
+\begin{question}\nvf{You can skip this exercise. I moved it from the G/G/1 section to here.}
+  What would be the difference between a multi-server queue and a
+  single-server queue with a fast server? We can use the formulas for
+  the $M/M/1$ queue and the $M/M/c$ queue to obtain some basic
+  understanding of the difference. To this end, suppose we have an
+  $M/M/3$ queue, with arrival rate $\lambda = 5$ per day and $\mu=2$
+  per server, and we compare it to an $M/M/1$ with the same arrival
+  rate but with a service rate of $\mu = 3\cdot 2 = 6$. 
+
+
+ When is it OK to approximate the $M/M/c$ queue by an $M/M/1$
+    queue with a fast server?
+
+\hint{  Implement the formulas for $\E{L_Q(M/M/3)}$ for the $M/M/3$ queue in
+  some computer program (R, excel, python, whatever) and compare this
+  to $\E{L_Q(M/M/1)}$ for the fast $M/M/1$ case.  Make plots of
+  $\E{L_Q(M/M/3)}$ and $\E{L(M/M/3)}$ as functions of $\rho$.}
+  \begin{solution}
+
+I am going to implement the formulas of Eq.~(\ref{eq:9}) in python. First the results for the $M/M/3$ queue.
+
+<<term=True>>=
+from math import exp, factorial
+
+labda = 5
+mu = 2
+c = 3
+
+rho = labda / mu / c
+rho
+
+G = sum((c * rho)**n / factorial(n) for n in range(c))
+G += (c * rho)**c / ((1 - rho) * factorial(c))
+G
+
+ELQ = (c * rho)**c / (factorial(c) * G) * rho / (1 - rho)**2
+ELQ
+ELS = rho * c
+ELS
+EL = ELQ + ELS
+EL
+
+@
+
+Now for the $M/M/1$ queue:
+
+<<term=True>>=
+labda = 5
+c = 3
+mu = 2*c
+
+rho = labda / mu 
+rho
+
+ELQ = rho**2/(1-rho)
+ELQ
+ELS = rho
+ELS
+EL = ELS + ELQ
+EL
+
+rho/(1-rho) # this must also be EL, just a check
+@
+
+Note the last check. As a rule, you should always compare your results
+with known results. BTW, that is one of the reasons I prefer to code
+the formulas instead of using a calculator. Testing with code is
+relatively easy, whereas with a calculator it is impossible (You
+simply can't check what you typed at the calculator.)
+
+So, returning to the results, as expected, the number of jobs in queue
+is smaller for the $M/M/3$ queue, but the number in service is higher.
+
+To put things in a larger perspective, see
+Figure~\ref{fig:multisingle} where we plot the ratio of the queue
+lengths and the system length as functions of $\rho$. We see, in case
+of high load, that $\E{L_Q}$ and $\E L$ are nearly the same for both
+systems. This is as expected: when the load is high, most jobs should
+be in the queue. Therefore, $\E{L_Q}/\E L \to 1$ as $\rho\to 1$. When
+$\rho$ is small, the difference is quite large. This is also
+reasonable, because the service time in the fast $M/M/1$ is 3 times as
+small as the service time in the $M/M/3$ queue. Hence, as $\rho$ is
+small, the time in the system is dominated by service time, as there
+is hardly any queueing time, if at all.  Thus, there must be more jobs
+in the system on average in the $M/M/3$ queue than in the fast $M/M/1$
+queue.
+
+\begin{figure}[h]
+  \centering
+% see progs/multi_server_queue.py
+\input{progs/multi_vs_single_server.tex}
+\caption{multi server versus single fast server}
+  \label{fig:multisingle}
+\end{figure}
+
+The  code can be found on \texttt{github} in the \texttt{progs} directory.
+
+\end{solution}
 \end{question}
 
 

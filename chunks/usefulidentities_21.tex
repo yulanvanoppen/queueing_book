@@ -1,12 +1,12 @@
 
->>> P = [0.4, 0.3, 0.2, 0.05, 0.05]
+>>> labda = 10./60
+>>> Wq = Lq/labda # in minutes
+>>> Wq
+0.9000000000000001
+>>> Wq/60 # in hours
+0.015000000000000003
 >>>
->>> c = 2
->>> Lq = sum((n-c)*P[n] for n in range(c,len(P)))
->>> Lq
-0.15000000000000002
->>>
->>> L= sum(n*P[n] for n in range(len(P)))
->>> L
-1.05
+>>> W = L/labda
+>>> W
+6.300000000000001
 

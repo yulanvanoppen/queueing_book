@@ -167,8 +167,7 @@ stationary state will occupy us for the rest of the book.
 \end{figure}
 
 \begin{question}
-  What is the difference between the recursive schemes of
-  Eq.~(\ref{eq:5}) and Eq.~(\ref{eq:31})? Explain in the former scheme
+  What is the difference between the recursive schemes of~(\ref{eq:5}) and~(\ref{eq:31})? Explain in the former scheme
   the formula for $d_k$.  \hint{When are the arrivals in slot $k$
     available for service in either of the systems?}
 \begin{solution}

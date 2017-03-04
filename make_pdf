@@ -1,5 +1,7 @@
 ./pweaveAll.py
-pdflatex book
-pdflatex book
 pdflatex book_solutions_in_text
+bibtex book_solutions_in_text
 pdflatex book_solutions_in_text
+pdflatex book
+bibtex book
+pdflatex book

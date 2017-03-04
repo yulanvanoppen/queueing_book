@@ -655,21 +655,19 @@ L
 The problem is to find $n$ such that
       $\sum_{j=0}^n p_j > 0.9$.
 
-<<term = False>>=
-tot = 0.
+<<term = True>>=
+total = 0. 
 j = 0
-while tot <= 0.9:
-   tot += (1-rho)*rho**j
+while total <= 0.9:
+   total += (1-rho)*rho**j
    j += 1
-n = j- 1
+
+total
+j
+n = j- 1 # the number of chairs 
 @ 
 
 Observe that $j$ is one too high once the condition is satisfied, thus subtract one.
-
-<<term=True>>=
-tot
-n  # the number of chairs 
-@      
 
 As a check, I use that $(1-\rho) \sum_{j=0}^n \rho^j = 1-\rho^{n+1}$.
 
@@ -735,10 +733,10 @@ There are 4 states in total: $0,1,2,3$.
 P = [rho**n for n in range(c+b+1)]
 P
 
-tot = sum(P)
-tot
+G = sum(P)
+G
 
-P = [p/tot for p in P] # normalize
+P = [p/G for p in P] # normalize
 P
 @ 
 
@@ -770,10 +768,10 @@ accepted
 b = 5
 P = [rho**n for n in range(c+b+1)]
 P
-tot = sum(P)
-tot
+G = sum(P)
+G
 
-P = [p/tot for p in P] # normalize
+P = [p/G for p in P] # normalize
 P
 
 L = sum(n*P[n] for n in range(len(P)))
@@ -790,7 +788,7 @@ accepted
   The code is in \texttt{progs/mm1\_waiting\_time_distribution.py}. In
   mm1\_waiting\_time_distribution.py we compute the waiting time
   distribution. At this point in the text this distribution has not
-  yet been derived.  This problem should be moved to another section.}
+  yet been derived.  This problem should be moved to another section.
 
 Consider an $M/M/1$ queue with $\mu=1.2$ per hour. Make plots of the
 waiting time distribution $\P{W_Q\leq t}$ for various values of
@@ -913,9 +911,9 @@ for i in range(1,5):
     P[i] = labda[i-1]/mu[i]*P[i-1]
 
 P
-tot = sum(P)
-tot
-P = [p/tot for p in P]
+G = sum(P)
+G
+P = [p/G for p in P]
 P # normed
 @ 
 
@@ -966,6 +964,9 @@ Wq
   \item How many employees should work in the tool crib?
   \end{enumerate}
 
+  \hint{Realize that we have to control the number of servers. Hence,
+    we are dealing with a multi-server queue, i.e., the $M/M/c$
+    queue. Use the formulas of Eq.~\eqref{eq:9}.}
   \begin{solution}
     \begin{enumerate}
     \item 
@@ -973,11 +974,10 @@ Wq
 <<term=True>>=
 labda = 28./60 # arrivals per minute
 ES = 4.
-rho = labda*ES
-rho
+labda*ES
 @ 
 
-A load $\rho>1$ is clearly undesirable for one server.  We need at
+If $c=1$, the load $\rho=\lambda \E S/c >1$ is clearly undesirable for one server.  We need at
 least two servers.
 
 The remark that maintenance workers are compensated at the same rate
@@ -990,29 +990,47 @@ the server. If it is very expensive to let customers wait, the number
 of servers must be high, whereas if servers are relatively very
 expensive, customers have to do the waiting.)
 
+I just convert the formulas of~\eqref{eq:9} to python code. This saves
+me time during the computations.
+
 <<term = False>>=
 from math import factorial
 
 def WQ(c, labda, ES):
-    rho = labda*ES
-    tot = sum([rho**n/factorial(n) for n in range(c)])
-    tot += rho**c/factorial(c)/(1.-rho/c)
-    P0 = 1./tot
-    Lq = rho**(c+1)/c/(factorial(c)*(1.-rho/c)**2)*P0
+    rho = labda*ES/c
+    G = sum([c*rho**n/factorial(n) for n in range(c)])
+    G += (c*rho)**c/factorial(c)/(1.-rho/c)
+    p0 = 1./G
+    Lq = rho**(c+1)/c/(factorial(c)*(1.-rho/c)**2)*p0
     return Lq/labda # Wq
 @ 
 
 Considering the scenario with one server is superfluous as $\rho>1$ in
 that case.
 
+What is the waiting time for $c=2$ servers?
+
 <<term=True>>=
 WQ(2, 28./60, 4)
 WQ(2, 28./60, 4)/60. # in hours
+@
+
+What is the waiting time for $c=3$ servers?
+
+<<term=True>>=
 WQ(3, 28./60, 4)
 WQ(3, 28./60, 4)/60. # in hours
+@
+
+
+What is the waiting time for $c=4$ servers?
+
+<<term=True>>=
 WQ(4, 28./60, 4)
 WQ(4, 28./60, 4)/60. # in hours
 @ 
+
+Interpreting these results in the next part of this question.
 
 \item It is not relevant to focus on the time in the system , as time
   in service needs to be spent anyway. Hence, we focus on the waiting
@@ -1090,9 +1108,9 @@ Compute Ls and so on
 
 
 <<term=True>>=
-tot = sum(rho**n/factorial(n) for n in range(c))
-tot += rho**c/factorial(c)/(1.-rho/c)
-P0 = 1./tot
+G = sum(rho**n/factorial(n) for n in range(c))
+G += rho**c/factorial(c)/(1.-rho/c)
+P0 = 1./G
 P0
 
 Lq = rho**(c+1)/c/(factorial(c)*(1.-rho/c)**2)*P0

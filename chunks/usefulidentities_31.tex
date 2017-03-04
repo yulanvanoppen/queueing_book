@@ -1,7 +1,12 @@
 
->>> labda = 28./60 # arrivals per minute
->>> ES = 4.
->>> rho = labda*ES
->>> rho
-1.8666666666666667
+from math import factorial
+
+def WQ(c, labda, ES):
+    rho = labda*ES/c
+    G = sum([c*rho**n/factorial(n) for n in range(c)])
+    G += (c*rho)**c/factorial(c)/(1.-rho/c)
+    p0 = 1./G
+    Lq = rho**(c+1)/c/(factorial(c)*(1.-rho/c)**2)*p0
+    return Lq/labda # Wq
+
 

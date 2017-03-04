@@ -6,13 +6,13 @@
 In manufacturing settings it is quite often the case that the arrival
 process at a station is not Poisson. For instance, if processing times
 at a station are nearly constant, and the jobs of this station are
-sent to a second station for further processing, the inter-arrival
+sent to a second station for further processing, the interarrival
 times at the second station must be more or less equal. Hence, in this
 case, the SCV of the arrivals at the second station $C_{a,2}^2$ is
 most probably smaller than 1. As a consequence the
 Pollackzek-Khintchine formula for the $M/G/1$-queue can no longer be
 reliably used to compute the average waiting times.  As a second,
-trivial case, if the inter-arrival times of jobs are 1 hour always and
+trivial case, if the interarrival times of jobs are 1 hour always and
 service times 59 minutes always, there simply cannot be queue. Thus,
 the $M/G/1$ waiting time formula cannot, and should not, be applied to
 approximate the average waiting time of the $G/G/1$ queue. 
@@ -33,7 +33,7 @@ result to the $M/G/1$ queue we get
 Thus, $1_b$ in the expression for the $M/M/1$ queue is replaced by
 $C_s^2$ in the expression for the $M/G/1$ queue. As a second
 generalization, Kingman proposed to replace $1_a$ in this formula by
-the SCV of the inter-arrival times
+the SCV of the interarrival times
 \begin{equation*}
 C_a^2 = \frac{\V X}{(\E X)^2}
 \end{equation*}
@@ -42,11 +42,12 @@ resulting in
   \E{W_Q(G/G/1)} \approx \frac{C_a^2 + C_s^2}2 \frac{\rho}{1-\rho} \E S.
 \end{equation*}
 
-This formula is reasonable accurate; for more, related, expressions we
+This formula is reasonably accurate; for more, related, expressions we
 refer to \citet{bolch06:_queuein_networ_markov_chain} and
 \citet{hall91:_queuein_method_servic_manuf}. With Little's law we can
 compute $\E{L_Q}$ from the above. Moreover, $\E W = \E{W_Q} + \E S$,
-and so on.
+and so on, c.f., Section~\ref{sec:some-usef-ident}
+
 
 
 It is crucial to memorize the \emph{scaling} relations that can be
@@ -56,7 +57,7 @@ seen from the $G/G/1$ waiting time formula. Roughly:
   time increases \emph{very steeply} when~$\rho$ is large, hence is
   very sensitive to the actual value of $\rho$ when $\rho$ is large.
 \item $\E{W_Q} \sim C_a^2$ and $\E{W_Q} \sim C_s^2$. Hence, reductions
-  of the variation of the inter-arrival and service times do affect the
+  of the variation of the interarrival and service times do affect the
   waiting time, but only linearly.
 \item $\E{W_Q} \sim \E S$. Thus, working in smaller job sizes reduces
   the waiting time also. The average queue length does not decrease by
@@ -85,29 +86,29 @@ effect of certain changes, in particular  changes in capacity,
 variability and service times.
 
 Clearly, Kingman's equation requires an estimate of the SCV $C_a^2$ of
-the inter-arrival times and the SCV $C_s^2$ of the service times. Now it is
-not always easy in practice to determine the actual service time
+the interarrival times and the SCV $C_s^2$ of the service times. Now
+it is not always easy in practice to determine the actual service time
 distribution, one reason being that service times are often only
 estimated by a planner, but not actually measured. Similarly, the
 actual arrival moments of jobs are often not registered, mostly just
 the date or the hour, perhaps, that a customer arrived.  Hence, it is
 often not possible to estimate $C_a^2$ and $C_s^2$ from information
 that is available.  However, when for instance the number of arrivals
-per day have been logged for some time, i.e., we know
-$\{a_n, n=1,\ldots, N\}$ for some $N$, we can this information instead
-of the the inter-arrival times $\{X_k\}$, to obtain insight into the
-relevant SCVs.  Here we present a relation to compute $C_a^2$ from
-$\{a_n\}$; of course it can be applied to $C_s^2$ as well.
+per day have been logged for some time so that we know
+$\{a_n, n=1,\ldots, N\}$ for some $N$, we can use this information
+instead of the the interarrival times $\{X_k\}$ to obtain insight into
+$C_a^2$.  The relation we present here to compute $C_a^2$ from
+$\{a_n\}$ can of course also be applied to estimate $C_s^2$.
 
-\begin{theorem} The SCV of the inter-arrival times can be estimated
+\begin{theorem} The SCV of the interarrival times can be estimated
   with the following formula
 \begin{equation*}
 C_a^2 \approx \frac{\tilde \sigma^2}{\tilde \lambda},
 \end{equation*}
 where 
 \begin{equation*}
-\tilde  \lambda = \lim_{n\to\infty} n^{-1} \sum_{i=1}^n a_i,\quad  
-\tilde  \sigma^2 = \lim_{n\to\infty} n^{-1} \sum_{i=1}^n a_i^2 - \tilde \lambda^2,
+\tilde  \lambda = \lim_{n\to\infty} \frac 1n  \sum_{i=1}^n a_i,\quad  
+\tilde  \sigma^2 = \lim_{n\to\infty} \frac 1 n \sum_{i=1}^n a_i^2 - \tilde \lambda^2,
 \end{equation*}
 in words, $\tilde \lambda$ is the average number of arrivals per
 period, e.g., per day, and $\tilde \sigma^2 $ is the variance of the
@@ -120,7 +121,7 @@ number of arrivals per period.
   Section~\ref{sec:rate-stability}. Let $\{A(t), t\geq 0\}$ be the
   number of arrivals that occur up to (and including) time $t$. We
   assume that $\{A(t)\}$ is a renewal process such that the
-  inter-arrival times $\{X_k, k=1, 2, \ldots\}$ with
+  interarrival times $\{X_k, k=1, 2, \ldots\}$ with
   $X_k = A_{k}-A_{k-1}$, are i.i.d. with mean $1/\lambda$ and standard
   deviation~$\sigma$. (Observe that $\sigma$ is not the same as
   $\tilde \sigma$ above.) Note that $C_a^2$ is defined in terms of
@@ -137,7 +138,7 @@ of the Poisson process):
 \P{A(t) < k} = \P{A_k > t}
 \end{equation*}
 
-Since the inter-arrival times have finite mean and second moment by
+Since the interarrival times have finite mean and second moment by
 assumption, we can apply the central limit law to obtain that, as
 $k\to\infty$,
 \begin{equation*}
@@ -195,19 +196,19 @@ as $k\to\infty$. This is precisely the case when
 \alpha = \lambda^{3/2}\sigma.
 \end{equation*}
 Finally, for $t$ large (or, by the same token $k$ large),
-\begin{align*}
-\frac{\sigma_k^2}{\lambda_k} &= \frac{\V{A(t)}}{\E{A(t)}} \approx \frac{\alpha^2 t}{\lambda t} 
-= \frac{\alpha^2}{\lambda} = \frac{\lambda^3\sigma^2}{\lambda} = \lambda^2 \sigma^2 \\
-&= C_a^2,
-\end{align*}
+\begin{equation*}
+\frac{\sigma_k^2}{\lambda_k} = \frac{\V{A(t)}}{\E{A(t)}} \approx \frac{\alpha^2 t}{\lambda t} 
+= \frac{\alpha^2}{\lambda} = \frac{\lambda^3\sigma^2}{\lambda} = \lambda^2 \sigma^2 = C_a^2,
+\end{equation*}
 where the last equation follows from the above definition of $C_a^2$.  The proof is complete.
 \end{proof}
 
 
 
 \begin{question}
-  Show that~\eqref{eq:7} reduces to the result known for the $M/M/1$ and $M/G/1$ queues. 
-    \hint{ Take $c=1$.}
+  Show that the approximation~\eqref{eq:7} for the $G/G/1$ queue
+  reduces to the result known for the $M/M/1$ and $M/G/1$ queues.
+  \hint{ Take $c=1$.}
   \begin{solution}
     If $c=1$, as is the case for the $M/M/1$ queue, $\sqrt{2(c+1)} - 1=2-1=1$, so that~\eqref{eq:7} reduces to $\E{W_Q} = \rho/(1-\rho) \E S$. Recall that $C_a^2=C_s^2=1$ for the $M/M/1$. 
   \end{solution}
@@ -231,7 +232,7 @@ where the last equation follows from the above definition of $C_a^2$.  The proof
 
 \begin{question}
   Consider a queue $n$ servers, with generally distributed
-  inter-arrival times, generally distributed service times, and the
+  interarrival times, generally distributed service times, and the
   system can contain at most $K$ customers, i.e, the $G/G/n/K$ queue.
   Let $\lambda$ be the arrival rate, $\mu$ the service rate, $\beta$
   the long-run fraction of customers lost, and $\rho$  the average
@@ -268,7 +269,7 @@ What are $\rho$,
       arrivals do not overlap any job service, the number of jobs in
       the system is 1 for $50$ seconds, then the server is idle for 10
       seconds, and so on. Thus $\E L = 1\cdot5/6 = 5/6$. There is no
-      variance in the inter-arrival times, and also not in the service
+      variance in the interarrival times, and also not in the service
       times, thus $C_a^2 = C_s^2 = 0$. Also $\E{W_Q}=0$ since
       $\E{L_Q}=0$. Interestingly, we get the same from Kingman's formula.
     \item Again $\E S$ is 50 seconds, so that $\rho = 5/6$. Also
@@ -313,21 +314,25 @@ What are $\rho$,
   arrival. Can you use the central limit law to estimate the
   distribution of waiting time in queue for this job?  
 
-\hint{ Let
-    $S_n = \sum_{k=1}^n X_k$. Then, under conditions you can find on
-    the internet, $(S_n - n \E X)/\sqrt{n\V X} \to N(0,1)$ as
-  $n\to \infty$, where and $N(0,1)$ is a normally distributed random
-  variable with $\mu=0$ and $\sigma=1$. But then,
-  $S_n \sim \sqrt{n\V X} N(0,1) + n \E X$.}
+  \hint{ Let $S_n = \sum_{k=1}^n X_k$ and $\sigma_n^2 = n\V X$. Then,
+    under conditions you can find on the internet,
+    \begin{equation*}
+    \frac{S_n - n \E X}{\sigma_n} \to N(0,1), \quad\text{as } n\to \infty,
+    \end{equation*}
+    where $N(0,1)$ is a normally distributed random variable with
+    $\mu=0$ and $\sigma=1$. But then $S_n$ is approximately
+    distributed as a normal r.v. $N(n\E X, \sigma_n)$ (since
+    $N(n\E X, \sigma_n) = \sigma_n N(0,1) + n \E X$.)}
 
 \begin{solution} If the number in the system is $n$, then the total
   service time required to process these $n$ jobs is the sum of the
   service times, i.e.,$W_{Q,k} = \sum_{k=1}^n S_k$ where $k$ counts over the
   $n$ jobs in the system. Then, with the hint,
   \begin{equation*}
-    W_{Q, k} \sim \sqrt{n \V S} N(0,1) + n \E S.
+    W_{Q, k} \sim \sqrt{n \V S} N(n\E S, \sigma_n)
   \end{equation*}
-Thus, the waiting time in queue is approximately normally distributed with mean $n \E S$ and variance $\sqrt{n \V S}$. 
+where $\sigma_n^2 = n \V S$. 
+Thus, the waiting time in queue is approximately normally distributed with mean $n \E S$ and variance $n \V S$. 
 \end{solution}
 \end{question}
 
@@ -335,14 +340,15 @@ Thus, the waiting time in queue is approximately normally distributed with mean 
   (Hall 5.19) When a bus reaches the end of its line, it undergoes a
   series of inspections. The entire inspection takes 5 minutes on
   average, with a standard deviation of 2 minutes. Buses arrive with
-  inter-arrival times uniformly distributed on $[3,9]$ minutes.
+  interarrival times uniformly distributed on $[3,9]$ minutes.
   \begin{enumerate}
   \item Assuming a single server, estimate $\E{W_Q}$ with the $G/G/1$ waiting time formula.
   \item Compare this result to an $M/G/1$ system with arrival rate 10 per hour and the same service time distribution. Explain why your previous answer is smaller. 
   \end{enumerate}
+  \hint{ It took me some time to understand the details of part a. I
+    then decided to read part b first, which clarified the intent of
+    part a.}
   \begin{solution}
-      It took me some time to understand the details of part a. I then
-decided to read part b first, which clarified the intent of part a.
 \begin{enumerate}
 \item 
 <<term=True>>=
@@ -375,211 +381,13 @@ Wq = (1.+CS2)/2.*rho/(1.-rho)*ES
 Wq
 @
 
-The arrival process with uniform inter-arrival times is much more
+The arrival process with uniform interarrival times is much more
 regular than a Poisson process. In the first case, bus arrivals are
 spaced in time at least with 3 minutes.
   \end{enumerate}
     \end{solution}
 \end{question}
 
-
-
-\begin{question}
-  What would be the difference between a multi-server queue and a
-  single-server queue with a fast server? We can use the formulas for
-  the $M/M/1$ queue and the $M/M/c$ queue to obtain some basic
-  understanding of the difference. To this end, suppose we have an
-  $M/M/3$ queue, with arrival rate $\lambda = 5$ per day and $\mu=2$
-  per server, and we compare it to an $M/M/1$ with the same arrival
-  rate but with a service rate of $\mu = 3\cdot 2 = 6$. 
-  \begin{enumerate}
-  \item Check that the service time of the slow server is three times
-    as long as the service time of  the fast server.
-  \item Estimate $\E{W_Q}$ for the $M/M/3$ queue, and compare this to
-    $\E{W_Q}$ for the fast $M/M/1$ case.
-  \item Compare the sojourn times $\E W$ for both systems.
-  \item Implement the formulas in excel, or R, or some other computer
-    environment, and make plots of $\E W$ as a function of the number
-    of servers $c$. 
-  \item When is it OK to approximate the $M/M/c$ queue by an $M/M/1$
-    queue with a fast server?
-  \end{enumerate}
-  \begin{solution}
-    \begin{enumerate}
-    \item Evident
-    \item 
-<<>>=
-from math import sqrt
-
-def MMc(labda, ES, c):
-    rho = labda*ES/c
-    return  rho**(sqrt(2*(c+1))-1)/(c*(1-rho)) * ES
-@
-
-As a test I first apply the code to the $M/M/1$ queue, for which we have closed form expression.
-
-<<term=True>>=
-labda = 5
-mu = 6
-ES = 1./mu
-rho = labda/mu
-print(MMc(labda, 1/mu,1), rho/(1-rho)*ES)
-@
-
-The results check. As a rule, you should always compare your results
-with known results. BTW, that is one of the reasons I prefer to code
-the formulas instead of using a calculator. Testing with code is
-relatively easy, whereas with a calculator it is impossible (You simply can't check what you typed at the calculator.)
-
-Now for  the case of the problem.
-
-<<term=True>>=
-labda = 5
-mu = 2
-ES = 1/mu
-c =3
-
-multi  = MMc(labda, ES, c) # multi server
-single  = MMc(labda, ES/c, 1) # single fast server
-print(multi, single)
-@
-
-Note that I use here that the multi-server formula reduces to the
-single-server formula by taking $c=1$. 
-
-\item 
-
-<<term=True>>=
-print(MMc(labda, ES, c)+ES, MMc(labda, ES/c, 1)+ES/c)
-@
-
-\item
-Lets first compute the waiting in queue for some values of $c$.
-<<term=True>>=
-for c in range(1,10):
-    print(MMc(labda, ES, c), MMc(labda, ES/c, 1))
-@   
-
-Hmm, some results are plainly wrong; indeed, $c=1$ is too small, and
-$\lambda/(c\mu) = \lambda/\mu = 5/2$. And this is larger than 1, and
-then the formula is not valid anymore. Only from $c\geq 3$ the results
-are OK.
-
-BTW, I sometimes include the mistakes I make, just to show you the
-type of mistakes you have to take care to avoid. 
-
-
-<<term=True>>=
-for c in range(3,10):
-    print(MMc(labda, ES, c)+ES, MMc(labda, ES/c, 1)+ES/c)
-@
-
-This is interesting. The time in the $M/M/1$ system with the fast
-server becomes ever smaller, whereas the sojourn time in the $M/M/c$
-converges to $1/2$. The explanation is easy. With a fast server, the
-service time becomes small, whereas with many servers the time in
-queue becomes small, but the service time itself not.
-
-The processing capacity of $c$ servers that work at rate 1 is equal to
-one server that works at rate $c$. The, intuitive, difference between
-the $M/M/c$ queue and the $M/M/1$ queue with a fast server is that
-jobs spend shorter time in queue in the $M/M/c$ case---jobs can be
-served in parallel, hence do not always have to wait in queue for
-service capacity---, but spend longer time in service---simply because
-the servers in the $M/M/c$ case works at rate $1$, not at rate $c$.
-
-\item 
-
-To put things in perspective, see Figure~\ref{fig:multisingle}. 
-\begin{figure}[h]
-  \centering
-\includegraphics{multi_vs_single}
-  \caption{multi server versus single fast server; here the number of
-    servers $c=3$. We plot the ratio of the average number of jobs in
-    the $M/M/3$ case and the $M/M/1$ queue with a fast server. (Note
-    that by Little's law, the ratio between the waiting times is the
-    same.) Clearly, jobs spend, on average, less time in queue in the
-    $M/M/c$ case, but more time in total. This is as expected. In
-    particular, if $\rho$ is small, the time in the system must be
-    dominated by the service time. Since the average service time is
-    three times as short at the fast server, the total time in the
-    system must be approximately three times as long in the $M/M/3$
-    case for $\rho$ is small. On the other hand, when $\rho$ is large,
-    the queues are long, and the total time in the system is dominated
-    by the queueing times.  As queued jobs depart from the queue at
-    rate $3$, in both queueing systems, the average queueing times
-    must be roughly equal. This we can also see clearly in the graph,}
-  \label{fig:multisingle}
-\end{figure}
-
-Here is the code I used to make the graphs.
-
-<<wrap=False,include=False,fig=False>>=
-from math import exp, factorial
-import matplotlib.pylab as plt
-import seaborn as sns
-sns.set_context("paper")
-
-
-def G(labda, mu, c):
-    rho = labda / mu / c
-    res = sum((c * rho)**n / factorial(n) for n in range(c))
-    res += (c * rho)**c / ((1 - rho) * factorial(c))
-    return res
-
-
-def ELQ(labda, mu, c):
-    rho = labda / mu / c
-    g = G(labda, mu, c)
-    return (c * rho)**c / (factorial(c) * g) * rho / (1 - rho)**2
-
-
-def ELS(labda, mu, c):
-    rho = labda / mu / c
-    return rho * c
-
-
-def EL(labda, mu, c):
-    return ELS(labda, mu, c) + ELQ(labda, mu, c)
-
-
-labda = 10
-mu = 11
-
-c = 3
-
-R = range(5, c * mu)
-Q = []
-L = []
-load = []
-for labda in R:
-    Q.append(ELQ(labda, mu, c) / ELQ(labda, c * mu, 1))
-    L.append(EL(labda, mu, c) / EL(labda, c * mu, 1))
-    load.append(labda / mu / c)
-
-plt.figure(figsize=(6, 2))
-plt.subplot(111)
-plt.axis([0, 1, 0, 3])
-plt.title("$M/M/c$ vs $M/M/1$")
-plt.plot(load, L, label="$E(L(M/M/c))/E(L(M/M/1))$")
-plt.plot(load, Q, label="$EL_Q(M/M/c)/EL_Q(M/M/1)$")
-plt.xlabel("$\\rho$")
-plt.legend()
-plt.subplots_adjust(bottom=0.24)
-
-# plt.show()
-filename = "figures/multi_vs_single.pdf"
-plt.savefig(filename)
-plt.close()
-@
-
-The reader should observe that this code is not particularly
-efficient, many of the computations are done a few times. With
-recursion quite a number of shortcuts can be made.
-
-    \end{enumerate}
-\end{solution}
-\end{question}
 
 
 %%% Local Variables:

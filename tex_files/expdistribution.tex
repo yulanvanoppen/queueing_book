@@ -89,7 +89,7 @@ the arrival rate is $N/5$.  As a second example, we extend the
 simulation to $n=1000$ visits to the shop, see
 Figure~\ref{fig:uniformmany} In the third example we take the
 inter-arrival times to be normally distributed times with mean $5$ and
-$\sigma=1$, see Figure~\ref{fig:uniform}.
+$\sigma=1$, see Figure~\ref{fig:normal}.
 
 \begin{figure}[ht]
   \centering
@@ -113,7 +113,7 @@ $\sigma=1$, see Figure~\ref{fig:uniform}.
   \end{tabular}
   \caption{Each of the $N$ customer visits the shop with exponentially
     distributed interarrival times, but now the number of visits is
-    $n=1000$.}  \label{fig:normal}
+    $n=1000$.}  
   \label{fig:uniformmany}
 \end{figure}
 
@@ -651,10 +651,9 @@ service times of jobs.
 \end{question}
 
 \begin{question}
-  Try to make Figure~\ref{fig:uniform} with simulation.
+  Try to make Figure~\ref{fig:uniformmany} with simulation.
   \begin{solution}
-    I used python to do the simulations. The source code is in
-    \texttt{progs/converge\_to\_exp.py}.
+    The source code can be found in \texttt{progs/converge\_to\_exp.py}.
 \end{solution}
 \end{question}
   
