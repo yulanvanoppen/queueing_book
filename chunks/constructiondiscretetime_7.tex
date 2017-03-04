@@ -1,4 +1,8 @@
 
->>> d
-array([ 0, 10, 17, 14, 10, 21, 21, 19, 17, 19])
+>>> loss = (Q > 20)
+>>> loss
+array([False, False, False, False,  True,  True, False, False, False,
+True], dtype=bool)
+>>> loss.sum()
+3
 

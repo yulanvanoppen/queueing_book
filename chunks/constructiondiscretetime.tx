@@ -4,7 +4,7 @@
 \label{sec:constr-discr-time}
 
 In this section we discuss a case as this provides real-life
-motivation to analyze queueing systems. After decribing the case, we
+motivation to analyze queueing systems. After describing the case, we
 we develop a set of recursions by which we can construct queueing
 systems in discrete time.  As it turns out, this case is too hard to
 analyze by mathematical means, so that simulation is the best way
@@ -112,7 +112,7 @@ recursions~\eqref{eq:31}. If we do not have sufficient data we make a
 probability model for these data and use the computer to generate
 random numbers with, hopefully, similar characteristics as the real
 data. At any rate, from this point on we assume that it is easy, by
-means of computurs, to obtain numbers $a_1,\ldots, a_n$ for
+means of computers, to obtain numbers $a_1,\ldots, a_n$ for
 $n\gg 1000$, and so on.
 
 We now show how to adapt~\eqref{eq:30} and~\eqref{eq:31} to the case
@@ -121,7 +121,7 @@ introduced above.
 As a first step we model the arrival process of patients as a Poisson
 process, c.f., Section~\ref{sec:poisson-distribution}. The duration of
 a period is taken to be a week. The average number of arrivals per
-period, based on data of the company, was slighly less than~12 per
+period, based on data of the company, was slightly less than~12 per
 week; in the simulation we set it to $\lambda= 11.8$ per week. We
 model the capacity in the form of a matrix such that row $i$
 corresponds to the weekly capacity of psychiatrist $i$:
@@ -185,13 +185,14 @@ apparent that suggestions 1 and 2 above do not significantly affect
 the behavior of the queue length process.  
 
 
-
-
-
 \begin{figure}[ht]
   \centering
-\includegraphics{balanced} 
-  \caption{Effect of capacity and holiday plans}
+% progs/intake_control.py
+\input{progs/balanced} 
+\caption{Effect of capacity and holiday plans. We plot for time point
+  the maximum and the minimum queue length for each of the
+  policies. We see that the effect of each of these policies is, for
+  all practical purposes, negligible.  }
 \label{fig:balanced}
 \end{figure}
 
@@ -212,13 +213,11 @@ Figure~\ref{fig:intakes} shows a striking difference indeed. The queue
 does not explode any more, and already taking $e=1$ has a large
 influence. 
 
-
-
-
 \begin{figure}[ht]
   \centering
-\includegraphics{intakes}  
-  \caption{Controling the number of intakes}
+% progs/intake_control.py
+\input{progs/service_control.tex}  
+  \caption{Controlling the number of intakes}
 \label{fig:intakes}
 \end{figure}
 
@@ -234,7 +233,7 @@ developed a simple recursion of the type~\eqref{eq:31} to
 made plots of these processes. 
 
 
-In more abstract terms the study of queueing system is focussed on
+In more abstract terms the study of queueing system is focused on
 studying the probabilistic properties of the queueing length process
 and related concepts such as waiting time, server occupancy, fraction
 of customers lost, and so on. Once we have constructed the queueing
@@ -256,20 +255,20 @@ should try to develop other mathematical methods to analyze
 multi-server queueing system with vacations, of which this is an
 example. Warning, do not even attempt: you'll fail as it is most
 probably too hard.) The simplicity of the recursions is deceitful, but
-with these simple recursions we can analyse many practical queueing
+with these simple recursions we can analyze many practical queueing
 situations. Together with students the author applied it numerous
 times, for instance,
 \begin{itemize}
 \item Should a certain hospital invest in a new MRI scanner to reduce
   waiting times?
-\item When to switch on and off a tin bath at an eletronics component factory?
+\item When to switch on and off a tin bath at an electronics component factory?
 \item What is the effect of reducing the number of jobs in a paint
   factory?
 \item Post parcel routing in a post sorting center.
 \item Controlling inventories at various companies.
 \item Throughput time analysis at courts.
 \end{itemize}
-And so on, and so on. The recursions are indeed astoningly useful. We
+And so on, and so on. The recursions are indeed astonishingly useful. We
 therefore urge the reader to practice with this type of queueing
 modeling. The exercises below provide ample material for this purpose.
 
@@ -420,7 +419,7 @@ long-run average cost is
       \frac 1T\sum_{k=1}^T \left(\beta c_k + h Q_k\right).
     \end{equation*}
 
-    It is an interesting problem to find a policy that minizes (the
+    It is an interesting problem to find a policy that minimizes (the
     expectation of) this cost. The policy is such that the capacity
     for period $k$ can be chosen based on the queue length $Q_{k-1}$
     and \emph{estimates} of the demands
@@ -748,7 +747,7 @@ Realize that Stations A and B have their own arrivals.
   period $k$ and $\{a_k^b\}$ be the number of arrivals of stream
   $b$. Find a set of recursions by which it becomes possible to
   analyze the waiting time distribution of each of the streams. Assume
-  that the service capacity $c$ is contant for all periods, and that
+  that the service capacity $c$ is constant for all periods, and that
   jobs that arrive in period $k$ can also be served in period $k$.
 
   \begin{solution}
@@ -871,7 +870,7 @@ any off-by-one errors. For future work, implement it in a simulator\ldots
   problem as an LP problem, taking into account the inventory
   dynamics.  
 
-\hint{Formuale the decision variables/controls, the
+\hint{Formulate the decision variables/controls, the
     objective and the constraints.}
 
   \begin{solution}
@@ -914,44 +913,44 @@ I_k &>= 0.
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_3.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_1.tex}
 
 
 These are the number of arrivals in each period.
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_4.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_2.tex}
 
 
 The number of potential services
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_5.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_3.tex}
 
 
 Now for the queueing recursions:
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_6.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_4.tex}
 
 
 These are the departures for each period:
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_7.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_5.tex}
 
 
 The queue lengths
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_8.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_6.tex}
 
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_9.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_7.tex}
 
 
 Here I
@@ -966,7 +965,7 @@ Now all statistics:
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_10.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_8.tex}
 
 
 Since this is a small example, the mean number of departures, i.e.,
@@ -978,12 +977,12 @@ Now I am going to run the same code, but for a larger instance.
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_11.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_9.tex}
 
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_12.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_10.tex}
 
 
 
@@ -998,12 +997,12 @@ Poisson distribution with $P(21)$
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_13.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_11.tex}
 
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_14.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_12.tex}
 
 
 Compared to the case with constant service capacity, i.e., $c=21$ in

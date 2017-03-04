@@ -1,11 +1,10 @@
 
-c = np.random.poisson(mu, num)
-Q = np.zeros_like(a)
-d = np.zeros_like(a)
-Q[0] = 10  # initial queue length
-
-for k in range(1, len(a)):
-    d[k] = min(Q[k - 1], c[k])
-    Q[k] = Q[k - 1] - d[k] + a[k]
-
+>>> d.mean()
+20.148
+>>> Q.mean()
+42.518000000000001
+>>> Q.std()
+22.841096208369684
+>>> (Q > 30).sum()/num * 100
+62.399999999999999
 

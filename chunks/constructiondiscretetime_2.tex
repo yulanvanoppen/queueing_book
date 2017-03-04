@@ -1,34 +1,5 @@
 
-def computeQExtra(a, s, e, Q0=0): #  initial queue length is 0
-    N = len(a)
-    Q = [0]*N # make a list to store the values of  Q
-    Q[0] = Q0
-    for n in range(1,N):
-        q = Q[n-1]
-        if  q <12:
-            s[n] = max(s[n]-e,0) # protect from becoming negative
-        elif q >= 24:
-            s[n] += e
-        Q[n] = max( q +a[n] - s[n], 0)
-    return Q
-
-np.random.seed(3)
-a = np.random.poisson(11.8, 1000)
-s = 12.*np.ones_like(a)
-Q= computeQ(a,s)
-Qe1= computeQExtra(a,s,1)
-Qe2= computeQExtra(a,s,2)
-Qe5= computeQExtra(a,s,5)
-
-plt.figure(figsize=(6, 2))
-plt.ylim(0, 200)
-plt.plot(Q, label="Q")
-plt.plot(Qe1, label="Qe1")
-plt.plot(Qe2, label="Qe2")
-plt.plot(Qe5, label="Qe5")
-plt.legend()
-filename = "figures/intakes.pdf"
-plt.savefig(filename)
-plt.close()
-
+>>> a = np.random.poisson(labda, 10)
+>>> a
+array([21, 17, 14, 10, 22, 22, 17, 17, 19, 21])
 
