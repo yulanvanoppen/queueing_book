@@ -217,7 +217,8 @@ influence.
   \centering
 % progs/intake_control.py
 \input{progs/service_control.tex}  
-  \caption{Controlling the number of intakes}
+\caption{Controlling the number of intakes. Clearly, adapting the
+  service rate `does wonders' to control the queue length.}
 \label{fig:intakes}
 \end{figure}
 

@@ -32,9 +32,9 @@ filenames = [
 
 # to select some files temporarily
 
-filenames = [
-     "constructiondiscretetime",
-       ]
+# filenames = [
+#      "constructiondiscretetime",
+#        ]
 
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
