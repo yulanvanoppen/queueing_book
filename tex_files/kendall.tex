@@ -16,7 +16,7 @@ mutually independent.
 To characterize the type of queueing process it is common to use the
 \recall{abbreviation} $A/B/c/K$ where $A$ is the distribution of the
 interarrival times, $B$ the distribution of the services, $c$ the
-number of servers, and $K$ the size of the queue. In this notation it
+number of servers, and $K$ the size of the system. In this notation it
 is assumed that jobs are served in first-in-first-out (FIFO) order;
 FIFO scheduling is also often called first-come-first-serve (FCFS).
 
@@ -38,6 +38,10 @@ Let us illustrate the shorthand $A/B/c/K$ with some examples:
     the capacity in the queue, not the entire system. The notation differs among
     authors. Due to the lack of consistency, I might also not be
     consistent; be warned.}
+\item $M/M/c/c$: in this system the number of servers is the same as
+  the system capacity, thus the queue length is always zero. This
+  queueing system is useful to model the determine the number of beds
+  in a hospital; the beds act as servers.
 \item $M^X/M/1$: Customers arrive with exponentially distributed
   interarrival times. However, each customer brings in a number of
   jobs, known as a batch. The number of jobs in each batch is

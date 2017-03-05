@@ -14,17 +14,17 @@ For the $M/M/1/K$, i.e., a system that cannot contain more than $K$ jobs, take
   \begin{align*}
     \lambda(n) &= 
   \begin{cases}
-    \lambda, &\text{ if } n \leq K, \\
-    0, &\text{ if } n > K, \\
+    \lambda, &\text{ if } n < K, \\
+    0, &\text{ if } n \geq K, \\
   \end{cases} \\
 \mu(n) &= \mu.
   \end{align*}
   Then,
 \begin{subequations}\label{eq:8}
  \begin{align}
-p(n) &=  \frac{\rho^n}G\\
+p(n) &=  \frac{\rho^n}G, \quad 0\leq n \leq K,\\
 G &= \frac{1-\rho^{K+1}}{1-\rho}, \\
-P_{\text{loss}} &= \P{L=K} = \frac{\rho^K}G.
+P_{\text{loss}} &= \P{L=K} = \frac{\rho^K}G = \frac{1-\rho}{1-\rho^{K+1}} \rho^K.
 \end{align}
 \end{subequations}
 

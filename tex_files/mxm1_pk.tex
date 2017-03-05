@@ -33,7 +33,7 @@ work. To determine the latter, the total number of items $N(t)$
 arrived up to time $t$ must be equal to the number of arrivals $A(t)$
 up to time $t$ times the batch size of each arrival, i.e.,
 \begin{equation*}
-N(t)=  \sum_{k=0}^\infty B_k \1{A_k \leq t} = \sum_{k=0}^{A(t)} B_k.
+N(t)=  \sum_{k=1}^\infty B_k \1{A_k \leq t} = \sum_{k=1}^{A(t)} B_k.
 \end{equation*}
 The (stochastic) process $\{N(t)\}$ is known as the \recall{compound
   Poisson process}. Clearly, the rate at which items arrive is
@@ -41,7 +41,7 @@ approximately
 \begin{equation*}
   \frac{N(t)}t = \frac{A(t)}t \frac1{A(t)}\sum_{i=k}^{A(t)} B_k.
 \end{equation*}
-As in  the limit $A(t)/t \to \lambda$ and $(A(t))^{-1}\sum_{i=k}^{A(t)} B_k \to \E{B}$, we see that
+As in  the limit $A(t)/t \to \lambda$ and $(A(t))^{-1}\sum_{k=1}^{A(t)} B_k \to \E{B}$, we see that
 \begin{align*}
 \frac{N(t)}t \to \lambda \E B.
 \end{align*}
@@ -261,7 +261,7 @@ the above expression we obtain~\eqref{eq:br}.
 \end{question}
 
 \begin{question}
-  What is $\E L$ in case $B_k=3$ always? Suppose $\lambda=1$ and $\mu=5$ so that we can get a numerical answer. 
+  What is $\E L$ in case $B_k=3$ always? Suppose $\lambda=1$ and $\mu=6$ so that we can get a numerical answer. 
 \hint{Use Eq.~\ref{eq:43}. What are $\E{B^2}$, $\E B$ and $\V B$ for this case?}
 \begin{solution}
   As $B$ is constant and equal to 3, $\E{B^2}=9$, hence $\V B=0$,

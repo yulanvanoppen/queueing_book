@@ -9,6 +9,103 @@ distribution. In multi-class networks jobs of different classes
 typically have different service distributions. Note that we do not
 discuss multi-class queueing networks in this course.
 
+
+\paragraph{Example}
+
+Company X produces paint according to a make-to-stock strategy. It
+makes paint in two steps: mixing and filling/packaging. In the first
+step, the ingredients are mixed in large vessels. Once mixed, the
+vessels are moved to an intermediate stocking point. Here the paint
+waits (in the vessels) until the planner decides to package the paint
+into cans. Company X has two filling/packaging machines: machine A
+fills small, 1 liter cans; machine B fills large, 5 liter cans. Jobs
+for machine A (B) line up in front of machine A (B), i.e., each
+machine has its own queue, c.f. Figure~\ref{fig:paint}. The paint shop
+has 8 hours available per day, and any unfinished work at the end of a
+day is carried over to the next working day. The problem of Company X
+is that the amount of intermediate stock in queue is too high. This
+not only costs money (paint is quite expensive), but also makes
+due-date quotation to customers difficult (recall, by Little's law, if
+queues are long, waiting times are typically also long).
+
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[
+->-/.style={decoration={markings, mark=at position .5 with {\arrow{stealth}}},
+postaction={decorate}},
+queuei/.pic={
+  \draw%[line width=1pt]
+    (0,-0.5) -- ++(2cm,0) -- ++(0,-1cm) -- ++(-2cm,0);
+   \foreach \Val in {1,...,3}
+     \draw ([xshift=-\Val*10pt]2cm,-0.5) -- ++(0,-1cm);
+\draw (2.5,-1) circle [radius=0.5cm] node {#1};}
+]
+\path 
+  (0,0) pic {queuei=$\mu$}
+  (5,-1) pic {queuei=$\mu_A$}
+  (5,1) pic {queuei=$\mu_B$};
+
+\draw[->] (-2,-1)--(0,-1) node[midway, anchor=south] {$\lambda_A+\lambda_B$};
+\draw[->] (3,-1)--(5,0) node[midway,above] {$\lambda_A$}; 
+\draw[->] (3,-1)--(5,-2) node[midway,below] {$\lambda_B$}; 
+\draw[->] (8,0)--(9,0) node[midway,above] {$\lambda_A$}; 
+\draw[->] (8,-2)--(9,-2) node[midway,above] {$\lambda_B$}; 
+%\draw[->-] (2.5,-0.5)-- ++(0,-1) -- ++(5.,0) -- ++(0, 1.5); 
+
+\end{tikzpicture}
+\caption{A queueing model of a paint factory.}
+\label{fig:paint}
+\end{figure}
+
+To analyze how to control the average cycle time of an arbitrary job,
+whether it is an A or a B job, we can use at least three models.
+\begin{enumerate}
+\item Model 1. Model all stations as $M/M/1$ queues. As, by
+  assumption, the mixing station is an $M/M/1$ queue, its departure
+  process is exponential with rate $\lambda_A + \lambda_B$, and of
+  these departures, the type A jobs go to filling station A. Thus, we
+  can compute the waiting times at stations $A$ and $B$ also. Finally,
+  the average waiting time is given by the weighted average of the
+  waiting times of the A and B jobs. One weak point of this model is
+  the assumption of the exponentiality of the processing times at all
+  stations. The data obtained at the paint factory tells that
+  processing times are not really exponential.  However, we can model
+  the processing times as expoential, and use the ideas of Section
+  2.2. of Zijm's book to compute the waiting times.
+\item Model 2. Model the second processing step as \emph{one} filling
+  station, i.e., put an imaginary box around both filling stations A
+  and B, and model it as one station with \emph{one} machine, but such
+  that the capacity of this one machine is equal to the capacity of
+  the two original filling machines. This is a simple model, but it
+  approximates the two filling machines by one machine, and we know
+  that multi-server queueing systems behave a bit different from
+  single-server queueing systems. Besides that, there are two queues
+  in front of the machines, but in this model we merge both queues
+  into one.
+\item Model 3. Model the second processing step as \emph{one} filling
+  station, i.e., put an imaginary box around both filling stations A
+  and B, but now model it as one station with \emph{two identical}
+  machines.  This is also a simple model, but for this to work we need
+  to assume that both machines have the same capacity, i.e.,
+  processing speed. This assumption, however, is not satisfied in the
+  paint factory.
+\end{enumerate}
+
+We see that all three models capture part of the real production
+system, but they are also partly wrong.  To analyze the case it is
+perhaps best to implement all three models and investigate to what
+extent these models give similar or dissimilar results. Once we know
+which models appears to give the most realistic, or robust, results,
+we can use the models to obtain insight into the situation and provide
+ideas how and where to improve the situation. Mind that in general it
+is quite pointless to make very detailed models: often only gross data
+is available, the data needed to estimate the parameters of
+fine-grained models is simply not available, or need to be guesses.
+As a conclusion, the analysis of real situation often requires several
+models, each with their own strengths and weaknesses.
+
+
 \begin{question}
   It is mentioned in the text that there are $5M+M^2$ input parameters
   required to characterize an $M$ station network of $G/G/1$ queues. What are these parameters?
@@ -31,267 +128,6 @@ discuss multi-class queueing networks in this course.
 \end{question}
 
 
-\begin{question}
-Consider a tandem of single server work stations. If you would be
-given some money to reduce the variance of the service times of one
-machine.  Which machine would you prefer? 
-\begin{solution}
-  From the $G/G/1$ waiting time formula, it is obvious that by
-  reducing the variability of the service times the average waiting
-  time will also reduce.  The results to be developed in this section
-  will show that when the service times become less variable, the
-  inter departure times also become less variable. As a a consequence,
-  the downstream machine sees a more regular arrival process, hence,
-  by the $G/G/1$ waiting time, will have less average waiting
-  time. But also its departure process will go down, so that the
-  waiting time at the next station also decreases, and so on. Thus,
-  the entire chain benefits from reducing variability of processing
-  times at the first station. 
-
-  However, all depends of course on the cost. If it is very expensive
-  to reduce variability at the first station, or if this station is
-  already very `regular', it might be better to improve the second
-  station. Thus, as always, what to do depends on the context,
-  financially and technically.
-\end{solution}
-\end{question}
-
-
-\begin{question}
-  Assume that in a network of five stations the last station is the
-  bottleneck. Under what conditions would you invest in this last
-  work station?
-  \begin{solution}
-    If it would be cheap. However, as the previous question should
-    show you, by reducing variability at the first station the waiting
-    time of all stations along the line goes down. Thus, by improving
-    the first or second machine the total average waiting time may go
-    down more than by only improving the situation at the last,
-    bottleneck, machine. 
-
-    Thus, we need models, simulations and/or experiments to find out
-    what is the best option.
-  \end{solution}
-\end{question}
-
-
-\begin{question}[use=false]
-
-In this section we apply the formulas of $G/G/1$ and $G/G/c$ queue to
-analyze the waiting times at a paint factory. The intent of this
-section is to show how to approach realistic problems and how queueing
-models can be used to obtain insight into the situation and provide
-ideas how and where to improve the situation. Since often only gross
-data is available, it is of no use to make very detailed models; the
-data that is typically needed to estimate the parameters of
-fine-grained models is not available. 
-
-
-Company X produces paint according to a make-to-stock (MTS), also
-called production-to-stock, strategy. It makes paint in two steps:
-mixing and packaging. In the first step, the ingredients are mixed in
-large vessels. Once mixed, the vessels are moved to an intermediate
-stocking point. Here the paint waits (in the vessels) until the
-planner decides to package the paint. Company X has two packaging
-machines: machine A is dedicated to filling small cans (1L), machine B
-to large cans (5L). Jobs for machine A (B) line up in front of machine
-A (B), i.e., each machine has its own queue.
-
-\begin{enumerate}
-\item 
-  Make a drawing of the production situation, including the flow of the
-  orders, the processing steps and stocking/queueing points.
-\end{enumerate}
-
-Orders of type A, i.e,. orders that have to be filled in small cans,
-arrive at rate $\lambda_A = 2$ per working day, orders of type B
-arrive at rate $\lambda_B =1$ per working day. The processing time at
-the mixer is, on average, $\E S_m= 2$ hours per order, independent of
-the type of paint. The average packaging time of an order of type A is
-$\E S_A = 3$ hours, while the average packaging time of orders of type B
-is $\E S_B=7$ hours. The paint shop has 8 hours available per day, and
-any unfinished work at the end of a day is carried over to the next
-working day.
-
-The data, as obtained from measurements taken by the procedure as
-described in Section~\ref{sec:gg1}, show that the
-inter-arrival times of orders and the processing times at the machines
-have moderate variability, i.e. $C_a^2 \approx 1$ and $C_s^2\approx 1$. 
-
-  \begin{enumerate}[resume]
-  \item Show that the average queueing time at the mixing station is $\E W_Q = 6$ hours.
-  \item Show that the average cycle time at the mixing station is $\E W = 8$ hours.
-  \end{enumerate}
-
-If we are interested in the average cycle time of an arbitrary job,
-whether it is an A or a B job, we can use at least three models.  
-\begin{enumerate}
-\item Model 1. Model all stations as $M/M/1$ queues. As, by
-  assumption, the mixing station is an $M/M/1$ queue, its departure
-  process is exponential with rate $\lambda_A + \lambda_B$, and of
-  these departures, the type A jobs go to filling station A. Thus, we
-  can compute the waiting times at stations $A$ and $B$ also. Finally,
-  the average waiting time is given by the weighted average of the
-  waiting times of the A and B jobs. One weak point of this model is
-  the assumption of the exponentiality of the processing times at all
-  stations. We do know that, in real systems, processing times are not
-  really exponential, but the extent to which a deviation of this
-  assumption leads, is not so clear.
-\item Model 2. Model the second processing step as \emph{one} filing
-  station, i.e., put an imaginary box around both filling stations A
-  and B and model it as one station with \emph{one} machine, but
-  such that the capacity of this one machine is equal to the capacity
-  of the two original filling machines. This is a simple model, but it
-  approximates the two filling machines with one machine. 
-\item Model 3. Model the second processing step as \emph{one} filing
-  station, i.e., put an imaginary box around both filling stations A
-  and B and model it as one station with \emph{two identical}
-  machines. This modeling assumption might have a large influence,
-  since we know that multi-server queueing systems behave quite a bit
-  different from single-server queueing systems. On the other hand,
-  one basic assumption for the $G/G/c$ queue is that all machines have
-  the same capacity, i.e., processing speed. This assumption is not
-  satisfied in the paint case.
-\end{enumerate}
-All in all, all three models capture part of the real production
-system, but they are also partly wrong.  Perhaps we need all three
-models to analyze the case, and see to what extent these models give
-similar or dissimilar results.
-
-
-\begin{enumerate}[resume]
-\item   Use the ideas of Section 2.2. of Zijm's book to carry out the
-  details of Model 1.  In other words, solve the stationary
-  distribution for the system with Poisson arrivals and two
-  exponential servers, one working at rate $\mu_1$ the other at rate
-  $\mu_2$.
-\end{enumerate}
-
-For Model 2, observe that the arrival process at the filling station,
-being the departure process of the mixing machine, is
-Poisson. However, the service times of type A and type B are not the
-same. Thus we model the queueing situation at the second stations as a
-$G/G/1$ queue.
-  \begin{enumerate}[resume]
-  \item   What assumption of Jackson networks is not met, which forces us to
-  use the G/G/1 queue as a model for the filling station?
-\item To apply the $G/G/1$ waiting time formula, we need to convert
-  the processing times of the job types into one weighted processing
-  time and an approximation for the SCVs, i.e., for $C_a^2$ and
-  $C_s^2$.  Motivate that
-  \begin{equation*}
-\E S_c = \frac{\lambda_A}{\lambda_A + \lambda_B} \E S_A + \frac{\lambda_B}{\lambda_A + \lambda_B} \E S_B = \frac23 3 + \frac13 7= 13/4.
-  \end{equation*}
-  is a reasonable approximation for the average processing time at the
-  filling stage, i.e., for a combined job.
-\item For model 2, why do we need to use the $G/G/1$ queue and not an
-  $M/M/1$ queue?
-\item As a simple approximation for $C_s^2$, take
-  \begin{equation*}
-  C_s^2 = 
-\frac{\lambda_A}{\lambda_A + \lambda_B} C_s^2(A) +
-  \frac{\lambda_B}{\lambda_A + \lambda_B} C_s^2(B).
-  \end{equation*}
-  Find an improvement for this estimate.
-\item What can we take for $C_a^2$ at the filling station?
-\item Compute the average waiting time at the filling station based on
-  the above approximations.
-\item Use Model 3 and carry out similar computations to find another
-  estimate of the waiting times.
-  \item If  $\E W_Q$ would be 10 days, what would be the average
-    number of jobs waiting in this intermediate storage point?
-\item Suppose that the marketing department proposes to start a
-  campaign to sell type A paint at a slightly lower price. They
-  estimate that for at least one year the demand for type A paint will
-  increase with about 1 order per day. What is your opinion about this
-  campaign?
-\end{enumerate}
-
-\begin{solution}
-  \begin{enumerate}
-  \item 
-\includegraphics{mixingpaint}
-
-To make this, I used the \texttt{asymptote} program, a very nice
-drawing package that makes a pdf file that is right away importable in
-\LaTeX. This is the code, in case you are interested.
-
-\begin{lstlisting}
-settings.outformat = "pdf";
-size(8cm);
-
-path[] q = (0,0.25)--(2,0.25)--(2,-0.25)--(0,-0.25);
-path[] q = q^^(1.75,0.25)--(1.75,-0.25);
-path[] q = q^^(1.5,0.25)--(1.5,-0.25);
-path[] q = q^^(1.25,0.25)--(1.25,-0.25);
-
-path[] queue = q;
-path[] queueA = shift((5,1))*q;
-path[] queueB = shift((5,-1))*q;
-
-label("$\lambda$", (-1,0.25), align=N);
-draw((-2,0)--(0, 0), arrow=ArcArrow(TeXHead));
-draw(queue);
-
-label("$\lambda_A$", (3.75,0.75), align=N);
-draw((2,0)--(5, 1), arrow=ArcArrow(TeXHead));
-label("$A$", (6,1.25), align=N);
-draw(queueA);
-draw((7,1)--(9, 1), arrow=ArcArrow(TeXHead));
-
-label("$\lambda_B$", (3.75,-1.75), align=N);
-draw((2,0)--(5, -1), arrow=ArcArrow(TeXHead));
-label("$B$", (6,-0.75), align=N);
-draw(queueB);
-draw((7,-1)--(9, -1), arrow=ArcArrow(TeXHead));
-\end{lstlisting}
-\item 
-  $\lambda_A=2$ per day and $\lambda_B = 1$ per day, hence $1$ per 8
-  hours. $\E S_{m}=2$.
-  $\rho=(\lambda_A+\lambda_B)t_{e,m} = 3/8 \times 2=3/4$. Fill in
-  the $G/G/1$1 queueing time formula to get $\E W_Q=6$ hours.  
-\item  $\E W = \E W_Q + \E S_{m} = 8$ hours.
-\item     TBD
-\item   The job in a Jackson network are assumed to have the same
-  distribution at one station. In the paint case, this is not true,
-  jobs of type A have different service times than jobs of type B.  
-\item  A fraction $\lambda_A/(\lambda_A + \lambda_B)$ of jobs is of
-  type A and requires $t_A$ service time on average. The answer above
-  is just the weighted average of service times.
-\item  The combined station has, by assumption, just one machine that
-  serves a combination of type A and type B jobs.  The service time
-  distribution of the combined jobs is most surely no longer
-  exponential. It may taken to be like this:
-  \begin{equation*}
-    \P(S_c \leq t) = 
-\frac{\lambda_A}{\lambda_A + \lambda_B} \P(S_A \leq t) + 
-\frac{\lambda_B}{\lambda_A + \lambda_B} \P(S_B \leq t),
-  \end{equation*}
-  where $S_C$ is the distribution of the combined jobs.  If $S_A$ and
-  $S_B$ have exponential distribution, then $S_c$ is known to have
-  hyper exponential distribution.
-\item  Use the $G/G/2$ formula. Thus, use the fact that $\rho$ has to be
-  raised to some power of $m$, where $m=2$ is the number of
-  machines. Many students tend to  use the G/G/1 formula.
-\item     TBD
-\item  For an improvement, use the definition of the SCV. Let $S_c$ be
-  the process time of a combined job: 
-  \begin{equation*}
-    \text{Var} S_c = \frac{\lambda_A}{\lambda_A + \lambda_B} \text{Var}S_A +
-  \frac{\lambda_B}{\lambda_A + \lambda_B} S_B,
-  \end{equation*}
-  provided the service times of type A and type B jobs are
-  independent. Now $\text{Var} S_A = C_s^2(A) \E S_A^2$, and likewise
-  for $\text{Var}S_B$.
-\item   Use Little's law to convert this to mean queue length,
-  $\E L_Q= \E W_Q \times \lambda$, where
-  $\lambda=\lambda_A + \lambda_B = 3$ per day. Hence $\E L_Q = 30$.
-  Don't divide by $\E S_c$! Note, $1/\E S_c$ is not the arrival rate!
-\item This is not a good idea as the utilization becomes larger than
-  one at station A: $(2+1)\cdot 3/8>1$.
-\end{enumerate}
-\end{solution}
-\end{question}
 
 \begin{question}[use=false]
   In this question we develop a simple model to analyze the sojourn
