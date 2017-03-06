@@ -11,20 +11,25 @@ probability $\P{L>n}$, we need expressions for the stationary
 distribution of the number of jobs in the system $p(n)=\P{L=n}$.  Here
 we present a set of recursions by which we can compute $p(n)$ for
 a given arrival rate $\lambda$ and service distribution~$F$ of the
-service times.
+service times. 
 
 To derive the stationary distribution $p(n)$ we work in steps, and use
 similar level-crossing arguments as in
-Section~\ref{sec:batch-arrivals}.  As we will see, the argumentation
-is quite subtle, as it uses an interplay of the PASTA property and the
-relation of Eq.~\eqref{eq:39} between $\pi(n)$, $p(n)$ and
-$\delta(n)$. The important idea is to focus on the \emph{departure}
-moments, as these moments can be considered as restarts of the service
-times, and on the number of arrivals $Y_k$ during the service time of
-the $k$th job.  Assume that $f(j) = \P{Y_k = j}$ is given and write
-$G(j) = \P{Y_k > j}$.
-
-
+Section~\ref{sec:batch-arrivals}.  However, we cannot simply copy the
+derivation of the $M^X/M/1$ queue to the $M/G/1$ queue. To see this,
+note that in the $M^X/M/1$ queue, the service times are exponential,
+hence memoryless. For this reason, the service times `restart from
+anew' at any moment in time, in particular at arrival moments. For the
+$M/G/1$ queue, service times are, in general, not exponential, hence
+not memoryless, hence do not restart at arrival times. For this reason
+we need to focus on moments in time in which the system `restarts'. As
+we will see, the argumentation is quite subtle, as it uses an
+interplay of the PASTA property and the relation of Eq.~\eqref{eq:39}
+between $\pi(n)$, $p(n)$ and $\delta(n)$. The important idea is to
+focus on the \emph{departure} moments, as these moments can be
+considered as restarts of the service times, and on the number of
+arrivals $Y_k$ during the service time of the $k$th job.  Assume that
+$f(j) = \P{Y_k = j}$ is given and write $G(j) = \P{Y_k > j}$.
 
 First we concentrate on a downcrossing of level $n$, see
 Figure~\ref{fig:mg1_2}. Suppose that the `$k-1$'th job leaves $n+1$
@@ -33,18 +38,19 @@ time of the $k$th job, no other jobs arrive, it must be that job $k$
 leaves $n$ jobs behind. Thus, job $k$ realizes a downcrossing of level
 $n$ only when $L(D_{k-1})=n+1$ and $Y_k=0$, i.e.,
 \begin{equation*}
-  L(D_{k-1})=n+1, Y_k = 0 \implies L(D_k) = n
+\1{L(D_{k-1})=n+1}\1{Y_k = 0} = \1{L(D_k) = n}.
 \end{equation*}
-Let us next count all  downcrossings up to time $t$. Clearly, 
+With this result, we see that the number of downcrossings up to time
+$t$ is such that
 \begin{equation*}
-  D(n+1, 0, t) = \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k-1})=n+1}\1{Y_k=0}
+  \begin{split}
+  D(n+1, 0, t) 
+&= \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k})=n} \\
+&= \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k-1})=n+1}\1{Y_k=0}.
+  \end{split}
 \end{equation*}
-is the number of jobs that depart before time $t$, i.e.,
-$\1{D_k\leq t}$, and whose predecessors leave $n+1$ jobs behind, i.e.,
-$\1{L(D_{k-1})=n+1}$, and such that no jobs arrive during the service
-time, i.e., $\1{Y_k=0}$. . Then, by using the definitions and limits
-developed in Sections~\ref{sec:rate-stability}
-and~\ref{sec:poisson-arrivals-see},
+Then, by using the definitions and limits developed in
+Sections~\ref{sec:rate-stability} and~\ref{sec:poisson-arrivals-see},
 \begin{equation*}
   \begin{split}
   \lim_{t\to\infty} \frac{  D(n+1, 0, t)}t 
@@ -54,7 +60,7 @@ and~\ref{sec:poisson-arrivals-see},
 & = \gamma \delta(n+1) f(0),
   \end{split}
 \end{equation*}
-where the last limit follows from the independence of $Y_k$ and $L(D_{k-1})$. 
+where the last limit follows from the independence of $Y_k$ and $L(D_{k-1})$.
 
 \begin{figure}[htb]
   \centering
@@ -80,9 +86,9 @@ where the last limit follows from the independence of $Y_k$ and $L(D_{k-1})$.
 
 
 \end{tikzpicture}
-\caption{Level $3$ is crossed from below with rates
-  $\delta(0)G(3) + \delta(1)G(3) + \cdots \delta(3) G(1)$ and crossed
-  from above with rate $\delta(4) f(0)$. }
+\caption{Level $3$ is crossed from below with rate
+  $\gamma\delta(0)G(3) + \gamma\delta(1)G(3) + \cdots \gamma \delta(3) G(1)$ and crossed
+  from above with rate $\gamma\delta(4) f(0)$. }
 \label{fig:mg1_2}
 \end{figure}
 
@@ -95,15 +101,15 @@ still no upcrossing occurs. In fact, to upcross level $n$ when
 $L(D_{k-1})=n>0$, at least two new jobs must arrive during the service
 of job $k$. More generally, if $0<m\leq n$,
 \begin{equation*}
-  L(D_{k-1})=m, Y_k > n-m+1 \implies L(D_k) > n,
+  \1{L(D_{k-1})=m}\1{Y_k > n-m+1} = \1{L(D_k) > n},
 \end{equation*}
 while if $m=0$ (think about this),
 \begin{equation*}
-  L(D_{k-1})=0, Y_k > n \implies L(D_k) > n.
+  \1{L(D_{k-1})=0}\1{ Y_k > n} = \1{L(D_k) > n}.
 \end{equation*}
 Similar to our earlier work, by defining proper counting functions,
-c.f., Exercise~\ref{q:555}, and taking suitable limits, we find for
-the upcrossing rate that
+c.f., Exercise~\ref{q:555}, and taking suitable limits, we find 
+that the upcrossing rate is
 \begin{equation}\label{eq:555}
 \gamma \delta(0) G(n) + \gamma \sum_{m=1}^n \delta(m) G(n-m+1).
 \end{equation}

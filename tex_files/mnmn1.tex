@@ -41,30 +41,52 @@ For the $M/M/c$ queue we can take
 This model is also known as the \recall{Erlang $C$}-formula. 
 Define the load as 
 \begin{subequations}\label{eq:9}
-\begin{equation*}
+\begin{equation}
   \rho = \frac{\lambda}{c\mu}.
-\end{equation*}
+\end{equation}
   Then,
  \begin{align}
-p(n) &= \frac{1}G \frac{(c\rho)^n}{n!}, \quad n=0,\ldots, c-1 \\
+p(n) &= \frac{1}G \frac{(c\rho)^n}{n!}, \quad n=0,\ldots, c-1, \label{eq:502}\\
 p(n) &= \frac{1}G \frac{c^c\rho^n}{c!}, \quad n=c,c+1, \ldots \\
 G &=\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{(1-\rho)c!}, \label{eq:501}\\
 \E{L_Q} &= \sum_{n=c}^\infty (n-c) p(n) = \frac{(c\rho)^c}{c! G}\frac{\rho}{(1-\rho)^2}, \\ 
 \E{L_S} &= \sum_{n=0}^{c-1}n p(n) = \frac{\lambda}\mu.
 \end{align}
 \end{subequations}
-By taking the limit $c\to\infty$ we obtain the $M/M/\infty$ queue, in which case
-\begin{subequations}
- \begin{align} 
-\rho &= \frac{\lambda}\mu\\
-p(n) &=  \frac 1 G\frac{\rho^n}{n!}\\
-G &= e^{\rho} \\
-\E{L} &= \E{L_S} = \rho.
-\end{align}
-\end{subequations}
 
-A model, often used to determine the number of beds at hospitals, is
-the $M/M/c/c$ model, also known as the Erlang $B$-formula; here jobs cannot be in queue, only in service, and the system has $c$ servers.
+From this we can easily get the $M/M/c/c$ queue; here jobs cannot be
+in queue, only in service, and the system has $c$ servers.  This model
+is also known as the Erlang $B$-formula and is often used to determine
+the number of beds at hospitals, where the beds act as servers and the
+patients as jobs.
+
+
+From the $M/M/c$ queue (or the $M/M/c/c$ queue) we can also obtain the
+$M/M/\infty$, i.e., a queueing system with ample servers. By taking
+the limit $c\to\infty$, note first that in~(\ref{eq:501}),
+\begin{equation*}
+\frac{(c\rho)^c}{(1-\rho)c!} = \frac{(\lambda/\mu)^c}{(1-\rho)c!}\to 0, \quad\text{as } c\to \infty.
+\end{equation*}
+Hence
+\begin{equation*}
+G =\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{(1-\rho)c!} \to \sum_{n=0}^{\infty} \frac{(c\rho)^n}{n!} = e^{\lambda/\mu}.
+\end{equation*}
+Next, for $n\geq c$:
+\begin{equation*}
+  p(n) = \frac{1}G \frac{c^c\rho^n}{c!} =\frac{\rho^n}{G}\frac{c^c}{c!} \to 0, 
+\quad\text{as } c\to\infty,
+\end{equation*}
+since, from a standard limit $n^n/n! \to 0$ as $n\to\infty$. Therefore, for $n<c$: 
+\begin{equation*}
+  p(n) = \frac{1}G \frac{(c\rho)^n}{n!} = \frac{1}G \frac{(\lambda/\mu))^n}{n!} 
+\to e^{-\lambda/\mu}  \frac{(\lambda/\mu))^n}{n!}, \quad\text{as } c\to\infty.
+\end{equation*}
+Thus, by redefining $\rho$, we get
+ \begin{align} 
+\rho &= \frac{\lambda}\mu, & p(n) &=  e^{-\rho} \frac{\rho^n}{n!}, & \E{L} &= \E{L_S} = \rho,
+\end{align}
+where the last observation follows from the fact that $\E{L_Q}=0$, as
+there cannot be any job in queue. 
 
 
 Finally, we consider queues with \recall{balking}, that is, queues in
