@@ -50,7 +50,7 @@ p(n) &= \frac{1}G \frac{(c\rho)^n}{n!}, \quad n=0,\ldots, c-1, \label{eq:502}\\
 p(n) &= \frac{1}G \frac{c^c\rho^n}{c!}, \quad n=c,c+1, \ldots \\
 G &=\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{(1-\rho)c!}, \label{eq:501}\\
 \E{L_Q} &= \sum_{n=c}^\infty (n-c) p(n) = \frac{(c\rho)^c}{c! G}\frac{\rho}{(1-\rho)^2}, \\ 
-\E{L_S} &= \sum_{n=0}^{c-1}n p(n) = \frac{\lambda}\mu.
+\E{L_S} &= \sum_{n=0}^{c}n p(n) + \sum_{n=c+1}^\infty c p(n) = \frac{\lambda}\mu.
 \end{align}
 \end{subequations}
 
@@ -270,7 +270,7 @@ G &=\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{(1-\rho)c!}
 \\
 \E{L_Q} &= \frac{(c\rho)^c}{c! G}\frac{\rho}{(1-\rho)^2} = 
 = \frac{\rho}{1/(1-\rho)}\frac{\rho}{(1-\rho)^2} = \frac{\rho^2}{1-\rho} \\
-\E{L_S} &= \sum_{n=0}^{c-1}n p(n) = \frac{\lambda}\mu = \rho.
+\E{L_S} &= \sum_{n=0}^{c}n p(n) + \sum_{n=c+1}^\infty c p(n) = p(1) + 1 \sum_{n=2}^\infty p(n) = 1- p(0) = \rho.
 \end{align}
 Everything is in accordance to the formulas we derived earlier for the $M/M/1$ queue.    
   \end{solution}
@@ -364,7 +364,7 @@ painless. Realize, by the way, that
 We next show that the expected number of jobs in service is given
 by
     \begin{equation*}
-      \E{L_S} = \sum_{n=0}^{c-1} n p(n) + \sum_{n=c}^{\infty} c p(n).
+      \E{L_S} = \sum_{n=0}^{c} n p(n) + \sum_{n=c+1}^{\infty} c p(n).
     \end{equation*}
     This expression is not the easiest to start with. With a slight
     modification the entire derivation becomes easier. I also premultiply by the normalization constant $G$ to get rid of it on the right hand side. 

@@ -610,10 +610,10 @@ I got the same results as Wolframalpa, but certainly not for free.
 
 
 
-\begin{question} Can you derive following (algorithmic efficient) procedure to
+\begin{question} Can you derive the following (algorithmic efficient) procedure to
     compute the number of jobs in the system as seen by arrivals,
   \begin{equation*}
-    L_k = L_{k-1}+1 - \sum_{i= k-1 - L_{k-1}}^{k-1} 1\{D_i< A_k\}?
+    L_k = L_{k-1}+1 - \sum_{i= k-1 - L_{k-1}}^{k-1} \1{D_i< A_k}?
   \end{equation*} Why do we take $i=k-1-L_{k-1}$ in  the sum, and not $i=k-2-L_{k-1}$?
 % \hint{ Realize that $L_k = k - 1 - D(A_k)$. 
 % what happens to job k-1?
@@ -631,7 +631,7 @@ I got the same results as Wolframalpa, but certainly not for free.
   before $A_{k-1}$ into account as these have already been
   `incorporated in' $L_{k-1}$.  Therefore,
   \begin{equation*}
-    L_k = L_{k-1} + 1 - \sum_{i= k-1 - L_{k-1}}^{k-1} 1\{D_i< A_k\}.
+    L_k = L_{k-1} + 1 - \sum_{i= k-1 - L_{k-1}}^{k-1} \1{D_i< A_k}.
   \end{equation*}
 
     Suppose $L_{k-1}=0$, i.e., job $k-1$ finds an empty system at its

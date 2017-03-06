@@ -199,7 +199,8 @@ Hence, Little's law follows.
 \end{question}
 
 
-\begin{question}\nvf{You can skip this exercise. I moved it from the G/G/1 section to here.}
+\begin{question}[use=false]
+\nvf{You can skip this exercise. I moved it from the G/G/1 section to here.}
   Discuss the results of Figure~\ref{fig:multisingle} in terms of
   waiting time ratios. Recall, in this figure we compare queue and
   system length, not waiting times.

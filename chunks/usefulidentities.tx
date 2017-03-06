@@ -780,11 +780,6 @@ for various values of $\lambda$.
 \lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_23.tex}
 
 
-\item 
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_24.tex}
-
   \end{enumerate}
     \end{solution}
 \end{question}  
@@ -806,14 +801,14 @@ for various values of $\lambda$.
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_25.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_24.tex}
 
 
 Use the level crossing result for the $M(n)/M(n)/1$ queue:
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_26.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_25.tex}
 
 
 \item 
@@ -822,7 +817,7 @@ $\lambda = \sum_{n}\lambda(n) p(n)$.
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_27.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_26.tex}
 
 
 
@@ -830,14 +825,14 @@ $\lambda = \sum_{n}\lambda(n) p(n)$.
 \item 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_28.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_27.tex}
 
 
 And now the waiting times:
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_29.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_28.tex}
 
 
   \end{enumerate}
@@ -865,7 +860,7 @@ And now the waiting times:
       Would one server/person do? 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_30.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_29.tex}
 
 
 If $c=1$, the load $\rho=\lambda \E S/c >1$ is clearly undesirable for one server.  We need at
@@ -886,7 +881,7 @@ me time during the computations.
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_31.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_30.tex}
 
 
 Considering the scenario with one server is superfluous as $\rho>1$ in
@@ -896,14 +891,14 @@ What is the waiting time for $c=2$ servers?
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_32.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_31.tex}
 
 
 What is the waiting time for $c=3$ servers?
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_33.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_32.tex}
 
 
 
@@ -911,7 +906,7 @@ What is the waiting time for $c=4$ servers?
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_34.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_33.tex}
 
 
 Interpreting these results in the next part of this question.
@@ -943,18 +938,18 @@ $c$.
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_35.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_34.tex}
 
 Now the maintenance employees wait more than the tool crib employees.
 
 
 
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_35.tex}
+
+
+
+
 \lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_36.tex}
-
-
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_37.tex}
 
 
 Clearly, $c=3$ should do.
@@ -974,7 +969,7 @@ Clearly, $c=3$ should do.
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_38.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_37.tex}
 
 
 Compute Ls and so on
@@ -982,14 +977,14 @@ Compute Ls and so on
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_39.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_38.tex}
 
 
 \item 
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_40.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_39.tex}
 
 It is of interest to compare the M/M/2 system to the M/M/1 system with twice the capacity. 
   \end{enumerate}
