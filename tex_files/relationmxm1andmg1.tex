@@ -20,15 +20,15 @@ of a batch of small units of work. To make this more specific, assume
 that the distibution of the service time $S$ is given. Use a grid of
 size $1/n$ and take
 \begin{equation}\label{eq:69}
-  \P{X^{(n)} = i} = \P{ S\in\left(\frac in, \frac{i+1}n\right]}
+  \P{B^{(n)} = i} = \P{ S\in\left(\frac in, \frac{i+1}n\right]}
 \end{equation}
-as the distribution of the batch size $X^{(n)}$. Let the service time
+as the distribution of the batch size $B^{(n)}$. Let the service time
 of one unit of the batch be exponentially distributed with mean $1/n$.
 Thus, if $n$ becomes larger, the service time $S$ is represented by
 ever larger batches, but such that the service time of each unit
 becomes ever smaller. These arguments can be made precise in a
 probabilistic sense, but here we rely on our intuition to conclude
-that, in some sense, $X^{(n)}/n \to S$\footnote{For the interested, we
+that, in some sense, $B^{(n)}/n \to S$\footnote{For the interested, we
   mean convergence in distribution here.}.
 
 Let us see how this limit can be used to show that the expected
@@ -38,33 +38,33 @@ queue for the $M/G/1$ queue.  Writing $\E{L^{(n)}}$ for the batch
 queue with grid size $1/n$, we use~\eqref{eq:43} to see that
 \begin{align}\label{eq:1pp}
 \frac{\E{L^{(n)}}}{n}
-= \frac{\rho}{1-\rho}\cdot \frac12\left(1 + \frac{\V{X^{(n)}}}{(\E{X^{(n)}})^2}\right) \frac{\E{X^{(n)}}}n +  \frac1{2n}\frac{\rho}{1-\rho}.
+= \frac{\rho}{1-\rho}\cdot \frac12\left(1 + \frac{\V{B^{(n)}}}{(\E{B^{(n)}})^2}\right) \frac{\E{B^{(n)}}}n +  \frac1{2n}\frac{\rho}{1-\rho}.
 \end{align}
 By assumption\footnote{ Here we interchange limits and expectations. A
   formal approach should pay due attention to the validity of all
   these interchanges.}:
 \begin{align*}
-\frac{X^{(n)}}n &\to S \\
+\frac{B^{(n)}}n &\to S \\
 \intertext{so that must be that
 }
-\E{\frac{X^{(n)}}n} &\to \E S \\
+\E{\frac{B^{(n)}}n} &\to \E S \\
 \intertext{and}
-\E{\frac{(X^{(n)})^2}{n^2}} &\to \E{S^2},
+\E{\frac{(B^{(n)})^2}{n^2}} &\to \E{S^2},
 \end{align*}
 as $n\to \infty$.  
 Hence, 
 \begin{equation*}
   \begin{split}
-\frac{\V{X^{(n)}}}{n^2} 
+\frac{\V{B^{(n)}}}{n^2} 
 &=  
-\frac{\E{(X^{(n)})^2} - (\E{X^{(n)}})^2}{n^2} = 
-\E{\frac{(X^{(n)})^2}{n^2}} - \left(\E{\frac{X^{(n)}}{n}}\right)^2 \\
+\frac{\E{(B^{(n)})^2} - (\E{B^{(n)}})^2}{n^2} = 
+\E{\frac{(B^{(n)})^2}{n^2}} - \left(\E{\frac{B^{(n)}}{n}}\right)^2 \\
 &\to \E{S^2} - (\E{S})^2  =  \V{S}.
   \end{split}
 \end{equation*}
 from which
 \begin{equation*}
-\frac{\V{X^{(n)}}} {(\E{X^{(n)}})^2} = \frac{\V{X^{(n)}}}{n^2}\frac{n^2}{(\E{X^{(n)}})^2} \to 
+\frac{\V{B^{(n)}}} {(\E{B^{(n)}})^2} = \frac{\V{B^{(n)}}}{n^2}\frac{n^2}{(\E{B^{(n)}})^2} \to 
 \frac{\V S}{(\E S)^2} = C_s^2,
 \end{equation*}
 as $n\to \infty$.  Moreover, we expect that
@@ -82,16 +82,16 @@ in~\eqref{eq:1pp} we obtain
 This is the same as Eq.~\eqref{eq:710}!
 
 \begin{question}
-In Eq.~(\ref{eq:69}) we  define $\P{X^{(n)} = i} = \P{ S\in(i/n, (i+1)/n]}$ and not 
+In Eq.~(\ref{eq:69}) we  define $\P{B^{(n)} = i} = \P{ S\in(i/n, (i+1)/n]}$ and not 
 \begin{equation*}
-\P{X^{(n)} = i} = \P{S\in[i/n, (i+1)/n]},  
+\P{B^{(n)} = i} = \P{S\in[i/n, (i+1)/n]},  
 \end{equation*}
 i.e., we use a half open interval $(,]$ rather than the closed
 interval $[,]$. Why is that?
 \begin{solution}
   Starting from the distribution function $\P{S\leq x}$, we define
   \begin{equation*}
-  \P{X^{(n)} = i} = \P{ S\leq (i+1)/n} - \P{S\leq i/n} = \P{
+  \P{B^{(n)} = i} = \P{ S\leq (i+1)/n} - \P{S\leq i/n} = \P{
   S\in(i/n, (i+1)/n]}.
      \end{equation*}
 \end{solution}
@@ -128,13 +128,13 @@ the $M^1/M/1$ queue in which the jobs arrive as single units. Next, if
 $S$ consists of the sum of $k$ i.i.d. exponential random variables
 $S_i$ with mean $1/\mu$, i.e., $S=\sum_{i=1}^k S_i$, then the
 $M^k/M/1$ queue results. Generalizing still further, we can take a
-random batch $X$ of i.i.d. exponentials so that $S = \sum_{i=1}^X S_i$. Now
+random batch $B$ of i.i.d. exponentials so that $S = \sum_{i=1}^B S_i$. Now
 \begin{equation*}
   \P{S\leq x}
-= \sum_{k=1}^\infty \P{S \leq x\given X=k}\P{X=k}
-= \sum_{k=1}^\infty f(k) \P{\sum_{i=1}^k X_i \leq x}
+= \sum_{k=1}^\infty \P{S \leq x\given B=k}\P{B=k}
+= \sum_{k=1}^\infty f(k) \P{\sum_{i=1}^B X_i \leq x}
 \end{equation*}
-where $f(k)=\P{X=k}$, and we obtain the $M^X/M/1$ from the $M/G/1$
+where $f(k)=\P{B=k}$, and we obtain the $M^X/M/1$ from the $M/G/1$
 queue by taking this distribution function for the service times.
   \end{solution}
 \end{question}

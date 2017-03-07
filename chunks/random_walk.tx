@@ -282,7 +282,7 @@ result as a deterrent to study transient aspects of queueing system.
 With this we have a characterization of the queue length process as a
 function of time until it hits zero for the first time. What can we
 say about the distribution of $Q(t)$? With the above random walk, 
-\begin{equation*}
+\begin{equation}\label{eq:29}
   \begin{split}
     \PP{m}{Z(t)=n} 
 &= \P{N_\mu(t) - N_\lambda(t) = m-n }  \\
@@ -290,7 +290,7 @@ say about the distribution of $Q(t)$? With the above random walk,
 &= \sum_{k=0}^\infty e^{-\mu t} \frac{(\mu t)^{k -n+m}}{(k-n +m)!} e^{-\lambda t} \frac{(\lambda t)^k}{k!} \\
 &= e^{-(\lambda+\mu)t} \sum_{k=0}^\infty \frac{(\lambda t)^k(\mu t)^{k  -n + m }}{k!(k-n+m)!}.
   \end{split}
-\end{equation*}
+\end{equation}
 We can write this a bit simpler by noting that
 \begin{equation*}
   \begin{split}
@@ -308,8 +308,25 @@ With this,
 \end{equation*}
   
 \end{solution}
-  
 \end{question}
+
+\begin{question}
+  In Eq.~(\ref{eq:29}) the summation runs from $0$ to $\infty$ while
+  in the computation of $\P{N_a(t) + N_b(t)=n}$ in Eq.~(\ref{eq:002})
+  the summation runs from $0$ to $n$. Why are the summation limits
+  different in these two equations?
+  \begin{solution}
+    The process $\{N_a(t)+N_b(t)\}$ is a counting process, hence it is
+    non-decreasing and has positive jumps.  The process $\{Z(t)\}$ is
+    a random walk; it can go up and down. Now, if $N_a(t)+N_b(t)=n$,
+    then $N_b(t)\in \{0,\ldots, n\}$, it can certainly not be smaller
+    than 0 (as it is a counting process), and it can also be not more
+    than $n$. On the other hand, if $Z(t)=n$, $N_\lambda(t)$ can be
+    any value in $\Z$ as long as $N_\mu(t)= n+N_\lambda(t)$, provided
+    $Z(0)=0$.
+  \end{solution}
+\end{question}
+
 
 \begin{question}
   Can you relate the construction of $\{Q_k\}$ as a discrete-time

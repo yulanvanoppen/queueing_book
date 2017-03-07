@@ -34,7 +34,7 @@ For the $M/M/c$ queue we can take
 \lambda(n) &= \lambda, \\
     \mu(n) &= 
   \begin{cases}
-    n\mu, &\text{ if } n < c, \\
+    n\mu, &\text{ if } n \leq c, \\
     c\mu, &\text{ if } n \geq c.
   \end{cases}
   \end{align*}
@@ -46,7 +46,7 @@ Define the load as
 \end{equation}
   Then,
  \begin{align}
-p(n) &= \frac{1}G \frac{(c\rho)^n}{n!}, \quad n=0,\ldots, c-1, \label{eq:502}\\
+p(n) &= \frac{1}G \frac{(c\rho)^n}{n!}, \quad n=0,\ldots, c, \label{eq:502}\\
 p(n) &= \frac{1}G \frac{c^c\rho^n}{c!}, \quad n=c,c+1, \ldots \\
 G &=\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{(1-\rho)c!}, \label{eq:501}\\
 \E{L_Q} &= \sum_{n=c}^\infty (n-c) p(n) = \frac{(c\rho)^c}{c! G}\frac{\rho}{(1-\rho)^2}, \\ 
@@ -78,15 +78,18 @@ Next, for $n\geq c$:
 \end{equation*}
 since, from a standard limit $n^n/n! \to 0$ as $n\to\infty$. Therefore, for $n<c$: 
 \begin{equation*}
-  p(n) = \frac{1}G \frac{(c\rho)^n}{n!} = \frac{1}G \frac{(\lambda/\mu))^n}{n!} 
-\to e^{-\lambda/\mu}  \frac{(\lambda/\mu))^n}{n!}, \quad\text{as } c\to\infty.
+  p(n) = \frac{1}G \frac{(c\rho)^n}{n!} = \frac{1}G \frac{(\lambda/\mu)^n}{n!} 
+\to e^{-\lambda/\mu}  \frac{(\lambda/\mu)^n}{n!}, \quad\text{as } c\to\infty.
 \end{equation*}
-Thus, by redefining $\rho$, we get
- \begin{align} 
-\rho &= \frac{\lambda}\mu, & p(n) &=  e^{-\rho} \frac{\rho^n}{n!}, & \E{L} &= \E{L_S} = \rho,
-\end{align}
-where the last observation follows from the fact that $\E{L_Q}=0$, as
-there cannot be any job in queue. 
+We see that the number of busy servers in the $M/M/\infty$ queue is
+Poisson distributed with parameter $\lambda/\mu$, and
+$\E{L} = \E{L_S} = \lambda/\mu$.  Observe that now $\lambda/\mu$ has
+no longer the interpretation of the fraction of time the server(s) are
+busy; it is the average number of busy servers.
+
+We mention in passing---but do not
+prove it---that the same results also hold for the $M/G/\infty$ queue
+with $\lambda \E S$ rather than $\lambda/\mu$.
 
 
 Finally, we consider queues with \recall{balking}, that is, queues in

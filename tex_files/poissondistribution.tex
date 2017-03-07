@@ -144,10 +144,11 @@ is easy, so that, as $n\to\infty$,  the above converges to
 
 
 \begin{question}
-  If the inter-arrival times are i.i.d. and exponentially distributed
-  with mean $1/\lambda$, prove that the number $N(t)$ of arrivals
-  during interval $[0,t]$ is Poisson distributed.
-\hint{Realize that     $\P{N(t)=k} = \P{A_k \leq t} - \P{A_{k+1} \leq t}$.}
+  If the inter-arrival times $\{X_i\}$ are i.i.d. and exponentially
+  distributed with mean $1/\lambda$, prove that the number $N(t)$ of
+  arrivals during interval $[0,t]$ is Poisson distributed.
+  \hint{Realize that
+    $\P{N(t)=k} = \P{A_k \leq t} - \P{A_{k+1} \leq t}$.}
     \begin{solution}
       We want to show that
     \begin{equation*}
@@ -313,8 +314,6 @@ uniformly on the interval $[0,t]$.
 
     \begin{solution}
 First we show how to  use conditioning. 
-
-
   \begin{equation*}
     \begin{split}
 \P{N_a(t) + N_s(t) = n} 
@@ -328,7 +327,7 @@ i+N_s(t) = n \iff
 N_s(t) = n-i.
 \end{equation*}
 Thus,
-  \begin{equation*}
+  \begin{equation}\label{eq:002}
     \begin{split}
 \P{N_a(t) + N_s(t) = n} 
 &= \sum_{i=0}^n \P{ N_s(t) = n-i}\P{N_a(t)=i} \\
@@ -337,7 +336,7 @@ Thus,
 &= e^{-(\mu+\lambda)t}\frac 1{n!} \sum_{i=0}^n {n \choose i }(\mu t)^{n-i}(\lambda t)^i  \\
 &= \frac{((\mu+\lambda)t))^n}{n!}e^{-(\mu+\lambda)t}.
     \end{split}
-  \end{equation*}
+  \end{equation}
 
 Now   with the probability generating functions.
       \begin{equation*}
