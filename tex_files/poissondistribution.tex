@@ -62,11 +62,11 @@ e^{-\lambda t} \frac{(\lambda t)^k}{k!}.
 We say that $N(t)$ is \recall{Poisson distributed} with rate
 $\lambda$, and write $N(t)\sim P(\lambda t)$. 
 
-Moreover, if there are no failures in some interval
-$[0,t]$, then it must be that $N(t) = 0$ and $A_1$, i.e., the
-occurrence of the first failure, must be larger than $t$.  Therefore,
+Moreover, if there are no failures in some interval $[0,t]$, then it
+must be that $N(t) = 0$ and the interarrival time $X_1=A_1-0$ (as
+$A_0=0$) must be larger than $t$.  Therefore,
 \begin{equation*}
-  \P{A_1>t} = \P{X_1> t} = \P{N(t) = 0} = e^{-\lambda t} \frac{(\lambda t)^0}{0!}= e^{-\lambda t}.
+ \P{X_1> t} = \P{N(t) = 0} = e^{-\lambda t} \frac{(\lambda t)^0}{0!}= e^{-\lambda t}.
 \end{equation*}
 
 The relations we discussed above are of paramount importance in the

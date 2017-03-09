@@ -1,9 +1,11 @@
 \chapter{Introduction}\label{sec:introduction}
 %\addcontentsline{toc}{chapter}{Introduction}
 
+\paragraph{Motivation and Examples}
 Queueing systems abound, and the analysis and control of queueing
 systems are major topics in the control, performance evaluation and
 optimization of production and service systems. 
+
 
 At my local supermarket, for instance, any customer that joins a queue
 of 4 of more customers get his/her shopping for free. Of course, there
@@ -23,7 +25,7 @@ the penalties and the personnel cost are small.
 Fast food restaurants also deal with many interesting queueing
 situations. Consider, for instance, the making of
 hamburgers. Typically, hamburgers are made-to-stock, in other words,
-they prepared before the actual demand has arrived. Thus, hamburgers
+they are prepared before the actual demand has arrived. Thus, hamburgers
 in stock can be interpreted as customers in queue waiting for service,
 where the service time is the time between the arrival of two
 customers that buy hamburgers. The hamburgers have a typical lifetime,
@@ -50,7 +52,7 @@ per year.
 Clearly, all the above systems can be seen as queueing systems that
 have to be monitored and controlled to achieve a certain
 performance. The performance analysis of such systems can, typically,
-be characterized with the following performance measures:
+be characterized by the following performance measures:
 \begin{enumerate}
 \item The fraction of time $p(n)$ that the system contains $n$
   customers. In particular, $1-p(0)$, i.e., the fraction of time the
@@ -74,6 +76,9 @@ service system. Thus, we are concerned with three types of waiting:
 waiting in queue, i.e., \emph{queueing time}, waiting while being in
 service, i.e., the \emph{service time}, and the total waiting time in
 the system, i.e., the \emph{sojourn time}.
+
+\paragraph{Organization}
+
 
 In these notes we will be primarily concerned with making models of
 queueing systems such that we can compute or estimate the above
@@ -138,12 +143,14 @@ this part we refer to book of Prof. Zijm; the present set of notes
 augment the discussion there.
 
 
+\paragraph{Exercises}
+
 I urge you to make \emph{all} exercises in this set of notes. Many
 exercises require many of the tools you learned previously in courses
 on calculus, probability, and linear algebra. Here you can see them
 applied. Moreover, many of these tools will be useful for other,
 future, courses. Thus, the investments made here will pay off for the
-rest of your (student) carreer. Moreover, the exercises are meant to
+rest of your (student) career. Moreover, the exercises are meant to
 \emph{illustrate} the material and to force you to \textit{think}
 about it. Thus, the main text does not contain many examples; the
 exercises form the examples.
@@ -153,7 +160,7 @@ not because the problem itself is difficult, but because you need to
 combine a substantial amount of knowledge all at the same time.  All
 this takes time and effort. Next to this, I did not include the
 exercises with the intention that you would find them easy. The
-problems should be doalbe, but hard.
+problems should be doable, but hard.
 
 The solution manual is meant to prevent you from getting stuck and to
 help you increase your knowledge of probability, linear algebra,
@@ -167,20 +174,28 @@ good idea on how to approach the problem, check the solution
 manual. Once you have understood the solution, try to repeat the
 arguments \emph{with the solution manual closed}.
 
+\paragraph{Symbols}
+
 The meaning of the symbols in the margin of pages are as follows:
 \begin{itemize}
 \item The symbol \recall{} in the margin means that you have to
   memorize the \emph{emphasized concepts}.
 \item The symbol \hintsymbol in the margin means that this question
   has a \emph{hint}.
-\item The symbol \tbd that this question or its solution requires
-  still some \emph{work on my part}; you can skip it. 
+\item The symbol \tbd in the margin means that this question or its
+  solution requires still some \emph{work on my part}; you can skip
+  it.
 \end{itemize}
 
-Finally I would like to acknowledge dr. J.W. Nieuwenhuis for our many
+
+\paragraph{Acknowledgments}
+
+I would like to acknowledge dr. J.W. Nieuwenhuis for our many
 discussions on the formal aspects of queueing theory and
 prof. dr. W.H.M. Zijm for allowing me to use the first few chapters of
-his book. 
+his book. Finally, without
+\cite{el-taha98:_sampl_path_analy_queuein_system} I could not have
+written these notes. 
 
 
 

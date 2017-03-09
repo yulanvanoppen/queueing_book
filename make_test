@@ -1,0 +1,1 @@
+./pweaveAll.py && pdflatex booktest
