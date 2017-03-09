@@ -32,24 +32,27 @@ arrivals $Y_k$ during the service time of the $k$th job.  Assume that
 $f(j) = \P{Y_k = j}$ is given and write $G(j) = \P{Y_k > j}$.
 
 First we concentrate on a downcrossing of level $n$, see
-Figure~\ref{fig:mg1_2}. Suppose that the `$k-1$'th job leaves $n+1$
-jobs behind after its service completion. Then, if during the service
-time of the $k$th job, no other jobs arrive, it must be that job $k$
-leaves $n$ jobs behind. Thus, job $k$ realizes a downcrossing of level
-$n$ only when $L(D_{k-1})=n+1$ and $Y_k=0$, i.e.,
+Figure~\ref{fig:mg1_2}; recall that level $n$ lies between states $n$
+and $n+1$.  Suppose now that job `$k-1$' leaves $n+1$ jobs behind
+after its service completion. Precisely when job $k$ leaves $n$ jobs
+behind a downcrossing occurs, i.e., when
+$\1{L(D_{k-1}) = n+1}\1{L(D_k)=n} = 1$. Let us write this in another
+way. Observe that if $L(D_{k-1})=n+1$ and no other jobs arrive during
+the service time $S_k$ of job $k$, i.e., when $Y_k=0$, it must also be
+that job $k$ leaves $n$ jobs behind. If, however, $Y_k>0$, then
+$L(D_k)\geq n+1$.  Thus, we see that
 \begin{equation*}
-\1{L(D_{k-1})=n+1}\1{Y_k = 0} = \1{L(D_k) = n}.
+  \1{L(D_{k-1}) = n+1}\1{L(D_k)=n} =  \1{L(D_{k-1}) = n+1}\1{Y_k=0}.
 \end{equation*}
-With this result, we see that the number of downcrossings up to time
-$t$ is such that
+Consequently, the number of downcrossings up to time $t$ is
 \begin{equation*}
   \begin{split}
   D(n+1, 0, t) 
-&= \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k})=n} \\
+%&= \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k})=n} \\
 &= \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k-1})=n+1}\1{Y_k=0}.
   \end{split}
 \end{equation*}
-Then, by using the definitions and limits developed in
+By using the definitions and limits developed in
 Sections~\ref{sec:rate-stability} and~\ref{sec:poisson-arrivals-see},
 \begin{equation*}
   \begin{split}
@@ -60,9 +63,10 @@ Sections~\ref{sec:rate-stability} and~\ref{sec:poisson-arrivals-see},
 & = \gamma \delta(n+1) f(0),
   \end{split}
 \end{equation*}
-where the last limit follows from the independence of $Y_k$ and $L(D_{k-1})$.
+where the last limit follows from the independence of $Y_k$ and
+$L(D_{k-1})$, compare the derivation of~\eqref{eq:1332}.
 
-\begin{figure}[htb]
+\begin{figure}[tb]
   \centering
                   
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
@@ -77,10 +81,20 @@ where the last limit follows from the independence of $Y_k$ and $L(D_{k-1})$.
 
 \path 
 (0) edge [bend left] node[above, very near start, fill=white] {$G(3)$} (5)
+(0) edge [loop below] node[below, midway, fill=white] {$f(0)$} (0)
 (1) edge [bend left] node[above, very near start, fill=white] {$G(3)$} (5)
+(1) edge [loop below] node[below, midway, fill=white] {$f(1)$} (1)
+(1) edge [bend left] node[below, midway, fill=white] {$f(0)$} (0)
 (2) edge [bend left] node[above, very near start, fill=white] {$G(2)$} (5)
+(2) edge [bend left] node[below, midway, fill=white] {$f(0)$} (1)
+(2) edge [loop below] node[below, midway, fill=white] {$f(1)$} (2)
 (3) edge [bend left] node[above, very near start, fill=white] {$G(1)$} (5)
+(3) edge [loop below] node[below, midway, fill=white] {$f(1)$} (3)
+(3) edge [bend left] node[below, midway, fill=white] {$f(0)$} (2)
 (4) edge [bend left] node[below, near start] {$f(0)$} (3);
+
+% \node[circ, right=of n-2] (n-1) {$n-1$}
+% edge[loop below, thick]  node[midway, fill=white] {$\lambda f(0)$} (n-1); 
 
 \draw[-, dotted, gray] (9.7,-1)--(9.7, 4.0) node[below, black] {level $3$};
 
@@ -93,35 +107,39 @@ where the last limit follows from the independence of $Y_k$ and $L(D_{k-1})$.
 \end{figure}
 
 
-For the upcrossings, suppose first that $L(D_{k-1})=n>0$. If there are
-no arrivals during the service of job $k$, i.e., $Y_k=0$, then job $k$
-must leave $n-1$ jobs behind. Thus, no upcrossing occurs in this
-case. Next, if $Y_k=1$, then job $k$ leaves $n$ jobs behind. Thus,
-still no upcrossing occurs. In fact, to upcross level $n$ when
-$L(D_{k-1})=n>0$, at least two new jobs must arrive during the service
-of job $k$. More generally, if $0<m\leq n$,
+For the upcrossings, suppose first that $L(D_{k-1})=n>0$ and observe
+that an upcrossing whenever $\1{L(D_{k-1})=n} \1{L(D_{k})>n} = 1$.
+Again, we can convert this into a statement with the number of
+arrivals during the service time $S_k$ of job $k$.  If $Y_k=0$, then
+job $k$ must leave $n-1$ jobs behind, so no upcrossing can
+happen. Next, if $Y_k=1$, then job $k$ leaves $n$ jobs behind, so
+still no upcrossing occurs. In fact, level $n$ is upcrossed when iff
+more than one job arrives during the service of job $k$, thus,
 \begin{equation*}
-  \1{L(D_{k-1})=m}\1{Y_k > n-m+1} = \1{L(D_k) > n},
+\1{L(D_{k-1})=n} \1{L(D_{k})>n} = \1{L(D_{k-1})=n} \1{Y_{k}>1}.
+\end{equation*}
+More generally, level $n$ is upcrossed for $0<m\leq n$ whenever
+\begin{equation*}
+\1{L(D_{k-1})=m} \1{L(D_{k})>n} = \1{L(D_{k-1})=m} \1{Y_{k}>n-m+1},
 \end{equation*}
 while if $m=0$ (think about this),
 \begin{equation*}
-  \1{L(D_{k-1})=0}\1{ Y_k > n} = \1{L(D_k) > n}.
+\1{L(D_{k-1})=0} \1{L(D_{k})>n} = \1{L(D_{k-1})=0} \1{Y_{k}>n}.
 \end{equation*}
-Similar to our earlier work, by defining proper counting functions,
-c.f., Exercise~\ref{q:555}, and taking suitable limits, we find 
-that the upcrossing rate is
+Again we define proper counting functions (c.f., one of the exercises
+below), divide, and take suitable limits to find for upcrossing rate
 \begin{equation}\label{eq:555}
 \gamma \delta(0) G(n) + \gamma \sum_{m=1}^n \delta(m) G(n-m+1).
 \end{equation}
 
-Equating the down-crossings and up-crossing and dividing by $\gamma$
-gives
+Finally, equating the downcrossing and upcrossing rates and dividing
+by $\gamma$ gives
 \begin{equation}\label{eq:72}
   f(0) \delta(n+1) = \delta(0) G(n) + \sum_{m=1}^{n} \delta(m) G(n+1-m).
 \end{equation}
-Finally, noting that $\pi(n) = \delta(n)$ from~\eqref{eq:39} and the
-fact that the $M/G/1$ queue length process has one-step transitions,
-we arrive at
+Noting that $\pi(n) = \delta(n)$, which follows from~\eqref{eq:39} and
+the fact that the $M/G/1$ queue length process has one-step
+transitions, we arrive at
 \begin{equation*}
   f(0) \pi(n+1) = \pi(0) G(n) + \sum_{m=1}^{n} \pi(m) G(n+1-m).
 \end{equation*}
@@ -138,10 +156,20 @@ the $p(n)$ with $n<N$, $N$ is most surely sufficiently large. However,
 getting formal bounds on a proper size of $N$ requires more work than
 we can do here.
 
-\begin{question}\label{q:555}
+\begin{question}
 Provide the details behind the derivation of Eq.~\ref{eq:555}.
+\hint{Define for $m=1,\ldots, n$
+\begin{equation*}
+  D(m, n, t) = \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k-1})=m}\1{Y_k>n-m+1},
+\end{equation*}
+and 
+\begin{equation*}
+  D(0, n, t) = \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k-1})=0}\1{Y_k>n}.
+\end{equation*}
+Then, divide by $D(n,t)$ and $D(t)$ and take limits.}
+
 \begin{solution}
-Define, for the first term,
+ Define, for the first term,
 \begin{equation*}
   D(0, n, t) = \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k-1})=0}\1{Y_k>n}
 \end{equation*}
@@ -224,9 +252,11 @@ If the service time is $s$ units long, we need to know the number of arrivals du
 where $F$ is the distribution of the service times.
 \begin{solution}
   We use a conditioning argument to arrive at this result. The
-    probability that the service time is $s$ units long is written
-    like $\d F(s) = \P{S\in \d s}$. (To properly define this we need
-    measure theory\ldots). Thus
+  probability that the service time is $s$ units long is written in
+  various ways in the literature: $F(\d s) = \d F(s) = \P{S\in \d s}$.
+  (To properly define this we need measure theory\ldots). When $F$ has
+  a density $f$, then $\d F(s) = f(s) \d s$.  Note that when $S$ is
+  discrete, it does not have density everywhere. With this,
     \begin{equation*}
     \P{Y_k=j} = \int_0^\infty \P{Y_k =j\given S=s}\P{S\in \d s} =
     \int_0^\infty \P{Y_k =j\given S=s} \d F(s).
@@ -236,8 +266,11 @@ where $F$ is the distribution of the service times.
 \end{question}
 
 \begin{question}
- If $S$ is deterministic and equal to $s$, show that
-  Eq.~\eqref{eq:10} reduces to Eq.~\eqref{eq:4}.
+  If $S$ is deterministic and equal to $s$, show that
+  Eq.~\eqref{eq:10} reduces to Eq.~\eqref{eq:4}.  \hint{If $S=s$ then
+    $\P{S=s}=1$, i.e., all probability mass lies at $s$. Thus, all
+    arrivals must occur during $[0,s]$.}
+
   \begin{solution}
     If $\P{S=s}=1$, then $\int_0^\infty g(x) \d F(x) = g(s)$ for any
     sensible function $g$. More specifically, since $\P{S=s}=1$, the
@@ -369,7 +402,7 @@ obtained earlier for the $M/M/1$ queue.
   \begin{equation*}
     \begin{split}
   \P{Y_k = j} 
-&= \int_0^\infty e^{-\lambda s}\frac{(\lambda s)^j}{j!} \d F(s) 
+&= \int_0^\infty e^{-\lambda s}\frac{(\lambda x)^j}{j!} \d F(x) 
 \approx \sum_{i=1}^\infty e^{-\lambda i \d x}\frac{(\lambda i\d x)^j}{j!} f_i \d x
     \end{split}
 \end{equation*}

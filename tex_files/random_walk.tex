@@ -263,7 +263,10 @@ departure process is a Poisson process $N_\mu(t)$. Show that
 \frac{(t\sqrt{\lambda\mu} )^{2k+m-n}}{k!(k+m-n)!},
 \end{equation*}
 where $\PP{m}{\cdot}$ means that the random walk starts at $m$, i.e.,
-$Z(0)=m$.
+$Z(0)=m$\footnote{The summation includes negative factorials when
+$k+m-n<0$. The tacit assumption is to take $n!\in \{\pm \infty\}$ for
+$n\in \Z_-$. Another way to get around this problem is to take
+$k=\max\{0, m-n\}$.}.
 
 
 Now this summation is known as a modified Bessel function, but this
@@ -285,6 +288,7 @@ say about the distribution of $Q(t)$? With the above random walk,
 \begin{equation}\label{eq:29}
   \begin{split}
     \PP{m}{Z(t)=n} 
+&= \P{m+N_\lambda(t) - N_\mu(t) = n }  = \P{N_\lambda(t) - N_\mu(t) = n-m }  \\
 &= \P{N_\mu(t) - N_\lambda(t) = m-n }  \\
 &= \sum_{k=0}^\infty \P{N_\mu(t) = k - n + m\given N_\lambda(t) = k } \P{N_\lambda(t)=k}\\
 &= \sum_{k=0}^\infty e^{-\mu t} \frac{(\mu t)^{k -n+m}}{(k-n +m)!} e^{-\lambda t} \frac{(\lambda t)^k}{k!} \\

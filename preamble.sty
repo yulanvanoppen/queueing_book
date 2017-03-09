@@ -56,10 +56,7 @@
 \lstset{style=customc}
 
 \usepackage{exsheets}
- 
 \DeclareQuestionProperty{hint}
-
-
 \SetupExSheets{
   headings = runin,
   question/print = true,
@@ -67,7 +64,9 @@
   counter-format = ch.se.qu,
   counter-within = section
 }
-
+% Get question references ok.
+\renewcommand\thequestion{\thesection.\arabic{question}}
+\setlist[enumerate,1]{label=\alph*),ref=\thequestion\alph*)}
 
 % a command to print all given hints
 \NewDocumentCommand\printquestionhints{}{%

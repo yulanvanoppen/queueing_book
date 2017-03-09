@@ -39,7 +39,7 @@ the network and the amount of work required to achieve a certain
 throughput.  Finally, it is important to know the bottleneck capacity
 $r_b$ of the network: The maximal throughput of the network cannot
 exceed the bottleneck capacity. Thus, when accepting jobs, one needs
-to respect the capacity of the network.
+to respect the capacity of the network. 
 
 Before we study queueing networks in stochastic settings, we should
 familiarize ourselves with the behavior of networks of queueing
@@ -53,19 +53,61 @@ station~2. After service at station~2, they leave the network. A
 station can contain one or more servers. For instance, a single-server
 station contains just one server. Finally, we assume that job service
 times are constant at all servers at all stations. In other words,
-service times need to be same from one machine/server or station to
-another, but each server works at constant speed.  The
+service times need not be same from one machine/server or station
+to another, but each server works at constant speed.  The
 \emph{utilization} of station $i$ is the rate $\lambda_i t_i$, i.e.,
-the rate at which work arrives times the (average) service time per
+the rate at which work arrives, times the (average) service time per
 job. The \emph{bottleneck} station is the station with the
 \emph{highest utilization}.
 
+As an example, consider $n$ single-server stations in tandem such that
+the service time  at station $i$ is constant and equal to
+$S$. Jobs arrive at rate $\lambda$. Then  the raw processing time 
+\begin{equation*}
+  T_0= n S.
+\end{equation*}
+Suppose now that we would release just one job in the system, in other
+words, only when the first job has visited all stations, the next job
+is released. In that case, the capacity $\mu$ of the network is
+$1/T_0$. In general, a bit of thought will show that if we are
+prepared to release $w$ jobs, then the capacity of the network is
+given by
+\begin{equation*}
+  \mu(w) = \min\{w, n\} \frac 1{T_0}.
+\end{equation*}
+Thus, we need a minimal amount $w$ in the network to guarantee that
+$\mu(w)> \lambda$. We also see that the maximal capacity of the
+network is achieved when $w\geq n$, in which case,
+\begin{equation*}
+  \mu(w) = \frac{n}{T_0} = \frac{n}{n S} = \frac 1S.
+\end{equation*}
+Finally, for given $w$ we can maximize the waiting time by setting
+$\lambda = \mu(w)$, and then by Little's law,
+\begin{equation*}
+  \begin{split}
+  \E W 
+= \frac{\E L}{\lambda} = \frac{w}{\mu(w)} = \frac{w}{\min\{w, n\}} T_0 
+=
+\begin{cases}
+  T_0=nS, & \text{ if } w\leq n, \\
+  \frac{w}{n} T_0 = w S, & \text{ if } w\geq n.
+\end{cases}
+  \end{split}
+\end{equation*}
+Thus, we see that $w>n$, there must be $w-n$ jobs in queue and the
+other $n$ jobs are in service. So, in conclusion, in determinstic
+tandem networks adding more than $n$ jobs does not increase the
+network capacity, but only increases the waiting times. On the other
+hand, setting $w<n$, minimizes the waiting times, but also negatively
+affects the capacity.
 
-The problems below are meant to help you become acquainted with
-networking behavior. They appear much simpler than they are; I had
-much less trouble making them than solving them. In fact, to ensure
-that I got the answer right, I often tried to find two different ways
-to solve the same problem. Be warned!
+The problems below are generalizations to networks with multi-server
+stations, servers with different processing rates, and multiple
+routings. They are meant to help you become acquainted with networking
+behavior. They appear much simpler than they are; I had much less
+trouble making the problems than solving them. In fact, to ensure that
+I got the answer right, I often tried to find two different ways to
+solve the same problem. Be warned!
 
 \begin{question}
   A production system consists of 2 separate stations. Jobs never go
@@ -411,7 +453,8 @@ W_0 = r_b T_0 = \frac 12 \frac{23}5 = \frac{23}{10}.
   amounts of work in front of each station and just see how the network drains. 
   \begin{solution}
     As indicated in the problem, I don't have a solution for this
-    problem.
+    problem. However, given the elegance of the problem, I am pretty
+    sure it has been solved.
   \end{solution}
 
 \end{question}
