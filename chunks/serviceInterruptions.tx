@@ -67,31 +67,47 @@ And finally,
 
 \begin{question} 
 
-  A small company receives orders at a rate $\lambda$.  After a batch
-  of $B$ orders have been assembled, the company produces the batch.
-  The average service time of an order is $1/\mu$. Between two batches
-  the company has to re-adjust some of the machines before it can
-  process another batch. A setup costs  $S$ time units.
+  A small company receives orders at a rate $\lambda$.  Interarrival
+  times between orders are exponentially distributed. Once $B$ orders
+  have been assembled, the company starts produces this batch of $B$
+  jobs.  The average service time of an order is $1/\mu$. Between two
+  batches the company has to re-adjust some of the machines before it
+  can start processing another batch. These setup times form an
+  i.i.d. sequence of times with average $\E{S}$ time units.
 
 \begin{enumerate}
 \item Should the batch size be limited from above or below to ensure that the system remains stable? 
 \item How many orders arrive on average during a setup?
-\item Use the above two points to determine a criterion on the batch size $B$. 
+\item Use the above two points to determine a criterion on the minimal
+  batch size $B$.
 \end{enumerate}
+\hint{1: If the batch sizes $B$ are small, relatively much time is
+  spent on setups. 2: If the setup time $S$ is constant, then the
+  number of orders that arrive is Poisson distributed. 3: Given a
+  batch size $B$, find the time to produce such a batch, then include
+  a setup time $S$ to compute the length of one production cycle. The
+  expected number of jobs served during such a cycle must not exceed the number of jobs served during the cycle.}
 
 \begin{solution}
 \begin{enumerate}
 \item Only from below. If batches are very large, the fraction of time spent on setups becomes very small.
-\item \begin{equation*}
-    \lambda \E S
+\item The expected number of arrivals is 
+\begin{equation*}
+    \lambda \E S.
   \end{equation*}
-Ensure you realized that you used Wald's equation.
+To see this, note that  the number of arrivals $N$ during a constant time is Poisson. Thus,
+\begin{equation*}
+  \E{N} = \E{ \E{N\given S}} = \E{ \E{\lambda S\given S}} = \lambda \E{\E{S \given S}} = \lambda \E{S}.
+\end{equation*}
+
 \item  The number of jobs that arrive, on average, during one
   production cycle must be smaller than the total amount of jobs that
-  can be served, on average, during one cycle.   The number of arrivals during the setup is $\lambda \E S$. The number of arrivals during serving the batch is $\lambda B/\mu$. Thus, 
+  can be served, on average, during one cycle.   The number of arrivals during the setup is $\lambda \E{S}$. The number of arrivals during serving the batch is $\lambda B/\mu$. Thus, 
   \begin{equation*}
-    \lambda ( B/\mu + S) < B.
+    \lambda ( B/\mu + \E{S}) \leq B.
   \end{equation*}
+  When equality holds here, the system is critically loaded. As we
+  discussed before, that it not a good idea.
 \end{enumerate}
 \end{solution}
 \end{question}
@@ -99,7 +115,7 @@ Ensure you realized that you used Wald's equation.
 \begin{question}
 Zijm.Ex.1.11.1
  \begin{solution}
-Yes. The availability is $93\%$. Since $\E{S_e} = \E S/A$, and if $\E S $ is known, $\E{S_e}$ follows.
+Yes. The availability is $93\%$. Since $\E{S_e} = \E{S_0}/A$, and if $\E{S_0} $ is known, $\E{S_e}$ follows.
 \end{solution}
 \end{question}
 

@@ -67,19 +67,24 @@ from which
 \frac{\V{B^{(n)}}} {(\E{B^{(n)}})^2} = \frac{\V{B^{(n)}}}{n^2}\frac{n^2}{(\E{B^{(n)}})^2} \to 
 \frac{\V S}{(\E S)^2} = C_s^2,
 \end{equation*}
-as $n\to \infty$.  Moreover, we expect that
+as $n\to \infty$.  Moreover, we \emph{expect} that
 \begin{equation*}
 \frac{\E{L^{(n)}}}n \to \E{W_Q},
 \end{equation*}
 since the number of items in the system, $\E{L^{(n)}}$, becomes ever
 larger as $n$ increases, but the service time of one item is $1/n$,
-which becomes ever smaller. Thus, taking the limit $n\to\infty$
+which becomes ever smaller. Now, taking the limit $n\to\infty$
 in~\eqref{eq:1pp} we obtain
 \begin{equation*}
   \frac{\E{L^{(n)}}}{n}
   \to \frac{\rho}{1-\rho}  \frac{1 + C_s^2}2\E{S}.
 \end{equation*}
-This is the same as Eq.~\eqref{eq:710}!
+Thus, based on this  limit we expect that 
+\begin{equation*}
+\E{W_Q}=  \frac{\E{L^{(n)}}}{n}
+  \to \frac{\rho}{1-\rho}  \frac{1 + C_s^2}2\E{S},
+\end{equation*}
+but this is the same as Eq.~\eqref{eq:710}!
 
 \begin{question}
 In Eq.~(\ref{eq:69}) we  define $\P{B^{(n)} = i} = \P{ S\in(i/n, (i+1)/n]}$ and not 
