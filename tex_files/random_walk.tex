@@ -2,7 +2,7 @@
 \label{sec:queu-proc-as}
 
 In the construction of queueing processes as set out in
-section~\ref{sec:constr-discr-time} we are given two sequences of
+Section~\ref{sec:constr-discr-time} we are given two sequences of
 i.i.d. random variables: the number of arrivals $\{a_k\}$ per period
 and the service capacities $\{c_k\}$. Assuming that jobs can be served
 in the period they arrive, the departure and queue length processes
@@ -275,7 +275,7 @@ does not make us, in some sense, much wiser. In fact, we use this
 result as a deterrent to study transient aspects of queueing system.
 
 \hint{It is actually not hard, even though the expression looks
-  hard. Use condition to see that
+  hard. Use conditioning to see that
   $\PP{m}{Z(t)=n} = \P{N_\mu(t) - N_\lambda(t) = m - n}$. Then write out
   the definitions of the two Poisson distributions. Assemble
   terms. Then fiddle a bit with the terms to get
@@ -391,7 +391,10 @@ I compute the following
 \end{equation*}
 for $x$ in the support of $W_{Q,k}$. 
 
-<<term=True>>=
+Let's print the difference (The Kolmogorov-Smirnov statistic) between
+the distributions of $W_k$ and $W_{k+1}$. 
+
+<<term=True,wrap=False>>=
 from lea import Lea
 
 S = Lea.fromVals(1,  2)
@@ -401,8 +404,10 @@ U = S-X
 W = Lea.fromVals(3)
 for k in range(1, 10):
     W_new = Lea.fastMax(W + U, 0)
-    m = max(abs(W_new.cdf(x)-W.cdf(x)) for x in range(W_new.support()[-1]))
-    print(k, m)
+    m = max(abs(W_new.cdf(x)-W.cdf(x)) \
+            for x in range(W_new.support()[-1])
+            )
+    print(k, m) 
     W = W_new
 @
 

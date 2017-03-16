@@ -283,6 +283,14 @@ and then,
 \end{equation*}
 and this is a tiny bit less then the previous way of organizing things. 
 
+So, why are the above answers different? One reason is that the
+objective is not explicitly stated. It might be that, to minimize time
+in a multi-server station, it is optimal to let a fast machine idle
+and wait until the next job comes in. If we were to assign this next
+job to a slow machine, the time in the system may be longer.  In
+general, it might be that schedules that mininime $T_0$ (on average)
+are not work-conserving (i.e., such that when jobs are waiting, not
+all machines are idle.)
 \end{solution}
 \end{question}
 
@@ -447,7 +455,7 @@ W_0 = r_b T_0 = \frac 12 \frac{23}5 = \frac{23}{10}.
   the slowest machines or stations need not be the bottlenecks. Can
   you find or develop a general algorithm by which we can compute
   $T_0$, $W_0$ and $r_b$ for any network of reasonable size? (I have
-  not tried this\ldots yet.) 
+  not tried this yet. It might be too difficult. \tbd.) 
 
   One way to approach this problem is by placing (imaginary) huge
   amounts of work in front of each station and just see how the network drains. 

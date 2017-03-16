@@ -2,7 +2,7 @@
 \label{sec:queu-proc-as}
 
 In the construction of queueing processes as set out in
-section~\ref{sec:constr-discr-time} we are given two sequences of
+Section~\ref{sec:constr-discr-time} we are given two sequences of
 i.i.d. random variables: the number of arrivals $\{a_k\}$ per period
 and the service capacities $\{c_k\}$. Assuming that jobs can be served
 in the period they arrive, the departure and queue length processes
@@ -26,10 +26,10 @@ the random walk $\{Z_k\}$ by a device called a \emph{reflection map}.
 Besides the elegance of this construction, the construction leads to
 spectacularly fast simulations. Moreover, we can use the probabilistic
 tools that have been developed for the random walk to analyze queueing
-systems. On example is the distribution of the time until an
-especially large queue is reached; these times can be formulated as
-\emph{hitting times} of the random walk. Another example is the
-average time it takes to clear a large queue.
+systems. One example is the distribution of the time until an
+especially large queue length is reached; these times can be
+formulated as \emph{hitting times} of the random walk. Another example
+is the average time it takes to clear a large queue.
 
 In an exercise  below we derive that $Q_k$ satisfies the relation
 \begin{equation}\label{eq:reich1}
@@ -134,9 +134,10 @@ $W_{Q,0}=5$. However, for $k>10$ the distribution of $W_{Q,k}$ hardly
 changes, at least not visually. Apparently, the convergence of the
 sequence of distributions of $W_{Q,k}$ is rather fast. In the middle
 panel we show the results of a set of \emph{simulations} for
-increasing simulation length, up to $N=1000$ samples. Here the \emph{empirical distribution} for the simulation is defined as
+increasing simulation length, up to $N=1000$ samples. Here the
+\emph{empirical distribution} for the simulation is defined as
 \begin{equation*}
-\P{W_Q\leq x} =   n^{-1}\sum_{k=1}^n \1{W_{Q,k} \leq x},
+\P{W_Q\leq x} =   \frac 1n n\sum_{k=1}^n \1{W_{Q,k} \leq x},
 \end{equation*}
 where $W_{Q,k}$ is obtained by simulation. As should be clear from the
 figure, the simulated distribution also seems to converge quite fast to
@@ -274,7 +275,7 @@ does not make us, in some sense, much wiser. In fact, we use this
 result as a deterrent to study transient aspects of queueing system.
 
 \hint{It is actually not hard, even though the expression looks
-  hard. Use condition to see that
+  hard. Use conditioning to see that
   $\PP{m}{Z(t)=n} = \P{N_\mu(t) - N_\lambda(t) = m - n}$. Then write out
   the definitions of the two Poisson distributions. Assemble
   terms. Then fiddle a bit with the terms to get
@@ -389,6 +390,9 @@ I compute the following
   \max_x\{ |\P{W_{Q,k}\leq x} - \P{W_{Q,k-1}\leq x}|\},
 \end{equation*}
 for $x$ in the support of $W_{Q,k}$. 
+
+Let's print the difference (The Kolmogorov-Smirnov statistic) between
+the distributions of $W_k$ and $W_{k+1}$. 
 
 
 

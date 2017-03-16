@@ -1,7 +1,10 @@
 \section{Service Interruptions}
 \label{sec:serv-interr}
 
+See the related section 1.11 of the book of Zijm.
+
 No notes; only questions.
+
 
 \begin{question}
   Determine the expectation and variance of $S_N = \sum_{i=1}^N X_i$
@@ -33,11 +36,16 @@ that the $\{X_i\}$ are i.i.d. as $X$,
 \begin{equation*}
   \E{ S_N^2 \given N=n} = n \E{X^2} + n(n-1) (\E X)^2. 
 \end{equation*}
-With this, 
+Thus, interpreting $\E{S_N^2\given N}$ as a function of $N$, we get
+\begin{equation*}
+  \E{ S_N^2 \given N} = N \E{X^2} + N(N-1) (\E X)^2,
+\end{equation*}
+from which follows that
+
 \begin{equation*}
   \begin{split}
-  \E{ S_N^2}  &= \E{\E{ S_N^2 \given N=n}}  \\
-&= \E{N \E X^2 + N(N-1)(\E X)^2 } \\
+\E{ S_N^2}  &= \E{\E{ S_N^2 \given N}}  \\
+&= \E{N \E{X^2} + N(N-1)(\E X)^2 } \\
 & = \E N \E{ X^2} + \E{N^2} (\E X)^2 - \E N (\E X)^2 \\
 & = \E N (\E{ X^2}  - (\E X)^2) + \E{N^2} (\E X)^2 \\
 & = \E N \V X + \E{N^2} (\E X)^2.
@@ -77,7 +85,7 @@ And finally,
 \item \begin{equation*}
     \lambda \E S
   \end{equation*}
-Ensure you realized that you used Wald's rule.
+Ensure you realized that you used Wald's equation.
 \item  The number of jobs that arrive, on average, during one
   production cycle must be smaller than the total amount of jobs that
   can be served, on average, during one cycle.   The number of arrivals during the setup is $\lambda \E S$. The number of arrivals during serving the batch is $\lambda B/\mu$. Thus, 

@@ -25,7 +25,7 @@ arrive per unit time, i.e.,
   \lambda = \lim_{t\to\infty} \frac{A(t)}t.
 \end{equation}
 We remark in passing that this limit does not necessarily exist if
-$A(t)$ is some pathological function. If, however, the inter-arrival
+$A(t)$ is some pathological function. If, however, the interarrival
 times $\{X_k\}$ are the basic data, and $\{X_k\}$ are i.i.d.  and
 distributed as a generic random variable $X$ with finite mean $\E{X}$,
 we can construct $\{A_k\}$ and $\{A(t)\}$ as described in
@@ -39,14 +39,14 @@ $A(A_n) = n$. Thus,
   \frac{1}n\sum_{k=1}^n X_k = \frac{A_n}n = \frac{A_n}{A(A_n)}. 
 \end{equation*}
 But since $A_n\to\infty$ if $n\to\infty$, it follows from
-Eq.~(\ref{eq:3}) that the average inter-arrival time between two
+Eq.~(\ref{eq:3}) that the average interarrival time between two
 consecutive jobs is
 \begin{equation}\label{eq:54}
   \E X = \lim_{n\to\infty}  \frac{1}n\sum_{k=1}^n X_k = \lim_{n\to \infty} \frac{A_n}{A(A_n)} = \lim_{t\to\infty} \frac t{A(t)} = \frac 1 \lambda,
 \end{equation}
-where we take $t=A_n$ in the limit for $t\to\infty$.  In words the
+where we take $t=A_n$ in the limit for $t\to\infty$.  In words, the
 above states that the arrival rate $\lambda$ is the inverse of the
-expected inter-arrival time.
+expected interarrival time.
 
 
 The development of the departure times $\{D_k\}$ is entirely analogous
@@ -88,8 +88,8 @@ We call a system \recall{(rate) stable} if
   \lambda = \gamma,
 \end{equation*}
 in other words, the system is stable if, on the long run, jobs leave
-the system just as fast as they arrive. Observe that if
-$\lambda > \gamma$, then the queue length process $L(t) \to \infty$ as
+the system just as fast as they arrive. Of course, if
+$\lambda > \gamma$, the system length process $L(t) \to \infty$ as
 $t\to \infty$.
 
 It is also evident that jobs cannot depart faster than they can be
@@ -100,9 +100,10 @@ fact that $\gamma \leq \lambda$, we get
 \end{equation*}
 When $\mu \geq \lambda$ the above inequality reduces to
 $\gamma = \lambda$ for rate-stable systems. (It is interesting to
-prove this.) As it turns out, when $\mu = \lambda$ and $\V{S_n} > 0$ or
-$\V{X_n} >0$ then $\lim_t L(t)/t$ does not necessarily exist. For this
-reason we henceforth require that $\mu > \lambda$.
+prove this.) As it turns out, when $\mu = \lambda$ and the variance of
+the service times $\V{S} > 0$ or $\V{X} >0$ then $\lim_t L(t)/t$
+does not necessarily exist. For this reason we henceforth require that
+$\mu > \lambda$.
 
 The concept of \recall{load} or \emph{utilization}, denoted by the
 symbol $\rho$, is fundamental. One way to define it is as the limiting
@@ -144,7 +145,8 @@ arrivals, i.e., $\E S < \E X$.
 
 \begin{question}
   Define the departure time $D_{k}$ of the $k$th job in terms of
-  $\{D(t)\}$. (Use the analogy with Eq.~\eqref{eq:27}.)
+  $\{D(t)\}$. 
+\hint{Use the analogy with Eq.~\eqref{eq:27}.}
 \begin{solution}
   \begin{equation*}
  D_{k} = \inf\{t; D(t) \geq k\}.
@@ -344,8 +346,14 @@ such that
 \end{question}
 
 \begin{question}
- Can you make an arrival process such that $A(t)/t$ does not
-    have a limit? 
+  Can you make an arrival process such that $A(t)/t$ does not have a
+  limit?  
+
+  \hint{As a start, the function $\sin(t)$ has not a limit as
+    $t\to\infty$. However, the time-average $\sin(t)/t \to 0$.  Now
+    you need to make some function whose time-average does not
+    converge, hence it should grow fast, or fluctuate wilder and
+    wilder.}
   \begin{solution}
  If $N(t) = 3 t^2$, then clearly $N(t)/t = 3t$. This does not
     converge to a limit. 

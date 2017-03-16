@@ -325,33 +325,33 @@ $R$ or python will reveal that this is easy.
 
 This first year probability. It should be elementary for you. Ensure you can do it.}
 
-\begin{solution}  First find the distribution of $U_k=S_{k-1}-X_k$ so that we can write
-  $W_{Q,k}=[W_{Q,k-1}+U_k]^+$.  Use independence of $\{S_k\}$ and $\{X_k\}$:
+\begin{solution}  First find the distribution of $Y_k:=S_{k-1}-X_k$ so that we can write
+  $W_{Q,k}=[W_{Q,k-1}+Y_k]^+$.  Use independence of $\{S_k\}$ and $\{X_k\}$:
 \begin{align*}
-  \P{U_k=-2} &=\P{S_{k-1}-X_k=-2} = \P{S_{k-1}=1, X_k=3} = \P{S_{k-1}=1}\P{X_k=3} = \frac14.
+  \P{Y_k=-2} &=\P{S_{k-1}-X_k=-2} = \P{S_{k-1}=1, X_k=3} = \P{S_{k-1}=1}\P{X_k=3} = \frac14.
 \end{align*}
 Dropping the dependence on $k$ for ease, we get
 \begin{align*}
-  \P{U=-2} &=\P{S-X=-2} = \P{S=1, X=3} = \P{S=1}\P{X=3} = \frac14\\
-  \P{U=-1} &=\P{S=2}\P{X=3} = \frac14\\
-  \P{U=0} &=\P{S=1}\P{X=1} = \frac14\\
-  \P{U=1} &=\P{S=2}\P{X=1} = \frac14.
+  \P{Y=-2} &=\P{S-X=-2} = \P{S=1, X=3} = \P{S=1}\P{X=3} = \frac14\\
+  \P{Y=-1} &=\P{S=2}\P{X=3} = \frac14\\
+  \P{Y=0} &=\P{S=1}\P{X=1} = \frac14\\
+  \P{Y=1} &=\P{S=2}\P{X=1} = \frac14.
 \end{align*}
 With this
   \begin{align*}
-    \P{W_{Q,1} = 1} &=\P{W_{Q,0} + U_0= 1} = \P{3 + U_0 =1} = \P{U_0=-2} =\frac14\\
-    \P{W_{Q,1} = 2} &= \P{3 + U =2} = \P{U=-1}  =\frac14\\
-    \P{W_{Q,1} = 3} &= \P{3 + U = 3} = \P{U=0}  =\frac14\\
-    \P{W_{Q,1} = 4} &= \P{3 + U = 4} = \P{U=1}  =\frac14.\\
+    \P{W_{Q,1} = 1} &=\P{W_{Q,0} + Y_0= 1} = \P{3 + Y_0 =1} = \P{Y_0=-2} =\frac14\\
+    \P{W_{Q,1} = 2} &= \P{3 + Y =2} = \P{Y=-1}  =\frac14\\
+    \P{W_{Q,1} = 3} &= \P{3 + Y = 3} = \P{Y=0}  =\frac14\\
+    \P{W_{Q,1} = 4} &= \P{3 + Y = 4} = \P{Y=1}  =\frac14.\\
   \end{align*}
 And, then
   \begin{equation*}
     \begin{split}
     \P{W_{Q,2} = 1} 
-&=\P{W_{Q,1} + U = 1} = \sum_{i=1}^4 \P{W_{Q,1} + U = 1\given W_{Q,1}=i}\P{W_{Q,1}=i}\\
-&=\sum_{i=1}^4 \P{i + U = 1\given W_{Q,1}=i}\frac14
-=\sum_{i=1}^4 \P{U = 1-i\given W_{Q,1}=i}\frac14\\
-&=\frac14\sum_{i=1}^4 \P{U = 1-i} = \frac14(\P{U = 0} + \P{U=-1} +\P{U=-2}) = \frac{3}{16}.
+&=\P{W_{Q,1} + Y = 1} = \sum_{i=1}^4 \P{W_{Q,1} + Y = 1\given W_{Q,1}=i}\P{W_{Q,1}=i}\\
+&=\sum_{i=1}^4 \P{i + Y = 1\given W_{Q,1}=i}\frac14
+=\sum_{i=1}^4 \P{Y = 1-i\given W_{Q,1}=i}\frac14\\
+&=\frac14\sum_{i=1}^4 \P{Y = 1-i} = \frac14(\P{Y = 0} + \P{Y=-1} +\P{Y=-2}) = \frac{3}{16}.
     \end{split}
   \end{equation*}
 
