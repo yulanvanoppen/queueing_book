@@ -128,94 +128,14 @@ models, each with their own strengths and weaknesses.
 \end{question}
 
 
-
 \begin{question}[use=false]
-  In this question we develop a simple model to analyze the sojourn
-  time at a large pancake restaurant. The restaurant has three large
-  dining rooms and a terrace. One a busy summer days there can be more
-  than 600 customers present at the same time. The kitchen has a stove
-  with 12 burners to make pancakes. Baking one pancake takes about 2
-  minutes. One out of five pancakes get an extra topping after
-  baking. The chef bakes the pancakes, the assistant handles the
-  toppings. We model this situation as a two-station queueing system:
-  the chef is the server at the first station, the assistant is the
-  server at the second station. The chef is a bit clumsy with his
-  tools: about 10\% of the pancakes falls on the floor, hence needs to
-  be baked again.  We want to compute the throughput time, i.e, the
-  total sojourn time, for this system.
-
-  \begin{enumerate}
-  \item Suppose we would model the stove as a $M/M/1$ queueing system
-    in which the (single) server works at twelve times the rate of the
-    one of the burners. Would this be a good model? 
-  \item What is the routing matrix for this queueing system?
-\item What is the vector $\vec \gamma$ of external arrivals?
-\item Can you find an approximation for the net arrival rate
-  $\lambda_1$ and $\lambda_2$ at the two stations? 
-  \end{enumerate}
-
-
-  Up to now we have not yet discussed an important detail, the
-  distribution of the inter departure times at the chef. 
-
-  \begin{enumerate}[resume]
-  \item Why is this departure process most probably not Poisson?
-  \item What type of $C_a^2$ do you expect to see at the assistant? 
-  \item How would you estimate the waiting time at the assistant?
-  \item Estimate the arrival rate $\alpha$, and compute the utilization of  the chef.
-  \item What formula would you use to estimate the average waiting time at the chef?
-  \end{enumerate}
-
-    \begin{solution}
-      \begin{enumerate}
-      \item 
-      No, not really, it takes 2 minutes to bake a pancake, no matter
-      the amount of burners available.  Thus, only when the queues are
-      really long, the difference in sojourn time between a fast single server and multiple, parallel, slow servers would be small. 
-    \item   The chef drops 10\% of the pancakes. These have to be re-baked. Of
-  the remaining 90\% of the pancakes one out five gets a topping,
-  thus, $0.9\cdot0.2=0.18$ goes to the assistant. The assistant
-  delivers quality work, so no pancakes have to be processed by him
-  again. Thus,
-\begin{equation*} 
-P=
-  \begin{pmatrix}
-    1/10 & 9/50 \\
-0 & 0
-  \end{pmatrix}
-\end{equation*}
-\item Only the chef gets new orders.  $\vec \gamma = (\alpha, 0)$,
-where  $\alpha$ is the arrival rate of new orders.
-\item The assistant receives
-  20\% of all pancakes: $\lambda_2 = \alpha/5$.  As the chef has to
-  redo 10\% of the pancakes, $\lambda_1 = \frac{10}{9}\alpha$.
-
-  We can also solve $\vec \gamma + \vec \lambda P = \vec \lambda$.
-  This gives, $\lambda_1 = \alpha + \lambda_1/10$, and
-  $\lambda_2 = 9/50 \lambda_1$. Solving this gives the same answers.
-\item       The baking of a pancake takes about 2 minutes, and it quite
-      regular. Thus, the queueing situation at the chef resembles the
-      $M/D/12$ queue. However, due to the rework, there is more variability than in the $M/D/12$ queue. 
-    \item       I would guess it would be smaller than 1. By how much is not so
-      easy to say. Simulation of the $M/D/12$ queue would be most helpful here.
-    \item       As both  $C_a^2$ and $C_s^2$ at the second station are smaller than 1, in particular $C_s^2$ must be quite a bit smaller than 1, I would use the formula:
-\begin{equation*}
-  \E W_Q \approx \frac{C_a^2 + C_s^2}2 \frac \rho{1-\rho} ES_2,
-\end{equation*}
-where $\rho=\lambda_2E(S_2)$.
-\item       Lets concentrate on a busy day. There are 600 people
-      present. Assume they stay one hour on average. By Little's law
-      we see that the arrival rate of people is $600/60=10$ per
-      minute. Assume half of the people order a pancake, then $\alpha=5$ per minute. As the average baking time is 2 minutes, $\rho = \lambda_1 \E S_1/12 = 5\cdot 10/9\cdot 2/12= 25/27$.
-Realize that $\rho=\lambda\E S_1/12$ is not OK. 
-\item Since we have many customers, independently arriving and ordering pancakes, it is reasonable to model the arrival process as a Poisson process. Thus, as an approximation
-  \begin{equation*}
-    \E W_Q \approx \frac12 \frac{\rho^{\sqrt{2(12+1)} - 1}}{12(1-\rho)} E(S_1).
-  \end{equation*}
-where $\rho=\lambda_1 E(S_1)$.
-\end{enumerate}
-\end{solution}
+Just to how 
+  Apply the formulas (2.30)--(2.33) of Zijm to a single station
+  queueing network with rework.
+  
 \end{question}
+
+
 
 
 \begin{question}[use=false]
