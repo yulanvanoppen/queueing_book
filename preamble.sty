@@ -139,6 +139,36 @@
 \newcommand{\recall}[1]{\emph{#1}\recallsymbol}
 \newcommand{\nvf}[1]{\tbdsymbol}
 
+\makeatletter
+\def\integral#1#2{\def\temp@expr{#1\,\mathrm d#2}\int\integral@}
+\def\integral@{%
+    \@ifnextchar{_}{\integral@sub}{%
+    \@ifnextchar{^}{\integral@sup}{\temp@expr}}%
+}%
+\def\integral@sub#1#2{_{#2}\integral@}
+\def\integral@sup#1#2{^{#2}\integral@}
+\makeatother
+
+% \makeatletter
+% \def\E#1{\def\temp@expr{\left\{#1\right\}}{\sf E}\expectation@}
+% \def\expectation@{%
+%     \@ifnextchar{_}{\expectation@sub}{%
+%     \@ifnextchar{^}{\expectation@sup}{\temp@expr}}%
+% }%
+% \def\expectation@sub#1#2{_{#2}\expectation@}
+% \def\expectation@sup#1#2{^{#2}\expectation@}
+% \makeatother
+% example on how to use the above definitions.
+% \[
+%     \integral{x^2}{x} \qquad
+%     \integral{x^2}{x}_a \qquad
+%     \integral{x^2}{x}^b \qquad
+%     \integral{x^2}{x}_a^b \qquad
+%     \integral{x^2}{x}^b_a \quad
+%     \E{\int_0^\infty x^2 dx \given A}^b_a \quad
+% \]
+
+
 
 \setcounter{tocdepth}{1}
 
