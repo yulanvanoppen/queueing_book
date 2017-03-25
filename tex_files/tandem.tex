@@ -6,18 +6,19 @@
 
 Consider two stations in tandem. The service process at both stations
 is subject to variability. Suppose you have some money to spend on
-reducing the variability of either of the two machines.  Which one is
-the better one to spend it on?\footnote{You should realize the relevancy of
-modeling for this problem. Due to the lack of money you can only
-achieve one of the alternatives; hence there is no way of finding out
-what would have happened if you would have made the other choice.}
+reducing the variability of just one, but not both, of the machines.
+Which one is the better one to spend it on?\footnote{You should
+  realize the relevancy of modeling for this problem. Due to the lack
+  of money you can only achieve one of the alternatives; hence there
+  is no way of finding out what would have happened if you would have
+  made the other choice.}
 
 The answer to this problem is of course not clear cut. A well balanced
 answer requires some extra information, such as which of the two
 stations has the larger variability. However, we can provide some
 general insights into this problem.
 
-We first compute the expected waiting time in the queues at both
+We first compute the expected waiting time in the queue at both
 stations for a  reference situation. Then we derive similar
 expressions for the waiting times in case we spend all money on the
 second or first station. 
@@ -41,10 +42,10 @@ immediate.
 
 What can we say about the second station?  Clearly, the jobs departing
 at the first stations are the arrivals at the second station. Hence,
-this departure process being exponential with rate $\lambda$, the
+the departure process being exponential with rate $\lambda$, the
 inter-arrival times at the second station are also exponential with
 rate $\lambda$. Consequently, the second queue is also an $M/M/1$
-queue.  
+queue.
 
 It is well known that, for this case, the total waiting time in the
 system, i.e., the time spent in both queues, is the sum of the waiting
@@ -52,16 +53,14 @@ times at the first and second station. As each is an $M/M/1$ queue,
 the total waiting time has the form:
 \begin{equation}
   \begin{split}
-E(W)  &= E(W_1) + E(W_2) \\
+\E{W_Q}  &= \E{W_{Q,1}} + \E{W_{Q,2}} \\
 &= \frac{\rho_1}{1-\rho_1} \frac1{\mu_1} + \frac{\rho_2}{1-\rho_2} \frac1{\mu_2},
   \end{split}
 \end{equation}
-where $\rho_i = \lambda/\mu_i$ and $E(S_i) = 1/\mu_i$, for $i=1,2$. 
+where $\rho_i = \lambda/\mu_i$ and $\E{S_i} = 1/\mu_i$, for $i=1,2$. 
 
 
-\emph{Case1: Spend all the money on the second server} Now we might
-spend the money on the second machine. How would this influence the
-total waiting time $E(W)$?
+\emph{Case1: Spend all the money on the second server} 
 
 As we reduce the variability of the second server, the service process
 is no longer exponential. However, the arrival process at the second
@@ -69,48 +68,50 @@ station is still Poisson. As a consequence, the queueing discipline
 changes to the $M/G/1$ queue. The expected waiting time for this case
 has the form:
 \begin{equation}\label{eq:200}
-E(W_2) = \frac{1+C_{s,2}^2}2\frac{\rho_2}{1-\rho_2} \frac1{\mu_2},
+\E{W_{Q,2}} = \frac{1+C_{s,2}^2}2\frac{\rho_2}{1-\rho_2} \frac1{\mu_2},
 \end{equation}
-where $C_{s,2}$ is the coefficient of variation of the service process
-of the second server.  
+where $C_{s,2}^2$ is the squared coefficient of variation of the
+service process of the second server.
 
 Suppose the money we have suffices to entirely remove the variability
 of the second server.  (This is of course also the best we can
 possibly achieve.) This yields that the coefficient of variation
-$C_{v,2} = 0$. As an aside, observe that as all variability has been
+$C_{s,2}^s = 0$. As an aside, observe that as all variability has been
 removed, the service process is entirely deterministic: each service
 takes exactly the same amount of time. As a result, we arrive at the
 $M/D/1$ queue to model the queueing process at the second station.
 
 The expected waiting time for the $M/D/1$ queue follows immediately
-from~(\ref{eq:200}) by setting $C_{v,2} =0$:
+from~(\ref{eq:200}) by setting $C_{s,2}^2 =0$:
 \begin{equation}\label{eq:300}
-E(W_2) = \frac{1}2\frac{\rho_2}{1-\rho_2} \frac1{\mu_2}.
+\E{W_{Q,2}} = \frac{1}2\frac{\rho_2}{1-\rho_2} \frac1{\mu_2}.
 \end{equation}
 Clearly, this is half the waiting time of the  $M/M/1$ queue. 
 
 Since we do not change the first station in any way, this is still an
-$M/M/1$ queue. Thus, the total waiting time for this scenario becomes:
+$M/M/1$ queue. Thus, the total time in queue for this scenario becomes:
 \begin{equation*}
-  E(W)= \frac{\rho_1}{1-\rho_1} \frac1{\mu_1} +
+  \E{W_Q}= \frac{\rho_1}{1-\rho_1} \frac1{\mu_1} +
   \frac12\frac{\rho_2}{1-\rho_2} \frac1{\mu_2}. 
 \end{equation*}
 
 
 \emph{Case 2: Spend the money on the first server} Analogous to the
 previous situation, suppose we can set the coefficient of variation
-$C_{1,v}$ of the first server to zero. Thus, this becomes an $M/D/1$
+$C_{1,s}^2$ of the first server to zero. Thus, this becomes an $M/D/1$
 queue, so that, similar to~(\ref{eq:300}):
 \begin{equation*}
-E(W_1) = \frac{1}2\frac{\rho_1}{1-\rho_1} \frac1{\mu_1}.
+\E{W_{Q,1}} = \frac{1}2\frac{\rho_1}{1-\rho_1} \frac1{\mu_1}.
 \end{equation*}
 
 Contrary to the $M/M/1$ queue, the inter-departures of the $M/D/1$
 queue are not exponentially distributed. Rather, as long as the first
 server is busy, they are deterministic, i.e., equally separated in
-time.  Only when the first server is idle---these idle times still
-have exponential distribution---there are no regular departures.  Thus
-the departure process is not deterministic. However, for the sake of
+time.  When the first server is idle, for the next departure we first
+need to wait for the next arrival, with exponentially distributed
+interarrival time $X$, and then for this arrival to finish, which
+takes $D$. Thus, the time to the next departure is $X+D$.  Hence, the
+departure process is not deterministic. However, for the sake of
 simplicity, we assume in the sequel of this example that the departure
 process \emph{is} deterministic.
 
@@ -127,19 +128,19 @@ expression for the waiting time of the $G/G/1$ queue.
 We know that the expected waiting time for the the $G/G/1$ queue has
 the approximate form:
 \begin{equation}\label{eq:500}
-E(W_2) = \frac{C_{a,2}^2+C_{s,2}^2}2\frac{\rho_2}{1-\rho_2} \frac1{\mu_2},
+\E{W_{Q,2}} = \frac{C_{a,2}^2+C_{s,2}^2}2\frac{\rho_2}{1-\rho_2} \frac1{\mu_2},
 \end{equation}
-Clearly, for our case, the coefficient of  variation $C_{a,s}$ of the
-arrival process becomes, approximately, $0$, while $C_{s,2} = 1$,
+Clearly, for our case, the coefficient of  variation $C_{a,s}^2$ of the
+arrival process becomes, approximately, $0$, while $C_{s,2}^2 = 1$,
 since the service process is still exponential. Hence,
 \begin{equation}\label{eq:400}
-E(W_2) = \frac12\frac{\rho_2}{1-\rho_2} \frac1{\mu_2}.
+\E{W_{Q,2}} = \frac12\frac{\rho_2}{1-\rho_2} \frac1{\mu_2}.
 \end{equation}
 
-Combining~(\ref{eq:500}) and~(\ref{eq:400}), the total waiting time
+Combining~(\ref{eq:500}) and~(\ref{eq:400}), the total  time in queue
 becomes:
 \begin{equation*}
-  E(W)= \frac12\frac{\rho_1}{1-\rho_1} \frac1{\mu_1} +
+  \E{W_Q}= \frac12\frac{\rho_1}{1-\rho_1} \frac1{\mu_1} +
   \frac12\frac{\rho_2}{1-\rho_2} \frac1{\mu_2}, 
 \end{equation*}
 which is half the waiting time of the reference scenario, and still
@@ -149,8 +150,9 @@ less than the first scenario.
 variability at the first station. The main point to remember is that
 reducing the variability of the service process at the first station
 also reduces the variability of its departure process, hence the
-variability of the arrival processes at the second station. Thus, we
-gain at two locations of the chain of stations, rather than at one.
+variability of the arrival processes at the second station. Thus, the
+situation improves at two locations of the chain of stations, rather
+than at one.
 
 Interestingly, the departure process of the $D/M/1$ queue is not
 Poisson; the coefficient of variation is less than $1$. Hence, if
@@ -326,3 +328,8 @@ Lp
   \end{enumerate}
     \end{solution}
 \end{question}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../booktest"
+%%% End:

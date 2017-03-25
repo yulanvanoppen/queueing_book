@@ -410,7 +410,7 @@ Note that  $\gamma < \lambda$, as it should be the case.
   necessarily the same as for a $G/G/1/1$ queue with the same load?  
 \hint{Provide an  example.}
   \begin{solution}
- Typically, in the $G/G/1$ queue, the arrivals do not see  time-averages. Consequently, the fraction of arrivals that are blocked is not necessarily equal to the utilization $\rho$.
+ Typically, in the $G/G/1$ queue, the arrivals do not see  time-averages. Consequently, the fraction of arrivals that are blocked is not necessarily equal to the utilization~$\rho$.
 
   Again, take jobs with duration 59 minutes and interarrival times of
   1 hour. The load is $59/60$, but no job is lost, also not in the

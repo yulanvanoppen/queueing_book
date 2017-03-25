@@ -259,11 +259,11 @@ where we subsequently use that
 where the arrival process is a Poisson process $N_\lambda(t)$ and the
 departure process is a Poisson process $N_\mu(t)$. Show that
 \begin{equation*}
-    \PP{m}{Z(t)=n} 
+    \P{Z(t)=n}_m 
 = e^{-(\lambda+\mu)t} \left(\frac\lambda\mu\right)^{(n-m)/2} \sum_{k=0}^\infty 
 \frac{(t\sqrt{\lambda\mu} )^{2k+m-n}}{k!(k+m-n)!},
 \end{equation*}
-where $\PP{m}{\cdot}$ means that the random walk starts at $m$, i.e.,
+where $\P{\cdot}_m$ means that the random walk starts at $m$, i.e.,
 $Z(0)=m$\footnote{The summation includes negative factorials when
 $k+m-n<0$. The tacit assumption is to take $n!\in \{\pm \infty\}$ for
 $n\in \Z_-$. Another way to get around this problem is to take
@@ -276,7 +276,7 @@ result as a deterrent to study transient aspects of queueing system.
 
 \hint{It is actually not hard, even though the expression looks
   hard. Use conditioning to see that
-  $\PP{m}{Z(t)=n} = \P{N_\mu(t) - N_\lambda(t) = m - n}$. Then write out
+  $\P{Z(t)=n}_m = \P{N_\mu(t) - N_\lambda(t) = m - n}$. Then write out
   the definitions of the two Poisson distributions. Assemble
   terms. Then fiddle a bit with the terms to get
   $(t\sqrt{\lambda\mu})$. }
@@ -288,7 +288,7 @@ function of time until it hits zero for the first time. What can we
 say about the distribution of $Q(t)$? With the above random walk, 
 \begin{equation}\label{eq:29}
   \begin{split}
-    \PP{m}{Z(t)=n} 
+    \P{Z(t)=n}_m
 &= \P{m+N_\lambda(t) - N_\mu(t) = n }  = \P{N_\lambda(t) - N_\mu(t) = n-m }  \\
 &= \P{N_\mu(t) - N_\lambda(t) = m-n }  \\
 &= \sum_{k=0}^\infty \P{N_\mu(t) = k - n + m\given N_\lambda(t) = k } \P{N_\lambda(t)=k}\\
