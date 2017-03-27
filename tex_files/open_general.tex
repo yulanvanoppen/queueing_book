@@ -133,7 +133,7 @@ models, each with their own strengths and weaknesses.
 Here is an example to show how to use the formulas for the general open network.
 
 Consider a single-machine station with deterministic (very regular)
-production times such that each job takes $S=10 minutes$. Jobs arrive
+production times such that each job takes $S=10$ minutes. Jobs arrive
 as a Poisson process with rate $\lambda=4$ per hour. Thus, we model
 the station as an $M/D/1$ queue. Jobs fail with probability $1/5$ and
 are sent back the machine for repair. The production times for repair
@@ -153,7 +153,9 @@ since
 \end{equation*}
 This was easy. Now the case with rework.
 
-Lets work from top to bottom and compute anything we need along the way. First, the departure SCV. Noting that $i=1$ and $M=1$, 
+Lets work from top to bottom of Section 2.4.2 of Zijm and compute
+anything we need along the way. First, the departure SCV. Noting that
+$i=1$ and $M=1$,
 \begin{equation*}
   C_{d1}^2 
 = (1-\rho_1^2)C_{a1}^2 + \rho_1^2 C_{s1}^2.
@@ -178,7 +180,8 @@ Thus,
 Observe that we don't know $C_{a1}^2$ yet as it is a mix of the
 external arrivals and the jobs that require rework. Also, we are, by
 the explanation in Zijm's book, not allowed to take $C_{1s}^2=0$; we
-need to use the suggested approximation.
+need to use the suggested approximation to take
+$C_s^2 = \max\{0.2, C_s^2\}$ in the formula, rather than $C_s^2$.
 
 Next, splitting. We have
 \begin{equation*}
@@ -248,6 +251,10 @@ not too way off, we see that we can take $C_{1a}^2=1$. And then, including the r
 
   Perhaps I should implement the above in python to deal with the
   numerical details.
+
+  In the synthesis section in Section Zijm.2.4.2, all of the above
+  algebra has been reduced to a set of linear equations to compute
+  $C_{a,i}^2$ for stations $i=1,\ldots,M$.
 \end{solution}
 \end{question}
 

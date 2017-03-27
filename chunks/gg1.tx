@@ -317,19 +317,27 @@ What are $\rho$,
   \hint{ Let $S_n = \sum_{k=1}^n X_k$ and $\sigma_n^2 = n\V X$. Then,
     under conditions you can find on the internet,
     \begin{equation*}
-    \frac{S_n - n \E X}{\sigma_n} \to N(0,1), \quad\text{as } n\to \infty,
+    \frac{S_n - n \E X}{\sigma_n} \to \mathcal{N}(0,1), \quad\text{as } n\to \infty,
     \end{equation*}
-    where $N(0,1)$ is a normally distributed random variable with
-    $\mu=0$ and $\sigma=1$. But then $S_n$ is approximately
-    distributed as a normal r.v. $N(n\E X, \sigma_n)$ (since
-    $N(n\E X, \sigma_n) = \sigma_n N(0,1) + n \E X$.)}
+    where $\mathcal{N}(0,1)$ is a normally distributed random variable
+    with $\mu=0$ and $\sigma^2=1$. But then 
+    \begin{align*}
+    \frac{S_n - n \E X}{\sigma_n} &\approx  \mathcal{N}(0,1)  \iff\\
+    S_n - n \E X &\approx  \sigma_n \mathcal{N}(0,1)  \iff\\
+    S_n - n \E X &\approx  \mathcal{N}(0,\sigma_n^2)  \iff\\
+    S_n  &\approx   n \E X + \mathcal{N}(0,\sigma_n^2)  \iff\\
+    S_n  &\approx    \mathcal{N}(n \E X,\sigma_n^2),
+    \end{align*}
+    hence, $S_n$ is approximately distributed as
+    $\mathcal{N}(n\E X, \sigma_n^2)$.
+}
 
 \begin{solution} If the number in the system is $n$, then the total
   service time required to process these $n$ jobs is the sum of the
   service times, i.e.,$W_{Q,k} = \sum_{k=1}^n S_k$ where $k$ counts over the
   $n$ jobs in the system. Then, with the hint,
   \begin{equation*}
-    W_{Q, k} \sim \sqrt{n \V S} N(n\E S, \sigma_n)
+    W_{Q, k} \sim  \mathcal{N}(n\E S, \sigma_n^2)
   \end{equation*}
 where $\sigma_n^2 = n \V S$. 
 Thus, the waiting time in queue is approximately normally distributed with mean $n \E S$ and variance $n \V S$. 

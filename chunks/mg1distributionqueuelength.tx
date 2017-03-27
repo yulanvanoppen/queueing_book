@@ -247,19 +247,21 @@ If the service time is $s$ units long, we need to know the number of arrivals du
 \begin{question}
  Explain that 
 \begin{equation}\label{eq:10}
-  \P{Y_k = j} = \int_0^\infty e^{-\lambda s}\frac{(\lambda s)^j}{j!}\, \d F(s).
+  \P{Y_k = j} = \int_0^\infty e^{-\lambda x}\frac{(\lambda x)^j}{j!}\, \d F(x).
 \end{equation}
 where $F$ is the distribution of the service times.
 \begin{solution}
   We use a conditioning argument to arrive at this result. The
-  probability that the service time is $s$ units long is written in
-  various ways in the literature: $F(\d s) = \d F(s) = \P{S\in \d s}$.
-  (To properly define this we need measure theory\ldots). When $F$ has
-  a density $f$, then $\d F(s) = f(s) \d s$.  Note that when $S$ is
-  discrete, it does not have density everywhere. With this,
+  probability that the service time is $x$ units long is written in
+  various ways in the literature: $F(\d x) = \d F(x) = \P{S\in \d x}$,
+  but this all means the same thing, it is only the notation that
+  differs.  (As an aside, to properly define this we need measure
+  theory\ldots). When $F$ has a density $f$, then
+  $\d F(x) = f(x) \d x$.  Note that when $S$ is discrete, it does not
+  have a density everywhere. With this,
     \begin{equation*}
-    \P{Y_k=j} = \int_0^\infty \P{Y_k =j\given S=s}\P{S\in \d s} =
-    \int_0^\infty \P{Y_k =j\given S=s} \d F(s).
+    \P{Y_k=j} = \int_0^\infty \P{Y_k =j\given S=x}\P{S\in \d x} =
+    \int_0^\infty \P{Y_k =j\given S=x} \d F(x).
     \end{equation*}
     Using the answer of the previous problem we arrive at the result.
 \end{solution}
@@ -267,21 +269,83 @@ where $F$ is the distribution of the service times.
 
 \begin{question}
   If $S$ is deterministic and equal to $s$, show that
-  Eq.~\eqref{eq:10} reduces to Eq.~\eqref{eq:4}.  \hint{If $S=s$ then
+  Eq.~\eqref{eq:10} reduces to Eq.~\eqref{eq:4}.  
+
+\hint{If $S=s$ then
     $\P{S=s}=1$, i.e., all probability mass lies at $s$. Thus, all
     arrivals must occur during $[0,s]$.}
 
   \begin{solution}
-    If $\P{S=s}=1$, then $\int_0^\infty g(x) \d F(x) = g(s)$ for any
-    sensible function $g$. More specifically, since $\P{S=s}=1$, the
-    distribution $F$ has an atom at $s$. The size of the atom is
-    $F(s)-F(s-)=1$. Thus, for instance,
-    $\int_0^\infty x \d F(x) = s (F(s)-F(s-)) =s$. The function $x$ in
-    this integral can be replaced by any function $g(x)$ (provided $g$
-    satisfies some technical regularity conditions. If you are
-    mathematically interested: it must be measurable.)  Applying this
-    result to the function $e^{-\lambda x}(\lambda x)^j/j!$ we obtain
-    the answer.
+
+    Let us first attack this problem from a general point of
+    view. Suppose the service time $S$ can take values
+    $s_1<s_2<\cdots <s_n$, and $\P{S=s_i}=\alpha_i$. Then of course we
+    want that $\P{S\leq s_n} = \sum_{i=1}^n \alpha_i = 1$. The
+    distribution function $F$ of $S$ is in this case a step function,
+    with steps at the points $s_1, s_2, \ldots$, and step sizes
+    $\alpha_1, \alpha_2, \ldots$. Thus, $F(s_i)-F(s_i-)=\alpha_i$. We
+    say that such a distribution function has \emph{atoms} at the
+    points $s_1, s_2, \ldots$. In this case we write
+  \begin{equation*}
+    \int_0^\infty g(x) \d F(x) = \sum_{i=1}^n g(s_i) \alpha_i.
+  \end{equation*}
+  Thus, the integral of $g$ with respect to $F$ is the sum of $g$ at
+  the points at which $F$ makes a jump times the weight of $F$ at
+  these points. 
+
+
+  As an example, in case $S\equiv 10$ (the service time is always 10
+  time units long) the distribution function $F$ makes just one jump
+  at $s_1=10$ of size $\alpha_1 = F(10)-F(10-) =1$, i.e., $F$ has the
+  form
+    \begin{equation*}
+      F(x) = 
+      \begin{cases}
+        0, &\quad x< 10, \\
+        1, &\quad x\geq 10.
+      \end{cases}
+    \end{equation*}
+With this, 
+\begin{equation*}
+  \int_0^\infty g(x) \d F(x) = \sum_{i=1}^n g(s_i) \alpha_i = g(s_1) \alpha_1 = g(10) \cdot 1 = g(10).
+\end{equation*}
+Thus, the integral of $g$ with respect to this distribution $F$ is
+$g(10)$.  More generally, when $F$ puts all probability mass at the
+single point $s$ (rather than at the point $10$), then
+\begin{equation*}
+  \int_0^\infty g(x) \d F(x) = g(s).
+\end{equation*}
+
+    Let us now copy the formula of the previous problem:
+    \begin{equation*}
+    \P{Y_k=j} = \int_0^\infty \P{Y_k =j\given S=x} \d F(x).
+    \end{equation*}
+    We see that here the integrand is the function
+    $g(x) = \P{Y_k=j\given S=x}$. It is given in the question that $F$
+    puts all mass on the point $s$. Therefore,
+    \begin{equation*}
+    \P{Y_k=j} = \int_0^\infty \P{Y_k =j\given S=x} \d F(x) = 
+\int_0^\infty g(x) \d F(x) = g(s) \qquad \star
+    \end{equation*}
+
+    Now we also know that if the service time takes precisely $x$ time
+    units, the number of arrivals is Poisson distributed. Therefore
+    \begin{equation*}
+    \P{Y_k =j\given S=x} = e^{-\lambda x}\frac{(\lambda x)^j}{j!}.
+    \end{equation*}
+Hence, 
+    \begin{equation*}
+    g(x) = \P{Y_k =j\given S=x} = e^{-\lambda x}\frac{(\lambda x)^j}{j!}.
+    \end{equation*}
+
+
+    Finally, using $(\star)$, and taking $x=s$ in the above expression of $g$, we get
+    \begin{equation*}
+    \P{Y_k=j} = \int_0^\infty \P{Y_k =j\given S=x} \d F(x) = 
+    g(s) = e^{-\lambda s}\frac{(\lambda s)^j}{j!}.
+    \end{equation*}
+
+
   \end{solution}
 \end{question}
 
@@ -295,8 +359,8 @@ Use conditional probability to see that
 \begin{equation*}
   \begin{split}
   \P{Y_n = j} 
-&= \int_0^\infty e^{-\lambda s}\frac{(\lambda s)^j}{j!}\, \d F(s) = \int_0^\infty e^{-\lambda s}\frac{(\lambda s)^j}{j!} \mu e^{-\mu s}\, \d s \\
-&= \frac{\mu}{j!}\lambda^j \int_0^\infty e^{-(\lambda+\mu) s}s^j\,\d s = \frac{\mu}{j!}\left(\frac{\lambda}{\lambda+\mu}\right)^j \int_0^\infty e^{-(\lambda+\mu) s}((\lambda+\mu)s)^j\,\d s \\
+&= \int_0^\infty e^{-\lambda x}\frac{(\lambda x)^j}{j!}\, \d F(x) = \int_0^\infty e^{-\lambda x}\frac{(\lambda x)^j}{j!} \mu e^{-\mu x}\, \d x \\
+&= \frac{\mu}{j!}\lambda^j \int_0^\infty e^{-(\lambda+\mu) x}x^j\,\d x = \frac{\mu}{j!}\left(\frac{\lambda}{\lambda+\mu}\right)^j \int_0^\infty e^{-(\lambda+\mu) x}((\lambda+\mu)x)^j\,\d x \\
 &= \frac{\mu}{j!}\left(\frac{\lambda}{\lambda+\mu}\right)^j \frac{j!}{\lambda+\mu}.
 \end{split}
 \end{equation*}
@@ -337,9 +401,14 @@ G(j) = \sum_{k=j+1}^\infty f(k) =  \left(\frac{\lambda}{\lambda+\mu}\right)^{j+1
 \end{question}
 
 \begin{question}
-  Use Eq.~\eqref{eq:41} to derive a closed-form expression for the
-  queue length distribution for the $M/M/1$ queue.  \hint{ Define
-    shorthands such as $\alpha=\lambda/(\lambda+\mu)$, so that
+  Clearly, the $M/M/1$ queue is a special case of the $M/G/1$
+  queue. For this reason, Eq.~\eqref{eq:41} must also apply to the
+  $M/M/1$ queue.  Thus, to check our work, show that this recursion,
+  when applied to the $M/M/1$ queue, gives the queue length
+  distribution for the $M/M/1$ queue, i.e., $p(n)=(1-\rho)\rho^n$. 
+
+\hint{ Define shorthands
+    such as $\alpha=\lambda/(\lambda+\mu)$, so that
     $1-\alpha = \mu/(\lambda+\mu)$, and
     $\alpha/(1-\alpha) = \lambda /\mu = \rho$.  Then, with the
     previous exercise that $f(n) = \alpha^n(1-\alpha)$ and

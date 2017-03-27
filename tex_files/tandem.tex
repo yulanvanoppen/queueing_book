@@ -200,14 +200,50 @@ downstream, reducing the waiting time all along the chain.
 This is really a neat problem. Please spend serious time on it to
 solve before looking at the answer. It requires some ingenuity on your part. 
 
-Let $p_{ij}$ be the fraction of time that the system contains
-$j$ taxi cabs and $i$ riders. I assume that all members of
-a party of riders can be served by a single cab (that is, the parties
-do not excees the capacity of a cab and all members of a party have
-the same destination). For clarity, write $\mu$ for the rate at
-which cabs arrive, and $\lambda$ for the arrival rate of parties
-of riders. Then:
+Let $p_{ij}$ be the fraction of time that the system contains $i$
+riders and $j$ taxi cabs. I assume that all members of a party of
+riders can be served by a single cab (that is, the parties do not
+exceed the capacity of a cab and all members of a party have the same
+destination). For clarity, write $\mu$ for the rate at which cabs
+arrive, and $\lambda$ for the arrival rate of parties of riders.  Then
+the transitions are as in the figure below. Suppose first that there
+are $3$ taxi cabs. When a group arrives (at rate $\lambda$), there is
+one taxi less, and so on, until there are no more taxi's
+left. Finally, if yet more groups arrive, they have to wait. When a
+new taxi arrives, the number of groups is reduced by one, and so on,
+until there are $3$ taxi's waiting and no groups of people.
 
+
+    \begin{center}
+
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.8cm,
+                    semithick]
+  \node[state] (0) {$p(0,3)$} ;
+  \node[state] (1) [right of=0] {$p(0,2)$};
+  \node[state] (2) [right of=1] {$p(0,1)$};
+  \node[state] (3) [right of=2] {$p(0,0)$};
+  \node[state] (4) [right of=3] {$p(1,0)$};
+  \node[state] (5) [right of=4] {$p(2,0)$};
+  \node[state] (6) [right of=5] {$p(\cdot, \cdot)$};
+
+\path 
+ (0) edge [bend left] node {$\lambda$} (1)
+ (1) edge [bend left] node {$\mu$} (0)
+ (1) edge [bend left] node {$\lambda$} (2)
+ (2) edge [bend left] node {$\mu$} (1)
+ (2) edge [bend left] node {$\lambda$} (3)
+ (3) edge [bend left] node {$\mu$} (2)
+ (3) edge [bend left] node {$\lambda$} (4)
+ (4) edge [bend left] node {$\mu$} (3)
+ (4) edge [bend left] node {$\lambda$} (5)
+ (5) edge [bend left] node {$\mu$} (4)
+ (5) edge [bend left] node {$\lambda$} (6)
+;
+\end{tikzpicture}
+      
+    \end{center}
+
+From this figure, we see that
 \begin{align*}
 \lambda p_{0,3} &= \mu p_{0,2} \\
 (\lambda+\mu) p_{0,2} &= \mu p_{0,1} + \lambda p_{0,3}\\
@@ -216,12 +252,13 @@ of riders. Then:
 (\lambda+\mu) p_{1,0} &= \mu p_{2,0} + \lambda p_{0,0}\\
 (\lambda+\mu) p_{2,0} &= \mu p_{3,0} + \lambda p_{1,0}\\
 \end{align*}
-And so on. Thus, it is left to compute $p_{ij}$. Observe that
-the scheme of the equations is precisely the same as the scheme of the
-M/M/1 queue, just the number of the states is different. Let $q$
-be the number of jobs in an M/M/1 queue. Some thought will reveal that
-the queueing system with cabs and parties can be mapped to an
-equivalent M/M/1 queueing system. In fact, consider the following table
+And so on. Thus, it is left to compute $p_{ij}$. Observe from this
+scheme, or the above figure, that the situation with the taxi's
+correspond to an $M/M/1$ queue, only the states have a `different
+name'. Let $q$ be the number of jobs in an M/M/1 queue. Some thought
+will reveal that the queueing system with cabs and parties can be
+mapped to an equivalent M/M/1 queueing system. In fact, consider the
+following table
 \begin{center}
 \begin{tabular}{ccc}
 $j$ & $i$ & $q$\\
