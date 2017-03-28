@@ -4,11 +4,27 @@
 \label{sec:general-job-shop}
 
 Perhaps the term `class' needs some clarification. A network with a
-single class of jobs means that  all jobs have the same service
-distribution. In multi-class networks jobs of different classes
-typically have different service distributions. Note that we do not
-discuss multi-class queueing networks in this course.
+single class of jobs means that all jobs have the same service
+distribution at the same station. (Of course, the service rates at
+different stations can be different.) In multi-class networks jobs of
+different classes typically have different service distributions even
+if served at the same station. Note that we do not discuss multi-class
+queueing networks in this course.
 
+There is typo in Section Zijm.2.4.3, just above Eq.2.34. There the visit ratio is defined as $V_i=\lambda_{i0}/\gamma$. This is not correct, it should be
+\begin{equation*}
+  V_i = \frac{\lambda_i}{\gamma},
+\end{equation*}
+where $\lambda_i$ the total arrival rate at station $i$, that is, the
+arrivals of other stations combined with the external arrivals. As an
+example, consider a tandem network with $\gamma_{1} = 3$, say, and
+$\gamma_i=0$ for $i\neq 1$, hence
+$\gamma=\sum_i \gamma_i = \gamma_1 = 3$. Also $\lambda_i = 3$ at all
+stations, because it is a tandem network. In this case, then,
+$V_i = \lambda_i/\gamma = 3/3 = 1$. This makes perfect sence: all
+stations are visited with the same rate.  In case of rework, some
+stations get more arrivals, hence the visit ratio should
+proportionally increase at the stations with rework.
 
 \paragraph{Example}
 
@@ -311,3 +327,8 @@ not too way off, we see that we can take $C_{1a}^2=1$. And then, including the r
   \end{enumerate}
 \end{solution}
 \end{question}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
