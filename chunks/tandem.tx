@@ -238,6 +238,7 @@ until there are $3$ taxi's waiting and no groups of people.
  (4) edge [bend left] node {$\lambda$} (5)
  (5) edge [bend left] node {$\mu$} (4)
  (5) edge [bend left] node {$\lambda$} (6)
+ (6) edge [bend left] node {$\mu$} (5)
 ;
 \end{tikzpicture}
       
