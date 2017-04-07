@@ -528,7 +528,7 @@ where $G(x) = 1 - F(x)$.
 \begin{solution}
 \begin{equation*}
   \begin{split}
-    \E S &= \int_0^\infty x \d F  = \int_0^\infty \int_0^x \d y \d F(x) \\
+    \E{S} &= \int_0^\infty x \d F  = \int_0^\infty \int_0^x \d y \d F(x) \\
     & = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d F(x)   = \int_0^\infty \int_0^\infty 1_{y\leq x} \d F(x) \d y\\
     & = \int_0^\infty \int_y^\infty \d F(x) \d y = \int_0^\infty G(y) \d y
   \end{split}
@@ -540,10 +540,10 @@ where $G(x) = 1 - F(x)$.
  Use indicator functions to prove that for  a continuous random
     variable $S$ with distribution function $F$, 
 \begin{align*}
-    \E S^2 &= \int_0^\infty x^2 dF  = 2 \int_0^\infty y G(y) \d y,
+    \E{S^2} &= \int_0^\infty x^2 \d F  = 2 \int_0^\infty y G(y) \d y,
 \end{align*}
 where $G(x) = 1 - F(x)$. 
-\hint{$\int_0^\infty y G(y) \d y \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d x \d y$.
+\hint{$\int_0^\infty y G(y) \d y = \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d x \d y$.
 }
 \begin{solution}
   \begin{equation*}
@@ -558,9 +558,23 @@ where $G(x) = 1 - F(x)$.
 \end{solution}
 \end{question}
 
+\begin{question}
+ Use integration by parts to show that for  a continuous random
+    variable $S$ with distribution function $F$ and survivor function $G=1-F$, 
+\begin{align*}
+\int_0^\infty y G(y) \d y = \frac{\E{S^2}}2.
+\end{align*}
+\begin{solution}
+  \begin{equation}
+      \int_0^\infty y G(y) \d y 
+= \frac{y^2}2 G(y) \bigg|_0^\infty  - \int_0^\infty \frac{y^2}2 g(y)\d y = \int_0^\infty \frac{y^2}2 f(y)\d y = \frac{\E{S^2}}2,
+  \end{equation}
+  since $g(y) = G'(y) = - F'(y) = f(y)$.
+\end{solution}
+\end{question}
 
 \begin{question}
-  Use that $\E S = \int_0^\infty x dF = \int_0^\infty G(y) \d y$ to
+  Use that $\E S = \int_0^\infty x \d F = \int_0^\infty G(y) \d y$ to
   check that  $\E S = \mu^{-1}$ if $F(x) = 1 - e^{-\mu x}$.
 \begin{solution}
 If $F(x) = 1 - e^{-\mu x}$, we obtain that 
