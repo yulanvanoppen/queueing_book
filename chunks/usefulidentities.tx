@@ -805,11 +805,18 @@ for various values of $\lambda$.
 \lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_24.tex}
 
 
+Since there can be arrivals in states $0,\ldots, 4$,  the system can contain $0$ to $5$ customers, i.e., $p(0),\ldots, p(5)$.
+
 Use the level crossing result for the $M(n)/M(n)/1$ queue:
 
 
 
 \lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_25.tex}
+
+
+
+
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_26.tex}
 
 
 \item 
@@ -818,22 +825,29 @@ $\lambda = \sum_{n}\lambda(n) p(n)$.
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_26.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_27.tex}
 
 
 
-
+The average number in the system is: 
 \item 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_27.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_28.tex}
+
+
+
+The average number in queue 
+
+
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_29.tex}
 
 
 And now the waiting times:
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_28.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_30.tex}
 
 
   \end{enumerate}
@@ -854,35 +868,41 @@ And now the waiting times:
 
   \hint{Realize that we have to control the number of servers. Hence,
     we are dealing with a multi-server queue, i.e., the $M/M/c$
-    queue. Use the formulas of Eq.~\eqref{eq:9}.}
+    queue. Use the formulas of Eq.~\eqref{eq:9}.
+
+The remark that maintenance workers are compensated at the same rate
+as the tool crib workers confused me a bit at first.  Some thought
+revealed that the consequence of this remark is that is it just as
+expensive to let the tool crib workers wait (to help maintenance
+workers) as to let the maintenance workers wait for tools. (Recall, in
+queueing systems always somebody has to wait, either the customer in queue or
+the server being idle. If it is very expensive to let customers wait, the number
+of servers must be high, whereas if servers are relatively expensive, customers have to do the waiting.)
+
+}
   \begin{solution}
     \begin{enumerate}
     \item 
       Would one server/person do? 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_29.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_31.tex}
 
 
 If $c=1$, the load $\rho=\lambda \E S/c >1$ is clearly undesirable for one server.  We need at
 least two servers.
 
-The remark that maintenance workers are compensated at the same rate
-as the tool crib workers confused me a bit at first.  Some thought
-revealed that the consequence of this remark is that it just as
-expensive to let the tool crib workers wait (to help maintenance
-workers) as to let the maintenance workers wait for tools. (Recall, in
-queueing systems always somebody has to wait, either the customer or
-the server. If it is very expensive to let customers wait, the number
-of servers must be high, whereas if servers are relatively very
-expensive, customers have to do the waiting.)
+It is not relevant to focus on the time in the system , as time
+  in service needs to be spent anyway. Hence, we focus on the waiting
+  time in queue.
+
 
 I just convert the formulas of~\eqref{eq:9} to python code. This saves
 me time during the computations.
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_30.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_32.tex}
 
 
 Considering the scenario with one server is superfluous as $\rho>1$ in
@@ -892,14 +912,14 @@ What is the waiting time for $c=2$ servers?
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_31.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_33.tex}
 
 
 What is the waiting time for $c=3$ servers?
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_32.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_34.tex}
 
 
 
@@ -907,50 +927,37 @@ What is the waiting time for $c=4$ servers?
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_33.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_35.tex}
 
 
-Interpreting these results in the next part of this question.
+In the next  part of the question we will interpret these numbers.
 
-\item It is not relevant to focus on the time in the system , as time
-  in service needs to be spent anyway. Hence, we focus on the waiting
-  time in queue.
-
+\item 
 Since both types of workers cost the same amount of money per unit
 time, it is best to divide the amount of waiting/idleness equally over
 both types of workers.  I am inclined to reason as follows. The
 average amount of waiting time done by the maintenance workers per
-hour is $\lambda \E{W_Q}$. To see this, note that $\lambda$
-customers arrive, on average, each hour, and each customer waits on
-average $\E{W_Q}$ minutes. On the other hand, the total amount of
-minutes wasted by the tool crib employees is $c-\rho$, as
-$\rho = \lambda \E S$ is the average number of servers busy,
-while $c$ crib servers are available.
+hour is $\lambda \E{W_Q}$. To see this, note that maintenance workers arrive at rate $\lambda$, and each worker waits on average $\E{W_Q}$ minutes. Thus, worker time is wasted at rate $\lambda \E{W_Q}$. Intestingly, with Little's lawy, $\E{L_Q}=\lambda \E{W_Q}$, i.e., the rate at which workers waste capacity (i.e.  waiting in queue) is $\E{L_Q}$. On the other hand, the  rate of work capacity wasted by the tool crib employees being idle is $c-\lambda \E{S}$, as $\lambda \E S$ is the average number of servers busy, while $c$ crib servers are available.
 
-Now, while this makes perfect sense, to me at least, the formulas tell
-their own story. $\lambda\E{W_Q} = \E{L_Q}$. In other words,
-$\E{L_Q}$ is the average number of maintenance employees wasting
-their time in queue, while $c -\rho$ is the average number of
-crib workers wasting their time being idle. (To paraphrase Prince,
-doing something close to nothing.) Therefore, as both types of
+As both types of
 employees are equally expensive, we need to choose $c$ such that
-$\E{L_Q} \approx c- \rho$, where, of course, $\E{L_Q}$ depends on
-$c$.
-
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_34.tex}
-
-Now the maintenance employees wait more than the tool crib employees.
-
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_35.tex}
+the number of maintenance workers waiting (i.e., being idle because they are waiting in queue), is  equal to the number of crib workers being idle. In other words, we search for a $c$ such that $\E{L_Q} \approx c- \lambda \E S$ (where, of course, $\E{L_Q}$ depends on $c$.)
 
 
 
 
 \lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_36.tex}
+
+Now the maintenance employees wait more than the tool crib employees.
+
+
+
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_37.tex}
+
+
+
+
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_38.tex}
 
 
 Clearly, $c=3$ should do.
@@ -970,7 +977,7 @@ Clearly, $c=3$ should do.
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_37.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_39.tex}
 
 
 Compute Ls and so on
@@ -978,14 +985,14 @@ Compute Ls and so on
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_38.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_40.tex}
 
 
 \item 
 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_39.tex}
+\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_41.tex}
 
 It is of interest to compare the M/M/2 system to the M/M/1 system with twice the capacity. 
   \end{enumerate}

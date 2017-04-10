@@ -81,21 +81,22 @@ We number  station a as 1, and so on.
 \begin{equation*}
   P = 
   \begin{pmatrix}
-    0 & 1 & 0 & 0 & 0 & 0 \\
-    0 & 0 & 1 & 0 & 0 & 0 \\
-    0 & 1/5 & 0 & 4/5 & 0 & 0\\
-    0 & 0& 0 & 0 & 1/3 & 2/3 \\
-    1 & 0 & 0 & 0 & 0 & 0\\
-    1 & 0 & 0 & 0 & 0 & 0\\
+     0 & 1 & 0 & 0 & 0 &0 \\
+     1/5 & 0 & 4/5 & 0 & 0 & 0\\
+     0& 0 & 0 & 1/3 & 2/3 & 0 \\
+     0 & 0 & 0 & 0 & 0 & 1\\
+     0 & 0 & 0 & 0 & 0 & 1\\
+     1 & 0 & 0 & 0 & 0 & 0\\
   \end{pmatrix}
 \end{equation*}
-Since, by definition, $V_1=1$, it suffices to express the other visit
-ratios in terms of $V_1$. From elementary linear algebra, the third
-column implies that $V_1 = V_2$, and the fourth that $4/5 V_2 = V_3$,
-so that $V_3 = 4/5 V_1$. From the fifth column $1/3 V_3=V_4$, thus,
-$V_4 = 1/3 \cdot 4/5 V_1 = 4/15 V_1$.  From the sixth column
-$2/3 V_4 = V_5$, hence $V_5 = 8/45 V_1$. Finally, from the first
-column, $V_4+V_5 = V_6$, hence $V_6 = (4/15 + 8/45)V_1$. 
+We now solve for $V$ in the equation $V = VP$. Since, by
+definition, $V_1=1$, it suffices to express the other visit ratios in
+terms of $V_1$. From elementary linear algebra, the second column
+implies that $V_2 = V_1$, and the third that $V_3 = 4/5 V_2$, so that
+$V_3 = 4/5 V_1$. From the fourth column $V_4 = 1/3 V_3$, thus,
+$V_4 = 1/3 \cdot 4/5 V_1 = 4/15 V_1$.  From the fifth column
+$V_5 = 2/3 V_4$, hence $V_5 = 8/45 V_1$. Finally, from the sixth
+column, $V_6 = V_4+V_5$, hence $V_6 = (4/15 + 8/45)V_1$.
 
 For later courses on Markov chains, it is important to note the
 following. Write the visit ratio equation $V = VP$ as $V(1-P)=0$ where

@@ -2,8 +2,9 @@
 >>> import numpy as np
 >>> labda = [10., 15., 15., 10., 5.]
 >>> c = 2
->>> mn = np.array([0,1,2,2,2]) # number of active servers
->>> mu = 5*mn
+>>> mn = 2*np.ones(len(labda)+1, dtype=int)  # number of active servers
+>>> mn[0] = 0  # no service if system is empty
+>>> mn[1] = 1  # one busy server if just one job present
+>>> mu = 5*mn # service rate is 5 times no of active servers
 >>> mu
-array([ 0,  5, 10, 10, 10])
-
+array([ 0,  5, 10, 10, 10, 10])

@@ -1,6 +1,11 @@
 
->>> WQ(3, 28./60, 4)
-0.004168006747036868
->>> WQ(3, 28./60, 4)/60. # in hours
-6.946677911728114e-05
+from math import factorial
+
+def WQ(c, labda, ES):
+    rho = labda*ES/c
+    G = sum([(c*rho)**n/factorial(n) for n in range(c)])
+    G += (c*rho)**c/(1.-rho)/factorial(c)
+    Lq = (c*rho)**c/(factorial(c)*G) * rho/(1.-rho)**2
+    return Lq/labda # Wq, Little's law
+
 

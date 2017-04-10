@@ -1,25 +1,9 @@
 
->>> mu = c*6
+>>> labda = 11.
+>>> mu = 6
+>>> c = 2
 >>>
 >>> rho = labda/mu
->>>
->>> P0 = 1-rho
->>> P0
-0.08333333333333337
->>>
->>> Lq = rho**2/(1.-rho)
->>> Lq
-10.083333333333327
->>> Lq/labda # Wq
-0.9166666666666661
->>>
->>> Ls = rho/(1.-rho)
->>> Ls
-10.999999999999995
->>> Ls/labda # Ws
-0.9999999999999996
->>>
->>> ES = 1./mu # expected service time
->>> ES
-0.08333333333333333
+>>> rho < c  # is the system stable?
+True
 
