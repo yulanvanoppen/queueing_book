@@ -73,7 +73,7 @@ interarrival times for a simulation with a total of $n\cdot N$ as
 where $\1{X_k\leq t}=1$ if $X_k\leq t$ and $\1{X_k\leq t}=0$
 if $X_k> t$.  
 
-Let us now compare the probability density of $\mathbb{P}_n$ as
+Let us now compare the probability density as
 obtained for several simulation scenarios to the density of the
 exponential distribution, i.e., to $\lambda e^{-\lambda t}$.  As a
 first example, take $N=1$ customer and let the computer generate
@@ -84,9 +84,9 @@ simulation we take $N=3$ customers, and in the third, $N=10$
 customers. The emperical distributions are shown, from left to right,
 in the three panels in Figure~\ref{fig:uniformfew}. The continuous
 curve is the graph of $\lambda e^{-\lambda x}$ where
-$\lambda = N/\E X = N/5$. (In Eq.~(\ref{eq:54}) we show that when $N$
-persons visits the shop, each with an average interarrival time of $5$
-hours, it must be that the arrival rate is $N/5$.)  As a second
+$\lambda = N/\E X = N/5$. (In Eq.~(\ref{eq:54}) we show that when $1$
+person visits the shop  with an average interarrival time of $5$
+hours, it must be that the arrival rate  is $1/\E{X} = 1/5$. Hence, when $N$ customers visit the shop, each with an average interarrival time of 5 hours, the total arrival rate as seen by the shop must be $N/5$.)  As a second
 example, we extend the simulation to $n=1000$ visits to the shop, see
 Figure~\ref{fig:uniformmany}. In the third example we take the
 interarrival times to be normally distributed times with mean $5$ and
