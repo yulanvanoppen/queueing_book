@@ -61,11 +61,16 @@ plus in service, becomes
 
 The situation can be significantly simplified for the $M/M/1$ queue as
 then the service times are also exponential, hence memoryless,
-implying that $\E{S_r\given S_r>0} = \E S$. Thus, for the $M/M/1$ queue,
+implying that $\E{S_r\given S_r>0} = \E S$. Thus, for the $M/M/1$ queue, 
+and using~(\ref{eq:37}) and the above formula, we get 
 \begin{equation*}
-  \E W = \E{W_Q}+ \E S = \frac{\E S}{1-\rho}.
+  \begin{split}
+  \E W 
+&= \E{W_Q}+ \E S = 
+\frac{\E S_r}{1-\rho} + \E S \\
+&= \frac{\rho \E S}{1-\rho} + \E S = \frac{\E S}{1-\rho}.
+  \end{split}
 \end{equation*}
-
 
 Another way to derive the above result is to conclude from PASTA that
 the expected number of jobs in the system at an arrival is $\E{L}$.

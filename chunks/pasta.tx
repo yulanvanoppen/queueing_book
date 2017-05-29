@@ -224,7 +224,7 @@ Check that the conditions of the renewal reward theorem are satisfied in the abo
 \item Check Eq.~(\ref{eq:13}) for this case.
 \item Consider another (theoretical) queueing system in which each
   customer requires precisely 1 minute. At the start of each hour, 59
-  customers arrive. What is $p(n)$, what is $\pi(n)$?
+  customers arrive. What is $p(n)$, what is $\pi(n)$? What is the time-average system length $\E{L}$?
 \end{enumerate}
 \hint{Check the definitions of $Y(0,t)$, $Y(1,t)$, $A(0,t)$ and so on.}
   \begin{solution}
@@ -255,7 +255,13 @@ p(1)  &= \frac{59}{60}, \\
   $\lambda \pi(0) = 1\cdot 1 = 1$.  For $n=1$: $\lambda(1) p(1) = 0$. Since $\pi(1)=0$ the result is again OK for $n=1$. And so on .
 \item Again $\rho=59/60$.
 
-  Observe that the average queue length is very different from the
+For $p(n)$: the fraction of time the system contains $n=0$ jobs is $p(0)=1/60=1-\rho$. Also, as the service time of each job is precisely one minute, $p(n)=1/60$ for $n=1,\ldots, 59$. 
+
+For $\pi(n)$, the first of the $59$ jobs sees a free server, thus $\pi(0)=1/59$. The second job of the $59$ jobs sees one job in system (and this job is in service), hence $\pi(1)=1/59$. More generally then, $\pi(n)=1/59$ for $n=0,\ldots 58$. 
+
+Note in particular $p(59)=1/60 \neq \pi(59) = 0$. 
+
+  Observe now that the average system length is very different from the
   previous example, even though $\rho = 59/60$ in both cases. Thus,
   knowledge of the load is not sufficient to make a statement about the
   average queue length.
@@ -265,9 +271,9 @@ p(1)  &= \frac{59}{60}, \\
   customer in front, and so on. Thus, the average queue length as seen
   by customers is
   \begin{equation*}
-   \frac{0+1+2+\cdots+58}{59}=\frac{58\cdot 59}{2\cdot 59} = 29.
+   \frac{0+1+2+\cdots+58}{59}=\frac{1}{59}\frac{58\cdot 59}{2} = 29.
   \end{equation*}
-The time average queue length is $\E L = 59/60 + 58/60 + \cdots 1/60 + 0/60 = 59/2$. 
+The time average system length is $\E L = 59/60 + 58/60 + \cdots 1/60 + 0/60 = 59/2$. 
 \end{enumerate}
 
 These two examples show that the way customers arrive have an enormous
