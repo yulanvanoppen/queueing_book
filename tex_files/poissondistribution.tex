@@ -77,9 +77,13 @@ analysis of queueing process. We summarize this by a theorem.
   arrivals, are i.i.d. and $\P{ X_1\leq t} = 1 - e^{-\lambda t}$. In other words, $X_i\sim \exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t)$ 
 \end{theorem}
 
+\subsection*{Exercises}
+
 \begin{question}
 Show that $\E{N_n(t)} = \sum_{i=1}^n \E{B_i} = n p$.
+\begin{hint}
 \hint{Recall that $\E{X+Y} = \E X + \E Y$. Just as a reminder, $\E{XY} \neq \E X \E Y$ in general. Only when $X$ and $Y$ are uncorrelated (which is implied by independence), the product of the expectations is the expection of the products.}
+\end{hint}
 \begin{solution}
   \begin{equation*}
     \E{N_n(t)} = \E{\sum_{i=1}^n {B_i}} = \sum_{i=1}^n \E{B_i} = n \E{B_i} = n p.
@@ -102,10 +106,12 @@ What is the difference between $N_n(t)$ and $N(t)$?
   Poisson distribution~\eqref{eq:pois} if $n\to\infty$, $p\to0$ such
   that $np=\lambda$. 
 
+  \begin{hint}
   \hint{First find $p$, $n$, $\lambda$ and $t$ are such that the rate
     at which event occur in both processes are the same. Then consider
     the binomial distribution and use the standard limit
     $(1-x/n)^n \to e^{-x}$ as $n\to \infty$. }
+  \end{hint}
 
   \begin{solution} Now we like to relate $N_n(t)$ and $N(t)$. It is
     clear that we at least want the expectations to be the same, that
@@ -147,8 +153,10 @@ is easy, so that, as $n\to\infty$,  the above converges to
   If the inter-arrival times $\{X_i\}$ are i.i.d. and exponentially
   distributed with mean $1/\lambda$, prove that the number $N(t)$ of
   arrivals during interval $[0,t]$ is Poisson distributed.
+  \begin{hint}
   \hint{Realize that
     $\P{N(t)=k} = \P{A_k \leq t} - \P{A_{k+1} \leq t}$.}
+  \end{hint}
     \begin{solution}
       We want to show that
     \begin{equation*}
@@ -182,6 +190,7 @@ We are done.
  where $o(h)$ is a function
     $f(h)$ such $f(h)/h \to 0$ as $h\to 0$.
 
+    \begin{hint}
     \hint{Think about the meaning of the formula
       $\P{N(h) = n \given N(0) = n}$. It is a conditional probability
       that should be read like this: given that up to time $0$ we have
@@ -193,6 +202,8 @@ We are done.
       $|x| << 1$.  Furthermore, use that
       $\sum_{i=2}^\infty x^i/i! = \sum_{i=0}^\infty x^i/i! - x -1 = e^x -x 
       - 1$.}
+      
+    \end{hint}
 
 \begin{solution}
 
@@ -256,11 +267,13 @@ Thus, if you know that $N(0,t]=1$, the arrival is distributed
 uniformly on the interval $[0,t]$.
 
 
+\begin{hint}
 \hint{Use Bayes' law for conditional probability. Observe that 
   \begin{equation*}
 \{N(0,s]+N(s,t]=1\}\cap\{N(0,s]=1\} = \{1+N(s,t]=1\}\cap\{N(0,s]=1\}=\{N(s,t]=0\}\cap\{N(0,s]=1\}.
   \end{equation*}
 }
+\end{hint}
 
 \begin{solution}
 \begin{equation*}
@@ -311,6 +324,7 @@ uniformly on the interval $[0,t]$.
 
 
 
+  \begin{hint}
   \hint{Use a conditioning argument or use probability generating
     functions (i.e. $\E{z^X}=\sum_k z^k \P{X=k}$. In particular, for
     conditioning, use that $\P{AB} = \P{A\given B}\P{B}$. More
@@ -322,6 +336,8 @@ uniformly on the interval $[0,t]$.
     where we use the conditioning formula to see that
     $\P{A B_i} = \P{A \given B_i} \P{B_i}$.  Now choose practical sets
     $B_i$.  }
+    
+  \end{hint}
 
     \begin{solution}
 First we show how to  use conditioning. 
@@ -379,7 +395,9 @@ $M_1(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\
 \frac{\lambda}{\lambda+\mu}.
     \end{equation*}
     Note that the right-hand-side does not depend on $h$, hence it
-    holds for any time $h$, whether it is small or not.  \hint{Suppose
+    holds for any time $h$, whether it is small or not.  
+    \begin{hint}
+\hint{Suppose
       we write $N(t)=N_a(t) + N_s(t)$. Then
       \begin{equation*}
       \P{N_a(h) = 1, N_s(h) = 0 | N(h) = 1}
@@ -388,6 +406,7 @@ $M_1(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\
       that $N(t)=1$. In other words, the question is find out that,
       given one of the two processes `fired', what is the probability
       that $N_a$ was the one that `fired'.}
+    \end{hint}
 
     \begin{solution}
   With the above:
@@ -477,6 +496,7 @@ node[below, fill=white] {$B_6=0$};
   Show that the Poisson process obtained by thinning the original
   process is $\sim P(\lambda t p)$ for any~$t$.
 
+  \begin{hint}
 \hint{ Condition on the total number of arrivals $N(t)=m$ up to time
       $t$. Realize that the probability that a job is of type 1 is
       Bernoulli distributed, hence when you consider $m$ jobs in
@@ -497,8 +517,8 @@ You might also consider the random variable
   with $N\sim P(\lambda)$ and $Z_i\sim B(p)$. Show that the moment
   generating function of $Y$ is equal to the moment generating
   function of a Poisson random variable with parameter $\lambda p$.
-
 }
+  \end{hint}
 
     \begin{solution}
 Suppose that  $N_1$ is the  thinned stream, and $N$ the total stream. Then
@@ -556,7 +576,9 @@ $Y\sim P(\lambda p)$.
   that the SCV of a Poisson distributed random variable is not the
   same as the SCV of an exponentially distributed random variable.
 
+  \begin{hint}
   \hint{You might use generating functions here.}
+  \end{hint}
 
   \begin{solution} I expect that this is easy for you by now. The
     exercise is just meant to help you recall this.

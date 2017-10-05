@@ -438,9 +438,13 @@ $\pi(n)$ for these three different acceptance rules.
     now. Implementing the recursion is not hard, just try and see how
     far you get.}
   \begin{solution}
-The recursion for $n$ becomes $\pi(n) = \lambda/\mu \sum_{i=0}^{n-1} \pi(n-1-i)G(i)$. Since $G(i) =0$ for $i\geq 3$ we rewrite this to 
+The recursion for $n$ becomes 
 \begin{equation*}
-  \pi(n) = \lambda/\mu \sum_{i=0}^{\min(\{n-1,l\}} \pi(n-1-i)G(i),
+\pi(n) = \frac \lambda \mu \sum_{i=0}^{n-1} \pi(n-1-i)G(i).
+\end{equation*}
+Since $G(i) =0$ for $i\geq 3$ we rewrite this to 
+\begin{equation*}
+  \pi(n) = \frac\lambda \mu \sum_{i=0}^{\min(\{n-1,l\}} \pi(n-1-i)G(i),
 \end{equation*}
 where $l=3$. 
 
@@ -450,7 +454,7 @@ In python this reads:
 p[n] = labda / mu * sum(p[n - 1 - i] * G[i] for i in range(min(n, l)))
 @
 
-The following code carries out the recursion for the $M/M/1$ queue and compares the result to the (unnormalized) probabilities $(\lambda/\mu)^n$. Thus, we can test the code right away. 
+The following code carries out the recursion for the $M/M/1$ queue and compares the result to the \emph{unnormalized} probabilities $(\lambda/\mu)^n$ (unnormalized means that I do  not multiply with $1-\rho$). Thus, we can test the code right away. 
 
 <<wrap=False>>=
 import numpy as np

@@ -55,45 +55,47 @@
 }
 \lstset{style=customc}
 
-\usepackage{exsheets}
-\DeclareQuestionProperty{hint}
-\SetupExSheets{
-  headings = runin,
-  question/print = true,
-  solution/print = false,
-  counter-format = ch.se.qu,
-  counter-within = section
-}
-% Get question references ok.
-\renewcommand\thequestion{\thesection.\arabic{question}}
-\setlist[enumerate,1]{label=\alph*),ref=\thequestion\alph*)}
+% \usepackage{exsheets}
+% \DeclareQuestionProperty{hint}
+% \SetupExSheets{
+%   headings = runin,
+%   question/print = true,
+%   solution/print = false,
+%   counter-format = ch.se.qu,
+%   counter-within = section
+% }
+% % Get question references ok.
+% \renewcommand\thequestion{\thesection.\arabic{question}}
+% \setlist[enumerate,1]{label=\alph*),ref=\thequestion\alph*)}
 
-% a command to print all given hints
-\NewDocumentCommand\printquestionhints{}{%
-   \ForEachQuestion
-     {%
-       \IfQuestionPropertyT{hint}{##1}{%
-         \ExSheetsHeading
-           {runin}               % headings style
-           {Hint}                % heading
-           {\QuestionNumber{##1}}% number
-           {0}                   % points -- need to be zero here
-           {0}                   % bonus points -- need to be zero here
-           {##1}%                % ID
-         \GetQuestionProperty{hint}{##1}%
-         \par
-         \medskip
-       }%
-     }%
-}
+% % a command to print all given hints
+% \NewDocumentCommand\printquestionhints{}{%
+%    \ForEachQuestion
+%      {%
+%        \IfQuestionPropertyT{hint}{##1}{%
+%          \ExSheetsHeading
+%            {runin}               % headings style
+%            {Hint}                % heading
+%            {\QuestionNumber{##1}}% number
+%            {0}                   % points -- need to be zero here
+%            {0}                   % bonus points -- need to be zero here
+%            {##1}%                % ID
+%          \GetQuestionProperty{hint}{##1}%
+%          \par
+%          \medskip
+%        }%
+%      }%
+% }
 
-\newcommand{\hint}[1]{\hintsymbol\SetQuestionProperties{ hint = {#1}}}
+% \newcommand{\hint}[1]{\SetQuestionProperties{ hint = {#1}}}
+%\newcommand{\hint}[1]{\hintsymbol\SetQuestionProperties{ hint = {#1}}}
 
 \theoremstyle{definition} % font type for theorems and related environments
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
-\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{question}{Exercise}[section]
+%\newtheorem{exercise}[theorem]{Exercise}
 
 \newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1} \nameref*{#1}}} % One single link
 

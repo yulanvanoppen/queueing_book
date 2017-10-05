@@ -13,47 +13,30 @@
 \usepackage{xr-hyper}
 \externaldocument{book}
 
-\usepackage{bigfoot}
+%\usepackage{bigfoot}
 % \DeclareNewFootnote{default} % if `normal' footnotes should be printed first
-\DeclareNewFootnote{solution}
-\renewcommand\thefootnotesolution{}
+%\DeclareNewFootnote{solution}
+%\renewcommand\thefootnotesolution{}
 
-%\renewcommand\exsheetsprintsolution[2]{\footnotesolution{#1#2}}
-% \renewcommand\exsheetsprintsolution[2]{
-% \footnotesolution{
-% \ExSheetsHeading
-%   {runin}               % headings style
-%   {Hint}                % heading
-%   {\GetQuestionProperty{counter}{\CurrentQuestionID}}% number
-%   {0}                   % points -- need to be zero here
-%   {0}                   % bonus points -- need to be zero here
-%   {\CurrentQuestionID}%                % ID
-% \GetQuestionProperty{hint}{\CurrentQuestionID}%
-% #1#2
-% }
+%\renewcommand{\hint}[1]{\SetQuestionProperties{ hint = {#1}}}
+
+
+% \SetupExSheets{
+%   headings = runin,
+%   question/print = true,
+%   %solution/print = true,
+%   counter-within = section,
+%   counter-format = ch.se.qu
 % }
 
-\renewcommand\exsheetsprintsolution[2]{
-\ExSheetsHeading
-{runin}               % headings style
-{Hint}                % heading
-{\GetQuestionProperty{counter}{\CurrentQuestionID}}% number
-{0}                   % points -- need to be zero here
-{0}                   % bonus points -- need to be zero here
-{##1}%                % ID
-\GetQuestionProperty{hint}{\CurrentQuestionID}
-#1#2
-}
-\renewcommand{\hint}[1]{\SetQuestionProperties{ hint = {#1}}}
+\usepackage{answers}
+%\usepackage[nosolutionfiles]{answers}
+\Newassociation{solution}{Solution}{ans}
+\Newassociation{sol}{Solution}{ans}
+\Newassociation{hint}{Hint}{hint}
+\renewcommand{\Hintlabel}[1]{\textbf{Hint #1:}}
+\renewcommand{\Solutionlabel}[1]{\textbf{Solution #1:}}
 
-
-\SetupExSheets{
-  headings = runin,
-  question/print = true,
-  solution/print = true,
-  counter-within = section,
-  counter-format = ch.se.qu
-}
 
 
 \begin{document}
@@ -65,8 +48,29 @@
 \chapter{Single-Station Queueing Systems}
 %\input{todo/appendix.tex}
 %\input{tex_files/single_station_intro.tex}
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
 \input{tex_files/expdistribution.tex}
-%\input{tex_files/poissondistribution.tex}
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+\input{tex_files/poissondistribution.tex}
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
+
+% \printquestionhints[section]
+% \printsolutions[section]
+
 % \input{kendall.tex}
 %\input{chunks/constructiondiscretetime.tx}
 %\input{chunks/constructioncontinuoustime.tx}

@@ -171,7 +171,8 @@ computers, to generate exponentially distributed interarrival
 times. Thus, it is easy to use such exponentially distributed random
 variables to simulate queueing systems. 
 
-
+\subsection*{Exercises}
+\label{sec:exercises}
 
 \begin{question}(Using conditional probability)
   We have to give one present to one of three children. As we cannot
@@ -179,7 +180,10 @@ variables to simulate queueing systems.
   is, we choose a random number in the set $\{1, 2, 3\}$. The first
   child that guesses the number wins the present. Show that the
   probability of winning the present is the same for each child.
-\hint{For the second child, condition on the event that the first does not chose the right number.}
+%\hint{For the second child, condition on the event that the first does not chose the right number.}
+  \begin{hint}
+    For the second child, condition on the event that the first does not chose the right number.
+  \end{hint}
 \begin{solution}
     Use the definition of conditional probability
     ($\P{A|B} = \P{AB}/\P{B}$, provided $\P{B}>0$)
@@ -203,6 +207,7 @@ variables to simulate queueing systems.
     Similar conditional reasoning gives that child 3 wins with probability $1/3$. 
   \end{solution}
 \end{question}
+
 
 \begin{question}
   Assume that the time $X$ to fail of a machine is uniformly
@@ -241,7 +246,9 @@ variables to simulate queueing systems.
 \begin{question}
   Show that an exponentially distributed random variable is
   memoryless.  
-   \hint{Condition on the event ${X>t}$. }
+  \begin{hint}
+Condition on the event ${X>t}$. 
+  \end{hint}
   \begin{solution}
 This is easy, but be sure you can do it. 
 
@@ -274,6 +281,7 @@ probability ($\P{A|B} = \P{AB}/\P{B}$, provided $\P{B}>0$):
     \end{equation*}
   \end{solution}
 \end{question}
+
 
 \begin{question} 
   If the random variable $X\sim\exp(\lambda)$, show that
@@ -350,11 +358,13 @@ C_a^2 = \frac{\V X}{(\E X)^2}.
 \begin{equation*}
 f_{A_i}(t) = \lambda e^{-\lambda t} \frac{(\lambda t)^{i-1}}{(i-1)!}. 
 \end{equation*}
- \hint{ Check the result for $i=1$ by filling in $i=1$ (just to be
+\begin{hint}
+ Check the result for $i=1$ by filling in $i=1$ (just to be
      sure that you have read the formula right), and compare the result
      to the exponential density. Then write $A_i =\sum_{i=1}^k X_k$, and compute the moment
      generating function for $A_i$ and use that the interarrival times
-     $X_i$ are independent. Use the moment generating function  of $X_i$.}
+     $X_i$ are independent. Use the moment generating function  of $X_i$.
+\end{hint}
 \begin{solution}
  One way to find the distribution of $A_i$ is by using the
     moment generating function $M_{A_i}(t) = \E{e^{t A_i}}$ of
@@ -386,12 +396,14 @@ $A_i \sim \Gamma(n,\lambda)$, i.e., $A_i$ is Gamma distributed.
 \E{A_i} = \frac i\lambda,
  \end{equation*}
  that is, the expected time to see $i$ jobs is $i/\lambda$.
-  \hint{Use that
+ \begin{hint}
+Use that
     $\int_0^\infty (\lambda t)^i e^{- \lambda t} \d t =
     \frac{i!}\lambda$.
     Another way would be to use that, once you have the moment
     generating function of some random variable $X$,
-    $\E X = \frac{\d}{\d t} M(t) |_{t=0}$. }
+    $\E X = \frac{\d}{\d t} M(t) |_{t=0}$. 
+ \end{hint}
   \begin{solution}
   \begin{equation*}
 \E{A_i} = \int_0^\infty t \P{A_i \in \d t} = \int_0^\infty t f_{A_i} (t) \, \d t  = 
@@ -432,8 +444,10 @@ Z=\min\{X,S\}\sim\exp(\lambda+\mu),
   \end{equation*}
 hence $\E Z = (\lambda+\mu)^{-1}$.
 
-\hint{Use that if $Z=\min\{X, S\}>x$ that then it must be that $X>x$
+\begin{hint}
+ \hint{Use that if $Z=\min\{X, S\}>x$ that then it must be that $X>x$
   and $S>x$. Then use independence of $X$ and $S$.}
+\end{hint}
 
   \begin{solution}
 Use that $X$ and $S$ are independent to get
@@ -454,9 +468,11 @@ Use that $X$ and $S$ are independent to get
       \P{X\leq S} = \frac{\lambda}{\lambda+\mu}.
     \end{equation*}
 
+    \begin{hint}
     \hint{ Define the joint distribution of $X$ and $S$ and carry out
       the computations, or use conditioning, or use the result of the
       previous exercise.}
+    \end{hint}
 
 \begin{solution}
 There is more than one way to show that $\P{X\leq S} = \lambda/(\lambda+\mu)$.  
@@ -645,7 +661,7 @@ we get
 \end{split}
 \end{equation*}
 
-Interestingly, we see that even if $\V X_1 = \V X_2 = 0$, $\V X > 0$
+Interestingly, we see that even if $\V{X_1} = \V{X_2} = 0$, $\V X > 0$
 if $\E{X_1} \neq \E{X_2}$. Bear this in mind; we will use these ideas
 later when we discuss the effects of failures on the variance of
 service times of jobs.
