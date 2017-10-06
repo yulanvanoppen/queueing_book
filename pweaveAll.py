@@ -32,9 +32,9 @@ filenames = [
 
 # to select some files temporarily
 
-# filenames = [
-#     "mnmn1",
-#        ]
+filenames = [
+    "constructiondiscretetime",
+        ]
 
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
@@ -60,29 +60,34 @@ class ToFile(PwebTexPweaveFormatter):
                     f.write(chunk['result'])
                     chunk['content'] = r"\lstinputlisting{"+fname+"}"
                     chunk['result'] = "\n\n"
+        print(chunk)
         return(chunk)
 
 
 for fname in filenames:
-    doc = Pweb(tex_dir + fname+r".tex", format="texpweave",
+    #doc = Pweb(tex_dir + fname+r".tex", format="texpweave",
+    doc = Pweb(tex_dir + fname+r".tex", doctype="tex", 
                output=chunk_dir+fname+r".tx")
-    doc.setformat(Formatter=ToFile)
-    doc.updateformat({
-        "outputstart": "\n",
-        "outputend": "\n",
-        "codestart": "\n",
-        "codeend": "\n",
-        "termstart": "\n",
-        "termend": "\n",
-    }
-    )
+    
+    # doc.setformat(Formatter=ToFile)
 #     doc.updateformat({
-#         "outputstart": r"\begin{lstlisting}",
-#         "outputend": r"\end{lstlisting}",
-#         "codestart": r"\begin{lstlisting}",
-#         "codeend": r"\end{lstlisting}",
-#         "termstart": r"\begin{lstlisting}",
-#         "termend": r"\end{lstlisting}",
+#         "outputstart": "\n",
+#         "outputend": "\n",
+#         "codestart": "\n",
+#         "codeend": "\n",
+#         "termstart": "\n",
+#         "termend": "\n",
 #     }
 #     )
-    doc.weave()
+    doc.updateformat({
+        "outputstart": r"\begin{lstlisting}",
+        "outputend": r"\end{lstlisting}",
+        "codestart": r"\begin{lstlisting}",
+        "codeend": r"\end{lstlisting}",
+        "termstart": r"\begin{lstlisting}",
+        "termend": r"\end{lstlisting}",
+    }
+    )
+    print(doc.getformat())
+    print(doc.weave())
+    #doc.weave()

@@ -1,3 +1,4 @@
+\begin{lstlisting}
 %\section{Construction of Discrete-Time  Queueing Processes}
 \section{Construction of Discrete-Time Queueing
   Processes}
@@ -303,6 +304,10 @@ long, but this is also undesirable. So, let's be pragmatic: the aim is
 that you practice with modeling, and that you learn from the
 solutions.  If you obtain \emph{reasonable} recursions, but they are
 different from mine, then your answer is just as good.
+
+\subsection*{Exercises}
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
 
 \begin{question}
  What are the consequences of setting
@@ -705,11 +710,14 @@ Realize that Stations A and B have their own arrivals.
   FIFO sequence. Find an expression for the shortest possible waiting
   time $W_-(k)$ of a job that arrives at time $k$, and an expression
   for the largest possible waiting time $W_+(k)$
-  \hint{Consider a numerical example. Suppose $Q_{k-1}=20$. Suppose
+  \begin{hint}
+ Consider a numerical example. Suppose $Q_{k-1}=20$. Suppose
     that the capacity is $c_k=3$ for all $k$. Then a job that arrives
     in the $k$th period, must wait at least $20/3$ (plus rounding)
     periods before it can leave the system. Now generalize this
-    numerical example.}
+    numerical example.
+  \end{hint}
+
     \begin{solution}
       Let's tag the first customer that arrives in period $k$. This
       tagged customer sees $Q_{k-1}$ customer in the system, hence the
@@ -870,8 +878,10 @@ any off-by-one errors. For future work, implement it in a simulator\ldots
   problem as an LP problem, taking into account the inventory
   dynamics.  
 
+  \begin{hint}
 \hint{Formulate the decision variables/controls, the
     objective and the constraints.}
+  \end{hint}
 
   \begin{solution}
     The decision variables are $X_k$, $Y_K$ and $S_k$ (note, it is not
@@ -911,47 +921,55 @@ I_k &>= 0.
     same size as the number of arrival $a$ initially set to zeros. The
     rest of the code is nearly identical to the formulas in the text.
 
+<<>>=
+import numpy as np
 
+np.random.seed(3) # fix the seed
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_1.tex}
-
+labda = 20
+mu = 21
+@
 
 These are the number of arrivals in each period.
 
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_2.tex}
-
+<<term=True>>=
+a = np.random.poisson(labda, 10)
+a
+@
 
 The number of potential services
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_3.tex}
-
+<<term=True>>=
+c = mu * np.ones_like(a)
+c
+@ 
 
 Now for the queueing recursions:
 
+<<>>=
+Q = np.zeros_like(a)
+d = np.zeros_like(a)
+Q[0] = 10  # initial queue length
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_4.tex}
-
+for k in range(1, len(a)):
+    d[k] = min(Q[k - 1], c[k])
+    Q[k] = Q[k - 1] - d[k] + a[k]
+@
 
 These are the departures for each period:
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_5.tex}
-
+<<term=True>>=
+d
+@
 
 The queue lengths
+<<term=True>>=
+Q
+@
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_6.tex}
-
-
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_7.tex}
-
+<<term=True>>=
+loss = (Q > 20)
+loss
+loss.sum()
+@
 
 Here I
 define loss as the number of periods in which the queue length exceeds
@@ -963,10 +981,12 @@ them.
 
 Now all statistics:
 
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_8.tex}
-
+<<term=True>>=
+d.mean()
+Q.mean()
+Q.std()
+(Q > 20).sum()
+@
 
 Since this is a small example, the mean number of departures, i.e.,
 \texttt{d.mean()}, is not equal to the arrival rate $\lambda$.  
@@ -975,15 +995,25 @@ statistical functions.
 
 Now I am going to run the same code, but for a larger instance. 
 
+<<>>=
+num = 1000
+a = np.random.poisson(labda, num)
+c = mu * np.ones_like(a)
+Q = np.zeros_like(a)
+d = np.zeros_like(a)
+Q[0] = 10  # initial queue length
 
+for k in range(1, len(a)):
+    d[k] = min(Q[k - 1], c[k])
+    Q[k] = Q[k - 1] - d[k] + a[k]
+@
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_9.tex}
-
-
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_10.tex}
-
+<<term=True>>=
+d.mean()
+Q.mean()
+Q.std()
+(Q > 30).sum()/num * 100
+@
 
 
 I multiply with 100 to get a percentage. Clearly, many jobs see a long
@@ -995,15 +1025,23 @@ distributed number of jobs served per day, so the service rate is
 still $21$, but the period capacity $c$ is random variable with
 Poisson distribution with $P(21)$
 
+<<fig = False, width = '12 cm'>>=
+c = np.random.poisson(mu, num)
+Q = np.zeros_like(a)
+d = np.zeros_like(a)
+Q[0] = 10  # initial queue length
 
+for k in range(1, len(a)):
+    d[k] = min(Q[k - 1], c[k])
+    Q[k] = Q[k - 1] - d[k] + a[k]
+@
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_11.tex}
-
-
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructiondiscretetime_12.tex}
-
+<<term=True>>=
+d.mean()
+Q.mean()
+Q.std()
+(Q > 30).sum()/num * 100
+@
 
 Compared to the case with constant service capacity, i.e., $c=21$ in
 each period, we see that the average waiting time increases, just as
@@ -1022,8 +1060,20 @@ vary parameters for sensitivity analysis, and so on.
   \end{solution}
 \end{question}
 
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
 
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "book"
 %%% End:
+\end{lstlisting}\begin{lstlisting}
+File "<tokenize>", line 704
+    this problem for the midterm as I changed the answer quite a bit
+    ^
+IndentationError: unindent does not match any outer indentation level
+\end{lstlisting}
