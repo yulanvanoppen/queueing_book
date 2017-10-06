@@ -298,6 +298,12 @@ sequence of have inter-arrival times $\{X_k\}$ and service times
 $\{S_k\}$.  A bit of experimentation with computer programs such as
 $R$ or python will reveal that this is easy.
 
+\subsection*{Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 
 \begin{question}
   \begin{enumerate}
@@ -320,10 +326,13 @@ $R$ or python will reveal that this is easy.
 \begin{question}
   Suppose that $X_k\in\{1,3\}$ such that $\P{X_k=1}=\P{X_k=3}$ and
   $S_k\in\{1,2\}$ with $\P{S_k=1}=\P{S_k=2}$. If $W_{Q,0}=3$, what are
-  the distributions of $W_{Q,1}$ and $W_{Q,2}$?  \hint{Use that
+  the distributions of $W_{Q,1}$ and $W_{Q,2}$?  
+  \begin{hint}
+\hint{Use that
     $W_{Q,1} = [W_{Q,0} + S_1 - X_1]^+$ and likewise for $W_{Q,2}$.
 
 This first year probability. It should be elementary for you. Ensure you can do it.}
+\end{hint}
 
 \begin{solution}  First find the distribution of $Y_k:=S_{k-1}-X_k$ so that we can write
   $W_{Q,k}=[W_{Q,k-1}+Y_k]^+$.  Use independence of $\{S_k\}$ and $\{X_k\}$:
@@ -358,9 +367,35 @@ And, then
 Typing the solution becomes  boring\ldots, let's use the computer.
 
 
+\begin{lstlisting}
+from lea import Lea
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructioncontinuoustime_1.tex}
+W = 3
+S = Lea.fromVals(1,  2)
+X = Lea.fromVals(1,  3)
 
+# This is WQ1
+W = Lea.fastMax(W + S - X, 0)
+W
+\end{lstlisting}\begin{lstlisting}
+1 : 1/4
+2 : 1/4
+3 : 1/4
+4 : 1/4
+\end{lstlisting}
+\begin{lstlisting}
+
+# This is WQ2
+W = Lea.fastMax(W + S - X, 0)
+W
+\end{lstlisting}\begin{lstlisting}
+0 : 3/16
+1 : 3/16
+2 : 4/16
+3 : 3/16
+4 : 2/16
+5 : 1/16
+\end{lstlisting}
 Great! Our handiwork matches with the computer's results. 
 
 \end{solution}
@@ -372,10 +407,13 @@ Great! Our handiwork matches with the computer's results.
   uniform distribution concentrated on the interval $I$, compute
   $\P{S-X\leq x}$. 
 
+  \begin{hint}
   \hint{This appears to be trivial\ldots, but I didn't find it
     easy\ldots In fact, I found it a major headache, hence it is good
     to try yourself before looking at the answer. Check your
     probability book if you don't know what to do. }
+    
+  \end{hint}
 
   \begin{solution}
     Let us write $f(x)$ for the density of $\P{S-X\leq x}$, i.e.,
@@ -468,23 +506,23 @@ so up to now.
 So, I went to Wolframalpha, and this is what what I typed: 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructioncontinuoustime_2.tex}
-
+\begin{lstlisting}
+\int_{-\infty}^\infty Boole[0<=u<=10] Boole[-x<=u<=7-x] du,
+\end{lstlisting}
 
 so, once you know \LaTeX\/ you can use wolframalpha.  Wolframalpha turned it to 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructioncontinuoustime_3.tex}
-
+\begin{lstlisting}
+integral\_(-infinity)^infinity Boole[0<=u<=10] Boole[-x<=u<=7-x] du
+\end{lstlisting}
 
 For your convenience, I also include the following code from Wolframalpa
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructioncontinuoustime_4.tex}
-
+\begin{lstlisting}
+Integrate[Boole[Max[0, -x] <= u <= Min[10, 7 - x]], {u, -Infinity, Infinity}]
+\end{lstlisting}
 
 I got the same results as Wolframalpa, but certainly not for free. 
 
@@ -506,7 +544,9 @@ I got the same results as Wolframalpa, but certainly not for free.
 
 \begin{question}
   Would it make sense to define $A(t)=\min\{k : A_k \geq t\}$?
+  \begin{hint}
 \hint{Compare this to the definition in (\ref{eq:2}).}
+  \end{hint}
   \begin{solution}
     Suppose $A_3 = 10$ and $A_4 = 20$. Take $t=15$. Then
     $\min\{k : A_k \geq 15\} = 4$ since $A_3 < t=15 < A_4$. On the
@@ -554,11 +594,13 @@ I got the same results as Wolframalpa, but certainly not for free.
   job at the time of the $k$th arrival, then $A_k \leq D_{k-1}$, i.e.,
   job $k$ arrives before job $k-1$ departs.
 
+  \begin{hint}
   \hint{Use Boolean algebra.  Write, for notational ease,
     $A=\1{A_k \leq t}$ and $\bar A = 1- A = \1{A_k > t}$, and define
     something similar for $D$.  Then show that
     $A - D = A \bar D - \bar A D$, and show that $\bar A D
     =0$. Finally sum over $k$.}
+  \end{hint}
 
 \begin{solution}
   \begin{enumerate}
@@ -654,10 +696,13 @@ I got the same results as Wolframalpa, but certainly not for free.
   Provide a specification of the virtual waiting time process $\{V(t)\}$ for
     all $t$.
 
+    \begin{hint}
 \hint{
 Make a plot of the function $A_{A(t)}-t$. What is the meaning of $V(A_{A(t)})?$ What is
 $V(A_{A(t)} + A_{A(t)}-t$?
 }
+      
+    \end{hint}
 
     \begin{solution}
       There is a funny way to do this. Recall from a previous exercise
@@ -821,9 +866,15 @@ be simple to understand, not necessarily super efficient.
     comparison. As always, it is not obligatory to memorize the  code.
 
 
+\begin{lstlisting}
+class Fifo(Queue):
+    def __init__(self):
+        self.queue = SortedSet(key = lambda job: job.arrivalTime)
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructioncontinuoustime_5.tex}
-
+class Priority(Queue): # a priority queue
+    def __init__(self, numServers = 1):
+        self.queue = SortedSet(key = lambda job: job.p)
+\end{lstlisting}
 
 Interestingly, once we have a proper environment to carry out
 simulations, changing the queueing discipline is a one-liner!.
@@ -842,21 +893,32 @@ simulations, changing the queueing discipline is a one-liner!.
 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructioncontinuoustime_6.tex}
-
+\begin{lstlisting}
+class Lifo(Queue):
+    def __init__(self):
+        self.queue = SortedSet(key = lambda job: -job.arrivalTime)
+\end{lstlisting}
 
 Another interesting queueing rule is to sort in increasing job size;
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/constructioncontinuoustime_7.tex}
-
+\begin{lstlisting}
+  class SPTF(Queue): # shortest processing time first
+    def __init__(self):
+        self.queue = SortedSet(key = lambda job: job.serviceTime)
+\end{lstlisting}
 
 Do you see how sort in descending order of job size (it just a matter
 of putting a minus sign at the right place)?
   \end{solution}
 \end{question}
 
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
 
 %%% Local Variables:
 %%% mode: latex

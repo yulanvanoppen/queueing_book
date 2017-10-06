@@ -33,7 +33,7 @@ filenames = [
 # to select some files temporarily
 
 filenames = [
-    "constructiondiscretetime",
+    "constructioncontinuoustime",
         ]
 
 
@@ -66,7 +66,8 @@ class ToFile(PwebTexPweaveFormatter):
 
 for fname in filenames:
     #doc = Pweb(tex_dir + fname+r".tex", format="texpweave",
-    doc = Pweb(tex_dir + fname+r".tex", doctype="tex", 
+    doc = Pweb(tex_dir + fname+r".tex", informat="noweb",
+               doctype="tex", 
                output=chunk_dir+fname+r".tx")
     
     # doc.setformat(Formatter=ToFile)
@@ -88,6 +89,5 @@ for fname in filenames:
         "termend": r"\end{lstlisting}",
     }
     )
-    print(doc.getformat())
-    print(doc.weave())
-    #doc.weave()
+    #print(doc.getformat())
+    doc.weave()

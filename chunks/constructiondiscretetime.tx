@@ -1,4 +1,3 @@
-\begin{lstlisting}
 %\section{Construction of Discrete-Time  Queueing Processes}
 \section{Construction of Discrete-Time Queueing
   Processes}
@@ -306,6 +305,8 @@ solutions.  If you obtain \emph{reasonable} recursions, but they are
 different from mine, then your answer is just as good.
 
 \subsection*{Exercises}
+\label{sec:exercises}
+
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
@@ -711,13 +712,12 @@ Realize that Stations A and B have their own arrivals.
   time $W_-(k)$ of a job that arrives at time $k$, and an expression
   for the largest possible waiting time $W_+(k)$
   \begin{hint}
- Consider a numerical example. Suppose $Q_{k-1}=20$. Suppose
+  \hint{Consider a numerical example. Suppose $Q_{k-1}=20$. Suppose
     that the capacity is $c_k=3$ for all $k$. Then a job that arrives
     in the $k$th period, must wait at least $20/3$ (plus rounding)
     periods before it can leave the system. Now generalize this
-    numerical example.
+    numerical example.}
   \end{hint}
-
     \begin{solution}
       Let's tag the first customer that arrives in period $k$. This
       tagged customer sees $Q_{k-1}$ customer in the system, hence the
@@ -881,6 +881,7 @@ any off-by-one errors. For future work, implement it in a simulator\ldots
   \begin{hint}
 \hint{Formulate the decision variables/controls, the
     objective and the constraints.}
+    
   \end{hint}
 
   \begin{solution}
@@ -921,31 +922,39 @@ I_k &>= 0.
     same size as the number of arrival $a$ initially set to zeros. The
     rest of the code is nearly identical to the formulas in the text.
 
-<<>>=
+
+\begin{lstlisting}
 import numpy as np
 
 np.random.seed(3) # fix the seed
 
 labda = 20
 mu = 21
-@
+\end{lstlisting}
 
 These are the number of arrivals in each period.
 
-<<term=True>>=
+
+\begin{lstlisting}
 a = np.random.poisson(labda, 10)
 a
-@
+\end{lstlisting}\begin{lstlisting}
+array([21, 17, 14, 10, 22, 22, 17, 17, 19, 21])
+\end{lstlisting}
 
 The number of potential services
-<<term=True>>=
+
+\begin{lstlisting}
 c = mu * np.ones_like(a)
 c
-@ 
+\end{lstlisting}\begin{lstlisting}
+array([21, 21, 21, 21, 21, 21, 21, 21, 21, 21])
+\end{lstlisting}
 
 Now for the queueing recursions:
 
-<<>>=
+
+\begin{lstlisting}
 Q = np.zeros_like(a)
 d = np.zeros_like(a)
 Q[0] = 10  # initial queue length
@@ -953,23 +962,37 @@ Q[0] = 10  # initial queue length
 for k in range(1, len(a)):
     d[k] = min(Q[k - 1], c[k])
     Q[k] = Q[k - 1] - d[k] + a[k]
-@
+\end{lstlisting}
 
 These are the departures for each period:
-<<term=True>>=
+
+\begin{lstlisting}
 d
-@
+\end{lstlisting}\begin{lstlisting}
+array([ 0, 10, 17, 14, 10, 21, 21, 19, 17, 19])
+\end{lstlisting}
 
 The queue lengths
-<<term=True>>=
-Q
-@
 
-<<term=True>>=
+\begin{lstlisting}
+Q
+\end{lstlisting}\begin{lstlisting}
+array([10, 17, 14, 10, 22, 23, 19, 17, 19, 21])
+\end{lstlisting}
+
+
+\begin{lstlisting}
 loss = (Q > 20)
 loss
+\end{lstlisting}\begin{lstlisting}
+array([False, False, False, False,  True,  True, False, False, False,
+True], dtype=bool)
+\end{lstlisting}
+\begin{lstlisting}
 loss.sum()
-@
+\end{lstlisting}\begin{lstlisting}
+3
+\end{lstlisting}
 
 Here I
 define loss as the number of periods in which the queue length exceeds
@@ -981,12 +1004,27 @@ them.
 
 Now all statistics:
 
-<<term=True>>=
+
+\begin{lstlisting}
 d.mean()
+\end{lstlisting}\begin{lstlisting}
+14.800000000000001
+\end{lstlisting}
+\begin{lstlisting}
 Q.mean()
+\end{lstlisting}\begin{lstlisting}
+17.199999999999999
+\end{lstlisting}
+\begin{lstlisting}
 Q.std()
+\end{lstlisting}\begin{lstlisting}
+4.3772137256478576
+\end{lstlisting}
+\begin{lstlisting}
 (Q > 20).sum()
-@
+\end{lstlisting}\begin{lstlisting}
+3
+\end{lstlisting}
 
 Since this is a small example, the mean number of departures, i.e.,
 \texttt{d.mean()}, is not equal to the arrival rate $\lambda$.  
@@ -995,7 +1033,8 @@ statistical functions.
 
 Now I am going to run the same code, but for a larger instance. 
 
-<<>>=
+
+\begin{lstlisting}
 num = 1000
 a = np.random.poisson(labda, num)
 c = mu * np.ones_like(a)
@@ -1006,14 +1045,29 @@ Q[0] = 10  # initial queue length
 for k in range(1, len(a)):
     d[k] = min(Q[k - 1], c[k])
     Q[k] = Q[k - 1] - d[k] + a[k]
-@
+\end{lstlisting}
 
-<<term=True>>=
+
+\begin{lstlisting}
 d.mean()
+\end{lstlisting}\begin{lstlisting}
+20.178000000000001
+\end{lstlisting}
+\begin{lstlisting}
 Q.mean()
+\end{lstlisting}\begin{lstlisting}
+28.420000000000002
+\end{lstlisting}
+\begin{lstlisting}
 Q.std()
+\end{lstlisting}\begin{lstlisting}
+10.155865300406461
+\end{lstlisting}
+\begin{lstlisting}
 (Q > 30).sum()/num * 100
-@
+\end{lstlisting}\begin{lstlisting}
+34.200000000000003
+\end{lstlisting}
 
 
 I multiply with 100 to get a percentage. Clearly, many jobs see a long
@@ -1025,7 +1079,8 @@ distributed number of jobs served per day, so the service rate is
 still $21$, but the period capacity $c$ is random variable with
 Poisson distribution with $P(21)$
 
-<<fig = False, width = '12 cm'>>=
+
+\begin{lstlisting}
 c = np.random.poisson(mu, num)
 Q = np.zeros_like(a)
 d = np.zeros_like(a)
@@ -1034,14 +1089,29 @@ Q[0] = 10  # initial queue length
 for k in range(1, len(a)):
     d[k] = min(Q[k - 1], c[k])
     Q[k] = Q[k - 1] - d[k] + a[k]
-@
+\end{lstlisting}
 
-<<term=True>>=
+
+\begin{lstlisting}
 d.mean()
+\end{lstlisting}\begin{lstlisting}
+20.148
+\end{lstlisting}
+\begin{lstlisting}
 Q.mean()
+\end{lstlisting}\begin{lstlisting}
+42.518000000000001
+\end{lstlisting}
+\begin{lstlisting}
 Q.std()
+\end{lstlisting}\begin{lstlisting}
+22.841096208369684
+\end{lstlisting}
+\begin{lstlisting}
 (Q > 30).sum()/num * 100
-@
+\end{lstlisting}\begin{lstlisting}
+62.399999999999999
+\end{lstlisting}
 
 Compared to the case with constant service capacity, i.e., $c=21$ in
 each period, we see that the average waiting time increases, just as
@@ -1071,9 +1141,3 @@ vary parameters for sensitivity analysis, and so on.
 %%% mode: latex
 %%% TeX-master: "book"
 %%% End:
-\end{lstlisting}\begin{lstlisting}
-File "<tokenize>", line 704
-    this problem for the midterm as I changed the answer quite a bit
-    ^
-IndentationError: unindent does not match any outer indentation level
-\end{lstlisting}
