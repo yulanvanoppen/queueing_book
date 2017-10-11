@@ -7,10 +7,10 @@ filenames = [
     "expdistribution",
     "constructiondiscretetime",
     "constructioncontinuoustime",
+    "random_walk",
     "ratestability",
     "empericalperfmeasures",
     "levelcrossing",
-    "random_walk",
     "ratestability",
     "mm1",
     "mnmn1",
@@ -33,7 +33,7 @@ filenames = [
 # to select some files temporarily
 
 filenames = [
-    "constructioncontinuoustime",
+    "ratestability",
         ]
 
 

@@ -142,11 +142,20 @@ $\rho=\E S/ \E X < 1$ then tells us that the average time it takes to
 serve a job must be less than the average time between two consecutive
 arrivals, i.e., $\E S < \E X$.
 
+\subsection*{Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 
 \begin{question}
   Define the departure time $D_{k}$ of the $k$th job in terms of
   $\{D(t)\}$. 
+  \begin{hint}
+    
 \hint{Use the analogy with Eq.~\eqref{eq:27}.}
+  \end{hint}
 \begin{solution}
   \begin{equation*}
  D_{k} = \inf\{t; D(t) \geq k\}.
@@ -173,7 +182,10 @@ Define the random variables $\{\tilde X_k,k=1,\ldots\}$ as
 \begin{question} 
 Define $\tilde X_k = S_{k-1}-X_k$.
  Show that $\E{\tilde X_k} <0$ implies that $\lambda<\mu$. 
+ \begin{hint}
 \hint{Remember that $\{X_k\}$ and $\{S_k\}$ are sequences of i.i.d. random variables. What are the implications for the expectations?}
+   
+ \end{hint}
   \begin{solution}
   $0> \E{\tilde X_k} = \E {S_{k-1}-X_k} =  \E{ S_{k-1}}- \E {X_k} = \E S - \E X$, where we use the fact that the $\{S_k\}$ and $\{X_k\}$ are i.i.d. sequences. Hence, 
   \begin{equation*}
@@ -187,6 +199,7 @@ Define $\tilde X_k = S_{k-1}-X_k$.
 \begin{question}
   Show that $\E{S}/\E{X}$ is the fraction of time the server is busy.
 
+  \begin{hint}
   \hint{ Let $T_1>A_1$ be the first time after the arrival of job 1
     that arrives at an empty system. (Observe that job 1 also arrives
     at an empty system.)  Suppose, for ease of writing, that this job
@@ -196,6 +209,8 @@ Define $\tilde X_k = S_{k-1}-X_k$.
     of service that arrived during this period is $\sum_{i=1}^n S_i$.
     What is the fraction of time the server has been busy in this
     cycle?}
+    
+  \end{hint}
 
 
   \begin{solution}
@@ -267,7 +282,9 @@ Define $\tilde X_k = S_{k-1}-X_k$.
 \begin{question}
   Consider a queueing system with $c$ identical servers (identical in
   the sense that each server has the same production rate $\mu$). What would be a reasonable stability criterion for this system? 
+  \begin{hint}
 \hint{What is the rate in, and what is the service capacity?}
+  \end{hint}
   \begin{solution}
     The criterion is that $c$ must be such that $\lambda <
     c\mu$.
@@ -314,8 +331,8 @@ such that
  \lambda_B T &< k_B.
 \end{align*}
 
-\hint{ Here are some questions to help you interpret this formulation.
-
+\begin{hint}
+Here are some questions to help you interpret this formulation.
 \begin{enumerate}
 \item   What are the decision variables for this problem? In other words, what are the `things' we can control/change?
 \item What are the interpretations of $k_A t_A$, and $S+k_B t_B$?
@@ -330,7 +347,7 @@ such that
   time between jobs of class $i$ and $j$ is given by $S_{ij}$. (Thus,
   the setup times are sequence dependent.) 
 \end{enumerate}
-}
+\end{hint}
 
   \begin{solution}
     Realize that the machine works in cycles. A cycle starts with
@@ -349,11 +366,14 @@ such that
   Can you make an arrival process such that $A(t)/t$ does not have a
   limit?  
 
+  \begin{hint}
+    
   \hint{As a start, the function $\sin(t)$ has not a limit as
     $t\to\infty$. However, the time-average $\sin(t)/t \to 0$.  Now
     you need to make some function whose time-average does not
     converge, hence it should grow fast, or fluctuate wilder and
     wilder.}
+  \end{hint}
   \begin{solution}
  If $N(t) = 3 t^2$, then clearly $N(t)/t = 3t$. This does not
     converge to a limit. 
@@ -393,10 +413,13 @@ For the mathematically interested, we seek a
   is right-continuous. 
     \end{enumerate}
 
+    \begin{hint}
+      
     \hint{ Use that $A_{A(t)} \leq t < A_{A(t)+1}$. Divide by $A(t)$
       and take suitable limits. BTW, such type of proof is used quite
       often to show that the existence of one limit implies, and is
       implied by, the existence of another type of limit.  }
+    \end{hint}
 
  \begin{solution}
  Observing that $A_{A(t)}$ is the arrival time of the last job
@@ -481,6 +504,13 @@ For the mathematically interested, we seek a
     See my website. 
   \end{solution}
 \end{question}
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
 
 %%% Local Variables:
 %%% mode: latex

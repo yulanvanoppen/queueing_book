@@ -167,10 +167,20 @@ stationary state will occupy us for the rest of the book.
 \label{fig:convergence}
 \end{figure}
 
+\subsection*{Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
+
 \begin{question}
   What is the difference between the recursive schemes of~(\ref{eq:5}) and~(\ref{eq:31})? Explain in the former scheme
-  the formula for $d_k$.  \hint{When are the arrivals in slot $k$
+  the formula for $d_k$.  
+  \begin{hint}
+\hint{When are the arrivals in slot $k$
     available for service in either of the systems?}
+  \end{hint}
 \begin{solution}
   In the scheme
   \begin{equation*}
@@ -204,6 +214,7 @@ Show that
 \end{equation*}
 where $Z_k$ is defined by the above random walk.  
 
+\begin{hint}
 \hint{Note first that from the expression for $Z_k$,
   $a_k - c_k = Z_k - Z_{k-1}$. Use this to get
   $Q_k = [Q_{k-1} +Z_k- Z_{k-1}]^+$. Subtract $Z_k$, use recursion and
@@ -214,6 +225,8 @@ where $Z_k$ is defined by the above random walk.
 &\max\{-a, -b \} = -\min\{a,b\}.
 \end{align*}
 }
+  
+\end{hint}
  
 \begin{solution}
 Note first that from the expression
@@ -274,12 +287,15 @@ Now this summation is known as a modified Bessel function, but this
 does not make us, in some sense, much wiser. In fact, we use this
 result as a deterrent to study transient aspects of queueing system.
 
+\begin{hint}
 \hint{It is actually not hard, even though the expression looks
   hard. Use conditioning to see that
   $\P{Z(t)=n}_m = \P{N_\mu(t) - N_\lambda(t) = m - n}$. Then write out
   the definitions of the two Poisson distributions. Assemble
   terms. Then fiddle a bit with the terms to get
   $(t\sqrt{\lambda\mu})$. }
+  
+\end{hint}
 
 
 \begin{solution}
@@ -337,11 +353,14 @@ With this,
   Can you relate the construction of $\{Q_k\}$ as a discrete-time
   random walk to a continuous-time construction of the $M/M/1$ queue?
 
+  \begin{hint}
+    
   \hint{Consider $Z(t)=Z(0) + N_\lambda( t) -N_\mu(t)$ at the embedded
     set of epochs at which either $N_\lambda$ or $N_\mu$ changes. What
     is the probability that $N_\lambda$ fires, given that one of the
     two Poisson processes fires? Relate this to $\{a_k\}$ and
     $\{c_k\}$.}
+  \end{hint}
 
     \begin{solution}
       We use that merging two Poisson processes leads to another
@@ -395,9 +414,31 @@ Let's print the difference (The Kolmogorov-Smirnov statistic) between
 the distributions of $W_k$ and $W_{k+1}$. 
 
 
+\begin{lstlisting}
+from lea import Lea
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/random_walk_1.tex}
+S = Lea.fromVals(1,  2)
+X = Lea.fromVals(1,  3)
+U = S-X
 
+W = Lea.fromVals(3)
+for k in range(1, 10):
+    W_new = Lea.fastMax(W + U, 0)
+    m = max(abs(W_new.cdf(x)-W.cdf(x))             for x in range(W_new.support()[-1])
+            )
+    print(k, m) 
+    W = W_new
+\end{lstlisting}\begin{lstlisting}
+1 0.5
+2 0.1875
+3 0.125
+4 0.08203125
+5 0.0576171875
+6 0.042236328125
+7 0.03131103515625
+8 0.02362060546875
+9 0.018096923828125
+\end{lstlisting}
 
 So, after some 10 customers, the distribution hardly changes anymore. 
 
@@ -415,6 +456,13 @@ So, after some 10 customers, the distribution hardly changes anymore.
     your favorite programming language is fun.
 \end{solution}
 \end{question}
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
 
 %%% Local Variables:
 %%% mode: latex
