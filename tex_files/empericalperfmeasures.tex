@@ -195,6 +195,12 @@ edge[pil,bend left=25, <-] (mu.east);
 \end{figure}
 
 
+\subsection*{Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 \begin{question}
 Design a queueing system in which the load as seen the server is very
 different from what the customers see. Show that for such a queueing system typically
@@ -207,8 +213,11 @@ where, by \eqref{eq:Lk}, $L_k=L(A_k)$ is the number in the system at the arrival
   \end{equation*}
 
 
+  \begin{hint}
+    
   \hint{Consider a queueing system with constant service and
     interarrival times.}
+  \end{hint}
 \begin{solution}
   Take $X_k = 10$ and $S_k = 10-\epsilon$ for some tiny
   $\epsilon$. Then $L(t) = 1$ nearly all of the time. In fact,
@@ -252,8 +261,11 @@ where, by \eqref{eq:Lk}, $L_k=L(A_k)$ is the number in the system at the arrival
   that \emph{see upon arrival} more than~$m$ customers in the system
   cannot be defined as~\eqref{eq:Qm}. Provide a better definition. 
 
+  \begin{hint}
+    
 \hint{Why is \eqref{eq:Qm} not the same as the number of
   batches that see a queue length less than $m$?}
+  \end{hint}
 
   \begin{solution} Since we deal with a system in discrete time $L_k$
     is the queue length at the end of period~$k$. Thus,
@@ -291,6 +303,15 @@ requires some care; not all definitions need to measure the same.
   \end{solution}
 \end{question}
 
+
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
+  
 
 
 

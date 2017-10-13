@@ -241,6 +241,11 @@ the model becomes useless. Mind: a good model is simple (but not too
 simple). So, notwithstanding the weaknesses of the above model, it is
 pretty powerful already. 
 
+\subsection*{Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
 
 \begin{question}
   Derive expression~\ref{eq:el} for the average number of jobs in an
@@ -269,7 +274,9 @@ to justify the interchange of the summations.
 
 \begin{question}
   Derive expression~\ref{eq:pn} for the excess probability $\P{L\geq n}$, i.e., the probability that a long queue occurs. 
+  \begin{hint}
 \hint{$\P{L\geq n} = \sum_{k\geq n} p(k)$.}
+  \end{hint}
   \begin{solution}
     \begin{equation*}
       \begin{split}
@@ -309,13 +316,24 @@ backlogged, what are the average costs of using a reorder level $r$?
 What is the optimal reorder level $r^*$, i.e., the level that achieves
 minimal average cost?
 
+\begin{hint}
+  
 \hint{Realize that the inventory level $I(t)$ at time $t$ can be
   modeled as $I(t) = r+1-L(t)$, where $L$ is the number of jobs in an
   $M/M/1$ queue.}
+\end{hint}
 
   \begin{solution}
   \end{solution}
 \end{question}
+
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
 
 %%% Local Variables:
 %%% mode: latex

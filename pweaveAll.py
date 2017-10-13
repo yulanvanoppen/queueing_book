@@ -33,7 +33,9 @@ filenames = [
 # to select some files temporarily
 
 filenames = [
-    "ratestability",
+    "mm1",
+    "mnmn1",
+#    "pasta",
         ]
 
 

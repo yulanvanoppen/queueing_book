@@ -120,6 +120,14 @@ with the perception of customers. To relate these two `views', i.e.,
 time-average versus observer-average, we need a new concept,
 \emph{PASTA}, to be developed in in Section~\ref{sec:poisson-arrivals-see}.
 
+
+\subsection*{Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
+
 \begin{question}
 Consider the $M/M/2/2+1$ queue with arrival rate $\lambda$ and
 service rate $\mu$. 
@@ -129,6 +137,7 @@ service rate $\mu$.
    probabilities in steady state. 
  \end{enumerate}
  
+ \begin{hint}
  \hint{Think about what would be the appropriate model choices for
    $\lambda(n)$ and $\mu(n)$ and use the level-crossing equations
    $\lambda(n) p(n) = \mu(n+1)p(n+1)$.  For instance, realize that
@@ -137,6 +146,8 @@ service rate $\mu$.
    setting $\lambda(3)=0$. For the service rate, how many servers are
    busy when the system contains 2 or more jobs?  What does this say
    about $\mu(k)$ for $k=2$ or $k=3$.}
+   
+ \end{hint}
 
   \begin{solution}
 
@@ -195,10 +206,13 @@ p(0) = (1+\rho + \rho^2/2 + \rho^3/4)^{-1}.
   \item Derive Eq.~\eqref{eq:8}
   \item   Show that as $K\to\infty$, the performance measures of the $M/M/1/K$ converge to those of the $M/M/1$ queue. 
   \end{enumerate}
+  \begin{hint}
+    
   \hint{Use that $\sum_{i=0}^n x^i = (1-x^{n+1})/(1-x)$. BTW, is it
     necessary for this expression to be true that $|x|<1$? What should
     you require for $|x|$ when you want to take the limit
     $n\to\infty$?}
+  \end{hint}
   \begin{solution}
 Note that 
 \begin{equation*}
@@ -230,8 +244,11 @@ performance measures (which are derived from $p(n)$) must be the same.
   $p(0)$, $p(1), \ldots$. You do not have to compute the normalization
   constant $G$.
 
+  \begin{hint}
+    
 \hint{ Use $\lambda(n) p(n) = \mu(n+1)p(n+1)$ and
     find suitable expressions for $\lambda(n)$ and $\mu(n+1)$. }
+  \end{hint}
 
   \begin{solution}
     $\lambda(n) \equiv \lambda$ for all $n<c+K$. When $n=c+K$,
@@ -262,7 +279,9 @@ The normalization is trivial, numerically at least.
 
 \begin{question}
   Check that  Eq.\eqref{eq:9} for the $M/M/c$ queue reduces to the $M/M/1$ queue if you take $c=1$.
-\hint{Fill in $c=1$. Realize that this is a check on the formulas.}
+  \begin{hint}
+Fill in $c=1$. Realize that this is a check on the formulas.
+  \end{hint}
   \begin{solution}
 Take $c=1$
  \begin{align}
@@ -282,7 +301,9 @@ Everything is in accordance to the formulas we derived earlier for the $M/M/1$ q
 \begin{question}
   Derive Eq.\eqref{eq:9} for the $M/M/c$ queue.
 
-  \hint{ Use $\lambda(n)p(n) = \mu(n+1)p(n+1)=\min\{c, n+1\}\mu p(n+1)$.}
+  \begin{hint}
+ Use $\lambda(n)p(n) = \mu(n+1)p(n+1)=\min\{c, n+1\}\mu p(n+1)$.
+  \end{hint}
 
   \begin{solution}
 First we use the hint to  establish a generic relation for $p(n+1)$:
@@ -389,7 +410,8 @@ Observe that the right hand side is precisely equal to $\rho c G$, and hence,
 \end{question}
 
 
-
+\begin{comment}
+  
 \begin{question}[use=false]
   \TBD.  Explain the difference between level crossing and balance
   equations, and the pros and cons of each.
@@ -413,6 +435,7 @@ Observe that the right hand side is precisely equal to $\rho c G$, and hence,
     \TBD
   \end{solution}
 \end{question}
+\end{comment}
 
 
 \begin{question}
@@ -421,7 +444,9 @@ Observe that the right hand side is precisely equal to $\rho c G$, and hence,
 \item Show that the $M/M\infty$ queue is stable for any finite $\lambda$. 
 \item Why is $\E L=\rho$ for the $M/M/\infty$ queue? 
   \end{enumerate}
-\hint{Use that for any $x$, $x^n/n!\to 0$ as $n\to\infty$.}
+  \begin{hint}
+Use that for any $x$, $x^n/n!\to 0$ as $n\to\infty$.
+  \end{hint}
  \begin{solution}
    \begin{enumerate}
    \item 
@@ -451,6 +476,8 @@ Observe that the right hand side is precisely equal to $\rho c G$, and hence,
 \end{solution}
 \end{question}
 
+\begin{comment}
+  
 \begin{question}[use=false]
   Show that the steady state distribution of the $M/M/K/K$ converges
   to the steady-state distribution of the $M/M/\infty$ queue.
@@ -467,6 +494,7 @@ Observe that the right hand side is precisely equal to $\rho c G$, and hence,
 \begin{solution}\TBD
  \end{solution}
 \end{question}
+\end{comment}
 
 
 \begin{question}(Hall 5.1) Give two examples of systems that
@@ -507,7 +535,7 @@ that can arrive to the queueing system is only 8.
 
 
 
-
+\begin{comment}
 \begin{question}[use=false]
   (Hall 5.21) The queueing operator of the previous problem has
   decided to institute a policy whereby employees are removed from
@@ -517,7 +545,9 @@ that can arrive to the queueing system is only 8.
   $\E W_Q$, the interruption rate, the expected time between
   interruption, and the expected number of busy servers. 
   \begin{solution}
+
 \TBD. 
+
     This is an interesting exercise. This policy is a so-called
 $N$-policy: as soon as the server becomes idle, remove the
 server from the queue and let him/her do something useful, when the
@@ -531,9 +561,15 @@ is also analyzed. With a bit of effort you can study this analysis.
 
 First copy some data from the previous problem.
 
+\begin{lstlisting}
+labda = 11. # per hour
+mu = 6. # per hour
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/mnmn1_1.tex}
-
+rho = labda/mu
+rho
+\end{lstlisting}\begin{lstlisting}
+1.8333333333333333
+\end{lstlisting}
 
 To estimate $\E L_Q$ I use Figure 5.10. Using the line $rho =
 2$, as here $\rho = 11/6 \approx 2$, and $K=2$, we see
@@ -565,6 +601,8 @@ queue).
 
   \end{solution}
 \end{question}
+  
+\end{comment}
 
 
 \begin{question}(Systems with finite calling population)
@@ -580,8 +618,10 @@ queue).
     size of the calling population.
   \end{enumerate}
   
-    \hint{Use $\lambda(n) p(n) = \mu(n+1)p(n+1)$, and realize that for
-      this case $\lambda(n) = (N-n)\lambda$ and $\mu(n) = \mu$.}
+  \begin{hint}
+Use $\lambda(n) p(n) = \mu(n+1)p(n+1)$, and realize that for
+      this case $\lambda(n) = (N-n)\lambda$ and $\mu(n) = \mu$.
+  \end{hint}
     \begin{solution}
 1) Take $\lambda(n) = (N-n)\lambda$ and $\mu(n) = \mu$, and solve
     Eq.~\eqref{eq:25} and \eqref{eq:20}.  Thus: 
@@ -645,25 +685,92 @@ I asked WolframAlpha to simplify this, but the answer I got was not particularly
  When is it OK to approximate the $M/M/c$ queue by an $M/M/1$
     queue with a fast server?
 
-\hint{  Implement the formulas for $\E{L_Q(M/M/3)}$ for the $M/M/3$ queue in
+    \begin{hint}
+Implement the formulas for $\E{L_Q(M/M/3)}$ for the $M/M/3$ queue in
   some computer program (R, excel, python, whatever) and compare this
   to $\E{L_Q(M/M/1)}$ for the fast $M/M/1$ case.  Make plots of
-  $\E{L_Q(M/M/3)}$ and $\E{L(M/M/3)}$ as functions of $\rho$.}
+  $\E{L_Q(M/M/3)}$ and $\E{L(M/M/3)}$ as functions of $\rho$.
+    \end{hint}
+
   \begin{solution}
 
 I am going to implement the formulas of Eq.~(\ref{eq:9}) in python. First the results for the $M/M/3$ queue.
 
 
+\begin{lstlisting}
+from math import exp, factorial
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/mnmn1_2.tex}
+labda = 5
+mu = 2
+c = 3
 
+rho = labda / mu / c
+rho
+\end{lstlisting}\begin{lstlisting}
+0.8333333333333334
+\end{lstlisting}
+\begin{lstlisting}
+G = sum((c * rho)**n / factorial(n) for n in range(c))
+G += (c * rho)**c / ((1 - rho) * factorial(c))
+G
+\end{lstlisting}\begin{lstlisting}
+22.250000000000004
+\end{lstlisting}
+\begin{lstlisting}
+ELQ = (c * rho)**c / (factorial(c) * G) * rho / (1 - rho)**2
+ELQ
+\end{lstlisting}\begin{lstlisting}
+3.511235955056181
+\end{lstlisting}
+\begin{lstlisting}
+ELS = rho * c
+ELS
+\end{lstlisting}\begin{lstlisting}
+2.5
+\end{lstlisting}
+\begin{lstlisting}
+EL = ELQ + ELS
+EL
+\end{lstlisting}\begin{lstlisting}
+6.011235955056181
+\end{lstlisting}
 
 Now for the $M/M/1$ queue:
 
 
+\begin{lstlisting}
+labda = 5
+c = 3
+mu = 2*c
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/mnmn1_3.tex}
-
+rho = labda / mu 
+rho
+\end{lstlisting}\begin{lstlisting}
+0.8333333333333334
+\end{lstlisting}
+\begin{lstlisting}
+ELQ = rho**2/(1-rho)
+ELQ
+\end{lstlisting}\begin{lstlisting}
+4.166666666666668
+\end{lstlisting}
+\begin{lstlisting}
+ELS = rho
+ELS
+\end{lstlisting}\begin{lstlisting}
+0.8333333333333334
+\end{lstlisting}
+\begin{lstlisting}
+EL = ELS + ELQ
+EL
+\end{lstlisting}\begin{lstlisting}
+5.000000000000001
+\end{lstlisting}
+\begin{lstlisting}
+rho/(1-rho) # this must also be EL, just a check
+\end{lstlisting}\begin{lstlisting}
+5.000000000000002
+\end{lstlisting}
 
 Note the last check. As a rule, you should always compare your results
 with known results. BTW, that is one of the reasons I prefer to code
@@ -700,6 +807,17 @@ The  code can be found on \texttt{github} in the \texttt{progs} directory.
 
 \end{solution}
 \end{question}
+
+
+
+
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
 
 
 %%% Local Variables:

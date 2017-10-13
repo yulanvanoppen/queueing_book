@@ -517,6 +517,12 @@ in practical queueing situations; they are useful in theory and in
 simulation, as they relate the theoretical concepts to actual measurements.
 
 
+\subsection*{Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 
 \begin{question}
   Should we  take $L(A_k-)=n$ or $L(A_k)$ in the definition of $A(n,t)$?
@@ -599,10 +605,13 @@ Is it always true that
   of service, and there is one server. Find an expression for
   $Y(n,t)$.What acronym would describe this queueing situation?
 
+  \begin{hint}
   \hint{For the acronym, observe that the service times and
     interarrival are \emph{D}eterministic and there is one server. For
     the computation of $Y(n,t)$, make make a plot of $L(s)$ as a
     function of time for $n=1$.}
+    
+  \end{hint}
 
     \begin{solution}
       First, it is the $D/D/1$ queue, since there is one server and
@@ -677,7 +686,10 @@ Continuing to $[2,3)$ and so on gives
   Use the graph of the previous question and a level-crossing argument
   to express the steady-state probabilities $p(n),n=0,\ldots, 3$ in
   terms of $\lambda$ and $\mu$.
+  \begin{hint}
+    
 \hint{First balance the rates accross the levels. Then solve for $\pi(k)$.}
+  \end{hint}
   \begin{solution}
 With level crossing
   \begin{align*}
@@ -688,6 +700,13 @@ With level crossing
   Solving this in terms of $p(0)$ gives $p(2) = \rho p(0)$, $p(3) = \rho p(2) = \rho^2p(0)$, and $p(1) = (\lambda+\mu)/\lambda p(0)$. 
   \end{solution}
 \end{question}
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
 
 %%% Local Variables:
 %%% mode: latex
