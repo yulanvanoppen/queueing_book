@@ -3,6 +3,14 @@
 {$\mathbf{M/G/1}$ Queue: Expected Waiting Time}
 \label{sec:mg1}
 
+
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
+
 Let's focus on one queue in a supermarket, served by one cashier, and
 assume that customers do not jockey, i.e., change queue. What can we
 say about the average waiting time in queue if service times are not
@@ -190,9 +198,45 @@ Show that $\E{S_r\given S_r>0} = 2\mu^{-1}/3$ when  $S$ is $U[0,2/\mu]$.
   \begin{solution}
 
 
+\begin{lstlisting}
+labda = 5./60 # arrivals per minute
+a = 4.
+b = 6.
+ES = (a+b)/2.  # service time in minutes
+Var = (b-a)*(b-a)/12.
+SCV = Var/(ES**2)
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/mg1_1.tex}
+rho = labda*ES
 
+Wq = (1+SCV)/2.*rho/(1.-rho)*ES
+Wq # in minutes
+\end{lstlisting}\begin{lstlisting}
+1.8095238095238095
+\end{lstlisting}
+\begin{lstlisting}
+Wq/60. # in hour
+\end{lstlisting}\begin{lstlisting}
+0.03015873015873016
+\end{lstlisting}
+\begin{lstlisting}
+
+W = Wq + ES
+W
+\end{lstlisting}\begin{lstlisting}
+6.809523809523809
+\end{lstlisting}
+\begin{lstlisting}
+Lq = labda*Wq
+Lq
+\end{lstlisting}\begin{lstlisting}
+0.15079365079365079
+\end{lstlisting}
+\begin{lstlisting}
+L = labda*W
+L
+\end{lstlisting}\begin{lstlisting}
+0.5674603174603174
+\end{lstlisting}
   \end{solution}
 \end{question}
 
@@ -236,15 +280,72 @@ Show that $\E{S_r\given S_r>0} = 2\mu^{-1}/3$ when  $S$ is $U[0,2/\mu]$.
     just one server. Hence, we can use the PK formula to compute the average queue length.
 
 
+\begin{lstlisting}
+labda = 20./60 # per hour
+ES = 2. # hour
+sigma = 1.
+SCV = sigma*sigma/(ES*ES)
+rho = labda*ES
+rho
+\end{lstlisting}\begin{lstlisting}
+0.6666666666666666
+\end{lstlisting}
+\begin{lstlisting}
+Wq = (1+SCV)/2 * rho/(1-rho) * ES
+Wq
+\end{lstlisting}\begin{lstlisting}
+2.4999999999999996
+\end{lstlisting}
+\begin{lstlisting}
+Lq = labda * Wq # Little's law
+Lq
+\end{lstlisting}\begin{lstlisting}
+0.8333333333333331
+\end{lstlisting}
+\begin{lstlisting}
+W = Ws + ES
+\end{lstlisting}\begin{lstlisting}
+---------------------------------------------------------------------------NameError
+Traceback (most recent call last)<ipython-input-1-4b0da811f906> in
+<module>()
+----> 1 W = Ws + ES
+NameError: name 'Ws' is not defined
+\end{lstlisting}
+\begin{lstlisting}
+W
+\end{lstlisting}\begin{lstlisting}
+6.809523809523809
+\end{lstlisting}
+\begin{lstlisting}
+L = labda * W
+L
+\end{lstlisting}\begin{lstlisting}
+2.2698412698412698
+\end{lstlisting}
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/mg1_2.tex}
 
 
-
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/mg1_3.tex}
-
+\begin{lstlisting}
+ES = 2.1
+SD = 0.1
+SCV = SD**2/ES**2
+rho = labda*ES
+rho
+\end{lstlisting}\begin{lstlisting}
+0.7
+\end{lstlisting}
+\begin{lstlisting}
+Lq = rho**2/(1.-rho)*(1.+SCV)/2.
+Lq
+\end{lstlisting}\begin{lstlisting}
+0.8185185185185182
+\end{lstlisting}
+\begin{lstlisting}
+L = rho + Lq
+L
+\end{lstlisting}\begin{lstlisting}
+1.5185185185185182
+\end{lstlisting}
 
   \end{solution}
 
@@ -318,7 +419,10 @@ In both cases the expected service times are equal to $T$ so that the loads are 
 \begin{question}
   Compute $\E L$ for the $M/G/1$ queue with $G=U[0,A]$, i.e., the
   uniform distribution on $[0,A]$.
+  \begin{hint}
+    
 \hint{Integrate $A^{-1} \int x \d x$, and likewise for the second moment.}
+  \end{hint}
 \begin{solution}
   \begin{align*}
 \E S &= A/2,\\
@@ -336,10 +440,14 @@ C_s^2 &= (A^2/12)/(A^2/4) = 1/3,\\
 
 \begin{question}
   Show that for the $M/G/1$ queue, the expected idle time is
-  $\E I = 1/\lambda$.  \hint{What is the average time between two
+  $\E I = 1/\lambda$.  
+  \begin{hint}
+    
+\hint{What is the average time between two
     arrivals? Observe that the interarrivals are memoryless, hence the
     average time until the next arrival after the server becomes idle
     is also $1/\lambda$.}
+  \end{hint}
   \begin{solution}
   Since the interarrival times are memoryless, the expected
       time to the first arrival after a busy time stops is also
@@ -360,11 +468,15 @@ The result follows.
 \end{question}
 
 \begin{question}
-  What is the utilization of the $M/G/1/1$ queue?  \hint{The job in
+  What is the utilization of the $M/G/1/1$ queue?  
+  \begin{hint}
+    
+\hint{The job in
     the system is also in service (it is an $M/G/1/1$ queue\ldots).
     The average idle time is $1/\lambda$. The average busy time is
     $\E S$--as there are no jobs in queue. The load $\rho$ must also
     be equal to the fraction of time the server is busy. }
+  \end{hint}
   \begin{solution}
  The system can contain at most 1 job. Necessarily, if the
       system contains a job, this job must be in service.  All jobs
@@ -381,9 +493,14 @@ The result follows.
 
 \begin{question}
   For the $M/G/1/1$ queue what is the fraction of jobs rejected
-  (hence, what is the fraction of accepted jobs)?  \hint{The rate of
+  (hence, what is the fraction of accepted jobs)?  
+  \begin{hint}
+    
+\hint{The rate of
     accepted jobs is $\lambda \pi(0)$. What is the load of these jobs?
     Equate this to $1-\pi(0$ as this must also be the load. Then solve for $\pi(0)$.}
+  \end{hint}
+
   \begin{solution}
     Let $p(0)$ be the fraction of time the server is idle. By PASTA,
     $\pi(0)=p(0)$. Thus, the rate of accepted jobs is
@@ -408,7 +525,10 @@ Note that  $\gamma < \lambda$, as it should be the case.
 \begin{question}
   Why is the fraction of lost jobs at the $M/G/1/1$ queue not
   necessarily the same as for a $G/G/1/1$ queue with the same load?  
+  \begin{hint}
+    
 \hint{Provide an  example.}
+  \end{hint}
   \begin{solution}
  Typically, in the $G/G/1$ queue, the arrivals do not see  time-averages. Consequently, the fraction of arrivals that are blocked is not necessarily equal to the utilization~$\rho$.
 
@@ -419,6 +539,8 @@ Note that  $\gamma < \lambda$, as it should be the case.
 \end{question}
 
 
+\begin{comment}
+  
 \begin{question}[use=false]
   Use the ideas of Section~\ref{sec:arrival-processes} to derive an
   expression for the density $f_r$ of the remaining service times as
@@ -428,7 +550,20 @@ Note that  $\gamma < \lambda$, as it should be the case.
     \TBD.
   \end{solution}
 \end{question}
+\end{comment}
 
+
+
+
+
+
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
 
 
 

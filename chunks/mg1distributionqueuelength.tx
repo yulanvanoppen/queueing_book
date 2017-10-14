@@ -3,6 +3,13 @@
 {$\mathbf{M/G/1}$ Queue Length Distribution}
 \label{sec:distr-queue-length}
 
+
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 In Section~\ref{sec:mg1} we derived the Pollackzek-Khintchine
 Eq.~\eqref{eq:710} by which we can compute the average waiting time in
 queue for the $M/G/1$ queue. Then, with Little's law, we therefore
@@ -158,6 +165,8 @@ we can do here.
 
 \begin{question}
 Provide the details behind the derivation of Eq.~\ref{eq:555}.
+\begin{hint}
+  
 \hint{Define for $m=1,\ldots, n$
 \begin{equation*}
   D(m, n, t) = \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k-1})=m}\1{Y_k>n-m+1},
@@ -167,6 +176,7 @@ and
   D(0, n, t) = \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k-1})=0}\1{Y_k>n}.
 \end{equation*}
 Then, divide by $D(n,t)$ and $D(t)$ and take limits.}
+\end{hint}
 
 \begin{solution}
  Define, for the first term,
@@ -208,11 +218,15 @@ then
   $S_k = D_k - D_{k-1}$?  If $L(D_{k-1}) = 0$, the time between
   $D_{k-1}$ and $D_k$ is \emph{not} equal to $S_k$. What is then the
   distribution of $D_k-D_{k-1}$?
+  \begin{hint}
+    
 \hint{  Realize that if $L(D_{k-1})=0$, job $k-1$ leaves behind an empty
   system. Thus, before job $k$ can leave, it has to arrive. In other
   words, $D_{k-1}<A_k$.  Since job $k$ arrives to an empty system,
   his service starts right away, to that the time between $A_k$ and
   $D_k$ is equal to the service time of job $k$.}
+  \end{hint}
+
 \begin{solution}
   When $L(D_{k-1})>0$, job $k$ is already in the system when job $k-1$
   finishes its service and leaves. Thus, at the departure time
@@ -237,8 +251,11 @@ then
 \begin{equation}\label{eq:4}
   \P{Y_k = j\given S=s} = e^{-\lambda s}\frac{(\lambda s)^j}{j!}.
 \end{equation}
+\begin{hint}
+  
 \hint{ If $s$ is deterministic, the number of arrival during a fixed
     period of time with length $s$ must be Poisson distributed.}
+\end{hint}
   \begin{solution}
 If the service time is $s$ units long, we need to know the number of arrivals during this interval. By assumption, the arrival process is Poisson. 
   \end{solution}
@@ -271,9 +288,12 @@ where $F$ is the distribution of the service times.
   If $S$ is deterministic and equal to $s$, show that
   Eq.~\eqref{eq:10} reduces to Eq.~\eqref{eq:4}.  
 
+  \begin{hint}
+    
 \hint{If $S=s$ then
     $\P{S=s}=1$, i.e., all probability mass lies at $s$. Thus, all
     arrivals must occur during $[0,s]$.}
+  \end{hint}
 
   \begin{solution}
 
@@ -407,6 +427,8 @@ G(j) = \sum_{k=j+1}^\infty f(k) =  \left(\frac{\lambda}{\lambda+\mu}\right)^{j+1
   when applied to the $M/M/1$ queue, gives the queue length
   distribution for the $M/M/1$ queue, i.e., $p(n)=(1-\rho)\rho^n$. 
 
+  \begin{hint}
+    
 \hint{ Define shorthands
     such as $\alpha=\lambda/(\lambda+\mu)$, so that
     $1-\alpha = \mu/(\lambda+\mu)$, and
@@ -415,6 +437,7 @@ G(j) = \sum_{k=j+1}^\infty f(k) =  \left(\frac{\lambda}{\lambda+\mu}\right)^{j+1
     $G(n) = \alpha^{n+1}$.  (I did not get this result for
     `free'. Indeed, it's just algebra, but please try to derive this
     yourself. Its good to hone your computational skills.)}
+  \end{hint}
 
     \begin{solution}
       Take $n=0$. Then $f(0) \pi(1) = (1-\alpha)\pi(1)$, and
@@ -481,14 +504,46 @@ necessary for the course, but I hope that you study it nonetheless.
 You will have to use it for other courses later anyway.
 
 
+\begin{lstlisting}
+import numpy as np
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/mg1distributionqueuelength_1.tex}
+labda = 3
+mu = 4
+j = 5
+dx = 1 / 100
 
 
+def F(x):
+    return 1 - np.exp(-mu * x)
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/mg1distributionqueuelength_2.tex}
+def f(x):
+    return F(x + dx) - F(x)
 
+
+def term(i):
+    res = np.exp(-labda * i * dx)
+    res *= (labda * i * dx)**j / np.math.factorial(j)
+    res *= f(i*dx) * dx
+    return res
+\end{lstlisting}
+
+
+\begin{lstlisting}
+print(sum(term(i) for i in range(50)))
+\end{lstlisting}\begin{lstlisting}
+1.11588350072e-05
+\end{lstlisting}
+\begin{lstlisting}
+print(sum(term(i) for i in range(500)))
+\end{lstlisting}\begin{lstlisting}
+8.09880771006e-05
+\end{lstlisting}
+\begin{lstlisting}
+print(sum(term(i) for i in range(5000)))
+\end{lstlisting}\begin{lstlisting}
+8.09880771273e-05
+\end{lstlisting}
 
 Since I don't know when to stop the integral I just try a few values;
 of course stopping the integration at $x=50$ is too small, since
@@ -506,9 +561,16 @@ very hard to improve these methods. Thus, let's try a real number
 cruncher.
 
 
+\begin{lstlisting}
+from scipy.integrate import quad
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/mg1distributionqueuelength_3.tex}
+def g(x):
+    return np.exp(-labda*x) * (labda*x)**j/np.math.factorial(j) * f(x)
 
+print(quad(g, 0, np.inf))
+\end{lstlisting}\begin{lstlisting}
+(8.098807712760667e-05, 3.4086429822163874e-11)
+\end{lstlisting}
 
 Comparing these results to our simple estimates we see that they are
 the same.
@@ -516,6 +578,8 @@ the same.
 \end{question}
 
 
+\begin{comment}
+  
 \begin{question}[use=false]
   To analyze the distribution of $L$ of the $M/G/1$ we concentrated on
   the departure epochs. Why will this not help to find the
@@ -524,7 +588,15 @@ the same.
     \TBD.
   \end{solution}
 \end{question}
+\end{comment}
 
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
 
 
 

@@ -1,6 +1,14 @@
 \section{Service Interruptions}
 \label{sec:serv-interr}
 
+
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
+
 See the related section 1.11 of the book of Zijm.
 
 No notes; only questions.
@@ -81,12 +89,15 @@ And finally,
 \item Use the above two points to determine a criterion on the minimal
   batch size $B$.
 \end{enumerate}
+\begin{hint}
+  
 \hint{1: If the batch sizes $B$ are small, relatively much time is
   spent on setups. 2: If the setup time $S$ is constant, then the
   number of orders that arrive is Poisson distributed. 3: Given a
   batch size $B$, find the time to produce such a batch, then include
   a setup time $S$ to compute the length of one production cycle. The
   expected number of jobs served during such a cycle must not exceed the number of jobs served during the cycle.}
+\end{hint}
 
 \begin{solution}
 \begin{enumerate}
@@ -158,9 +169,12 @@ Zijm.Ex.1.11.4 and 1.11.5
 i.e., very small.  This is the code I used: 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/serviceInterruptions_1.tex}
-
+\begin{lstlisting}
+from math import exp, factorial
+exp(-10) * sum((10)**n / factorial(n) for n in range(21))
+\end{lstlisting}\begin{lstlisting}
+0.9984117393381421
+\end{lstlisting}
 \end{solution}
 \end{question}
 
@@ -174,9 +188,11 @@ If the shop already contains 10 jobs, somewhere upstream of the broken machine, 
    \end{equation*}
 where  I used
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/serviceInterruptions_2.tex}
-
+\begin{lstlisting}
+exp(-10) * sum((10)**n / factorial(n) for n in range(11))
+\end{lstlisting}\begin{lstlisting}
+0.5830397501929855
+\end{lstlisting}
 \end{solution}
 \end{question}
 
@@ -206,6 +222,8 @@ Zijm.Ex.1.11.7
 \end{solution}
 \end{question}
 
+\begin{comment}
+  
 \begin{question}[use=false]
   Suppose a single machine workstation has to process $n$ different
   product families. Jobs of family $i$ arrive as a Poisson process
@@ -226,6 +244,19 @@ Zijm.Ex.1.11.7
     are planned? This is a very hard problem. 
   \end{solution}
 \end{question}
+\end{comment}
+
+
+
+
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
+
 
 %%% Local Variables:
 %%% mode: latex

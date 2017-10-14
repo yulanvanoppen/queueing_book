@@ -33,9 +33,14 @@ filenames = [
 # to select some files temporarily
 
 filenames = [
-    "mm1",
-    "mnmn1",
-#    "pasta",
+    #"little",
+    #"usefulidentities",
+    #"mg1",
+    #"batcharrivals",
+    #"mg1distributionqueuelength",
+    #"gg1",
+    #"serviceInterruptions",
+    "process_batches",
         ]
 
 

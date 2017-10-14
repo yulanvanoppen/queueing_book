@@ -1,6 +1,12 @@
 \section{Some Useful Identities}
 \label{sec:some-usef-ident}
 
+
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
 With the PASTA property and Little's law we can derive a number of
 useful and simple results for the $M/G/1$ queue. Recall, to use the
 PASTA, we need to assume that jobs arrive as a Poisson process.
@@ -108,7 +114,9 @@ again in accordance with our earlier result.
 \begin{question}
   It is an easy mistake to think that $\E{S_r} = \E S$ when service
   times are exponential. Why is this wrong?
-\hint{Realize again that $\E{S_r}$ includes the jobs that arrive at an empty system.}
+  \begin{hint}
+Realize again that $\E{S_r}$ includes the jobs that arrive at an empty system.
+  \end{hint}
   \begin{solution}
     $\E{S_r \given S_r>0} = \E S$ for the $M/M/1$ queue, and
     $\E{S_r} = \rho \E{S_r \given S_r>0}$ for the $M/G/1$ queue, it
@@ -122,8 +130,11 @@ again in accordance with our earlier result.
 \begin{question}
   Try to derive relation~(\ref{eq:37}) with sample path
   arguments. 
+  \begin{hint}
   \hint{ This requires some extra definitions, similar to
   $A(n,t)$ as defined in~\eqref{eq:19}.}
+  \end{hint}
+
   \begin{solution}
     This is, admittedly, not simple, so let us work in stages. Define
     $A(+,t)$ as the number of arrivals that see a job in service. As
@@ -176,12 +187,14 @@ if the limit exists, we can \emph{define}
   \end{solution}
 \end{question}
 
+\begin{comment}
 \begin{question}[use=false]
   As a challenge you can try to derive \eqref{eq:24} by means of sample path arguments.
   \begin{solution}
     \TBD
   \end{solution}
 \end{question}
+\end{comment}
 
 
 
@@ -226,7 +239,10 @@ Another way to get the same result is by splitting:
 
 \begin{question}
   Why is Eq.~(\ref{eq:61}) not true in general for the $M/G/1$ queue?
+  \begin{hint}
+    
 \hint{Think about the consequences of memoryless service times.}
+  \end{hint}
   \begin{solution}
     Because the remaining service time of the job in service, provided
     there is a job in the system upon arrival, is not exponentially
@@ -274,6 +290,8 @@ arrival sees $N=n$ customers upon arrival.
   \end{solution}
 \end{question}
 
+\begin{comment}
+  
 \begin{question}[use=false] Note: the question is unclear, and needs more explanation. 
 
   There is distinction between $\E{L_Q}$, i.e., the time-average queue
@@ -290,6 +308,7 @@ arrival sees $N=n$ customers upon arrival.
   $\E{L\given B} > \E{L_Q}$.
 \end{solution}
 \end{question}
+\end{comment}
 
 \begin{question}
   Compute the variance of the number of jobs in the system $L$ for the $M/G/1$ queue.
@@ -491,9 +510,13 @@ that $p(n) = \pi(n)$. We are done.
       not the most efficient, code.)
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_1.tex}
-
+\begin{lstlisting}
+P = [0.4, 0.3, 0.2, 0.05, 0.05]
+L = sum(n*P[n] for n in range(len(P)))
+L
+\end{lstlisting}\begin{lstlisting}
+1.05
+\end{lstlisting}
 
 There can only be a queue when a job is in service. Since there is
 $m=1$ server, we subtract $m$ from the amount of jobs in the system.
@@ -501,48 +524,104 @@ Before we do this, we need to ensure that $n-m$ does not become
 negative. Thus, $\E{L_Q} = \sum_n \max\{n-m, 0\} p(n)$.
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_2.tex}
-
-
-\item 
-
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_3.tex}
-
+\begin{lstlisting}
+m = 1
+Lq = sum(max(n-m,0)*P[n] for n in range(len(P)))
+Lq
+\end{lstlisting}\begin{lstlisting}
+0.45000000000000007
+\end{lstlisting}
 
 \item 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_4.tex}
-
-
-
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_5.tex}
-
+\begin{lstlisting}
+labda = 10./60
+Wq = Lq/labda # in minutes
+Wq
+\end{lstlisting}\begin{lstlisting}
+2.7000000000000006
+\end{lstlisting}
+\begin{lstlisting}
+Wq/60 # in hours
+\end{lstlisting}\begin{lstlisting}
+0.04500000000000001
+\end{lstlisting}
+\begin{lstlisting}
+W = L/labda # in minutes
+W
+\end{lstlisting}\begin{lstlisting}
+6.300000000000001
+\end{lstlisting}
+\begin{lstlisting}
+W/60 # in hours
+\end{lstlisting}\begin{lstlisting}
+0.10500000000000001
+\end{lstlisting}
 
 \item 
 
 
+\begin{lstlisting}
+from math import sqrt
+var_L = sum((n-L)**2*P[n] for n in range(len(P)))
+var_L
+\end{lstlisting}\begin{lstlisting}
+1.2475
+\end{lstlisting}
+\begin{lstlisting}
+sqrt(var_L)
+\end{lstlisting}\begin{lstlisting}
+1.116915395184434
+\end{lstlisting}
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_6.tex}
 
 
+\begin{lstlisting}
+var_Lq = sum((max(n-m,0)-Lq)**2*P[n] for n in range(len(P)))
+var_Lq
+\end{lstlisting}\begin{lstlisting}
+0.6475
+\end{lstlisting}
+\begin{lstlisting}
+sqrt(var_Lq)
+\end{lstlisting}\begin{lstlisting}
+0.8046738469715541
+\end{lstlisting}
+
+\item 
 
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_7.tex}
+\begin{lstlisting}
+mu = 1./(W-Wq)
+1./mu # in minutes
+\end{lstlisting}\begin{lstlisting}
+3.5999999999999996
+\end{lstlisting}
+\begin{lstlisting}
+rho = labda/mu
+rho
+\end{lstlisting}\begin{lstlisting}
+0.6
+\end{lstlisting}
 
+
+\begin{lstlisting}
+rho = L-Lq
+rho
+\end{lstlisting}\begin{lstlisting}
+0.6
+\end{lstlisting}
 This checks the previous line.
 
 The utilization must also by equal to the fraction of time the server is busy. 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_8.tex}
-
+\begin{lstlisting}
+u = 1 - P[0]
+u
+\end{lstlisting}\begin{lstlisting}
+0.6
+\end{lstlisting}
 
 Yet another way: Suppose we have $m$ servers. If the system is empty,
 all $m$ servers are idle. If the system contains one customer, $m-1$
@@ -556,9 +635,12 @@ number of idle servers is $0$.
 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_9.tex}
-
+\begin{lstlisting}
+idle = sum( max(m-n,0)*P[n] for n in range(len(P)))
+idle
+\end{lstlisting}\begin{lstlisting}
+0.4
+\end{lstlisting}
   \end{enumerate}
    \end{solution}
  
@@ -580,9 +662,44 @@ $p(n) = (1-\rho)\rho^n$
 \item 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_10.tex}
-
+\begin{lstlisting}
+labda = 100. # per hour
+mu = 140. # per hour
+ES = 1./mu
+rho = labda/mu
+rho
+\end{lstlisting}\begin{lstlisting}
+0.7142857142857143
+\end{lstlisting}
+\begin{lstlisting}
+1-rho
+\end{lstlisting}\begin{lstlisting}
+0.2857142857142857
+\end{lstlisting}
+\begin{lstlisting}
+L = rho/(1.-rho)
+L
+\end{lstlisting}\begin{lstlisting}
+2.5
+\end{lstlisting}
+\begin{lstlisting}
+Lq = rho**2/(1.-rho)
+Lq
+\end{lstlisting}\begin{lstlisting}
+1.7857142857142858
+\end{lstlisting}
+\begin{lstlisting}
+W = 1./(1.-rho) * ES
+W
+\end{lstlisting}\begin{lstlisting}
+0.024999999999999998
+\end{lstlisting}
+\begin{lstlisting}
+Wq = rho/(1.-rho) * ES
+Wq
+\end{lstlisting}\begin{lstlisting}
+0.017857142857142856
+\end{lstlisting}
   \end{enumerate}
   \end{solution}
 \end{question}
@@ -603,16 +720,45 @@ $p(n) = (1-\rho)\rho^n$
         $\rho > 0$):
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_11.tex}
-
+\begin{lstlisting}
+labda = 5. # per minute
+Wq = 1.
+a = 1.
+b = labda*Wq
+c = -labda*Wq
+rho = (-b + sqrt(b*b-4*a*c))/(2*a)
+rho
+\end{lstlisting}\begin{lstlisting}
+0.8541019662496847
+\end{lstlisting}
+\begin{lstlisting}
+ES = rho/labda
+ES
+\end{lstlisting}\begin{lstlisting}
+0.17082039324993695
+\end{lstlisting}
 
 \item 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_12.tex}
-
+\begin{lstlisting}
+Lq = labda*Wq
+Lq
+\end{lstlisting}\begin{lstlisting}
+5.0
+\end{lstlisting}
+\begin{lstlisting}
+W = Wq + ES
+W
+\end{lstlisting}\begin{lstlisting}
+1.170820393249937
+\end{lstlisting}
+\begin{lstlisting}
+L = labda*W
+L
+\end{lstlisting}\begin{lstlisting}
+5.854101966249685
+\end{lstlisting}
 
 \item 
 
@@ -620,18 +766,41 @@ The problem is to find $n$ such that
       $\sum_{j=0}^n p_j > 0.9$.
 
 
+\begin{lstlisting}
+total = 0. 
+j = 0
+while total <= 0.9:
+   total += (1-rho)*rho**j
+   j += 1
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_13.tex}
-
+total
+\end{lstlisting}\begin{lstlisting}
+0.9061042738330157
+\end{lstlisting}
+\begin{lstlisting}
+j
+\end{lstlisting}\begin{lstlisting}
+15
+\end{lstlisting}
+\begin{lstlisting}
+n = j- 1 # the number of chairs
+\end{lstlisting}
 
 Observe that $j$ is one too high once the condition is satisfied, thus subtract one.
 
 As a check, I use that $(1-\rho) \sum_{j=0}^n \rho^j = 1-\rho^{n+1}$.
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_14.tex}
-
+\begin{lstlisting}
+1-rho**(n) #  this must be too small.
+\end{lstlisting}\begin{lstlisting}
+0.890064968964683
+\end{lstlisting}
+\begin{lstlisting}
+1-rho**(n+1) # this must be OK.
+\end{lstlisting}\begin{lstlisting}
+0.9061042738330156
+\end{lstlisting}
 
 And indeed, we found the right $n$.
 
@@ -649,7 +818,10 @@ And indeed, we found the right $n$.
   $\lambda(0) = 5$, $\lambda(1)=3$, $\lambda(2)=2$,
   $\lambda(n)=0, n\geq 3$, $\mu(0) = 0$, $\mu(1)=2$, $\mu(2)=3$, $\mu(n)=4, n\geq 3$. 
 Calculate the state probabilities, i.e., $p(n)$ for $n=0,\ldots$. 
+\begin{hint}
+  
 \hint{ Use the level-crossing equations of the $M(n)/M(n)/1$ queue.}
+\end{hint}
     \begin{solution}
       Follows right away from the hint.
     \end{solution}
@@ -664,16 +836,22 @@ Calculate the state probabilities, i.e., $p(n)$ for $n=0,\ldots$.
   \item Estimate $\E{L_Q}$ for a buffer of size 5. What is the impact of the increased buffer size on the number of customers served per hour?
   \end{enumerate}
   
+  \begin{hint}
 \hint{ This is a queueing system with loss, in particular the $M/M/1/1+2$ queue.}
+  \end{hint}
     \begin{solution}
       \begin{enumerate}
 
       \item 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_15.tex}
-
+\begin{lstlisting}
+labda = 6.
+mu = 5.
+rho = labda/mu
+c = 1
+b = 2
+\end{lstlisting}
 
 Set $p(n) = \rho^n$ initially, and normalize later. Use the
 expressions for the $M(n)/M(n)/1$ queue.  Observe that $\rho>1$. Since
@@ -684,14 +862,41 @@ this case too.
 There are 4 states in total: $0,1,2,3$.
 
 
+\begin{lstlisting}
+P = [rho**n for n in range(c+b+1)]
+P
+\end{lstlisting}\begin{lstlisting}
+[1.0, 1.2, 1.44, 1.7279999999999998]
+\end{lstlisting}
+\begin{lstlisting}
+G = sum(P)
+G
+\end{lstlisting}\begin{lstlisting}
+5.368
+\end{lstlisting}
+\begin{lstlisting}
+P = [p/G for p in P] # normalize
+P
+\end{lstlisting}\begin{lstlisting}
+[0.18628912071535023,
+ 0.22354694485842025,
+ 0.2682563338301043,
+ 0.3219076005961251]
+\end{lstlisting}
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_16.tex}
 
-
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_17.tex}
-
+\begin{lstlisting}
+L = sum(n*P[n] for n in range(len(P)))
+L
+\end{lstlisting}\begin{lstlisting}
+1.725782414307004
+\end{lstlisting}
+\begin{lstlisting}
+Lq = sum((n-c)*P[n] for n in range(c,len(P)))
+Lq
+\end{lstlisting}\begin{lstlisting}
+0.9120715350223545
+\end{lstlisting}
 
 
 The number of jobs served per hour must be equal to the number of jobs
@@ -699,21 +904,71 @@ accepted, i.e., not lost. The fraction of customers lost is equal to
 the fraction of customers that sees a full system.
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_18.tex}
-
+\begin{lstlisting}
+lost = labda*P[-1] # the last element of P
+lost
+\end{lstlisting}\begin{lstlisting}
+1.9314456035767507
+\end{lstlisting}
+\begin{lstlisting}
+accepted = labda*(1.-P[-1]) # rate at which jobs are accepted
+accepted
+\end{lstlisting}\begin{lstlisting}
+4.06855439642325
+\end{lstlisting}
 
 \item 
 
  Increase $b$ to 5
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_19.tex}
-
+\begin{lstlisting}
+b = 5
+P = [rho**n for n in range(c+b+1)]
+P
+\end{lstlisting}\begin{lstlisting}
+[1.0,
+ 1.2,
+ 1.44,
+ 1.7279999999999998,
+ 2.0736,
+ 2.4883199999999994,
+ 2.9859839999999993]
+\end{lstlisting}
+\begin{lstlisting}
+G = sum(P)
+G
+\end{lstlisting}\begin{lstlisting}
+12.915903999999998
+\end{lstlisting}
+\begin{lstlisting}
+P = [p/G for p in P] # normalize
+P
+\end{lstlisting}\begin{lstlisting}
+[0.07742392634692857,
+ 0.09290871161631428,
+ 0.11149045393957714,
+ 0.13378854472749255,
+ 0.16054625367299108,
+ 0.19265550440758927,
+ 0.23118660528910712]
+\end{lstlisting}
+\begin{lstlisting}
+L = sum(n*P[n] for n in range(len(P)))
+L
+\end{lstlisting}\begin{lstlisting}
+3.7098374221424995
+\end{lstlisting}
+\begin{lstlisting}
+accepted = labda*(1.-P[-1])
+accepted
+\end{lstlisting}\begin{lstlisting}
+4.6128803682653565
+\end{lstlisting}
   \end{enumerate}
     \end{solution}
 \end{question}
 
+\begin{comment}
 \begin{question}[use=false]
   The code is in \texttt{progs/mm1\_waiting\_time_distribution.py}. In
   mm1\_waiting\_time_distribution.py we compute the waiting time
@@ -745,6 +1000,7 @@ for various values of $\lambda$.
 \end{solution}
 
 \end{question}
+\end{comment}
 
 
 
@@ -764,27 +1020,71 @@ for various values of $\lambda$.
     \begin{enumerate}
     \item 
 
+\begin{lstlisting}
+P = [0.4, 0.3, 0.2, 0.05, 0.05]
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_20.tex}
-
+c = 2
+Lq = sum((n-c)*P[n] for n in range(c,len(P)))
+Lq
+\end{lstlisting}\begin{lstlisting}
+0.15000000000000002
+\end{lstlisting}
+\begin{lstlisting}
+L= sum(n*P[n] for n in range(len(P)))
+L
+\end{lstlisting}\begin{lstlisting}
+1.05
+\end{lstlisting}
 
 \item 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_21.tex}
-
+\begin{lstlisting}
+labda = 10./60
+Wq = Lq/labda # in minutes
+Wq
+\end{lstlisting}\begin{lstlisting}
+0.9000000000000001
+\end{lstlisting}
+\begin{lstlisting}
+Wq/60 # in hours
+\end{lstlisting}\begin{lstlisting}
+0.015000000000000003
+\end{lstlisting}
+\begin{lstlisting}
+W = L/labda
+W
+\end{lstlisting}\begin{lstlisting}
+6.300000000000001
+\end{lstlisting}
 
 \item 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_22.tex}
-
+\begin{lstlisting}
+from math import sqrt
+var_L = sum((n-L)**2*P[n] for n in range(len(P)))
+var_L
+\end{lstlisting}\begin{lstlisting}
+1.2475
+\end{lstlisting}
+\begin{lstlisting}
+sqrt(var_L)
+\end{lstlisting}\begin{lstlisting}
+1.116915395184434
+\end{lstlisting}
 
 \item 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_23.tex}
-
+\begin{lstlisting}
+var_q = sum((max(n-c,0)-Lq)**2*P[n] for n in range(len(P)))
+var_q
+\end{lstlisting}\begin{lstlisting}
+0.22750000000000004
+\end{lstlisting}
+\begin{lstlisting}
+sqrt(var_q)
+\end{lstlisting}\begin{lstlisting}
+0.4769696007084729
+\end{lstlisting}
 
   \end{enumerate}
     \end{solution}
@@ -806,54 +1106,101 @@ for various values of $\lambda$.
       \item 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_24.tex}
-
+\begin{lstlisting}
+import numpy as np
+labda = [10., 15., 15., 10., 5.]
+c = 2
+mn = 2*np.ones(len(labda)+1, dtype=int)  # number of active servers
+mn[0] = 0  # no service if system is empty
+mn[1] = 1  # one busy server if just one job present
+mu = 5*mn # service rate is 5 times no of active servers
+mu
+\end{lstlisting}\begin{lstlisting}
+array([ 0,  5, 10, 10, 10, 10])
+\end{lstlisting}
 
 Since there can be arrivals in states $0,\ldots, 4$,  the system can contain $0$ to $5$ customers, i.e., $p(0),\ldots, p(5)$.
 
 Use the level crossing result for the $M(n)/M(n)/1$ queue:
 
 
+\begin{lstlisting}
+P = [1]*(len(labda)+1)
+for i in range(1,len(P)):
+    P[i] = labda[i-1]/mu[i]*P[i-1]
+print(P) # unnormalized probabilities
+\end{lstlisting}\begin{lstlisting}
+[1, 2.0, 3.0, 4.5, 4.5, 2.25]
+\end{lstlisting}
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_25.tex}
 
-
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_26.tex}
-
+\begin{lstlisting}
+G = sum(P) # normalization constant
+G
+\end{lstlisting}\begin{lstlisting}
+17.25
+\end{lstlisting}
+\begin{lstlisting}
+P = [p/G for p in P]
+P # normed
+\end{lstlisting}\begin{lstlisting}
+[0.057971014492753624,
+ 0.11594202898550725,
+ 0.17391304347826086,
+ 0.2608695652173913,
+ 0.2608695652173913,
+ 0.13043478260869565]
+\end{lstlisting}
 
 \item 
 
 $\lambda = \sum_{n}\lambda(n) p(n)$.
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_27.tex}
-
+\begin{lstlisting}
+labdaBar = sum(labda[n]*P[n] for n in range(len(labda)))
+labdaBar
+\end{lstlisting}\begin{lstlisting}
+8.8405797101449277
+\end{lstlisting}
 
 
 The average number in the system is: 
 \item 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_28.tex}
-
+\begin{lstlisting}
+Ls = sum(n*P[n] for n in range(len(P)))
+Ls
+\end{lstlisting}\begin{lstlisting}
+2.9420289855072461
+\end{lstlisting}
 
 
 The average number in queue 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_29.tex}
-
+\begin{lstlisting}
+c = 2
+Lq = sum((n-c)*P[n] for n in range(c,len(P)))
+Lq
+\end{lstlisting}\begin{lstlisting}
+1.1739130434782608
+\end{lstlisting}
 
 And now the waiting times:
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_30.tex}
-
+\begin{lstlisting}
+Ws = Ls/labdaBar
+Ws # time in the system
+\end{lstlisting}\begin{lstlisting}
+0.33278688524590161
+\end{lstlisting}
+\begin{lstlisting}
+Wq = Lq/labdaBar
+Wq # time in queue
+\end{lstlisting}\begin{lstlisting}
+0.13278688524590163
+\end{lstlisting}
 
   \end{enumerate}
     \end{solution}
@@ -871,7 +1218,8 @@ And now the waiting times:
   \item How many employees should work in the tool crib?
   \end{enumerate}
 
-  \hint{Realize that we have to control the number of servers. Hence,
+  \begin{hint}
+Realize that we have to control the number of servers. Hence,
     we are dealing with a multi-server queue, i.e., the $M/M/c$
     queue. Use the formulas of Eq.~\eqref{eq:9}.
 
@@ -883,16 +1231,20 @@ workers) as to let the maintenance workers wait for tools. (Recall, in
 queueing systems always somebody has to wait, either the customer in queue or
 the server being idle. If it is very expensive to let customers wait, the number
 of servers must be high, whereas if servers are relatively expensive, customers have to do the waiting.)
+  \end{hint}
 
-}
   \begin{solution}
     \begin{enumerate}
     \item 
       Would one server/person do? 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_31.tex}
-
+\begin{lstlisting}
+labda = 28./60 # arrivals per minute
+ES = 4.
+labda*ES
+\end{lstlisting}\begin{lstlisting}
+1.8666666666666667
+\end{lstlisting}
 
 If $c=1$, the load $\rho=\lambda \E S/c >1$ is clearly undesirable for one server.  We need at
 least two servers.
@@ -906,9 +1258,16 @@ I just convert the formulas of~\eqref{eq:9} to python code. This saves
 me time during the computations.
 
 
+\begin{lstlisting}
+from math import factorial
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_32.tex}
-
+def WQ(c, labda, ES):
+    rho = labda*ES/c
+    G = sum([(c*rho)**n/factorial(n) for n in range(c)])
+    G += (c*rho)**c/(1.-rho)/factorial(c)
+    Lq = (c*rho)**c/(factorial(c)*G) * rho/(1.-rho)**2
+    return Lq/labda # Wq, Little's law
+\end{lstlisting}
 
 Considering the scenario with one server is superfluous as $\rho>1$ in
 that case.
@@ -916,24 +1275,45 @@ that case.
 What is the waiting time for $c=2$ servers?
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_33.tex}
-
+\begin{lstlisting}
+WQ(2, 28./60, 4) # in minutes
+\end{lstlisting}\begin{lstlisting}
+27.034482758620694
+\end{lstlisting}
+\begin{lstlisting}
+WQ(2, 28./60, 4)/60. # in hours
+\end{lstlisting}\begin{lstlisting}
+0.4505747126436782
+\end{lstlisting}
 
 What is the waiting time for $c=3$ servers?
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_34.tex}
-
+\begin{lstlisting}
+WQ(3, 28./60, 4)   # in minutes
+\end{lstlisting}\begin{lstlisting}
+1.3542675591474136
+\end{lstlisting}
+\begin{lstlisting}
+WQ(3, 28./60, 4)/60. # in hours
+\end{lstlisting}\begin{lstlisting}
+0.022571125985790228
+\end{lstlisting}
 
 
 What is the waiting time for $c=4$ servers?
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_35.tex}
-
+\begin{lstlisting}
+WQ(4, 28./60, 4) # in minutes
+\end{lstlisting}\begin{lstlisting}
+0.26778942672317635
+\end{lstlisting}
+\begin{lstlisting}
+WQ(4, 28./60, 4)/60. # in hours
+\end{lstlisting}\begin{lstlisting}
+0.0044631571120529396
+\end{lstlisting}
 
 In the next  part of the question we will interpret these numbers.
 
@@ -950,20 +1330,49 @@ the number of maintenance workers waiting (i.e., being idle because they are wai
 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_36.tex}
-
+\begin{lstlisting}
+labda = 28./60
+ES = 4.
+c = 2
+ELQ = labda*WQ(c, labda, ES)
+ELQ
+\end{lstlisting}\begin{lstlisting}
+12.616091954022991
+\end{lstlisting}
+\begin{lstlisting}
+c-labda*ES
+\end{lstlisting}\begin{lstlisting}
+0.1333333333333333
+\end{lstlisting}
 Now the maintenance employees wait more than the tool crib employees.
 
 
+\begin{lstlisting}
+c = 3
+ELQ = labda*WQ(c, labda, ES)
+ELQ
+\end{lstlisting}\begin{lstlisting}
+0.6319915276021264
+\end{lstlisting}
+\begin{lstlisting}
+c-labda*ES
+\end{lstlisting}\begin{lstlisting}
+1.1333333333333333
+\end{lstlisting}
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_37.tex}
 
-
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_38.tex}
-
+\begin{lstlisting}
+c = 4
+ELQ = labda*WQ(c, labda, ES)
+ELQ
+\end{lstlisting}\begin{lstlisting}
+0.1249683991374823
+\end{lstlisting}
+\begin{lstlisting}
+c-labda*ES
+\end{lstlisting}\begin{lstlisting}
+2.1333333333333333
+\end{lstlisting}
 
 Clearly, $c=3$ should do.
   \end{enumerate}
@@ -981,24 +1390,99 @@ Clearly, $c=3$ should do.
   \item 
 
 
+\begin{lstlisting}
+labda = 11.
+mu = 6
+c = 2
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_39.tex}
-
+rho = labda/mu
+rho < c  # is the system stable?
+\end{lstlisting}\begin{lstlisting}
+True
+\end{lstlisting}
 
 Compute Ls and so on
 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_40.tex}
-
+\begin{lstlisting}
+G = sum(rho**n/factorial(n) for n in range(c))
+G += rho**c/factorial(c)/(1.-rho/c)
+P0 = 1./G
+P0
+\end{lstlisting}\begin{lstlisting}
+0.043478260869565244
+\end{lstlisting}
+\begin{lstlisting}
+Lq = rho**(c+1)/c/(factorial(c)*(1.-rho/c)**2)*P0
+Lq
+\end{lstlisting}\begin{lstlisting}
+9.64492753623188
+\end{lstlisting}
+\begin{lstlisting}
+Lq/labda # Wq
+\end{lstlisting}\begin{lstlisting}
+0.8768115942028981
+\end{lstlisting}
+\begin{lstlisting}
+Ls = Lq + rho
+Ls
+\end{lstlisting}\begin{lstlisting}
+11.478260869565213
+\end{lstlisting}
+\begin{lstlisting}
+Ls/labda # Ws
+\end{lstlisting}\begin{lstlisting}
+1.0434782608695647
+\end{lstlisting}
+\begin{lstlisting}
+ES = 1./mu # expected service time
+ES
+\end{lstlisting}\begin{lstlisting}
+0.16666666666666666
+\end{lstlisting}
 
 \item 
 
 
+\begin{lstlisting}
+mu = c*6
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/usefulidentities_41.tex}
+rho = labda/mu
 
+P0 = 1-rho
+P0
+\end{lstlisting}\begin{lstlisting}
+0.08333333333333337
+\end{lstlisting}
+\begin{lstlisting}
+Lq = rho**2/(1.-rho)
+Lq
+\end{lstlisting}\begin{lstlisting}
+10.083333333333327
+\end{lstlisting}
+\begin{lstlisting}
+Lq/labda # Wq
+\end{lstlisting}\begin{lstlisting}
+0.9166666666666661
+\end{lstlisting}
+\begin{lstlisting}
+Ls = rho/(1.-rho)
+Ls
+\end{lstlisting}\begin{lstlisting}
+10.999999999999995
+\end{lstlisting}
+\begin{lstlisting}
+Ls/labda # Ws
+\end{lstlisting}\begin{lstlisting}
+0.9999999999999996
+\end{lstlisting}
+\begin{lstlisting}
+ES = 1./mu # expected service time
+ES
+\end{lstlisting}\begin{lstlisting}
+0.08333333333333333
+\end{lstlisting}
 It is of interest to compare the M/M/2 system to the M/M/1 system with twice the capacity. 
   \end{enumerate}
     \end{solution}
@@ -1015,8 +1499,10 @@ It is of interest to compare the M/M/2 system to the M/M/1 system with twice the
 We will use this result later to derive algorithms to compute the
 performance measures for the analysis of closed-queueing network.
 
-  \hint{ Interpret each component at the right hand side of the equation
-    and generalize it to a multi-server queueing system. }
+\begin{hint}
+Interpret each component at the right hand side of the equation
+    and generalize it to a multi-server queueing system. 
+\end{hint}
   \begin{solution}
 
     Recall that for the $M/M/1$ queue, $\E{S_r\given S_r>0} = 1/\mu$.
@@ -1049,7 +1535,6 @@ performance measures for the analysis of closed-queueing network.
 \rho\E{S_r\given S_r>0}  = \sum_{k=c}^\infty p(k) \frac 1{c\mu}.
     \end{equation*}
 
-
     For the second term, since there are $c$ servers, jobs depart from
     the queue (hence enter service) at rate $c\mu$. The expected time
     in queue when there are $n$ jobs in front, is therefore
@@ -1080,6 +1565,16 @@ arriving job also sees $p(k)$.
   \end{solution}
 \end{question}
 
+
+
+
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
 
 %%% Local Variables:
 %%% mode: latex

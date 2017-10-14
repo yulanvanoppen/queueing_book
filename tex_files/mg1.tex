@@ -3,6 +3,14 @@
 {$\mathbf{M/G/1}$ Queue: Expected Waiting Time}
 \label{sec:mg1}
 
+
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
+
 Let's focus on one queue in a supermarket, served by one cashier, and
 assume that customers do not jockey, i.e., change queue. What can we
 say about the average waiting time in queue if service times are not
@@ -357,7 +365,10 @@ In both cases the expected service times are equal to $T$ so that the loads are 
 \begin{question}
   Compute $\E L$ for the $M/G/1$ queue with $G=U[0,A]$, i.e., the
   uniform distribution on $[0,A]$.
+  \begin{hint}
+    
 \hint{Integrate $A^{-1} \int x \d x$, and likewise for the second moment.}
+  \end{hint}
 \begin{solution}
   \begin{align*}
 \E S &= A/2,\\
@@ -375,10 +386,14 @@ C_s^2 &= (A^2/12)/(A^2/4) = 1/3,\\
 
 \begin{question}
   Show that for the $M/G/1$ queue, the expected idle time is
-  $\E I = 1/\lambda$.  \hint{What is the average time between two
+  $\E I = 1/\lambda$.  
+  \begin{hint}
+    
+\hint{What is the average time between two
     arrivals? Observe that the interarrivals are memoryless, hence the
     average time until the next arrival after the server becomes idle
     is also $1/\lambda$.}
+  \end{hint}
   \begin{solution}
   Since the interarrival times are memoryless, the expected
       time to the first arrival after a busy time stops is also
@@ -399,11 +414,15 @@ The result follows.
 \end{question}
 
 \begin{question}
-  What is the utilization of the $M/G/1/1$ queue?  \hint{The job in
+  What is the utilization of the $M/G/1/1$ queue?  
+  \begin{hint}
+    
+\hint{The job in
     the system is also in service (it is an $M/G/1/1$ queue\ldots).
     The average idle time is $1/\lambda$. The average busy time is
     $\E S$--as there are no jobs in queue. The load $\rho$ must also
     be equal to the fraction of time the server is busy. }
+  \end{hint}
   \begin{solution}
  The system can contain at most 1 job. Necessarily, if the
       system contains a job, this job must be in service.  All jobs
@@ -420,9 +439,14 @@ The result follows.
 
 \begin{question}
   For the $M/G/1/1$ queue what is the fraction of jobs rejected
-  (hence, what is the fraction of accepted jobs)?  \hint{The rate of
+  (hence, what is the fraction of accepted jobs)?  
+  \begin{hint}
+    
+\hint{The rate of
     accepted jobs is $\lambda \pi(0)$. What is the load of these jobs?
     Equate this to $1-\pi(0$ as this must also be the load. Then solve for $\pi(0)$.}
+  \end{hint}
+
   \begin{solution}
     Let $p(0)$ be the fraction of time the server is idle. By PASTA,
     $\pi(0)=p(0)$. Thus, the rate of accepted jobs is
@@ -447,7 +471,10 @@ Note that  $\gamma < \lambda$, as it should be the case.
 \begin{question}
   Why is the fraction of lost jobs at the $M/G/1/1$ queue not
   necessarily the same as for a $G/G/1/1$ queue with the same load?  
+  \begin{hint}
+    
 \hint{Provide an  example.}
+  \end{hint}
   \begin{solution}
  Typically, in the $G/G/1$ queue, the arrivals do not see  time-averages. Consequently, the fraction of arrivals that are blocked is not necessarily equal to the utilization~$\rho$.
 
@@ -458,6 +485,8 @@ Note that  $\gamma < \lambda$, as it should be the case.
 \end{question}
 
 
+\begin{comment}
+  
 \begin{question}[use=false]
   Use the ideas of Section~\ref{sec:arrival-processes} to derive an
   expression for the density $f_r$ of the remaining service times as
@@ -467,7 +496,20 @@ Note that  $\gamma < \lambda$, as it should be the case.
     \TBD.
   \end{solution}
 \end{question}
+\end{comment}
 
+
+
+
+
+
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
 
 
 

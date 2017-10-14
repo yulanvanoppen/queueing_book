@@ -3,6 +3,13 @@
 {$\mathbf{M^X/M/1}$ Queue Length Distribution}
 \label{sec:batch-arrivals}
 
+
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 In this section we extend the analysis of the $M^X/M/1$ batch queue
 that we started in Section~\ref{sec:mxm1-queue:-expected}.  We present
 a numerical, recursive, scheme to compute the stationary distribution
@@ -282,10 +289,12 @@ is much less simple, hence we will not discuss this further.
   \mu \E L =\mu \sum_{n=0}^\infty n \pi(n) = \lambda \frac{\E{B^2}}2  + \lambda \E B \E L +\lambda \frac{\E B}2,
 \end{equation}
 
-\hint{Substitute the
+\begin{hint}
+Substitute the
   recursion, and carry on with the algebra. We urge the reader to try
   it, its good (necessary) practice.  Use also the results of the
-  exercises of Section~\ref{sec:mxm1-queue:-expected}.  }
+  exercises of Section~\ref{sec:mxm1-queue:-expected}.  
+\end{hint}
 
 \begin{solution}
   We use that $\mu \pi(n) =\lambda \sum_{i=0}^{n-1} \pi(i) G(n-1-i)$
@@ -316,7 +325,9 @@ is much less simple, hence we will not discuss this further.
 \end{equation*}
 This is the same result as what we obtained in
 Section~\ref{sec:mxm1-queue:-expected}.  
-\hint{Divide both sides by $\mu$.}
+\begin{hint}
+Divide both sides by $\mu$.
+\end{hint}
 \begin{solution}
 Dividing both sides by $\mu$ and using that $\lambda \E B/\mu = \rho$, 
 \begin{equation*}
@@ -339,14 +350,16 @@ acceptance, or equivalently a rejection, policy. Three common rules are
 Derive a set of recursions, analogous to Eq.~(\ref{eq:42}), to compute
 $\pi(n)$ for these three different acceptance rules.  
 
-\hint{This
+\begin{hint}
+This
   exercise tests your creativity and modeling skills, it is not
   analytically difficult.  The best approach to problems like this is
   to try some simple cases first. For instance, consider the case with
   batch sizes of $1$ first, then batches of sizes $1$ or $2$, and so
   on. If system contains $K$ jobs, which batches can be accepted? If
   the system contains $K-3$, say, which batch sizes can be accepted,
-  which will be refused, under which acceptance policy? }
+  which will be refused, under which acceptance policy? 
+\end{hint}
 \begin{solution}
 
   Let's first deal with complete rejection. Suppose a batch of size
@@ -433,10 +446,13 @@ $\pi(n)$ for these three different acceptance rules.
   case $f(1)=f(2)=f(3)=1/3$ (recall $\P{B=k} =f_k$). Take $\lambda =1$
   and $\mu = 3$.  
 
+  \begin{hint}
+    
   \hint{This is an important problem, it helps to check (numerically)
     the algebraic results we have been deriving up to
     now. Implementing the recursion is not hard, just try and see how
     far you get.}
+  \end{hint}
   \begin{solution}
 The recursion for $n$ becomes 
 \begin{equation*}
@@ -547,6 +563,13 @@ that all results are ok.
 \end{question}
 
 
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
 
 
 %%% Local Variables:

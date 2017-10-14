@@ -3,6 +3,14 @@
 {A Relation Between the $\mathbf{M^X/M/1}$ and $\mathbf{M/G/1}$  Queue}
 \label{sec:relat-batch-queu}
 
+
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
+
 There is an interesting relation between the $M^X/M/1$ and the $M/G/1$
 queueing systems. As an example, consider the $M^{10}/M/1$ queue in
 which each job corresponds to the arrival of ten items of
@@ -105,8 +113,11 @@ interval $[,]$. Why is that?
 \begin{question}
   Why do we consider $\E{L^{(n)}}/n \to \E{W_Q}$, and not
   $\E{L^{(n)}}/n \to \E W$? 
+  \begin{hint}
+    
   \hint{What is the expected service time of one
   unit of a job in the $M^X/M/1$ queue in the limiting case?}
+  \end{hint}
   \begin{solution}
     The time it takes to serve one unit is $1/n$. Thus, the fraction
     of time in service in the batch queue becomes negligible compared
@@ -151,6 +162,19 @@ queue by taking this distribution function for the service times.
 % Then $F^{(n)}(x) \downarrow F(x)$ for all $x$; recall that $F(x)$ is a
 % distribution function, i.e., right continuous, non-decreasing, and such
 % that $F(0) = 0$ and $F(\infty) = 1$. 
+
+
+
+
+
+
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
 
 %%% Local Variables:
 %%% mode: latex

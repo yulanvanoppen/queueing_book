@@ -3,6 +3,13 @@
 {$\mathbf{M^X/M/1}$ Queue Length Distribution}
 \label{sec:batch-arrivals}
 
+
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 In this section we extend the analysis of the $M^X/M/1$ batch queue
 that we started in Section~\ref{sec:mxm1-queue:-expected}.  We present
 a numerical, recursive, scheme to compute the stationary distribution
@@ -282,10 +289,12 @@ is much less simple, hence we will not discuss this further.
   \mu \E L =\mu \sum_{n=0}^\infty n \pi(n) = \lambda \frac{\E{B^2}}2  + \lambda \E B \E L +\lambda \frac{\E B}2,
 \end{equation}
 
-\hint{Substitute the
+\begin{hint}
+Substitute the
   recursion, and carry on with the algebra. We urge the reader to try
   it, its good (necessary) practice.  Use also the results of the
-  exercises of Section~\ref{sec:mxm1-queue:-expected}.  }
+  exercises of Section~\ref{sec:mxm1-queue:-expected}.  
+\end{hint}
 
 \begin{solution}
   We use that $\mu \pi(n) =\lambda \sum_{i=0}^{n-1} \pi(i) G(n-1-i)$
@@ -316,7 +325,9 @@ is much less simple, hence we will not discuss this further.
 \end{equation*}
 This is the same result as what we obtained in
 Section~\ref{sec:mxm1-queue:-expected}.  
-\hint{Divide both sides by $\mu$.}
+\begin{hint}
+Divide both sides by $\mu$.
+\end{hint}
 \begin{solution}
 Dividing both sides by $\mu$ and using that $\lambda \E B/\mu = \rho$, 
 \begin{equation*}
@@ -339,14 +350,16 @@ acceptance, or equivalently a rejection, policy. Three common rules are
 Derive a set of recursions, analogous to Eq.~(\ref{eq:42}), to compute
 $\pi(n)$ for these three different acceptance rules.  
 
-\hint{This
+\begin{hint}
+This
   exercise tests your creativity and modeling skills, it is not
   analytically difficult.  The best approach to problems like this is
   to try some simple cases first. For instance, consider the case with
   batch sizes of $1$ first, then batches of sizes $1$ or $2$, and so
   on. If system contains $K$ jobs, which batches can be accepted? If
   the system contains $K-3$, say, which batch sizes can be accepted,
-  which will be refused, under which acceptance policy? }
+  which will be refused, under which acceptance policy? 
+\end{hint}
 \begin{solution}
 
   Let's first deal with complete rejection. Suppose a batch of size
@@ -433,10 +446,13 @@ $\pi(n)$ for these three different acceptance rules.
   case $f(1)=f(2)=f(3)=1/3$ (recall $\P{B=k} =f_k$). Take $\lambda =1$
   and $\mu = 3$.  
 
+  \begin{hint}
+    
   \hint{This is an important problem, it helps to check (numerically)
     the algebraic results we have been deriving up to
     now. Implementing the recursion is not hard, just try and see how
     far you get.}
+  \end{hint}
   \begin{solution}
 The recursion for $n$ becomes 
 \begin{equation*}
@@ -451,58 +467,202 @@ where $l=3$.
 In python this reads:
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/batcharrivals_1.tex}
-
+\begin{lstlisting}
+p[n] = labda / mu * sum(p[n - 1 - i] * G[i] for i in range(min(n, l)))
+\end{lstlisting}
 
 The following code carries out the recursion for the $M/M/1$ queue and compares the result to the \emph{unnormalized} probabilities $(\lambda/\mu)^n$ (unnormalized means that I do  not multiply with $1-\rho$). Thus, we can test the code right away. 
 
 
+\begin{lstlisting}
+import numpy as np
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/batcharrivals_2.tex}
+l = 1 # M/M/1 has batch size 1
+f = np.ones(l + 1) / l # f[0] =1, f[1] = 1 
+f[0] = 0 # set f[0] = 0
+F = np.cumsum(f) # distribution 
+G = np.ones_like(F) - F # survivor function
 
+labda = 1
+mu = 3
+num = 30
+p = np.ones(num)
+
+for n in range(1, num):
+    p[n] = labda / mu * sum(p[n - 1 - i] * G[i] for i in range(min(n, l)))
+    print(n, p[n], (labda / mu)**n)
+\end{lstlisting}\begin{lstlisting}
+1 0.333333333333 0.3333333333333333
+2 0.111111111111 0.1111111111111111
+3 0.037037037037 0.03703703703703703
+4 0.0123456790123 0.012345679012345677
+5 0.00411522633745 0.004115226337448558
+6 0.00137174211248 0.0013717421124828527
+7 0.000457247370828 0.00045724737082761756
+8 0.000152415790276 0.0001524157902758725
+9 5.08052634253e-05 5.0805263425290837e-05
+10 1.69350878084e-05 1.693508780843028e-05
+11 5.64502926948e-06 5.645029269476759e-06
+12 1.88167642316e-06 1.8816764231589195e-06
+13 6.27225474386e-07 6.272254743863065e-07
+14 2.09075158129e-07 2.090751581287688e-07
+15 6.96917193763e-08 6.969171937625627e-08
+16 2.32305731254e-08 2.3230573125418753e-08
+17 7.74352437514e-09 7.743524375139585e-09
+18 2.58117479171e-09 2.5811747917131946e-09
+19 8.60391597238e-10 8.603915972377315e-10
+20 2.86797199079e-10 2.867971990792438e-10
+21 9.55990663597e-11 9.559906635974793e-11
+22 3.18663554532e-11 3.186635545324931e-11
+23 1.06221184844e-11 1.0622118484416435e-11
+24 3.54070616147e-12 3.540706161472145e-12
+25 1.18023538716e-12 1.1802353871573816e-12
+26 3.93411795719e-13 3.934117957191272e-13
+27 1.3113726524e-13 1.3113726523970905e-13
+28 4.37124217466e-14 4.3712421746569684e-14
+29 1.45708072489e-14 1.457080724885656e-14
+\end{lstlisting}
 The test is convincing.
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/batcharrivals_3.tex}
-
+\begin{lstlisting}
+l = 3
+f = np.ones(l + 1) / l
+f[0] = 0
+F = np.cumsum(f)
+G = np.ones_like(F) - F
+num = 30
+p = np.ones(num)
+for n in range(1, num):
+    p[n] = labda / mu * sum(p[n - 1 - i] * G[i] for i in range(min(n, l)))
+    print(n, p[n])
+\end{lstlisting}\begin{lstlisting}
+1 0.333333333333
+2 0.333333333333
+3 0.296296296296
+4 0.20987654321
+5 0.172839506173
+6 0.137174211248
+7 0.107453132144
+8 0.0855052583448
+9 0.0676218056191
+10 0.053481007299
+11 0.0423546546089
+12 0.0335164204493
+13 0.0265266197627
+14 0.0209963727551
+15 0.0166176420267
+16 0.013152476817
+17 0.0104098985844
+18 0.00823914349042
+19 0.006521078273
+20 0.00516126893158
+21 0.00408501187013
+22 0.00323318352739
+23 0.00255898258378
+24 0.0020253696307
+25 0.00160302862078
+26 0.00126875641195
+27 0.00100418845646
+28 0.000794789646005
+29 0.000629055806986
+\end{lstlisting}
 Stopping at 30 seems ok. The last step is normalize.
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/batcharrivals_4.tex}
-
+\begin{lstlisting}
+p /= p.sum()  # normalize
+for n in range(1, num):  # print normalized results
+    print(n, p[n])
+\end{lstlisting}\begin{lstlisting}
+1 0.111199612316
+2 0.111199612316
+3 0.098844099836
+4 0.0700145707172
+5 0.0576590582377
+6 0.0457611573315
+7 0.0358462399097
+8 0.0285244547366
+9 0.0225585557067
+10 0.0178412018337
+11 0.0141294635168
+12 0.0111810388805
+13 0.00884924950098
+14 0.00700436553119
+15 0.00554362605289
+16 0.00438765096912
+17 0.00347273006048
+18 0.00274856868584
+19 0.00217542412751
+20 0.00172179331274
+21 0.00136275520879
+22 0.00107858626437
+23 0.000853673613716
+24 0.000675660953187
+25 0.000534768483485
+26 0.000423255663394
+27 0.000334996101149
+28 0.000265140901524
+29 0.000209852285585
+\end{lstlisting}
 
 Now that we have the probabilities we can do all experiments we like. 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/batcharrivals_5.tex}
-
+\begin{lstlisting}
+EL = sum(n*p[n] for n in range(len(p)))
+EL
+\end{lstlisting}\begin{lstlisting}
+3.309069824793065
+\end{lstlisting}
 
 It is of interest to compare this result to the equation above
 Eq.~(\ref{eq:43}).
 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/batcharrivals_6.tex}
-
+\begin{lstlisting}
+EB = sum(k*fk for k,fk in enumerate(f))
+EB2 = sum(k*k*fk for k,fk in enumerate(f))
+EB2
+\end{lstlisting}\begin{lstlisting}
+4.6666666666666661
+\end{lstlisting}
+\begin{lstlisting}
+rho=labda*EB/mu
+RHS = labda/mu*EB2/2 + rho/2
+EL=RHS/(1-rho)
+EL
+\end{lstlisting}\begin{lstlisting}
+3.3333333333333326
+\end{lstlisting}
 
 So, after all, stopping at 30 seems not quite ok: there is a slight
 difference between the two expectations. Lets run the recursion up to
 100, and see what we get then.
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/batcharrivals_7.tex}
-
+\begin{lstlisting}
+num = 100
+p = np.ones(num)
+for n in range(1, num):
+    p[n] = labda / mu * sum(p[n - 1 - i] * G[i] for i in range(min(n, l)))
+p /= p.sum()  # normalize
+EL = sum(n*p[n] for n in range(len(p)))
+print(EL)
+\end{lstlisting}\begin{lstlisting}
+3.33333332712
+\end{lstlisting}
 This does the job.
 
 As a last step, I want to check Eq.~(\ref{eq:43}).
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/batcharrivals_8.tex}
-
+\begin{lstlisting}
+VB = EB2 - EB*EB
+C2 = VB/EB/EB
+EL = (1+C2)/2*rho/(1-rho)*EB + rho/(1-rho)/2
+EL
+\end{lstlisting}\begin{lstlisting}
+3.3333333333333326
+\end{lstlisting}
 
 The algebra is, most probably, correct. I spent at least one hour to
 get Eq.~(\ref{eq:43}) correct. I am now, also numerically, convinced
@@ -513,6 +673,13 @@ that all results are ok.
 \end{question}
 
 
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
 
 
 %%% Local Variables:

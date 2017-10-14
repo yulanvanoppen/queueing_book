@@ -1,10 +1,15 @@
 \section{Service Interruptions}
 \label{sec:serv-interr}
 
+
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
+
 See the related section 1.11 of the book of Zijm.
-
-No notes; only questions.
-
 
 \begin{question}
   Determine the expectation and variance of $S_N = \sum_{i=1}^N X_i$
@@ -81,12 +86,15 @@ And finally,
 \item Use the above two points to determine a criterion on the minimal
   batch size $B$.
 \end{enumerate}
+\begin{hint}
+  
 \hint{1: If the batch sizes $B$ are small, relatively much time is
   spent on setups. 2: If the setup time $S$ is constant, then the
   number of orders that arrive is Poisson distributed. 3: Given a
   batch size $B$, find the time to produce such a batch, then include
   a setup time $S$ to compute the length of one production cycle. The
   expected number of jobs served during such a cycle must not exceed the number of jobs served during the cycle.}
+\end{hint}
 
 \begin{solution}
 \begin{enumerate}
@@ -205,6 +213,8 @@ Zijm.Ex.1.11.7
 \end{solution}
 \end{question}
 
+\begin{comment}
+  
 \begin{question}[use=false]
   Suppose a single machine workstation has to process $n$ different
   product families. Jobs of family $i$ arrive as a Poisson process
@@ -225,6 +235,19 @@ Zijm.Ex.1.11.7
     are planned? This is a very hard problem. 
   \end{solution}
 \end{question}
+\end{comment}
+
+
+
+
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
+
 
 %%% Local Variables:
 %%% mode: latex
