@@ -29,15 +29,12 @@
 %   counter-format = ch.se.qu
 % }
 
-\usepackage{answers}
-%\usepackage[nosolutionfiles]{answers}
+\usepackage[nosolutionfiles]{answers}
 \Newassociation{solution}{Solution}{ans}
 \Newassociation{sol}{Solution}{ans}
 \Newassociation{hint}{Hint}{hint}
 \renewcommand{\Hintlabel}[1]{\textbf{Hint #1:}}
 \renewcommand{\Solutionlabel}[1]{\textbf{Solution #1:}}
-
-
 
 \begin{document}
 
@@ -48,101 +45,8 @@
 \chapter{Single-Station Queueing Systems}
 %\input{todo/appendix.tex}
 %\input{tex_files/single_station_intro.tex}
-\Opensolutionfile{hint}
-\Opensolutionfile{ans}
-\input{tex_files/expdistribution.tex}
-\Closesolutionfile{hint}
-\Closesolutionfile{ans}
-\subsection*{Hints}
-\input{hint}
-\subsection*{Solutions}
-\input{ans}
-
-\Opensolutionfile{hint}
-\Opensolutionfile{ans}
+%\input{tex_files/expdistribution.tex}
 \input{tex_files/poissondistribution.tex}
-\Closesolutionfile{hint}
-\Closesolutionfile{ans}
-\subsection*{Hints}
-\input{hint}
-\subsection*{Solutions}
-\input{ans}
-
-% \printquestionhints[section]
-% \printsolutions[section]
-
-% \input{kendall.tex}
-%\input{chunks/constructiondiscretetime.tx}
-%\input{chunks/constructioncontinuoustime.tx}
-%\input{chunks/random_walk.tx}
-%\input{chunks/ratestability.tx}
-%\input{chunks/empericalperfmeasures.tx}
-%\input{chunks/levelcrossing.tx}
-% \input{chunks/mm1.tx}
-%\input{chunks/mnmn1.tx}
-  % \input{chunks/pasta.tx}
-% \input{chunks/little.tx}
-%\input{chunks/usefulidentities.tx}
-%\input{tex_files/mxm1_pk.tex}
-%  \input{chunks/mg1.tx}
-%\input{chunks/batcharrivals.tx}
-% \input{tex_files/relationmxm1andmg1.tex}
-%\input{mm1transient}
-%\input{chunks/mg1distributionqueuelength.tx}
-%   \input{chunks/gg1.tx}
-% \input{chunks/serviceInterruptions.tx}
-%  \input{chunks/process_batches.tx}
-% \input{chunks/mg1density.tx}
-
-\chapter{Open Queueing Networks}
-\label{sec:notes-relat-chapt2}
-
-%\input{tex_files/deterministic_networks.tex}
-%\input{tex_files/open_single_class.tex}
-%\input{chunks/tandem.tx}
-%\input{tex_files/open_general.tex}
-%\input{todo/open_move_batches.tex}
-
-\chapter{Closed Queueing Networks}
-\label{ch3}
-
-%\input{tex_files/gordon_newell.tex}
-% \input{chunks/convolution.tx}
-% \input{chunks/mva.tx}
-%\input{chunks/mda.tx}
-
-\chapter{Extra Topics}
-%\input{todo/extra_notes.tex}
-
-%\includequestions[random=2]{single_station}
-
-\chapter{To Do}
-\label{cha:extra-topics}
-
-%\input{tex_files/mg1_markov_chain.tex}
-%\input{tex_files/open_move_batches.tex}
-
-
-%\chapter{Hints}
-%\addcontentsline{toc}{chapter}{Hints}
-% \fancyhead{} % clear all header fields
-% \fancyhead[LO, LE]{HINTS}
-%\printquestionhints
-
-%\chapter{Solutions}
-%\addcontentsline{toc}{chapter}{Solutions}
-% \fancyhead{} % clear all header fields
-% \fancyhead[LO, LE]{SOLUTIONS}
-%\printsolutions
-
-\chapter*{Notation}
-%\addcontentsline{toc}{chapter}{Notation}
-% \label{sec:notation}
-% \input{notation}
-
-\chapter*{Formula Sheet}
-%\addcontentsline{toc}{chapter}{Formula Sheet}
-%\input{formula_sheet}
 
 \bibliographystyle{plainnat}
 \bibliography{biblio_nicky}

@@ -1,6 +1,8 @@
 \section{Poisson Distribution}
 \label{sec:poisson-distribution}
 
+\subsection*{Theory and Exercises}
+
 In this section we provide a derivation of, and motivation for, the
 Poisson process, and clarify its relation with the exponential
 distribution at the end.
@@ -77,7 +79,6 @@ analysis of queueing process. We summarize this by a theorem.
   arrivals, are i.i.d. and $\P{ X_1\leq t} = 1 - e^{-\lambda t}$. In other words, $X_i\sim \exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t)$ 
 \end{theorem}
 
-\subsection*{Exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -85,7 +86,7 @@ analysis of queueing process. We summarize this by a theorem.
 \begin{question}
 Show that $\E{N_n(t)} = \sum_{i=1}^n \E{B_i} = n p$.
 \begin{hint}
-\hint{Recall that $\E{X+Y} = \E X + \E Y$. Just as a reminder, $\E{XY} \neq \E X \E Y$ in general. Only when $X$ and $Y$ are uncorrelated (which is implied by independence), the product of the expectations is the expection of the products.}
+Recall that $\E{X+Y} = \E X + \E Y$. Just as a reminder, $\E{XY} \neq \E X \E Y$ in general. Only when $X$ and $Y$ are uncorrelated (which is implied by independence), the product of the expectations is the expection of the products.
 \end{hint}
 \begin{solution}
   \begin{equation*}
@@ -110,10 +111,10 @@ What is the difference between $N_n(t)$ and $N(t)$?
   that $np=\lambda$. 
 
   \begin{hint}
-  \hint{First find $p$, $n$, $\lambda$ and $t$ are such that the rate
+First find $p$, $n$, $\lambda$ and $t$ are such that the rate
     at which event occur in both processes are the same. Then consider
     the binomial distribution and use the standard limit
-    $(1-x/n)^n \to e^{-x}$ as $n\to \infty$. }
+    $(1-x/n)^n \to e^{-x}$ as $n\to \infty$. 
   \end{hint}
 
   \begin{solution} Now we like to relate $N_n(t)$ and $N(t)$. It is
@@ -157,8 +158,8 @@ is easy, so that, as $n\to\infty$,  the above converges to
   distributed with mean $1/\lambda$, prove that the number $N(t)$ of
   arrivals during interval $[0,t]$ is Poisson distributed.
   \begin{hint}
-  \hint{Realize that
-    $\P{N(t)=k} = \P{A_k \leq t} - \P{A_{k+1} \leq t}$.}
+  Realize that
+    $\P{N(t)=k} = \P{A_k \leq t} - \P{A_{k+1} \leq t}$.
   \end{hint}
     \begin{solution}
       We want to show that
@@ -194,7 +195,7 @@ We are done.
     $f(h)$ such $f(h)/h \to 0$ as $h\to 0$.
 
     \begin{hint}
-    \hint{Think about the meaning of the formula
+    Think about the meaning of the formula
       $\P{N(h) = n \given N(0) = n}$. It is a conditional probability
       that should be read like this: given that up to time $0$ we have
       seen $n$ arrivals (i.e, $N(0)=n$), what is the probability that
@@ -204,8 +205,7 @@ We are done.
       expension of $e^{x}$ to see that $e^{x} = 1 +x + o(x)$ for
       $|x| << 1$.  Furthermore, use that
       $\sum_{i=2}^\infty x^i/i! = \sum_{i=0}^\infty x^i/i! - x -1 = e^x -x 
-      - 1$.}
-      
+      - 1$.
     \end{hint}
 
 \begin{solution}
@@ -261,7 +261,7 @@ $N(t) \sim \text{P}(\lambda t)$.
 \end{solution}
 \end{question}
 
-\begin{question}(\tbd I added this question to clarify the next question, you can skip it for year 16/17.)
+\begin{question}
 Show that  for a Poisson process $N$, 
 \begin{equation*}
   \P{N(0,s] =1\given N(0,t]=1} = \frac st.
@@ -271,11 +271,10 @@ uniformly on the interval $[0,t]$.
 
 
 \begin{hint}
-\hint{Use Bayes' law for conditional probability. Observe that 
+Use Bayes' law for conditional probability. Observe that 
   \begin{equation*}
 \{N(0,s]+N(s,t]=1\}\cap\{N(0,s]=1\} = \{1+N(s,t]=1\}\cap\{N(0,s]=1\}=\{N(s,t]=0\}\cap\{N(0,s]=1\}.
   \end{equation*}
-}
 \end{hint}
 
 \begin{solution}
@@ -328,7 +327,7 @@ uniformly on the interval $[0,t]$.
 
 
   \begin{hint}
-  \hint{Use a conditioning argument or use probability generating
+Use a conditioning argument or use probability generating
     functions (i.e. $\E{z^X}=\sum_k z^k \P{X=k}$. In particular, for
     conditioning, use that $\P{AB} = \P{A\given B}\P{B}$. More
     generally, if the set $A$ can be split into disjoint sets $B_i$,
@@ -338,8 +337,7 @@ uniformly on the interval $[0,t]$.
     \end{equation*}
     where we use the conditioning formula to see that
     $\P{A B_i} = \P{A \given B_i} \P{B_i}$.  Now choose practical sets
-    $B_i$.  }
-    
+    $B_i$.  
   \end{hint}
 
     \begin{solution}
@@ -400,7 +398,7 @@ $M_1(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\
     Note that the right-hand-side does not depend on $h$, hence it
     holds for any time $h$, whether it is small or not.  
     \begin{hint}
-\hint{Suppose
+Suppose
       we write $N(t)=N_a(t) + N_s(t)$. Then
       \begin{equation*}
       \P{N_a(h) = 1, N_s(h) = 0 | N(h) = 1}
@@ -408,7 +406,7 @@ $M_1(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\
       is the probability that $N_a(h)=1$ and $N_s(h)=0$ \emph{given}
       that $N(t)=1$. In other words, the question is find out that,
       given one of the two processes `fired', what is the probability
-      that $N_a$ was the one that `fired'.}
+      that $N_a$ was the one that `fired'.
     \end{hint}
 
     \begin{solution}
@@ -500,7 +498,7 @@ node[below, fill=white] {$B_6=0$};
   process is $\sim P(\lambda t p)$ for any~$t$.
 
   \begin{hint}
-\hint{ Condition on the total number of arrivals $N(t)=m$ up to time
+ Condition on the total number of arrivals $N(t)=m$ up to time
       $t$. Realize that the probability that a job is of type 1 is
       Bernoulli distributed, hence when you consider $m$ jobs in
       total, the number of type 1 jobs is binomially distributed.
@@ -520,7 +518,6 @@ You might also consider the random variable
   with $N\sim P(\lambda)$ and $Z_i\sim B(p)$. Show that the moment
   generating function of $Y$ is equal to the moment generating
   function of a Poisson random variable with parameter $\lambda p$.
-}
   \end{hint}
 
     \begin{solution}
@@ -580,7 +577,7 @@ $Y\sim P(\lambda p)$.
   same as the SCV of an exponentially distributed random variable.
 
   \begin{hint}
-  \hint{You might use generating functions here.}
+  You might use generating functions here.
   \end{hint}
 
   \begin{solution} I expect that this is easy for you by now. The
@@ -658,7 +655,7 @@ $t$.
 \input{hint}
 \subsection*{Solutions}
 \input{ans}
-
+\clearpage
 
 %%% Local Variables:
 %%% mode: latex

@@ -90,13 +90,6 @@
 % \newcommand{\hint}[1]{\SetQuestionProperties{ hint = {#1}}}
 %\newcommand{\hint}[1]{\hintsymbol\SetQuestionProperties{ hint = {#1}}}
 
-\usepackage{answers}
-%\usepackage[nosolutionfiles]{answers}
-\Newassociation{solution}{Solution}{ans}
-\Newassociation{sol}{Solution}{ans}
-\Newassociation{hint}{Hint}{hint}
-\renewcommand{\Hintlabel}[1]{\textbf{Hint #1:}}
-\renewcommand{\Solutionlabel}[1]{\textbf{Solution #1:}}
 
 
 \theoremstyle{definition} % font type for theorems and related environments
@@ -129,7 +122,7 @@
 \newcommand{\1}[1]{\,\mathbb{1}_{#1}} % indicator
 \renewcommand{\TH}{\mathrm{TH}} % indicator
 
-\newcommand{\recall}[1]{\emph{#1}\recallsymbol}
+\newcommand{\recall}[1]{\emph{#1}} %\recallsymbol}
 \newcommand{\nvf}[1]{\tbdsymbol}
 
 \makeatletter

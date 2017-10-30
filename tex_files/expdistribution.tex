@@ -1,5 +1,13 @@
 \section{Exponential Distribution}
 \label{sec:expon-distr}
+
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
+
 As we will see in the sections to come, the modeling and analysis of
 any queueing system involves the specification of the (probability)
 distribution of the time between consecutive arrival epochs of jobs,
@@ -29,6 +37,125 @@ Section~\ref{sec:poisson-distribution}.  In the sequel we often write
 $X\sim \exp(\lambda)$ to mean that $X$ is exponentially distributed
 with rate $\lambda$.
 
+\begin{question} 
+  If the random variable $X\sim\exp(\lambda)$, show that its mean $\E X = \frac{1}\lambda.$
+  \begin{hint}
+ \begin{equation*}
+    \E X 
+= \int_0^\infty t \,\d F(t) = \int_0^\infty t f(t)\, \d t =
+    \int_0^\infty t \lambda e^{-\lambda t}\, \d t 
+= \frac{1}\lambda,
+  \end{equation*}
+  where~$f(t)=\lambda e^{-\lambda t}$ is the density function of the distribution function $F$ of $X$.
+  \end{hint}
+  \begin{solution}
+    \begin{equation*}
+      \begin{split}
+\E{X} 
+&= \int_0^\infty t \lambda e^{-\lambda t} \d t, \quad\text{density is } \lambda e^{-\lambda t} \\
+&=   \lambda^{-1} \int_0^\infty u e^{-u}\, \d u, \quad \text{ by  change of variable $u=\lambda t$},   \\
+&=  -\lambda^{-1}\left. t e^{- t}\right|_0^\infty + \lambda^{-1} \int_0^\infty e^{- t} \d t\\
+&=  - \lambda^{-1} \left. e^{- t} \right|_0^\infty =  \frac1\lambda.
+      \end{split}
+    \end{equation*}
+  \end{solution}
+\end{question}
+
+
+\begin{question} 
+  If $X\sim\exp(\lambda)$, show that its second moment $\E{X^2} =  \frac{2}{\lambda^2}$.
+  \begin{hint}
+  \begin{equation*}
+  \E{X^2}= \int_0^\infty t^2 \lambda e^{-\lambda t}\, \d t =  \frac{2}{\lambda^2}.
+  \end{equation*}
+  \end{hint}
+  \begin{solution}
+    \begin{equation*}
+      \begin{split}
+\E{X^2} 
+&= \int_0^\infty t^2 \lambda e^{-\lambda t} \d t \\
+&=   \lambda^{-2} \int_0^\infty u^2 e^{-u}\, \d u, \quad \text{ by  change of variable $u=\lambda t$},   \\
+&= -\lambda^{-2}\left. t^2 e^{- t}\right|_0^\infty + 2\lambda^{-2}\int_0^\infty t e^{- t} \d t \\
+&=  -2\lambda^{-2}\left. t e^{- t}\right|_0^\infty + 2\lambda^{-2} \int_0^\infty e^{- t} \d t\\
+&=  - 2\lambda^{-2} \left. e^{- t} \right|_0^\infty \\
+&=  2/\lambda^2.
+      \end{split}
+    \end{equation*}
+  \end{solution}
+\end{question}
+
+\begin{question} 
+  If $X\sim\exp(\lambda)$, show that the \recall{variance}
+$\V X = \lambda^{-2}$.
+
+  \begin{hint} Use, and memorize, the very practical formula
+  \begin{equation*}
+  \V X = \E X^2 - (\E X)^2.
+  \end{equation*}
+  \end{hint}
+  \begin{solution}
+    By the previous problems, $\E{X^2}=2/\lambda^2$ and $\E X = \lambda$. 
+  \end{solution}
+\end{question}
+
+The  above exercises can also be easily solved with the concept of \recall{moment generating function} which is defined for a random variable $X\geq 0$ as 
+\begin{equation*}
+  M_X(t) = \E{e^{tX}}.
+\end{equation*}
+
+\begin{question}\label{ex:33}
+ If $X$ is an exponentially distributed random variable with
+    parameter $\lambda$, show that its moment generating function
+   $ M_X(t) = \lambda/(\lambda-t)$.
+   \begin{hint}
+    \begin{equation*}
+      M_X(t) = \E{\exp(t X)} =\int_0^\infty e^{tx} f(x) \,\d x.
+\end{equation*}
+\end{hint}
+
+    \begin{solution}
+    \begin{equation*}
+      \begin{split}
+      M_X(t) &= \E{\exp(t X)} = \int_0^\infty e^{tx} \,\d F(x) 
+=\int_0^\infty e^{tx} f(x) \,\d x 
+=\int_0^\infty e^{tx} \lambda e^{-\lambda x} \,\d x  \\
+&=\lambda \int_0^\infty e^{(t-\lambda)x} \,\d x 
+=\frac{\lambda}{\lambda -t}.
+      \end{split}
+    \end{equation*}
+    \end{solution}
+  \end{question}
+
+  \begin{question}
+    Use the moment generating function to show that 
+    \begin{align*}
+      \E{X} &= M'(0)=\frac1\lambda, & 
+      \E{X^2} &= M''(0)=\frac2{\lambda^2}, 
+    \end{align*}
+where $M'(t) = \frac{\d}{\d t} M(t)$. 
+
+\begin{solution}
+  $M'(0)=\lambda/(\lambda-t)^2$. Hence, $M'(0)=1/\lambda$. And, $M''(t)=2\lambda/(\lambda-t)^3$, hence $\E{X^2}=M''(1)=2\lambda/\lambda^3=2\lambda^{-2}$. 
+\end{solution}
+  \end{question}
+
+
+Define the \recall{square coefficient of variation (SCV)} as
+  \begin{equation}
+C_a^2 = \frac{\V X}{(\E X)^2}.
+  \end{equation}
+As
+  will become clear later, the SCV is a very important concept in
+  queueing theory. Memorize it as a measure of \emph{relative
+  variability}.
+
+\begin{question}
+  Prove that when $X$ is exponentially distributed, $C_a^2 =1$.  
+\begin{solution}
+  By the previous problems, $\V X = 1/\lambda^2$ and $\E X=1/\lambda$.
+\end{solution}
+\end{question}
+
 
 Let us show with simulation how the exponential distribution
 originates. Consider $N$ people that regularly visit a shop. We assume
@@ -45,17 +172,103 @@ customers. One way to compute the arrival moments of all customers
 together as seen by the shop is to put all the numbers
 $\{A_k^i, k=1,\ldots,n, i=1,\ldots,N\}$ into one set, and sort these
 numbers in increasing order. This results in the (sorted) set of
-arrival times $\{A_k, k=1,2,\ldots\}$ at the shop, and then
+arrival times $\{A_k, k=1,2,\ldots\}$ at the shop. Taking $A_0=0$, 
 \begin{equation*}
 X_k = A_k - A_{k-1},
 \end{equation*}
-with $A_0=0$, must be the interarrival time between the $k-1$th and
-$k$th visit to the shop.  Thus, starting from interarrival times of
+must be the interarrival time between the $k-1$th and
+$k$th visit to the shop.  Like this, starting from interarrival times of
 individual customers we can construct interarrival times as seen by
 the shop.
 
+
+  \begin{question}
+ Let $A_i$ be the arrival time of customer $i$ and set $A_0=0$.
+    Assume that the interarrival times $\{X_i\}$ are i.i.d.  with
+    exponential distribution with mean $1/\lambda$ for some
+    $\lambda>0$.  Prove that
+\begin{equation*}
+f_{A_i}(t) = \lambda e^{-\lambda t} \frac{(\lambda t)^{i-1}}{(i-1)!}
+\end{equation*}
+is  the density of $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$. 
+\begin{hint}
+ Check the result for $i=1$ by filling in $i=1$ (just to be
+     sure that you have read the formula right), and compare the result
+     to the exponential density. Then write $A_i =\sum_{i=1}^k X_k$, and compute the moment
+     generating function for $A_i$ and use that the interarrival times
+     $X_i$ are independent. Use the moment generating function  of $X_i$.
+\end{hint}
+\begin{solution}
+ One way to find the distribution of $A_i$ is by using the
+    moment generating function $M_{A_i}(t) = \E{e^{t A_i}}$ of
+    $A_i$. Let $X_i$ be the interarrival time between customers $i$
+    and $i-1$, and $M_X(t)$ the associated moment generating
+    function. Using the i.i.d. property of the $\{X_i\}$,
+\begin{equation*}
+  \begin{split}
+  M_{A_i}(t) &= \E{e^{t A_i}} = \E{\exp\left(t\sum_{j=1}^{i} X_j\right)} \\
+& = \prod_{j=1}^{i} \E{e^{tX_j}} = 
+\prod_{j=1}^{i} M_{X_j}(t) = 
+\prod_{j=1}^{i} \frac{\lambda}{\lambda -t }
+ = \left(\frac{\lambda}{\lambda -t }\right)^i.
+  \end{split}
+\end{equation*}
+From a table of moment generation functions it follows immediately that
+$A_i \sim \Gamma(i,\lambda)$, i.e., $A_i$ is Gamma distributed.
+\end{solution}
+
+\end{question}
+
+  \begin{question}
+    Assume that the interarrival times $\{X_i\}$ are i.i.d. and
+    $X_i\sim\exp(\lambda)$. Let
+    $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$. Use the
+    density of $A_i$ or the moment generating function of $A_i$ to
+    show that
+ \begin{equation*}
+\E{A_i} = \frac i\lambda,
+ \end{equation*}
+ that is, the expected time to see $i$ jobs is $i/\lambda$.
+ \begin{hint}
+Use that
+    $\int_0^\infty (\lambda t)^i e^{- \lambda t} \d t =
+    \frac{i!}\lambda$.
+    Another way would be to use that, once you have the moment
+    generating function of some random variable $X$,
+    $\E X = \frac{\d}{\d t} M(t) |_{t=0}$. 
+ \end{hint}
+  \begin{solution}
+  \begin{equation*}
+\E{A_i} = \int_0^\infty t f_{A_i} (t) \, \d t  = 
+\int_0^\infty t  \lambda e^{-\lambda t} \frac{(\lambda t)^{i-1}}{(i-1)!}\, \d t.
+  \end{equation*}
+Thus, 
+  \begin{equation*}
+\E{A_i} = \frac{1}{(i-1)!} \int_0^\infty   e^{-\lambda t} (\lambda t)^i\,\d t = \frac{i!}{(i-1)!\lambda}=\frac{i}\lambda,
+  \end{equation*}
+  where we used the hint.
+
+What if we would use the moment generating function, as derived by the previous exercise?
+\begin{equation*}
+  \begin{split}
+    \E{A_i} 
+&= \left.\frac{\d}{\d t} M_{A_i}(t)\right|_{t=0} \\
+&= \left.\frac{\d}{\d t} \left(\frac{\lambda}{\lambda-t}\right)^i\right|_{t=0} \\
+&= i \left.\left(\frac{\lambda}{\lambda-t}\right)^{i-1}\frac{\lambda}{(\lambda-t)^2}\right|_{t=0} \\
+&= \frac i\lambda \left.\left(\frac{\lambda}{\lambda-t}\right)^{i-1}\right|_{t=0} \\
+&= \frac i\lambda.
+  \end{split}
+\end{equation*}
+
+Finally, the simplest way to obtain the answer is to use that the expectation is a linear operator, i.e., $\E{X+Y}= \E X + \E Y$ for any r.v. $X$ and $Y$. Then,
+\begin{equation*}
+\E{A_i} = \E{\sum_{k=1}^i X_k} = i \E{X} = \frac 1 \lambda.
+\end{equation*}
+  \end{solution}
+\end{question}
+
 To plot the \recall{empirical distribution function}, or the
-histogram, of the interarrival times at the shop, we need to count the
+\emph{histogram}, of the interarrival times at the shop, we need to count the
 number of interarrival times smaller than time $t$ for any $t$.  For
 this, we introduce the \recall{indicator function}:
 \begin{equation*}
@@ -65,8 +278,8 @@ this, we introduce the \recall{indicator function}:
     0, \quad\text{if the event $A$ is false}.
   \end{cases}
 \end{equation*}
-With the indicator function we define the emperical distribution of the
-interarrival times for a simulation with a total of $n\cdot N$ as
+Define then the emperical distribution of the
+interarriva
 \begin{equation*}
   \P{X \leq t}_{nN} = \frac1{nN}\sum_{k=1}^{nN} \1{X_k\leq t},
 \end{equation*}
@@ -113,12 +326,18 @@ $\sigma=1$, see Figure~\ref{fig:normal}.
 % see progs/convergence_to_exp.py
  \input{progs/uniform_to_exponential_many.tex}\\
   \end{tabular}
-  \caption{Each of the $N$ customer visits the shop with exponentially
+  \caption{Each of the $N$ customer visits the shop at uniformly 
     distributed interarrival times, but now the number of visits is
     $n=1000$.}  
   \label{fig:uniformmany}
 \end{figure}
 
+\begin{question}
+  Try to make Figure~\ref{fig:uniformmany} with simulation.
+  \begin{solution}
+    The source code can be found in \texttt{progs/converge\_to\_exp.py}.
+\end{solution}
+\end{question}
 
 \begin{figure}[ht]
   \centering
@@ -144,10 +363,19 @@ arrivals have to be drawn from a large population, and 2) each of the
 arriving customers decides, independent of the others, to visit the
 system.
 
-Another, but theoretical, reason to use the exponential distribution
+
+
+
+
+% Then reader should realize that it is simple, by means of
+% computers, to generate exponentially distributed interarrival
+% times. Thus, it is easy to use such exponentially distributed random
+% variables to simulate queueing systems. 
+
+
+Another reason to use the exponential distribution
 is that an exponentially distributed random variable is
-\recall{memoryless}, that is, $X$ is memoryless if it satisfies the
-property that
+\recall{memoryless}, that is, it satisfies the property that
 \begin{equation*}
   \P{X > t+h | X>t} = \P{X>h}.
 \end{equation*}
@@ -161,36 +389,22 @@ broken arm just arrived at the emergency room of a hospital, what does
 that tell us about the time the next patient will be brought in? Not
 much, as most of us will agree.
 
-It can be shown that only exponential random variables have the
-memoryless property. The proof of this fact requires quite some work;
-we refer the reader to the literature if s/he want to check this, see
-e.g. \citet[Appendix 3]{yushkevich69:_markov_proces}.
 
-Finally, the reader should realize that it is simple, by means of
-computers, to generate exponentially distributed interarrival
-times. Thus, it is easy to use such exponentially distributed random
-variables to simulate queueing systems. 
-
-\subsection*{Exercises}
-\label{sec:exercises}
-
-\Opensolutionfile{hint}
-\Opensolutionfile{ans}
-
-\begin{question}(Using conditional probability)
+\begin{question} (This exercise should help you recall the concept of conditional probability.)
   We have to give one present to one of three children. As we cannot
   divide the present into parts, we decide to let `fate decide'. That
   is, we choose a random number in the set $\{1, 2, 3\}$. The first
   child that guesses the number wins the present. Show that the
   probability of winning the present is the same for each child.
-%\hint{For the second child, condition on the event that the first does not chose the right number.}
   \begin{hint}
     For the second child, condition on the event that the first does not chose the right number.
+    Use the definition of conditional probability:
+    \begin{equation*}
+    \P{A|B} = \frac{\P{AB}}{\P{B}}, 
+    \end{equation*}
+provided $\P{B}>0$.
   \end{hint}
 \begin{solution}
-    Use the definition of conditional probability
-    ($\P{A|B} = \P{AB}/\P{B}$, provided $\P{B}>0$)
-
     The probability that the first child to guess also wins is
     $1/3$. What is the probability for child number two? Well, for
     him/her to win, it is necessary that child one does not win and
@@ -211,41 +425,6 @@ variables to simulate queueing systems.
   \end{solution}
 \end{question}
 
-
-\begin{question}
-  Assume that the time $X$ to fail of a machine is uniformly
-  distributed on the interval $[0,10]$. If the machine fails at time
-  $t$, the cost to repair it is $h(t)$. What is the expected repair
-  cost? 
-  \begin{solution}
-    Write for $F(x) = \P{X\leq x}$ and $f(x) = \d F(x)/\d x$ for the
-    density of $F$.
-    \begin{equation*}
-      \begin{split}
-\E{h(X)}
-&= \int_0^{10} \E{h(X) \given X = x} \P{X\in \d x} \\
-&= \int_0^{10} \E{h(x) \given X = x} \d F(x) \\
-&= \int_0^{10} \E{h(x) \given X = x} F(\d x) \\
-&= \int_0^{10} \E{h(x) \given X = x} f(x) \d x \\
-&= \int_0^{10} h(x)\frac{\d x}{10}.
-      \end{split}
-    \end{equation*}
-    Here we introduce some notation that is commonly used in the
-    probabity literature to indicate the same conceptual idea, i.e,
-    $\P{X\in \d x} = \d F(x) = F(\d x) = f(x) \d x$, where the last
-    equality follows from the fact that $F$ has a density $f$
-    everywhere on $[0,10]$. 
-
-    The concept of conditional expectation is of fundamental
-    importance in probability theory. Any \emph{good} probability book
-    defines this concept as a random variable measurable with respect
-    to some $\sigma$-algebra. In this course we will not deal with
-    this elegant idea, due to lack of time. 
-
-  \end{solution}
-\end{question}
-
-
 \begin{question}
   Show that an exponentially distributed random variable is
   memoryless.  
@@ -253,188 +432,15 @@ variables to simulate queueing systems.
 Condition on the event ${X>t}$. 
   \end{hint}
   \begin{solution}
-This is easy, but be sure you can do it. 
-
-To see that an exponentially
-distributed is memoryless, use the definition of conditional
-probability ($\P{A|B} = \P{AB}/\P{B}$, provided $\P{B}>0$):
+By  the definition of conditional probability
 \begin{equation*}
   \P{X>t+h|X>t} = \frac{\P{X>t+h, X>t}}{\P{X>t}} = \frac{\P{X>t+h}}{\P{X>t}} = \frac{e^{-\lambda(t+h)}}{e^{-\lambda t}} = e^{-\lambda h} = \P{X>h}.
 \end{equation*}
-  \end{solution}
-\end{question}
 
-\begin{question} 
-  If the random variable $X\sim\exp(\lambda)$, show that
- \begin{equation*}
-    \E X = \int_0^\infty t \,\d F(t) = \int_0^\infty t f(t)\, \d t =
-    \int_0^\infty t \lambda e^{-\lambda t}\, \d t = \frac{1}\lambda,
-  \end{equation*}
-  where~$f$ is the density function of the distribution function $F$ of $X$.
-  \begin{solution}
-    \begin{equation*}
-      \begin{split}
-\E{X} 
-&= \int_0^\infty \E{X\given X=t} f(t) \d t \\
-&= \int_0^\infty t \lambda e^{-\lambda t} \d t, \quad\text{density is } \lambda e^{-\lambda t} \\
-&=   \lambda^{-1} \int_0^\infty u e^{-u}\, \d u, \quad \text{ by  change of variable $u=\lambda t$},   \\
-&=  -\lambda^{-1}\left. t e^{- t}\right|_0^\infty + \lambda^{-1} \int_0^\infty e^{- t} \d t\\
-&=  - \lambda^{-1} \left. e^{- t} \right|_0^\infty =  \frac1\lambda.
-      \end{split}
-    \end{equation*}
-  \end{solution}
-\end{question}
-
-
-\begin{question} 
-  If the random variable $X\sim\exp(\lambda)$, show that
-  \begin{equation*}
-  \E{X^2}= \int_0^\infty t^2 \lambda e^{-\lambda t}\, \d t =  \frac{2}{\lambda^2}.
-  \end{equation*}
-  \begin{solution}
-    \begin{equation*}
-      \begin{split}
-\E{X^2} 
-&= \int_0^\infty \E{X^2\given X=t} f(t) \d t \\
-&= \int_0^\infty t^2 \lambda e^{-\lambda t} \d t \\
-&=   \lambda^{-2} \int_0^\infty u^2 e^{-u}\, \d u, \quad \text{ by  change of variable $u=\lambda t$},   \\
-&= -\lambda^{-2}\left. t^2 e^{- t}\right|_0^\infty + 2\lambda^{-2}\int_0^\infty t e^{- t} \d t \\
-&=  -2\lambda^{-2}\left. t e^{- t}\right|_0^\infty + 2\lambda^{-2} \int_0^\infty e^{- t} \d t\\
-&=  - 2\lambda^{-2} \left. e^{- t} \right|_0^\infty \\
-&=  2/\lambda^2.
-      \end{split}
-    \end{equation*}
-  \end{solution}
-\end{question}
-
-\begin{question} 
-  If the random variable $X\sim\exp(\lambda)$, show that the \recall{variance}
-  \begin{equation*}
-  \V X = \E X^2 - (\E X)^2 = \frac{1}{\lambda^2}.
-  \end{equation*}
-  Recall in particular this middle term to compute $\V X$; it is very
-  practical.
-  \begin{solution}
-    By the previous problems, $\E{X^2}=2/\lambda^2$ and $\E X = \lambda$. 
-  \end{solution}
-\end{question}
-
-\begin{question}
- Define the \recall{square coefficient of variation (SCV)} as
-  \begin{equation}
-C_a^2 = \frac{\V X}{(\E X)^2}.
-  \end{equation}
-  Prove that when $X$ is exponentially distributed, $C_a^2 =1$.  As
-  will become clear later, the SCV is a very important concept in
-  queueing theory. Memorize it as a measure of \emph{relative
-  variability}.
-\begin{solution}
-  By the previous problems, $\V X = 1/\lambda^2$ and $\E X=1/\lambda$.
-\end{solution}
-\end{question}
-
-\begin{question}\label{ex:33}
- If $X$ is an exponentially distributed random variable with
-    parameter $\lambda$, show that its moment generating function
-    \begin{equation*}
-    M_X(t) = \E{e^{tX}} = \frac{\lambda}{\lambda-t}.
-    \end{equation*}
-    \begin{solution}
-    \begin{equation*}
-      \begin{split}
-      M_X(t) &= \E{\exp(t X)} = \int_0^\infty e^{tx} \,\d F(x) 
-=\int_0^\infty e^{tx} f(x) \,\d x 
-=\int_0^\infty e^{tx} \lambda e^{-\lambda x} \,\d x  \\
-&=\lambda \int_0^\infty e^{(t-\lambda)x} \,\d x 
-=\frac{\lambda}{\lambda -t}.
-      \end{split}
-    \end{equation*}
-    \end{solution}
-  \end{question}
-
-  \begin{question}
- Let $A_i$ be the arrival time of customer $i$ and set $A_0=0$.
-    Assume that the interarrival times $\{X_i\}$ are i.i.d.  with
-    exponential distribution with mean $1/\lambda$ for some
-    $\lambda>0$.  Prove that the density of
-    $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$ is
-\begin{equation*}
-f_{A_i}(t) = \lambda e^{-\lambda t} \frac{(\lambda t)^{i-1}}{(i-1)!}. 
-\end{equation*}
-\begin{hint}
- Check the result for $i=1$ by filling in $i=1$ (just to be
-     sure that you have read the formula right), and compare the result
-     to the exponential density. Then write $A_i =\sum_{i=1}^k X_k$, and compute the moment
-     generating function for $A_i$ and use that the interarrival times
-     $X_i$ are independent. Use the moment generating function  of $X_i$.
-\end{hint}
-\begin{solution}
- One way to find the distribution of $A_i$ is by using the
-    moment generating function $M_{A_i}(t) = \E{e^{t A_i}}$ of
-    $A_i$. Let $X_i$ be the interarrival time between customers $i$
-    and $i-1$, and $M_X(t)$ the associated moment generating
-    function. Using the i.i.d. property of the $\{X_i\}$,
-\begin{equation*}
-  \begin{split}
-  M_{A_i}(t) &= \E{e^{t A_i}} = \E{\exp\left(t\sum_{j=1}^{i} X_j\right)} \\
-& = \prod_{j=1}^{i} \E{e^{tX_j}} = 
-\prod_{j=1}^{i} M_{X_j}(t) = 
-\prod_{j=1}^{i} \frac{\lambda}{\lambda -t }
- = \left(\frac{\lambda}{\lambda -t }\right)^i.
-  \end{split}
-\end{equation*}
-From a table of moment generation functions it follows immediately that
-$A_i \sim \Gamma(n,\lambda)$, i.e., $A_i$ is Gamma distributed.
-\end{solution}
-
-\end{question}
-
-  \begin{question}
-    Assume that the interarrival times $\{X_i\}$ are i.i.d. and
-    $X_i\sim\exp(\lambda)$. Let
-    $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$. Use the
-    density of $A_i$ or the moment generating function of $A_i$ to
-    show that
- \begin{equation*}
-\E{A_i} = \frac i\lambda,
- \end{equation*}
- that is, the expected time to see $i$ jobs is $i/\lambda$.
- \begin{hint}
-Use that
-    $\int_0^\infty (\lambda t)^i e^{- \lambda t} \d t =
-    \frac{i!}\lambda$.
-    Another way would be to use that, once you have the moment
-    generating function of some random variable $X$,
-    $\E X = \frac{\d}{\d t} M(t) |_{t=0}$. 
- \end{hint}
-  \begin{solution}
-  \begin{equation*}
-\E{A_i} = \int_0^\infty t \P{A_i \in \d t} = \int_0^\infty t f_{A_i} (t) \, \d t  = 
-\int_0^\infty t  \lambda e^{-\lambda t} \frac{(\lambda t)^{i-1}}{(i-1)!}\, \d t.
-  \end{equation*}
-Thus, 
-  \begin{equation*}
-\E{A_i} = \frac{1}{(i-1)!} \int_0^\infty   e^{-\lambda t} (\lambda t)^i\,\d t = \frac{i!}{(i-1)!\lambda}=\frac{i}\lambda,
-  \end{equation*}
-  where we used the hint.
-
-What if we would use the moment generating function? 
-\begin{equation*}
-  \begin{split}
-    \E{A_i} 
-&= \left.\frac{\d}{\d t} M_{A_i}(t)\right|_{t=0} \\
-&= \left.\frac{\d}{\d t} \left(\frac{\lambda}{\lambda-t}\right)^i\right|_{t=0} \\
-&= i \left.\left(\frac{\lambda}{\lambda-t}\right)^{i-1}\frac{\lambda}{(\lambda-t)^2}\right|_{t=0} \\
-&= \frac i\lambda \left.\left(\frac{\lambda}{\lambda-t}\right)^{i-1}\right|_{t=0} \\
-&= \frac i\lambda.
-  \end{split}
-\end{equation*}
-
-And indeed, by the fact that $\E{X+Y}= \E X + \E Y$ for any r.v. $X$ and $Y$,
-\begin{equation*}
-\E{A_i} = \E{\sum_{k=1}^i X_k} = i \E{X} = \frac 1 \lambda.
-\end{equation*}
-We get the same answer. 
+As an aside,  it can be shown that only exponential random variables have the
+memoryless property. The proof of this fact requires quite some work;
+we refer the reader to the literature if s/he want to check this, see
+e.g. \citet[Appendix 3]{yushkevich69:_markov_proces}.
   \end{solution}
 \end{question}
 
@@ -448,8 +454,8 @@ Z=\min\{X,S\}\sim\exp(\lambda+\mu),
 hence $\E Z = (\lambda+\mu)^{-1}$.
 
 \begin{hint}
- \hint{Use that if $Z=\min\{X, S\}>x$ that then it must be that $X>x$
-  and $S>x$. Then use independence of $X$ and $S$.}
+Use that if $Z=\min\{X, S\}>x$,  it then must be that $X>x$
+  and $S>x$. Then use independence of $X$ and $S$.
 \end{hint}
 
   \begin{solution}
@@ -457,7 +463,7 @@ Use that $X$ and $S$ are independent to get
     \begin{equation*}
       \begin{split}
       \P{Z>x} 
-&= \P{\min{X,S}>x} = \P{X>x\text{ and } S>x} = \P{X>x}\P{S>x} \\
+&= \P{\min\{X,S\}>x} = \P{X>x\text{ and } S>x} = \P{X>x}\P{S>x} \\
 &= e^{-\lambda x} e^{-\mu x} = e^{-(\lambda+\mu)x}.
       \end{split}
     \end{equation*}
@@ -472,21 +478,22 @@ Use that $X$ and $S$ are independent to get
     \end{equation*}
 
     \begin{hint}
-    \hint{ Define the joint distribution of $X$ and $S$ and carry out
+     Define the joint distribution of $X$ and $S$ and carry out
       the computations, or use conditioning, or use the result of the
-      previous exercise.}
+      previous exercise.
     \end{hint}
 
 \begin{solution}
 There is more than one way to show that $\P{X\leq S} = \lambda/(\lambda+\mu)$.  
 
-Method 1. (I admit that, although the simplest, least technical,
-method, I did not think of this right away. I am `conditioned' to use
-conditioning\ldots) Observe first that $X$ and $S$, being
+Method 1. Observe first that $X$ and $S$, being
 exponentially distributed, both have a density. Moreover, as they are
-independent, we can sensibly speak of the joint density
-$f_{X,S}(x,y) = f_X(x)f_S(y) = \lambda \mu e^{-\lambda x} e^{-\mu
-  y}$. With this,
+independent,  the joint density takes the form
+\begin{equation*}
+f_{X,S}(x,y) = f_X(x)f_S(y) = \lambda \mu e^{-\lambda x} e^{-\mu
+  y}.
+\end{equation*}
+With this,
 \begin{equation*}
   \begin{split}
     \P{X\leq S} 
@@ -500,80 +507,30 @@ $f_{X,S}(x,y) = f_X(x)f_S(y) = \lambda \mu e^{-\lambda x} e^{-\mu
 &= 1 - \frac{\mu}{\lambda + \mu} 
   \end{split}
 \end{equation*}
-This argument is provided in the probability book you use in the first year.
 
-Method 2. Applying a standard conditioning argument
+Method 2. Start with  the law of total probability in the discrete case: 
 \begin{equation*}
-\P{X\leq S} = \int_0^\infty \P{X\leq S| S=s} \mu e^{-\mu s} \,  \d s.
+  \E{A} = \sum_{i=1}^k \E{A\given B_i} \P{B_i},
 \end{equation*}
-Now, $\P{X\leq S| S=s}$ is a conditional probability
-distribution. This is a bit of tricky object, but very useful once you
-get used to it. The tricky part is that $\P{S=s} = 0$. Therefore
-$\P{X\leq S\given S=s}$ cannot be defined as $\frac{\P{X\leq s,
-  S=s}}{\P{S=s}}$. However, if we proceed nonetheless and use the
-independence of $S$ and $X$, we get
+where $B_1,\ldots, B_k$ forms a set of events such that $\cup_{i=1}^k B_i$ is equal to the sample space, $B_i\cap B_j = \varnothing$ and $\P{B_i}>0$. Now in \cite{capinski03:_probab_probl} it is shown that this can be extended to random variables $X$ and $Y$ with a densities $f_X, f_Y$. The result is
 \begin{equation*}
-   \P{X\leq S| S=s} = \frac{\P{X\leq s, S=s}}{\P{S=s}} = \frac{\P{X\leq s} \P{S=s}}{\P{S=s}} = \
-\P{X\leq s}
- \end{equation*}
- and thus, indeed, $\P{X\leq S| S=s} = \P{X\leq s}$. Then,
-\begin{equation*}
-  \begin{split}
-\P{X\leq S} 
-&= \int_0^\infty \P{X\leq S| S=s} \mu e^{-\mu s} \,  \d s \\
-&= \int_0^\infty \P{X\leq s} \mu e^{-\mu s} \,  \d s \\
-&= \int_0^\infty (1-e^{-\lambda s})\mu e^{-\mu s} \,  \d s \\
-  \end{split}
+  \E{Y} = \int_0^\infty \E{Y\given X=x} f_X(x)\d x.
 \end{equation*}
-and we arrive at the integral we have seen above. 
-
-So we get the correct answer, but by the wrong method.  How can we
-repair this?  As a first step, let's not fix $S$ to a set of measure
-zero, but let's assume that $S\in [s,t]$ for $s<t$. Then it follows
-that
+Here, conceptually, $f_X(x)\d x \approx \P{X\in \d x}$ plays the role of $\P{B_i}$ in the discrete case above. With this notion, and observing that $f_S(s) = \mu e^{-\mu s} \d s$,
 \begin{equation*}
-  \1{X\leq s} \1{S\in[s,t]} \leq  \1{X\leq S} \1{S\in[s,t]} \leq \1{X\leq t} \1{S\in[s,t]}
-\end{equation*}
-As a second step,  using that $\P{S\in[s,t]} > 0$ if $s<t$ and the independence of $X$ and $S$,
-\begin{equation*}
-  \begin{split}
-    \P{X\leq s} &= \frac{\P{X\leq s} \P{S\in[s,t]}}{\P{S\in[s,t]}} = \frac{\P{X\leq s,  S\in[s,t]}}{\P{S\in[s,t]}} \\
-    \P{X\leq t} &= \frac{\P{X\leq t} \P{S\in[s,t]}}{\P{S\in[s,t]}} = \frac{\P{X\leq t,  S\in[s,t]}}{\P{S\in[s,t]}}
-  \end{split}
-\end{equation*}
-Now with the result of the first step
-\begin{equation*}
-  \begin{split}
-    \P{X\leq s} 
-&= \frac{\P{X\leq s,  S\in[s,t]}}{\P{S\in[s,t]}} \\
-&\leq \frac{\P{X\leq S,  S\in[s,t]}}{\P{S\in[s,t]}} \\
-&= \P{X\leq S| S\in[s,t]} \\
-&\leq \frac{\P{X\leq t,  S\in[s,t]}}{\P{S\in[s,t]}} \\
-&= \P{X\leq t}.
-  \end{split}
-\end{equation*}
-Hence, 
-\begin{equation*}
-  \begin{split}
-    \P{X\leq s} \leq \P{X\leq S| S\in[s,t]} \leq \P{X\leq t}.
-  \end{split}
-\end{equation*}
-Finally, taking the limit $t\downarrow s$, and defining $\P{X\leq S|
-S = s} = \lim_{t\downarrow s} \P{X\leq S| S\in[s,t]}$, it follows
-that
-\begin{equation*}
-    \P{X\leq s} = \P{X\leq S| S = s}
+\P{X\leq S} = \E{\1{X\leq S}} = \int_0^\infty \E{\1{X\leq S}| S=s} \mu e^{-\mu s} \,  \d s.
 \end{equation*}
 
-A more direct way to properly define $\P{X\leq S| S=s}$ is as follows. For any $y$ such that $f_S(y) > 0$, we can define the conditional probability density function of $X$, given that $S=s$, as 
+Now, $\E{\1{X\leq S}| S=s}$ is a tricky object, as $\P{S=s} = 0$, so that 
+$\E{\1{X\leq S}\given S=s}$ \emph{cannot} be defined as 
+\begin{equation*}
+\frac{\E{\1{X\leq s}}}{\P{S=s}}.
+\end{equation*}
+The way to proceed is to consider the conditional probability density function of $X$ given that $S=s$, which is defined as
 \begin{equation*}
   f_{X|S}(x|s) = \frac{f_{X, S}( x, s)}{f_Y(s)},
 \end{equation*}
-where, as before, $f_{X, S}( x, s)$ is the joint density of $X$ and $S$. Now that the conditional probability density is defined, we can properly define
-\begin{equation*}
-  \E {X| S=s } = \int_0^\infty x   f_{X|S}(x|s)\, \d x
-\end{equation*}
-and also
+where, as before, $f_{X, S}( x, s)$ is the joint density of $X$ and $S$. With this, we can properly define
 \begin{equation*}
   \begin{split}
   \P{X\leq S| S=s } = \E{\1{X \leq S}| S=s } = \int_0^\infty \1{x \leq s}   f_{X|S}(x|s)\, \d x.
@@ -590,20 +547,19 @@ from which we get that
 &= \int_0^\infty \1{x \leq s}   f_{X|S}(x|s)\, \d x \\
 &= \int_0^\infty \1{x \leq s} \lambda e^{-\lambda x}\, \d x \\
 &= \int_0^s \lambda e^{-\lambda x}\, \d x \\
-&= 1 - e^{-\lambda s},
+&= 1 - e^{-\lambda s}.
   \end{split}
 \end{equation*}
+
+And then, 
 that is,
 \begin{equation*}
   \begin{split}
-  \P{X\leq S| S=s} = \E{\1{X \leq S}| S=s } = 1 - e^{-\lambda s}  = \P{X \leq s}.
+  \P{X\leq S} &= \int \P{X\leq S| S=s} \mu e^{-\mu s}\d s \\
+&= \mu \int_0^\infty \E{\1{X \leq S}| S=s } e^{-\mu s} \d s= \mu \int_0^\infty (1 - e^{-\lambda s})e^{-\mu s} \d s.
   \end{split}
 \end{equation*}
-
-All of these problems can be put on solid ground by using measure
-theory. We do not pursue these matters any further, but trust on our
-intuition that all is well.
-
+Straightforward integration gives the final result.
 \end{solution}
 \end{question}
 
@@ -615,15 +571,27 @@ intuition that all is well.
   else, and such that $\P{T=1} = p = 1-q = 1-\P{T=2}$. (An example
   is a desk serving men and women, both requiring different average
   service times, and $p$ is the probability that the customer in
-  service is a man.) What is the expected processing time and what is the variance? 
-  \begin{solution}
+  service is a man.)  Show that  the expected processing time  and  variance are given by
+\begin{align*}
+  \E X &= p \E{X_1}  + q \E{X_2} \\
+\V X &= p \V{X_1} + q \V{X_2} + pq(\E{X_1} - \E{X_2})^2.
+  \end{align*}
+Interestingly, we see that even if $\V{X_1} = \V{X_2} = 0$, $\V X > 0$
+if $\E{X_1} \neq \E{X_2}$. Bear this in mind; we will use these ideas
+later when we discuss the effects of failures on the variance of
+service times of jobs.
+
+\begin{hint}
     Let $X$ be the processing (or service) time at the server, and
     $X_i$ the service time of a type $i$ job. Then, 
     \begin{equation*}
       X = \1{T=1} X_1 + \1{T=2} X_2,
     \end{equation*}
     where $\1{}$ is the indicator function, that is, $\1{A}=1$ if the
-    event $A$ is true, and $\1{A}=0$ if $A$ is not true. With this,
+    event $A$ is true, and $\1{A}=0$ if $A$ is not true.   
+\end{hint}
+  \begin{solution}
+With the hint, 
 \begin{equation*}
   \begin{split}
   \E X 
@@ -664,20 +632,46 @@ we get
 \end{split}
 \end{equation*}
 
-Interestingly, we see that even if $\V{X_1} = \V{X_2} = 0$, $\V X > 0$
-if $\E{X_1} \neq \E{X_2}$. Bear this in mind; we will use these ideas
-later when we discuss the effects of failures on the variance of
-service times of jobs.
-
 \end{solution}
 \end{question}
 
+
+
+\begin{comment}
 \begin{question}
-  Try to make Figure~\ref{fig:uniformmany} with simulation.
+  Assume that the time $X$ to fail of a machine is uniformly
+  distributed on the interval $[0,10]$. If the machine fails at time
+  $t$, the cost to repair it is $h(t)$. What is the expected repair
+  cost? 
   \begin{solution}
-    The source code can be found in \texttt{progs/converge\_to\_exp.py}.
-\end{solution}
+    Write for $F(x) = \P{X\leq x}$ and $f(x) = \d F(x)/\d x$ for the
+    density of $F$.
+    \begin{equation*}
+      \begin{split}
+\E{h(X)}
+&= \int_0^{10} \E{h(X) \given X = x} \P{X\in \d x} \\
+&= \int_0^{10} \E{h(x) \given X = x} \d F(x) \\
+&= \int_0^{10} \E{h(x) \given X = x} F(\d x) \\
+&= \int_0^{10} \E{h(x) \given X = x} f(x) \d x \\
+&= \int_0^{10} h(x)\frac{\d x}{10}.
+      \end{split}
+    \end{equation*}
+    Here we introduce some notation that is commonly used in the
+    probabity literature to indicate the same conceptual idea, i.e,
+    $\P{X\in \d x} = \d F(x) = F(\d x) = f(x) \d x$, where the last
+    equality follows from the fact that $F$ has a density $f$
+    everywhere on $[0,10]$. 
+
+    The concept of conditional expectation is of fundamental
+    importance in probability theory. Any \emph{good} probability book
+    defines this concept as a random variable measurable with respect
+    to some $\sigma$-algebra. In this course we will not deal with
+    this elegant idea, due to lack of time. 
+
+  \end{solution}
 \end{question}
+  
+\end{comment}
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}
@@ -685,7 +679,7 @@ service times of jobs.
 \input{hint}
 \subsection*{Solutions}
 \input{ans}
-  
+\clearpage  
 
 
 %%% Local Variables:
