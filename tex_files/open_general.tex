@@ -3,6 +3,12 @@
 \section{General Job Shop Manufacturing Systems}
 \label{sec:general-job-shop}
 
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 Perhaps the term `class' needs some clarification. A network with a
 single class of jobs means that all jobs have the same service
 distribution at the same station. (Of course, the service rates at
@@ -125,7 +131,9 @@ models, each with their own strengths and weaknesses.
 \begin{question}
   It is mentioned in the text that there are $5M+M^2$ input parameters
   required to characterize an $M$ station network of $G/G/1$ queues. What are these parameters?
-  \hint{ Check the formulas in the synthesis carefully.}
+  \begin{hint}
+ Check the formulas in the synthesis carefully.
+  \end{hint}
   \begin{solution}
     \begin{enumerate}
     \item The routing matrix $P$ is $M$ times $M$, hence contains
@@ -156,8 +164,10 @@ are sent back the machine for repair. The production times for repair
 jobs are also 10 minutes.  What is the influence of faulty jobs on the
 queueing times? 
 
-\hint{Apply the formulas (2.30)--(2.33) of Zijm to a single station
-  queueing network with rework.}
+\begin{hint}
+Apply the formulas (2.30)--(2.33) of Zijm to a single station
+  queueing network with rework.
+\end{hint}
 \begin{solution}
   First consider the situation without loss. Then
   \begin{equation*}
@@ -328,7 +338,12 @@ not too way off, we see that we can take $C_{1a}^2=1$. And then, including the r
 \end{solution}
 \end{question}
 
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: t
-%%% End:
+
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
+\clearpage

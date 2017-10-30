@@ -3,6 +3,10 @@
 
 \subsection*{Theory and Exercises}
 
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 In this section we provide a derivation of, and motivation for, the
 Poisson process, and clarify its relation with the exponential
 distribution at the end.
@@ -18,10 +22,10 @@ Our first assumption is that the failure behavior of the machine does not
 significantly change over time. Then it is reasonable to assume that
 the expected number of failure is proportional to the  length of
 the interval $T$. Thus, it is reasonable to assume that there exists some
-constant $\lambda$ such that
+constant~$\lambda$ such that
 \begin{equation}
   \label{eq:6}
- \E{N(s,t)} = \lambda (t-s)
+ \E{N(s,t)} = \lambda (t-s).
 \end{equation}
 The constant $\lambda$ is often called the \recall{arrival rate}, or
 failure rate in this case.
@@ -48,45 +52,17 @@ probability that two or more failures occur in one such tiny interval.
 
 As a consequence, then, we can model the occurrence of a failure in
 some period $i$ as a Bernoulli distributed random variable $B_i$ such
-that $\P{B_i =1}$ and $\P{B_i=0} = 1-\P{B_i = 1}$, and we assume that
+that $p=\P{B_i =1}$ and $\P{B_i=0} = 1-\P{B_i = 1}$, and we assume that
 $\{B_i\}$ are independent. The total number of failures $N_n(t)$ that
 occur in $n$ intervals is then binomially distributed
 \begin{equation}\label{eq:bin}
   \P{N_n(t) = k} = {n \choose k} p^k (1-p)^{n-k}.
 \end{equation}
-In the exercises we ask you to use this to motivate that, in some
-appropriate sense, $N_n(t)$ converges to $N(t)$ for $n\to \infty$ such
-that
-\begin{equation}\label{eq:pois}
-  \P{N(t) = k} = 
-e^{-\lambda t} \frac{(\lambda t)^k}{k!}.
-\end{equation}
-We say that $N(t)$ is \recall{Poisson distributed} with rate
-$\lambda$, and write $N(t)\sim P(\lambda t)$. 
-
-Moreover, if there are no failures in some interval $[0,t]$, then it
-must be that $N(t) = 0$ and the interarrival time $X_1=A_1-0$ (as
-$A_0=0$) must be larger than $t$.  Therefore,
-\begin{equation*}
- \P{X_1> t} = \P{N(t) = 0} = e^{-\lambda t} \frac{(\lambda t)^0}{0!}= e^{-\lambda t}.
-\end{equation*}
-
-The relations we discussed above are of paramount importance in the
-analysis of queueing process. We summarize this by a theorem.
-\begin{theorem}\label{thr:1}
-  A counting process $\{N(t)\}$ is a Poisson process with rate $\lambda$ if and only if
-  the inter-arrival times $\{X_i\}$, i.e., the times between consecutive
-  arrivals, are i.i.d. and $\P{ X_1\leq t} = 1 - e^{-\lambda t}$. In other words, $X_i\sim \exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t)$ 
-\end{theorem}
-
-
-\Opensolutionfile{hint}
-\Opensolutionfile{ans}
 
 \begin{question}
 Show that $\E{N_n(t)} = \sum_{i=1}^n \E{B_i} = n p$.
 \begin{hint}
-Recall that $\E{X+Y} = \E X + \E Y$. Just as a reminder, $\E{XY} \neq \E X \E Y$ in general. Only when $X$ and $Y$ are uncorrelated (which is implied by independence), the product of the expectations is the expection of the products.
+Use that $\E{X+Y} = \E X + \E Y$. 
 \end{hint}
 \begin{solution}
   \begin{equation*}
@@ -104,6 +80,16 @@ What is the difference between $N_n(t)$ and $N(t)$?
   $[0,t]$. As such it is not necessarily bounded by $n$. Thus, $N_n(t)$ and $N(t)$ cannot represent the same random variable. 
 \end{solution}
 \end{question}
+
+
+In fact, in some appropriate sense, $N_n(t)$ converges to $N(t)$ for $n\to \infty$ such
+that
+\begin{equation}\label{eq:pois}
+  \P{N(t) = k} = 
+e^{-\lambda t} \frac{(\lambda t)^k}{k!}.
+\end{equation}
+We say that $N(t)$ is \recall{Poisson distributed} with rate
+$\lambda$, and write $N(t)\sim P(\lambda t)$. 
 
 \begin{question}
   Show how the binomial distribution~\eqref{eq:bin} converges to the
@@ -150,6 +136,131 @@ is easy, so that, as $n\to\infty$,  the above converges to
 \end{equation*}
 
   \end{solution}
+\end{question}
+
+\begin{question}
+  Show that if $N(t)$ is Poisson distributed with parameter $\lambda$, $\E{N(t)} = \lambda t$ and $\V{N(t)} = \lambda t$. 
+
+
+  \begin{hint}
+  You might use generating functions here.
+  \end{hint}
+
+  \begin{solution} 
+    When a random variable $N$ is Poisson distributed with parameter
+    $\lambda$,
+    \begin{equation*}
+      \begin{split}
+      \E N 
+&= \sum_{n=0}^\infty n e^{-\lambda}\frac{\lambda^n}{n!}  \\
+&= \sum_{n=1}^\infty n e^{-\lambda}\frac{\lambda^n}{n!}, \text{ since the term with $n=0$ cannot contribute} \\
+&= e^{-\lambda} \lambda \sum_{n=1}^\infty \frac{\lambda^{n-1}}{(n-1)!} \\
+&= e^{-\lambda} \lambda \sum_{n=0}^\infty \frac{\lambda^{n}}{n!}, \text{ by a change of variable}\\
+&= e^{-\lambda} \lambda e^{\lambda} \\
+&= \lambda.
+      \end{split}
+    \end{equation*}
+Similarly, using that $\V N = \E{N^2} - (\E N)^2$, 
+    \begin{equation*}
+      \begin{split}
+      \E{N^2}
+&= \sum_{n=0}^\infty n^2 e^{-\lambda}\frac{\lambda^n}{n!}  \\
+&= e^{-\lambda} \sum_{n=1}^\infty n \frac{\lambda^n}{(n-1)!}  \\
+&= e^{-\lambda} \sum_{n=0}^\infty (n+1) \frac{\lambda^{n+1}}{n!}  \\
+&= e^{-\lambda} \lambda \sum_{n=0}^\infty n \frac{\lambda^{n}}{n!}  +e^{-\lambda}\lambda \sum_{n=0}^\infty\frac{\lambda^{n}}{n!}  \\
+&= \lambda^2  + \lambda.
+\end{split}
+\end{equation*}
+
+The Poisson \emph{process} $\{N(t)\}$ is a much more complicated
+object than the Poisson distributed random variable $N(t)$. The
+process contains it is an \emph{ uncountable set} of random variables,
+whereas $N(t)$ is just \emph{one} random variable that is Poisson
+distributed with parameter $\lambda t$. 
+\end{solution}
+\end{question}
+
+
+\begin{question}
+Show that the moment generating function of a Poisson distributed random variable $N$ is
+\begin{equation*}
+\phi(z)=  \E{z^N}  = e^{(z-1)\lambda},
+\end{equation*}
+and use this to compute $\V N$ and $\E N$. 
+\begin{hint}
+  How does   $\E N$ relate to the derivative of $\phi(z)$? 
+\end{hint}
+\begin{solution}
+With generating functions we get the result without too much
+effort. Suppose $N$ is a Poisson distributed random variable. Then 
+\begin{equation*}
+  \begin{split}
+\phi(z)
+&=  \E{z^N} \\
+&= \sum_{k=0}^\infty z^k \P{N=k} \\
+&= \sum_{k=0}^\infty z^k \frac{\lambda^k}{k!} e^{-\lambda}  \\
+&= e^{-\lambda} \sum_{k=0}^\infty  \frac{(z\lambda^k}{k!}  \\
+&= e^{-\lambda} e^{z \lambda} \\
+&= e^{(z-1)\lambda}.
+  \end{split}
+\end{equation*}
+Observe that $\phi'(z) = \E{N z^N}$, so that $\phi'(1)=\E{N}$; also
+$\phi''(z)=\E{N(N-1)z^{N-2}}$, hence $\phi''(1)=\E{N(N-1)}$. With this,
+  \begin{align*}
+    \E N &= \phi'(1)= \lambda,\\
+\E{N^2} &= \phi''(1) + \E{N} = \lambda^2 + \lambda,\\
+\V N &= \E{N^2}-(\E N)^2 = \lambda,\\
+  \end{align*}
+\end{solution}
+\end{question}
+
+\begin{question}
+Show that   the SCV of $N(t)$ is equal to $1/\lambda t$. 
+
+  \begin{solution}
+    \begin{equation*}
+SCV = \frac{\V{N(t)}}{(\E{N(t)})^2} = \frac{\lambda t}{(\lambda t)^2} = \frac1{(\lambda t)^2}.
+    \end{equation*}
+
+Clearly, as $t$
+increases, $1/\lambda t$ decreases.
+
+Here is a point of confusion for some students. The SCV of an
+exponentially distributed random variable is 1; the SCV of the related
+Poisson process $N_\lambda(t)$ is \emph{not} identically~1 for all
+$t$.
+  \end{solution}
+
+\end{question}
+
+
+To see that the exponential distribution can be derived from the Poisson distribution, observe that, if there are no failures in some interval $[0,t]$, then it
+must be that $N(t) = 0$ and the interarrival time $X_1=A_1-A_0=A_1$, as
+$A_0=0$, must be larger than $t$.  Therefore,
+\begin{equation*}
+ \P{X_1> t} = \P{N(t) = 0} = e^{-\lambda t} \frac{(\lambda t)^0}{0!}= e^{-\lambda t}.
+\end{equation*}
+
+The relations we discussed above are of paramount importance in the
+analysis of queueing process. We summarize this by a theorem.
+\begin{theorem}\label{thr:1}
+  A counting process $\{N(t)\}$ is a Poisson process with rate $\lambda$ if and only if
+  the inter-arrival times $\{X_i\}$, i.e., the times between consecutive
+  arrivals, are i.i.d. and $\P{ X_1\leq t} = 1 - e^{-\lambda t}$. In other words, $X_i\sim \exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t)$ 
+\end{theorem}
+
+
+
+\begin{question}
+  Assume a timer fires at times $0=T_0<T_1<T_2< \cdots$, such that
+  $T_{k}-T_{k-1}\sim\exp(\lambda)$. Define
+  $N(t) = \sum_{k=0}^\infty k \1{T_k \leq t < T_{k+1}}$, where $\1{}$
+  is the \recall{indicator function}, that is, $\1{A}=1$ if the event
+  $A$ is true, and $\1{A}=0$ if $A$ is not true. What is the
+  distribution of $N(t)$?
+\begin{solution}
+$N(t) \sim \text{P}(\lambda t)$. 
+\end{solution}
 \end{question}
 
 
@@ -250,18 +361,6 @@ We can also use the results of the previous parts to see that
 
 
 \begin{question}
-  Assume a timer fires at times $0=T_0<T_1<T_2< \cdots$, such that
-  $T_{k}-T_{k-1}\sim\exp(\lambda)$. Define
-  $N(t) = \sum_{k=0}^\infty k \1{T_k \leq t < T_{k+1}}$, where $\1{}$
-  is the \recall{indicator function}, that is, $\1{A}=1$ if the event
-  $A$ is true, and $\1{A}=0$ if $A$ is not true. What is the
-  distribution of $N(t)$?
-\begin{solution}
-$N(t) \sim \text{P}(\lambda t)$. 
-\end{solution}
-\end{question}
-
-\begin{question}
 Show that  for a Poisson process $N$, 
 \begin{equation*}
   \P{N(0,s] =1\given N(0,t]=1} = \frac st.
@@ -291,14 +390,8 @@ Use Bayes' law for conditional probability. Observe that
 \end{solution}
 \end{question}
 
-
-\begin{question} (Merged Poisson streams form a new Poisson process
-  with the sum of the rates.) Assume that
-  $N_a(t)\sim \text{P}(\lambda t)$ , $N_s(t) \sim \text{P}(\mu t)$ and
-  independent.  Show that
-  $N_a(t) + N_s(t) \sim \text{P}((\lambda + \mu)t)$. The figure below
-  provides a graphical representation of merging (also called
-  superposition) of streams.
+In the study of queueing networks, we will be concerned with  merging (also called
+  superposition) of Poisson streams, as illustrated by the figure below.
 
   \begin{center}
 \begin{tikzpicture}[scale=1]
@@ -319,13 +412,14 @@ Use Bayes' law for conditional probability. Observe that
 \draw[{Rays[]}-{Rays[]},dotted] (5,1.06)--(5,-0.06);
 \draw[{Rays[]}-{Rays[]},dotted] (6.1,1.06)--(6.1,-0.06);
 \draw[{Rays[]}-{Rays[]},dotted] (7.1,2.06)--(7.1,-0.06);
-
 \end{tikzpicture}
-    
-  \end{center}
+\end{center}
 
-
-
+\begin{question} 
+ Assuming that
+  $N_a(t)\sim \text{P}(\lambda t)$ , $N_s(t) \sim \text{P}(\mu t)$ and
+  independent, show that
+  $N_a(t) + N_s(t) \sim \text{P}((\lambda + \mu)t)$. 
   \begin{hint}
 Use a conditioning argument or use probability generating
     functions (i.e. $\E{z^X}=\sum_k z^k \P{X=k}$. In particular, for
@@ -379,7 +473,7 @@ Now   with the probability generating functions.
       Use this, and the similar expression for $N_s(t)$ and
       independence to see that
 \begin{equation*}
-M(z) = \E{z^{N(t)}} = \E{z^{N_a(t)}} \E{z^{N_s(t)}} = \exp((\lambda +\lambda)t (z-1)). 
+M(z) = \E{z^{N(t)}} = \E{z^{N_a(t)}} \E{z^{N_s(t)}} = \exp((\lambda +\mu)t (z-1)). 
 \end{equation*}
 Finally, since the  generating function uniquely characterizes
 the distribution, and since the above expression has the same form as
@@ -436,9 +530,7 @@ Suppose
     \end{solution}
 \end{question}
 
-
-\begin{question} (A Bernoulli-thinned Poisson process is still a
-  Poisson process) Consider a Poisson process. Split the process in
+Besides merging Poisson streams, we can also consider the concept of splitting a stream into substreams. Take a Poisson process and split it in
   the following way.  When a job arrives, throw a coin that lands
   heads with probability $p$ and tails with $q=1-p$. When the coin
   lands heads, call the job of type 1, otherwise of type 2.  Another
@@ -448,7 +540,7 @@ Suppose
   c.f. the figure below. The crosses at the upper line are passersby
   in the street. The crosses at the lower line are the customers that
   enter the shop. The outcome of the $k$th throw of a coin is
-  indicated by $B_k$. Since $B_1=1$ the first passerby turns into a
+  indicated by $B_k$. In the figure below,  $B_1=1$ so that the first passerby turns into a
   customer entering the shop; the second passerby does not enter as
   $B_2=0$, and so on. Like this, the stream of passerby's is thinned
   with Bernoulli distributed random variables.
@@ -486,7 +578,7 @@ node[below, fill=white] {$B_6=0$};
   \end{center}
 
  
-  The concept of thinning is particularly useful to analyze queueing
+The concept of thinning is particularly useful to analyze queueing
   networks. Suppose the departure stream of a machine is split into
   two substreams, e.g., a fraction $p$ of the jobs move on another
   machine and the rest ($1-p$) of the jobs leave the system. Then we
@@ -494,7 +586,8 @@ node[below, fill=white] {$B_6=0$};
   stream (with probability $p$) of the departures of the first
   machine.
 
-  Show that the Poisson process obtained by thinning the original
+\begin{question}
+Show that the Poisson process obtained by thinning the original
   process is $\sim P(\lambda t p)$ for any~$t$.
 
   \begin{hint}
@@ -569,85 +662,6 @@ $Y\sim P(\lambda p)$.
 \end{solution}
 \end{question}    
 
-\begin{question}
-  Show that $\E{N(t)} = \lambda t$ and $\V{N(t)} = \lambda t$. Why is
-  the SCV of $N(t)$ equal to $1/\lambda t$? Conclude that the relative
-  variability of $N(t)$ becomes smaller as $t$ becomes larger. Observe
-  that the SCV of a Poisson distributed random variable is not the
-  same as the SCV of an exponentially distributed random variable.
-
-  \begin{hint}
-  You might use generating functions here.
-  \end{hint}
-
-  \begin{solution} I expect that this is easy for you by now. The
-    exercise is just meant to help you recall this.
-
-    When a random variable $N$ is Poisson distributed with parameter
-    $\lambda$,
-    \begin{equation*}
-      \begin{split}
-      \E N 
-&= \sum_{n=0}^\infty n e^{-\lambda}\frac{\lambda^n}{n!}  \\
-&= \sum_{n=1}^\infty n e^{-\lambda}\frac{\lambda^n}{n!}, \text{ since the term with $n=0$ cannot contribute} \\
-&= e^{-\lambda} \lambda \sum_{n=1}^\infty \frac{\lambda^{n-1}}{(n-1)!} \\
-&= e^{-\lambda} \lambda \sum_{n=0}^\infty \frac{\lambda^{n}}{n!}, \text{ by a change of variable}\\
-&= e^{-\lambda} \lambda e^{\lambda} \\
-&= \lambda.
-      \end{split}
-    \end{equation*}
-Similarly, using that $\V N = \E{N^2} - (\E N)^2$, 
-    \begin{equation*}
-      \begin{split}
-      \E{N^2}
-&= \sum_{n=0}^\infty n^2 e^{-\lambda}\frac{\lambda^n}{n!}  \\
-&= e^{-\lambda} \sum_{n=1}^\infty n \frac{\lambda^n}{(n-1)!}  \\
-&= e^{-\lambda} \sum_{n=0}^\infty (n+1) \frac{\lambda^{n+1}}{n!}  \\
-&= e^{-\lambda} \lambda \sum_{n=0}^\infty n \frac{\lambda^{n}}{n!}  +e^{-\lambda}\lambda \sum_{n=0}^\infty\frac{\lambda^{n}}{n!}  \\
-&= \lambda^2  + \lambda.
-\end{split}
-\end{equation*}
-
-The Poisson \emph{process} $\{N(t)\}$ is a much more complicated
-object than the Poisson distributed random variable $N(t)$. The
-process contains it is an \emph{ uncountable set} of random variables,
-whereas $N(t)$ is just \emph{one} random variable. However, for a
-fixed $t$ the element $N(t)$ is a random variable that is Poisson
-distributed with parameter $\lambda t$. Using the above, the answer of
-the question follows immediately.
-
-
-With generating functions we get the result without too much
-effort. Suppose $N$ is a Poisson distributed random variable. Then 
-\begin{equation*}
-  \begin{split}
-\phi(z)
-&=  \E{z^N} \\
-&= \sum_{k=0}^\infty z^k \P{N=k} \\
-&= \sum_{k=0}^\infty z^k \frac{\lambda^k}{k!} e^{-\lambda}  \\
-&= e^{-\lambda} \sum_{k=0}^\infty  \frac{(z\lambda^k}{k!}  \\
-&= e^{-\lambda} e^{z \lambda} \\
-&= e^{(z-1)\lambda}.
-  \end{split}
-\end{equation*}
-Observe that $\phi'(z) = \E{N z^N}$, so that $\phi'(1)=\E{N}$; also
-$\phi''(z)=\E{N(N-1)z^{N-2}}$, hence $\phi''(1)=\E{N(N-1)}$. With this,
-  \begin{align*}
-    \E N &= \phi'(1)= \lambda,\\
-\E{N^2} &= \phi''(1) + \E{N} = \lambda^2 + \lambda,\\
-\V N &= \E{N^2}-(\E N)^2 = \lambda,\\
-SCV &= \frac{\V{N(t)}}{(\E{N(t)})^2} = \frac{\lambda t}{(\lambda t)^2} = \frac1{(\lambda t)^2}.
-  \end{align*}
-Clearly, as $t$
-increases, $1/\lambda t$ decreases.
-
-Here is a point of confusion for some students. The SCV of an
-exponentially distributed random variable is 1; the SCV of the related
-Poisson process $N_\lambda(t)$ is \emph{not} identically~1 for all
-$t$.
-
-\end{solution}
-\end{question}
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}

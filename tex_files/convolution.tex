@@ -2,6 +2,12 @@
 \section{The Convolution Algorithm}
 \label{sec:convolution}
 
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 In view of the later algorithm, it is more consistent to write
 $p_i(k|N)=\pi(n_i=k)$ for the marginal probability that station $i$
 contains $k$ jobs, under the assumption that the network contains $N$
@@ -213,7 +219,9 @@ service time.
 
 \begin{question}
 Zijm.Ex.3.1.10. Assume that the visit ratios are 1.
-\hint{ Compare Zijm.Question 3.1.5.}
+\begin{hint}
+ Compare Zijm.Question 3.1.5.
+\end{hint}
 \begin{solution}
   $G(2,2)$ means that we have $2$ stations and $2$ jobs. Lets start
   from Zijm.Eq.3.6 but now applied to node $M=2$:
@@ -424,7 +432,14 @@ print(G(2, 2))
 \end{solution}
 \end{question}
 
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "book"
-%%% End:
+
+
+
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
+\clearpage

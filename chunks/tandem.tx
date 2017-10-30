@@ -2,6 +2,13 @@
 \section{Tandem queues}
 \label{sec:tandem-queues}
 
+
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 \paragraph{Example}
 
 Consider two stations in tandem. The service process at both stations
@@ -192,7 +199,9 @@ downstream, reducing the waiting time all along the chain.
   \item In words, what would be the impact of allowing four cabs to wait at a time?
   \end{enumerate}
   
-\hint{ Try to adapt the ideas behind Figure 2.2 of Zijm to this case.}
+  \begin{hint}
+Try to adapt the ideas behind Figure 2.2 of Zijm to this case.
+  \end{hint}
 
     \begin{solution}
       \begin{enumerate}
@@ -290,15 +299,24 @@ The expected number of cabs waiting must be
 and the expected number of parties waiting must be $\sum_{j=1}^\infty j p_{j,0}$
 
 
+\begin{lstlisting}
+labda = 12. # per hour
+mu = 15. # per hour
+rho = labda/mu
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/tandem_1.tex}
-
+def p(i,j):
+    q  = 3 - j + i
+    return rho**q*(1.-rho)
+\end{lstlisting}
 
 Expected number of  cabs waiting:
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/tandem_2.tex}
-
+\begin{lstlisting}
+Lc = sum(j*p(0,j) for j in range(0,4)) # recall this sums up to 4, not including 4
+Lc
+\end{lstlisting}\begin{lstlisting}
+1.0479999999999998
+\end{lstlisting}
 
 
 To compute the expected number of parties waiting we formally have to
@@ -307,24 +325,33 @@ the summation at an $i$ such that $\rho^i \ll 1$, i.e.,
 negligble.  Truncating at 30 seems reasonable enough:
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/tandem_3.tex}
-
+\begin{lstlisting}
+trunc = 30
+rho**trunc
+\end{lstlisting}\begin{lstlisting}
+0.0012379400392853823
+\end{lstlisting}
 
 Hm. At second thought this is not yet really small. 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/tandem_4.tex}
-
+\begin{lstlisting}
+trunc = 50
+rho**trunc
+\end{lstlisting}\begin{lstlisting}
+1.4272476927059638e-05
+\end{lstlisting}
 
 
 This is better. Now go for what we want to know:
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/tandem_5.tex}
-
+\begin{lstlisting}
+Lp = sum(i*p(i,0) for i in range(trunc))
+Lp
+\end{lstlisting}\begin{lstlisting}
+2.0476053945579213
+\end{lstlisting}
 
 \item 
 This is tricky. I first, naively, computed $W_q = L_c/\mu$. This
@@ -337,28 +364,46 @@ $\mu$. Similarly (and more formally by the mapping developed in
 part a), for our cab system we also need to use $\lambda$.
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/tandem_6.tex}
-
+\begin{lstlisting}
+Wq = Lc/labda
+Wq
+\end{lstlisting}\begin{lstlisting}
+0.08733333333333332
+\end{lstlisting}
 
 Thinking in templates is often useful, but makes one sloppy\ldots
 
 What would be the impact of allowing 4 cabs? Funny question, and with the above, trivial to answer.
 
 
+\begin{lstlisting}
+def p(i,j):
+    q  = 4 - j + i
+    return rho**q*(1.-rho)
+\end{lstlisting}
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/tandem_7.tex}
 
-
-
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/tandem_8.tex}
-
+\begin{lstlisting}
+Lc = sum(j*p(0,j) for j in range(0,4))
+Lc
+\end{lstlisting}\begin{lstlisting}
+0.8383999999999999
+\end{lstlisting}
+\begin{lstlisting}
+Lp = sum(i*p(i,0) for i in range(trunc))
+Lp
+\end{lstlisting}\begin{lstlisting}
+1.638084315646337
+\end{lstlisting}
   \end{enumerate}
     \end{solution}
 \end{question}
 
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../booktest"
-%%% End:
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
+\clearpage

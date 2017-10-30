@@ -2,6 +2,12 @@
 \section{Deterministic Queueing Networks}
 \label{sec:determ-queu-netw}
 
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 The simplest possible single-server queueing system is such that job
 interarrival times are deterministic and that all service times are
 equal. In such cases it is easy to determine the maximal throughput,
@@ -201,7 +207,9 @@ queuei/.pic={
   with processing times $(2, 3, 2)$ hours.  Suppose we modify this
   network by adding one extra machine to station 2, with processing
   time $t=3$ hours.  What are $W_0$, $r_b$ and $T_0$?
-\hint{Is the new machine placed in parallel or in series?}
+  \begin{hint}
+Is the new machine placed in parallel or in series?
+  \end{hint}
   \begin{solution}
     Realize that machines at a station are in parallel, not in
     series. Thus, when we add capacity to station 2, we don't add an
@@ -233,7 +241,9 @@ queuei/.pic={
   network by adding one extra machine to station 2 with
   processing time $t=4$ hours.  What are $W_0$, $r_b$ and $T_0$?
 
-\hint{Check your reasoning very carefully here. It is easy to do it wrong.}
+  \begin{hint}
+Check your reasoning very carefully here. It is easy to do it wrong.
+  \end{hint}
 \begin{solution}
 Now, 
 \begin{equation*}
@@ -480,7 +490,12 @@ W_0 = r_b T_0 = \frac 12 \frac{23}5 = \frac{23}{10}.
 
 \end{question}
 
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../booktest"
-%%% End:
+
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
+\clearpage

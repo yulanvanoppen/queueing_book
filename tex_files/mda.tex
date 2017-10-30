@@ -2,6 +2,12 @@
 \section{MDA Algorithm}
 \label{sec:mda}
 
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 A relatively easy way to obtain insight into the procedure is by
 comparing this case to the single-server single station case.  Recall that, for the latter case, 
 \begin{equation*}
@@ -47,9 +53,11 @@ Up- and down-crossing of level $k$ gives that
 
 \begin{question}
   Apply the MDA algorithm to the network discussed in Question~\ref{ex:mva_numerical}, but now assume that station 1 has 2 servers. 
-  \hint{ Just follow the description of the algorithm of the book of
+  \begin{hint}
+ Just follow the description of the algorithm of the book of
     Zijm. I expect that you have read the solution of
-    Question~\ref{ex:mva_numerical}.}
+    Question~\ref{ex:mva_numerical}.
+  \end{hint}
   \begin{solution}
     Take $n=1$.
     \begin{align*}
@@ -353,3 +361,13 @@ plt.close()
 \end{question}
 
 
+
+
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
+\clearpage

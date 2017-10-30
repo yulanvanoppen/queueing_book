@@ -2,6 +2,12 @@
 \label{sec:jackson-networks}
 
 
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 The remark above Zijm.Eq.2.11 is not entirely correct. Remove the
 sentence: `These visit ratios satisfy \ldots up to a multiplicative
 constant'.
@@ -62,11 +68,13 @@ We chop up the problem in small steps.
 
   \end{enumerate}
 
-  \hint{ The final result is
+  \begin{hint}
+The final result is
     $f_D(t) = f_{X+S}(t) \P{I} + f_S \P B = (1-\rho) f_{X+S}(t) +
     \rho \mu e^{-\mu t}$.
     Now use the above to simplify and see that
-    $f_D(t) = \lambda e^{-\lambda t}$.}
+    $f_D(t) = \lambda e^{-\lambda t}$.
+  \end{hint}
 
     \begin{solution}
       \begin{enumerate}
@@ -139,7 +147,9 @@ We chop up the problem in small steps.
 \begin{question}(Linear algebra refresher) Can you find an example to
   show for two matrices $A$ and $B$ that $AB\neq BA$, hence
   $x A \neq A x$.
-\hint{
+
+  \begin{hint}
+    
     Let 
     \begin{equation*}
 A =
@@ -153,7 +163,8 @@ A =
 1&1
     \end{pmatrix}
     \end{equation*}.
-}
+  \end{hint}
+
   \begin{solution}
     \begin{equation*}
       AB =  
@@ -523,3 +534,13 @@ Zijm.Ex.2.2.8
     TBD.
   \end{solution}
 \end{question}
+
+
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
+\clearpage

@@ -2,6 +2,12 @@
 \section{The Convolution Algorithm}
 \label{sec:convolution}
 
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 In view of the later algorithm, it is more consistent to write
 $p_i(k|N)=\pi(n_i=k)$ for the marginal probability that station $i$
 contains $k$ jobs, under the assumption that the network contains $N$
@@ -213,7 +219,9 @@ service time.
 
 \begin{question}
 Zijm.Ex.3.1.10. Assume that the visit ratios are 1.
-\hint{ Compare Zijm.Question 3.1.5.}
+\begin{hint}
+ Compare Zijm.Question 3.1.5.
+\end{hint}
 \begin{solution}
   $G(2,2)$ means that we have $2$ stations and $2$ jobs. Lets start
   from Zijm.Eq.3.6 but now applied to node $M=2$:
@@ -268,9 +276,11 @@ Zijm.Ex.3.1.11
 We first need a few libraries. 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/convolution_1.tex}
-
+\begin{lstlisting}
+from functools import lru_cache
+import numpy as np
+from numpy.linalg import eig
+\end{lstlisting}
 
 Since the convolution algorithm is recursive I use caching to store
 the results of intermediate computations. The storage is taken care of
@@ -284,9 +294,16 @@ exponential to linear complexity..
 The data is this:
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/convolution_2.tex}
-
+\begin{lstlisting}
+mu = np.array([2, 1, 3])
+c = np.array([1, 1, 1]) # single server stations
+P = np.matrix([
+    [0, 1, 0],
+    [0, 0, 1],
+    [1, 0, 0]
+]
+)
+\end{lstlisting}
 
 I now compute the visit ratios $V$. This vector is the left
 eigenvector of the routing matrix~$P$ with eigenvalue $1$, i.e.,
@@ -301,28 +318,33 @@ eigenvalue 1 is the largest of all eigenvalues.
 Compute the eigenvalues and eigenvectors:
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/convolution_3.tex}
-
+\begin{lstlisting}
+v, w = eig(P.T)
+\end{lstlisting}
 
 Get the index of the  eigenvalue with the largest real part, i.e., the  eigenvalue 1:
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/convolution_4.tex}
-
+\begin{lstlisting}
+x = v.real.argmax()
+\end{lstlisting}
 
 V is the eigenvector with eigenvalue 1; take the real part of the entries of $V$:
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/convolution_5.tex}
-
+\begin{lstlisting}
+V = w[:,x].real
+\end{lstlisting}
 
 Normalize so that $V_0 = 1$. 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/convolution_6.tex}
-
+\begin{lstlisting}
+V = V / V[0] 
+V
+\end{lstlisting}\begin{lstlisting}
+matrix([[ 1.],
+        [ 1.],
+        [ 1.]])
+\end{lstlisting}
 This is what we expected.
 
 It follows from Zijm.Eq.3.3 that 
@@ -335,18 +357,28 @@ It follows from Zijm.Eq.3.3 that
 \end{equation*}
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/convolution_7.tex}
-
+\begin{lstlisting}
+@lru_cache(maxsize=None)
+def f(i, n_i):
+    if n_i == 0:
+        return 1
+    return V[i] / mu[i] / min(n_i, c[i]) * f(i, n_i - 1)
+\end{lstlisting}
 
 Note that the cache stores the results of intermediate computations.
 
 Finally the convolution algorithm.
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/convolution_8.tex}
-
+\begin{lstlisting}
+@lru_cache(maxsize=None) 
+def G(m, n):
+    if n == 0:
+        return 1
+    if m == 0:
+        return 1 / mu[0]**n
+    return sum(f(m, k) * G(m - 1, n - k) for k in range(n + 1))
+\end{lstlisting}
 
 Observe how simple this implementation is compared to the
 specification in the text. I also find it much easier to read. 
@@ -354,17 +386,27 @@ specification in the text. I also find it much easier to read.
 The result of the previous example must be 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/convolution_9.tex}
-
+\begin{lstlisting}
+G(2, 2)
+\end{lstlisting}\begin{lstlisting}
+matrix([[ 2.36111111]])
+\end{lstlisting}
 
 Testing code is crucial, just as crucial as testing formulas. The
 analytic result of the previous question becomes in code:
 
 
+\begin{lstlisting}
+def test():
+    res = 1 / mu[0]**2 + 1 / mu[1]**2 + 1 / mu[2]**2
+    res += 1 / mu[0] * 1 / mu[1] + 1 / mu[0] * \
+        1 / mu[2] + 1 / mu[1] * 1 / mu[2]
+    print(res)
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/convolution_10.tex}
-
+test()
+\end{lstlisting}\begin{lstlisting}
+2.36111111111
+\end{lstlisting}
 
 The  outcomes of both procedures are the same. 
 
@@ -390,14 +432,35 @@ Zijm.Ex.3.1.12
 We can try the recursion of Example 3.3.
 
 
+\begin{lstlisting}
+mu = np.array([2, 1, 3])
+V = np.array([1, 1, 1])
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/convolution_11.tex}
 
+@lru_cache(maxsize=None)
+def G(M, N):
+    if N == 0:
+        return 1
+    if M == 0:
+        return 1 / mu[M]**N
+    return G(M - 1, N) + G(M, N - 1) * V[M] / mu[M]
+
+print(G(2, 2))
+\end{lstlisting}\begin{lstlisting}
+2.36111111111
+\end{lstlisting}
 
 \end{solution}
 \end{question}
 
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "book"
-%%% End:
+
+
+
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
+\clearpage

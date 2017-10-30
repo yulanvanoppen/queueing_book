@@ -40,7 +40,11 @@ filenames = [
     #"mg1distributionqueuelength",
     #"gg1",
     #"serviceInterruptions",
-    "process_batches",
+    #"process_batches",
+    #"tandem",
+    #"convolution",
+    #"mva",
+    "mda",
         ]
 
 

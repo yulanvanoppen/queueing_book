@@ -2,6 +2,12 @@
 \section{MVA Algorithm}
 \label{sec:mva}
 
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 \begin{question}[use=false]
   Assume that there are $M$ stations, each with one server. The
   service time at station $i$, $i=0,\ldots,M$ is deterministic and
@@ -27,7 +33,9 @@
   \end{equation*}
 Apply the MVA algorith to this case.
 
-\hint{Start with $n=1$, then consider $n=2$ and so on.}
+\begin{hint}
+Start with $n=1$, then consider $n=2$ and so on.
+\end{hint}
 
 \begin{solution}
   From $V P = V$ we conclude that $V_1=2V_0$.  Take $n=1$.
@@ -85,9 +93,34 @@ Zijm.Ex.3.1.14
  Start with computing the visit ratios.
 
 
+\begin{lstlisting}
+from functools import lru_cache
+import numpy as np
+from numpy.linalg import eig
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/mva_1.tex}
+mu = np.array([2, 2.5, 3, 3, 3])
+c = np.array([1, 1, 1, 1, 1])  # single server stations
+P = np.matrix([
+    [0, 1, 0, 0, 0],
+    [0, 0, 1, 0, 0],
+    [0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0],
+]
+)
 
+v, w = eig(P.T)
+x = v.real.argmax()
+V = w[:, x].real
+V = V / V[0]
+print(V)
+\end{lstlisting}\begin{lstlisting}
+[[ 1.]
+ [ 1.]
+ [ 1.]
+ [ 1.]
+ [ 1.]]
+\end{lstlisting}
 The visit ratios are according to expectation.
 
 
@@ -98,18 +131,73 @@ think about in what exact sequence each of the functions needs to be
 called. The memoization takes care of all these problems..
 
 
+\begin{lstlisting}
+@lru_cache(maxsize=None)
+def EL(j, n):
+    if n <= 0:
+        return 0
+    else:
+        return TH(j, n) * EW(j, n)
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/mva_2.tex}
 
+@lru_cache(maxsize=None)
+def EW(j, n):
+    return (EL(j, n - 1) + 1) / mu[j]
+
+
+@lru_cache(maxsize=None)
+def TH(j, n):
+    if j == 0:
+        return n / sum(V[j] * EW(j, n) for j in range(len(mu)))
+    else:
+        return V[j] * TH(0, n)
+\end{lstlisting}
 This is all!
 
 
 Now I print the expected jobs at the stations. 
 
 
-
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/mva_3.tex}
-
+\begin{lstlisting}
+print("  n   EL0   EL1   EL2  EL3   EL4   TH0")
+for n in range(1,30):
+    res = "{:3d}".format(n)
+    for j in range(len(mu)):
+        res += "{:6.2f}".format(float(EL(j, n)))
+    res += "{:6.2f}".format(float(TH(0,n)))
+    print(res)
+\end{lstlisting}\begin{lstlisting}
+n   EL0   EL1   EL2  EL3   EL4   TH0
+  1  0.26  0.21  0.18  0.18  0.18  0.53
+  2  0.55  0.42  0.34  0.34  0.34  0.87
+  3  0.87  0.64  0.50  0.50  0.50  1.12
+  4  1.21  0.85  0.65  0.65  0.65  1.30
+  5  1.58  1.06  0.79  0.79  0.79  1.43
+  6  1.99  1.27  0.92  0.92  0.92  1.54
+  7  2.42  1.47  1.04  1.04  1.04  1.62
+  8  2.89  1.67  1.15  1.15  1.15  1.69
+  9  3.39  1.86  1.25  1.25  1.25  1.74
+ 10  3.93  2.05  1.34  1.34  1.34  1.79
+ 11  4.50  2.23  1.42  1.42  1.42  1.83
+ 12  5.10  2.40  1.50  1.50  1.50  1.86
+ 13  5.74  2.56  1.57  1.57  1.57  1.88
+ 14  6.41  2.70  1.63  1.63  1.63  1.90
+ 15  7.11  2.84  1.68  1.68  1.68  1.92
+ 16  7.84  2.97  1.73  1.73  1.73  1.93
+ 17  8.60  3.09  1.77  1.77  1.77  1.95
+ 18  9.39  3.20  1.80  1.80  1.80  1.96
+ 19 10.20  3.30  1.84  1.84  1.84  1.96
+ 20 11.03  3.39  1.86  1.86  1.86  1.97
+ 21 11.88  3.47  1.88  1.88  1.88  1.98
+ 22 12.75  3.54  1.90  1.90  1.90  1.98
+ 23 13.64  3.60  1.92  1.92  1.92  1.98
+ 24 14.54  3.66  1.93  1.93  1.93  1.99
+ 25 15.46  3.70  1.95  1.95  1.95  1.99
+ 26 16.39  3.75  1.96  1.96  1.96  1.99
+ 27 17.33  3.78  1.96  1.96  1.96  1.99
+ 28 18.27  3.82  1.97  1.97  1.97  1.99
+ 29 19.23  3.84  1.98  1.98  1.98  2.00
+\end{lstlisting}
 
 This is interesting. Using the insights of the previous question,
 approximation stations 3, 4 and 5 as $M/M/1$ queues, we have according
@@ -130,3 +218,15 @@ our intuition!
     See the answer of the previous question.
   \end{solution}
 \end{question}
+
+
+
+
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
+\clearpage
