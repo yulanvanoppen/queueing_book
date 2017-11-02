@@ -4,7 +4,6 @@ from pweave import Pweb, PwebTexPweaveFormatter
 
 
 filenames = [
-    "expdistribution",
     "constructiondiscretetime",
     "constructioncontinuoustime",
     "random_walk",
@@ -33,6 +32,11 @@ filenames = [
 # to select some files temporarily
 
 filenames = [
+    #"constructiondiscretetime",
+    #"constructioncontinuoustime",
+    #"random_walk",
+    #"ratestability",
+    "empericalperfmeasures",
     #"little",
     #"usefulidentities",
     #"mg1",
@@ -44,7 +48,7 @@ filenames = [
     #"tandem",
     #"convolution",
     #"mva",
-    "mda",
+    #"mda",
         ]
 
 

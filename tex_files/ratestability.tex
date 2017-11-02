@@ -1,6 +1,12 @@
 \section{Rate Stability and Utilization}
 \label{sec:rate-stability}
 
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 In the analysis of any queueing process the first step should be to
 check the relations between the arrival, service and departure
 rates. The concept of rate is crucial because it captures our
@@ -32,347 +38,16 @@ we can construct $\{A_k\}$ and $\{A(t)\}$ as described in
 Section~\ref{sec:constr-gg1-queu}; the strong law of large numbers
 guarantees that the above limit exists.
 
-Observe that at time $t=A_n$, precisely $n$ arrivals occurred. Thus,
-by applying the definition of $A(t)$ at the epochs $A_n$, we see that
-$A(A_n) = n$. Thus,
-\begin{equation*}
-  \frac{1}n\sum_{k=1}^n X_k = \frac{A_n}n = \frac{A_n}{A(A_n)}. 
-\end{equation*}
-But since $A_n\to\infty$ if $n\to\infty$, it follows from
-Eq.~(\ref{eq:3}) that the average interarrival time between two
-consecutive jobs is
-\begin{equation}\label{eq:54}
-  \E X = \lim_{n\to\infty}  \frac{1}n\sum_{k=1}^n X_k = \lim_{n\to \infty} \frac{A_n}{A(A_n)} = \lim_{t\to\infty} \frac t{A(t)} = \frac 1 \lambda,
-\end{equation}
-where we take $t=A_n$ in the limit for $t\to\infty$.  In words, the
-above states that the arrival rate $\lambda$ is the inverse of the
-expected interarrival time.
-
-
-The development of the departure times $\{D_k\}$ is entirely analogous
-to that of the arrival times; we leave it to the reader to provide the
-details. As a result we can define the \recall{departure rate} as
-\begin{equation}\label{eq:28}
-  \lim_{t\to\infty} \frac{D(t)}t = \gamma
-\end{equation}
-
-Assume now that there is a single server. Let $S_k$ be the required
-service time of the $k$th job to be served, and define
-\begin{equation*}
-U_n = \sum_{k=1}^n S_k
-\end{equation*}
-as the total service time required by the first $n$ jobs. With this,
-let 
-\begin{equation*}
-  U(t) = \sup\{n: U_n \leq t\}.
-\end{equation*}
-and  define the \recall{service } or \emph{processing rate} as
-\begin{equation*}
-  \mu = \lim_{t\to\infty} \frac{U(t)}t.
-\end{equation*}
-In the same way as we derived that $\E X= 1/\lambda$, we obtain for
-the expected (or average) amount of service required by an individual
-job
-\begin{equation*}
-  \E S = \lim_{n\to\infty} \frac 1 n \sum_{k=1}^n S_k = \lim_{n\to\infty} \frac{U_n}{n} = \lim_{n\to\infty} \frac{U_n}{U(U_n)} = \lim_{t\to\infty} \frac t{U(t)} = \frac 1 \mu.
-\end{equation*}
-
-Now observe that, if the system is empty at time $0$, it must be that
-at any time the number of departures must be smaller than the number
-of arrivals, i.e., $D(t) \leq A(t)$ for all $t$. Therefore,
-\begin{equation}\label{eq:26}
-\gamma :=   \lim_t \frac{D(t)}t \leq \lim_t \frac{A(t)}t = \lambda.
-\end{equation}
-We call a system \recall{(rate) stable} if
-\begin{equation*}
-  \lambda = \gamma,
-\end{equation*}
-in other words, the system is stable if, on the long run, jobs leave
-the system just as fast as they arrive. Of course, if
-$\lambda > \gamma$, the system length process $L(t) \to \infty$ as
-$t\to \infty$.
-
-It is also evident that jobs cannot depart faster than they can be
-served, hence, $D(t) \leq U(t)$ for all~$t$. Combining this with the
-fact that $\gamma \leq \lambda$, we get
-\begin{equation*}
-  \gamma \leq \min\{\lambda, \mu\}.
-\end{equation*}
-When $\mu \geq \lambda$ the above inequality reduces to
-$\gamma = \lambda$ for rate-stable systems. (It is interesting to
-prove this.) As it turns out, when $\mu = \lambda$ and the variance of
-the service times $\V{S} > 0$ or $\V{X} >0$ then $\lim_t L(t)/t$
-does not necessarily exist. For this reason we henceforth require that
-$\mu > \lambda$.
-
-The concept of \recall{load} or \emph{utilization}, denoted by the
-symbol $\rho$, is fundamental. One way to define it is as the limiting
-fraction of time the server is busy, i.e.,
-\begin{equation*}
-  \rho = \lim_{t\to\infty} \frac 1 t \int_0^t \1{L(s)>0} \d s.
-\end{equation*}
-Interestingly, we can express this in terms of the arrival rate
-$\lambda$ and service rate $\mu$. Observe that
-\begin{equation*}
-  \sum_{k=1}^{A(t)} S_k \geq \int_0^t \1{L(s)>0} \d s \geq   \sum_{k=1}^{D(t)} S_k,
-\end{equation*}
-since $t$ can lie half way a service interval and $A(t) \geq D(t)$. As
-$A(t)\to \infty$ as $t\to\infty$,
-\begin{equation*}
-  \lim_{t\to\infty} \frac 1 t\sum_{k=1}^{A(t)} S_k = 
-  \lim_{t\to\infty} \frac{A(t)}t \frac{1}{A(t)} \sum_{k=1}^{A(t)} S_k = 
-  \lim_{t\to\infty} \frac{A(t)}t \cdot \lim_{t\to\infty}\frac{1}{A(t)} \sum_{k=1}^{A(t)} S_k = \lambda \E S.
-\end{equation*}
-Applying similar limits to the other inequality gives
-\begin{equation*}
-\lambda \E S \geq \rho \geq \gamma \E S.
-\end{equation*}
-Hence, if $\gamma=\lambda$, $\rho = \lambda \E S$.  
-
-From the identies $\lambda^{-1} = \E X$ and $\mu^{-1} = \E S$, we get
-a further set of relations:
-\begin{equation*}
-  \rho = \lambda \E S = \frac{\lambda}{\mu} = \frac{\E S}{\E X}.
-\end{equation*}
-Thus, the load has also the interpretation as the rate at which jobs
-arrive multiplied by the average amount of work per job.  Finally,
-recall that for a system to be rate-stable, it is necessary that
-$\mu> \lambda$, implying in turn that $\rho < 1$. The relation
-$\rho=\E S/ \E X < 1$ then tells us that the average time it takes to
-serve a job must be less than the average time between two consecutive
-arrivals, i.e., $\E S < \E X$.
-
-\subsection*{Exercises}
-\label{sec:exercises}
-
-\Opensolutionfile{hint}
-\Opensolutionfile{ans}
-
-
-\begin{question}
-  Define the departure time $D_{k}$ of the $k$th job in terms of
-  $\{D(t)\}$. 
-  \begin{hint}
-    
-\hint{Use the analogy with Eq.~\eqref{eq:27}.}
-  \end{hint}
-\begin{solution}
-  \begin{equation*}
- D_{k} = \inf\{t; D(t) \geq k\}.
-  \end{equation*}
-\end{solution}
-\end{question}
-
-\begin{question} 
-Define the random variables $\{\tilde X_k,k=1,\ldots\}$ as
-  \begin{equation*}
-    \tilde X_k = S_{k-1}-X_k.
-  \end{equation*}
-  For stability of the queueing process it is essential that
-  $\tilde X_k$ has negative expectation, i.e.,
-  $\E{\tilde X_k} = \E{S_{k-1}-X_k} < 0$.  What is the conceptual
-  meaning of this inequality?
-  \begin{solution}
- That the average time customers spend in service is smaller
-      than the average time between the arrival of two subsequent
-      jobs. 
-  \end{solution}
-\end{question}
-
-\begin{question} 
-Define $\tilde X_k = S_{k-1}-X_k$.
- Show that $\E{\tilde X_k} <0$ implies that $\lambda<\mu$. 
- \begin{hint}
-\hint{Remember that $\{X_k\}$ and $\{S_k\}$ are sequences of i.i.d. random variables. What are the implications for the expectations?}
-   
- \end{hint}
-  \begin{solution}
-  $0> \E{\tilde X_k} = \E {S_{k-1}-X_k} =  \E{ S_{k-1}}- \E {X_k} = \E S - \E X$, where we use the fact that the $\{S_k\}$ and $\{X_k\}$ are i.i.d. sequences. Hence, 
-  \begin{equation*}
-    \E X > \E S \iff \frac 1{\E S} > \frac1{\E X} \iff \mu > \lambda.
-  \end{equation*}
-
-  \end{solution}
-\end{question}
-
-
-\begin{question}
-  Show that $\E{S}/\E{X}$ is the fraction of time the server is busy.
-
-  \begin{hint}
-  \hint{ Let $T_1>A_1$ be the first time after the arrival of job 1
-    that arrives at an empty system. (Observe that job 1 also arrives
-    at an empty system.)  Suppose, for ease of writing, that this job
-    is the $n+1$th job, so that up to time $T_1$ the number of
-    arrivals is $n$. Since the first job arrived at time $A_1=X_1$,
-    the first $n$ jobs arrived during $[X_1, T_1)$. The total amount
-    of service that arrived during this period is $\sum_{i=1}^n S_i$.
-    What is the fraction of time the server has been busy in this
-    cycle?}
-    
-  \end{hint}
-
-
-  \begin{solution}
- The
-    fraction of time that the server has been busy during $[X_1, T_1)$
-    is
-        \begin{equation*}
-\frac{\sum_{i=1}^n S_i}{T_1-X_1} 
-=          \frac{\sum_{i=1}^n S_i}{\sum_{i=1}^{n+1}X_i -X_1} 
-=          \frac{\sum_{i=1}^n S_i}{\sum_{i=2}^{n+1}X_i} 
-        \end{equation*}
-        Now use the assumption that the $\{X_i\}$ and $\{S_i\}$ are
-        sequences of i.i.d. random variables distributed as the
-        generic random variables $X$ and $S$, respectively. Then by
-        taking expectations the above becomes
-        \begin{equation*}
-\frac{\E{\sum_{i=1}^n S_i}}{\E{\sum_{i=2}^{n+1}X_i}} 
-= \frac{n \E S }{n \E X} =
- \frac{ \E S }{ \E X}.
-        \end{equation*}
-
-        These busy cycles occur over and over again. Thus, the
-        long-run average fraction of time the server is busy must also
-        be $\E S/\E X$. (For the die-hards, there is a subtle point
-        here: the arrival epochs of the $G/G/1$ queue are not real
-        renewal moments, hence the epochs at which the busy times
-        start also do not form a sequence of renewal times. But then
-        it is not true, in general, that the busy times $\{B_i\}$ have
-        the same distribution, neither do the idles times
-        $\{I_n\}$. Showing that in the limit all is OK requires a
-        substantial amount of mathematics. The above claim is still
-        true however.)
-  \end{solution}
-\end{question}
-
-\begin{question}
- Show that $\E{X - S}/\E{X}$ is the fraction of time
-  the server is idle.
-  \begin{solution}
-    Since the fraction of idle time is $1$ minus the fraction of busy
-    time, it follows that $1-\E S/ \E X = (\E X - \E S)/\E X$ is the
-    idle time fraction.
-  \end{solution}
-\end{question}
-
-\begin{question}\label{ex:11}
-  If $\E{B}$ is the expected busy time and $\E{I}$ is the expected idle
-  time, show that 
-\begin{equation*}
-  \E{B} = \frac{\rho }{1-\rho} \E{I}. 
-\end{equation*}
- is the fraction of time the  server is busy.
-\begin{solution}
-  Consider a busy cycle, that is, a cycle that starts with the first
-  job that sees an empty system at upon arrival up to the time another
-  job sees an empty system upon arrival. In such one cycle, the server
-  is busy for an expected duration $\E{B}$. The total expected length
-  of the cycle is $\E{B} + \E{I}$, since after the last job of the cycle
-  left, the expected time until the next job is $\E{I}$.
-
-  Since $\rho$ is utilization of the server,
-  \begin{equation*}
-\rho = \frac{\E B}{\E B + \E I}.
-  \end{equation*}
-  With a bit of algebra the result follows.
-\end{solution}
-\end{question}
-
-\begin{question}
-  Consider a queueing system with $c$ identical servers (identical in
-  the sense that each server has the same production rate $\mu$). What would be a reasonable stability criterion for this system? 
-  \begin{hint}
-\hint{What is the rate in, and what is the service capacity?}
-  \end{hint}
-  \begin{solution}
-    The criterion is that $c$ must be such that $\lambda <
-    c\mu$.
-    (Thus, we interpret the number of servers as a \emph{control},
-    i.e., a `thing' we can change, while we assume that $\lambda$ and
-    $\mu$ cannot be easily changed.) To see this, we can take two
-  different points of view.  Imagine that the $c$ servers are replaced
-  by one server that works $c$ times as fast. The service capacity of
-  these two systems (i.e., the system with $c$ servers and the system
-  with one fast server) is the same, i.e., $c\mu$, where $\mu$ is the
-  rate of one server. For the system with the fast server the load is
-  defined as $\rho =\lambda/c\mu$, and for stability we require
-  $\rho<1$.  Another way to see it is to assume that the stream of
-  jobs is split into $c$ smaller streams, each with arrival rate
-  $\lambda/c$.  In this case, applying the condition that
-  $(\lambda/c )/\mu<1$ per server leads to the same condition that
-  $\lambda/(c\mu) < 1$.
-  \end{solution}
-\end{question}
-
-\begin{question}
-  Consider a paint factory which contains a paint mixing machine that
-  serves two classes of jobs, A and B. The processing times of jobs of
-  types A and B are constant and require $t_A$ and $t_B$ hours. The
-  job arrival rate is $\lambda_A$ for type A and $\lambda_B$ for type
-  $B$ jobs. It takes a setup time of $S_s$ hours to clean the mixing
-  station when changing from paint type A to type B, and there is no
-  time required to change from type B to A.
-
-  To keep the system (rate) stable, it is necessary to produce the
-  jobs in batches, for otherwise the server, i.e., the mixing machine,
-  spends a too large fraction of time on setups, so that
-  $\mu < \lambda$. Thus, it is necessary to identify minimal batch
-  sizes to ensure that $\mu > \lambda$.  Motivate that the linear
-  program below can be used to determine the minimal batch sizes.
-
-\begin{equation*}
-  \text{minimize }  T
-\end{equation*}
-such that
-\begin{align*}
- T&=  k_A t_A + S + k_B t_B, \\
- \lambda_A T &< k_A,  \\
- \lambda_B T &< k_B.
-\end{align*}
-
-\begin{hint}
-Here are some questions to help you interpret this formulation.
-\begin{enumerate}
-\item   What are the decision variables for this problem? In other words, what are the `things' we can control/change?
-\item What are the interpretations of $k_A t_A$, and $S+k_B t_B$?
-\item What is the meaning of the first constraint?  Realize that $T$
-  represents one production cycle. After the completion of one such
-  cycle, we start another cycle. Hence, the start of every cycle can
-  be seen as a restart of the entire system.
-\item   What is the meaning of the other two constraints?
-\item Why do we minimize the cycle time $T$?
-\item Solve for $k_A$ and $k_B$ in terms of $S$,  $\lambda_A, \lambda_B$ and $t_A, t_B$. 
-\item Generalize this to $m$ job classes and such that the cleaning
-  time between jobs of class $i$ and $j$ is given by $S_{ij}$. (Thus,
-  the setup times are sequence dependent.) 
-\end{enumerate}
-\end{hint}
-
-  \begin{solution}
-    Realize that the machine works in cycles. A cycle starts with
-    processing $k_A$ jobs of type A, then does a setup, and processes
-    $k_B$ jobs of type B, and then a new cycle starts again.  The time
-    it takes to complete one such cycle is $T=k_A t_A + S + k_B t_B$.
-    The number of jobs of type A processed during one such cycle is,
-    of course, $k_A$. Observe next that the average number of jobs
-    that arrive during one cycle is $\lambda_A T$. We of course want
-    that $\lambda_A T< k_A$, i.e., less jobs of type A arrive on
-    average per cycle than what we can process.
-  \end{solution}
-\end{question}
-
 \begin{question}
   Can you make an arrival process such that $A(t)/t$ does not have a
   limit?  
 
   \begin{hint}
-    
-  \hint{As a start, the function $\sin(t)$ has not a limit as
+As a start, the function $\sin(t)$ has not a limit as
     $t\to\infty$. However, the time-average $\sin(t)/t \to 0$.  Now
     you need to make some function whose time-average does not
     converge, hence it should grow fast, or fluctuate wilder and
-    wilder.}
+    wilder.
   \end{hint}
   \begin{solution}
  If $N(t) = 3 t^2$, then clearly $N(t)/t = 3t$. This does not
@@ -399,26 +74,37 @@ For the mathematically interested, we seek a
 \end{question}
 
 
+
+Observe that at time $t=A_n$, precisely $n$ arrivals occurred. Thus,
+by applying the definition of $A(t)$ at the epochs $A_n$, we see that
+$A(A_n) = n$. Thus,
+\begin{equation*}
+  \frac{1}n\sum_{k=1}^n X_k = \frac{A_n}n = \frac{A_n}{A(A_n)}. 
+\end{equation*}
+But since $A_n\to\infty$ if $n\to\infty$, it follows from
+Eq.~(\ref{eq:3}) that the average interarrival time between two
+consecutive jobs is
+\begin{equation}\label{eq:54}
+  \E X = \lim_{n\to\infty}  \frac{1}n\sum_{k=1}^n X_k = \lim_{n\to \infty} \frac{A_n}{A(A_n)} = \lim_{t\to\infty} \frac t{A(t)} = \frac 1 \lambda,
+\end{equation}
+where we take $t=A_n$ in the limit for $t\to\infty$.  In words, the
+above states that the arrival rate $\lambda$ is the inverse of the
+expected interarrival time.
+
 \begin{question}
-  This exercise is meant to give the reader some idea about what needs
-  to be done to put everything on solid ground.  If you are not
-  interested in the maths, you can skip the problem.
-    \begin{enumerate}
-    \item In
     Eq. (\ref{eq:54}) we replaced the limit with respect to $n$ by a
-    limit with respect to $t$.  But why is this actually allowed?  Use
-    the notation $A_{A(t)}$ to show that all is OK.
-  \item 
-  Show that the function $t\to A(t)$ as defined by Eqs.~(\ref{eq:2})
-  is right-continuous. 
-    \end{enumerate}
+    limit with respect to $t$.  Use
+    the notation $A_{A(t)}$ to show that  this is allowed.
+  Show next that the function $t\to A(t)$ as defined by Eqs.~(\ref{eq:2})
+  is right-continuous. (This exercise is meant to provide some insight into what needs
+  to be done to put everything on solid ground.  If you are not
+  interested in the maths, you can skip the problem.)
 
     \begin{hint}
-      
-    \hint{ Use that $A_{A(t)} \leq t < A_{A(t)+1}$. Divide by $A(t)$
+ Use that $A_{A(t)} \leq t < A_{A(t)+1}$. Divide by $A(t)$
       and take suitable limits. BTW, such type of proof is used quite
       often to show that the existence of one limit implies, and is
-      implied by, the existence of another type of limit.  }
+      implied by, the existence of another type of limit.  
     \end{hint}
 
  \begin{solution}
@@ -495,6 +181,232 @@ For the mathematically interested, we seek a
  \end{solution}
 \end{question}
 
+The development of the departure times $\{D_k\}$ is entirely analogous
+to that of the arrival times; we leave it to the reader to provide the
+details. As a result we can define the \recall{departure rate} as
+\begin{equation}\label{eq:28}
+  \lim_{t\to\infty} \frac{D(t)}t = \gamma
+\end{equation}
+
+
+\begin{question}
+  Define the departure time $D_{k}$ of the $k$th job in terms of
+  $\{D(t)\}$. 
+  \begin{hint}
+Use the analogy with Eq.~\eqref{eq:27}.
+  \end{hint}
+\begin{solution}
+  \begin{equation*}
+ D_{k} = \inf\{t; D(t) \geq k\}.
+  \end{equation*}
+\end{solution}
+\end{question}
+
+Assume now that there is a single server. Let $S_k$ be the required
+service time of the $k$th job to be served, and define
+\begin{equation*}
+U_n = \sum_{k=1}^n S_k
+\end{equation*}
+as the total service time required by the first $n$ jobs. With this,
+let 
+\begin{equation*}
+  U(t) = \sup\{n: U_n \leq t\}.
+\end{equation*}
+and  define the \recall{service } or \emph{processing rate} as
+\begin{equation*}
+  \mu = \lim_{t\to\infty} \frac{U(t)}t.
+\end{equation*}
+In the same way as we derived that $\E X= 1/\lambda$, we obtain for
+the expected (or average) amount of service required by an individual
+job
+\begin{equation*}
+  \E S = \lim_{n\to\infty} \frac 1 n \sum_{k=1}^n S_k = \lim_{n\to\infty} \frac{U_n}{n} = \lim_{n\to\infty} \frac{U_n}{U(U_n)} = \lim_{t\to\infty} \frac t{U(t)} = \frac 1 \mu.
+\end{equation*}
+
+Now observe that, if the system is empty at time $0$, it must be that
+at any time the number of departures must be smaller than the number
+of arrivals, i.e., $D(t) \leq A(t)$ for all $t$. Therefore,
+\begin{equation}\label{eq:26}
+\gamma :=   \lim_t \frac{D(t)}t \leq \lim_t \frac{A(t)}t = \lambda.
+\end{equation}
+We call a system \recall{(rate) stable} if
+\begin{equation*}
+  \lambda = \gamma,
+\end{equation*}
+in other words, the system is stable if, on the long run, jobs leave
+the system just as fast as they arrive. Of course, if
+$\lambda > \gamma$, the system length process $L(t) \to \infty$ as
+$t\to \infty$.
+
+It is also evident that jobs cannot depart faster than they can be
+served, hence, $D(t) \leq U(t)$ for all~$t$. Combining this with the
+fact that $\gamma \leq \lambda$, we get
+\begin{equation*}
+  \gamma \leq \min\{\lambda, \mu\}.
+\end{equation*}
+When $\mu \geq \lambda$ the above inequality reduces to
+$\gamma = \lambda$ for rate-stable systems. (It is interesting to
+prove this.) As it turns out, when $\mu = \lambda$ and the variance of
+the service times $\V{S} > 0$ or $\V{X} >0$ then $\lim_t L(t)/t$
+does not necessarily exist. For this reason we henceforth require that
+$\mu > \lambda$.
+
+
+
+\begin{question} 
+Define the random variables $\{\tilde X_k,k=1,\ldots\}$ as
+  \begin{equation*}
+    \tilde X_k = S_{k-1}-X_k.
+  \end{equation*}
+  For stability of the queueing process it is essential that
+  $\tilde X_k$ has negative expectation, i.e.,
+  $\E{\tilde X_k} = \E{S_{k-1}-X_k} < 0$.  What is the conceptual
+  meaning of this inequality?
+  \begin{solution}
+ That the average time customers spend in service is smaller
+      than the average time between the arrival of two subsequent
+      jobs. 
+  \end{solution}
+\end{question}
+
+\begin{question} 
+Define $\tilde X_k = S_{k-1}-X_k$.
+ Show that $\E{\tilde X_k} <0$ implies that $\lambda<\mu$. 
+ \begin{hint}
+Remember that $\{X_k\}$ and $\{S_k\}$ are sequences of i.i.d. random variables. What are the implications for the expectations?
+ \end{hint}
+  \begin{solution}
+  $0> \E{\tilde X_k} = \E {S_{k-1}-X_k} =  \E{ S_{k-1}}- \E {X_k} = \E S - \E X$, where we use the fact that the $\{S_k\}$ and $\{X_k\}$ are i.i.d. sequences. Hence, 
+  \begin{equation*}
+    \E X > \E S \iff \frac 1{\E S} > \frac1{\E X} \iff \mu > \lambda.
+  \end{equation*}
+
+  \end{solution}
+\end{question}
+
+
+\begin{question}
+  Show that $\E{S}/\E{X}$ is the fraction of time the server is busy.
+
+  \begin{hint}
+Let $T_1>A_1$ be the first time after the arrival of job 1
+    that arrives at an empty system. (Observe that job 1 also arrives
+    at an empty system.)  Suppose, for ease of writing, that this job
+    is the $n+1$th job, so that up to time $T_1$ the number of
+    arrivals is $n$. Since the first job arrived at time $A_1=X_1$,
+    the first $n$ jobs arrived during $[X_1, T_1)$. The total amount
+    of service that arrived during this period is $\sum_{i=1}^n S_i$.
+    What is the fraction of time the server has been busy in this
+    cycle?
+  \end{hint}
+
+
+  \begin{solution}
+ The
+    fraction of time that the server has been busy during $[X_1, T_1)$
+    is
+        \begin{equation*}
+\frac{\sum_{i=1}^n S_i}{T_1-X_1} 
+=          \frac{\sum_{i=1}^n S_i}{\sum_{i=1}^{n+1}X_i -X_1} 
+=          \frac{\sum_{i=1}^n S_i}{\sum_{i=2}^{n+1}X_i} 
+        \end{equation*}
+        Now use the assumption that the $\{X_i\}$ and $\{S_i\}$ are
+        sequences of i.i.d. random variables distributed as the
+        generic random variables $X$ and $S$, respectively. Then by
+        taking expectations the above becomes
+        \begin{equation*}
+\frac{\E{\sum_{i=1}^n S_i}}{\E{\sum_{i=2}^{n+1}X_i}} 
+= \frac{n \E S }{n \E X} =
+ \frac{ \E S }{ \E X}.
+        \end{equation*}
+
+        These busy cycles occur over and over again. Thus, the
+        long-run average fraction of time the server is busy must also
+        be $\E S/\E X$. (For the die-hards, there is a subtle point
+        here: the arrival epochs of the $G/G/1$ queue are not real
+        renewal moments, hence the epochs at which the busy times
+        start also do not form a sequence of renewal times. But then
+        it is not true, in general, that the busy times $\{B_i\}$ have
+        the same distribution, neither do the idles times
+        $\{I_n\}$. Showing that in the limit all is OK requires a
+        substantial amount of mathematics. The above claim is still
+        true however.)
+  \end{solution}
+\end{question}
+
+\begin{question}
+ Show that $\E{X - S}/\E{X}$ is the fraction of time
+  the server is idle.
+  \begin{solution}
+    Since the fraction of idle time is $1$ minus the fraction of busy
+    time, it follows that $1-\E S/ \E X = (\E X - \E S)/\E X$ is the
+    idle time fraction.
+  \end{solution}
+\end{question}
+
+The concept of \recall{load} or \emph{utilization}, denoted by the
+symbol $\rho$, is fundamental. One way to define it is as the limiting
+fraction of time the server is busy, i.e.,
+\begin{equation*}
+  \rho = \lim_{t\to\infty} \frac 1 t \int_0^t \1{L(s)>0} \d s.
+\end{equation*}
+Interestingly, we can express this in terms of the arrival rate
+$\lambda$ and service rate $\mu$. Observe that
+\begin{equation*}
+  \sum_{k=1}^{A(t)} S_k \geq \int_0^t \1{L(s)>0} \d s \geq   \sum_{k=1}^{D(t)} S_k,
+\end{equation*}
+since $t$ can lie half way a service interval and $A(t) \geq D(t)$. As
+$A(t)\to \infty$ as $t\to\infty$,
+\begin{equation*}
+  \lim_{t\to\infty} \frac 1 t\sum_{k=1}^{A(t)} S_k = 
+  \lim_{t\to\infty} \frac{A(t)}t \frac{1}{A(t)} \sum_{k=1}^{A(t)} S_k = 
+  \lim_{t\to\infty} \frac{A(t)}t \cdot \lim_{t\to\infty}\frac{1}{A(t)} \sum_{k=1}^{A(t)} S_k = \lambda \E S.
+\end{equation*}
+Applying similar limits to the other inequality gives
+\begin{equation*}
+\lambda \E S \geq \rho \geq \gamma \E S.
+\end{equation*}
+Hence, if $\gamma=\lambda$, $\rho = \lambda \E S$.  
+
+From the identies $\lambda^{-1} = \E X$ and $\mu^{-1} = \E S$, we get
+a further set of relations:
+\begin{equation*}
+  \rho = \lambda \E S = \frac{\lambda}{\mu} = \frac{\E S}{\E X}.
+\end{equation*}
+Thus, the load has also the interpretation as the rate at which jobs
+arrive multiplied by the average amount of work per job.  Finally,
+recall that for a system to be rate-stable, it is necessary that
+$\mu> \lambda$, implying in turn that $\rho < 1$. The relation
+$\rho=\E S/ \E X < 1$ then tells us that the average time it takes to
+serve a job must be less than the average time between two consecutive
+arrivals, i.e., $\E S < \E X$.
+
+
+\begin{question}
+  Consider a queueing system with $c$ identical servers (identical in
+  the sense that each server has the same production rate $\mu$). What would be a reasonable stability criterion for this system? 
+  \begin{hint}
+What is the rate in, and what is the service capacity?
+  \end{hint}
+  \begin{solution}
+    The criterion is that $c$ must be such that $\lambda <
+    c\mu$.
+    (Thus, we interpret the number of servers as a \emph{control},
+    i.e., a `thing' we can change, while we assume that $\lambda$ and
+    $\mu$ cannot be easily changed.) To see this, we can take two
+  different points of view.  Imagine that the $c$ servers are replaced
+  by one server that works $c$ times as fast. The service capacity of
+  these two systems (i.e., the system with $c$ servers and the system
+  with one fast server) is the same, i.e., $c\mu$, where $\mu$ is the
+  rate of one server. For the system with the fast server the load is
+  defined as $\rho =\lambda/c\mu$, and for stability we require
+  $\rho<1$.  Another way to see it is to assume that the stream of
+  jobs is split into $c$ smaller streams, each with arrival rate
+  $\lambda/c$.  In this case, applying the condition that
+  $(\lambda/c )/\mu<1$ per server leads to the same condition that
+  $\lambda/(c\mu) < 1$.
+  \end{solution}
+\end{question}
 
 \begin{question}
   Check with simulation that when $\lambda > \mu$ the queue length
@@ -504,6 +416,88 @@ For the mathematically interested, we seek a
     See my website. 
   \end{solution}
 \end{question}
+
+
+\begin{question}\label{ex:11}
+  If $\E{B}$ is the expected busy time and $\E{I}$ is the expected idle
+  time, show that 
+\begin{equation*}
+  \E{B} = \frac{\rho }{1-\rho} \E{I}. 
+\end{equation*}
+ is the fraction of time the  server is busy.
+\begin{solution}
+  Consider a busy cycle, that is, a cycle that starts with the first
+  job that sees an empty system at upon arrival up to the time another
+  job sees an empty system upon arrival. In such one cycle, the server
+  is busy for an expected duration $\E{B}$. The total expected length
+  of the cycle is $\E{B} + \E{I}$, since after the last job of the cycle
+  left, the expected time until the next job is $\E{I}$.
+
+  Since $\rho$ is utilization of the server,
+  \begin{equation*}
+\rho = \frac{\E B}{\E B + \E I}.
+  \end{equation*}
+  With a bit of algebra the result follows.
+\end{solution}
+\end{question}
+
+\begin{question}
+  Consider a paint factory which contains a paint mixing machine that
+  serves two classes of jobs, A and B. The processing times of jobs of
+  types A and B are constant and require $t_A$ and $t_B$ hours. The
+  job arrival rate is $\lambda_A$ for type A and $\lambda_B$ for type
+  $B$ jobs. It takes a setup time of $S_s$ hours to clean the mixing
+  station when changing from paint type A to type B, and there is no
+  time required to change from type B to A.
+
+  To keep the system (rate) stable, it is necessary to produce the
+  jobs in batches, for otherwise the server, i.e., the mixing machine,
+  spends a too large fraction of time on setups, so that
+  $\mu < \lambda$. Thus, it is necessary to identify minimal batch
+  sizes to ensure that $\mu > \lambda$.  Motivate that the following linear
+  program  can be used to determine the minimal batch sizes:
+\begin{equation*}
+  \text{minimize }  T
+\end{equation*}
+such that
+\begin{align*}
+ T&=  k_A t_A + S + k_B t_B, \\
+ \lambda_A T &< k_A,  \\
+ \lambda_B T &< k_B.
+\end{align*}
+
+\begin{hint}
+Here are some questions to help you interpret this formulation.
+\begin{enumerate}
+\item   What are the decision variables for this problem? In other words, what are the `things' we can control/change?
+\item What are the interpretations of $k_A t_A$, and $S+k_B t_B$?
+\item What is the meaning of the first constraint?  Realize that $T$
+  represents one production cycle. After the completion of one such
+  cycle, we start another cycle. Hence, the start of every cycle can
+  be seen as a restart of the entire system.
+\item   What is the meaning of the other two constraints?
+\item Why do we minimize the cycle time $T$?
+\item Solve for $k_A$ and $k_B$ in terms of $S$,  $\lambda_A, \lambda_B$ and $t_A, t_B$. 
+\item Generalize this to $m$ job classes and such that the cleaning
+  time between jobs of class $i$ and $j$ is given by $S_{ij}$. (Thus,
+  the setup times are sequence dependent.) 
+\end{enumerate}
+\end{hint}
+
+  \begin{solution}
+    Realize that the machine works in cycles. A cycle starts with
+    processing $k_A$ jobs of type A, then does a setup, and processes
+    $k_B$ jobs of type B, and then a new cycle starts again.  The time
+    it takes to complete one such cycle is $T=k_A t_A + S + k_B t_B$.
+    The number of jobs of type A processed during one such cycle is,
+    of course, $k_A$. Observe next that the average number of jobs
+    that arrive during one cycle is $\lambda_A T$. We of course want
+    that $\lambda_A T< k_A$, i.e., less jobs of type A arrive on
+    average per cycle than what we can process.
+  \end{solution}
+\end{question}
+
+
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}

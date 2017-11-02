@@ -2,6 +2,12 @@
 \section{MDA Algorithm}
 \label{sec:mda}
 
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 A relatively easy way to obtain insight into the procedure is by
 comparing this case to the single-server single station case.  Recall that, for the latter case, 
 \begin{equation*}
@@ -47,9 +53,11 @@ Up- and down-crossing of level $k$ gives that
 
 \begin{question}
   Apply the MDA algorithm to the network discussed in Question~\ref{ex:mva_numerical}, but now assume that station 1 has 2 servers. 
-  \hint{ Just follow the description of the algorithm of the book of
+  \begin{hint}
+ Just follow the description of the algorithm of the book of
     Zijm. I expect that you have read the solution of
-    Question~\ref{ex:mva_numerical}.}
+    Question~\ref{ex:mva_numerical}.
+  \end{hint}
   \begin{solution}
     Take $n=1$.
     \begin{align*}
@@ -159,17 +167,86 @@ Zijm.Ex.3.1.15
 First the old results again:
 
 
+\begin{lstlisting}
+from functools import lru_cache
+import numpy as np
+from numpy.linalg import eig
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/mda_1.tex}
 
+c = np.array([1, 1, 1, 1, 1])  # single server stations
+P = np.matrix([
+    [0, 1, 0, 0, 0],
+    [0, 0, 1, 0, 0],
+    [0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0],
+]
+)
+
+v, w = eig(P.T)
+x = v.real.argmax()
+V = w[:, x].real
+V = V / V[0]
+
+mu = np.array([2, 2.5, 3, 3, 3])
+
+@lru_cache(maxsize=None)
+def EL(j, n):
+    if n <= 0:
+        return 0
+    else:
+        return TH(j, n) * EW(j, n)
+
+@lru_cache(maxsize=None)
+def EW(j, n):
+    return (EL(j, n - 1) + 1) / mu[j]
+
+
+@lru_cache(maxsize=None)
+def TH(j, n):
+    if j == 0:
+        return n / sum(V[j] * EW(j, n) for j in range(len(mu)))
+    else:
+        return V[j] * TH(0, n)
+
+print(" n  EL0  EL1  EL2   EL3   EL4 TH0")
+for n in range(8, 11):
+    res = "{:3d}".format(n)
+    for j in range(len(mu)):
+        res += "{:6.2f}".format(float(EL(j, n)))
+    res += "{:6.2f}".format(float(TH(0,n)))
+    print(res)
+\end{lstlisting}\begin{lstlisting}
+n  EL0  EL1  EL2   EL3   EL4 TH0
+  8  2.89  1.67  1.15  1.15  1.15  1.69
+  9  3.39  1.86  1.25  1.25  1.25  1.74
+ 10  3.93  2.05  1.34  1.34  1.34  1.79
+\end{lstlisting}
 
 Now we need to clear the cache, and redo the computations
 The visit ratios do not change, only the processing rates.
 
 
+\begin{lstlisting}
+EL.cache_clear()
+EW.cache_clear()
+TH.cache_clear()
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/mda_2.tex}
+mu = np.array([2, 3, 3, 3, 3])
 
+print(" n  EL0  EL1  EL2   EL3   EL4 TH0")
+for n in range(8, 11):
+    res = "{:3d}".format(n)
+    for j in range(len(mu)):
+        res += "{:6.2f}".format(float(EL(j, n)))
+    res += "{:6.2f}".format(float(TH(0,n)))
+    print(res)
+\end{lstlisting}\begin{lstlisting}
+n  EL0  EL1  EL2   EL3   EL4 TH0
+  8  3.14  1.21  1.21  1.21  1.21  1.74
+  9  3.71  1.32  1.32  1.32  1.32  1.79
+ 10  4.32  1.42  1.42  1.42  1.42  1.83
+\end{lstlisting}
 
 All is according to intuition. Indeed, the throughput increases
 slightly. Thus, it may be interesting to increase the production rate
@@ -191,37 +268,139 @@ improving the bottleneck.
     results of the previous question.
 
 
+\begin{lstlisting}
+from functools import lru_cache
+import numpy as np
+from numpy.linalg import eig
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/mda_3.tex}
+mu = np.array([2, 2.5, 3, 3, 3])
+c = np.array([1, 1, 1, 1, 1])  # single server stations
+P = np.matrix([
+    [0, 1, 0, 0, 0],
+    [0, 0, 1, 0, 0],
+    [0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0],
+]
+)
 
+v, w = eig(P.T)
+x = v.real.argmax()
+V = w[:, x].real
+V = V / V[0]
+
+
+@lru_cache(maxsize=None)
+def p(j, k, n):
+    if n == 0:
+        return 1
+    if k > 0:
+        return TH(j, n) * p(j, k - 1, n - 1) / min(c[j], k) / mu[j]
+    else:
+        return 1 - sum(p(j, k, n) for k in range(1, n + 1))
+
+
+@lru_cache(maxsize=None)
+def EW(j, n):
+    res = sum((k - c[j] + 1) / c[j] / mu[j] * p(j, k, n - 1)
+              for k in range(c[j], n))
+    res += 1 / mu[j]
+    return res
+
+
+@lru_cache(maxsize=None)
+def TH(j, n):
+    if j == 0:
+        return n / sum(V[j] * EW(j, n) for j in range(len(c)))
+    else:
+        return V[j] * TH(0, n)
+
+print(TH(0, 10))
+\end{lstlisting}\begin{lstlisting}
+[[ 1.78901276]]
+\end{lstlisting}
 
 This is the same as what we see earlier. I guess all is ok. 
 
 Now add a machine to station 0. Don't forget to clear the cache!
 
 
+\begin{lstlisting}
+p.cache_clear()
+EW.cache_clear()
+TH.cache_clear()
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/mda_4.tex}
+c = np.array([2, 1, 1, 1, 1])
 
+n = 10
+TH(0, n)
+\end{lstlisting}\begin{lstlisting}
+matrix([[ 2.08301549]])
+\end{lstlisting}
+\begin{lstlisting}
+n = 30
+TH(0, n)
+\end{lstlisting}\begin{lstlisting}
+matrix([[ 2.46519749]])
+\end{lstlisting}
 
 As expected, station 1 with processing rate $\mu_1=2.5$ now determines
 the throughput of the network.
 
 
 
+\begin{lstlisting}
+def ELQ(j, n):
+    return sum((k - c[j]) * p(j, k, n) for k in range(c[j], n + 1))
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/mda_5.tex}
 
+def EL(j, n):
+    return sum(k * p(j, k, n) for k in range(n + 1))
+
+print(EL(0, n))
+print(TH(0, n) * EW(0, n)) # Little's law as a check.
+\end{lstlisting}\begin{lstlisting}
+[[ 1.9724301]]
+[[ 1.9724301]]
+\end{lstlisting}
 
 Finally, plot the probability mass functions for stations 0, 1, and 2.
 
 
+\begin{lstlisting}
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set_context("paper")
 
-\lstinputlisting{/home/nicky/Dropbox/nicky/vakken/qsim/queueing_book/chunks/mda_6.tex}
-
+plt.figure(figsize=(6, 2))
+plt.plot([float(p(0, k, n)) for k in range(n + 1)], label="S0")
+plt.plot([float(p(1, k, n)) for k in range(n + 1)], label="S1")
+plt.plot([float(p(2, k, n)) for k in range(n + 1)], label="S2")
+plt.legend()
+plt.show()
+filename = "figures/mda_mass.pdf"
+plt.savefig(filename)
+plt.close()
+\end{lstlisting}\begin{lstlisting}
+/usr/local/lib/python3.5/dist-packages/IPython/html.py:14:
+ShimWarning: The `IPython.html` package has been deprecated since
+IPython 4.0. You should import from `notebook` instead.
+`IPython.html.widgets` has moved to `ipywidgets`.
+  "`IPython.html.widgets` has moved to `ipywidgets`.", ShimWarning)
+\end{lstlisting}
 
 \includegraphics{mda_mass}
   \end{solution}
 \end{question}
 
 
+
+
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
+\clearpage

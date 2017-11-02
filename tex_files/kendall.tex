@@ -2,9 +2,12 @@
 \section{Kendall's Notation to Characterize Queueing Processes}
 \label{sec:kendalls-notation}
 
+\subsection*{Theory and Exercises}
+
 As will become apparent in Sections~\ref{sec:constr-discr-time}
-and~\ref{sec:constr-gg1-queu}, the construction of any queueing
-process involves three main elements: the distribution of the
+and~\ref{sec:constr-gg1-queu}, the construction of any single-station queueing
+process involves three main elements: 
+the distribution of the
 interarrival times between consecutive jobs, the distribution of the
 service times of the individual jobs, and the number of servers
 present to process jobs. In this characterization it is implicit that
@@ -13,10 +16,10 @@ identically distributed) random variables, the service times are also
 i.i.d., and finally, the interarrival times and service times are
 mutually independent.
 
-To characterize the type of queueing process it is common to use the
-\recall{abbreviation} $A/B/c/K$ where $A$ is the distribution of the
-interarrival times, $B$ the distribution of the services, $c$ the
-number of servers, and $K$ the size of the system. In this notation it
+To characterize the type of queueing process it is common to use 
+Kendall's abbreviation $A/B/c/K$, where $A$ is the distribution of the
+interarrival times, $B$ the distribution of the service times, $c$ the
+number of servers, and $K$ system size, i.e., the total number of customers that can be simultaneously present, whether in queue or in service. In this notation it
 is assumed that jobs are served in first-in-first-out (FIFO) order;
 FIFO scheduling is also often called first-come-first-serve (FCFS).
 
@@ -27,7 +30,7 @@ Let us illustrate the shorthand $A/B/c/K$ with some examples:
   \emph{M}emoryless, and there is 1 server. As $K$ is unspecified, it
   is assumed to be infinite.
 \item $M/M/c$: A \recall{multi-server} queue with $c$ servers in which
-  all servers have the same capacity. Jobs arrive according to a
+  all servers have the same service capacity. Jobs arrive according to a
   Poisson process and have exponentially distributed processing times.
 \item $M(n)/M(n)/1$: the interarrival times are exponential, just as
   the service times, but the rates of the arrival and service processes
@@ -36,11 +39,10 @@ Let us illustrate the shorthand $A/B/c/K$ with some examples:
   and the \recall{system capacity} is $K$ jobs. Thus, the queue can
   contain at most $K-c$ jobs.\footnote{Sometimes, the $K$ stands for
     the capacity in the queue, not the entire system. The notation differs among
-    authors. Due to the lack of consistency, I might also not be
-    consistent; be warned.}
+    authors.}
 \item $M/M/c/c$: in this system the number of servers is the same as
   the system capacity, thus the queue length is always zero. This
-  queueing system is useful to model the determine the number of beds
+  queueing system is useful to determine the number of beds
   in a hospital; the beds act as servers.
 \item $M^X/M/1$: Customers arrive with exponentially distributed
   interarrival times. However, each customer brings in a number of
@@ -53,20 +55,39 @@ Let us illustrate the shorthand $A/B/c/K$ with some examples:
 \item $M/G/\infty$: exponential interarrival times, service times can
   have any distribution, and there is an unlimited supply of
   servers. This is also known as an \recall{ample} server. Observe
-  that in this queueing process, jobs actually never have wait in
+  that in this queueing process, jobs actually never have to wait in
   queue; upon arrival there is always a free server available.
 \item $M/D/1-LIFO$.  Now job service times are \emph{D}eterministic, and the service sequence is last-in-first-out (LIFO).
 \item $G/G/1$: generally distributed interarrival and service times, 1 server.
 \end{itemize}
 
-In the sequel we will use Kendall's notation frequently to distinguish
-the different queueing models. Ensure that you familiarize yourself
-with this notation.
+In the sequel we will use Kendall's notation to distinguish between the different queueing models. Ensure that you familiarize yourself with this notation.
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-\subsection*{Exercises}
+\begin{question}
+  Is the $M/D/1$ queue a specific type of  $M/G/c$ queue? 
+  \begin{solution}
+    Yes, take $G=D$ and $c=1$. 
+  \end{solution}
+\end{question}
+
+\begin{question}
+What is the $D/D/1$ queue?  
+\begin{solution}
+  A queueing process with deterministic interarrival times and deterministic service times and 1 server.
+\end{solution}
+\end{question}
+
+\begin{question}
+  By how many parameters is the $M/M/1$ queue characterized?
+  \begin{solution}
+    The interarrival times are exponentially distributed with rate $\lambda$; the service times are also exponential, but with parameter $\mu$. Thus, if we know $\lambda$ and $\mu$, we have fully characterized the parameters of both distributions. Since the number of servers is 1, only $\lambda$ and $\mu$ remain.
+  \end{solution}
+\end{question}
+
+
 \begin{question}
   What are some advantages and disadvantages of using the Shortest
   Processing Time First (SPTF) rule to serve jobs? 

@@ -3,6 +3,11 @@
 {Construction of the $\mathbf{G/G/1}$ Queueing Process in Continuous Time}
 \label{sec:constr-gg1-queu}
 
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
 
 In the previous section we considered time in discrete `chunks',
 minutes, hours, days, and so on. For given numbers of arrivals and
@@ -63,6 +68,30 @@ memorize it may be helpfull to write it like this:
   A_k : \N \to \R, \quad{\text{job id (integer) to arrival time (real number)}}, \\
   A(t) : \R\to \N, \quad{\text{time (real number) to number of jobs (integer)}}.
 \end{align*}
+
+\begin{question}
+ What are  the meanings of $A_{A(t)}$ and $A(A_n)$?
+ \begin{solution}
+  $A(t)$ is the number of arrivals during $[0,t]$. Suppose that
+    $A(t) = n$. This $n$th job arrived at time $A_n$. Thus, $A_{A(t)}$
+    is the arrival time of the last job that arrived before or at time
+    $t$. In a similar vein, $A_n$ is the arrival time of the $n$th
+    job. Thus, the number of arrivals up to time $n$, i.e., $A(A_n)$,
+    must be $n$.
+  \end{solution}
+\end{question}
+
+\begin{question}
+  Would it make sense to define $A(t)$ as $\min\{k : A_k \geq t\}$?
+  \begin{hint}
+Compare this to the definition in (\ref{eq:2}).
+  \end{hint}
+  \begin{solution}
+    Suppose $A_3 = 10$ and $A_4 = 20$. Take $t=15$. Then
+    $\min\{k : A_k \geq 15\} = 4$ since $A_3 < t=15 < A_4$. On the
+    other hand $\max\{k : A_k \leq t\} = 3$. And, indeed, at time $t=15$, 3 jobs arrived, not 4. So defining $A(t)$ as $\min\{k : A_k \geq t\}$ is not ok. 
+  \end{solution}
+\end{question}
 
 To compute the departure times $\{D_k\}$ we proceed in stages. The
 first stage is to construct the \recall{waiting time in queue}
@@ -180,13 +209,11 @@ see that
 where each of these equations has its own interpretation. 
 
 A bit of similar reasoning gives another recursion for $W_k$:
-\begin{equation}
+\begin{align}
   \label{eq:59}
-  \begin{split}
-  W_{Q,k} &= [W_{k-1} - X_k]^+,\\
-  W_{k} &= W_{Q,k} + S_k = [W_{k-1} - X_k]^+ + S_k.
-  \end{split}
-\end{equation}
+  W_{Q,k} &= [W_{k-1} - X_k]^+, &
+  W_{k} &= W_{Q,k} + S_k = [W_{k-1} - X_k]^+ + S_k,
+\end{align}
 from which follows a recursion for $D_k$
 \begin{equation}
   D_k = A_k + W_k.
@@ -195,6 +222,125 @@ This in turn specifies the departure process $\{D(t)\}$ as
 \begin{equation*}
   D(t) = \max\{k; D_k \leq t\} = \sum_{k=1}^\infty \1{D_k \leq t}.
 \end{equation*}
+
+\begin{question}
+ Assume that $X_1=10$, $X_2=5$, $X_3=6$ and $S_1 = 17$,
+    $S_2=20$ and $S_3=5$, compute the arrival times, waiting times in
+    queue, the sojourn times and the departure times for these three
+    customers.
+  \begin{hint}
+     The intent of this exercise is
+      to make you familiar with the notation.
+
+      BTW, such simple test cases are also very useful to test
+      computer code. The numbers in the exercise are one such simple
+      case. You can check the results by hand; if the results of the
+      simulator are different, there is a problem.
+    \end{hint}
+  \end{question}
+
+\begin{question}
+  Suppose that $X_k\in\{1,3\}$ such that $\P{X_k=1}=\P{X_k=3}$ and
+  $S_k\in\{1,2\}$ with $\P{S_k=1}=\P{S_k=2}$. If $W_{Q,0}=3$, what are
+  the distributions of $W_{Q,1}$ and $W_{Q,2}$?  
+  \begin{hint}
+Use Eq.~(\ref{eq:59}).
+\end{hint}
+
+\begin{solution}  First find the distribution of $Y_k:=S_{k-1}-X_k$ so that we can write
+  $W_{Q,k}=[W_{Q,k-1}+Y_k]^+$.  Use independence of $\{S_k\}$ and $\{X_k\}$:
+\begin{align*}
+  \P{Y_k=-2} &=\P{S_{k-1}-X_k=-2} = \P{S_{k-1}=1, X_k=3} = \P{S_{k-1}=1}\P{X_k=3} = \frac14.
+\end{align*}
+Dropping the dependence on $k$ for ease, we get
+\begin{align*}
+  \P{Y=-2} &=\P{S-X=-2} = \P{S=1, X=3} = \P{S=1}\P{X=3} = \frac14\\
+  \P{Y=-1} &=\P{S=2}\P{X=3} = \frac14\\
+  \P{Y=0} &=\P{S=1}\P{X=1} = \frac14\\
+  \P{Y=1} &=\P{S=2}\P{X=1} = \frac14.
+\end{align*}
+With this
+  \begin{align*}
+    \P{W_{Q,1} = 1} &=\P{W_{Q,0} + Y_0= 1} = \P{3 + Y_0 =1} = \P{Y_0=-2} =\frac14\\
+    \P{W_{Q,1} = 2} &= \P{3 + Y =2} = \P{Y=-1}  =\frac14\\
+    \P{W_{Q,1} = 3} &= \P{3 + Y = 3} = \P{Y=0}  =\frac14\\
+    \P{W_{Q,1} = 4} &= \P{3 + Y = 4} = \P{Y=1}  =\frac14.\\
+  \end{align*}
+And, then
+  \begin{equation*}
+    \begin{split}
+    \P{W_{Q,2} = 1} 
+&=\P{W_{Q,1} + Y = 1} = \sum_{i=1}^4 \P{W_{Q,1} + Y = 1\given W_{Q,1}=i}\P{W_{Q,1}=i}\\
+&=\sum_{i=1}^4 \P{i + Y = 1\given W_{Q,1}=i}\frac14
+=\sum_{i=1}^4 \P{Y = 1-i\given W_{Q,1}=i}\frac14\\
+&=\frac14\sum_{i=1}^4 \P{Y = 1-i} = \frac14(\P{Y = 0} + \P{Y=-1} +\P{Y=-2}) = \frac{3}{16}.
+    \end{split}
+  \end{equation*}
+
+Typing the solution becomes  boring\ldots, let's use the computer.
+
+<<term=True>>=
+from lea import Lea
+
+W = 3
+S = Lea.fromVals(1,  2)
+X = Lea.fromVals(1,  3)
+
+# This is WQ1
+W = Lea.fastMax(W + S - X, 0)
+W
+
+
+# This is WQ2
+W = Lea.fastMax(W + S - X, 0)
+W
+@
+Great! Our handiwork matches with the computer's results. 
+
+\end{solution}
+\end{question}
+
+
+Another set of recursions to compute the arrival and departure times for the single server queue is the following:
+\begin{equation}
+  \label{eq:45}
+  \begin{split}
+    A_k &= A_{k-1} + X_k, \\
+    D_k &= \max\{A_k, D_{k-1}\} + S_k,\\
+    W_k &= D_k - A_k.
+  \end{split}
+\end{equation}
+
+\begin{question}  Why do the recursions Eq.~(\ref{eq:45}) work? 
+  \begin{solution}
+ Of course, the service of job $k$ cannot start before it
+      arrives. Hence, it cannot leave before $A_k + S_k$. Therefore it
+      must be that $D_k \geq A_k +S_k$. But the service of job $k$ can
+      also not start before the previous job, i.e. job $k-1$, left the
+      server. Thus job $k$ cannot start before $D_{k-1}$. To clarify
+      it somewhat further, define $S_k'$ as the earliest start of job
+      $k$. Then it must be that $S_k' = \max\{A_k, D_{k-1}\}$---don't
+      confuse the earliest start $S_k'$ and the service time
+      $S_k$---and $D_k = S_k' + S_k$.
+    \end{solution}
+\end{question}
+
+\begin{question}
+  Implement the above recursions in excel or some other computer
+  program such as R, python, or julia, and check the results of the
+  previous exercise.
+    \begin{solution}
+      You can check the files on \texttt{github} in the \texttt{progs}
+      directory.
+\begin{itemize}
+\item \texttt{mm1.py} is the python implementation
+\item \texttt{mm1.R} is the R implementation
+\item \texttt{mm1.jl} is the julia implementation
+\end{itemize}
+Take your pick, and start playing with it. These examples are meant to
+be simple to understand, not necessarily super efficient.
+\end{solution}
+\end{question}
 
 Once we have the arrival and departure processes it is easy to compute
 the \recall{number of jobs in the system} at time $t$ as
@@ -282,313 +428,70 @@ L_s(t) = D_Q(t) - D(t) = L(t) - L_Q(t).
 
 
 
-Finally, the \recall{virtual waiting time process} $\{V(t)\}$ is the
-amount of waiting that an arrival would see if it would arrive at time
-$t$. To construct $\{V(t)\}$, we simply draw lines that start at
-points $(A_k, W_k)$ and have slope -1, unless the line hits the
-$x$-axis, in which case the virtual waiting time remains zero until
-the next arrival occurs.  Thus, the lines with slope $-1$ in
-Figure~\ref{fig:waitingtimegg1} show (a sample path of) the virtual
-waiting time.
-
-
-Observe that, just as in Section~\ref{sec:constr-discr-time}, we have
-obtained a set of recursions by which we can run a simulation of a
-queueing process of whatever length we need, provided we have a
-sequence of have inter-arrival times $\{X_k\}$ and service times
-$\{S_k\}$.  A bit of experimentation with computer programs such as
-$R$ or python will reveal that this is easy.
-
-\subsection*{Exercises}
-\label{sec:exercises}
-
-\Opensolutionfile{hint}
-\Opensolutionfile{ans}
-
-
 \begin{question}
-  \begin{enumerate}
-  \item Assume that $X_1=10$, $X_2=5$, $X_3=6$ and $S_1 = 17$,
-    $S_2=20$ and $S_3=5$, compute the arrival times, waiting times in
-    queue, the sojourn times and the departure times for these three
-    customers.
-  \end{enumerate}
-  \begin{solution}
-     The intent of this exercise is
-      to make you familiar with the notation.
-
-      BTW, such simple test cases are also very useful to test
-      computer code. The numbers in the exercise are one such simple
-      case. You can check the results by hand; if the results of the
-      simulator are different, there is a problem.
-    \end{solution}
-  \end{question}
-
-\begin{question}
-  Suppose that $X_k\in\{1,3\}$ such that $\P{X_k=1}=\P{X_k=3}$ and
-  $S_k\in\{1,2\}$ with $\P{S_k=1}=\P{S_k=2}$. If $W_{Q,0}=3$, what are
-  the distributions of $W_{Q,1}$ and $W_{Q,2}$?  
-  \begin{hint}
-\hint{Use that
-    $W_{Q,1} = [W_{Q,0} + S_1 - X_1]^+$ and likewise for $W_{Q,2}$.
-
-This first year probability. It should be elementary for you. Ensure you can do it.}
-\end{hint}
-
-\begin{solution}  First find the distribution of $Y_k:=S_{k-1}-X_k$ so that we can write
-  $W_{Q,k}=[W_{Q,k-1}+Y_k]^+$.  Use independence of $\{S_k\}$ and $\{X_k\}$:
-\begin{align*}
-  \P{Y_k=-2} &=\P{S_{k-1}-X_k=-2} = \P{S_{k-1}=1, X_k=3} = \P{S_{k-1}=1}\P{X_k=3} = \frac14.
-\end{align*}
-Dropping the dependence on $k$ for ease, we get
-\begin{align*}
-  \P{Y=-2} &=\P{S-X=-2} = \P{S=1, X=3} = \P{S=1}\P{X=3} = \frac14\\
-  \P{Y=-1} &=\P{S=2}\P{X=3} = \frac14\\
-  \P{Y=0} &=\P{S=1}\P{X=1} = \frac14\\
-  \P{Y=1} &=\P{S=2}\P{X=1} = \frac14.
-\end{align*}
-With this
-  \begin{align*}
-    \P{W_{Q,1} = 1} &=\P{W_{Q,0} + Y_0= 1} = \P{3 + Y_0 =1} = \P{Y_0=-2} =\frac14\\
-    \P{W_{Q,1} = 2} &= \P{3 + Y =2} = \P{Y=-1}  =\frac14\\
-    \P{W_{Q,1} = 3} &= \P{3 + Y = 3} = \P{Y=0}  =\frac14\\
-    \P{W_{Q,1} = 4} &= \P{3 + Y = 4} = \P{Y=1}  =\frac14.\\
-  \end{align*}
-And, then
-  \begin{equation*}
-    \begin{split}
-    \P{W_{Q,2} = 1} 
-&=\P{W_{Q,1} + Y = 1} = \sum_{i=1}^4 \P{W_{Q,1} + Y = 1\given W_{Q,1}=i}\P{W_{Q,1}=i}\\
-&=\sum_{i=1}^4 \P{i + Y = 1\given W_{Q,1}=i}\frac14
-=\sum_{i=1}^4 \P{Y = 1-i\given W_{Q,1}=i}\frac14\\
-&=\frac14\sum_{i=1}^4 \P{Y = 1-i} = \frac14(\P{Y = 0} + \P{Y=-1} +\P{Y=-2}) = \frac{3}{16}.
-    \end{split}
-  \end{equation*}
-
-Typing the solution becomes  boring\ldots, let's use the computer.
-
-<<term=True>>=
-from lea import Lea
-
-W = 3
-S = Lea.fromVals(1,  2)
-X = Lea.fromVals(1,  3)
-
-# This is WQ1
-W = Lea.fastMax(W + S - X, 0)
-W
-
-
-# This is WQ2
-W = Lea.fastMax(W + S - X, 0)
-W
-@
-Great! Our handiwork matches with the computer's results. 
-
-\end{solution}
-\end{question}
-
-  
-\begin{question}
-  If $S\sim U[0,7]$ and $X\sim U[0,10]$, where $U[I]$ stands for the
-  uniform distribution concentrated on the interval $I$, compute
-  $\P{S-X\leq x}$. 
-
-  \begin{hint}
-  \hint{This appears to be trivial\ldots, but I didn't find it
-    easy\ldots In fact, I found it a major headache, hence it is good
-    to try yourself before looking at the answer. Check your
-    probability book if you don't know what to do. }
-    
-  \end{hint}
-
-  \begin{solution}
-    Let us write $f(x)$ for the density of $\P{S-X\leq x}$, i.e.,
-    $\P{S-X\leq x} = \int_{-\infty}^x f(y) \d y$. (A formal point, why
-    does $\P{S-X \leq x }$ actually have a density? You can skip this
-    detail if you are not interested in mathematical details,
-    nevertheless, it is interesting to think about.)
-With conditioning, 
-\begin{equation*}
-  f(x) 
-= \int_{0}^{10} \P{S-X = x|X=u} \P{X\in \d u}
-\end{equation*}
-This notation is, admittably, quite subtle (and to get it right
-requires much more work than we can do in this course). Intuitively,
-$\P{X\in \d u}$ means the (infinitesimal) probability that
-$X\in [u, u+\d u]$. Since $X$ is uniform on $[0,10]$,
-$\P{X\in [s,t]} = (t-s)/10$ for $s,t \in [0,10]$ and $s<t$. Now,
-taking this literaly, let $s=u$ and $t=u + \d u$, it follows that,
-\begin{equation*}
-  \P{X\in [u, u+\d u]} = \frac{ u+\d t - u}{10}=\frac{\d u}{10}.
-\end{equation*}
-Using this in the above expression for $f(x)$ gives
-\begin{equation*}
-  f(x) = \frac1{10}\int_{0}^{10} \P{S-X = x|X=u} \d u.
-\end{equation*}
-Now use that
-$S$ and $X$ are independent so that
-\begin{equation*}
-  \begin{split}
-\P{S-X = x|X=u}
-&= \frac{\P{S-X=x, X=u}}{\P{X=u}} = \frac{\P{S-u=x, X=u}}{\P{X=u}} \\
-&=\frac{\P{S-u=x}\P{X=u}}{\P{X=u}}=\P{S=u-x}.
-  \end{split}
-\end{equation*}
-Observe that we just use the formulas we are used to from
-conditioning on sets with positive probability. Recall,
-$\P{A|B} = \P{AB}/\P{B}$ only when $\P{B}>0$. But here $\P{X=x} = 0$
-for all $x$, since $x$ consists of a single point and $X$ is uniformly
-distributed. Thus, we divide by $0$! To get the mathematical details
-right, requires quite a bit more work than we can do in this course.
-Interesingly, in this case it works, as $\P{X=u}$ appears in the
-numerator and denominator, hence can be cancelled. In general, be
-careful when using such shortcuts; it can go wrong easily.
-
-With this,
-\begin{equation*}
-  f(x) 
-= \frac1{10}\int_{0}^{10} \P{S-u=  x }\d u 
-= \frac1{10}\int_{0}^{10} \P{S= x +u} \d u.
-\end{equation*}
-
-Next, interpret $\P{S= y}$ as the density of $\P{S\leq y}$ so that
-$\P{S= y} = \1{y\in [0,7]}/7$ Therefore, while using that in the above
-integral that $x$ is fixed,
-\begin{equation*}
-  \P{S= x+u} = \frac 17 \1{-x \leq u \leq 7-x},
-\end{equation*}
-from which
-\begin{equation*}
-  \begin{split}
-  f(x)  
-&= \frac1{70}\int_{0}^{10} \1{-x \leq u \leq 7-x} \d u \\
-&= \frac1{70}\int_{-\infty}^{\infty} \1{0\leq u \leq 10} \1{-x \leq u \leq 7-x} \d u \\
-&= \frac1{70}\int_{-\infty}^{\infty} \1{\max\{0, -x\} \leq u \leq \min\{10, 7-x\}} \d u.\\
-  \end{split}
-\end{equation*}
-First we make some simple observations. If $x>7$ then
-$\min\{10, 7-x\} <0$. This is smaller then $\max\{0, -x\}$. Thus,
-$f(x) = 0$ for $x\geq 7$. Likewise, when $x\leq -10$, $f(x) =
-0$. Also, when $x\in[-3,0]$ the $\max$ and $\min$ overlap. Thus, all in all,
-\begin{equation*}
-  f(x) = 
-  \begin{cases}
-    0, &\text{ if } x\leq -10, \\
- \frac {x+10}{70} &\text{ if } x \in [-10, -3], \\
-\frac 1{10} &\text{ if } x \in [-3, 0], \\
- \frac {7-x}{70} &\text{ if } x \in [0, 7], \\
-    0, &\text{ if } x>7, 
-  \end{cases}
-\end{equation*}
-
-The above is the answer; but, given the amount of effort I had to put
-into getting it, I want to check it. For this I used Wolframalpha. You
-can skip the rest of the solution below if you are not interested in how to
-do this (I will not ask this at the exam). However, to expand your
-skill set, I advise you to take notice of it anyway. Besides that, 
-Wolframalpha is a great site. Please check it out if you haven't done
-so up to now.
-
-So, I went to Wolframalpha, and this is what what I typed: 
-
-<<evaluate=False>>=
-\int_{-\infty}^\infty Boole[0<=u<=10] Boole[-x<=u<=7-x] du,
-@
-
-so, once you know \LaTeX\/ you can use wolframalpha.  Wolframalpha turned it to 
-
-<<evaluate=False>>=
-integral\_(-infinity)^infinity Boole[0<=u<=10] Boole[-x<=u<=7-x] du
-@
-
-For your convenience, I also include the following code from Wolframalpa
-
-<<evaluate=False>>=
-Integrate[Boole[Max[0, -x] <= u <= Min[10, 7 - x]], {u, -Infinity, Infinity}]
-@
-
-I got the same results as Wolframalpa, but certainly not for free. 
-
-\end{solution}
-\end{question}
-
-
-\begin{question}
- What are  the meanings of $A_{A(t)}$ and $A(A_n)$?
- \begin{solution}
-  $A(t)$ is the number of arrivals during $[0,t]$. Suppose that
-    $A(t) = n$. This $n$th job arrived at time $A_n$. Thus, $A_{A(t)}$
-    is the arrival time of the last job that arrived before or at time
-    $t$. In a similar vein, $A_n$ is the arrival time of the $n$th
-    job. Thus, the number of arrivals up to time $n$, i.e., $A(A_n)$,
-    must be $n$.
-  \end{solution}
-\end{question}
-
-\begin{question}
-  Would it make sense to define $A(t)=\min\{k : A_k \geq t\}$?
-  \begin{hint}
-\hint{Compare this to the definition in (\ref{eq:2}).}
-  \end{hint}
-  \begin{solution}
-    Suppose $A_3 = 10$ and $A_4 = 20$. Take $t=15$. Then
-    $\min\{k : A_k \geq 15\} = 4$ since $A_3 < t=15 < A_4$. On the
-    other hand $\max\{k : A_k \leq t\} = 3.$
-  \end{solution}
-\end{question}
-
-\begin{question}
-  Define $L_Q(t)$ as the number of job in queue, and $L_s(t)$ as the
-  number of jobs in service. Likewise, let $D_Q(t)$ be the number of
-  jobs that departed from the queue up to time $t$.
-  \begin{enumerate}
-  \item Why don't we need separate notation for $D_s(t)$, the number
+Why don't we need separate notation for $D_s(t)$, the number
     of jobs that departed from the server? 
-  \item Is $D_Q(t) \leq D(t)$ or $D_Q(t) \geq D(t)$?
-  \item Why is $L(t) = L_Q(t) + L_s(t)$?
-  \item Express $L_Q(t)$ and $L_s(t)$ in terms of $A(t)$, $D_Q(t)$ and $D(t)$.
-  \item Consider a multi-server queue with $m$ servers. Suppose that
-    at some $t$ it happens that $D_Q(t) - D_s(t) < m$ even though
-    $A(t) - D_s(t) > m$. How can this occur? 
-  \end{enumerate}
 \begin{solution}
-  \begin{enumerate}
-  \item Because $D_s(t) = D(t)$. Once customers leave the server,
+ Because $D_s(t) = D(t)$. Once customers leave the server,
     their service is completed, and they leave the queueing system.
-  \item All customers that left the system must have left the
+  \end{solution}
+\end{question}
+
+
+
+\begin{question}
+ Is $D_Q(t) \leq D(t)$ or $D_Q(t) \geq D(t)$?
+\begin{solution}
+ All customers that left the system must have left the
     queue. Thus, $D_Q(t) \geq D(t)$.
-  \item Jobs in the system are in queue or in service.
-  \item $L_Q(t) = A(t) - D_Q(t)$. $L_S(t) = D_Q(t) - D(t)$. This is in
+  \end{solution}
+\end{question}
+
+
+
+\begin{question}
+ Why is $L(t) = L_Q(t) + L_s(t)$?
+\begin{solution}
+ $L_Q(t) = A(t) - D_Q(t)$. $L_S(t) = D_Q(t) - D(t)$. This is in
     line with the fact that $L(t) = L_Q(t) + L_s(t) = A(t) - D(t)$.
-  \item In that case, there are servers idling while there are still
+\end{solution}
+\end{question}
+
+
+
+\begin{question}
+ Express $L_Q(t)$ and $L_s(t)$ in terms of $A(t)$, $D_Q(t)$ and $D(t)$.
+\begin{solution}
+ $L_Q(t) = A(t) - D_Q(t)$. $L_S(t) = D_Q(t) - D(t)$. This is in
+    line with the fact that $L(t) = L_Q(t) + L_s(t) = A(t) - D(t)$.
+\end{solution}
+\end{question}
+
+\begin{question}
+ Consider a multi-server queue with $m$ servers. Suppose that
+    at some time~$t$ it happens that $D_Q(t) - D_s(t) < m$ even though
+    $A(t) - D_s(t) > m$. How can this occur? 
+\begin{solution}
+ In this case, there are servers idling while there are still
     customers in queue. If such events occur, we say that the server
     is not work-conservative.
-  \end{enumerate}
 \end{solution}
 \end{question}
-
 
 
 \begin{question} Show that $L(t) = A(t)-D(t)$ implies that 
   \begin{equation*}
     L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}.
   \end{equation*}
- Show also that if $L(A_k)>0$, i.e., the system contains at least one
-  job at the time of the $k$th arrival, then $A_k \leq D_{k-1}$, i.e.,
-  job $k$ arrives before job $k-1$ departs.
-
   \begin{hint}
-  \hint{Use Boolean algebra.  Write, for notational ease,
+  Use Boolean algebra.  Write, for notational ease,
     $A=\1{A_k \leq t}$ and $\bar A = 1- A = \1{A_k > t}$, and define
     something similar for $D$.  Then show that
     $A - D = A \bar D - \bar A D$, and show that $\bar A D
-    =0$. Finally sum over $k$.}
+    =0$. Finally sum over $k$.
   \end{hint}
 
 \begin{solution}
-  \begin{enumerate}
-  \item 
   \begin{equation*}
     \begin{split}
       L(t)
@@ -617,7 +520,16 @@ I got the same results as Wolframalpa, but certainly not for free.
   Boolean algebra is actually a really nice way to solve logical
   puzzles. If you are interested you can find some examples on my
   homepage. 
-\item In a sense, the claim is evident, for, if the system contains a
+\end{solution}
+
+\end{question}
+
+\begin{question} Show  that $L(A_k)>0 \implies A_k \leq D_{k-1}$.
+  \begin{hint} Use that $L(A_k)>0$ means that the system contains at least one
+  job at the time of the $k$th arrival, and that $A_k \leq D_{k-1}$ means that
+  job $k$ arrives before job $k-1$ departs.
+  \end{hint}
+\begin{solution}  In a sense, the claim is evident, for, if the system contains a
   job when job $k$ arrives, it cannot be empty. But if it is not
   empty, then at least the last job that arrived before job $k$, i.e.,
   job $k-1$, must still be in the system. That is, $D_{k-1} \geq A_k$. A more formal proof proceeds along the following lines. Using that $A(A_k) = k$ and $D(D_{k-1})= k-1$, 
@@ -629,8 +541,6 @@ I got the same results as Wolframalpa, but certainly not for free.
   \end{equation*}
   where the last relation follows from the fact that $D(t)$ is a
   counting process, hence monotone non-decreasing.
-  \end{enumerate}
-
 \end{solution}
 \end{question}
 
@@ -676,16 +586,33 @@ I got the same results as Wolframalpa, but certainly not for free.
 \end{question}
 
 
+Finally, the \recall{virtual waiting time process} $\{V(t)\}$ is the
+amount of waiting that an arrival would see if it would arrive at time
+$t$. To construct $\{V(t)\}$, we simply draw lines that start at
+points $(A_k, W_k)$ and have slope -1, unless the line hits the
+$x$-axis, in which case the virtual waiting time remains zero until
+the next arrival occurs.  Thus, the lines with slope $-1$ in
+Figure~\ref{fig:waitingtimegg1} show (a sample path of) the virtual
+waiting time.
+
+
+Observe that, just as in Section~\ref{sec:constr-discr-time}, we have
+obtained a set of recursions by which we can run a simulation of a
+queueing process of whatever length we need, provided we have a
+sequence of have inter-arrival times $\{X_k\}$ and service times
+$\{S_k\}$.  A bit of experimentation with computer programs such as
+$R$ or python will reveal that this is easy.
+
+
+
+
+
 \begin{question}
   Provide a specification of the virtual waiting time process $\{V(t)\}$ for
     all $t$.
 
-    \begin{hint}
-\hint{
-Make a plot of the function $A_{A(t)}-t$. What is the meaning of $V(A_{A(t)})?$ What is
+    \begin{hint}Make a plot of the function $A_{A(t)}-t$. What is the meaning of $V(A_{A(t)})?$ What is
 $V(A_{A(t)} + A_{A(t)}-t$?
-}
-      
     \end{hint}
 
     \begin{solution}
@@ -713,36 +640,9 @@ $V(A_{A(t)} + A_{A(t)}-t$?
 
 
 
-\begin{question}  Another set of recursions to compute the arrival and departure times
-  for a given set of inter-arrival and service times is the following:
-\begin{equation}
-  \label{eq:45}
-  \begin{split}
-    A_k &= A_{k-1} + X_k, \\
-    D_k &= \max\{A_k, D_{k-1}\} + S_k.
-  \end{split}
-\end{equation}
-Now the computation of the waiting times is trivial:
-$W_k = D_k - A_k$.
-  \begin{enumerate}
-  \item Why do the recursions Eq.~(\ref{eq:45}) work? 
-  \item  (Very difficult) Extend the above recursions to a situation in which one queue is
-  served by two servers.  
-\item (Impossible?)  Extend the above recursions to a situation in
-  which one queue is served by $m>2$ servers.
-  \end{enumerate}
-  \begin{solution}
-    \begin{enumerate}
-    \item Of course, the service of job $k$ cannot start before it
-      arrives. Hence, it cannot leave before $A_k + S_k$. Therefore it
-      must be that $D_k \geq A_k +S_k$. But the service of job $k$ can
-      also not start before the previous job, i.e. job $k-1$, left the
-      server. Thus job $k$ cannot start before $D_{k-1}$. To clarify
-      it somewhat further, define $S_k'$ as the earliest start of job
-      $k$. Then it must be that $S_k' = \max\{A_k, D_{k-1}\}$---don't
-      confuse the earliest start $S_k'$ and the service time
-      $S_k$---and $D_k = S_k' + S_k$.
-    \item I found this not easy, to say the least\ldots The problem is
+\begin{question}  Try to extend the recursions~(\ref{eq:45})  to a situation in which one queue is
+  served by two servers.  (This is a hard problem, only for the interested student.)
+    \begin{hint} The problem is
       that in a multi-server queueing systems, unlike for
       single-server queues, jobs can overtake each other: a small job
       that arrives after a very large job can still leave the system
@@ -750,7 +650,9 @@ $W_k = D_k - A_k$.
       method. A subsequent search on the web helped a lot. The
       solution below is a modification of N. Krivulin, `Recursive
       equations based models of queueing systems'. 
+    \end{hint}
 
+  \begin{solution}
 The recursions for the two-server system are this: 
       \begin{equation*}
         \begin{split}
@@ -782,8 +684,8 @@ The recursions for the two-server system are this:
       that leaves after $D_{k-2}$ ( provided of course that
       $C_{k+1} < C_k$). Thus, all in all
       $D_{k-1} = \min\{M_{k-1}, C_k\}$.
-    \item Similar reasoning for the $G/G/m$ queue seems to lead to the
-      following.
+
+In an attempt to   extend the above to $m>2$ servers, I came up with this scheme:
       \begin{equation*}
         \begin{split}
           A_k &= A_{k-1} + X_k, \\
@@ -793,36 +695,22 @@ The recursions for the two-server system are this:
         \end{split}
       \end{equation*}
       but it is not correct. Can you find a counter example?
-    \end{enumerate}
   \end{solution}
 \end{question}
 
 
 
 
-\begin{question}
-  Implement the above recursions in excel or some other computer
-  program such as R, python, or julia, and check the results of the
-  previous exercise.
-    \begin{solution}
-      You can check the files on \texttt{github} in the \texttt{progs}
-      directory.
-\begin{itemize}
-\item \texttt{mm1.py} is the python implementation
-\item \texttt{mm1.R} is the R implementation
-\item \texttt{mm1.jl} is the julia implementation
-\end{itemize}
-Take your pick, and start playing with it. These examples are meant to
-be simple to understand, not necessarily super efficient.
-\end{solution}
-\end{question}
 
 
-\begin{question}(Multiple queues, for the interested) Suppose one server serves two
+
+
+\begin{question} Suppose one server serves two
   queues, such that jobs in queue A are served with priority over jobs
   in queue B. Assume that service is not-preemptive.  Can you develop
   a similar set of recursions for each of the queues, or, otherwise,
-  an algorithm?
+  an algorithm? Can you extend this to cover the LIFO (Last-In-First-Out) queue?
+(This is  a hard problem. You can skip it if you like.)
   \begin{solution}
     This question came up in class. I don't think this can be
     constructed as a straightforward recursion, and a search on the
@@ -862,18 +750,10 @@ class Priority(Queue): # a priority queue
 Interestingly, once we have a proper environment to carry out
 simulations, changing the queueing discipline is a one-liner!.
 
-  \end{solution}
-\end{question}
-
-
-\begin{question}(LIFO queue) Can you develop a set of recursions or
-  algorithm for a LIFO (Last-In-First-Out) queue?
-  \begin{solution}
-    Again, I don't know a good set of recursions, but an algorithm is
+With the above, an algorithm for the LIFO is
     straightforward. Rather then sorting the jobs in queue in
     ascending order of arrival time, just sort them in descending
     order of arrival time. 
-
 
 <<evaluate=False>>=
 class Lifo(Queue):
@@ -892,7 +772,6 @@ Do you see how sort in descending order of job size (it just a matter
 of putting a minus sign at the right place)?
   \end{solution}
 \end{question}
-
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}

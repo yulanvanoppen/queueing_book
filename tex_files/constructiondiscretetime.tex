@@ -3,58 +3,18 @@
   Processes}
 \label{sec:constr-discr-time}
 
-In this section we discuss a case as this provides real-life
-motivation to analyze queueing systems. After describing the case, we
-we develop a set of recursions by which we can construct queueing
-systems in discrete time.  As it turns out, this case is too hard to
-analyze by mathematical means, so that simulation is the best way
-forward. Interestingly, the structure of the simulation is very
-simple. As such, simulation is an exceedingly convincing tool to
-communicate the results of an analysis of a queueing system to
-managers (and the like). 
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
 
-At a mental health department five psychiatrists do intakes of future
-patients to determine the best treatment process for the patients.
-There are complaints about the time patients have to wait for their
-first intake; the desired waiting time is around two weeks, but the
-realized waiting time is sometimes more than three months. The
-organization considers this is to be unacceptably long, but\ldots what to do about it?
-
-To reduce the waiting times the five psychiatrists have various
-suggestions. 
-\begin{enumerate}
-\item Not all psychiatrists have the same amount of time available per
-  week to do intakes. This is not a problem during weeks that all are
-  present. However, psychiatrists tend to take holidays, visit
-  conferences, and so on. So, if the psychiatrist with the most
-  intakes per week would go on leave, this might affect the behavior
-  of the queue length considerably. This raises the question about the difference
-  in allocation of capacity allotted to the psychiatrists. What are
-  the consequences on the distribution and average of the waiting
-  times if they would all have the same weekly capacity?
-\item The psychiatrists tend to plan their holidays after each
-  other, to reduce the variation in the service capacity. What if they
-  would synchronize their holidays, to the extent possible, rather
-  than spread their holidays? 
-\item Finally, suppose the psychiatrists would do 2 more intakes per
-  week in busy times and 2 less in quiet weeks. Assuming that the
-  system is stable, i.e., the service capacity exceeds the demand,
-  then on average the psychiatrists would not do more intakes, i.e.,
-  their workload would not increase, but the queue length may be
-  controlled better.
-\end{enumerate}
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
 
 
-To evaluate the effect of these suggestions on reducing the queueing
-dynamics we develop a simple simulator and a number of plots. The
-simulation of a queueing system involves the specification of its
-behavior over time.  The easiest method to construct queueing
-processes, hence to develop simulations, is to `chop up' time in
-periods and develop recursions for the behavior of the queue from
-period to period. Note that the length of such a period depends on the
-case for which the model is developed.  For instance, to study
-queueing processes at a supermarket, a period can consist of $5$
-minutes, while for a production environment, e.g., a job shop, it can
+To provide real-life motivation to analyze queueing systems we discuss a case. However, as it turns out, this case is too hard to analyze by mathematical means;  we need to develop a set of recursions to simulate the queueing system in discrete time.  Interestingly, the structure of the simulation is very simple so that  it is also  an exceedingly convincing tool to
+communicate the results of an analysis of a queueing system to managers (and the like).  
+
+Let us start with discussing the essentials of the simulation of a queueing system. The easiest way  to construct queueing processes is to `chop up' time in periods and develop recursions for the behavior of the queue from period to period. Note that the length of such a period depends on the
+case for which the model is developed.  For instance, to study queueing processes at a supermarket, a period can consist of $5$ minutes, while for a production environment, e.g., a job shop, it can
 be a day, or even a week.
 
 Using fixed sized periods has it advantages as it does not require to
@@ -63,30 +23,29 @@ customers. Only the number of arrivals in a period and the number of
 potential services need to be specified, which is useful since in many
 practical settings, e.g., production environments, it is easier to
 provide data in these terms then in terms of inter-arrival and service
-times. It is, however, necessary to make some careful choices about
-timing.
+times. 
 
-Let us \recall{define}
+Let us define
 \begin{equation}
   \label{eq:30}
   \begin{split}
     a_k &= \text{number of jobs that arrive at period $k$},\\
-    c_k &= \text{number of jobs that can be served during period $k$},\\
-    d_k &= \text{number of jobs that depart the queue  \textit{during} period $k$},\\
+    c_k &= \text{the capacity, i.e., the maximal number of jobs that can be served, during period $k$},\\
+    d_k &= \text{number of jobs that depart the queue  \textit{in} period $k$},\\
     Q_k &= \text{number of jobs in queue  at the \textit{end} of period $k$}.\\
   \end{split}
 \end{equation}
-In the sequel we also call $a_k$ the \recall{batch} of job arrivals in
+In the sequel we also call $a_k$ the size of the batch arriving in
 period $k$. The definition of $a_k$ is a bit subtle: we may assume
 that the arriving jobs arrive either at the start or at the end of the
-period. In the first case, the jobs can be served during period $k$,
-in the latter case, they \emph{cannot} be served during period~$k$.
+period. In the first case, the jobs can be served in period $k$,
+in the latter case, they \emph{cannot} be served in period~$k$.
 
 
 Since $Q_{k-1}$ is the queue length at the end of period $k-1$, it
 must also be the queue length at the start of period $k$. Assuming
-that jobs that arrive in period $k$ cannot be served in period~$k$,
-the number of customers that can depart from the queue in period $k$
+that jobs arriving in period $k$ cannot be served in period~$k$,
+the number of customers that depart from the queue in period $k$
 is
 \begin{subequations}\label{eq:31}
 \begin{equation}\label{eq:d_k}
@@ -100,14 +59,190 @@ $k$ is given by
     Q_k = Q_{k-1} -d_k + a_k.
 \end{equation}
 \end{subequations}
-As an example, suppose that $c_k= 7$ for all $k$, and $a_1=5$, $a_2=4$
-and $a_3=9$; also $Q_0=8$. Then, $d_1=7$, $Q_1=8-7+5=6$, $d_2 = 6$,
+
+\begin{question}
+Suppose that $c_k= 7$ for all $k$, and $a_1=5$, $a_2=4$
+and $a_3=9$; also $Q_0=8$. What are $d_k$ and $Q_k$ for $k\geq 1$? 
+\begin{solution}
+$d_1=7$, $Q_1=8-7+5=6$, $d_2 = 6$,
 $Q_2=6-6+4=4$, $d_3 = 4$, $Q_3=4-4+9=9$, and so on. 
+\end{solution}
+\end{question}
+
+\begin{question}
+ What are the consequences of setting
+    $d_k = \min\{Q_{k-1}+a_k,  c_k\}$ rather than the definition~\eqref{eq:d_k}?
+\begin{solution}
+ The assumption is that the jobs arrive at the start of period
+    $k$, before service in period $k$ starts, rather than at the end
+    of the period. Therefore the arrivals at period $k$ can also be
+    served during period $k$.
+\end{solution}
+\end{question}
+
+
+\begin{question}
+  Implement Eqs.~\ref{eq:31} in a computer program and simulate a
+  simple single-server queueing system. 
+  \begin{solution}
+    Here is an example in python; please read the code to see how I
+    approach the problem. The code is really easy, as it is nearly
+    identical to the mathematical specification. You don't have to
+    memorize the specific syntax of the code, of course, but it is (at
+    least I find it) interesting to see how little code is actually
+    necessary to set things up.
+
+
+    Below I fix the seed of the random number generator to ensure that
+    I always get the same results from the simulator.  The arrival
+    process is Poisson, and the number of services is fixed to 21 per
+    period. I use \texttt{Q = np.zeros\_like(a)} to make an array of the
+    same size as the number of arrival $a$ initially set to zeros. The
+    rest of the code is nearly identical to the formulas in the text.
+
+<<>>=
+import numpy as np
+
+np.random.seed(3) # fix the seed
+
+labda = 20
+mu = 21
+@
+
+These are the number of arrivals in each period.
+
+<<term=True>>=
+a = np.random.poisson(labda, 10)
+a
+@
+
+The number of potential services
+<<term=True>>=
+c = mu * np.ones_like(a)
+c
+@ 
+
+Now for the queueing recursions:
+
+<<>>=
+Q = np.zeros_like(a)
+d = np.zeros_like(a)
+Q[0] = 10  # initial queue length
+
+for k in range(1, len(a)):
+    d[k] = min(Q[k - 1], c[k])
+    Q[k] = Q[k - 1] - d[k] + a[k]
+@
+
+These are the departures for each period:
+<<term=True>>=
+d
+@
+
+The queue lengths
+<<term=True>>=
+Q
+@
+
+<<term=True>>=
+loss = (Q > 20)
+loss
+loss.sum()
+@
+
+Here I
+define loss as the number of periods in which the queue length exceeds
+20. Of course, any other threshold can by taken. Counting the number
+of such periods is very easy in python: \texttt{(Q>20)} gives all
+entries of $Q$ such $Q>20$, the function \texttt{sum()} just adds
+them. 
+
+
+Now all statistics:
+
+<<term=True>>=
+d.mean()
+Q.mean()
+Q.std()
+(Q > 20).sum()
+@
+
+Since this is a small example, the mean number of departures, i.e.,
+\texttt{d.mean()}, is not equal to the arrival rate $\lambda$.  
+Likewise for the computation of the mean, variance, and other
+statistical functions. 
+
+Now I am going to run the same code, but for a larger instance. 
+
+<<>>=
+num = 1000
+a = np.random.poisson(labda, num)
+c = mu * np.ones_like(a)
+Q = np.zeros_like(a)
+d = np.zeros_like(a)
+Q[0] = 10  # initial queue length
+
+for k in range(1, len(a)):
+    d[k] = min(Q[k - 1], c[k])
+    Q[k] = Q[k - 1] - d[k] + a[k]
+@
+
+<<term=True>>=
+d.mean()
+Q.mean()
+Q.std()
+(Q > 30).sum()/num * 100
+@
+
+
+I multiply with 100 to get a percentage. Clearly, many jobs see a long
+queue, the mean is already some 24 jobs. For this arrival rate a
+service capacity of $\mu=21$ is certainly too small. 
+
+Next, an example with the same arrival pattern but with a Poisson
+distributed number of jobs served per day, so the service rate is
+still $21$, but the period capacity $c$ is random variable with
+Poisson distribution with $P(21)$
+
+<<fig = False, width = '12 cm'>>=
+c = np.random.poisson(mu, num)
+Q = np.zeros_like(a)
+d = np.zeros_like(a)
+Q[0] = 10  # initial queue length
+
+for k in range(1, len(a)):
+    d[k] = min(Q[k - 1], c[k])
+    Q[k] = Q[k - 1] - d[k] + a[k]
+@
+
+<<term=True>>=
+d.mean()
+Q.mean()
+Q.std()
+(Q > 30).sum()/num * 100
+@
+
+Compared to the case with constant service capacity, i.e., $c=21$ in
+each period, we see that the average waiting time increases, just as
+the number of periods in which the queue length exceeds 30. Clearly,
+variability in service capacity does not improve the performance of
+the queueing system, quite on the contrary. In later sections we will
+see why this is so.
+
+You can try to implement some of the other cases of the exercises in
+this section and analyze them in the same way. Hopefully you
+understand from this discussion that once you have the recursions to
+construct/simulate the queueing process, you are `in business'. The
+rest is easy: make plots, do some counting, i.e., assemble statistics,
+vary parameters for sensitivity analysis, and so on.
+
+  \end{solution}
+\end{question}
 
 Of course we are not going to carry out these computations by
 hand. Typically we use company data about the sequence of arrivals
 $\{a_k\}_{k=1,2,\ldots}$ and the capacity $\{c_k\}_{k=1,\ldots}$ and
-feed this data into a computer to compute the
+feed this data into a computer to carry out the
 recursions~\eqref{eq:31}. If we do not have sufficient data we make a
 probability model for these data and use the computer to generate
 random numbers with, hopefully, similar characteristics as the real
@@ -115,9 +250,41 @@ data. At any rate, from this point on we assume that it is easy, by
 means of computers, to obtain numbers $a_1,\ldots, a_n$ for
 $n\gg 1000$, and so on.
 
-We now show how to adapt~\eqref{eq:30} and~\eqref{eq:31} to the case
-introduced above.
 
+We now show how to apply~\eqref{eq:30} and~\eqref{eq:31} to a real case. At a mental health department five psychiatrists do intakes of future
+patients to determine the best treatment process for the patients.
+There are complaints about the time patients have to wait for their
+first intake; the desired waiting time is around two weeks, but the
+realized waiting time is sometimes more than three months. The
+organization considers this is to be unacceptably long, but\ldots what to do about it?
+
+To reduce the waiting times the five psychiatrists have various
+suggestions. 
+\begin{enumerate}
+\item Not all psychiatrists have the same amount of time available per
+  week to do intakes. This is not a problem during weeks that all psychiatrists are
+  present; however, psychiatrists tend to take holidays, visit
+  conferences, and so on. So, if the psychiatrist with the most
+  intakes per week would go on leave, this might affect the behavior
+  of the queue length considerably. This raises the question about the difference
+  in allocation of capacity allotted to the psychiatrists. What are
+  the consequences on the distribution and average of the waiting
+  times if they would all have the same weekly capacity?
+\item The psychiatrists tend to plan their holidays after each
+  other, to reduce the variation in the service capacity. What if they
+  would synchronize their holidays, to the extent possible, rather
+  than spread their holidays? 
+\item Finally, suppose the psychiatrists would do 2 more intakes per
+  week in busy times and 2 less in quiet weeks. Assuming that the
+  system is stable, i.e., the average service capacity is larger the average demand,
+  then on average the psychiatrists would not do more intakes, i.e.,
+  their workload would not increase, but the queue length may be
+  controlled better.
+\end{enumerate}
+
+
+To evaluate the effect of these suggestions on reducing the queueing
+dynamics we develop a simple simulator with which we can make a number of plots. 
 As a first step we model the arrival process of patients as a Poisson
 process, c.f., Section~\ref{sec:poisson-distribution}. The duration of
 a period is taken to be a week. The average number of arrivals per
@@ -189,9 +356,9 @@ the behavior of the queue length process.
   \centering
 % progs/intake_control.py
 \input{progs/balanced} 
-\caption{Effect of capacity and holiday plans. We plot for time point
+\caption{Effect of capacity and holiday plans. We plot for each time point
   the maximum and the minimum queue length for each of the
-  policies. We see that the effect of each of these policies is, for
+  policies. Apparently, the effect of each of these policies is, for
   all practical purposes, negligible.  }
 \label{fig:balanced}
 \end{figure}
@@ -222,41 +389,19 @@ influence.
 \label{fig:intakes}
 \end{figure}
 
-From the simulation experiment we learn that changing holiday plans or
+From this simulation experiment we learn that changing holiday plans or
 spreading the work over multiple servers, i.e., psychiatrists, does
 not significantly affect the queueing behavior.  However, controlling
 the service rate as a function of the queue length improves the
 situation quite dramatically. 
 
-Thus, we made models for the arrival and service processes and then
-developed a simple recursion of the type~\eqref{eq:31} to
-\recall{construct} a queueing process. Finally, for the analysis, we
-made plots of these processes. 
 
-
-In more abstract terms the study of queueing system is focused on
-studying the probabilistic properties of the queueing length process
-and related concepts such as waiting time, server occupancy, fraction
-of customers lost, and so on. Once we have constructed the queueing
-process we can compute all performance measures of relevance, such as
-the average waiting time,
-c.f. Section~\ref{sec:limits-of-emperical}. If it turns out that the
-performance of the system is not according to what we desire, we can
-change parts of the system with the aim to improve the situation and
-assess the effect of this change.  For instance, if the average
-waiting time is too long, we might add service capacity with the aim
-to reduce the service times, hence reduce the average waiting
-time. With simulation it is easy to study the effect of, hence
-evaluate, such decisions.
-
-Observe that, even with these simple recursions, we can obtain
+Observe that, even with these (deceitfully) simple recursions, we can obtain
 considerable insight into this, otherwise, very complicated controlled
 queueing process. (If the reader doubts the value of simulation, s/he
 should try to develop other mathematical methods to analyze
-multi-server queueing system with vacations, of which this is an
-example. Warning, do not even attempt: you'll fail as it is most
-probably too hard.) The simplicity of the recursions is deceitful, but
-with these simple recursions we can analyze many practical queueing
+multi-server queueing system with vacations, of which this case is an
+example.) As a matter of fact, with such simple recursions we can analyze many practical queueing
 situations. Together with students the author applied it numerous
 times, for instance,
 \begin{itemize}
@@ -265,24 +410,20 @@ times, for instance,
 \item When to switch on and off a tin bath at an electronics component factory?
 \item What is the effect of reducing the number of jobs in a paint
   factory?
-\item Post parcel routing in a post sorting center.
-\item Controlling inventories at various companies.
-\item Throughput time analysis at courts.
+\item How to route post parcels in a post sorting center.
 \end{itemize}
-And so on, and so on. The recursions are indeed astonishingly useful. We
-therefore urge the reader to practice with this type of queueing
-modeling. The exercises below provide ample material for this purpose.
 
-In passing we remark that yet more powerful simulations can be carried
-out with, so-called, event-based simulations. We refer to
-\cite[Section 4.5]{hall91:_queuein_method_servic_manuf} for a general
-description of this technique. The author applied this to quite complicated queueing networks:
-\begin{itemize}
-\item Analysis of the packaging process of a large beer factory.
-\item Performance analysis of large telecommunication networks
-\item Optimization of truck routing and queueing for a sugar factory.
-\end{itemize}
-Due to lack of time, we decided not to include this. 
+In general, the study of queueing system is focused on
+studying the probabilistic properties of the queueing length process
+and related concepts such as waiting time, server occupancy, fraction
+of customers lost, and so on. Once we have constructed the queueing
+process we can compute all performance measures of relevance, such as
+the average waiting time. If it turns out that the
+performance of the system is not according to what we desire, we can
+change parts of the system with the aim to improve the situation and
+assess the effect of this change.  For instance, if the average
+waiting time is too long, we might add service capacity. With simulation it is easy to study the effect of, hence
+evaluate, such decisions.
 
 The reader should understand from the above case that, once we have
 the recursions, we can analyze the system and make plots to evaluate
@@ -291,6 +432,7 @@ to construct, i.e., model, queueing processes. For this reason, most
 of the exercises below focus on obtaining recursions for many
 different queueing systems. 
 
+\begin{remark}
 A comment is required about the modeling exercises below. It may be
 that the recursions you find are not identical to the recursions in
 the solution; the reason is that the assumptions you make might not be
@@ -303,24 +445,7 @@ long, but this is also undesirable. So, let's be pragmatic: the aim is
 that you practice with modeling, and that you learn from the
 solutions.  If you obtain \emph{reasonable} recursions, but they are
 different from mine, then your answer is just as good.
-
-\subsection*{Exercises}
-\label{sec:exercises}
-
-\Opensolutionfile{hint}
-\Opensolutionfile{ans}
-
-\begin{question}
- What are the consequences of setting
-    $d_k = \min\{Q_{k-1}+a_k,  c_k\}$ rather than the definition~\eqref{eq:d_k}?
-\begin{solution}
- The assumption is that the jobs arrive at the start of period
-    $k$, before service in period $k$ starts, rather than at the end
-    of the period. Therefore the arrivals at period $k$ can also be
-    served during period $k$.
-\end{solution}
-\end{question}
-
+\end{remark}
 
 \begin{question} (Queue with Blocking) Consider a queueing system
   under daily review, i.e., at the end of the day the queue length is
@@ -339,10 +464,49 @@ different from mine, then your answer is just as good.
   \end{solution}
 \end{question}
 
+\begin{question} (Estimating the lead time distribution.)  Take
+  $d_k = \min\{Q_{k-1}+a_k, c_k\}$, and assume that jobs are served in
+  FIFO sequence. Find an expression for the shortest possible waiting
+  time $W_-(k)$ of a job that arrives at time $k$, and an expression
+  for the largest possible waiting time $W_+(k)$
+  \begin{hint}
+  Consider a numerical example. Suppose $Q_{k-1}=20$. Suppose
+    that the capacity is $c_k=3$ for all $k$. Then a job that arrives
+    in the $k$th period, must wait at least $20/3$ (plus rounding)
+    periods before it can leave the system. Now generalize this
+    numerical example.
+  \end{hint}
+    \begin{solution}
+      Let's tag the first customer that arrives in period $k$. This
+      tagged customer sees $Q_{k-1}$ customer in the system, hence the
+      tagged customer's service can only start after all $Q_{k-1}$
+      customers have been served.  Now, if $Q_{k-1}-c_k >0$, there are
+      still people in front of the tagged customer. In fact, as long
+      as $c_k+c_{k+1}+\cdots +c_m < Q_{k-1}$ the number of customers in
+      front of the tagged customer are still in the system.
+
+      We can also tag the last customer that arrives in period
+      $k$. This customer will certainly have left if $m$ is such that
+      $c_k+\cdot+c_m > Q_{k-1}+a_k$.
+
+      In formulas the above comes down to the following.  A job that
+      arrives in period $k$ cannot be served before period
+    \begin{equation*}
+    W_{-,k}:= \max\left\{m: \sum_{i=k}^{k+m} c_i < Q_{k-1}\right\},
+    \end{equation*}
+    and it must have been served before period
+    \begin{equation*}
+      W_{+,k}:= \min\left\{m: \sum_{i=k}^{k+m} c_i \geq
+        Q_{k}\right\}.
+    \end{equation*}
+    Thus, the waiting time of jobs arriving in period $k$ must lie in
+    the interval $[W_{-,k}, W_{+,k}]$.
+  \end{solution}
+\end{question}
 
 \begin{question}
   (Yield loss) A machine produces items, but a fraction $p$ of the
-  items produced in a period turn out to be faulty, and have to be
+  items produced in a period turns out to be faulty, and have to be
   made anew. Develop a set of recursions to cover this case.
   \begin{solution}
     The amount produced in period $k$ is $d_k$. Thus, $p d_k$ is the
@@ -476,13 +640,6 @@ we need. The total cost up to time $T$ becomes:
 \end{question}
 
 
-\begin{question}[use=false](Queue with setups)
-  One server serves two parallel queues, one at a time. After serving
-  a batch of 20 jobs of one queue the server moves to the other
-  queue. The change of queue requires one period setup time.
-  \begin{solution}
-  \end{solution}
-\end{question}
 
 
 \begin{question}
@@ -706,49 +863,9 @@ Realize that Stations A and B have their own arrivals.
 \end{solution}
 \end{question}
 
-\begin{question} (Estimating the lead time distribution.)  Take
-  $d_k = \min\{Q_{k-1}+a_k, c_k\}$, and assume that jobs are served in
-  FIFO sequence. Find an expression for the shortest possible waiting
-  time $W_-(k)$ of a job that arrives at time $k$, and an expression
-  for the largest possible waiting time $W_+(k)$
-  \begin{hint}
-  \hint{Consider a numerical example. Suppose $Q_{k-1}=20$. Suppose
-    that the capacity is $c_k=3$ for all $k$. Then a job that arrives
-    in the $k$th period, must wait at least $20/3$ (plus rounding)
-    periods before it can leave the system. Now generalize this
-    numerical example.}
-  \end{hint}
-    \begin{solution}
-      Let's tag the first customer that arrives in period $k$. This
-      tagged customer sees $Q_{k-1}$ customer in the system, hence the
-      tagged customer's service can only start after all $Q_{k-1}$
-      customers have been served.  Now, if $Q_{k-1}-c_k >0$, there are
-      still people in front of the tagged customer. In fact, as long
-      as $c_k+c_{k+1}+\cdots +c_m < Q_{k-1}$ the number of customers in
-      front of the tagged customer are still in the system.
 
-      We can also tag the last customer that arrives in period
-      $k$. This customer will certainly have left if $m$ is such that
-      $c_k+\cdot+c_m > Q_{k-1}+a_k$.
-
-      In formulas the above comes down to the following.  A job that
-      arrives in period $k$ cannot be served before period
-    \begin{equation*}
-    W_{-,k}:= \max\left\{m: \sum_{i=k}^{k+m} c_i < Q_{k-1}\right\},
-    \end{equation*}
-    and it must have been served before period
-    \begin{equation*}
-      W_{+,k}:= \min\left\{m: \sum_{i=k}^{k+m} c_i \geq
-        Q_{k}\right\}.
-    \end{equation*}
-    Thus, the waiting time of jobs arriving in period $k$ must lie in
-    the interval $[W_{-,k}, W_{+,k}]$.
-  \end{solution}
-\end{question}
-
-\begin{question} (Merging incoming streams) \tbd \emph{You can skip
-    this problem for the midterm as I changed the answer quite a bit
-    after the lecture. It is still interesting though. } Consider a
+\begin{question} (Merging incoming streams) 
+Consider a
   single-server queue that servers two customer `streams' in a FIFO
   discipline. Thus, both streams enter one queue that is served by the
   server. Let $\{a_k^a\}$ be the number of arrivals of stream $a$ in
@@ -879,9 +996,8 @@ any off-by-one errors. For future work, implement it in a simulator\ldots
   dynamics.  
 
   \begin{hint}
-\hint{Formulate the decision variables/controls, the
-    objective and the constraints.}
-    
+Formulate the decision variables/controls, the
+    objective and the constraints.    
   \end{hint}
 
   \begin{solution}
@@ -902,161 +1018,33 @@ I_k &>= 0.
   \end{solution}
 \end{question}
 
-
-\begin{question}
-  Implement Eqs.~\ref{eq:31} in a computer program and simulate a
-  simple single-server queueing system. 
+\begin{question}(Queue with setups)
+  One server serves two parallel queues, one at a time. After serving
+   one queue until it is empty,  the server moves to the other
+  queue. The change of queue requires one period setup time. (This is a tough problem; you can skip it if you don't have the time to really think about it.)
   \begin{solution}
-    Here is an example in python; please read the code to see how I
-    approach the problem. The code is really easy, as it is nearly
-    identical to the mathematical specification. You don't have to
-    memorize the specific syntax of the code, of course, but it is (at
-    least I find it) interesting to see how little code is actually
-    necessary to set things up.
+We need an extra variable $p_k$ that specifies  which queue is being served. If $p_k=0$, the server is moving from one queue to the other, if $p=1$, the server is at queue 1, and if $p_k=2$ it is at queue $2$. Then, with
+\begin{align*}
+  d^1_k &= \min\{Q^1_{k-1}, c_k^1 \1{p_k=1}\}, \\
+  d^2_k &= \min\{Q^2_{k-1}, c_k^2 \1{p_k=2}\},
+\end{align*}
+we can specify the evolution of the queue length processes. So it remains to deal with $p$. For this, we use a `truth table' to compute $p_{k+1}$ as a function of $p_k$ and whether $Q_k^1 > 0$ or not and $Q_k^2 > 0$ or not. 
 
-
-    Below I fix the seed of the random number generator to ensure that
-    I always get the same results from the simulator.  The arrival
-    process is Poisson, and the number of services is fixed to 21 per
-    period. I use \texttt{Q = np.zeros\_like(a)} to make an array of the
-    same size as the number of arrival $a$ initially set to zeros. The
-    rest of the code is nearly identical to the formulas in the text.
-
-<<>>=
-import numpy as np
-
-np.random.seed(3) # fix the seed
-
-labda = 20
-mu = 21
-@
-
-These are the number of arrivals in each period.
-
-<<term=True>>=
-a = np.random.poisson(labda, 10)
-a
-@
-
-The number of potential services
-<<term=True>>=
-c = mu * np.ones_like(a)
-c
-@ 
-
-Now for the queueing recursions:
-
-<<>>=
-Q = np.zeros_like(a)
-d = np.zeros_like(a)
-Q[0] = 10  # initial queue length
-
-for k in range(1, len(a)):
-    d[k] = min(Q[k - 1], c[k])
-    Q[k] = Q[k - 1] - d[k] + a[k]
-@
-
-These are the departures for each period:
-<<term=True>>=
-d
-@
-
-The queue lengths
-<<term=True>>=
-Q
-@
-
-<<term=True>>=
-loss = (Q > 20)
-loss
-loss.sum()
-@
-
-Here I
-define loss as the number of periods in which the queue length exceeds
-20. Of course, any other threshold can by taken. Counting the number
-of such periods is very easy in python: \texttt{(Q>20)} gives all
-entries of $Q$ such $Q>20$, the function \texttt{sum()} just adds
-them. 
-
-
-Now all statistics:
-
-<<term=True>>=
-d.mean()
-Q.mean()
-Q.std()
-(Q > 20).sum()
-@
-
-Since this is a small example, the mean number of departures, i.e.,
-\texttt{d.mean()}, is not equal to the arrival rate $\lambda$.  
-Likewise for the computation of the mean, variance, and other
-statistical functions. 
-
-Now I am going to run the same code, but for a larger instance. 
-
-<<>>=
-num = 1000
-a = np.random.poisson(labda, num)
-c = mu * np.ones_like(a)
-Q = np.zeros_like(a)
-d = np.zeros_like(a)
-Q[0] = 10  # initial queue length
-
-for k in range(1, len(a)):
-    d[k] = min(Q[k - 1], c[k])
-    Q[k] = Q[k - 1] - d[k] + a[k]
-@
-
-<<term=True>>=
-d.mean()
-Q.mean()
-Q.std()
-(Q > 30).sum()/num * 100
-@
-
-
-I multiply with 100 to get a percentage. Clearly, many jobs see a long
-queue, the mean is already some 24 jobs. For this arrival rate a
-service capacity of $\mu=21$ is certainly too small. 
-
-Next, an example with the same arrival pattern but with a Poisson
-distributed number of jobs served per day, so the service rate is
-still $21$, but the period capacity $c$ is random variable with
-Poisson distribution with $P(21)$
-
-<<fig = False, width = '12 cm'>>=
-c = np.random.poisson(mu, num)
-Q = np.zeros_like(a)
-d = np.zeros_like(a)
-Q[0] = 10  # initial queue length
-
-for k in range(1, len(a)):
-    d[k] = min(Q[k - 1], c[k])
-    Q[k] = Q[k - 1] - d[k] + a[k]
-@
-
-<<term=True>>=
-d.mean()
-Q.mean()
-Q.std()
-(Q > 30).sum()/num * 100
-@
-
-Compared to the case with constant service capacity, i.e., $c=21$ in
-each period, we see that the average waiting time increases, just as
-the number of periods in which the queue length exceeds 30. Clearly,
-variability in service capacity does not improve the performance of
-the queueing system, quite on the contrary. In later sections we will
-see why this is so.
-
-You can try to implement some of the other cases of the exercises in
-this section and analyze them in the same way. Hopefully you
-understand from this discussion that once you have the recursions to
-construct/simulate the queueing process, you are `in business'. The
-rest is easy: make plots, do some counting, i.e., assemble statistics,
-vary parameters for sensitivity analysis, and so on.
+\begin{tabular}{ccc|l}
+  $\1{Q^1_k > 0}$ & $\1{Q_k^2 > 0}$ & $p_k$ & $p_{k+1}$ \\ \hline
+0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 1 \\
+0 & 0 & 2 & 2 \\
+1 & 0 & 0 & 1 \\
+1 & 0 & 1 & 1 \\
+1 & 0 & 2 & 0 (switch over time)\\
+0 & 1 & 0 & 2 \\
+0 & 1 & 1 & 0 (switch over time)\\
+0 & 1 & 2 & 2 \\
+1 & 1 & 0 & 1 (to break ties) \\
+1 & 1 & 1 & 1 \\
+1 & 1 & 2 & 2 \\
+\end{tabular}
 
   \end{solution}
 \end{question}

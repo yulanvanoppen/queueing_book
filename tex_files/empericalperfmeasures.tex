@@ -1,6 +1,13 @@
 \section{(Limits of) Empirical Performance Measures}
 \label{sec:limits-of-emperical}
 
+
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 If the arrival and service processes are such that the queueing system
 is rate-stable, we can sensibly define other performance measures such
 as the average waiting time. In this section we define the second most
@@ -62,8 +69,37 @@ and $\{D(t)\}$. Assuming the limit exists for $t\to\infty$, we define
   \E L = \lim_{t\to\infty} \frac 1 t\int_0^t L(s) \d s 
 \end{equation}
 Observe that, notwithstanding that the symbols are the same, this
-expectation need not be the same as~\eqref{eq:EQ}, c.f. on of the
-exercises below. Next, define the following probability as the
+expectation need not be the same as~\eqref{eq:EQ}, c.f.  the
+next exercise.  Hence, in general:
+  \begin{equation*}
+    \lim_{t\to\infty} \int_0^t \1{L(s)\leq m}\,\d s \neq \lim_{n\to\infty} \frac 1n \sum_{k=1}^n \1{L_k \leq m}.
+  \end{equation*}
+
+
+\begin{question}
+Design a queueing system in which the load as seen by the server is very
+different from what the customers see. Show that for such a queueing system typically
+\begin{equation*}
+  \lim_{t\to\infty} \frac 1 t\int_0^t L(s)\, \d s \neq   \lim_{n\to\infty}\frac 1n  \sum_{k=1}^n L_k.
+\end{equation*}
+where, by \eqref{eq:Lk}, $L_k=L(A_k)$ is the number in the system at the arrival epoch of the $k$th job. 
+
+
+  \begin{hint}
+    
+  \hint{Consider a queueing system with constant service and
+    interarrival times.}
+  \end{hint}
+\begin{solution}
+  Take $X_k = 10$ and $S_k = 10-\epsilon$ for some tiny
+  $\epsilon$. Then $L(t) = 1$ nearly all of the time. In fact,
+  $\E L = 1-\epsilon/10$. However, $L_k=0$ for all $k$.
+\end{solution}
+\end{question}
+
+
+
+Next, define the following probability as the
 \recall{time-average fraction of time the system contains at most $m$
   jobs}:
 \begin{equation}
@@ -195,50 +231,13 @@ edge[pil,bend left=25, <-] (mu.east);
 \end{figure}
 
 
-\subsection*{Exercises}
-\label{sec:exercises}
-
-\Opensolutionfile{hint}
-\Opensolutionfile{ans}
-
-\begin{question}
-Design a queueing system in which the load as seen the server is very
-different from what the customers see. Show that for such a queueing system typically
-\begin{equation*}
-  \lim_{t\to\infty} \frac 1 t\int_0^t L(s)\, \d s \neq   \lim_{n\to\infty}\frac 1n  \sum_{k=1}^n L_k.
-\end{equation*}
-where, by \eqref{eq:Lk}, $L_k=L(A_k)$ is the number in the system at the arrival epoch of the $k$th job. Hence, in general:
-  \begin{equation*}
-    \lim_{t\to\infty} \int_0^t \1{L(s)\leq m}\,\d s \neq \lim_{n\to\infty} \frac 1n \sum_{k=1}^n \1{L_k \leq m}.
-  \end{equation*}
-
-
-  \begin{hint}
-    
-  \hint{Consider a queueing system with constant service and
-    interarrival times.}
-  \end{hint}
-\begin{solution}
-  Take $X_k = 10$ and $S_k = 10-\epsilon$ for some tiny
-  $\epsilon$. Then $L(t) = 1$ nearly all of the time. In fact,
-  $\E L = 1-\epsilon/10$. However, $L_k=0$ for all $k$.
-\end{solution}
-\end{question}
-
-
 \begin{question}\label{ex:2}
-  \begin{enumerate}
-  \item Assume that $X_k = 10$ minutes and $S_k = 11$ minutes for all
+ Assume that $X_k = 10$ minutes and $S_k = 11$ minutes for all
     $k$, i.e., $X_k$ and $S_k$ are deterministic and constant. What
     are $\lambda$ and $\mu$?  Compute $A_k$, $W_k$, $D_k$ and
     $L_k$. How do these numbers behave as a function of $k$?.
-  \item Yet another simple case is to take $X_k=10$ minutes and
-    $S_k=9$ minutes for all $k$. Answer the same questions as in the
-    previous part.
-  \end{enumerate}
   \begin{solution}
-    \begin{enumerate}
-    \item $\lambda=6$ per hour, and $\mu=60/11$ per hour. Note that
+ $\lambda=6$ per hour, and $\mu=60/11$ per hour. Note that
       $\mu < \lambda$. $A_0 = 0$, $A_1=10$, $A_2=20$, etc., hence
       $A_k = 10k$. $W_{Q,0} = 0$, $W_{Q,1} = \max\{0 + 0-10,0\} = 0$.
       $W_{Q,2} = \max\{0+11-10,0\} =1$.
@@ -248,8 +247,16 @@ where, by \eqref{eq:Lk}, $L_k=L(A_k)$ is the number in the system at the arrival
       as a function of $k$.  You can infer that, for the queue length
       to remain bounded, it is necessary that the service rate
       $\mu > \lambda$.
-    \item Trivial.
-    \end{enumerate}
+  \end{solution}
+\end{question}
+
+
+\begin{question}
+ Yet another simple case is to take $X_k=10$ minutes and
+    $S_k=9$ minutes for all $k$. Answer the same questions as in the
+    previous exercise.
+  \begin{solution}
+ Trivial.
   \end{solution}
 \end{question}
 
