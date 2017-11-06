@@ -37,7 +37,7 @@ Section~\ref{sec:poisson-distribution}.  In the sequel we often write
 $X\sim \exp(\lambda)$ to mean that $X$ is exponentially distributed
 with rate $\lambda$.
 
-\begin{question} 
+\begin{exercise} 
   If the random variable $X\sim\exp(\lambda)$, show that its mean $\E X = \frac{1}\lambda.$
   \begin{hint}
  \begin{equation*}
@@ -59,10 +59,10 @@ with rate $\lambda$.
       \end{split}
     \end{equation*}
   \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question} 
+\begin{exercise} 
   If $X\sim\exp(\lambda)$, show that its second moment $\E{X^2} =  \frac{2}{\lambda^2}$.
   \begin{hint}
   \begin{equation*}
@@ -82,12 +82,11 @@ with rate $\lambda$.
       \end{split}
     \end{equation*}
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question} 
+\begin{exercise} 
   If $X\sim\exp(\lambda)$, show that the \recall{variance}
 $\V X = \lambda^{-2}$.
-
   \begin{hint} Use, and memorize, the very practical formula
   \begin{equation*}
   \V X = \E X^2 - (\E X)^2.
@@ -96,14 +95,14 @@ $\V X = \lambda^{-2}$.
   \begin{solution}
     By the previous problems, $\E{X^2}=2/\lambda^2$ and $\E X = \lambda$. 
   \end{solution}
-\end{question}
+\end{exercise}
 
 The  above exercises can also be easily solved with the concept of \recall{moment generating function} which is defined for a random variable $X\geq 0$ as 
 \begin{equation*}
   M_X(t) = \E{e^{tX}}.
 \end{equation*}
 
-\begin{question}\label{ex:33}
+\begin{exercise}\label{ex:33}
  If $X$ is an exponentially distributed random variable with
     parameter $\lambda$, show that its moment generating function
    $ M_X(t) = \lambda/(\lambda-t)$.
@@ -112,7 +111,6 @@ The  above exercises can also be easily solved with the concept of \recall{momen
       M_X(t) = \E{\exp(t X)} =\int_0^\infty e^{tx} f(x) \,\d x.
 \end{equation*}
 \end{hint}
-
     \begin{solution}
     \begin{equation*}
       \begin{split}
@@ -124,20 +122,19 @@ The  above exercises can also be easily solved with the concept of \recall{momen
       \end{split}
     \end{equation*}
     \end{solution}
-  \end{question}
+  \end{exercise}
 
-  \begin{question}
+\begin{exercise}
     Use the moment generating function to show that 
     \begin{align*}
       \E{X} &= M'(0)=\frac1\lambda, & 
       \E{X^2} &= M''(0)=\frac2{\lambda^2}, 
     \end{align*}
 where $M'(t) = \frac{\d}{\d t} M(t)$. 
-
 \begin{solution}
   $M'(0)=\lambda/(\lambda-t)^2$. Hence, $M'(0)=1/\lambda$. And, $M''(t)=2\lambda/(\lambda-t)^3$, hence $\E{X^2}=M''(1)=2\lambda/\lambda^3=2\lambda^{-2}$. 
 \end{solution}
-  \end{question}
+  \end{exercise}
 
 
 Define the \recall{square coefficient of variation (SCV)} as
@@ -149,12 +146,12 @@ As
   queueing theory. Memorize it as a measure of \emph{relative
   variability}.
 
-\begin{question}
+\begin{exercise}
   Prove that when $X$ is exponentially distributed, $C_a^2 =1$.  
 \begin{solution}
   By the previous problems, $\V X = 1/\lambda^2$ and $\E X=1/\lambda$.
 \end{solution}
-\end{question}
+\end{exercise}
 
 
 Let us show with simulation how the exponential distribution
@@ -182,7 +179,7 @@ individual customers we can construct interarrival times as seen by
 the shop.
 
 
-  \begin{question}
+  \begin{exercise}
  Let $A_i$ be the arrival time of customer $i$ and set $A_0=0$.
     Assume that the interarrival times $\{X_i\}$ are i.i.d.  with
     exponential distribution with mean $1/\lambda$ for some
@@ -216,10 +213,9 @@ is  the density of $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$.
 From a table of moment generation functions it follows immediately that
 $A_i \sim \Gamma(i,\lambda)$, i.e., $A_i$ is Gamma distributed.
 \end{solution}
+\end{exercise}
 
-\end{question}
-
-  \begin{question}
+  \begin{exercise}
     Assume that the interarrival times $\{X_i\}$ are i.i.d. and
     $X_i\sim\exp(\lambda)$. Let
     $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$. Use the
@@ -267,7 +263,7 @@ Finally, the simplest way to obtain the answer is to use that the expectation is
 
 Just as a reminder, $\E{XY} \neq \E X \E Y$ in general. Only when $X$ and $Y$ are uncorrelated (which is implied by independence), the product of the expectations is the expection of the products.
   \end{solution}
-\end{question}
+\end{exercise}
 
 To plot the \recall{empirical distribution function}, or the
 \emph{histogram}, of the interarrival times at the shop, we need to count the
@@ -334,12 +330,12 @@ $\sigma=1$, see Figure~\ref{fig:normal}.
   \label{fig:uniformmany}
 \end{figure}
 
-\begin{question}
+\begin{exercise}
   Try to make Figure~\ref{fig:uniformmany} with simulation.
   \begin{solution}
     The source code can be found in \texttt{progs/converge\_to\_exp.py}.
 \end{solution}
-\end{question}
+\end{exercise}
 
 \begin{figure}[ht]
   \centering
@@ -374,25 +370,9 @@ system.
 % times. Thus, it is easy to use such exponentially distributed random
 % variables to simulate queueing systems. 
 
+For the next step, we need to concept or  concept of conditional probability. To help you recall this, solve the next question.
 
-Another reason to use the exponential distribution
-is that an exponentially distributed random variable is
-\recall{memoryless}, that is, it satisfies the property that
-\begin{equation*}
-  \P{X > t+h | X>t} = \P{X>h}.
-\end{equation*}
-In words, the probability that $X$ is larger than some time $t+h$,
-conditional on it being larger than a time~$t$, is equal to the
-probability that $X$ is larger than $h$. Thus, no matter how long we
-have been waiting for the next arrival to occur, the probability that
-it will occur in the next $h$ seconds remains the same.  This property
-seems to be vindicated also in practice: suppose that a patient with a
-broken arm just arrived at the emergency room of a hospital, what does
-that tell us about the time the next patient will be brought in? Not
-much, as most of us will agree.
-
-
-\begin{question} (This exercise should help you recall the concept of conditional probability.)
+\begin{exercise} 
   We have to give one present to one of three children. As we cannot
   divide the present into parts, we decide to let `fate decide'. That
   is, we choose a random number in the set $\{1, 2, 3\}$. The first
@@ -425,9 +405,25 @@ provided $\P{B}>0$.
     \end{equation*}
     Similar conditional reasoning gives that child 3 wins with probability $1/3$. 
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+
+A random variable $X$ is called \recall{memoryless} when it satisfies
+\begin{equation*}
+  \P{X > t+h | X>t} = \P{X>h}.
+\end{equation*}
+In words, the probability that $X$ is larger than some time $t+h$,
+conditional on it being larger than a time~$t$, is equal to the
+probability that $X$ is larger than $h$. Thus, no matter how long we
+have been waiting for the next arrival to occur, the probability that
+it will occur in the next $h$ seconds remains the same.  This property
+seems to be vindicated also in practice: suppose that a patient with a
+broken arm just arrived at the emergency room of a hospital, what does
+that tell us about the time the next patient will be brought in? Not
+much, as most of us will agree.
+
+
+\begin{exercise}
   Show that an exponentially distributed random variable is
   memoryless.  
   \begin{hint}
@@ -444,22 +440,20 @@ memoryless property. The proof of this fact requires quite some work;
 we refer the reader to the literature if s/he want to check this, see
 e.g. \citet[Appendix 3]{yushkevich69:_markov_proces}.
   \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}\label{ex:10}
+\begin{exercise}\label{ex:10}
   If $X\sim\exp(\lambda)$ and $S\sim\exp(\mu)$ and $X$ and $S$ are
   independent, show that 
   \begin{equation*}
 Z=\min\{X,S\}\sim\exp(\lambda+\mu),
   \end{equation*}
 hence $\E Z = (\lambda+\mu)^{-1}$.
-
 \begin{hint}
 Use that if $Z=\min\{X, S\}>x$,  it then must be that $X>x$
   and $S>x$. Then use independence of $X$ and $S$.
 \end{hint}
-
   \begin{solution}
 Use that $X$ and $S$ are independent to get
     \begin{equation*}
@@ -471,20 +465,18 @@ Use that $X$ and $S$ are independent to get
     \end{equation*}
   \end{solution}
 
-\end{question}
+\end{exercise}
 
-\begin{question}\label{ex:3}
+\begin{exercise}\label{ex:3}
    If $X\sim \exp(\lambda)$, $S\sim\exp(\mu)$ and independent, show that 
     \begin{equation*}
       \P{X\leq S} = \frac{\lambda}{\lambda+\mu}.
     \end{equation*}
-
     \begin{hint}
      Define the joint distribution of $X$ and $S$ and carry out
       the computations, or use conditioning, or use the result of the
       previous exercise.
     \end{hint}
-
 \begin{solution}
 There is more than one way to show that $\P{X\leq S} = \lambda/(\lambda+\mu)$.  
 
@@ -553,8 +545,7 @@ from which we get that
   \end{split}
 \end{equation*}
 
-And then, 
-that is,
+And then,  
 \begin{equation*}
   \begin{split}
   \P{X\leq S} &= \int \P{X\leq S| S=s} \mu e^{-\mu s}\d s \\
@@ -563,19 +554,16 @@ that is,
 \end{equation*}
 Straightforward integration gives the final result.
 \end{solution}
-\end{question}
+\end{exercise}
 
-
-  
-\begin{question}
+When $X$ and $S$ are not exponentially distributed, such computations are much harder.   
+\begin{exercise}
   If $S\sim U[0,7]$ and $X\sim U[0,10]$, where $U[I]$ stands for the
   uniform distribution concentrated on the interval $I$, compute
   $\P{S-X\leq u}$, assuming that $S$ and $X$ are independent.
-
   \begin{hint}
   This is elementary, hence it might appear trivial, but it's not\ldots In fact, I had a hard time finding a simple way to get the answer.  It is good practice to try yourself before looking at the answer. Check also the previous problem, and make a drawing of the region over which you have to integrate.
   \end{hint}
-
   \begin{solution}
 The joint density of $S$ and $X$ is given by
 \begin{equation*}
@@ -657,11 +645,11 @@ Integrate[Boole[s <= u + x], {x, 0, 10}, {s, 0, 7}]
 \end{verbatim}
 If you fill this in at Wolframalpa, you'll get the results that we obtained above in seconds, rather than in one hour or so (depending on your proficiency with carry out integrals).
 \end{solution}
-\end{question}
+\end{exercise}
 
 
 
-\begin{question}
+\begin{exercise}
   A machine serves two types of jobs. The processing time of jobs of
   type $i$, $i=1,2$, is exponentially distributed with parameter
   $\mu_i$. The type $T$ of job is random and independent of anything
@@ -677,7 +665,6 @@ Interestingly, we see that even if $\V{X_1} = \V{X_2} = 0$, $\V X > 0$
 if $\E{X_1} \neq \E{X_2}$. Bear this in mind; we will use these ideas
 later when we discuss the effects of failures on the variance of
 service times of jobs.
-
 \begin{hint}
     Let $X$ be the processing (or service) time at the server, and
     $X_i$ the service time of a type $i$ job. Then, 
@@ -728,14 +715,142 @@ we get
 + pq(\E{X_1} - \E{X_2})^2.
 \end{split}
 \end{equation*}
-
 \end{solution}
-\end{question}
+\end{exercise}
 
+
+Here are some further probability results we will use in the sequel. Let $B$ be a discrete random variable  such that $\P{B = k} = f(k)$, where $f(k)$ is a given set of
+probabilities. We write
+\begin{equation*}
+  G(k) = \P{B>k} = \sum_{m=k+1}^\infty f(m),
+\end{equation*}
+for the \emph{survivor function} of $B$.  
+
+\begin{exercise}\label{ex:6}
+ Use indicator functions to prove that
+    \begin{equation*}
+      \sum_{n=0}^\infty G(n) = \E B.
+    \end{equation*}
+    \begin{hint}
+Write 
+$\sum_{n=0}^\infty G(n) = \sum_{n=0}^\infty \sum_{i=n+1}^\infty \P{B=i}$ and then do the algebra.
+    \end{hint}
+\begin{solution}
+  Realize that this sort of problem is just a regular probability
+  theory problem, nothing fancy. We use/adapt the tools you learned in
+  calculus to carry out 2D integrals (or in this case 2D summations.)
+\begin{align*}
+\sum_{n=0}^\infty G(n) 
+&= \sum_{n=0}^\infty \P{B>n} 
+= \sum_{n=0}^\infty \sum_{i=n+1}^\infty \P{B=i}  \\
+& = \sum_{n=0}^\infty \sum_{i=0}^\infty 1\{n<i\} \P{B=i} 
+= \sum_{i=0}^\infty \sum_{n=0}^\infty 1 \{n<i\} \P{B=i} \\
+&= \sum_{i=0}^\infty i \P{B=i} = \E B.
+\end{align*}
+In case you are interested in mathematical justifications: the
+interchange of the two summations is allowed because the summands are
+all positive. (Interchanging the order of summations or integration is
+not allways allowed because the results can be different when part of
+the integrand is negative. Check Fubini's theorem for more on this if
+you are interested.)
+\end{solution}
+\end{exercise}
+
+\begin{exercise}\label{ex:66}
+ Use indicator functions to prove that
+    \begin{equation*}
+\sum_{i=0}^\infty i G(i) =  \frac{\E B^2}2 - \frac{\E B}{2}.
+    \end{equation*}
+    \begin{hint}
+$\sum_{i=0}^\infty i G(i) = \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^\infty i 1\{n\geq i+1\}$.
+    \end{hint}
+\begin{solution}
+\begin{align*}
+\sum_{i=0}^\infty i G(i)
+&= \sum_{i=0}^\infty i \sum_{n=i+1}^\infty \P{B=n} = \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^\infty i 1\{n\geq i+1\} \\
+&= \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^{n-1}i  = \sum_{n=0}^\infty \P{B=n} \frac{(n-1)n}{2} \\
+&= \sum_{n=0}^\infty  \frac{n^2}{2} \P{B=n} - \frac{\E B}{2}
+= \frac{\E B^2}2 - \frac{\E B}{2}.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+
+Let $S$ be a continuous random variable $S$ with distribution function $F$.
+
+\begin{exercise}
+ Use indicator functions to prove that 
+\begin{equation*}
+    \E S = \int_0^\infty x \d F  = \int_0^\infty G(y) \d y,
+\end{equation*}
+where $G(x) = 1 - F(x)$. 
+\begin{hint}
+$\E S = \int_0^\infty x \d F  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d F(x)$.
+\end{hint}
+\begin{solution}
+\begin{equation*}
+  \begin{split}
+    \E{S} &= \int_0^\infty x \d F  = \int_0^\infty \int_0^x \d y \d F(x) \\
+    & = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d F(x)   = \int_0^\infty \int_0^\infty 1_{y\leq x} \d F(x) \d y\\
+    & = \int_0^\infty \int_y^\infty \d F(x) \d y = \int_0^\infty G(y) \d y
+  \end{split}
+\end{equation*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+ Use indicator functions to prove that for  a continuous random
+    variable $S$ with distribution function $F$, 
+\begin{equation*}
+    \E{S^2} = \int_0^\infty x^2 \d F  = 2 \int_0^\infty y G(y) \d y,
+\end{equation*}
+where $G(x) = 1 - F(x)$. 
+\begin{hint}
+$\int_0^\infty y G(y) \d y = \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d x \d y$.
+\end{hint}
+\begin{solution}
+  \begin{equation*}
+    \begin{split}
+\int_0^\infty y G(y) \d y 
+&=  \int_0^\infty y \int_y^\infty f(x)\, \d x \d y =  \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d x \d y\\
+&=  \int_0^\infty f(x) \int_0^\infty y 1\{y \leq x\}\, \d x \d y
+=  \int_0^\infty f(x) \int_0^x y\, \d x \d y\\
+&=  \int_0^\infty f(x) \frac{x^2}2 \d x =\frac{\E S^2}2.
+    \end{split}
+  \end{equation*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+ Use integration by parts to show that for  a continuous random
+    variable $S$ with distribution function $F$ and survivor function $G=1-F$, 
+\begin{equation*}
+\int_0^\infty y G(y) \d y = \frac{\E{S^2}}2.
+\end{equation*}
+\begin{solution}
+  \begin{equation}
+      \int_0^\infty y G(y) \d y 
+= \frac{y^2}2 G(y) \bigg|_0^\infty  - \int_0^\infty \frac{y^2}2 g(y)\d y = \int_0^\infty \frac{y^2}2 f(y)\d y = \frac{\E{S^2}}2,
+  \end{equation}
+  since $g(y) = G'(y) = - F'(y) = f(y)$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+  Use that $\E S = \int_0^\infty x \d F = \int_0^\infty G(y) \d y$ to
+  check that  $\E S = \mu^{-1}$ if $F(x) = 1 - e^{-\mu x}$.
+\begin{solution}
+If $F(x) = 1 - e^{-\mu x}$, we obtain that 
+\begin{equation*}
+  \E S = \int_0^\infty e^{-\mu x} \d x =
+  \mu^{-1}\int_0^\infty e^{-x} \d x = \mu^{-1}.
+\end{equation*}
+\end{solution}
+\end{exercise}
 
 
 \begin{comment}
-\begin{question}
+\begin{exercise}
   Assume that the time $X$ to fail of a machine is uniformly
   distributed on the interval $[0,10]$. If the machine fails at time
   $t$, the cost to repair it is $h(t)$. What is the expected repair
@@ -764,10 +879,8 @@ we get
     defines this concept as a random variable measurable with respect
     to some $\sigma$-algebra. In this course we will not deal with
     this elegant idea, due to lack of time. 
-
   \end{solution}
-\end{question}
-  
+\end{exercise}
 \end{comment}
 
 \Closesolutionfile{hint}

@@ -8,110 +8,26 @@
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 With the PASTA property and Little's law we can derive a number of
-useful and simple results for the $M/G/1$ queue. Recall, to use the
+useful and simple results for the $M/G/1$ queue by which we can analyze a large number of practical queueing situations, see Exercise~\ref{exer: Hall} and below. In particular, we concentrate here on server utilization, i.e., $\rho$, and average queue length and waiting times. Recall, to use the
 PASTA, we need to assume that jobs arrive as a Poisson process.
 
 The fraction of time the server is empty is $1-\rho = p(0)$. By PASTA,
 $\pi(0)=p(0)$, hence the fraction of customers that enter an empty
-system is also $1-\rho$. 
+system is also $1-\rho$. Similarly, the fraction of customers that find the server occupied at arrival is equal to the the utilization $\rho$. 
+
+
 
 Suppose that at $A_k$, i.e., the arrival epoch of the $k$th job, the
-server is busy.  The remaining service time $S_{r,k}$ as seen by job
+server is busy.  The \recall{remaining service time} $S_{r,k}$ as seen by job
 $k$ is the time between $A_k$ and the departure epoch of the job in
 service. If the server is free at $A_k$, we set $S_{r,k}=0$.  Define
-the average \recall{remaining service time} as seen at arrival epochs by
-the limit
+the average \recall{remaining service time} as seen at arrival epochs as
 \begin{equation*}
   \E{S_r} = \lim_{n\to\infty} \frac1n \sum_{k=1}^n S_{r,k},
 \end{equation*}
-provided this limit exists. Note that $\E{S_r}$ includes the fraction
-of jobs that find the server idle. If we need the remaining service
-time for the jobs that see the server busy, use that a fraction~$\rho$
-sees the server occupied upon arrival, while a fraction $1-\rho$ sees
-a free server. Therefore
-\begin{equation}\label{eq:37}
-\E{S_r} =   \rho \E{S_r\given S_r >0} + (1-\rho)\cdot \E{S_r\given S_r = 0} = \rho \E{S_r\given S_r>0},
-\end{equation}
-since, evidently, $\E{S_r\given S_r=0}=0$.  Observe that we used the
-PASTA property here.
+provided this limit exists. 
 
-Next, consider the waiting time in queue.  It is evident that the
-expected waiting time for an arriving customer is the expected
-remaining service time plus the expected time in queue. The expected
-time in queue, in turn, must be equal to the expected number of
-customers in queue at an arrival epoch times the expected service time
-per customer, assuming that service times are i.i.d. If the arrival
-process is Poisson, it follows from PASTA that the average number of
-jobs in queue perceived by arriving customers is also the
-\emph{time-average} number of jobs in queue~$\E{L_Q}$.  Thus, the
-expected time in queue is
-\begin{equation}\label{eq:24}
-  \E{W_Q} = \E{S_r} + \E{L_Q} \E S.
-\end{equation}
-Now, from Little's law we know that $\E{L_Q} = \lambda \E{W_Q}$. Using this,
-\begin{equation*}
-  \E{W_Q} = \E{S_r} + \lambda \E{W_Q} \E S  =\E{S_r} + \rho \E{W_Q},
-\end{equation*}
-since $\rho=\lambda \E S$. But this gives for the $M/G/1$ queue that
-\begin{equation}\label{eq:35}
-  \E{W_Q} = \frac{\E{S_r}}{1-\rho} = \frac{\rho}{1-\rho} \E{S_r\given S_r>0},
-\end{equation}
-where we use~(\ref{eq:37}) in the last equation.
-
-
-The average waiting time $\E W$ in the entire system, i.e., in queue
-plus in service, becomes
-\begin{equation*}
-  \E W = \E{W_Q}+ \E S = \frac{\E{S_r}}{1-\rho} + \E S.
-\end{equation*}
-
-The situation can be significantly simplified for the $M/M/1$ queue as
-then the service times are also exponential, hence memoryless,
-implying that $\E{S_r\given S_r>0} = \E S$. Thus, for the $M/M/1$ queue, 
-and using~(\ref{eq:37}) and the above formula, we get 
-\begin{equation*}
-  \begin{split}
-  \E W 
-&= \E{W_Q}+ \E S = 
-\frac{\E S_r}{1-\rho} + \E S \\
-&= \frac{\rho \E S}{1-\rho} + \E S = \frac{\E S}{1-\rho}.
-  \end{split}
-\end{equation*}
-
-Another way to derive the above result is to conclude from PASTA that
-the expected number of jobs in the system at an arrival is $\E{L}$.
-Since all these jobs require an expected service time $\E S$,
-including the job in service by the memory-less property, the time in
-queue is $\E L \E S$. The time in the system is then the waiting time
-plus the service time, hence,
-\begin{equation}\label{eq:61}
-  \E W = \E L  \E S + \E S = \lambda \E W \E S + \E S = \rho \E W  + \E S,
-\end{equation}
-where we use Little's law $\E L = \lambda \E W$.  Hence,
-\begin{equation*}
-\E W = \frac{\E S}{1-\rho}.
-\end{equation*}
-Also,
-\begin{equation}\label{eq:wqes}
-  \E{W_Q} = \E L \E S = \lambda \E W \E S= \rho \E W = \frac{\rho}{1-\rho} \E S = \frac{\rho^2}{1-\rho} \frac 1 \lambda,
-\end{equation}
-which is consistent with our earlier result.  
-
-For the average queue length we use Little's law. Then
-\begin{equation*}
-  \begin{split}
-\E L &= \lambda \E W = \frac{\lambda \E S}{1-\rho} = \frac\rho{1-\rho}, \\
-  \E{L_Q} &= \lambda \E{W_Q} = \frac{\rho^2}{1-\rho}.
-      \end{split}
-\end{equation*}
-Finally, the expected number of jobs in service $\E{L_s}$, which is
-equal to the expected number of busy servers, must be
-\begin{equation*}
-  \E{L_s} = \E L - \E{L_Q} = \frac{\rho}{1-\rho} - \frac{\rho^2}{1-\rho} = \rho, 
-\end{equation*}
-again in accordance with our earlier result.
-
-\begin{question}
+\begin{exercise}
   It is an easy mistake to think that $\E{S_r} = \E S$ when service
   times are exponential. Why is this wrong?
   \begin{hint}
@@ -125,14 +41,41 @@ Realize again that $\E{S_r}$ includes the jobs that arrive at an empty system.
  \E{S_r} = \rho \E{S_r\given S_r>0} = \rho \E S.
   \end{equation*}
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}($M/G/1$)
+Use  the PASTA property to show that 
+\begin{equation}\label{eq:37}
+\E{S_r} =  \rho \E{S_r\given S_r>0}.
+\end{equation}
+\begin{hint}
+By the PASTA property, a fraction~$\rho$ of the arrivals sees the server occupied, while a fraction $1-\rho$ sees
+a free server.  
+\end{hint}
+\begin{solution}
+\begin{equation*}
+\E{S_r} =   \rho \E{S_r\given S_r >0} + (1-\rho)\cdot \E{S_r\given S_r = 0} = \rho \E{S_r\given S_r>0},
+\end{equation*}
+since, evidently, $\E{S_r\given S_r=0}=0$.  
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+  What would you guess for $\E{S_r\given S_r>0}$ for the $M/D/1$ queue? 
+  \begin{solution}
+    Since the service times are deterministic (and constant), I would
+    guess that on average half of the service time remains at the
+    moment a job arrives. If the service time is $D$ always, then
+    $\E{S_r\given S_r>0} = \lambda D/2$.  
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}
   Try to derive relation~(\ref{eq:37}) with sample path
   arguments. 
   \begin{hint}
-  \hint{ This requires some extra definitions, similar to
-  $A(n,t)$ as defined in~\eqref{eq:19}.}
+This requires some extra definitions, similar to
+  $A(n,t)$ as defined in~\eqref{eq:19}.
   \end{hint}
 
   \begin{solution}
@@ -185,34 +128,164 @@ if the limit exists, we can \emph{define}
 \E{S_r \given S_r>0}  =\lim_{t\to\infty} \frac{S_r(t)}{A(+,t)}.
 \end{equation*}
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{comment}
-\begin{question}[use=false]
-  As a challenge you can try to derive \eqref{eq:24} by means of sample path arguments.
+Next, consider the waiting time in queue.  
+\begin{exercise}($M/G/1$)
+Show  that the expected time in queue is
+\begin{equation}\label{eq:24}
+  \E{W_Q} = \E{S_r} + \E{L_Q} \E S.
+\end{equation}
+\begin{hint}
+  What happens when you enter a queue? First you have to wait until the job in service (if there is any) completes, and then you have to wait for the queue to clear.
+\end{hint}
+\begin{solution}
+It is evident that the expected waiting time for an arriving customer is the expected
+remaining service time plus the expected time in queue. The expected
+time in queue  must be equal to the expected number of
+customers in queue at an arrival epoch times the expected service time
+per customer, assuming that service times are i.i.d. If the arrival
+process is Poisson, it follows from PASTA that the average number of
+jobs in queue perceived by arriving customers is also the
+\emph{time-average} number of jobs in queue~$\E{L_Q}$.  
+\end{solution}
+\end{exercise}
+ 
+\begin{exercise}($M/G/1$)
+  Use the previous problem to show that 
+\begin{equation}\label{eq:35}
+  \E{W_Q} = \frac{\E{S_r}}{1-\rho} = \frac{\rho}{1-\rho} \E{S_r\given S_r>0}.
+\end{equation}
+\begin{hint}
+Use Little's law to see that $\E{L_Q} = \lambda \E{W_Q}$. Substitute this in~(\ref{eq:24}) and simplify.
+\end{hint}
+\begin{solution}
+With  Little's law $\E{L_Q} = \lambda \E{W_Q}$. Using this,
+\begin{equation*}
+  \E{W_Q} = \E{S_r} + \lambda \E{W_Q} \E S  =\E{S_r} + \rho \E{W_Q},
+\end{equation*}
+since $\rho=\lambda \E S$. But this gives for the $M/G/1$ queue that
+\begin{equation}\label{eq:35}
+  \E{W_Q} = \frac{\E{S_r}}{1-\rho} = \frac{\rho}{1-\rho} \E{S_r\given S_r>0},
+\end{equation}
+where we use~(\ref{eq:37}) in the last equation.
+\end{solution}
+\end{exercise}
+
+The average waiting time $\E W$ in the entire system, i.e., in queue
+plus in service, becomes
+\begin{equation*}
+  \E W = \E{W_Q}+ \E S = \frac{\E{S_r}}{1-\rho} + \E S.
+\end{equation*}
+
+The situation can be significantly simplified for the $M/M/1$ queue as
+then the service times are also exponential, hence memoryless,
+implying that $\E{S_r\given S_r>0} = \E S$. 
+
+\begin{exercise}($M/M/1$) Derive that
+\begin{equation}\label{eq:ew}
+  \E W = \frac{\E S}{1-\rho}.
+\end{equation}
+\begin{solution}
+Using~(\ref{eq:37}),
+\begin{equation*}
+  \begin{split}
+  \E W 
+&= \E{W_Q}+ \E S = 
+\frac{\E{S_r}}{1-\rho} + \E S \\
+&= \frac{\rho \E S}{1-\rho} + \E S = \frac{\E S}{1-\rho}.
+  \end{split}
+\end{equation*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}($M/M/1$) Use the PASTA property to conclude that
+\begin{equation}\label{eq:61}
+  \E W = \E L  \E S + \E S,
+\end{equation}
+and apply Little's law to find~(\ref{eq:ew}). 
+\begin{hint}
+Another way to derive the above result is to conclude from PASTA that
+the expected number of jobs in the system at an arrival is $\E{L}$.
+Since all these jobs require an expected service time $\E S$,
+including the job in service by the memory-less property, the time in
+queue is $\E L \E S$. The time in the system is then the waiting time
+plus the service time. Next, use Little's law $\E L = \lambda \E W$.
+\end{hint}
+\begin{solution}
+From the hint
+\begin{equation}
+  \E W = \E L  \E S + \E S = \lambda \E W \E S + \E S = \rho \E W  + \E S.
+\end{equation}
+Substituting Little's law $\E L = \lambda \E W$ and simplifying,
+\begin{equation*}
+\E W = \frac{\E S}{1-\rho}.
+\end{equation*}
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+  Why is Eq.~(\ref{eq:61}) not true in general for the $M/G/1$ queue?
+  \begin{hint}
+Think about the consequences of memoryless service times.
+  \end{hint}
   \begin{solution}
-    \TBD
+    Because the remaining service time of the job in service, provided
+    there is a job in the system upon arrival, is not exponentially
+    distributed in general. Only for the $M/M/1$ queue the service
+    times are exponentially distributed, hence memoryless. And only
+    when the service time is memoryless, the service time after an
+    interruption is still exponential.
   \end{solution}
-\end{question}
-\end{comment}
+\end{exercise}
 
-
-
-\begin{question}
-  \begin{enumerate}
-  \item Why is this true for the $M/M/1$ queue
-  \begin{equation*}
-\E{L_Q} = \sum_{n=1}^\infty (n-1)\pi(n)?
-  \end{equation*}
-\item   Derive an expression for $\E{L_Q}$ based on this observation.
-  \end{enumerate}
+\begin{exercise}
+Show that 
+\begin{equation}\label{eq:wqes}
+  \E{W_Q} = \E L \E S = \frac{\rho^2}{1-\rho} \frac 1 \lambda,
+\end{equation}
   \begin{solution}
-    \begin{enumerate}
-    \item 
+\begin{equation}
+  \E{W_Q} = \E L \E S = \lambda \E W \E S= \rho \E W = \frac{\rho}{1-\rho} \E S = \frac{\rho^2}{1-\rho} \frac 1 \lambda,
+\end{equation}
+which is consistent with our earlier result.  
+  \end{solution}
+\end{exercise}
+
+Finally, we find expressions for  the average lengths.
+\begin{exercise}($M/M/1$)
+  Show that
+  \begin{align*}
+\E L &= \frac\rho{1-\rho}, & \E{L_Q} &= \frac{\rho^2}{1-\rho}, & \E{L_s} &= \rho.
+  \end{align*}
+  \begin{hint}
+    Apply Little's law to the $\E{L_Q}$ and so on, and use the earlier expressions for $\E{W_Q}$ and so on.
+  \end{hint}
+  \begin{solution}
+With Little's law, 
+\begin{equation*}
+  \begin{split}
+\E L &= \lambda \E W = \frac{\lambda \E S}{1-\rho} = \frac\rho{1-\rho}, \\
+  \E{L_Q} &= \lambda \E{W_Q} = \frac{\rho^2}{1-\rho}, \\
+  \E{L_s} &= \E L - \E{L_Q} = \frac{\rho}{1-\rho} - \frac{\rho^2}{1-\rho} = \rho, 
+      \end{split}
+\end{equation*}
+since, the expected number of jobs in service $\E{L_s}$ is
+equal to the expected number of busy servers.
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}($M/M/1$) Explain that
+  \begin{equation*}
+\E{L_Q} = \sum_{n=1}^\infty (n-1)\pi(n),
+  \end{equation*}
+and  use this to find that $\E{L_Q}=\rho^2/(1-\rho)$.
+  \begin{solution}
     The fraction of time the system contains $n$ jobs is $\pi(n)$ (by
     PASTA). When the system contains $n>0$ jobs, the number in queue
     is one less, i.e., $n-1$.
-  \item 
+
     \begin{equation*}
       \begin{split}
 \E{L_Q} 
@@ -224,6 +297,7 @@ if the limit exists, we can \emph{define}
 = \rho \frac{\rho}{1-\rho}.
       \end{split}
     \end{equation*}
+
 Another way to get the same result is by splitting: 
 \begin{equation*}
   \begin{split}
@@ -233,27 +307,21 @@ Another way to get the same result is by splitting:
 &= \E L - (1-\pi(0)) = \E L - \rho.
   \end{split}
 \end{equation*}
-    \end{enumerate}
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
-  Why is Eq.~(\ref{eq:61}) not true in general for the $M/G/1$ queue?
-  \begin{hint}
-    
-\hint{Think about the consequences of memoryless service times.}
-  \end{hint}
+\begin{comment}
+\begin{exercise}[use=false]
+  As a challenge you can try to derive \eqref{eq:24} by means of sample path arguments.
   \begin{solution}
-    Because the remaining service time of the job in service, provided
-    there is a job in the system upon arrival, is not exponentially
-    distributed in general. Only for the $M/M/1$ queue the service
-    times are exponentially distributed, hence memoryless. And only
-    when the service time is memoryless, the service time after an
-    interruption is still exponential.
+    \TBD
   \end{solution}
-\end{question}
+\end{exercise}
+\end{comment}
 
-\begin{question}
+
+
+\begin{exercise}($M/M/1$)
   \begin{enumerate}
   \item 
   Use the PASTA property to see that the expected waiting time in the
@@ -288,11 +356,11 @@ arrival sees $N=n$ customers upon arrival.
       result follows.
     \end{enumerate}
   \end{solution}
-\end{question}
+\end{exercise}
 
 \begin{comment}
   
-\begin{question}[use=false] Note: the question is unclear, and needs more explanation. 
+\begin{exercise}[use=false] Note: the question is unclear, and needs more explanation. 
 
   There is distinction between $\E{L_Q}$, i.e., the time-average queue
   length, and the expected number of jobs in the system given that the
@@ -307,14 +375,23 @@ arrival sees $N=n$ customers upon arrival.
   than the fraction of time the queue length is zero.  Hence,
   $\E{L\given B} > \E{L_Q}$.
 \end{solution}
-\end{question}
+\end{exercise}
 \end{comment}
 
-\begin{question}
-  Compute the variance of the number of jobs in the system $L$ for the $M/G/1$ queue.
-  \begin{solution}
+\begin{exercise}($M/G/1$)
+Show that the variance of the number of jobs in the system $L$ is
+\begin{equation*}
+\V L = \frac{\rho}{(1-\rho)^2}.
+\end{equation*}
+
+  \begin{hint}
     $\V{L} = \E{L^2} - (\E L)^2$. We already know $\E L$ so it remains
-    to compute $\E{L^2}$. With wolfram alpha we get
+    to compute $\E{L^2}$. Then, $\E{L^2 }= \sum_{n=0}^\infty n^2 \pi(n)$. Use that $\pi(n)=\rho^n(1-\rho)$ is the probability to see $n$ jobs in the system. Now simplify.    
+  \end{hint}
+  \begin{solution}
+The starting point is  $\V{L} = \E{L^2} - (\E L)^2$. 
+
+With wolfram alpha we get
     \begin{equation*}
       \begin{split}
       \E{L^2 }
@@ -326,18 +403,6 @@ arrival sees $N=n$ customers upon arrival.
 \begin{equation*}
 \V L = \frac{\rho(1+\rho)}{(1-\rho)^2}-\frac{\rho^2}{(1-\rho)^2} = \frac{\rho}{(1-\rho)^2}.
 \end{equation*}
-
-To see how large this variance is, relative to the mean number of jobs
-in the system, we typically consider the square coefficient of
-variation (SCV). As $\E L = \rho/(1-\rho)$,
-\begin{equation*}
-  \frac{\V L}{(\E{L})^2} = \frac 1 \rho.
-\end{equation*}
-Thus, the SCV becomes smaller as $\rho$ increases, but does not become
-lower than $1$. So, realizing that the SCV of the exponential
-distribution is 1, the distribution of the number of jobs in the
-system has larger relative variability than the exponential
-distribution.
 
 
 Lets see whether I can get the result for $\E{L^2}$ by myself.  One way
@@ -432,59 +497,220 @@ Hence,
 
 A bit of algebra gives the previous results.
   \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
-  Use the PASTA property and the ideas of Section~\ref{sec:level-cross-balance}
- to derive  for the $M/M/1$ queue that
-  \begin{equation*}
-  (\lambda + \mu) \pi(n) = \lambda \pi(n-1) + \mu \pi(n+1)
-  \end{equation*}
+\begin{exercise}$(M/M/1$) 
+To see how large the variance of $L$ is, relative to the mean number of jobs
+in the system, we typically consider the square coefficient of
+variation (SCV). Show that the square coefficient of variation of $L$ is $1/\rho$. What do you conclude from this?
+\begin{hint}
+  SCV  $=\V X/(\E X)^2$. 
+\end{hint}
   \begin{solution}
-    Consider some state $n$ and count all transitions that `go in and
-    out of' this state. Specifically, $A(n,t) + D(n-1,t)$ counts all
-    transitions out of state $n$: $A(n,t)$ counts the number of
-    arrivals that see $n$ in the system upon arrival, hence
-    immediately after such arrivals the system contains $n+1$ jobs;
-    likewise, $D(n-1,t)$ counts all jobs that leave $n-1$ jobs behind,
-    hence immediately before such jobs depart the system contains $n$
-    jobs.  In a similar way, $A(n-1,t) + D(n,t)$ counts all
-    transitions into state $n$ (Recall once again, $D(n,t)$ counts the
-    jobs that leave $n$ behind. Hence, when such departures occur,
-    state $n$ is entered).  Therefore the difference between the `in'
-    transitions and the `out' transitions is at most 1 for all $t$, so
-    that we can write
-    \begin{equation*}
-      \begin{split}
-      A(n,t) + D(n-1,t) &\approx A(n-1,t) + D(n,t)  \iff \\
-      \frac{A(n,t) + D(n-1,t)}t &\approx \frac{A(n-1,t) + D(n, t)}t \iff \\
-      \frac{A(n,t)}t + \frac{D(n-1,t)}t &\approx \frac{A(n-1,t)}t + \frac{D(n,t)}t.
-      \end{split}
-    \end{equation*}
-Using the ideas of Section~\ref{sec:level-cross-balance} this becomes for $t\to\infty$, 
+To see how large this variance is, relative to the mean number of jobs
+in the system, we typically consider the square coefficient of
+variation (SCV). As $\E L = \rho/(1-\rho)$,
 \begin{equation*}
-  (\lambda(n) +\mu(n))p(n) = \lambda(n-1)p(n-1) + \mu(n+1)p(n+1).
+  \frac{\V L}{(\E{L})^2} = \frac 1 \rho.
 \end{equation*}
-Since we are concerned here with the $M/M/1$ queue we have that
-$ \lambda(n) = \lambda$ and $\mu(n) = \mu$, and using PASTA we have
-that $p(n) = \pi(n)$. We are done.
+Thus, the SCV becomes smaller as $\rho$ increases, but does not become
+lower than $1$. So, realizing that the SCV of the exponential
+distribution is 1, the distribution of the number of jobs in the
+system has larger relative variability than the exponential
+distribution.
   \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
-  What would you guess for $\E{S_r\given S_r>0}$ for the $M/D/1$ queue? 
+\begin{exercise}
+  An $M/M/2$ queueing system is very heavily utilized, with an arrival rate of 11 customers per hour, and a  service rate of 6 customers per hour per server.
+  \begin{enumerate}
+  \item Determine $\E{L_Q}$ and $\E{W_Q}$.
+  \item Compare your solution to an $M/M/1$ queue with $\rho=11/12$. Why are your answers similar or different?
+  \end{enumerate}
   \begin{solution}
-    Since the service times are deterministic (and constant), I would
-    guess that on average half of the service time remains at the
-    moment a job arrives. If the service time is $D$ always, then
-    $\E{S_r\given S_r>0} = \lambda D/2$.  
+  \begin{enumerate}
+  \item 
+
+
+\begin{lstlisting}
+labda = 11.
+mu = 6
+c = 2
+
+rho = labda/mu
+rho < c  # is the system stable?
+\end{lstlisting}\begin{lstlisting}
+True
+\end{lstlisting}
+
+Compute Ls and so on
+
+
+
+\begin{lstlisting}
+G = sum(rho**n/factorial(n) for n in range(c))
+G += rho**c/factorial(c)/(1.-rho/c)
+P0 = 1./G
+P0
+\end{lstlisting}\begin{lstlisting}
+0.043478260869565244
+\end{lstlisting}
+\begin{lstlisting}
+Lq = rho**(c+1)/c/(factorial(c)*(1.-rho/c)**2)*P0
+Lq
+\end{lstlisting}\begin{lstlisting}
+9.64492753623188
+\end{lstlisting}
+\begin{lstlisting}
+Lq/labda # Wq
+\end{lstlisting}\begin{lstlisting}
+0.8768115942028981
+\end{lstlisting}
+\begin{lstlisting}
+Ls = Lq + rho
+Ls
+\end{lstlisting}\begin{lstlisting}
+11.478260869565213
+\end{lstlisting}
+\begin{lstlisting}
+Ls/labda # Ws
+\end{lstlisting}\begin{lstlisting}
+1.0434782608695647
+\end{lstlisting}
+\begin{lstlisting}
+ES = 1./mu # expected service time
+ES
+\end{lstlisting}\begin{lstlisting}
+0.16666666666666666
+\end{lstlisting}
+
+\item 
+
+
+\begin{lstlisting}
+mu = c*6
+
+rho = labda/mu
+
+P0 = 1-rho
+P0
+\end{lstlisting}\begin{lstlisting}
+0.08333333333333337
+\end{lstlisting}
+\begin{lstlisting}
+Lq = rho**2/(1.-rho)
+Lq
+\end{lstlisting}\begin{lstlisting}
+10.083333333333327
+\end{lstlisting}
+\begin{lstlisting}
+Lq/labda # Wq
+\end{lstlisting}\begin{lstlisting}
+0.9166666666666661
+\end{lstlisting}
+\begin{lstlisting}
+Ls = rho/(1.-rho)
+Ls
+\end{lstlisting}\begin{lstlisting}
+10.999999999999995
+\end{lstlisting}
+\begin{lstlisting}
+Ls/labda # Ws
+\end{lstlisting}\begin{lstlisting}
+0.9999999999999996
+\end{lstlisting}
+\begin{lstlisting}
+ES = 1./mu # expected service time
+ES
+\end{lstlisting}\begin{lstlisting}
+0.08333333333333333
+\end{lstlisting}
+It is of interest to compare the M/M/2 system to the M/M/1 system with twice the capacity. 
+  \end{enumerate}
+    \end{solution}
+\end{exercise}
+
+
+
+
+\begin{exercise}
+  Generalize the single-server relation
+  $\E{W_Q} = \rho \E{S_r\given S_r>0} + \E{L_Q} \E S$ to the $M/M/c$
+  multi-server queue. 
+
+We will use this result later to derive algorithms to compute the
+performance measures for the analysis of closed-queueing network.
+
+\begin{hint}
+Interpret each component at the right hand side of the equation
+    and generalize it to a multi-server queueing system. 
+\end{hint}
+  \begin{solution}
+
+    Recall that for the $M/M/1$ queue, $\E{S_r\given S_r>0} = 1/\mu$.
+    Applying Little's law to the queue, we have that
+    $\lambda \E{W_Q} =\ E{L_Q}$, so that it follows that
+    \begin{equation*}
+    \E{W_Q} = \rho \E{S_r \given S_r > 0} + \E{L_Q}\E S = \frac{\rho}\mu + \rho \E{W_Q},
+    \end{equation*}
+    where we use that $\rho=\lambda \E S$. In words, the first term
+    (at the right-hand side) is the probability to find a job in
+    service, which is $\rho$ times the expected remaining service
+    time if the server is busy, which is $1/\mu$ for exponentially
+    distributed processing times. The second term is the probability
+    to find the server busy, so that the arriving job has to wait,
+    times the expected waiting time. 
+
+    For the $M/M/c$ queue we now derive the corresponding expressions
+    for this first and second term.
+
+    For the first, note that the probability that the job has to wait
+    is the same as the probability that all servers are occupied at
+    arrival. This is, clearly, $\sum_{k=c}^\infty p(k)$. If all
+    servers are busy, the expected time until a service completion is
+    $1/c\mu$, since there are $c$ servers and the expected time to
+    completion is $1/\mu$ for each individual server. Thus, the time
+    until the first departure is the minimum of the remaining services
+    at each of the servers. This has expectation $1/c\mu$. Thus, for the
+    $M/M/c$ queue
+    \begin{equation*}
+\rho\E{S_r\given S_r>0}  = \sum_{k=c}^\infty p(k) \frac 1{c\mu}.
+    \end{equation*}
+
+    For the second term, since there are $c$ servers, jobs depart from
+    the queue (hence enter service) at rate $c\mu$. The expected time
+    in queue when there are $n$ jobs in front, is therefore
+    $n/c\mu$. Thus, on average, since the expected queue length is $\E{L_Q}=\sum_{k=c}^\infty (k-c)p(k)$, we 
+get 
+\begin{equation*}
+  \E{L_Q}\frac{\E S}c = \sum_{k=c}^\infty \frac{k-c}{c\mu}p(k).
+\end{equation*}
+
+All in all,
+\begin{equation*}
+  \begin{split}
+  \E{W_Q} 
+&= \rho\E{S_r\given S_r>0}  +   \E{L_Q}\frac{\E S}c \\
+&= \sum_{k=c}^\infty p(k)\frac{1+k-c}{c\mu}.
+  \end{split}
+\end{equation*}
+
+We can also give this a natural interpretation. How many jobs have to
+leave before the service of the arriving job can start? Well, the
+entire queue must be cleared plus one job in service. Thus, if there
+are $k-c$ job in queue, we have to wait for these jobs to finish, plus
+one of the jobs in service. 
+
+Observe also that, by PASTA, we have $\pi(k) = p(k)$, so that the
+arriving job also sees $p(k)$.
+
   \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}(Hall 5.2) After observing a single server queue for
+\begin{exercise}(Hall 5.2) \label{exer: Hall} After observing a single server queue for
   several days, the following steady-state probabilities have been
   determined: $p(0)=0.4$, $p(1) = 0.3$, $p(2)=0.2$, $p(3)=0.05$ and
   $p(4)=0.05$. The arrival rate is 10 customers per hour. 
@@ -644,9 +870,9 @@ idle
   \end{enumerate}
    \end{solution}
  
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
   (Hall 5.5) An $M/M/1$ queue has an arrival rate of 100 per hour and
   a service rate of 140 per hour.
   \begin{enumerate}
@@ -702,9 +928,9 @@ Wq
 \end{lstlisting}
   \end{enumerate}
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}(Hall, 5.6)
+\begin{exercise}(Hall, 5.6)
   An $M/M/1$ queue has been found to have an average waiting time in queue of 1 minute. The arrival rate is known to be 5 customers per minute.
   \begin{enumerate}
   \item What are the service rate and utilization?
@@ -807,9 +1033,9 @@ And indeed, we found the right $n$.
   \end{enumerate}
 
     \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
   (Hall 5.7). A single server queueing system is known to have Poisson
   arrivals and exponential service times. However, the arrival rate
   and service time are state dependent. As the queue becomes longer,
@@ -819,15 +1045,14 @@ And indeed, we found the right $n$.
   $\lambda(n)=0, n\geq 3$, $\mu(0) = 0$, $\mu(1)=2$, $\mu(2)=3$, $\mu(n)=4, n\geq 3$. 
 Calculate the state probabilities, i.e., $p(n)$ for $n=0,\ldots$. 
 \begin{hint}
-  
-\hint{ Use the level-crossing equations of the $M(n)/M(n)/1$ queue.}
+Use the level-crossing equations of the $M(n)/M(n)/1$ queue.
 \end{hint}
     \begin{solution}
       Follows right away from the hint.
     \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
   (Hall 5.14) An airline phone reservation line has one server and a
   buffer for two customers. The arrival rate 6 customers per hour, and
   a service rate of just 5 customers per hour. Arrivals are Poisson and service times are exponential. 
@@ -837,7 +1062,7 @@ Calculate the state probabilities, i.e., $p(n)$ for $n=0,\ldots$.
   \end{enumerate}
   
   \begin{hint}
-\hint{ This is a queueing system with loss, in particular the $M/M/1/1+2$ queue.}
+This is a queueing system with loss, in particular the $M/M/1/1+2$ queue.
   \end{hint}
     \begin{solution}
       \begin{enumerate}
@@ -966,10 +1191,10 @@ accepted
 \end{lstlisting}
   \end{enumerate}
     \end{solution}
-\end{question}
+\end{exercise}
 
 \begin{comment}
-\begin{question}[use=false]
+\begin{exercise}[use=false]
   The code is in \texttt{progs/mm1\_waiting\_time_distribution.py}. In
   mm1\_waiting\_time_distribution.py we compute the waiting time
   distribution. At this point in the text this distribution has not
@@ -999,13 +1224,13 @@ for various values of $\lambda$.
 
 \end{solution}
 
-\end{question}
+\end{exercise}
 \end{comment}
 
 
 
 
-\begin{question}(Hall 5.3) After observing a queue with two servers
+\begin{exercise}(Hall 5.3) After observing a queue with two servers
   for several days, the following steady-state probabilities have been
   determined: $p(0)=0.4$, $p(1) = 0.3$, $p(2)=0.2$, $p(3)=0.05$ and
   $p(4)=0.05$. The arrival rate is 10 customers per hour.
@@ -1088,9 +1313,9 @@ sqrt(var_q)
 
   \end{enumerate}
     \end{solution}
-\end{question}  
+\end{exercise}  
 
-\begin{question}
+\begin{exercise}
   (Hall 5.8) The queueing system at a fast-food stand behaves in a
   peculiar fashion. When there is no one in the queue, people are
   reluctant to use the stand, fearing that the food is
@@ -1204,9 +1429,9 @@ Wq # time in queue
 
   \end{enumerate}
     \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
   (Hall 5.10) A repair/maintenance facility would like to determine
   how many employees should be working in its tool crib. The service
   time is exponential, with mean 4 minutes, and customers arrive by a
@@ -1377,193 +1602,8 @@ c-labda*ES
 Clearly, $c=3$ should do.
   \end{enumerate}
     \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
-  An $M/M/2$ queueing system is very heavily utilized, with an arrival rate of 11 customers per hour, and a  service rate of 6 customers per hour per server.
-  \begin{enumerate}
-  \item Determine $\E{L_Q}$ and $\E{W_Q}$.
-  \item Compare your solution to an $M/M/1$ queue with $\rho=11/12$. Why are your answers similar or different?
-  \end{enumerate}
-  \begin{solution}
-  \begin{enumerate}
-  \item 
-
-
-\begin{lstlisting}
-labda = 11.
-mu = 6
-c = 2
-
-rho = labda/mu
-rho < c  # is the system stable?
-\end{lstlisting}\begin{lstlisting}
-True
-\end{lstlisting}
-
-Compute Ls and so on
-
-
-
-\begin{lstlisting}
-G = sum(rho**n/factorial(n) for n in range(c))
-G += rho**c/factorial(c)/(1.-rho/c)
-P0 = 1./G
-P0
-\end{lstlisting}\begin{lstlisting}
-0.043478260869565244
-\end{lstlisting}
-\begin{lstlisting}
-Lq = rho**(c+1)/c/(factorial(c)*(1.-rho/c)**2)*P0
-Lq
-\end{lstlisting}\begin{lstlisting}
-9.64492753623188
-\end{lstlisting}
-\begin{lstlisting}
-Lq/labda # Wq
-\end{lstlisting}\begin{lstlisting}
-0.8768115942028981
-\end{lstlisting}
-\begin{lstlisting}
-Ls = Lq + rho
-Ls
-\end{lstlisting}\begin{lstlisting}
-11.478260869565213
-\end{lstlisting}
-\begin{lstlisting}
-Ls/labda # Ws
-\end{lstlisting}\begin{lstlisting}
-1.0434782608695647
-\end{lstlisting}
-\begin{lstlisting}
-ES = 1./mu # expected service time
-ES
-\end{lstlisting}\begin{lstlisting}
-0.16666666666666666
-\end{lstlisting}
-
-\item 
-
-
-\begin{lstlisting}
-mu = c*6
-
-rho = labda/mu
-
-P0 = 1-rho
-P0
-\end{lstlisting}\begin{lstlisting}
-0.08333333333333337
-\end{lstlisting}
-\begin{lstlisting}
-Lq = rho**2/(1.-rho)
-Lq
-\end{lstlisting}\begin{lstlisting}
-10.083333333333327
-\end{lstlisting}
-\begin{lstlisting}
-Lq/labda # Wq
-\end{lstlisting}\begin{lstlisting}
-0.9166666666666661
-\end{lstlisting}
-\begin{lstlisting}
-Ls = rho/(1.-rho)
-Ls
-\end{lstlisting}\begin{lstlisting}
-10.999999999999995
-\end{lstlisting}
-\begin{lstlisting}
-Ls/labda # Ws
-\end{lstlisting}\begin{lstlisting}
-0.9999999999999996
-\end{lstlisting}
-\begin{lstlisting}
-ES = 1./mu # expected service time
-ES
-\end{lstlisting}\begin{lstlisting}
-0.08333333333333333
-\end{lstlisting}
-It is of interest to compare the M/M/2 system to the M/M/1 system with twice the capacity. 
-  \end{enumerate}
-    \end{solution}
-\end{question}
-
-
-
-
-\begin{question}
-  Generalize the single-server relation
-  $\E{W_Q} = \rho \E{S_r\given S_r>0} + \E{L_Q} \E S$ to the $M/M/c$
-  multi-server queue. 
-
-We will use this result later to derive algorithms to compute the
-performance measures for the analysis of closed-queueing network.
-
-\begin{hint}
-Interpret each component at the right hand side of the equation
-    and generalize it to a multi-server queueing system. 
-\end{hint}
-  \begin{solution}
-
-    Recall that for the $M/M/1$ queue, $\E{S_r\given S_r>0} = 1/\mu$.
-    Applying Little's law to the queue, we have that
-    $\lambda \E{W_Q} =\ E{L_Q}$, so that it follows that
-    \begin{equation*}
-    \E{W_Q} = \rho \E{S_r \given S_r > 0} + \E{L_Q}\E S = \frac{\rho}\mu + \rho \E{W_Q},
-    \end{equation*}
-    where we use that $\rho=\lambda \E S$. In words, the first term
-    (at the right-hand side) is the probability to find a job in
-    service, which is $\rho$ times the expected remaining service
-    time if the server is busy, which is $1/\mu$ for exponentially
-    distributed processing times. The second term is the probability
-    to find the server busy, so that the arriving job has to wait,
-    times the expected waiting time. 
-
-    For the $M/M/c$ queue we now derive the corresponding expressions
-    for this first and second term.
-
-    For the first, note that the probability that the job has to wait
-    is the same as the probability that all servers are occupied at
-    arrival. This is, clearly, $\sum_{k=c}^\infty p(k)$. If all
-    servers are busy, the expected time until a service completion is
-    $1/c\mu$, since there are $c$ servers and the expected time to
-    completion is $1/\mu$ for each individual server. Thus, the time
-    until the first departure is the minimum of the remaining services
-    at each of the servers. This has expectation $1/c\mu$. Thus, for the
-    $M/M/c$ queue
-    \begin{equation*}
-\rho\E{S_r\given S_r>0}  = \sum_{k=c}^\infty p(k) \frac 1{c\mu}.
-    \end{equation*}
-
-    For the second term, since there are $c$ servers, jobs depart from
-    the queue (hence enter service) at rate $c\mu$. The expected time
-    in queue when there are $n$ jobs in front, is therefore
-    $n/c\mu$. Thus, on average, since the expected queue length is $\E{L_Q}=\sum_{k=c}^\infty (k-c)p(k)$, we 
-get 
-\begin{equation*}
-  \E{L_Q}\frac{\E S}c = \sum_{k=c}^\infty \frac{k-c}{c\mu}p(k).
-\end{equation*}
-
-All in all,
-\begin{equation*}
-  \begin{split}
-  \E{W_Q} 
-&= \rho\E{S_r\given S_r>0}  +   \E{L_Q}\frac{\E S}c \\
-&= \sum_{k=c}^\infty p(k)\frac{1+k-c}{c\mu}.
-  \end{split}
-\end{equation*}
-
-We can also give this a natural interpretation. How many jobs have to
-leave before the service of the arriving job can start? Well, the
-entire queue must be cleared plus one job in service. Thus, if there
-are $k-c$ job in queue, we have to wait for these jobs to finish, plus
-one of the jobs in service. 
-
-Observe also that, by PASTA, we have $\pi(k) = p(k)$, so that the
-arriving job also sees $p(k)$.
-
-  \end{solution}
-\end{question}
 
 
 

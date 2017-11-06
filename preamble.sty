@@ -90,14 +90,23 @@
 % \newcommand{\hint}[1]{\SetQuestionProperties{ hint = {#1}}}
 %\newcommand{\hint}[1]{\hintsymbol\SetQuestionProperties{ hint = {#1}}}
 
-
-
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
 \theoremstyle{definition} % font type for theorems and related environments
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
-\newtheorem{question}{Exercise}[section]
-%\newtheorem{exercise}[theorem]{Exercise}
+%\newtheorem{question}{Exercise}[section]
+\newtheorem{exercise}{}[section]
+\AtEndEnvironment{exercise}{\hspace{\stretch1}\ensuremath\qedsymbol}
+
+\Newassociation{solution}{Solution}{ans}
+\Newassociation{sol}{Solution}{ans}
+\Newassociation{hint}{Hint}{hint}
+%\renewcommand{\Hintlabel}[1]{\textbf{Hint #1:}}
+%\renewcommand{\Solutionlabel}[1]{\textbf{Solution #1:}}
+\renewcommand{\Hintlabel}[1]{\textbf{#1}}
+\renewcommand{\Solutionlabel}[1]{\textbf{#1}}
+
 
 \newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1} \nameref*{#1}}} % One single link
 
@@ -156,5 +165,6 @@
 
 \setcounter{tocdepth}{1}
 
+\allowdisplaybreaks
 
 \graphicspath{{figures/}}

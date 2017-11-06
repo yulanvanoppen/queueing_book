@@ -1,21 +1,85 @@
 \section{Poisson Arrivals See Time Averages}
 \label{sec:poisson-arrivals-see}
 
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 Suppose the following limit exists:
-\begin{equation*}
+\begin{equation}\label{eq:jaap}
   \pi(n) 
 = \lim_{m\to\infty} 
 \frac1m\sum_{k=1}^m \1{L(A_k-) = n},
-\end{equation*}
+\end{equation}
 where $\pi(n)$ is the long-run fraction of jobs that observe $n$
 customers in the system at the moment of arrival.  It is natural to
 ask whether $\pi(n)$ and $p(n)$ are related, that is, whether what
 customers see upon arrival is related to the time-average behavior of
-the system. We will derive a condition in this section under which
-$\pi(n)=p(n)$. 
+the system. In this section we will derive the famous \recall{PASTA (Poisson arrivals see time averages} condition  that ensures that  $\pi(n)=p(n)$. 
 
+\begin{exercise}\label{ex:8}
+  To see that $p(n)$ and $\pi(n)$ can be very different, consider a
+  queueing system in which the inter-arrival times $\{X_i\}$ are all
+  identical to 1 hour, and the service times are all identical to
+  $S_i=59$ minutes.  What are $\rho$, $p(0)$, $p(n)$ for $n\geq 2$. What is $\pi(n)$?
+  What is the time average system length $\E L$? What is the queue
+  length as observed by customers?  Check Eq.~(\ref{eq:13}) for this case.
+\begin{hint}
+Check the definitions of $Y(0,t)$, $Y(1,t)$, $A(0,t)$ and so on. Make a drawing of $Y(0, t)$ and $Y(1,t)$ as functions of $t$. 
+\end{hint}
+  \begin{solution}
+ $A(t)=\lfloor t\rfloor$ provided the unit of $t$ is in
+  hours. $A(0,t)=A(t)$ and $A(n,t)=0$ for $n>0$.  Next, for $Y(0,t)$ we define, for notational ease, the fractional part of $t$ as $\{t\} = t - \lfloor t \rfloor$. Then,
+  \begin{align*}
+    Y(0,t)&= \frac 1{60} \lfloor t \rfloor + \{t\} \1{ \{t\} \in[59/60, 1)} \approx \frac{1}{60}t, \\
+    Y(1,t)&= \frac{59}{60} \lfloor t \rfloor + \{t\} \1{\{t\}\in[0,59/60)} \approx \frac{59}{60}t. \\
+\lambda(0) &= \lim_t \frac{A(0,t)}{Y(0,t)} = \lim_t \frac{t}{t/60} = 60, \\
+\lambda(1) &= \lim_t \frac{A(1,t)}{Y(1,t)} = \lim_t\frac{0}{59/60 t} = 0 \\
+\lambda(n) &= 0, \quad n\geq 1. \\
+\lambda &= \lim_t \frac{A(t)}t  = 1 \\
+p(0)  &= \frac{1}{60}, \\
+p(1)  &= \frac{59}{60}, \\
+\rho  &= \frac{59}{60}, \\
+\pi(0)  &= 1. \\
+  \end{align*}
+  There is no queue so $\E{L_Q} = 0$, but $\E L = \rho$.  The queue
+  length as observed by customers is equal to 0, because jobs only
+  arrive when the server is free.
+  \end{solution}
+\end{exercise}
 
-We can make some progress with this question by rewriting $\pi(n)$ in
+\begin{exercise}
+ Consider another (theoretical) queueing system in which each
+  customer requires precisely 1 minute. At the start of each hour, 59
+  customers arrive. What is $p(n)$, what is $\pi(n)$? What is the time-average system length $\E{L}$?
+  \begin{solution}
+As in the previous problem, $\rho=59/60$.
+
+For $p(n)$: the fraction of time the system contains $n=0$ jobs is $p(0)=1/60=1-\rho$. Also, as the service time of each job is precisely one minute, $p(n)=1/60$ for $n=1,\ldots, 59$. 
+
+For $\pi(n)$, the first of the $59$ jobs sees a free server, thus $\pi(0)=1/59$. The second job of the $59$ jobs sees one job in system (and this job is in service), hence $\pi(1)=1/59$. More generally then, $\pi(n)=1/59$ for $n=0,\ldots 58$. 
+
+Note in particular $p(59)=1/60 \neq \pi(59) = 0$. 
+
+  Observe now that the average system length is very different from the
+  previous example, even though $\rho = 59/60$ in both cases. Thus,
+  knowledge of the load is not sufficient to make a statement about the
+  average queue length.
+
+  To compute the average queue length, as perceived by the customers,
+  note that the first customer sees no queue, the second sees one
+  customer in front, and so on. Thus, the average queue length as seen
+  by customers is
+  \begin{equation*}
+   \frac{0+1+2+\cdots+58}{59}=\frac{1}{59}\frac{58\cdot 59}{2} = 29.
+  \end{equation*}
+The time average system length is $\E L = 59/60 + 58/60 + \cdots 1/60 + 0/60 = 59/2$. 
+  \end{solution}
+\end{exercise}
+
+We can make some progress by rewriting $\pi(n)$ in
 the following way. Since $A(t)\to \infty$ as $t\to\infty$, it is reasonable 
 that\footnote{See below for the proof.}
 \begin{equation}\label{eq:132}
@@ -32,7 +96,7 @@ where we use~\eqref{eq:19} in the last row. But,
 = \frac{A(t)}t \frac{A(n,t)}{A(t)}
 \to \lambda  \pi(n), \quad\text{as } t \to \infty, 
 \end{equation}
-where we use Eq.~\eqref{eq:3} (i.e., $A(t)/t \to \lambda$). that
+where we use Eq.~\eqref{eq:3} (i.e., $A(t)/t \to \lambda$). 
 Next, by  Eq.~\eqref{eq:21}, 
 \begin{equation*}
 \frac{A(n,t)}t = \frac{A(n,t)}{Y(n,t)}\frac{Y(n,t)}t \to \lambda(n) p(n), \quad\text{as } t \to \infty.
@@ -46,6 +110,16 @@ from which  follows our final result:
   \lambda(n) = \lambda \iff \pi(n) = p(n), 
 \end{equation*}
 
+\begin{exercise}
+  Check that this relation holds for the system of Exercise~\ref{ex:8}
+  \begin{solution}
+ We have to check that $\lambda(n) p(n) = \lambda \pi(n)$.  First
+  take $n=0$. By the above: $\lambda(0) p(0) = 60\cdot 1/60 = 1$,
+  $\lambda \pi(0) = 1\cdot 1 = 1$.  For $n=1$: $\lambda(1) p(1) = 0$. Since $\pi(1)=0$ the result is again OK for $n=1$. And so on .
+  \end{solution}
+\end{exercise}
+
+
 So, why is this useful? Well, in words, it means that if the arrival
 rate does not depend on the state of the system, i.e.,
 $\lambda=\lambda(n)$, the sample average $\pi(n)$ is equal to the
@@ -53,15 +127,10 @@ time-average $p(n)$, i.e., $\pi(n)=p(n)$. But, when $\pi(n)=p(n)$, the
 customer perception at arrival moments, i.e., $\pi(n)$, is the same as
 the server perception, i.e., $p(n)$.
 
-Of course, this property is not satisfied for any general queueing
-system, see the exercise below in which $X_k=1$ hour for all $k$ and
-$S_k=59$ minutes.  However, it is true when the arrival process is
-Poisson. This fact is typically called \recall{PASTA}: Poisson
-Arrivals See Time Averages.
-% Interestingly, the result can be generalized to general sets
-% $B$ of the state space, not just the number $n$ of jobs in the system.
-
-Thus, when customers arrive in accordance to a Poisson process (so
+At the exercises above show, this property is not satisfied for any general queueing
+system.  However, it is true when the arrival process is
+Poisson. This fact is typically called \recall{PASTA: Poisson
+Arrivals See Time Averages}. Thus, when customers arrive in accordance to a Poisson process (so
 that the inter-arrival times are exponentially distributed), it must
 be that $\pi(n) = p(n)$, hence, for the $M/M/1$ queue, we see that
 \begin{equation*}
@@ -71,7 +140,7 @@ be that $\pi(n) = p(n)$, hence, for the $M/M/1$ queue, we see that
 
 With the above reasoning, we can also establish a relation between
 $\pi(n)$ and the statistics of the system as obtained by the
-departures, i.e., $\delta(n)$, to be defined presently. For this we
+departures. For this we
 turn again to Eq.~\eqref{eq:15}, i.e., $|A(n,t) - D(n,t)| \leq 1$. To
 obtain Eq.~\eqref{eq:12} we divided both sides of this equation by the
 time the system spends in a certain state. We can also use another
@@ -103,16 +172,124 @@ Moreover, if the system is rate-stable, i.e., the output rate $\gamma$ is equal 
 This means that the system as seen by arrivals, i.e., $\pi(n)$, is
 the same as what jobs leave behind, i.e., $\delta(n)$.
 
-There is a subtle problem in~\eqref{eq:132} and the derivation
+
+\begin{exercise}
+  When $\lambda\neq \gamma$, is $\pi(n)\geq \delta(n)$?  
+  \begin{hint}
+Use that
+    $\lambda \geq \gamma$ always, and $\lambda=\gamma$ when the system
+    is rate-stable.
+  \end{hint}
+  \begin{solution}
+    We have shown for one-step transition processes that
+    $\lambda \pi(n) = \gamma \delta(n)$. Thus,
+    $\pi(n) = \delta(n)\gamma /\lambda$. Since $\lambda\geq \gamma$,
+    we have that $\pi(n) \leq \delta(n)$.
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}
+Show that 
+\begin{equation*}
+\lambda  \pi(n) = \lambda(n) p(n) = \mu(n+1) p(n+1) = \gamma \delta(n).
+\end{equation*}
+What is the important condition for this to be true?
+\begin{hint}
+Check all definitions of $Y(n,t)/t$ and so on.
+\end{hint}
+\begin{solution}
+  The important condition is that transitions occur as single
+  steps. In other words, the relation is true for processes with
+  \recall{one-step} transitions, i.e, when $|A(n,t) - D(n,t)|\leq 1$.
+  In  that case, 
+\begin{align*}
+  \frac{A(n,t)}{t} &=   \frac{A(n,t)}{A(t)} \frac{A(t)}{t} \to \pi(n) \lambda\\
+  \frac{A(n,t)}{t} &=   \frac{A(n,t)}{Y(n,t)} \frac{Y(n,t)}{t} \to \lambda(n)p(n)\\
+  \frac{D(n,t)}{t} &=   \frac{D(n,t)}{Y(n+1,t)} \frac{Y(n+1,t)}{t} \to \mu(n+1)p(n+1)\\
+  \frac{D(n,t)}{t} &=   \frac{D(n,t)}{D(t)} \frac{D(t)}{t} \to \delta(n)\gamma \\
+\end{align*}
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+  Why is $\mu(n) = \mu$ for the $M/M/1$ queue?  
+  \begin{hint}
+Think about the
+    construction of the $M/M/1$ queue as a random walk, see
+    Section~\ref{sec:queu-proc-as}.
+  \end{hint}
+
+ \begin{solution}
+   The $M/M/1$-queue can be constructed as a reflection of the random
+   walk $Z(t) = Z(0) + N_\lambda(t) - N_\mu(t)$. Clearly,
+   downcrossings can only occur when $N_\mu$ fires. The rate at which
+   the transitions of $N_\mu$ occur is constant, and, in particular,
+   independent of the history of $Z$. 
+
+   More specifically, for the interested, define
+   $\sigma\{X(t) : t\in I\}$ as the $\sigma$-algebra generated by the
+   stochastic procsses $\{X(t), t\in I\}$ on the index set $I$. Then,
+   by construction of $\{N_\lambda(t)\}$ and $\{Z(t)\}$, we have that
+   $\sigma\{Z(s) : s\in[0,t]\}$  and $\sigma\{N_\lambda(u) : u > t\}$ are independent.
+ \end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+  Use the PASTA property and the ideas of Section~\ref{sec:level-cross-balance}
+ to derive  for the $M/M/1$ queue that
+  \begin{equation*}
+  (\lambda + \mu) \pi(n) = \lambda \pi(n-1) + \mu \pi(n+1)
+  \end{equation*}
+  \begin{hint}
+    Consider some state $n$ and count all transitions that `go in and
+    out of' this state. Specifically, $A(n,t) + D(n-1,t)$ counts all
+    transitions out of state $n$: $A(n,t)$ counts the number of
+    arrivals that see $n$ in the system upon arrival, hence
+    immediately after such arrivals the system contains $n+1$ jobs;
+    likewise, $D(n-1,t)$ counts all jobs that leave $n-1$ jobs behind,
+    hence immediately before such jobs depart the system contains $n$
+    jobs.  In a similar way, $A(n-1,t) + D(n,t)$ counts all
+    transitions into state $n$ (Recall once again, $D(n,t)$ counts the
+    jobs that leave $n$ behind. Hence, when such departures occur,
+    state $n$ is entered). Now use that `what goes in must go out'.    
+  \end{hint}
+  \begin{solution}
+By  the hint,  the difference between the `in'
+    transitions and the `out' transitions is at most 1 for all $t$. Thus,  we can write
+    \begin{equation*}
+      A(n,t) + D(n-1,t) \approx A(n-1,t) + D(n,t)
+    \end{equation*}
+From this, 
+    \begin{equation*}
+      \begin{split}
+      A(n,t) + D(n-1,t) &\approx A(n-1,t) + D(n,t)  \iff \\
+      \frac{A(n,t) + D(n-1,t)}t &\approx \frac{A(n-1,t) + D(n, t)}t \iff \\
+      \frac{A(n,t)}t + \frac{D(n-1,t)}t &\approx \frac{A(n-1,t)}t + \frac{D(n,t)}t.
+      \end{split}
+    \end{equation*}
+Using the ideas of Section~\ref{sec:level-cross-balance} this becomes for $t\to\infty$, 
+\begin{equation*}
+  (\lambda(n) +\mu(n))p(n) = \lambda(n-1)p(n-1) + \mu(n+1)p(n+1).
+\end{equation*}
+Since we are concerned here with the $M/M/1$ queue we have that
+$ \lambda(n) = \lambda$ and $\mu(n) = \mu$, and using PASTA we have
+that $p(n) = \pi(n)$. We are done.
+  \end{solution}
+\end{exercise}
+
+
+
+There is a subtle problem in the transition from~\eqref{eq:jaap} to~\eqref{eq:132} and the derivation
 of~\eqref{eq:1333}: $\pi(n)$ is defined as a limit over arrival epochs
 while in $A(n,t)/t$ we take the limit over time. Now the observant
 reader might ask why these limits should relate at all.  The
-resolution lies in the \recall{renewal reward theorem}. As this
-theorem is intuitive and very useful in its own right we state this
-theorem first, and then apply it to show~\eqref{eq:1333}. In
-Figure~\ref{fig:renewal} we provide graphical motivation why this
-theorem is true; for the (simple) proof we refer to
-\citet{el-taha98:_sampl_path_analy_queuein_system}.
+resolution lies in the \recall{renewal reward theorem}. This
+theorem is very useful in its own right, and states  intuitively that 
+when customers arrive at rate $\lambda$ and each customer pays an average amount $X$, then the system earns money at rate $Y=\lambda X$.  Figure~\ref{fig:renewal} provides graphical motivation about why this theorem is true; \citet{el-taha98:_sampl_path_analy_queuein_system}.
+gives  a (simple) proof.
 
 \begin{theorem}[Renewal Reward Theorem, $Y=\lambda X$]
   Suppose the counting process $\{N(t), t\geq 0\}$ is such that
@@ -174,19 +351,32 @@ node[pos=0.5, xshift=0.7cm]  {$X_{k+1}$};
 \end{tikzpicture}
 \caption{A graphical `proof' of $Y=\lambda X$. Here $Y(t)/t\to Y$, $n/\sum^n_i T_i\to \lambda$ and $n^{-1}\sum_i^n X_i \to X$.  (Observe that in the
   figure $X_k$ does not represent an interarrival time; instead it
-  corresponds to the increment of the (graph of) $Y$ between two
-  consecutive epochs $T_{k-1}$ and $T_k$ at which $Y$ is
+  corresponds to the increment of (the graph of) $Y(t)$ between two
+  consecutive epochs $T_{k-1}$ and $T_k$ at which $Y(t)$ is
   observed.) }
   \label{fig:renewal}
 \end{figure}
 
 
-Now, to show that~(\ref{eq:132}) is valid, define
+\begin{exercise}
+Show that~(\ref{eq:132}) is valid.
+\begin{hint}
+Check that the conditions of the renewal reward theorem are satisfied in the above prooff~\eqref{eq:1333}. Then define  
 \begin{align*}
   Y(t) &:= A(n,t) = \sum_{k=1}^{A(t)} \1{L(A_k-) = n} \\
-X_k &:= Y(A_k) - Y(A_{k-1}) = A(n, A_k) - A(n, A_{k-1}) = \1{L(A_k-)=n}
+X_k &:= Y(A_k) - Y(A_{k-1}) = A(n, A_k) - A(n, A_{k-1}) = \1{L(A_k-)=n}.
 \end{align*}
-Then, 
+
+\end{hint}
+\begin{solution}
+First we check the conditions.  The counting process here is $\{A(t)\}$ and the epochs at which
+    $A(t)$ increases are $\{A_k\}$. By assumption, $A_k\to\infty$,
+    hence $A(t)\to\infty$ as $t\to\infty$. Moreover, by assumption
+    $A(t)/t \to \lambda$. Also $A(n,t)$ is evidently non-decreasing and
+    $A(n,t)\to\infty$ as $t\to\infty$.
+
+
+From the definitions in the hint,   
 \begin{equation*}
 X= \lim_{m\to\infty} \frac 1 m \sum_{k=1}^m X_k =\lim_{m\to\infty} \frac 1 m \sum_{k=1}^m \1{L(A_k-)=n} = \pi(n).
 \end{equation*}
@@ -195,152 +385,17 @@ Since $Y=\lim_t Y(t)/t = \lim_t A(n,t)/t$ it follows from the renewal reward the
   Y=\lambda X \implies \lim_t \frac{A(n,t)} t = \lambda X = \lambda \pi(n).
 \end{equation*}
 Thus, Eq.~\eqref{eq:1333} follows from the renewal reward theorem.
-
-In many (stochastic) systems the relation $Y=\lambda X$ is useful. As
-a further example, suppose customers pay on average an amount $X$ and
-customers arrive at rate $\lambda$, then the system earns money at
-rate $\lambda X = Y$. 
-
-\begin{question} 
-Check that the conditions of the renewal reward theorem are satisfied in the above proof of~\eqref{eq:1333}. 
-  \begin{solution}
-    The counting process here is $\{A(t)\}$ and the epochs at which
-    $A(t)$ increases are $\{A_k\}$. By assumption, $A_k\to\infty$,
-    hence $A(t)\to\infty$ as $t\to\infty$. Moreover, by assumption
-    $A(t)/t \to \lambda$. Also $A(n,t)$ is evidently non-decreasing and
-    $A(n,t)\to\infty$ as $t\to\infty$.
-  \end{solution}
-\end{question}
-
-\begin{question}\label{ex:8}
-  To see that $p(n)$ and $\pi(n)$ can be very different, consider a
-  queueing system in which the inter-arrival times $\{X_i\}$ are all
-  identical to 1 hour, and the service times are all identical to
-  $S_i=59$ minutes.
-\begin{enumerate}
-\item What are $\rho$, $p(0)$, $p(n)$ for $n\geq 2$. What is $\pi(n)$?
-  What is the time average queue length $\E L$? What is the queue
-  length as observed by customers?
-\item Check Eq.~(\ref{eq:13}) for this case.
-\item Consider another (theoretical) queueing system in which each
-  customer requires precisely 1 minute. At the start of each hour, 59
-  customers arrive. What is $p(n)$, what is $\pi(n)$? What is the time-average system length $\E{L}$?
-\end{enumerate}
-\hint{Check the definitions of $Y(0,t)$, $Y(1,t)$, $A(0,t)$ and so on.}
-  \begin{solution}
-\begin{enumerate}
-\item $A(t)=\lfloor t\rfloor$ provided the unit of $t$ is in
-  hours. $A(0,t)=A(t)$ and $A(n,t)=0$ for $n>0$.  Thus, 
-  \begin{equation*}
-    \begin{split}
-A(0,t) &\approx t \\
-A(1,t) & = 0 \\
-    Y(0,t)&= \frac 1{60} \lfloor t \rfloor + (t-\lfloor t \rfloor) 1\{t-\lfloor t \rfloor \in[59/60, 1)\} \approx \frac{1}{60}t, \\
-    Y(1,t)&= \frac{59}{60} \lfloor t \rfloor + (t-\lfloor t \rfloor) 1\{t-\lfloor t \rfloor     \in[0,59/60)\} \approx \frac{59}{60}t. \\
-\lambda(0) &= \lim_t \frac{A(0,t)}{Y(0,t)} = \lim_t \frac{t}{t/60} = 60, \\
-\lambda(1) &= \lim_t \frac{A(1,t)}{Y(1,t)} = \lim_t\frac{0}{59/60 t} = 0 \\
-\lambda(n) &= 0, \quad n\geq 1. \\
-\lambda &= \lim_t \frac{A(t)}t  = 1 \\
-p(0)  &= \frac{1}{60}, \\
-p(1)  &= \frac{59}{60}, \\
-\rho  &= \frac{59}{60}, \\
-\pi(0)  &= 1. \\
-    \end{split}
-  \end{equation*}
-  There is no queue so $\E{L_Q} = 0$, but $\E L = \rho$.  The queue
-  length as observed by customers is equal to 0, because jobs only
-  arrive when the server is free.
-\item We have to check that $\lambda(n) p(n) = \lambda \pi(n)$.  First
-  take $n=0$. By the above: $\lambda(0) p(0) = 60\cdot 1/60 = 1$,
-  $\lambda \pi(0) = 1\cdot 1 = 1$.  For $n=1$: $\lambda(1) p(1) = 0$. Since $\pi(1)=0$ the result is again OK for $n=1$. And so on .
-\item Again $\rho=59/60$.
-
-For $p(n)$: the fraction of time the system contains $n=0$ jobs is $p(0)=1/60=1-\rho$. Also, as the service time of each job is precisely one minute, $p(n)=1/60$ for $n=1,\ldots, 59$. 
-
-For $\pi(n)$, the first of the $59$ jobs sees a free server, thus $\pi(0)=1/59$. The second job of the $59$ jobs sees one job in system (and this job is in service), hence $\pi(1)=1/59$. More generally then, $\pi(n)=1/59$ for $n=0,\ldots 58$. 
-
-Note in particular $p(59)=1/60 \neq \pi(59) = 0$. 
-
-  Observe now that the average system length is very different from the
-  previous example, even though $\rho = 59/60$ in both cases. Thus,
-  knowledge of the load is not sufficient to make a statement about the
-  average queue length.
-
-  To compute the average queue length, as perceived by the customers,
-  note that the first customer sees no queue, the second sees one
-  customer in front, and so on. Thus, the average queue length as seen
-  by customers is
-  \begin{equation*}
-   \frac{0+1+2+\cdots+58}{59}=\frac{1}{59}\frac{58\cdot 59}{2} = 29.
-  \end{equation*}
-The time average system length is $\E L = 59/60 + 58/60 + \cdots 1/60 + 0/60 = 59/2$. 
-\end{enumerate}
-
-These two examples show that the way customers arrive have an enormous
-impact on the queue length. Both queueing systems have the same
-utilization, i.e. 59/60, but the average queue lengths are not nearly
-the same, i.e. 0 versus 29.
-  \end{solution}
-\end{question}
-
-\begin{question}
-  Is in general $\pi(n)\geq \delta(n)$?  \hint{Use that
-    $\lambda \geq \gamma$ always, and $\lambda=\gamma$ when the system
-    is rate-stable.}
-  \begin{solution}
-    We have shown for one-step transition processes that
-    $\lambda \pi(n) = \gamma \delta(n)$. Thus,
-    $\pi(n) = \delta(n)\gamma /\lambda$. Since $\lambda\geq \gamma$,
-    we have that $\pi(n) \leq \delta(n)$.
-  \end{solution}
-\end{question}
-
-\begin{question}
-  Why is $\mu(n) = \mu$ for the $M/M/1$ queue?  \hint{Think about the
-    construction of the $M/M/1$ queue as a random walk, see
-    Section~\ref{sec:queu-proc-as}.}
-
- \begin{solution}
-   The $M/M/1$-queue can be constructed as a reflection of the random
-   walk $Z(t) = Z(0) + N_\lambda(t) - N_\mu(t)$. Clearly,
-   downcrossings can only occur when $N_\mu$ fires. The rate at which
-   the transitions of $N_\mu$ occur is constant, and, in particular,
-   independent of the history of $Z$. 
-
-   More specifically, for the interested, define
-   $\sigma\{X(t) : t\in I\}$ as the $\sigma$-algebra generated by the
-   stochastic procsses $\{X(t), t\in I\}$ on the index set $I$. Then,
-   by construction of $\{N_\lambda(t)\}$ and $\{Z(t)\}$, we have that
-   $\sigma\{Z(s) : s\in[0,t]\}$  and $\sigma\{N_\lambda(u) : u > t\}$ are independent.
- \end{solution}
-\end{question}
-
-
-\begin{question}
-Show that 
-\begin{equation*}
-\lambda  \pi(n) = \lambda(n) p(n) = \mu(n+1) p(n+1) = \gamma \delta(n).
-\end{equation*}
-What is the important condition for this to be true?
-\hint{Check all definitions of $Y(n,t)/t$ and so on.}
-\begin{solution}
-  The important condition is that transitions occur as single
-  steps. In other words, the relation is true for processes with
-  \recall{one-step} transitions, i.e, when $|A(n,t) - D(n,t)|\leq 1$.
-  In  that case, 
-\begin{align*}
-  \frac{A(n,t)}{t} &=   \frac{A(n,t)}{A(t)} \frac{A(t)}{t} \to \pi(n) \lambda\\
-  \frac{A(n,t)}{t} &=   \frac{A(n,t)}{Y(n,t)} \frac{Y(n,t)}{t} \to \lambda(n)p(n)\\
-  \frac{D(n,t)}{t} &=   \frac{D(n,t)}{Y(n+1,t)} \frac{Y(n+1,t)}{t} \to \mu(n+1)p(n+1)\\
-  \frac{D(n,t)}{t} &=   \frac{D(n,t)}{D(t)} \frac{D(t)}{t} \to \delta(n)\gamma \\
-\end{align*}
 \end{solution}
-\end{question}
+\end{exercise}
 
 
 
 
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "book"
-%%% End:
+
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
+\subsection*{Hints}
+\input{hint}
+\subsection*{Solutions}
+\input{ans}
+\clearpage

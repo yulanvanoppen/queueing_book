@@ -59,7 +59,7 @@ occur in $n$ intervals is then binomially distributed
   \P{N_n(t) = k} = {n \choose k} p^k (1-p)^{n-k}.
 \end{equation}
 
-\begin{question}
+\begin{exercise}
 Show that $\E{N_n(t)} = \sum_{i=1}^n \E{B_i} = n p$.
 \begin{hint}
 Use that $\E{X+Y} = \E X + \E Y$. 
@@ -69,9 +69,9 @@ Use that $\E{X+Y} = \E X + \E Y$.
     \E{N_n(t)} = \E{\sum_{i=1}^n {B_i}} = \sum_{i=1}^n \E{B_i} = n \E{B_i} = n p.
   \end{equation*}
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
 What is the difference between $N_n(t)$ and $N(t)$?
 \begin{solution}
   $N_n(t)$ is a binomially distributed random variable with parameters
@@ -79,7 +79,7 @@ What is the difference between $N_n(t)$ and $N(t)$?
   variable $N(t)$ models the number of failures that can occur during
   $[0,t]$. As such it is not necessarily bounded by $n$. Thus, $N_n(t)$ and $N(t)$ cannot represent the same random variable. 
 \end{solution}
-\end{question}
+\end{exercise}
 
 
 In fact, in some appropriate sense, $N_n(t)$ converges to $N(t)$ for $n\to \infty$ such
@@ -91,7 +91,7 @@ e^{-\lambda t} \frac{(\lambda t)^k}{k!}.
 We say that $N(t)$ is \recall{Poisson distributed} with rate
 $\lambda$, and write $N(t)\sim P(\lambda t)$. 
 
-\begin{question}
+\begin{exercise}
   Show how the binomial distribution~\eqref{eq:bin} converges to the
   Poisson distribution~\eqref{eq:pois} if $n\to\infty$, $p\to0$ such
   that $np=\lambda$. 
@@ -136,9 +136,9 @@ is easy, so that, as $n\to\infty$,  the above converges to
 \end{equation*}
 
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
   Show that if $N(t)$ is Poisson distributed with parameter $\lambda$, $\E{N(t)} = \lambda t$ and $\V{N(t)} = \lambda t$. 
 
 
@@ -178,10 +178,10 @@ process contains it is an \emph{ uncountable set} of random variables,
 whereas $N(t)$ is just \emph{one} random variable that is Poisson
 distributed with parameter $\lambda t$. 
 \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
 Show that the moment generating function of a Poisson distributed random variable $N$ is
 \begin{equation*}
 \phi(z)=  \E{z^N}  = e^{(z-1)\lambda},
@@ -212,9 +212,9 @@ $\phi''(z)=\E{N(N-1)z^{N-2}}$, hence $\phi''(1)=\E{N(N-1)}$. With this,
 \V N &= \E{N^2}-(\E N)^2 = \lambda,\\
   \end{align*}
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
 Show that   the SCV of $N(t)$ is equal to $1/\lambda t$. 
 
   \begin{solution}
@@ -231,7 +231,7 @@ Poisson process $N_\lambda(t)$ is \emph{not} identically~1 for all
 $t$.
   \end{solution}
 
-\end{question}
+\end{exercise}
 
 
 To see that the exponential distribution can be derived from the Poisson distribution, observe that, if there are no failures in some interval $[0,t]$, then it
@@ -251,7 +251,7 @@ analysis of queueing process. We summarize this by a theorem.
 
 
 
-\begin{question}
+\begin{exercise}
   Assume a timer fires at times $0=T_0<T_1<T_2< \cdots$, such that
   $T_{k}-T_{k-1}\sim\exp(\lambda)$. Define
   $N(t) = \sum_{k=0}^\infty k \1{T_k \leq t < T_{k+1}}$, where $\1{}$
@@ -261,10 +261,10 @@ analysis of queueing process. We summarize this by a theorem.
 \begin{solution}
 $N(t) \sim \text{P}(\lambda t)$. 
 \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
   If the inter-arrival times $\{X_i\}$ are i.i.d. and exponentially
   distributed with mean $1/\lambda$, prove that the number $N(t)$ of
   arrivals during interval $[0,t]$ is Poisson distributed.
@@ -291,11 +291,11 @@ $N(t) \sim \text{P}(\lambda t)$.
 \end{equation*}
 We are done.
     \end{solution}
-\end{question}
+\end{exercise}
 
 
 
-\begin{question}
+\begin{exercise}
   Show that if $N(t) \sim P(\lambda t)$, we have for small $h$,
   \begin{enumerate}
   \item $\P{N(h) = n \given N(0) = n} = 1-\lambda h + o(h)$ 
@@ -357,10 +357,10 @@ We can also use the results of the previous parts to see that
 \end{equation*}
 \end{enumerate}
 \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
 Show that  for a Poisson process $N$, 
 \begin{equation*}
   \P{N(0,s] =1\given N(0,t]=1} = \frac st.
@@ -388,7 +388,7 @@ Use Bayes' law for conditional probability. Observe that
   \end{split}
 \end{equation*}
 \end{solution}
-\end{question}
+\end{exercise}
 
 In the study of queueing networks, we will be concerned with  merging (also called
   superposition) of Poisson streams, as illustrated by the figure below.
@@ -415,7 +415,7 @@ In the study of queueing networks, we will be concerned with  merging (also call
 \end{tikzpicture}
 \end{center}
 
-\begin{question} 
+\begin{exercise} 
  Assuming that
   $N_a(t)\sim \text{P}(\lambda t)$ , $N_s(t) \sim \text{P}(\mu t)$ and
   independent, show that
@@ -479,10 +479,10 @@ Finally, since the  generating function uniquely characterizes
 the distribution, and since the above expression has the same form as
 $M_1(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\sim P((\lambda +\mu) t)$.
     \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question} Assume that
+\begin{exercise} Assume that
   $N_a(t)\sim \text{P}(\lambda t)$ , $N_s(t) \sim \text{P}(\mu t)$ and
   independent. Use that  $N_a(t) + N_s(t) \sim \text{P}((\lambda + \mu)t)$ to conclude
     \begin{equation*}
@@ -517,10 +517,10 @@ Suppose
     \end{split}
   \end{equation*}
     \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
  Assume that $N_a(t)\sim \text{P}(\lambda t)$ ,
   $N_s(t) \sim \text{P}(\mu t)$ and independent.  What is actually the
   meaning of the event
@@ -528,7 +528,7 @@ Suppose
     \begin{solution}
  This means that, given that an event occurred, the event was an arrival, i.e., $N_a$ was the first.
     \end{solution}
-\end{question}
+\end{exercise}
 
 Besides merging Poisson streams, we can also consider the concept of splitting a stream into substreams. Take a Poisson process and split it in
   the following way.  When a job arrives, throw a coin that lands
@@ -586,7 +586,7 @@ The concept of thinning is particularly useful to analyze queueing
   stream (with probability $p$) of the departures of the first
   machine.
 
-\begin{question}
+\begin{exercise}
 Show that the Poisson process obtained by thinning the original
   process is $\sim P(\lambda t p)$ for any~$t$.
 
@@ -660,7 +660,7 @@ moment-generating functions specify the distribution uniquely,
 $Y\sim P(\lambda p)$.
 
 \end{solution}
-\end{question}    
+\end{exercise}    
 
 
 \Closesolutionfile{hint}

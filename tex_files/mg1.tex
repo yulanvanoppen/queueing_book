@@ -86,15 +86,28 @@ R(D_n)
 = \frac{1}{D_n} \int_0^{D_n} \sum_{k=1}^\infty R_k(s) \d s 
 = \frac{1}{D_n} \sum_{k=1}^n \int_0^{D_n}  R_k(s) \d s,
 \end{align*}
-the interchange being allowed by the positivity of $R_k(s)$.  But, if
-$k<n$ so that $D_k< D_n$, 
+the interchange being allowed by the positivity of $R_k(s)$.  
+
+\begin{exercise}
+Show that for $k<n$, so that $D_k< D_n$,
+\begin{equation*}
+\int_0^{D_n} R_k(s) \d s = \frac{S_k^2}2.
+\end{equation*}
+\begin{hint}
+  Graphically, the result follows from Figure~\ref{fig:mg1remainingservicetime}.   
+\end{hint}
+\begin{solution}
+If $k<n$,  $D_k< D_n$, and then
 \begin{align*}
 \int_0^{D_n} R_k(s) \d s
 &= \int_0^{D_n} (D_k-s)\1{A_k \leq s < D_k}\, \d s = \int_{A_k}^{D_k} (D_k-s) \, \d s \\
 &= \int_{A_k}^{A_k+S_k} (A_k+S_k-s) \, \d s  = \int_{0}^{S_k} (S_k-s) \, \d s \\
 &= \int_{0}^{S_k} s \, \d s = \frac{S_k^2}2.
 \end{align*}
-With this, 
+  \end{solution}
+\end{exercise}
+
+With this exercise
 \begin{equation*}
 R(D_n)
 = \frac{1}{D_n} \sum_{k=1}^n \frac{S_k^2}2 = \frac{n}{D_n} \frac 1 n\sum_{k=1}^n \frac{S_k^2}2.
@@ -106,25 +119,44 @@ get
 \begin{equation}\label{eq:34}
 \E{S_r} = \lim_{D_n\to\infty} R(D_n) = \frac{\lambda}2 \E{S^2}.
 \end{equation}
-
-In the exercises we ask you to prove that
-\begin{equation}\label{eq:32}
-  \E{S_r} = \frac{1+C_s^2}2\rho\E S,
-\end{equation}
-where
-\begin{equation*}
- C_s^2 = \frac{\V S }{(\E S)^2},
+Thus, 
+\begin{equation*} 
+  \E{W_Q} = \frac1{1-\rho} \E{S_r} =\frac 1 2 \frac{\lambda \E{S^2}}{1-\rho}.
 \end{equation*}
 
-With the above we have obtained the \recall{Pollackzek-Khintchine}
-(PK) formula for the average waiting time in queue:
-\begin{equation} \label{eq:710}
-  \E{W_Q} = \frac1{1-\rho} \E{S_r} =\frac{1 + C_s^2}2 \frac{\rho}{1-\rho}  \E S.
+\begin{exercise}
+Show that
+\begin{equation}\label{eq:32}
+  \lambda \E{S^2} = (1+C_s^2)\rho\E S,
 \end{equation}
-This proves to be a very useful result; a few of the problems below
-will clarify how to use it.
+where the \recall{square coefficient of variation} is defined as
+\begin{equation*}
+ C_s^2 = \frac{\V S }{(\E S)^2}.
+\end{equation*}
+\begin{solution}
+Use that 
+\begin{equation*}
+  \frac{\E{S^2}}{(\E S)^2} = 
+  \frac{(\E{S^2}-(\E S)^2) + (\E S)^2}{(\E S)^2} =
+  \frac{\V S + (\E S)^2}{(\E S)^2} =
+  C_s^2 + 1.
+\end{equation*}
+Then
+\begin{equation*}
+  \frac{\lambda\E{S^2}} = \frac{\E{S^2}\lambda(\E S)^2}{(\E S)^2}=
+ \frac{\E{S^2}}{(\E S)^2} \rho \E S = (1+C_s^2) \rho \E{S}.
+\end{equation*}
+\end{solution}
+\end{exercise}
 
-\begin{question}\label{ex:9}
+With the simplification of the above exercise  we have obtained the fundamentally important \recall{Pollackzek-Khintchine} (PK) formula for the average waiting time in queue:
+\begin{equation} \label{eq:710}
+  \E{W_Q} =\frac{1 + C_s^2}2 \frac{\rho}{1-\rho}  \E S.
+\end{equation}
+The problems below will clarify how useful this result is.
+
+
+\begin{exercise}\label{ex:9}
 Show  from Eq.~\eqref{eq:34} that
 \begin{equation*}
   \E{S_r\given S_r>0} = \frac{\E{S^2}}{2 \E S}
@@ -137,46 +169,31 @@ Show  from Eq.~\eqref{eq:34} that
     \lambda \E{S_r\given S_r>0} = \frac{\E{S_r}}{\E S} = \lambda \frac{\E{S^2}}{2 \E S}.
     \end{equation*}
 \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
-Show~\eqref{eq:32}. 
-\begin{solution}
-Use that 
-\begin{equation*}
-  \frac{\E{S^2}}{(\E S)^2} = 
-  \frac{(\E{S^2}-(\E S)^2) + (\E S)^2}{(\E S)^2} =
-  \frac{\V S + (\E S)^2}{(\E S)^2} =
-  C_s^2 + 1.
-\end{equation*}
-Then
-\begin{equation*}
-  \E{S_r}=\frac{\lambda\E{S^2}}2 = \frac{\E{S^2}\lambda(\E S)^2}{2(\E S)^2}=
- \frac{\E{S^2}}{2(\E S)^2} \rho \E S.
-\end{equation*}
-\end{solution}
-\end{question}
-
-\begin{question}
+\begin{exercise}
 Show that  $\E {S_r\given S_r>0} = 1/2\mu$
-  when $S$ is deterministic and equal to $1/\mu$.
+  when $\E S=1/\mu$ and $\V{S} = 0$.
+  \begin{hint}
+    $\V S = 0$ implies that $S$ is deterministic.
+  \end{hint}
 \begin{solution}
  When $S$ is deterministic, $\P{S=1/\mu} = 1$. Therefore, $\E S=1/\mu$ and $\E{S^2} = 1/\mu^2$. 
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
-Show that $\E{S_r\given S_r>0} = 2\mu^{-1}/3$ when  $S$ is $U[0,2/\mu]$.
+\begin{exercise}
+Show that $\E{S_r\given S_r>0} = 2\mu^{-1}/3$ when  $S \sim U[0,2/\mu]$.
 \begin{solution}
  When $S$ is uniform,
     $\E S = \alpha^{-1}\int_0^\alpha x \, \d x =\alpha^2/2 \alpha =
     \alpha/2$,
     where we take $\alpha =2/\mu$ for notational convenience. Likewise $\E{S^2} = \alpha^{-1}\int_0^\alpha x^2 \, \d x = \alpha^2/3$. Thus, $\E{S_r\given S_r>0} = \alpha/3 = 2/3\mu$.
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
  Show that $\E{S_r\given S_r>0} = \mu^{-1}$ when $S\sim \exp(\mu)$.
 \begin{solution}
     \begin{align*}
@@ -187,10 +204,10 @@ Show that $\E{S_r\given S_r>0} = 2\mu^{-1}/3$ when  $S$ is $U[0,2/\mu]$.
 &=\frac2{\mu^2}.
     \end{align*}
 \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
   A queueing system receives Poisson arrivals at the rate of 5 per
   hour. The single server has a uniform service time distribution,
   with a range of 4 minutes to 6 minutes. Determine $\E{L_Q}$, $\E L$,
@@ -220,11 +237,11 @@ L = labda*W
 L
 @ 
   \end{solution}
-\end{question}
+\end{exercise}
 
 
 
-\begin{question}
+\begin{exercise}
   Consider a workstation with just one machine. Jobs arrive, roughly,
   in accordance to Poisson process, with rate $\lambda=3$ per day. The
   average service time $\E S = 2$ hours, $C^2_s = 1/2$, and the shop
@@ -244,20 +261,17 @@ L
     arrival process. However, typically this is not possible. For
     instance, would you accept this as a customer?
 \end{solution}
+\end{exercise}
 
-\end{question}
 
-
-\begin{question}
+\begin{exercise}
   (Hall 5.16) The manager of a small firm would like to determine
   which of two people to hire. One employee is fast, on average, but
   is somewhat inconsistent. The other is a bit slower, but very
   consistent. The first has a mean service time of $2$ minutes, with a
   standard deviation of 1 minute. The second has a mean service time
   of $2.1$ minute, with a standard deviation of $0.1$ minute. If the arrival rate is Poisson with rate 20 per hour, which employee would minimize $\E{L_Q}$? Which would minimize $\E L$? 
-
   \begin{solution}
-    
     The arrival process is assumed to be Poisson. There is also
     just one server. Hence, we can use the PK formula to compute the average queue length.
 
@@ -273,7 +287,7 @@ Wq = (1+SCV)/2 * rho/(1-rho) * ES
 Wq
 Lq = labda * Wq # Little's law
 Lq
-W = Ws + ES
+W = Wq + ES
 W
 L = labda * W
 L
@@ -294,10 +308,9 @@ L
 @ 
 
   \end{solution}
+\end{exercise}
 
-\end{question}
-
-\begin{question}
+\begin{exercise}
   Show that when services are exponential, the expected waiting time
   $\E{W_Q(M/G/1)}$ reduces to $\E{W_Q(M/M/1)}$.
     \begin{solution}
@@ -306,20 +319,17 @@ L
     \begin{equation*}
 \E{W_Q} = \frac{1+1}2\frac{\rho}{1-\rho} \E S = \frac{\rho}{1-\rho} \E S,
     \end{equation*}
-which we also found in the previous section.
+which we also found in a previous section.
     \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
   Compute $\E{W_Q}$ and $\E L$ for the $M/D/1$ queue. Assume that the
-  service time is always $T$. Compare $\E{L(M/D/1)}$ to $\E{L(M/M/1)}$
+  service time is always~$T$. Compare $\E{L(M/D/1)}$ to $\E{L(M/M/1)}$
   where the mean service time is the same in both cases.
 \begin{solution}
-  For the $M/D/1$ the service time is deterministic. 
-
-  Thus, the service time $S=T$ always; recall that $S$ is
-  deterministic under the assumptions in the exercise. Therefore, we
+  For the $M/D/1$ the service time is deterministic. Thus, the service time $S=T$ always; recall that $S$ is   deterministic under the assumptions in the exercise. Therefore, we
   must have that $\P{S\leq T} = 1$. As an immediate consequence,
   $\P{S>T} = 1-\P{S\leq T} = 0$. Also, $\P{S \leq x} = 0$ for all
   $x<T$. Thus, all probability mass is concentrated on the point $T$,
@@ -333,7 +343,7 @@ which we also found in the previous section.
   coefficient of variation. I use these steps time and again.
 
   First, $\E S = T$ since $\P{S=T} =1$. We can also obtain this in a
-  more formal way. The density $F(x)$ of $S$ has a, so-called, atom at
+  more formal way. The distribution $F(x)$ of $S$ has a, so-called, atom at
   $x=T$, such $F(T) - F(T-) =1$.  Using this,
   \begin{equation*}
     \E S = \int_0^\infty x \d F(x) = T\cdot (F(T)-F(T-)) = T.
@@ -360,14 +370,12 @@ In both cases the expected service times are equal to $T$ so that the loads are 
   \end{split}
 \end{equation*}
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
-  Compute $\E L$ for the $M/G/1$ queue with $G=U[0,A]$, i.e., the
-  uniform distribution on $[0,A]$.
+\begin{exercise}
+  Compute $\E L$ for the $M/G/1$ queue with $S\sim U[0,A]$.
   \begin{hint}
-    
-\hint{Integrate $A^{-1} \int x \d x$, and likewise for the second moment.}
+Integrate $A^{-1} \int x \d x$, and likewise for the second moment.
   \end{hint}
 \begin{solution}
   \begin{align*}
@@ -381,27 +389,26 @@ C_s^2 &= (A^2/12)/(A^2/4) = 1/3,\\
 \E L &= \lambda \E W.
   \end{align*}
 \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
   Show that for the $M/G/1$ queue, the expected idle time is
   $\E I = 1/\lambda$.  
   \begin{hint}
-    
-\hint{What is the average time between two
+ is the average time between two
     arrivals? Observe that the interarrivals are memoryless, hence the
     average time until the next arrival after the server becomes idle
-    is also $1/\lambda$.}
+    is also $1/\lambda$.
   \end{hint}
   \begin{solution}
   Since the interarrival times are memoryless, the expected
       time to the first arrival after a busy time stops is also
       $\E X=1/\lambda$.
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
   Use Exercise~\ref{ex:11} to show that for the $M/G/1$ queue, the
   expected busy time is given by $\E B = \E S/(1-\rho)$.
   \begin{solution}
@@ -411,17 +418,16 @@ C_s^2 &= (A^2/12)/(A^2/4) = 1/3,\\
 \end{equation*}
 The result follows.
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
   What is the utilization of the $M/G/1/1$ queue?  
   \begin{hint}
-    
-\hint{The job in
+The job in
     the system is also in service (it is an $M/G/1/1$ queue\ldots).
     The average idle time is $1/\lambda$. The average busy time is
     $\E S$--as there are no jobs in queue. The load $\rho$ must also
-    be equal to the fraction of time the server is busy. }
+    be equal to the fraction of time the server is busy. 
   \end{hint}
   \begin{solution}
  The system can contain at most 1 job. Necessarily, if the
@@ -435,18 +441,16 @@ The result follows.
       Since not all jobs are accepted, the utilization $\rho$ cannot
       be equal to $\lambda \E S$.
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
   For the $M/G/1/1$ queue what is the fraction of jobs rejected
   (hence, what is the fraction of accepted jobs)?  
   \begin{hint}
-    
-\hint{The rate of
+The rate of
     accepted jobs is $\lambda \pi(0)$. What is the load of these jobs?
-    Equate this to $1-\pi(0$ as this must also be the load. Then solve for $\pi(0)$.}
+    Equate this to $1-\pi(0$ as this must also be the load. Then solve for $\pi(0)$.
   \end{hint}
-
   \begin{solution}
     Let $p(0)$ be the fraction of time the server is idle. By PASTA,
     $\pi(0)=p(0)$. Thus, the rate of accepted jobs is
@@ -465,15 +469,14 @@ which is the same an in the previous problem.
 
 Note that  $\gamma < \lambda$, as it should be the case. 
   \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
   Why is the fraction of lost jobs at the $M/G/1/1$ queue not
   necessarily the same as for a $G/G/1/1$ queue with the same load?  
   \begin{hint}
-    
-\hint{Provide an  example.}
+Provide an  example.
   \end{hint}
   \begin{solution}
  Typically, in the $G/G/1$ queue, the arrivals do not see  time-averages. Consequently, the fraction of arrivals that are blocked is not necessarily equal to the utilization~$\rho$.
@@ -482,12 +485,12 @@ Note that  $\gamma < \lambda$, as it should be the case.
   1 hour. The load is $59/60$, but no job is lost, also not in the
   $G/G/1/1$ case. Thus, $\gamma=\lambda$ in this case.
   \end{solution}
-\end{question}
+\end{exercise}
 
 
 \begin{comment}
   
-\begin{question}[use=false]
+\begin{exercise}[use=false]
   Use the ideas of Section~\ref{sec:arrival-processes} to derive an
   expression for the density $f_r$ of the remaining service times as
   seen by the Poisson arrivals.  In the expression, check that it is a
@@ -495,7 +498,7 @@ Note that  $\gamma < \lambda$, as it should be the case.
   \begin{solution}
     \TBD.
   \end{solution}
-\end{question}
+\end{exercise}
 \end{comment}
 
 

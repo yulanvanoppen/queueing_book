@@ -1,6 +1,8 @@
 %\documentclass[a4paper,12pt]{report}
 %\documentclass[a4paper,11pt]{book}
 \documentclass[a4paper,11pt]{scrbook}
+%\usepackage[nosolutionfiles]{answers}
+\usepackage{answers}
 \usepackage{preamble}
 
 % handle indentation below figure captions
@@ -29,13 +31,6 @@
 %   counter-format = ch.se.qu
 % }
 
-%\usepackage[nosolutionfiles]{answers}
-\usepackage{answers}
-\Newassociation{solution}{Solution}{ans}
-\Newassociation{sol}{Solution}{ans}
-\Newassociation{hint}{Hint}{hint}
-\renewcommand{\Hintlabel}[1]{\textbf{Hint #1:}}
-\renewcommand{\Solutionlabel}[1]{\textbf{Solution #1:}}
 
 \begin{document}
 
@@ -44,16 +39,30 @@
 %\include{tex_files/intro}
 
 \chapter{Single-Station Queueing Systems}
-%\input{todo/appendix.tex}
-%\input{tex_files/single_station_intro.tex}
-%\input{tex_files/expdistribution.tex}
-%\input{tex_files/poissondistribution.tex}
-%\input{tex_files/kendall.tex}
-%\input{chunks/constructiondiscretetime.tx}
-%\input{chunks/constructioncontinuoustime.tx}
-%\input{chunks/random_walk.tx}
-%\input{chunks/ratestability.tx}
+\begin{comment}
+\input{todo/appendix.tex}
+\end{comment}
+
+\begin{comment}
+\input{tex_files/single_station_intro.tex}
+\input{tex_files/expdistribution.tex}
+\input{tex_files/poissondistribution.tex}
+\input{tex_files/kendall.tex}
+\input{chunks/constructiondiscretetime.tx}
+\input{chunks/constructioncontinuoustime.tx}
+\input{chunks/random_walk.tx}
+\input{chunks/ratestability.tx}
 \input{chunks/empericalperfmeasures.tx}
+\input{chunks/levelcrossing.tx}
+\input{chunks/mm1.tx}
+\input{chunks/mnmn1.tx}
+\input{chunks/pasta.tx}
+\input{chunks/little.tx}
+\input{chunks/usefulidentities.tx}
+\input{tex_files/mxm1_pk.tex}
+\input{chunks/batcharrivals.tx}
+\end{comment}
+\input{chunks/mg1.tx}
 
 
 \bibliographystyle{plainnat}

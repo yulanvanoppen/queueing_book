@@ -38,7 +38,7 @@ we can construct $\{A_k\}$ and $\{A(t)\}$ as described in
 Section~\ref{sec:constr-gg1-queu}; the strong law of large numbers
 guarantees that the above limit exists.
 
-\begin{question}
+\begin{exercise}
   Can you make an arrival process such that $A(t)/t$ does not have a
   limit?  
 
@@ -71,7 +71,7 @@ As a start, the function $\sin(t)$ has not a limit as
 For the mathematically interested, we seek a
     function for which its Ces\`aro limit does not exist.
   \end{solution}
-\end{question}
+\end{exercise}
 
 
 
@@ -91,7 +91,7 @@ where we take $t=A_n$ in the limit for $t\to\infty$.  In words, the
 above states that the arrival rate $\lambda$ is the inverse of the
 expected interarrival time.
 
-\begin{question}
+\begin{exercise}
     Eq. (\ref{eq:54}) we replaced the limit with respect to $n$ by a
     limit with respect to $t$.  Use
     the notation $A_{A(t)}$ to show that  this is allowed.
@@ -179,7 +179,7 @@ expected interarrival time.
     % our situation by taking $f_n(t) = 1\{A_n \leq t\}$, then this
     % limit certainly exists.
  \end{solution}
-\end{question}
+\end{exercise}
 
 The development of the departure times $\{D_k\}$ is entirely analogous
 to that of the arrival times; we leave it to the reader to provide the
@@ -189,7 +189,7 @@ details. As a result we can define the \recall{departure rate} as
 \end{equation}
 
 
-\begin{question}
+\begin{exercise}
   Define the departure time $D_{k}$ of the $k$th job in terms of
   $\{D(t)\}$. 
   \begin{hint}
@@ -200,7 +200,7 @@ Use the analogy with Eq.~\eqref{eq:27}.
  D_{k} = \inf\{t; D(t) \geq k\}.
   \end{equation*}
 \end{solution}
-\end{question}
+\end{exercise}
 
 Assume now that there is a single server. Let $S_k$ be the required
 service time of the $k$th job to be served, and define
@@ -253,7 +253,7 @@ $\mu > \lambda$.
 
 
 
-\begin{question} 
+\begin{exercise} 
 Define the random variables $\{\tilde X_k,k=1,\ldots\}$ as
   \begin{equation*}
     \tilde X_k = S_{k-1}-X_k.
@@ -267,9 +267,9 @@ Define the random variables $\{\tilde X_k,k=1,\ldots\}$ as
       than the average time between the arrival of two subsequent
       jobs. 
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question} 
+\begin{exercise} 
 Define $\tilde X_k = S_{k-1}-X_k$.
  Show that $\E{\tilde X_k} <0$ implies that $\lambda<\mu$. 
  \begin{hint}
@@ -282,10 +282,10 @@ Remember that $\{X_k\}$ and $\{S_k\}$ are sequences of i.i.d. random variables. 
   \end{equation*}
 
   \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
   Show that $\E{S}/\E{X}$ is the fraction of time the server is busy.
 
   \begin{hint}
@@ -332,9 +332,9 @@ Let $T_1>A_1$ be the first time after the arrival of job 1
         substantial amount of mathematics. The above claim is still
         true however.)
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
  Show that $\E{X - S}/\E{X}$ is the fraction of time
   the server is idle.
   \begin{solution}
@@ -342,7 +342,7 @@ Let $T_1>A_1$ be the first time after the arrival of job 1
     time, it follows that $1-\E S/ \E X = (\E X - \E S)/\E X$ is the
     idle time fraction.
   \end{solution}
-\end{question}
+\end{exercise}
 
 The concept of \recall{load} or \emph{utilization}, denoted by the
 symbol $\rho$, is fundamental. One way to define it is as the limiting
@@ -382,7 +382,7 @@ serve a job must be less than the average time between two consecutive
 arrivals, i.e., $\E S < \E X$.
 
 
-\begin{question}
+\begin{exercise}
   Consider a queueing system with $c$ identical servers (identical in
   the sense that each server has the same production rate $\mu$). What would be a reasonable stability criterion for this system? 
   \begin{hint}
@@ -406,19 +406,19 @@ What is the rate in, and what is the service capacity?
   $(\lambda/c )/\mu<1$ per server leads to the same condition that
   $\lambda/(c\mu) < 1$.
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
   Check with simulation that when $\lambda > \mu$ the queue length
   grows roughly linearly with slope $\lambda - \mu$.  Thus, if
   $\rho>1$, `we are in trouble'.
   \begin{solution}
     See my website. 
   \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}\label{ex:11}
+\begin{exercise}\label{ex:11}
   If $\E{B}$ is the expected busy time and $\E{I}$ is the expected idle
   time, show that 
 \begin{equation*}
@@ -439,9 +439,9 @@ What is the rate in, and what is the service capacity?
   \end{equation*}
   With a bit of algebra the result follows.
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
   Consider a paint factory which contains a paint mixing machine that
   serves two classes of jobs, A and B. The processing times of jobs of
   types A and B are constant and require $t_A$ and $t_B$ hours. The
@@ -495,7 +495,7 @@ Here are some questions to help you interpret this formulation.
     that $\lambda_A T< k_A$, i.e., less jobs of type A arrive on
     average per cycle than what we can process.
   \end{solution}
-\end{question}
+\end{exercise}
 
 
 

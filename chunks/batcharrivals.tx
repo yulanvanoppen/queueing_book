@@ -10,9 +10,8 @@
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-In this section we extend the analysis of the $M^X/M/1$ batch queue
-that we started in Section~\ref{sec:mxm1-queue:-expected}.  We present
-a numerical, recursive, scheme to compute the stationary distribution
+In Section~\ref{sec:mxm1-queue:-expected} we established expressions for the average queue length and waiting times for the $M^X/M/1$ queue. To compute more difficult performance measures we typically need the probability distribution of the number of items in the system. In this section
+We present a numerical, recursive, scheme to compute the stationary distribution
 of the number of items in queue. 
 
 To find the distribution $p(n)$, which is equal to $\pi(n)$ by PASTA,
@@ -24,12 +23,13 @@ single items, down-crossings of level $n=3$ occur in single
 units. However, due to the batch arrivals, when a job arrives it
 typically brings multiple items to the queue. For instance, suppose
 that $L(A_k-) = 3$, i.e., job $k$ sees 3 items in the system at its
-arrival epoch.  If $B_k = 20$, then $L(A_k)=3+20=23$, that is, right
-after the arrival of job $k$ the system contains 23 items. In this
+arrival epoch.  If $B_k = 20$, then  right
+after the arrival of job $k$ the system contains 23 items, that is, $L(A_k)=3+20=23$. In this
 case, at the arrival of job $k$, all levels between states $3$ and
-$23$ are crossed.  The left panel in Figure~\ref{fig:levelcrossing}
-demonstrates this in more general terms.  Level $n$ can be up-crossed
-from below from many states, in fact from any level $m <n$. However,
+$23$ are crossed.  
+
+The left panel in Figure~\ref{fig:levelcrossing} demonstrates the up- and downcrossings in more general terms.  Level $n$ can be up-crossed
+from below from many states, in fact from any level $m, 0\leq m <n$. However,
 it can only be down-crossed from state $n+1$.
 
 
@@ -114,77 +114,84 @@ edge[loop below, thick]  node[midway, fill=white] {$\lambda f(0)$} (n-1);
 As always with level-crossing arguments, we turn to counting how often
 level $n$ is upcrossed and downcrossed as a function of time. The
 downcrossing rate is easy; it is exactly the same as for the $M/M/1$
-queue. Thus, from Eq.~\eqref{eq:22}, the downcrossing rate is
+queue. Thus, from Eq.~\eqref{eq:22}, 
 \begin{equation}
-\frac{D(n,t)}t = \frac{D(n,t)}{Y(n+1,t)}\frac{Y(n+1,t)}t \to  \mu(n+1) p(n+1) = \mu \pi(n+1),
+\frac{D(n,t)}t = \frac{D(n,t)}{Y(n+1,t)}\frac{Y(n+1,t)}t
+\end{equation}
+which, as $t\to\infty$, converges to the downcrossing rate
+\begin{equation}
+\mu(n+1) p(n+1) = \mu \pi(n+1),
 \end{equation}
 where we use that $\mu(n+1) = \mu$ by the memoryless property of the
 service times and PASTA to see that $\pi(n+1)=p(n+1)$.  Observe that
 this part was easy because there is just one way (i.e., there is just
 one arrow from right to left in Figure~\ref{fig:levelcrossing}) to
-downcross level $n$, namely from $n+1$ to $n$. Counting upcrossings
-requires quite some more work.
+downcross level $n$, namely from $n+1$ to $n$. 
 
-Let us write $\1{L(A_k-) \leq n}\1{ L(A_k)>n}$ to track whether the
-$k$th job sees~$n$ or less items in the system upon arrival,
-i.e. condition $\1{L(A_k-)\leq n}$, and is such that after its arrival
-the system contains more than $n$ items, i.e., condition
-$\1{L(A_k) > n}$. Thus, if $\1{L(A_k-) \leq n}\1{ L(A_k)>n}=1$, job $k$ crossed level $n$ from below. Hence
-\begin{equation*}
-  \sum_{k=1}^{\infty} \1{A_k \leq t} \1{L(A_k-) \leq n}\,\1{L(A_k)>n},
-\end{equation*}
-counts all arrivals up to time $t$ that enforce a crossing of level
-$n$ from below.
+Counting upcrossings requires quite some more work. Observe that
+$\1{L(A_k-)\leq n}=1$ only when the $k$th job sees~$n$ or less items in the system, and
+$\1{L(A_k) > n}=1$ only when after the $k$th arrival the system contains more than $n$ items. Thus, $\1{L(A_k-) \leq n}\1{ L(A_k)>n}=1$ only when the $k$th arrival generates an upcrossing of level~$n$. 
+%  Hence
+% \begin{equation*}
+%   \sum_{k=1}^{A(t)} \1{L(A_k-) \leq n}\,\1{L(A_k)>n}
+% \end{equation*}
+% counts all upcrossings  of level $n$ up to time $t$.
 
 
 From Figure~\ref{fig:levelcrossing} we see that an upcrossing can be decomposed into:
 \begin{equation*}
   \begin{split}
-    \1{L(A_k-) \leq n}\1{L(A_k)>n} 
+&\1{L(A_k-) \leq n}\1{L(A_k)>n}  \\
 &=  \1{L(A_k-) =n}\, \1{B_k >0} + \1{L(A_k-) =n-1}\1{ B_k >1} +\cdots + \1{L(A_k-) =0}\1{B_k > n} \\
-& = \sum_{m=0}^n \1{L(A_k-) =m}\1{B_k > n-m}.
+&= \sum_{m=0}^n \1{L(A_k-) =m}\1{B_k > n-m}.
   \end{split}
 \end{equation*}
 In other words, paths that upcross level $n$ require that any job that
 sees $m$ ($m\leq n$) in the system upon arrival must bring a batch larger
 than $n-m$ items.
 
-Define 
+Next, define 
 \begin{equation*}
-  A(m,n,t) = \sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = m}\1{B_k > n-m}.
+  A(m,n,t) = \sum_{k=1}^{A(t)}\1{L(A_k-) = m}\1{B_k > n-m}
 \end{equation*}
-as the number of jobs that, up to time $t$, see $m$ in the system upon
-arrival and have batch size larger than $n-m$. Then the number of
-times level $n$ is upcrossed up to time~$t$ can be written as
-$\sum_{m=0}^n A(m,n,t)$, hence the upcrossing rate up to time $t$ is
-\begin{equation*}
-\frac 1t  \sum_{m=0}^n A(m,n,t).
-\end{equation*}
+as the number of jobs up to time $t$ that see $m$ in the system upon
+arrival and have batch size larger than $n-m$. 
 
-Simplifying this comes down to finding the right quantities by which
-to divide. Some experimentation will reveal that the following gives
-the most relevant insights:
+\begin{exercise}
+   Show that $A(n, n,t) = A(n,t)$, where $A(n,t)$ is defined by Eq.~\ref{eq:19}.
+\begin{solution}
+ $A(n,n,t)$ counts all jobs up to time $t$ that see $n$ items
+    and bring at least $n-n+1=1$ unit of work. As each job brings at
+    least 1 item, $A(n,n,t)$ counts all jobs that see $n$ items at
+    arrival.
+\end{solution}
+\end{exercise}
+
+As in Section~\ref{sec:level-cross-balance}, we are primarily intested in  long-run averages. For this purpose, observe that we can write
 \begin{equation}\label{eq:16}
   \frac{A(m,n,t)}t =   \frac{A(t)}t \frac{A(m,t)}{A(t)}\frac{A(m,n,t)}{A(m,t)}.
 \end{equation}
-Here $A(t)/t$ and $A(m,t)/A(t)$ have the same meaning as in
-Section~\ref{sec:poisson-arrivals-see}, hence the first of these
-fractions converges to $\lambda$ and the second to $\pi(m)$ as
-$t\to\infty$. Now, provided the limit exists, we define
+By similar assumptions as in Section~\ref{sec:poisson-arrivals-see},  $A(t)/t\to\lambda$ and $A(m,t)/A(t)\to\pi(m)$.  Now, provided the limit exists, we define
 \begin{equation}\label{eq:1332}
 \lim_{t\to\infty} \frac{A(m,n,t)}{A(m,t)} = 
-\lim_{t\to\infty} \frac{\sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = m, B_k > n-m}}
-{\sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = m}}=\P{B>n-m\given L(A-)=m},
+\lim_{t\to\infty} \frac{\sum_{k=1}^{A(t)}\1{L(A_k-) = m, B_k > n-m}}
+{\sum_{k=1}^{A(t)}\1{L(A_k-) = m}}=\P{B>n-m\given L(A-)=m},
 \end{equation}
-where $\P{L(A-)=m}$ has the interpretation of the steady-state
-probability that a job sees $m$ jobs in the system upon arrival.  By
-\emph{assumption}, $B$ and $L(A-)$ are independent\footnote{Thus, 
+where the random variable $L(A-)$   denotes the number in the system seen by an arbitrary arrival.
+
+\begin{exercise}
+Use that $B$ and $L(A-)$ are independent to conclude
+$\P{B>n-m\given L(A-)=m}=\P{B>n-m}$. 
+\begin{solution}
 \begin{equation*}
 \P{B>n-m\given L(A-)=m} =
 \frac{\P{B>n-m,L(A-)=m}}{\P{L(A-)=m}}=
 \frac{\P{B>n-m}\P{L(A-)=m}}{\P{L(A-)=m}} = \P{B>n-m}.
 \end{equation*}
-}, and therefore,
+\end{solution}
+\end{exercise}
+
+By the above exercise,
 \begin{equation*}
 \lim_{t\to\infty} \frac{A(m,n,t)}{A(n,t)} = \P{B>n-m} = G(n-m).
 \end{equation*} 
@@ -193,36 +200,56 @@ existence of all limits involved we find
 \begin{equation*}
 \lim_{t\to\infty}   \frac{A(m,n,t)}t = \lambda \pi(m) G(n-m).
 \end{equation*}
-Thus, Eq.~(\ref{eq:16}) has the interpretation that the rate at which
+
+\begin{exercise}
+Provide an interpretation of the above result in terms of a thinned Poisson arrival process.
+\begin{solution}
+Eq.~(\ref{eq:16}) has the interpretation that the rate at which
 level $n$ is crossed from below from state $m$ is equal the rate at
 which jobs arrive times the fraction of jobs that see $m$ jobs in the
 system times the fraction of jobs with batch size larger than $n-m$.
-Observe that the stream of jobs with batch size larger than $i$, say,
-is a Poisson process thinned at rate $G(i)$. Hence, this stream of
-jobs is a Poisson process in its own right with rate $\lambda G(i)$.
+Observe that the stream of jobs with batch size larger than $n-m$
+is a Poisson process thinned at rate $G(n-m)$. 
+\end{solution}
+\end{exercise}
 
 
-The last step is to relate the up- and downcrossing rates.  Recall
-that for the $M/M/1$ the number of upcrossings and downcrossings of
-level $n$ could not differ more than one, i.e.,
-$|A(n,t)-D(n,t)|\leq 1$. Similarly, for the $M^X/M/1$ queue we have
- \begin{equation}\label{eq:53}
- \left|  \sum_{m=0}^n A(m,n,t) - D(n,t) \right|\leq1.
-\end{equation}
+The last step is to relate the up- and downcrossing rates.  Clearly, $\sum_{m=0}^n A(m,n,t)$ is  the total number of times level $n$ is upcrossed up to time~$t$. By level crossing,
+ \begin{equation*}
+ \sum_{m=0}^n A(m,n,t) \approx  D(n,t). 
+\end{equation*}
 Thus, taking the limit $t\to\infty$ in this equation, we conclude that
-the upcrossing rate and the downcrossing rate of level $n$ must be the
-same. Hence,
 \begin{equation}\label{eq:42}
 \lambda  \sum_{m=0}^n G(n-m) \pi(m) = \mu \pi(n+1).
 \end{equation}
 
+\begin{exercise}
+  Show that Eq.~(\ref{eq:42}) reduces to $\mu p(n+1)=\lambda p(n)$ for the $M/M/1$ case.
+  \begin{solution}
+    The left hand side of Eq.~(\ref{eq:42}) is identical, so we only
+    have to concentrate on the right hand side. In the $M/M/1$ queue,
+    all batches have size $1$. Thus, $\P{B=1} = f(1)=1$ and $f(k)=0$
+    for $k\neq 1$. Thus, $G(0)=1$ and $G(1)=G(2)=\cdots = 0$. Thus,
+    $\sum_{m=0}^n G(n-m) p(m) = G(0)p(n)=p(n)$.
+  \end{solution}
+\end{exercise}
 
-For the excess probabilities $\P{L>n}$ we need to compute the actual
-probabilities $\pi(n)$ from the recursion~(\ref{eq:42}). To apply
-this, temporarily set $\pi(0)=1$. Then, for $n=1$, we have
-$\mu \pi(1) = \lambda \pi(0)=\lambda$, . Then,
-since $G(0)=1$, and writing $\alpha = \lambda/\mu$, the
-\emph{unnormalized} state probabilities are
+\begin{exercise}
+With $\alpha = \lambda/\mu$,  show that that \emph{unnormalized} state probabilities are given by
+\begin{equation*}
+  \begin{split}
+\pi(0) & = 1 \\
+  \pi(1) &= \alpha \\
+  \pi(2) &= \alpha^2 + \alpha G(1), \\
+  \pi(3) &= \alpha[ \alpha^2 + 2 \alpha G(1)) + G(2)].
+  \end{split}
+\end{equation*}
+We leave the rest to the computer to continue with this.
+\begin{hint}
+For $n=1$, we have
+$\mu \pi(1) = \lambda \pi(0)=\lambda$. Use that $G(0)=1$.
+\end{hint}
+\begin{solution}
 \begin{equation*}
   \begin{split}
   \pi(1) &= \alpha \\
@@ -231,8 +258,8 @@ since $G(0)=1$, and writing $\alpha = \lambda/\mu$, the
 &= \alpha[G(0) \pi(2) + G(1) \pi(1) + G(2) \pi(0)]  = \alpha[ \alpha^2 + 2 \alpha G(1)) + G(2)],
   \end{split}
 \end{equation*}
-and so on. (Evidently, the computer is better suited to continue with
-this.)
+\end{solution}  
+\end{exercise}
 
 It is left to find the normalization constant.  As this recursion does
 not lead to a closed form expression for $p(n)$, such as
@@ -242,60 +269,40 @@ easy, but a pragmatic approach is to simply stop at some (large)
 number $N$ and take $G=\sum_{i=0}^N \pi(i)$ as the normalization
 constant. Then $\pi(0)=1/G$, $\pi(1)=\alpha/G$, and so on.
 
-\begin{remark}
+And now that we have the state probabilities, we can compute the \emph{excess probability}
+\begin{equation}
+  \P{L> n } = \sum_{i=n+1}^\infty \pi(i).
+\end{equation}
+This performance measure is  of interest in inventory systems and---recall the supermarket example discussed in the Introduction---when there are costs associated with the occurence of long queues. 
+
 An interesting extension is to consider a queueing process with batch
 services, i.e., the $M/M^Y/1$ queue. Construction a recursion for the
 steady-state probabilities $p(n)$ for this case is not hard, in fact,
 mostly analogous to Eq.~(\ref{eq:42}).  However, solving the recursion
-is much less simple, hence we will not discuss this further.
-\end{remark}
+appears to be quite a bit harder; we will not discuss this further here
 
-
-\begin{question}
-  Show that Eq.~(\ref{eq:42}) reduces to $\mu p(n+1)=\lambda p(n)$ for the $M/M/1$ case.
-  \begin{solution}
-    The left hand side of Eq.~(\ref{eq:42}) is identical, so we only
-    have to concentrate on the right hand side. In the $M/M/1$ queue,
-    all batches have size $1$. Thus, $\P{B=1} = f(1)=1$ and $f(k)=0$
-    for $k\neq 1$. Thus, $G(0)=1$ and $G(1)=G(2)=\cdots = 0$. Thus,
-    $\sum_{m=0}^n G(n-m) p(m) = G(0)p(n)=p(n)$.
-  \end{solution}
-\end{question}
-
-\begin{question}
-   Show that $A(n, n,t) = A(n,t)$. 
-\begin{solution}
- $A(n,n,t)$ counts all jobs up to time $t$ that see $n$ items
-    and bring at least $n-n+1=1$ unit of work. As each job brings at
-    least 1 item, $A(n,n,t)$ counts all jobs that see $n$ items at
-    arrival.
-\end{solution}
-\end{question}
-
-\begin{question}
+\begin{exercise}
   Why is Eq.~\eqref{eq:39}, i.e., $\pi(n)=\delta(n)$, not true for the
   $M^X/M/1$ batch queue?
 \begin{solution}
  Because arrivals do not occur in single units, but in batches.
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
-  Let us use the above recursion Eq.~(\ref{eq:42}) for $\pi(n)$ to
-  derive an expression for the expected number of units of work $\E L$
-  in the system. Substitute the recursion Eq.~(\ref{eq:42}) in the
-  definition of $\E L$ to show that
+Let us use  recursion Eq.~(\ref{eq:42}) for $\pi(n)$ to
+ derive an expression for the expected number of units of work $\E L$
+ in the system.
+\begin{exercise}
+ Show that
 \begin{equation}\label{eq:67}
   \mu \E L =\mu \sum_{n=0}^\infty n \pi(n) = \lambda \frac{\E{B^2}}2  + \lambda \E B \E L +\lambda \frac{\E B}2,
 \end{equation}
-
 \begin{hint}
 Substitute the
   recursion, and carry on with the algebra. We urge the reader to try
   it, its good (necessary) practice.  Use also the results of the
   exercises of Section~\ref{sec:mxm1-queue:-expected}.  
 \end{hint}
-
 \begin{solution}
   We use that $\mu \pi(n) =\lambda \sum_{i=0}^{n-1} \pi(i) G(n-1-i)$
   and the results of the exercises of
@@ -315,16 +322,15 @@ Substitute the
   &= \lambda \frac{\E B^2 }2  + \lambda \E B \E L +\lambda \frac{\E B}2,
 \end{align*}
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+With this we can check a result of Section~\ref{sec:mxm1-queue:-expected}.  
+\begin{exercise}
   Use Eq.~(\ref{eq:67}) and the definition for
   $\rho=\lambda \E B/\mu$ to show that
 \begin{equation*}
 (1- \rho) \E L = \frac{\lambda}\mu \frac{\E{B^2}}2 + \frac\rho2.
 \end{equation*}
-This is the same result as what we obtained in
-Section~\ref{sec:mxm1-queue:-expected}.  
 \begin{hint}
 Divide both sides by $\mu$.
 \end{hint}
@@ -334,124 +340,19 @@ Dividing both sides by $\mu$ and using that $\lambda \E B/\mu = \rho$,
   \E L = \frac{\lambda}{\mu}  \frac{\E B^2 }2 + \rho \E L + \frac\rho2.
 \end{equation*}
 \end{solution}
-\end{question}
-
-
-\begin{question}(Finite queueing systems) We consider the $M^X/M/1/K$
-queue, i.e., a batch queue in which at most $K$ jobs fit into the
-system. When customers can be blocked, it is necessary to specify an
-acceptance, or equivalently a rejection, policy. Three common rules are
-\begin{enumerate}
-\item Complete rejection: if a batch does not fit entirely into the system, it will be rejected completely.
-\item Partial acceptance: accept whatever fits of a batch, and reject the rest.
-\item Complete acceptance: accept all batches that arrive when the
-  system contains $K$ or less jobs, and reject otherwise.
-\end{enumerate}
-Derive a set of recursions, analogous to Eq.~(\ref{eq:42}), to compute
-$\pi(n)$ for these three different acceptance rules.  
-
-\begin{hint}
-This
-  exercise tests your creativity and modeling skills, it is not
-  analytically difficult.  The best approach to problems like this is
-  to try some simple cases first. For instance, consider the case with
-  batch sizes of $1$ first, then batches of sizes $1$ or $2$, and so
-  on. If system contains $K$ jobs, which batches can be accepted? If
-  the system contains $K-3$, say, which batch sizes can be accepted,
-  which will be refused, under which acceptance policy? 
-\end{hint}
-\begin{solution}
-
-  Let's first deal with complete rejection. Suppose a batch of size
-  $k$ arrives when the system contains $n$ jobs. When $k+n \leq K$,
-  the batch can be accepted since the entire batch will fit into the
-  queue.  When, however, $k+n> K$, the batch has to be rejected. 
-
-  Now consider an imaginary line between states with $n$ and $n+1$
-  jobs in the system. This imaginary line separates the state space
-  into two disjoint part: one part with states $0, 1, \ldots, n$ and
-  the other part with states $n+1, n+2, \ldots, K$. We call this
-  imaginary line `level $n$'.  We call an `upcrossing' a transition
-  from some state $m\leq n$ to a state $l\geq n+1$. We also say in
-  that case that level $n$ is `crossed from below', i.e., from some
-  state $m\leq n$ to a state $l\geq n+1$. Likewise, a `downcrossing'
-  of level $n$ happens when this level is crossed from `above',
-  i.e. from some state $l\geq n+1$ to some state $m\leq n$.
-
-
-  If the system contains $n$ jobs,  level $n$ is
-  crossed from below with rate $\lambda \pi(n) \P{B \leq K-n}$.  More generally,
-  when the system is in state $m\leq n$, we need a batch of at least
-  $n+1-m$ to cross the $n$. Moreover, any batch larger than $K+1-m$
-  gets rejected. Thus, when the system contains $m \leq n $ jobs, the
-  rate at which level $n$ is crossed from below is
-  \begin{equation*}
-  \lambda \pi(m) \P{n+1-m\leq B \leq K+1-m} = \lambda \pi(m)
-  [G(n-m)-G(K-m)].
-  \end{equation*}
-
-  Since the server serves only single items, level $n$ can only be
-  crossed from above from state $n+1$. This happens at rate $\mu p(n+1)$. 
-
-  Finally, since on the long run the number of up- and crossings must
-  be the same, the up- and downcrossing rates must match. This implies
-  that the balance equations becomes
-  \begin{equation*}
-    \mu \pi(n+1) = \lambda \sum_{m=0}^n \pi(m)   [G(n-m)-G(K-m)],
-  \end{equation*}
-  for $n=0,\ldots, K-1$. 
-
-  Before we continue with the other acceptance rules, it is important
-  to check this result.  In general, off-by-one errors are easily, and
-  commonly, made, so we need to test the above on simple cases. 
-  \begin{itemize}
-  \item  If $K\to \infty$, then $G(K-m)=\P{B>K-m}\to 0$, so we get our earlier result. 
-  \item Take $n=K$. Then $G(n-m)-G(K-m)=0$ for all $m$. Then the right hand side is 0, as it should.
-  \item Taken $n=0$ and $K=1$, then $\mu \pi(1)= \lambda \pi(0)$. This also makes sense. 
-  \item Take $n$ much smaller than $K$. If the batch size is maximally
-    $2$, then for small $n$ the entire batch must fit. Let's see if
-    this holds in the above formula. If $n$ much smaller than $K$,
-    then also $m$ is much smaller than $K$ (since in the right hand
-    size, $m\leq n$. But then $G(K-m) \leq G(2) = 0$, as it
-    should. (Observe that $G$ is a decreasing function of it argument;
-    its a survival function.)
-  \end{itemize}
-
-  The complete-acceptance policy is actually quite simple. As any
-  batch will be accepted when $n\leq K$, the queue length is not
-  bounded.  Only when the number of jobs in the system is larger than
-  $K$, we do not accept jobs. 
-  \begin{equation*}
-    \mu \pi(n+1) = 
-    \begin{cases}
-      \lambda \sum_{m=0}^n \pi(m) G(n-m), & \text{ for } n\leq K,\\
-      \lambda \sum_{m=0}^K \pi(m) G(n-m), & \text{ for } n> K.
-    \end{cases}
-  \end{equation*}
-
-  For the partial acceptance case, any job is accepted, but the system
-  only admits whatever fits. Thus, the rate at which level $n<K$ is
-  crossed is not affected by this acceptance policy, and therefore,
-  \begin{equation*}
-    \mu \pi(n+1) = \lambda \sum_{m=0}^n \pi(m) G(n-m), 
-  \end{equation*}
-  for $n=0,1,\ldots, K-1$. 
-\end{solution}
-\end{question}
+\end{exercise}
 
 
 
-\begin{question}
+\begin{exercise}
   Implement the recursion~(\ref{eq:42}) in a computer program for the
   case $f(1)=f(2)=f(3)=1/3$ (recall $\P{B=k} =f_k$). Take $\lambda =1$
   and $\mu = 3$.  
-
   \begin{hint}
-    
-  \hint{This is an important problem, it helps to check (numerically)
+This is an important problem, it helps to check (numerically)
     the algebraic results we have been deriving up to
     now. Implementing the recursion is not hard, just try and see how
-    far you get.}
+    far you get.
   \end{hint}
   \begin{solution}
 The recursion for $n$ becomes 
@@ -667,10 +568,110 @@ EL
 The algebra is, most probably, correct. I spent at least one hour to
 get Eq.~(\ref{eq:43}) correct. I am now, also numerically, convinced
 that all results are ok.
-
-
 \end{solution}
-\end{question}
+\end{exercise}
+
+
+\begin{exercise}(Finite queueing systems) We consider the $M^X/M/1/K$
+queue, i.e., a batch queue in which at most $K$ jobs fit into the
+system. When customers can be blocked, it is necessary to specify an
+acceptance, or equivalently a rejection, policy. Three common rules are
+\begin{enumerate}
+\item Complete rejection: if a batch does not fit entirely into the system, it will be rejected completely.
+\item Partial acceptance: accept whatever fits of a batch, and reject the rest.
+\item Complete acceptance: accept all batches that arrive when the
+  system contains $K$ or less jobs, and reject otherwise.
+\end{enumerate}
+Derive a set of recursions, analogous to Eq.~(\ref{eq:42}), to compute
+$\pi(n)$ for these three different acceptance rules.  
+\begin{hint}
+This
+  exercise tests your creativity and modeling skills, it is not
+  analytically difficult.  The best approach to problems like this is
+  to try some simple cases first. For instance, consider the case with
+  batch sizes of $1$ first, then batches of sizes $1$ or $2$, and so
+  on. If system contains $K$ jobs, which batches can be accepted? If
+  the system contains $K-3$, say, which batch sizes can be accepted,
+  which will be refused, under which acceptance policy? 
+\end{hint}
+\begin{solution}
+  Let's first deal with complete rejection. Suppose a batch of size
+  $k$ arrives when the system contains $n$ jobs. When $k+n \leq K$,
+  the batch can be accepted since the entire batch will fit into the
+  queue.  When, however, $k+n> K$, the batch has to be rejected. 
+
+  Now consider an imaginary line between states with $n$ and $n+1$
+  jobs in the system. This imaginary line separates the state space
+  into two disjoint part: one part with states $0, 1, \ldots, n$ and
+  the other part with states $n+1, n+2, \ldots, K$. We call this
+  imaginary line `level $n$'.  We call an `upcrossing' a transition
+  from some state $m\leq n$ to a state $l\geq n+1$. We also say in
+  that case that level $n$ is `crossed from below', i.e., from some
+  state $m\leq n$ to a state $l\geq n+1$. Likewise, a `downcrossing'
+  of level $n$ happens when this level is crossed from `above',
+  i.e. from some state $l\geq n+1$ to some state $m\leq n$.
+
+
+  If the system contains $n$ jobs,  level $n$ is
+  crossed from below with rate $\lambda \pi(n) \P{B \leq K-n}$.  More generally,
+  when the system is in state $m\leq n$, we need a batch of at least
+  $n+1-m$ to cross the $n$. Moreover, any batch larger than $K+1-m$
+  gets rejected. Thus, when the system contains $m \leq n $ jobs, the
+  rate at which level $n$ is crossed from below is
+  \begin{equation*}
+  \lambda \pi(m) \P{n+1-m\leq B \leq K+1-m} = \lambda \pi(m)
+  [G(n-m)-G(K-m)].
+  \end{equation*}
+
+  Since the server serves only single items, level $n$ can only be
+  crossed from above from state $n+1$. This happens at rate $\mu p(n+1)$. 
+
+  Finally, since on the long run the number of up- and crossings must
+  be the same, the up- and downcrossing rates must match. This implies
+  that the balance equations becomes
+  \begin{equation*}
+    \mu \pi(n+1) = \lambda \sum_{m=0}^n \pi(m)   [G(n-m)-G(K-m)],
+  \end{equation*}
+  for $n=0,\ldots, K-1$. 
+
+  Before we continue with the other acceptance rules, it is important
+  to check this result.  In general, off-by-one errors are easily, and
+  commonly, made, so we need to test the above on simple cases. 
+  \begin{itemize}
+  \item  If $K\to \infty$, then $G(K-m)=\P{B>K-m}\to 0$, so we get our earlier result. 
+  \item Take $n=K$. Then $G(n-m)-G(K-m)=0$ for all $m$. Then the right hand side is 0, as it should.
+  \item Taken $n=0$ and $K=1$, then $\mu \pi(1)= \lambda \pi(0)$. This also makes sense. 
+  \item Take $n$ much smaller than $K$. If the batch size is maximally
+    $2$, then for small $n$ the entire batch must fit. Let's see if
+    this holds in the above formula. If $n$ much smaller than $K$,
+    then also $m$ is much smaller than $K$ (since in the right hand
+    size, $m\leq n$. But then $G(K-m) \leq G(2) = 0$, as it
+    should. (Observe that $G$ is a decreasing function of it argument;
+    its a survival function.)
+  \end{itemize}
+
+  The complete-acceptance policy is actually quite simple. As any
+  batch will be accepted when $n\leq K$, the queue length is not
+  bounded.  Only when the number of jobs in the system is larger than
+  $K$, we do not accept jobs. 
+  \begin{equation*}
+    \mu \pi(n+1) = 
+    \begin{cases}
+      \lambda \sum_{m=0}^n \pi(m) G(n-m), & \text{ for } n\leq K,\\
+      \lambda \sum_{m=0}^K \pi(m) G(n-m), & \text{ for } n> K.
+    \end{cases}
+  \end{equation*}
+
+  For the partial acceptance case, any job is accepted, but the system
+  only admits whatever fits. Thus, the rate at which level $n<K$ is
+  crossed is not affected by this acceptance policy, and therefore,
+  \begin{equation*}
+    \mu \pi(n+1) = \lambda \sum_{m=0}^n \pi(m) G(n-m), 
+  \end{equation*}
+  for $n=0,1,\ldots, K-1$. 
+\end{solution}
+\end{exercise}
+
 
 
 
@@ -680,9 +681,9 @@ that all results are ok.
 \input{hint}
 \subsection*{Solutions}
 \input{ans}
-
+\clearpage
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "booktest"
+%%% TeX-master: "../book"
 %%% End:

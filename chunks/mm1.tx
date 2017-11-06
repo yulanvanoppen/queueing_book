@@ -3,8 +3,15 @@
 {$\mathbf{M/M/1}$ queue}
 \label{sec:mm1}
 
+
+\subsection*{Theory and Exercises}
+\label{sec:exercises}
+
+\Opensolutionfile{hint}
+\Opensolutionfile{ans}
+
 In the $M/M/1$ queue, one server serves jobs arriving with
-exponentially distributed interarrival times and each requiring an
+exponentially distributed interarrival times and each job requires an
 exponentially distributed processing time.  With Eq.~(\ref{eq:25}),
 i.e., $\lambda(n)p(n)= \mu(n+1)p(n+1)$ we can derive a number of
 important results for this queueing process.
@@ -29,7 +36,7 @@ Then, from the normalization condition
 \begin{equation*}
 1=  \sum_{n=0}^\infty p(n) = p(0)\sum_{n=0}^\infty \rho^n = \frac{p(0)}{1-\rho},
 \end{equation*}
-so 
+it follows that
 \begin{align}\label{eq:23}
 p(0) &=1-\rho, &   p(n) &=  (1-\rho)\rho^{n}.
 \end{align}
@@ -41,48 +48,94 @@ server is busy, i.e., the utilization, is
   1-p(0) = \rho = \sum_{n=1}^\infty p(n).
 \end{equation*}
 Here the last equation has the interpretation of the fraction of time
-the system contains at least 1 job. Next, in the exercises below we
-derive that
+the system contains at least 1 job. 
+
+
+
+\begin{exercise}
+Show that the average number of jobs in an  $M/M/1$ queue is given by
 \begin{equation}\label{eq:el}
   \E L = \frac \rho{1-\rho}.
 \end{equation}
-and 
+  \begin{solution}
+\begin{align*}
+\E L &= \sum_{n=0}^\infty n p(n) \\
+&= \sum_{n=0}^\infty \sum_{i=1}^n \1{i\leq n} p(n)  && n=\sum_{i=1}^n \1{i\leq n}\\
+&= \sum_{n=0}^\infty \sum_{i=1}^\infty   \1{i\leq n} p(n)  && i>n\implies \1{i\leq n} = 0\\
+&= \sum_{i=1}^\infty \sum_{n=0}^\infty  \1{i\leq n} p(n) &&\text{Fubini} \\
+&= \sum_{i=1}^\infty \sum_{n=i}^\infty p(n) && n < i \implies \1{i\leq n}=0 \\
+&= \sum_{i=1}^\infty \sum_{n=i}^\infty (1-\rho)\rho^n && p(n) = (1-\rho)\rho^n \\
+&= \sum_{i=1}^\infty \sum_{n=0}^\infty (1-\rho)\rho^{n+i} && n\to n+i \\
+&= \sum_{i=1}^\infty (1-\rho)\rho^i \sum_{n=0}^\infty \rho^n && \rho^{n+i}=\rho^i \rho^n\\
+&= \sum_{i=1}^\infty (1-\rho)\rho^i \frac1{1-\rho}   \\
+&= \sum_{i=1}^\infty \rho^i \\
+&= \sum_{i=0}^\infty \rho^{i+1} && i\to i+1\\
+&= \rho \sum_{i=0}^\infty \rho^i \\
+&= \frac{\rho}{1-\rho}.
+\end{align*}
+Note that, since the summands are positive, we can use Fubini's theorm
+to justify the interchange of the summations.
+
+  \end{solution}
+\end{exercise}
+
+Let us interpret this expression. The fact
+that $\E L \sim (1-\rho)^{-1}$ for $\rho\to 1$ implies that the
+average waiting time increases very fast when $\rho\to1$.  If we want to avoid  long waiting times, this formula tells us that  situations with
+$\rho\approx 1$ should be avoided. As a practical guideline, it is typically best to  keep $\rho$ quite a bit below 1, and accept that servers are not fully  utilized. 
+
+
+\begin{exercise}
+  Show that the excess probability $\P{L\geq n}$, i.e., the probability that a long queue occurs, is 
 \begin{equation}\label{eq:pn}
   \P{L\geq n} = \rho^n.
 \end{equation}
+  \begin{hint}
+$\P{L\geq n} = \sum_{k\geq n} p(k)$.
+  \end{hint}
+  \begin{solution}
+    \begin{equation*}
+      \begin{split}
+ \P{L\geq n} 
+ &= \sum_{k=n}^\infty p(k) = \sum_{k=n}^\infty p(0)\rho^k = (1-\rho)\sum_{k=n}^\infty \rho^k \\
+ &= (1-\rho)\rho^n \sum_{k=0}^\infty\rho^k = (1-\rho) \rho^n \frac1{1-\rho}.
+\end{split}
+\end{equation*}
+\end{solution}
+\end{exercise}
 
-Let us interpret these expressions. First of all, we only need
-estimates of $\lambda$ and $\mu$ to characterize the utilization of
-the server, the average queue length and the queue length
-distribution. In fact, only the ratio $\rho=\lambda/\mu$ is required.
-As such, assuming that interarrival times and services are
-exponentially distributed, by measuring the fraction of time the
-server is busy, we obtain an estimate for $1-p(0)$, hence for $\rho$.
-With this, we can estimate $\E L$ and $\P{L\geq n}$.  Next, the fact
-that $\E L \sim (1-\rho)^{-1}$ for $\rho\to 1$ implies that the
-average waiting time \recall{increases asymptotically fast} to
-infinity when $\rho\to1$.  In practical terms, this means that
-striving for a high load results in (very) long average waiting
-times. As a consequence, this formula tells us that, in the design and
-operation of queueing systems, we should avoid the situation in which
-$\rho\approx 1$. Thus, we need to make a trade-off between the server
-utilization $1-p(0) = \rho$ and the waiting time. In high load
-regimes, the server is used efficiently, but the queue lengths are
-excessive. In any sensible system, we should keep $\rho$ quite a bit
-below 1, and accept lower utilization then might seem necessary.
-
-The expression for $\P{L\geq n}$ shows that the probability that the
-queue length exceeds some threshold decreases exponentially fast (for
-any reasonable $\rho$). Moreover, if we make the simple assumption
+Clearly,  the probability that the queue length exceeds some threshold decreases geometrically fast (for  $\rho<1$). If we make the simple assumption
 that customers decide to leave (or rather, not join) the system when
 the queue is longer than $9$ say, then $\P{L\geq 10} = \rho^{10}$ is
-an estimator of the fraction of customers lost. Again, for the $M/M/1$
-queue, the knowledge of $\rho$ suffices to compute this estimate.
+an estimator of the fraction of customers lost. 
 
 % In the context of inventory theory these equations are particularly
 % useful, see one of the questions below.
 
-\paragraph{Supermarket Planning}
+\begin{exercise}
+
+Customers of fast-food restaurants prefer to be served from stock. For this reason such
+restaurants often use a `produce-up-to' policy: When the on-hand inventory $I$ is equal or lower than some threshold $r$, the company produces items until the inventory level equals $r+1$ again. The level $r$ is the known as the reorder level.
+
+Suppose that customers arrive as a Poisson process with rate $\lambda$
+and the production times of single items are i.i.d. and exponentially
+distributed with parameter $\mu$. Assume also that customers who
+cannot be served from on-hand stock are backlogged, that is, they wait
+until their item has been produced. What are the average on-hand
+inventory level and the average number of customer in backlog?
+
+\begin{hint}
+  Realize that the inventory level $I(t)$ at time $t$ can be
+  modeled as $I(t) = r+1-L(t)$, where $L$ is the number of jobs in an
+  $M/M/1$ queue.
+\end{hint}
+
+  \begin{solution}
+Average on-hand: $\E{I} = \sum_{i=0}^{r+1} (r+1-i) p(i)$. Average number of customers in backlog: $\E B = \sum_{i=r+1}^\infty (i-r-1) p(i)$. 
+  \end{solution}
+\end{exercise}
+
+\subsection*{Supermarket Planning}
 
 Let us consider the example of cashier planning of a supermarket to
 demonstrate how to use the tools we developed up to now. Out of
@@ -92,11 +145,10 @@ models and data assembly---but the present example contains the
 essential analytic steps to solve the planning problem.
 
 The \emph{service objective} is to determine the minimal service
-capacity such that the fraction of the time the queue length exceeds
-10 is less than 1\%.
+capacity such that the fraction of the time more than 
+10 people in queue is less than 1\%. (If the supermarket has 3 cashiers open, 10 people in queue  means about 3 people per queue.)
 
-The next step is to find the \emph{relevant data}. For a supermarket
-this is relatively easy: the cash registers track all customers
+The next step is to find the \emph{relevant data}: the arrival rate and service time distribution. For a supermarket this is relatively easy: the cash registers track all customers
 payments. Thus, we know the number of customers that left the shop,
 hence entered the shop. (We neglect the time customers spend in the
 shop.) Based on these data we can make a \emph{demand profile}: the
@@ -148,45 +200,34 @@ To keep things simple, we model the arrival process as Poisson with an
 arrival rate that is constant during an hour and is specified by the
 demand profile, and we take the service time distribution as
 exponential with a mean of $1.5$ minutes. We also \emph{model} the
-behavior of the multi-server as a single fast server. Thus, we neglect
-any differences between a station with, for instance, 5 cashiers and a
-single server that works 5 times as fast as a normal cashier.  As yet
+behavior of all the cashiers together (a multi-server queue) as a single fast server. Thus, we neglect any differences between a station with, for instance, 3 cashiers and a
+single server that works 3 times as fast as a normal cashier.  As yet
 another simplification, we change the objective somewhat such that the
 number of jobs in the queueing system should not exceed 10. (Thus, the
 objective is no longer formulated in terms of queue lengths.)
 
-To determine the required number of servers per hour let us consider
-the hour from 12 to 13. In the demand profile we see that the arrival
-rate in this hour is $\lambda_{12}= 120$ customers per hour. The
-objective $\P{L>10}\leq 1\%$ translates into $\rho^{11}\leq 1\%$,
-hence, $\rho \leq 0.67$. Using that $\E{S}=1.5$ minutes, we need the
-number of servers $c$ to be such that
+The required number of servers per hour  follows from the
+objective $1\% \geq \P{L>10}=\rho^{11}$. This  translates into $\rho \leq 0.67$. Using that $\rho = \lambda \E S/c$ and our estimate $\E{S}=1.5$ minutes,  we get  the following rough bound on $c$:
 \begin{equation*}
-  \frac{120}{60} 1.5 \frac 1 c = \rho < 0.66,
-\end{equation*}
-hence $c\approx5$.  Interestingly, for this model we only need to be
-concerned with $\lambda \E S$ to meet the objective. Therefore $c$ is
-very simple to compute by the result
-\begin{equation*}
-  c \geq \lambda \frac{\E S}{0.66}  = \lambda 2.3 \approx 2.5 \lambda.
+c \geq \frac{\lambda \E S}{0.67} \approx \frac{3}2 \cdot \lambda \cdot 1.5  \approx 2.5 \lambda,
 \end{equation*}
 where $\lambda$ is the arrival rate (per minute, \emph{not} per hour).
-Thus, the conversion of the demand profile to a \emph{load} profile is
-trivial: divide the hourly arrival rate by $60$ and multiply by
-2.5. The load profile tells us the minimal number of cashiers needed
-per hour.
+For instance, for the hour from 12 to 13, we read in  the demand profile that $\lambda= 120$ customers per hour, hence $c=2.5 \cdot 120/60 = 5$. Thus, the conversion of the demand profile to a \emph{load} profile, which tells us the minimal number of cashiers needed
+per hour, is trivial: divide the hourly arrival rate by $60$ and multiply by
+2.5. 
+
 
 Now we need to \emph{cover the load profile with service shifts}. This
 is typically not easy since shifts have to satisfy all kinds of rules,
-e.g.: after 2 hours of work a cashier should take a break of at least
+such as: after 2 hours of work a cashier should take a break of at least
 10 minutes; a shift length must be at least four hours, and not longer
 than 9 hours including breaks; when the shift is longer than 4 hours
 it needs to contain at least one break of 30 minutes; and so on. These
-shifts also have different costs, e.g.: shifts with hours after 18h
+shifts also have different costs: shifts with hours after 18h
 are more expensive per hour; when the supermarket covers traveling
-costs, short shifts have higher marginal travel-ling costs; and so on.
+costs, short shifts have higher marginal traveling costs; and so on.
 
-The usual way to solve the covering problem is by means of an integer
+The usual way to solve such  covering problems is by means of an integer
 problem. First generate all (or a subset of the) allowed shift types
 with associated starting times. For instance, suppose only 4 shift
 plans are available
@@ -201,7 +242,7 @@ generate shift types for each of these plans with starting times
 $8$am, $9$am, and on on, until the end of the day. Thus, a shift type
 is a shift plan that starts at a certain hour. Let $x_i$ be the number
 of shift type $i$ and $c_i$ the cost of this type. Write $t\in s_i$ if
-hour $t$ is covered by shift type $i$.  Then the problem is given by
+hour $t$ is covered by shift type $i$.  Then the problem is to solve
 \begin{equation*}
   \min \sum_i c_i x_i.
 \end{equation*}
@@ -212,120 +253,6 @@ such that
 for all hours $t$ the shop is open and $\lambda_t$ is the demand for
 hour $t$.
 
-Conceptually it is easy how to make this approach more accurate and
-realistic. The queueing model is too simple, so as start we could
-replace it by the multi-server model (with exponential service times)
-we will discuss in Section~\ref{sec:mnmn1}. If the data tells us that
-the exponential distribution for the service times is very inaccurate,
-we might use the results of Section~\ref{sec:gg1}, however, this only
-provides us with the mean waiting times for the $M/G/c$ queue, not the
-queue length distribution, which is a drawback. (The analytic results
-for the queue lenght distribution of the $G/G/c$ queue are not so easy
-and also not very accurate. Whether it makes sense to prefer these
-expressions over the closed-form results of the $M/M/c$ queue is not
-so easy to say. It depends on the context.) Finally, the objective
-should depend on the number of cashiers that are open. Assuming that
-customers spread evenly over the queues, the objective is such that no
-queue is longer than 3 say. The objective is therefore such that the
-queue length should be smaller than $3$ times the number of cashiers
-$c$. Finally, in many shops, the cashier capacity is made dependent on
-the queue length; when the queues are long, stockers open extra
-cashier positions until the first server becomes idle. Thus, as there
-is spare capacity, the factor $2.5 \lambda$ can be made smaller,
-perhaps set to $2\lambda$. However, this factor only changes the load
-profile, not the method to solve it.
-
-Clearly, it does not require much effort to make the model very
-complicated, and it is easy to make it complicated to the extent that
-the model becomes useless. Mind: a good model is simple (but not too
-simple). So, notwithstanding the weaknesses of the above model, it is
-pretty powerful already. 
-
-\subsection*{Exercises}
-\label{sec:exercises}
-
-\Opensolutionfile{hint}
-\Opensolutionfile{ans}
-
-\begin{question}
-  Derive expression~\ref{eq:el} for the average number of jobs in an
-  $M/M/1$ queue.  
-  \begin{solution}
-\begin{align*}
-\E L &= \sum_{n=0}^\infty n p(n) \\
-&= \sum_{n=0}^\infty \sum_{i=1}^n \1{i\leq n} p(n)  && n=\sum_{i=1}^n \1{i\leq n}\\
-&= \sum_{n=0}^\infty \sum_{i=1}^\infty   \1{i\leq n} p(n)  && i>n\implies \1{i\leq n} = 0\\
-&= \sum_{i=1}^\infty \sum_{n=0}^\infty  \1{i\leq n} p(n) &&\text{Fubini} \\
-&= \sum_{i=1}^\infty \sum_{n=i}^\infty p(n) && n < i \implies \1{i\leq n}=0 \\
-&= \sum_{i=1}^\infty \sum_{n=i}^\infty (1-\rho)\rho^n && p(n) = (1-\rho)\rho^n \\
-&= \sum_{i=1}^\infty \sum_{n=0}^\infty (1-\rho)\rho^{n+i} && n\to n+i \\
-&= \sum_{i=1}^\infty (1-\rho)\rho^i \sum_{n=0}^\infty \rho^n && \rho^{n+i}=\rho^i \rho^n\\
-&= \sum_{i=1}^\infty (1-\rho)\rho^i \frac1{1-\rho}   \\
-&= \sum_{i=1}^\infty \rho^i \\
-&= \sum_{i=0}^\infty \rho^{i+1} && i\to i+1\\
-&= \rho \sum_{i=0}^\infty \rho^i \\
-&= \frac{\rho}{1-\rho}.
-\end{align*}
-Note that, since the summands are positive, we can use Fubini's theorm
-to justify the interchange of the summations.
-
-  \end{solution}
-\end{question}
-
-\begin{question}
-  Derive expression~\ref{eq:pn} for the excess probability $\P{L\geq n}$, i.e., the probability that a long queue occurs. 
-  \begin{hint}
-\hint{$\P{L\geq n} = \sum_{k\geq n} p(k)$.}
-  \end{hint}
-  \begin{solution}
-    \begin{equation*}
-      \begin{split}
- \P{L\geq n} 
- &= \sum_{k=n}^\infty p(k) = \sum_{k=n}^\infty p(0)\rho^k = (1-\rho)\sum_{k=n}^\infty \rho^k \\
- &= (1-\rho)\rho^n \sum_{k=0}^\infty\rho^k = (1-\rho) \rho^n \frac1{1-\rho}.
-\end{split}
-\end{equation*}
-\end{solution}
-\end{question}
-
-
-\begin{question}[use=false]
-\label{q:basestock}
-
-merge with inventory model of mnm1.tex file, or in the batchqueues.tex file.
-
-Customers of, for example, a fast-food restaurant or a production
-facility, prefer to be served from stock. For this reason such
-companies often use a `produce-up-to' policy: When the on-hand
-inventory $I$ is equal or lower than some threshold $r$, the company
-produces items until the inventory level equals $r+1$ again. The level
-$r$ is the known as the reorder level.
-
-Suppose that customers arrive as a Poisson process with rate $\lambda$
-and the production times of single items are i.i.d. and exponentially
-distributed with parameter $\mu$. Assume also that customers that
-cannot be served from on-hand stock are backlogged, that is, they wait
-until their item has been produced. What are the average on-hand
-inventory level, the average number of customer in backlog, and the
-fraction of customers that are backlogged?
-
-If $h$ is the cost per item per unit time in stock and $b$ the cost
-per customer per unit time in backlog and $\bar b$ the cost per customer
-backlogged, what are the average costs of using a reorder level $r$? 
-
-What is the optimal reorder level $r^*$, i.e., the level that achieves
-minimal average cost?
-
-\begin{hint}
-  
-\hint{Realize that the inventory level $I(t)$ at time $t$ can be
-  modeled as $I(t) = r+1-L(t)$, where $L$ is the number of jobs in an
-  $M/M/1$ queue.}
-\end{hint}
-
-  \begin{solution}
-  \end{solution}
-\end{question}
 
 
 \Closesolutionfile{hint}
@@ -334,6 +261,7 @@ minimal average cost?
 \input{hint}
 \subsection*{Solutions}
 \input{ans}
+\clearpage
 
 %%% Local Variables:
 %%% mode: latex

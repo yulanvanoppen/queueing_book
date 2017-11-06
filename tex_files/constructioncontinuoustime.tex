@@ -69,7 +69,7 @@ memorize it may be helpfull to write it like this:
   A(t) : \R\to \N, \quad{\text{time (real number) to number of jobs (integer)}}.
 \end{align*}
 
-\begin{question}
+\begin{exercise}
  What are  the meanings of $A_{A(t)}$ and $A(A_n)$?
  \begin{solution}
   $A(t)$ is the number of arrivals during $[0,t]$. Suppose that
@@ -79,9 +79,9 @@ memorize it may be helpfull to write it like this:
     job. Thus, the number of arrivals up to time $n$, i.e., $A(A_n)$,
     must be $n$.
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
   Would it make sense to define $A(t)$ as $\min\{k : A_k \geq t\}$?
   \begin{hint}
 Compare this to the definition in (\ref{eq:2}).
@@ -91,7 +91,7 @@ Compare this to the definition in (\ref{eq:2}).
     $\min\{k : A_k \geq 15\} = 4$ since $A_3 < t=15 < A_4$. On the
     other hand $\max\{k : A_k \leq t\} = 3$. And, indeed, at time $t=15$, 3 jobs arrived, not 4. So defining $A(t)$ as $\min\{k : A_k \geq t\}$ is not ok. 
   \end{solution}
-\end{question}
+\end{exercise}
 
 To compute the departure times $\{D_k\}$ we proceed in stages. The
 first stage is to construct the \recall{waiting time in queue}
@@ -223,7 +223,7 @@ This in turn specifies the departure process $\{D(t)\}$ as
   D(t) = \max\{k; D_k \leq t\} = \sum_{k=1}^\infty \1{D_k \leq t}.
 \end{equation*}
 
-\begin{question}
+\begin{exercise}
  Assume that $X_1=10$, $X_2=5$, $X_3=6$ and $S_1 = 17$,
     $S_2=20$ and $S_3=5$, compute the arrival times, waiting times in
     queue, the sojourn times and the departure times for these three
@@ -237,9 +237,9 @@ This in turn specifies the departure process $\{D(t)\}$ as
       case. You can check the results by hand; if the results of the
       simulator are different, there is a problem.
     \end{hint}
-  \end{question}
+  \end{exercise}
 
-\begin{question}
+\begin{exercise}
   Suppose that $X_k\in\{1,3\}$ such that $\P{X_k=1}=\P{X_k=3}$ and
   $S_k\in\{1,2\}$ with $\P{S_k=1}=\P{S_k=2}$. If $W_{Q,0}=3$, what are
   the distributions of $W_{Q,1}$ and $W_{Q,2}$?  
@@ -298,7 +298,7 @@ W
 Great! Our handiwork matches with the computer's results. 
 
 \end{solution}
-\end{question}
+\end{exercise}
 
 
 Another set of recursions to compute the arrival and departure times for the single server queue is the following:
@@ -311,7 +311,7 @@ Another set of recursions to compute the arrival and departure times for the sin
   \end{split}
 \end{equation}
 
-\begin{question}  Why do the recursions Eq.~(\ref{eq:45}) work? 
+\begin{exercise}  Why do the recursions Eq.~(\ref{eq:45}) work? 
   \begin{solution}
  Of course, the service of job $k$ cannot start before it
       arrives. Hence, it cannot leave before $A_k + S_k$. Therefore it
@@ -323,9 +323,9 @@ Another set of recursions to compute the arrival and departure times for the sin
       confuse the earliest start $S_k'$ and the service time
       $S_k$---and $D_k = S_k' + S_k$.
     \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
   Implement the above recursions in excel or some other computer
   program such as R, python, or julia, and check the results of the
   previous exercise.
@@ -340,7 +340,7 @@ Another set of recursions to compute the arrival and departure times for the sin
 Take your pick, and start playing with it. These examples are meant to
 be simple to understand, not necessarily super efficient.
 \end{solution}
-\end{question}
+\end{exercise}
 
 Once we have the arrival and departure processes it is easy to compute
 the \recall{number of jobs in the system} at time $t$ as
@@ -428,46 +428,46 @@ L_s(t) = D_Q(t) - D(t) = L(t) - L_Q(t).
 
 
 
-\begin{question}
+\begin{exercise}
 Why don't we need separate notation for $D_s(t)$, the number
     of jobs that departed from the server? 
 \begin{solution}
  Because $D_s(t) = D(t)$. Once customers leave the server,
     their service is completed, and they leave the queueing system.
   \end{solution}
-\end{question}
+\end{exercise}
 
 
 
-\begin{question}
+\begin{exercise}
  Is $D_Q(t) \leq D(t)$ or $D_Q(t) \geq D(t)$?
 \begin{solution}
  All customers that left the system must have left the
     queue. Thus, $D_Q(t) \geq D(t)$.
   \end{solution}
-\end{question}
+\end{exercise}
 
 
 
-\begin{question}
+\begin{exercise}
  Why is $L(t) = L_Q(t) + L_s(t)$?
 \begin{solution}
  $L_Q(t) = A(t) - D_Q(t)$. $L_S(t) = D_Q(t) - D(t)$. This is in
     line with the fact that $L(t) = L_Q(t) + L_s(t) = A(t) - D(t)$.
 \end{solution}
-\end{question}
+\end{exercise}
 
 
 
-\begin{question}
+\begin{exercise}
  Express $L_Q(t)$ and $L_s(t)$ in terms of $A(t)$, $D_Q(t)$ and $D(t)$.
 \begin{solution}
  $L_Q(t) = A(t) - D_Q(t)$. $L_S(t) = D_Q(t) - D(t)$. This is in
     line with the fact that $L(t) = L_Q(t) + L_s(t) = A(t) - D(t)$.
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
  Consider a multi-server queue with $m$ servers. Suppose that
     at some time~$t$ it happens that $D_Q(t) - D_s(t) < m$ even though
     $A(t) - D_s(t) > m$. How can this occur? 
@@ -476,10 +476,10 @@ Why don't we need separate notation for $D_s(t)$, the number
     customers in queue. If such events occur, we say that the server
     is not work-conservative.
 \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question} Show that $L(t) = A(t)-D(t)$ implies that 
+\begin{exercise} Show that $L(t) = A(t)-D(t)$ implies that 
   \begin{equation*}
     L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}.
   \end{equation*}
@@ -522,9 +522,9 @@ Why don't we need separate notation for $D_s(t)$, the number
   homepage. 
 \end{solution}
 
-\end{question}
+\end{exercise}
 
-\begin{question} Show  that $L(A_k)>0 \implies A_k \leq D_{k-1}$.
+\begin{exercise} Show  that $L(A_k)>0 \implies A_k \leq D_{k-1}$.
   \begin{hint} Use that $L(A_k)>0$ means that the system contains at least one
   job at the time of the $k$th arrival, and that $A_k \leq D_{k-1}$ means that
   job $k$ arrives before job $k-1$ departs.
@@ -542,11 +542,11 @@ Why don't we need separate notation for $D_s(t)$, the number
   where the last relation follows from the fact that $D(t)$ is a
   counting process, hence monotone non-decreasing.
 \end{solution}
-\end{question}
+\end{exercise}
 
 
 
-\begin{question} Can you derive the following (algorithmic efficient) procedure to
+\begin{exercise} Can you derive the following (algorithmic efficient) procedure to
     compute the number of jobs in the system as seen by arrivals,
   \begin{equation*}
     L_k = L_{k-1}+1 - \sum_{i= k-1 - L_{k-1}}^{k-1} \1{D_i< A_k}?
@@ -583,7 +583,7 @@ Why don't we need separate notation for $D_s(t)$, the number
     between the arrival of job $k-1$ and job $k$.
 
 \end{solution}
-\end{question}
+\end{exercise}
 
 
 Finally, the \recall{virtual waiting time process} $\{V(t)\}$ is the
@@ -607,7 +607,7 @@ $R$ or python will reveal that this is easy.
 
 
 
-\begin{question}
+\begin{exercise}
   Provide a specification of the virtual waiting time process $\{V(t)\}$ for
     all $t$.
 
@@ -635,12 +635,12 @@ $V(A_{A(t)} + A_{A(t)}-t$?
       times are easy to find.) Then draw a line with slope $-1$ from
       the waiting time that the last arrival saw.
     \end{solution}
-\end{question}
+\end{exercise}
 
 
 
 
-\begin{question}  Try to extend the recursions~(\ref{eq:45})  to a situation in which one queue is
+\begin{exercise}  Try to extend the recursions~(\ref{eq:45})  to a situation in which one queue is
   served by two servers.  (This is a hard problem, only for the interested student.)
     \begin{hint} The problem is
       that in a multi-server queueing systems, unlike for
@@ -696,7 +696,7 @@ In an attempt to   extend the above to $m>2$ servers, I came up with this scheme
       \end{equation*}
       but it is not correct. Can you find a counter example?
   \end{solution}
-\end{question}
+\end{exercise}
 
 
 
@@ -705,7 +705,7 @@ In an attempt to   extend the above to $m>2$ servers, I came up with this scheme
 
 
 
-\begin{question} Suppose one server serves two
+\begin{exercise} Suppose one server serves two
   queues, such that jobs in queue A are served with priority over jobs
   in queue B. Assume that service is not-preemptive.  Can you develop
   a similar set of recursions for each of the queues, or, otherwise,
@@ -771,7 +771,7 @@ Another interesting queueing rule is to sort in increasing job size;
 Do you see how sort in descending order of job size (it just a matter
 of putting a minus sign at the right place)?
   \end{solution}
-\end{question}
+\end{exercise}
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}

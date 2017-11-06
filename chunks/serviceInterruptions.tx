@@ -11,9 +11,6 @@
 
 See the related section 1.11 of the book of Zijm.
 
-No notes; only questions.
-
-
 \begin{question}
   Determine the expectation and variance of $S_N = \sum_{i=1}^N X_i$
   where $N$ is a random variable (with finite second moment) and

@@ -49,21 +49,40 @@ Moreover, if $s\leq T$,
 \begin{equation*}
 L(s) = \sum_{k=1}^\infty \1{A_k \leq s < D_k} = \sum_{k=1}^{A(T)}\1{A_k \leq s < D_k}.
 \end{equation*}
-Therefore,
+
+\begin{exercise}
+  Show that 
+\begin{equation*}
+  \int_0^T L(s)\, \d s  =  \sum_{k=1}^{A(T)} W_k.
+\end{equation*}
+Thus, in words, the area between the graphs of $A(s)$ and $D(s)$ must
+be equal to the total waiting time spent by all jobs in the system
+until $T$. 
+\begin{solution}
 \begin{equation*}
   \begin{split}
   \int_0^T L(s)\, \d s & = \int_0^T \sum_{k=1}^{A(T)} 1\{A_k \leq s < D_k\} \, \d s \\
 & =  \sum_{k=1}^{A(T)}\int_0^T  1\{A_k \leq s < D_k\} \, \d s =  \sum_{k=1}^{A(T)} W_k.
   \end{split}
 \end{equation*}
-Thus, in words, the area between the graphs of $A(s)$ and $D(s)$ must
-be equal to the total waiting time spent by all jobs in the system
-until $T$. 
-From this, 
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+  Use the result of the previous exercise to show  \recall{Little's law}
+\begin{equation*}
+\E L = \lambda \E W.
+\end{equation*}
+\begin{hint}
+  Divide both sides by $T$. At the right hand side use that $1/T =  A(T)/T \cdot 1/A(T)$. Take limits.
+\end{hint}
+\begin{solution}
+From the previous exercise:
 \begin{equation*}
   \mathscr{L}(T) = \frac 1 T  \int_0^T L(s)\, \d s  = \frac{A(T)} T \frac{1}{A(T)} \sum_{k=1}^{A(T)} W_k.
 \end{equation*}
-Finally, assuming there are an infinite number of times
+Assuming there are an infinite number of times
 $0\leq T_i<T_{i+1}<\cdots$, $T_i\to\infty$, at which $A(T_i) = D(T_i)$
 and the following limits exist
 \begin{align*}
@@ -71,38 +90,33 @@ and the following limits exist
 \frac{A(T_i)}{T_i} &\to \lambda, &
 \frac{1}{A(T_i)} \sum_{k=1}^{A(T_i)} W_k &\to \E W,
 \end{align*}
-we obtain \recall{Little's law}
-\begin{equation*}
-\E L = \lambda \E W.
-\end{equation*}
+we obtain  Little's law.
+\end{solution}
+\end{exercise}
 
-As a useful first application, consider a server of the $G/G/1$ queue
-as a system by itself. Assume the system is rate-stable, for otherwise
-the above limits do not exists.  The arrival rate at the server is
-$\lambda$ and the time a job remains in at the server is $\E S$.
-Thus, the averate number of jobs at the server is
-$\E{L_S} = \lambda \E S$. As $\lambda \E{S} = \rho$, we get
-$\E{L_S} = \rho$.
-
-\begin{remark}
-  Sometimes (often?) students memorize Little's law in the wrong
-  way. Thus, as an easy check, use the dimensions of the concepts:
-  $\E L$ is an average \emph{number}, $\lambda$ is a \emph{rate},
-  i.e., \emph{numbers per unit time}, and $\E W$ is waiting
-  \emph{time}. \recall{Checking the dimensions} in the formula
-  prevents painfull mistakes.
-
-  Note also that $\E L\neq L(t)$; to clarify, the expected number of
+Note that $\E L\neq L(t)$; to clarify, the expected number of
   items in the system is not necessarily equal to the number of items
   in the system at some arbitrary time $t$. Thus, Little's law need
   not hold at all moments in time; it is a statement about
   \emph{averages}.
-\end{remark}
 
-\paragraph{Summary}
+\begin{exercise}
+  Use the dimensions of the components of Little's law to check that $\E{W} \neq \lambda \E{L}$.
+  \begin{hint}
+Checking the dimensions in the formula  prevents painfull mistakes.
+  \end{hint}
+  \begin{solution}
+  Sometimes (often?) students memorize Little's law in the wrong
+  way. Thus, as an easy check, use the dimensions of the concepts:
+  $\E L$ is an average \emph{number}, $\lambda$ is a \emph{rate},
+  i.e., \emph{numbers per unit time}, and $\E W$ is waiting
+  \emph{time}. 
+  \end{solution}
+\end{exercise}
 
-Perhaps a summary of the most useful results and concepts of the previous sections
-are in order here:
+\begin{exercise}
+  Make, and \recall{memorize},  a summary of the most useful results and concepts of this and the previous sections
+  \begin{solution}
 \begin{itemize}
 \item Arrival rate,  departure  rate, rate stability:  $\lambda = \gamma$
 \item PASTA: $\lambda \pi(n) = \lambda(n) p(n)$,
@@ -110,11 +124,26 @@ are in order here:
 \item Renewal reward: $Y=\lambda X$
 \item Little's law: $\E L =\lambda \E W$.
 \end{itemize}
-\recall{Memorize these results.} We will use them often in the sequel,
-but in other courses these results will also prove very useful.
+We will use this often in the sequel.
+  \end{solution}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
+As a useful first application, consider a server of the $G/G/1$ queue
+as a system by itself. Show that $\E{L_S} = \rho$. 
+\begin{solution}
+ Assume the system is rate-stable, for otherwise
+the above limits do not exists.  The arrival rate at the server is
+$\lambda$ and the time a job remains in at the server is $\E S$.
+Thus, the averate number of jobs at the server is
+$\E{L_S} = \lambda \E S$. As $\lambda \E{S} = \rho$, we get
+$\E{L_S} = \rho$.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
   For a given single server queueing system the average number of
   customers in the system is $\E L = 10$, customers arrive at rate
   $\lambda=5$ per hour and are served at rate $\mu=6$ per hour.
@@ -126,9 +155,8 @@ but in other courses these results will also prove very useful.
   \item Why are the answers between these two questions different?
   \end{enumerate}
   \begin{hint}
-    
-  \hint{ Think about the data that is given in either situation. Check
-    the units when applying Little's law.}
+ Think about the data that is given in either situation. Check
+    the units when applying Little's law.
   \end{hint}
 
     \begin{solution}
@@ -153,9 +181,9 @@ but in other courses these results will also prove very useful.
     time-average $L$.
   \end{enumerate}
     \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
  Which assumptions did we use to prove Little's law?
   \begin{solution}
     \begin{itemize}
@@ -166,15 +194,14 @@ but in other courses these results will also prove very useful.
     $t^{-1}\int_0^t L(s) \d s$ exists, in which case the other exists.
     \end{itemize}
   \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
   Provide a graphical interpration of the proof of Little's law.
   \begin{hint}
-    
-  \hint{ Make a drawing of $A(t)$ and $D(t)$ until time $T$, i.e., the
-    first time the system is empty.}
+ Make a drawing of $A(t)$ and $D(t)$ until time $T$, i.e., the
+    first time the system is empty. Observe that $A(t)-D(t)$ is the number of jobs in the system. Take some level $k$, and compute $A^{-1}(k)$ and $D^{-1}(k)$. Observe that $D^{-1}(k) - A^{-1}(k)$ is the waiting time of job $k$.
   \end{hint}
   \begin{solution}
     The area enclosed between the graphs of $A(t)$ and $D(t)$ until
@@ -190,7 +217,7 @@ but in other courses these results will also prove very useful.
     jobs in the system. Since the area is the same no matter whether
     you sum it in the horizontal or vertical direction:
     \begin{equation*}
-      \sum_{k=1}^{A(T)}  W_k = \text{eclosed area} = \int_0^T (A(t)-D(t))\,dt. 
+      \sum_{k=1}^{A(T)}  W_k = \text{enclosed area} = \int_0^T (A(t)-D(t))\,dt. 
     \end{equation*}
  Dividing both sides by $A(T)$ gives
     \begin{equation*}
@@ -207,37 +234,7 @@ but in other courses these results will also prove very useful.
     \end{equation*}
 Hence, Little's law follows.
   \end{solution}
-\end{question}
-
-
-\begin{comment}
-  
-\begin{question}[use=false]
-\nvf{You can skip this exercise. I moved it from the G/G/1 section to here.}
-  Discuss the results of Figure~\ref{fig:multisingle} in terms of
-  waiting time ratios. Recall, in this figure we compare queue and
-  system length, not waiting times.
-
-  \begin{solution}
-    By Little's law, the ratio between the waiting times is the same.
-
-The processing capacity of $c$ servers that work at rate 1 is equal to
-one server that works at rate $c$. The, intuitive, difference between
-the $M/M/c$ queue and the $M/M/1$ queue with a fast server is that
-jobs spend shorter time in queue in the $M/M/c$ case---jobs can be
-served in parallel, hence do not always have to wait in queue for
-server capacity---, but spend longer time in service---simply because
-the servers in the $M/M/c$ case works at rate $1$, not at rate $c$.
-
-\end{solution}
-\end{question}
-\end{comment}
-
-
-
-
-
-
+\end{exercise}
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}

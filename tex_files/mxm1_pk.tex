@@ -12,8 +12,8 @@
 It is not always the case that jobs arrive in single units, they can
 also arrive as batches. For instance, cars and busses arrive at a fast
 food restaurant so that the batch size consists of the number of
-people in the vehicle.  In this section we derive a formula to compute
-the expected queue length for this queueing process. 
+people in the vehicle.  In this section we derive for this queueing
+process expressions of most important KPIs, i.e., the load and the expected waiting time and queue length. 
 
 
 Assume that jobs arrive as a Poisson process with rate $\lambda$ and
@@ -29,9 +29,30 @@ probabilities. We write
 \end{equation*}
 for the \emph{survivor function} of $B$.  We also assume that the
 service time of each item is exponentially distributed with average
-$1/\mu$. Thus, the average time to serve a job is
-$\E{B}\E{S}=\E B/\mu$. This queueing situation denoted by the shorthand
+$1/\mu$. Thus, the average time to serve the entire batch (i.e., job) is
+$\E{S_b} = \E{B}\E{S}=\E B/\mu$. This queueing situation denoted by the shorthand
 $M^X/M/1$.
+
+
+
+\begin{exercise}
+  Relate $f(k)$, the distribution $F(k)$ of the batch size $B$ and the
+  survivor function~$G$. Which of the three alternatives is true:
+  $G(k) = 1-F(k)$, $G(k) = 1-F(k-1)$, $G(k) = 1-F(k+1)$?
+  \begin{hint}
+This exercise is just meant to become familiar with the notation.
+  \end{hint}
+  \begin{solution}
+    \begin{align*}
+    f(k) &= \P{B=k} = \P{B\leq k} - \P{B\leq k-1} = F(k)-F(k-1), \\
+    G(k) &= \P{B>k} = 1 - \P{B\leq k} = 1-F(k).        
+    \end{align*}
+    It is all too easy to make, so called, off-by-one errors, such as
+    in the three alternatives above.  I nearly always check simple
+    cases to prevent such simple mistakes. I advise you to acquire the
+    same habit.
+  \end{solution}
+\end{exercise}
 
 The first criterion we must check for the $M^X/M/1$ queue is the
 stability: the service rate must be larger than the arrival rate of
@@ -51,16 +72,24 @@ As in  the limit $A(t)/t \to \lambda$ and $(A(t))^{-1}\sum_{k=1}^{A(t)} B_k \to 
 \begin{align*}
 \frac{N(t)}t \to \lambda \E B.
 \end{align*}
-Thus, for stability, it is necessary that the service rate
+
+\begin{exercise}
+Conclude that   the \recall{load} must satisfy
+\begin{equation*}
+\rho = \frac{\lambda \E B} \mu < 1.
+\end{equation*}
+\begin{solution}
+For stability, it is necessary that the service rate
 $\mu=1/\E S$ for items is larger than the rate at which items
-arrive. Hence we require that the load is such that
+arrive.  Hence,
 \begin{equation*}
 \rho = \lambda \E B \E S = \frac{\lambda \E B} \mu < 1.
 \end{equation*}
+\end{solution}
+\end{exercise}
 
-For the average waiting time, we can use the derivation of
-$\E{W_Q}=\E{S_r}/(1-\rho)$ of Section~\ref{sec:some-usef-ident} for
-inspiration. Suppose a batch finds $\E{L}$ items in the system upon
+Let us next find expressions for the waiting time and queue lengths. For the average waiting time, we use the derivation of
+$\E{W_Q}=\E{S_r}/(1-\rho)$ of Section~\ref{sec:some-usef-ident} as guidance. Suppose a batch finds $\E{L}$ items in the system upon
 arrival. By the memoryless property of the service distribution, the
 expected remaining service time of the item in service (if any) is
 $\E S$. Therefore the expected time the entire batch, i.e., the job,
@@ -76,34 +105,65 @@ in queue, then
 \begin{equation*}
   \E{L} = \E{L_{Q,b}}\E B + \E{B_r}.
 \end{equation*}
-With  Little's law, $\E{L_{Q,b}} = \lambda \E{W_{Q,b}}$, hence
+\begin{exercise}
+  Combine the above with  Little's law to show that
 \begin{equation*}
-  \E{W_{Q,b}} = \lambda \E S \E B \E{W_{Q,b}} + \E S \E{B_r} = \rho \E{W_{Q,b}} + \E S \E{B_r},
+  \E{W_{Q,b}} = \frac{\E{B_r}}{1-\rho}\E{S}.
+\end{equation*}
+\begin{solution}
+\begin{equation*}
+  \E{W_{Q,b}} 
+= \E{L} \E S  = (\E{L_{Q,b}}\E B + \E{B_r})\E S.
+\end{equation*}
+With  Little's law, $\E{L_{Q,b}} = \lambda \E{W_{Q,b}}$,
+\begin{equation*}
+  \E{W_{Q,b}} 
+= \lambda \E S \E B \E{W_{Q,b}} + \E S \E{B_r} = \rho \E{W_{Q,b}} + \E S \E{B_r},
 \end{equation*}
 hence,
 \begin{equation*}
-  \E{W_{Q,b}} = \frac{\E S}{1-\rho}\E{B_r}.
+  \E{W_{Q,b}} = \frac{\E{B_r}}{1-\rho}\E S.
 \end{equation*}
-And then, from the first equation, 
-\begin{equation*}
-  \E{L} = \frac{\E{W_{Q,b}}}{\E S} = \frac{\E{B_r}}{1-\rho}.
-\end{equation*}
+\end{solution}
+\end{exercise}
 Below we prove that 
 \begin{equation}\label{eq:br}
-  \E{B_r} = \rho\frac{\E{B^2}}{2\E B} + \frac\rho2.
+  \E{B_r} = \frac 1 2 \frac{\E{B^2}}{\E B}\rho + \frac\rho2.
 \end{equation}
-In an exercise below we rewrite this to
-\begin{equation}\label{eq:43}
-\E{L}  = \frac{\E{B_r}}{1-\rho} = \frac{1+C_s^2}2 \frac{\rho}{1-\rho} \E B + \frac12\frac\rho{1-\rho},
-\end{equation}
-where
+
+
+\begin{exercise}\label{q:batch}
+To simplify the above, show that 
+\begin{equation*}
+  \frac{\E{B^2}}{\E{B}} = (1+C_s^2)\E B, 
+\end{equation*}
+where 
 \begin{equation*}
 C_s^2 = \frac{\V B}{(\E B)^2},
 \end{equation*}
-is the square coefficient of variation of the batch sizes.  Observe
-that this is nearly the same as $M/G/1$ waiting time
-formula~\ref{eq:710}, a result we derive in Section~\ref{sec:mg1}. 
+is the square coefficient of variation of the batch sizes.  
+  \begin{solution}
+We have
+\begin{equation*}
+  \begin{split}
+  \frac{\E{B^2}}{\E{B}}
+=    \frac{\E{B^2}}{(\E B)^2} \E B 
+= \frac{(\E B)^2+\V B}{(\E B)^2}\E B = (1+C_s^2)\E B.
+  \end{split}
+\end{equation*}
+  \end{solution}
+\end{exercise}
 
+With the results of the above exercises we have established two cornerstones of queueing theory:
+\begin{equation}
+\E{W_{Q,b}} = \frac{\E{B_r}}{1-\rho} \E{S} = 
+\frac{1+C_s^2}2 \frac{\rho}{1-\rho} \E{S_b} + \frac12\frac\rho{1-\rho}\E S,
+\end{equation}
+and
+\begin{equation}\label{eq:43}
+\E{L}  =\frac{\E{W_{Q,b}}}{\E S} =  
+\frac{1+C_s^2}2 \frac{\rho}{1-\rho} \E B + \frac12\frac\rho{1-\rho}.
+\end{equation}
 Thus, to compute the average number of items in the system, we only
 need to know the first and second moment (or the variance) of the
 batch size $B$. Thus, no matter how `complicated' the distribution of
@@ -111,173 +171,26 @@ $B$, when its second moment exists, the average queue length and
 waiting time can be computed with the above result. 
 
 
+Let us check how our results reduce to what we obtained earlier.  Note, it is very important to carry out such  checks; it is easy to make mistakes.
 
-\begin{figure}[t]
-  \centering
-  \begin{tikzpicture}[scale=0.8,
-  open/.style={shape=circle, fill=white, inner sep=1pt, draw, node contents=},
-  closed/.style={shape=circle, fill=black, inner sep=1pt, draw, node contents=}]
-
-    % y = zero line
-    \draw (-0.5, 0) -- (18.5, 0); 
-    % level crossing
-    \draw (-0.5, 2.5) -- (18.5, 2.5) 
-    node[pos=0.65, fill=white, above]  {$\sum_{k=1}^n \1{B_k \geq i}$}
-    node[pos=0.92, fill=white]  {$y=i$};
-
-
-    \draw node (c1) at (0,3.5) [closed, label={}]
-          node (c2) at (3.5,0)[open, label={}]
-     (c1) to (c2);
-    \draw[dotted] (0,0) -- (0,3.5) node[midway, fill=white] {$B_1$};
-    \draw[dotted, <->] (1, 0.05) -- (1, 2.45) node[fill=white, midway, rotate=90] {$i$};
-
-
-    \draw node (c1) at (3.5,1.5) [closed, label={}]
-          node (c2) at (5,0)[open, label={}]
-     (c1) to (c2);
-    \draw[dotted] (3.5,0.1) -- (3.5,1.5) node[midway, fill=white] {$B_2$};
-
-    \draw node (c1) at (5,4) [closed, label={}]
-          node (c2) at (9,0)[open, label={}]
-     (c1) to (c2);
-    \draw[dotted] (5,0.1) -- (5,4) node[midway, fill=white] {$B_3$};
-    \draw[dotted, <->] (6.5, 0.05) -- (6.5, 2.45) node[fill=white, midway, rotate=90] {$i$};
-
-    \draw node (c1) at (9,2.3) [closed, label={}]
-          node (c2) at (11.3,0)[open, label={}]
-     (c1) to (c2);
-    \draw[dotted] (9,0.1) -- (9,2.3) node[midway, fill=white] {$B_4$};
-
-    % end
-    \draw node (c1) at (14.5,3.5) [closed, label={}]
-          node (c2) at (18,0)[open, label={}]
-     (c1) to (c2);
-    \draw[dotted] (14.5,0.1) -- (14.5,3.5) node[midway, fill=white ] {$B_n$};
-    \draw[dotted, <->] (15.5, 0.05) -- (15.5, 2.45) node[fill=white, midway, rotate=90] {$i$};
-    
-
-    % bottom line
-    \draw[<->] (0, -0.6) -- (18, -.6) node[fill=white, midway] {$\sum_{k=1}^n B_k$};
-\end{tikzpicture}
-
-\caption{The remaining job size as a function of time. A batch crosses
-  the line $y=i$ iff it contains an $i$th item. Thus, the number of
-  $i$th items in $n$ batches is $\sum_{k=1}^n \1{B_k\geq i}$. The
-  total number of items arrived is $\sum_k^n B_k$. The fraction of
-  time an $i$th item is in service is therefore
-  $\sum_k^n \1{B_k\geq i}/\sum_k^n B_k$.}
-  \label{fig:remainingservicetime}
-\end{figure}
-
-
-We now turn to proving~\eqref{eq:br} with sample-path arguments and
-counting; it is an elegant line of reasoning. First concentrate on the
-time the server is busy, i.e., just remove all idle times, and plot
-the remaining job size during the service of the job, c.f,
-Figure~\ref{fig:remainingservicetime}. Second, define $R$ as the
-remaining number of items to be served of the job in service at some
-arbitrary point in time. Let us show that
-\begin{equation*}
-  \P{R=i} =\frac{\P{B\geq i}}{\E B} = \frac{G(i-1)}{\E B}.
-\end{equation*}
-In Figure~\ref{fig:remainingservicetime} concentrate on level
-$i$. Only jobs whose initial batch size is larger or equal to~$i$ will
-produce, during its service, a remaining number of items equal to $i$.
-Thus, by counting, we see in Figure~\ref{fig:remainingservicetime}
-that $\sum_{k=1}^n \1{B_k \geq i}$ is the number of times there are
-precisely $i$ remaining items.  We also see that $\sum_{k=1}^n B_k$ is
-the total time the server is busy. Thus, the fraction of time there
-are $i$ remaining items is
-\begin{equation*}
-  \frac{\sum_{k=1}^n \1{B_k \geq i}}{\sum_{k=1}^n B_k}.
-\end{equation*}
-By PASTA this is also the fraction of jobs that see $i$ items in
-service.  Finally, assuming that the limits exist,
-\begin{equation*}
-\P{R=i} = \lim_{n\to\infty} \frac{\sum_{k=1}^n \1{B_k \geq i}}{\sum_{k=1}^n B_k} 
-= \lim_{n\to\infty}  \frac{n^{-1}\sum_{k=1}^n \1{B_k \geq i}}{n^{-1}\sum_{k=1}^n B_k} = \frac{G(i-1)}{\E B}.
-\end{equation*}
-
-With this expression for $\P{R=i}$, the expected remaining time becomes
-\begin{equation*}
-  \begin{split}
-  \E{R} 
-&= \sum_{i=1}^\infty i \P{R=i} = \sum_{i=1}^\infty i \frac{G(i-1)}{\E B} \\
-&=\sum_{i=0}^\infty (i+1) \frac{G(i)}{\E B} 
-=\sum_{i=0}^\infty i \frac{G(i)}{\E B} +
-\sum_{i=0}^\infty \frac{G(i)}{\E B}\\
-&= \frac{\E{B^2}}{2\E B} - \frac{\E B}{2\E B} + \frac{\E B}{\E B} = \frac{\E{B^2}}{2\E B} + \frac{1}2,
-  \end{split}
-\end{equation*}
-where we use the results of the exercises below.
-
-Finally, recalling that in the above we conditioned on the server
-being busy, we get that $\E{B_r} = \rho \E R$.  Combining this with
-the above expression we obtain~\eqref{eq:br}.
-
-\begin{remark}
-  The above derivation for $\P{R=i}$ is important for its own
-  sake. $\P{R=i}$ is known as the \emph{remaining lifetime
-      distribution} or the \emph{residual life} and used in, for
-    instance, maintenance planning. The derivation is worth
-    remembering, in particular the sample path derivation.
-\end{remark}
-
-\begin{question}
-  Why is $\rho = \lambda \E B \E S$ the appropriate definition
-  of load for the $M^X/M/1$ queue?
-  \begin{solution}
-    Jobs arrive at rate $\lambda$. The average number of items per job
-    is $\E B$. Hence, work arrives as rate $\lambda \E B \E S$.This
-    rate must be less than 1 for stability.
-  \end{solution}
-\end{question}
-
-
-\begin{question}
-  Relate $f(k)$, the distribution $F(k)$ of the batch size $B$ and the
-  survivor function~$G$. Which of the three alternatives is true:
-  $G(k) = 1-F(k)$, $G(k) = 1-F(k-1)$, $G(k) = 1-F(k+1)$?
+\begin{exercise}
+  Show that  when the batch size is 1, the expression $\E{L(M^X/M/1)}$, i.e., the system length for the $M^X/M/1$ queue, reduces to
+  $\E{L(M/M/1)}$, i.e., the system length for the $M/M/1$ queue. 
   \begin{hint}
-    
-This exercise is just meant to become familiar with the notation.
-  \end{hint}
-  \begin{solution}
-    \begin{align*}
-    f(k) &= \P{B=k} = \P{B\leq k} - \P{B\leq k-1} = F(k)-F(k-1), \\
-    G(k) &= \P{B>k} = 1 - \P{B\leq k} = 1-F(k).        
-    \end{align*}
-    It is all too easy to make, so called, off-by-one errors, such as
-    in the three alternatives above.  I nearly always check simple
-    cases to prevent such simple mistakes. I advise you to acquire the
-    same habit.
-  \end{solution}
-\end{question}
-
-\begin{question}
-  Show that the expression $\E{L(M^X/M/1)}$ reduces to
-  $\E{L(M/M/1)}$ when the batch size is 1.  
-  \begin{hint}
-    
-\hint{What is the
-    distribution of the batch size $B$ for the $M/M/1$ queue?}
+What is the    distribution of the batch size $B$ for the $M/M/1$ queue?
   \end{hint}
   \begin{solution}
     For the $M/M/1$ queue, each job contains just one item. Thus,
     $B\equiv 1$, hence $\P{B=1}=1$, $\E{B^2}=\E B =1$. Therefore,
     $\E{B_r(M/M/1)}= \rho$, and $\E{L(M/M/1)}=\rho/(1-\rho)$. 
-
-      Such checks are always important to do. Does the new result
-      reduce to the results of the models you know?
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+
+\begin{exercise}
   What is $\E L$ in case $B_k=3$ always? Suppose $\lambda=1$ and $\mu=6$ so that we can get a numerical answer. 
   \begin{hint}
-    
-\hint{Use Eq.~\ref{eq:43}. What are $\E{B^2}$, $\E B$ and $\V B$ for this case?}
+Use Eq.~\ref{eq:43}. What are $\E{B^2}$, $\E B$ and $\V B$ for this case?
   \end{hint}
 \begin{solution}
   As $B$ is constant and equal to 3, $\E{B^2}=9$, hence $\V B=0$,
@@ -286,34 +199,13 @@ This exercise is just meant to become familiar with the notation.
     \E L = \frac 1 2 \frac{1/2}{1-1/2}\cdot 3 + \frac12\frac{1/2}{1-1/2}.
   \end{equation*}
   \end{solution}
-\end{question}
+\end{exercise}
 
-
-\begin{question}\label{q:batch}
-Show that 
-\begin{equation*}
-  \frac{\lambda}\mu \E{B^2} = \rho (1+C_s^2)\E B, 
-\end{equation*}
-  \begin{solution}
-We have
-\begin{equation*}
-  \begin{split}
-  \frac{\lambda}\mu \E{B^2} 
-&=   \frac{\lambda\E B}{\mu} \frac{\E{B^2}}{(\E B)^2} \E B  = \rho \frac{\E{B^2}}{(\E B)^2} \E B \\
-&= \rho \frac{(\E B)^2+\V B}{(\E B)^2}\E B = \rho (1+C_s^2)\E B.
-  \end{split}
-\end{equation*}
-  \end{solution}
-\end{question}
-
-\begin{question}
-  If the batch size is geometrically distributed with parameter $p$, what is $\E L$?
-
+\begin{exercise}
+  If the batch size is $p$ geometrically distributed, what is $\E L$?
   \begin{hint}
-    
-\hint{$f_k=q^{k-1}p$ with $q=1-p$. Use generating functions to compute $\E B$ and $\E{B^2}$}
+$f_k=q^{k-1}p$ with $q=1-p$. Use generating functions to compute $\E B$ and $\E{B^2}$
   \end{hint}
-
 \begin{solution}
   We need $\V B$ and $\E B$. Consider
   \begin{equation*}
@@ -359,18 +251,13 @@ and
 Can we check this in a simple way? If $\P{B=1}=f_1 = p =1$, then
 $\E L=\rho/(1-\rho)$. Thus, we get the result for the $M/M/1$
 queue. The result is at least consistent with earlier work.
-
-
-
 \end{solution}
+\end{exercise}
 
-
-\end{question}
-
-\begin{question}
+\begin{exercise}
   A common operational problem is a machine that receives batches of
   various sizes. Management likes to know how a reduction of the
-  variability of the batch sizes affects the average queueing time.
+  variability of the batch sizes would affect the average queueing time.
   Suppose, for the sake of an example, that the batch size 
   \begin{equation*}
     \P{B=1} = \P{B=2} = \P{B=3} = \frac 13.
@@ -378,7 +265,6 @@ queue. The result is at least consistent with earlier work.
   Batches arrive at rate 1 per hour. The average processing for an
   item is $25$ minutes.  How much does the waiting time decrease if
   batch sizes are $2$ always?
-
   \begin{solution}
     Start with the simple case, $B\equiv 2$. Then $\V{B}=0$ and
     $\E B = 2$. The load is $\rho=\lambda \E B \E S = 1\cdot 2 \cdot 25/60 = 5/6$.  hence,
@@ -398,33 +284,79 @@ And thus,
     $\E{L}$ for both answers is $10/9$. In other words, we can
     reduce about 10\% of the number of items in the system by working
     in fixed batch sizes. 
-
-    Observe how easy it is with these models to get insight into the
-    order of magnitude that can be achieved with changing work habits,
-    such as working in contant batch sizes. 
-
-    Observe also that it is up to management to decide whether this
-    reduction outweighs any efforts to reduce the variation in batch
-    sizes. (In our model we assume that $B=2$, i.e., we removed all
-    variability. This is the best possible. Real life reductions will
-    typically achieve less than the 10\% reduction.)
   \end{solution}
-\end{question}
+\end{exercise}
+
+Observe how easy it is with these models to get insight into the order
+of magnitude that can be achieved with changing work habits, such as
+working in contant batch sizes.
+
+Observe also that it is up to management to decide whether this
+reduction outweighs any efforts to reduce the variation in batch
+sizes. In our model we assume that $B=2$, i.e., we removed all
+variability, which  is the best possible. Real life reductions will
+typically achieve less, of course.
+
+
+\begin{exercise}
+  Compare $\E{L(M^X/M/1)}$ to $\E{L(M/M/1)}$ when the loads are the
+    same. What do you conclude?
+  \begin{solution}
+    \begin{equation*}
+    \frac{\E{L(M^X/M/1)}}{\E{L(M/M/1)}} = \frac{\E{B_r}}{\rho} = 
+\frac{\E{B^2}}{2\E B} + \frac 12.
+    \end{equation*}
+With this we can check whether this condition
+    \begin{equation*}
+    1\leq \frac{\E{L(M^X/M/1)}}{\E{L(M/M/1)}} = \frac{\E{B^2}}{2\E B} + \frac 12
+    \end{equation*}
+    is always true. Clearly, it reduces to
+\begin{equation*}
+\E B \leq  \E{B^2}.
+\end{equation*}
+Multiply this by $\E B$ for reasons to become clear presently to get
+\begin{equation*}
+(\E B)^2 \leq  \E{B^2} \E B.
+\end{equation*}
+So, the initial inequality is converted to this, and we like to know
+whether this always true.
+
+
+To see this, we can use Jensen's inequality
+$\phi(\E X) \leq \E{\phi(X)}$ when $\phi$ is convex. In this case take
+$\phi(x)=x^2$, so that Jensen's inequality states that
+$(\E B)^2 \leq \E{B^2}$. (BTW, note that Jensen's inequality implies
+that $\V X = \E{X^2} - (\E X)^2\geq 0$.)  Now noting that $B\geq 1$, as a
+job minimally contains one item, we get
+\begin{equation*}
+  \begin{split}
+(\E B)^2 
+&\leq  \E{B^2}, \quad{\text{by Jensen's inequality}} \\
+&\leq   \E{B^2} \E B, \quad{\text{ as } B \geq 1}.
+  \end{split}
+\end{equation*}
+Clearly, this is the inequality we tried to show. As a result,
+    \begin{equation*}
+    1\leq \frac{\E{L(M^X/M/1)}}{\E{L(M/M/1)}}
+    \end{equation*}
+for all $B$. 
+
+In conclusion, if work arrives in batches, the average number of jobs
+in the system, increases, hence the average waiting time increases.
+  \end{solution}
+\end{exercise}
 
 
 
-\begin{question}
+\begin{exercise}
   In a production enviroment, a machine replenishes an inventory of
   items (e.g., hamburgers) at a fixed rate of $1$ per 3 minutes. If
-  the inventory reaches some level $S$, the machine stops.  Customers
+  the inventory reaches the \emph{produce-up-to} level $S$, the machine stops.  Customers
   arrive at rate of 6 per hour. A customer can buy items in different
   quanties, $B=1,2,3,4$, all with equal probability. What is a
-  sensible value for the stopping level $S$?  
-
+  sensible value for the produce-up-to level $S$?  
   \begin{hint}
-    
-  \hint{Realize that the inventory process $I(t)$ behaves as
-    $I(t)=S-L(t)$ where $L(t)$ is a suitable queueing process.}
+Realize that the inventory process $I(t)$ behaves as     $I(t)=S-L(t)$ where $L(t)$ is a suitable queueing process.
   \end{hint}
   \begin{solution}
 
@@ -485,190 +417,122 @@ $S$ should be quite a bit bigger than 6. A more detailed analysis is
 necessary to determine the right value of $S$ such that not more than
 a certain fraction of demand is lost. We will address this issue in
 Section~\ref{sec:batch-arrivals}.
+  \end{solution}
+\end{exercise}
 
+
+
+We now turn to proving~\eqref{eq:br} with sample-path arguments and
+counting; it is an elegant line of reasoning. Moreover, this derivation of the distribution of  the \emph{remaining lifetime   distribution} or the \emph{residual life} is useful in its own right and and used in, for instance, maintenance planning. 
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[scale=0.8,
+  open/.style={shape=circle, fill=white, inner sep=1pt, draw, node contents=},
+  closed/.style={shape=circle, fill=black, inner sep=1pt, draw, node contents=}]
+
+    % y = zero line
+    \draw (-0.5, 0) -- (18.5, 0); 
+    % level crossing
+    \draw (-0.5, 2.5) -- (18.5, 2.5) 
+    node[pos=0.65, fill=white, above]  {$\sum_{k=1}^n \1{B_k \geq i}$}
+    node[pos=0.92, fill=white]  {$y=i$};
+
+
+    \draw node (c1) at (0,3.5) [closed, label={}]
+          node (c2) at (3.5,0)[open, label={}]
+     (c1) to (c2);
+    \draw[dotted] (0,0) -- (0,3.5) node[midway, fill=white] {$B_1$};
+    \draw[dotted, <->] (1, 0.05) -- (1, 2.45) node[fill=white, midway, rotate=90] {$i$};
+
+
+    \draw node (c1) at (3.5,1.5) [closed, label={}]
+          node (c2) at (5,0)[open, label={}]
+     (c1) to (c2);
+    \draw[dotted] (3.5,0.1) -- (3.5,1.5) node[midway, fill=white] {$B_2$};
+
+    \draw node (c1) at (5,4) [closed, label={}]
+          node (c2) at (9,0)[open, label={}]
+     (c1) to (c2);
+    \draw[dotted] (5,0.1) -- (5,4) node[midway, fill=white] {$B_3$};
+    \draw[dotted, <->] (6.5, 0.05) -- (6.5, 2.45) node[fill=white, midway, rotate=90] {$i$};
+
+    \draw node (c1) at (9,2.3) [closed, label={}]
+          node (c2) at (11.3,0)[open, label={}]
+     (c1) to (c2);
+    \draw[dotted] (9,0.1) -- (9,2.3) node[midway, fill=white] {$B_4$};
+
+    % end
+    \draw node (c1) at (14.5,3.5) [closed, label={}]
+          node (c2) at (18,0)[open, label={}]
+     (c1) to (c2);
+    \draw[dotted] (14.5,0.1) -- (14.5,3.5) node[midway, fill=white ] {$B_n$};
+    \draw[dotted, <->] (15.5, 0.05) -- (15.5, 2.45) node[fill=white, midway, rotate=90] {$i$};
     
-  \end{solution}
-\end{question}
 
+    % bottom line
+    \draw[<->] (0, -0.6) -- (18, -.6) node[fill=white, midway] {$\sum_{k=1}^n B_k$};
+\end{tikzpicture}
 
-\begin{question}\label{ex:6}
- Use indicator functions to prove that
-    \begin{equation*}
-      \sum_{n=0}^\infty G(n) = \E B.
-    \end{equation*}
-    \begin{hint}
-Write 
-$\sum_{n=0}^\infty G(n) = \sum_{n=0}^\infty \sum_{i=n+1}^\infty \P{B=i}$ and then do the algebra.
-    \end{hint}
-\begin{solution}
-  Realize that this sort of problem is just a regular probability
-  theory problem, nothing fancy. We use/adapt the tools you learned in
-  calculus to carry out 2D integrals (or in this case 2D summations.)
-\begin{align*}
-\sum_{n=0}^\infty G(n) 
-&= \sum_{n=0}^\infty \P{B>n} 
-= \sum_{n=0}^\infty \sum_{i=n+1}^\infty \P{B=i}  \\
-& = \sum_{n=0}^\infty \sum_{i=0}^\infty 1\{n<i\} \P{B=i} 
-= \sum_{i=0}^\infty \sum_{n=0}^\infty 1 \{n<i\} \P{B=i} \\
-&= \sum_{i=0}^\infty i \P{B=i} = \E B.
-\end{align*}
-In case you are interested in mathematical justifications: the
-interchange of the two summations is allowed because the summands are
-all positive. (Interchanging the order of summations or integration is
-not allways allowed because the results can be different when part of
-the integrand is negative. Check Fubini's theorem for more on this if
-you are interested.)
+\caption{The remaining job size as a function of time. The
+  total number of service periods, which is equal to the number of items arrived, is $\sum_k^n B_k$. A batch crosses   the line $y=i$ iff it contains at least $i$ items. Thus, $\sum_{k=1}^n \1{B_k\geq i}$ is the number of periods in which there are precisely $i$ items. The fraction of
+  periods  the server works on the $i$th item is therefore
+  $\sum_k^n \1{B_k\geq i}/\sum_k^n B_k$.}
+  \label{fig:remainingservicetime}
+\end{figure}
 
-\end{solution}
-\end{question}
-
-\begin{question}
- Use indicator functions to prove that
-    \begin{equation*}
-\sum_{i=0}^\infty i G(i) =  \frac{\E B^2}2 - \frac{\E B}{2}.
-    \end{equation*}
-    \begin{hint}
-\hint{$\sum_{i=0}^\infty i G(i) = \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^\infty i 1\{n\geq i+1\}$.}
-    \end{hint}
-\begin{solution}
-\begin{align*}
-\sum_{i=0}^\infty i G(i)
-&= \sum_{i=0}^\infty i \sum_{n=i+1}^\infty \P{B=n} = \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^\infty i 1\{n\geq i+1\} \\
-&= \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^{n-1}i  = \sum_{n=0}^\infty \P{B=n} \frac{(n-1)n}{2} \\
-&= \sum_{n=0}^\infty  \frac{n^2}{2} \P{B=n} - \frac{\E B}{2}
-= \frac{\E B^2}2 - \frac{\E B}{2}.
-\end{align*}
-\end{solution}
-\end{question}
-
-
-\begin{question}
- Use indicator functions to prove that for  a continuous random
-    variable $S$ with distribution function $F$, 
-\begin{align*}
-    \E S &= \int_0^\infty x \d F  = \int_0^\infty G(y) \d y,\\
-\end{align*}
-where $G(x) = 1 - F(x)$. 
-\begin{hint}
-  
-\hint{$\E S = \int_0^\infty x \d F  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d F(x)$.}
-\end{hint}
-\begin{solution}
+For this purpose, consider  the start and finish times of the batches in service.  Then, remove all idle periods of the server, so that we paste together the times during which the server is busy, and plot the remaining job size as a function of time, 
+c.f., Figure~\ref{fig:remainingservicetime}.  Define $R$ as the
+remaining number of items to be served of the job in service at some
+arbitrary point in time. Let us show with Figure~\ref{fig:remainingservicetime} that
 \begin{equation*}
-  \begin{split}
-    \E{S} &= \int_0^\infty x \d F  = \int_0^\infty \int_0^x \d y \d F(x) \\
-    & = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d F(x)   = \int_0^\infty \int_0^\infty 1_{y\leq x} \d F(x) \d y\\
-    & = \int_0^\infty \int_y^\infty \d F(x) \d y = \int_0^\infty G(y) \d y
-  \end{split}
+  \P{R=i} =\frac{\P{B\geq i}}{\E B} = \frac{G(i-1)}{\E B}.
 \end{equation*}
-\end{solution}
-\end{question}
 
-\begin{question}
- Use indicator functions to prove that for  a continuous random
-    variable $S$ with distribution function $F$, 
-\begin{align*}
-    \E{S^2} &= \int_0^\infty x^2 \d F  = 2 \int_0^\infty y G(y) \d y,
-\end{align*}
-where $G(x) = 1 - F(x)$. 
-\begin{hint}
-  
-\hint{$\int_0^\infty y G(y) \d y = \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d x \d y$.
-}
-\end{hint}
-\begin{solution}
-  \begin{equation*}
-    \begin{split}
-\int_0^\infty y G(y) \d y 
-&=  \int_0^\infty y \int_y^\infty f(x)\, \d x \d y =  \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d x \d y\\
-&=  \int_0^\infty f(x) \int_0^\infty y 1\{y \leq x\}\, \d x \d y
-=  \int_0^\infty f(x) \int_0^x y\, \d x \d y\\
-&=  \int_0^\infty f(x) \frac{x^2}2 \d x =\frac{\E S^2}2.
-    \end{split}
-  \end{equation*}
-\end{solution}
-\end{question}
-
-\begin{question}
- Use integration by parts to show that for  a continuous random
-    variable $S$ with distribution function $F$ and survivor function $G=1-F$, 
-\begin{align*}
-\int_0^\infty y G(y) \d y = \frac{\E{S^2}}2.
-\end{align*}
-\begin{solution}
-  \begin{equation}
-      \int_0^\infty y G(y) \d y 
-= \frac{y^2}2 G(y) \bigg|_0^\infty  - \int_0^\infty \frac{y^2}2 g(y)\d y = \int_0^\infty \frac{y^2}2 f(y)\d y = \frac{\E{S^2}}2,
-  \end{equation}
-  since $g(y) = G'(y) = - F'(y) = f(y)$.
-\end{solution}
-\end{question}
-
-\begin{question}
-  Use that $\E S = \int_0^\infty x \d F = \int_0^\infty G(y) \d y$ to
-  check that  $\E S = \mu^{-1}$ if $F(x) = 1 - e^{-\mu x}$.
-\begin{solution}
-If $F(x) = 1 - e^{-\mu x}$, we obtain that 
+In Figure~\ref{fig:remainingservicetime} concentrate on level
+$i$. Only jobs whose initial batch size is larger or equal to~$i$ can
+generate a remaining service time with $i$ items.
+Thus, by counting, we see in Figure~\ref{fig:remainingservicetime}
+that $\sum_{k=1}^n \1{B_k \geq i}$ is the number of times there are
+precisely $i$ remaining items.  We also see that $\sum_{k=1}^n B_k$ is
+the total time the server is busy. Thus, the fraction of time there
+are $i$ remaining items is
 \begin{equation*}
-  \E S = \int_0^\infty e^{-\mu x} \d x =
-  \mu^{-1}\int_0^\infty e^{-x} \d x = \mu^{-1}.
+  \frac{\sum_{k=1}^n \1{B_k \geq i}}{\sum_{k=1}^n B_k}.
 \end{equation*}
-\end{solution}
-\end{question}
+By PASTA this is also the fraction of jobs that see $i$ items in
+service.  Finally, 
+\begin{equation*}
+\P{R=i} = \lim_{n\to\infty} \frac{\sum_{k=1}^n \1{B_k \geq i}}{\sum_{k=1}^n B_k} 
+= \lim_{n\to\infty}  \frac{n^{-1}\sum_{k=1}^n \1{B_k \geq i}}{n^{-1}\sum_{k=1}^n B_k} = \frac{G(i-1)}{\E B},
+\end{equation*}
+where  the limits exist by the strong law. With  Exercise~\ref{ex:ER} 
+the expected remaining time can be simplified to
+\begin{equation*}
+  \E{R} 
+= \sum_{i=1}^\infty i \P{R=i} = \frac1{\E B}\sum_{i=1}^\infty i G(i-1) 
+= \frac{\E{B^2}}{2\E B} + \frac{1}2.
+\end{equation*}
+Finally, recalling that in the above we conditioned on the server
+being busy, we get that $\E{B_r} = \rho \E R$, thereby yielding~\eqref{eq:br}.
 
-
-
-\begin{question}
-  Compare $\E{L(M^X/M/1)}$ to $\E{L(M/M/1)}$ when the loads are the
-    same. What do you conclude?
-
+\begin{exercise}\label{ex:ER}
+  Show that $2 \sum_{i=i}^\infty i G(i-1)= \E{B^2} + \E B.$
+  \begin{hint}
+    Use Exercises~\ref{ex:6} and \ref{ex:66}.
+  \end{hint}
   \begin{solution}
-    \begin{equation*}
-    \frac{\E{L(M^X/M/1)}}{\E{L(M/M/1)}} = \frac{\E{B_r}}{\rho} = 
-\frac{\E{B^2}}{2\E B} + \frac 12.
-    \end{equation*}
-With this we can check whether this condition
-    \begin{equation*}
-    1\leq \frac{\E{L(M^X/M/1)}}{\E{L(M/M/1)}} = \frac{\E{B^2}}{2\E B} + \frac 12
-    \end{equation*}
-    is always true. Clearly, it reduces to
-\begin{equation*}
-\E B \leq  \E{B^2}.
-\end{equation*}
-Multiply this by $\E B$ for reasons to become clear presently to get
-\begin{equation*}
-(\E B)^2 \leq  \E{B^2} \E B.
-\end{equation*}
-So, the initial inequality is converted to this, and we like to know
-whether this always true.
-
-
-To see this, we can use Jensen's inequality
-$\phi(\E X) \leq \E{\phi(X)}$ when $\phi$ is convex. In this case take
-$\phi(x)=x^2$, so that Jensen's inequality states that
-$(\E B)^2 \leq \E{B^2}$. (BTW, note that Jensen's inequality implies
-that $\V X = \E{X^2} - (\E X)^2\geq 0$.)  Now noting that $B\geq 1$, as a
-job minimally contains one item, we get
 \begin{equation*}
   \begin{split}
-(\E B)^2 
-&\leq  \E{B^2}, \quad{\text{by Jensen's inequality}} \\
-&\leq   \E{B^2} \E B, \quad{\text{ as } B \geq 1}.
+2 \sum_{i=1}^\infty i G(i-1) 
+&=2\sum_{i=0}^\infty (i+1) G(i) 
+=2\sum_{i=0}^\infty i G(i) +
+2\sum_{i=0}^\infty G(i)\\
+&= \E{B^2} - \E B + 2\E B.
   \end{split}
 \end{equation*}
-Clearly, this is the inequality we tried to show. As a result,
-    \begin{equation*}
-    1\leq \frac{\E{L(M^X/M/1)}}{\E{L(M/M/1)}}
-    \end{equation*}
-for all $B$. 
-
-In conclusion, if work arrives in batches, the average number of jobs
-in the system, increases, hence the average waiting time increases.
-
   \end{solution}
-\end{question}
-
-
+\end{exercise}
 
 
 
@@ -680,9 +544,10 @@ in the system, increases, hence the average waiting time increases.
 \input{hint}
 \subsection*{Solutions}
 \input{ans}
+\clearpage
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../booktest"
+%%% TeX-master: "../book"
 %%% End:
 

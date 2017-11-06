@@ -51,6 +51,35 @@ of the $k$th job.  The \recall{distribution of $\{L(t)\}$ as seen by
 \end{equation}
 
 
+\begin{exercise}\label{ex:2}
+ Assume that $X_k = 10$ minutes and $S_k = 11$ minutes for all
+    $k$, i.e., $X_k$ and $S_k$ are deterministic and constant. What
+    are $\lambda$ and $\mu$?  Compute $A_k$, $W_k$, $D_k$ and
+    $L_k$. How do these numbers behave as a function of $k$?
+  \begin{solution}
+ $\lambda=6$ per hour, and $\mu=60/11$ per hour. Note that
+      $\mu < \lambda$. $A_0 = 0$, $A_1=10$, $A_2=20$, etc., hence
+      $A_k = 10k$. $W_{Q,0} = 0$, $W_{Q,1} = \max\{0 + 0-10,0\} = 0$.
+      $W_{Q,2} = \max\{0+11-10,0\} =1$.
+      $W_{Q,3} = \max\{1+11-10,0\} =2$. Hence, $W_{Q,k} = k-1$ for
+      $k\geq1$. Thus, $W_k = k-1+11 = k + 10$ for $k\geq1$, and
+      $D_k = 10k + k+10 = 11k+10$. Note that $W_k$ increases linearly
+      as a function of $k$.  You can infer that, for the queue length
+      to remain bounded, it is necessary that the service rate
+      $\mu > \lambda$.
+  \end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+ Yet another simple case is to take $X_k=10$ minutes and
+    $S_k=9$ minutes for all $k$. Answer the same questions as in the
+    previous exercise.
+  \begin{solution}
+ Trivial.
+  \end{solution}
+\end{exercise}
+
 
 A related set of performance measures follows by tracking the system's
 behavior over time and taking the \emph{time-average}, rather than the
@@ -69,22 +98,13 @@ and $\{D(t)\}$. Assuming the limit exists for $t\to\infty$, we define
   \E L = \lim_{t\to\infty} \frac 1 t\int_0^t L(s) \d s 
 \end{equation}
 Observe that, notwithstanding that the symbols are the same, this
-expectation need not be the same as~\eqref{eq:EQ}, c.f. on  the
-next exercise. 
-
-
-\begin{question}
-Design a queueing system in which the load as seen by the server is very
-different from what the customers see. Show that for such a queueing system typically
+expectation need not be the same as~\eqref{eq:EQ}: in general,
 \begin{equation*}
   \lim_{t\to\infty} \frac 1 t\int_0^t L(s)\, \d s \neq   \lim_{n\to\infty}\frac 1n  \sum_{k=1}^n L_k.
 \end{equation*}
-where, by \eqref{eq:Lk}, $L_k=L(A_k)$ is the number in the system at the arrival epoch of the $k$th job. Hence, in general:
-  \begin{equation*}
-    \lim_{t\to\infty} \int_0^t \1{L(s)\leq m}\,\d s \neq \lim_{n\to\infty} \frac 1n \sum_{k=1}^n \1{L_k \leq m}.
-  \end{equation*}
 
-
+\begin{exercise}
+Design a queueing system to show that average number of jobs in the system as seen by the server is very different from what the customers see.
   \begin{hint}
     
   \hint{Consider a queueing system with constant service and
@@ -95,9 +115,7 @@ where, by \eqref{eq:Lk}, $L_k=L(A_k)$ is the number in the system at the arrival
   $\epsilon$. Then $L(t) = 1$ nearly all of the time. In fact,
   $\E L = 1-\epsilon/10$. However, $L_k=0$ for all $k$.
 \end{solution}
-\end{question}
-
-
+\end{exercise}
 
 Next, define the following probability as the
 \recall{time-average fraction of time the system contains at most $m$
@@ -109,8 +127,14 @@ Next, define the following probability as the
 Again, this probability need not be the same as what customers see
 upon arrival.  
 
-It is evident how to formulate the counterparts for the waiting time
-process $\{W(t)\}$.
+\begin{exercise}
+Formulate a definition  for the  time-average of the waiting time.
+\begin{solution}
+  \begin{equation*}
+    \E{W} = \lim_{t\to\infty} \frac1t \int_0^t W(s) \d s.
+  \end{equation*}
+\end{solution}
+\end{exercise}
 
 
 
@@ -231,47 +255,16 @@ edge[pil,bend left=25, <-] (mu.east);
 \end{figure}
 
 
-\begin{question}\label{ex:2}
- Assume that $X_k = 10$ minutes and $S_k = 11$ minutes for all
-    $k$, i.e., $X_k$ and $S_k$ are deterministic and constant. What
-    are $\lambda$ and $\mu$?  Compute $A_k$, $W_k$, $D_k$ and
-    $L_k$. How do these numbers behave as a function of $k$?.
-  \begin{solution}
- $\lambda=6$ per hour, and $\mu=60/11$ per hour. Note that
-      $\mu < \lambda$. $A_0 = 0$, $A_1=10$, $A_2=20$, etc., hence
-      $A_k = 10k$. $W_{Q,0} = 0$, $W_{Q,1} = \max\{0 + 0-10,0\} = 0$.
-      $W_{Q,2} = \max\{0+11-10,0\} =1$.
-      $W_{Q,3} = \max\{1+11-10,0\} =2$. Hence, $W_{Q,k} = k-1$ for
-      $k\geq1$. Thus, $W_k = k-1+11 = k + 10$ for $k\geq1$, and
-      $D_k = 10k + k+10 = 11k+10$. Note that $W_k$ increases linearly
-      as a function of $k$.  You can infer that, for the queue length
-      to remain bounded, it is necessary that the service rate
-      $\mu > \lambda$.
-  \end{solution}
-\end{question}
 
-
-\begin{question}
- Yet another simple case is to take $X_k=10$ minutes and
-    $S_k=9$ minutes for all $k$. Answer the same questions as in the
-    previous exercise.
-  \begin{solution}
- Trivial.
-  \end{solution}
-\end{question}
-
-
-\begin{question}
+\begin{exercise}
   Consider a discrete-time model of a queueing system, as we developed
-  in Section~\ref{sec:constr-discr-time}.  In that case batches of
-  jobs can arrive in a period, and the average number of customers
+  in Section~\ref{sec:constr-discr-time}, which case  batches of
+  jobs arrive in a period.  The average number of customers
   that \emph{see upon arrival} more than~$m$ customers in the system
   cannot be defined as~\eqref{eq:Qm}. Provide a better definition. 
-
   \begin{hint}
-    
-\hint{Why is \eqref{eq:Qm} not the same as the number of
-  batches that see a queue length less than $m$?}
+Why is \eqref{eq:Qm} not the same as the number of
+  batches that see a queue length less than $m$?
   \end{hint}
 
   \begin{solution} Since we deal with a system in discrete time $L_k$
@@ -308,7 +301,7 @@ that if one job sees a long queue, all see a long queue. In that case,
 Thus, when jobs arrive in batches, the definition of loss fraction
 requires some care; not all definitions need to measure the same.
   \end{solution}
-\end{question}
+\end{exercise}
 
 
 
