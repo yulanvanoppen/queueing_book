@@ -7,3 +7,6 @@ auto/
 *.gz
 *.toc
 booktest*.*
+ans.tex
+hint.tex
+chunks/*
