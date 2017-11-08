@@ -4,7 +4,6 @@
 \label{sec:mxm1-queue:-expected}
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -37,8 +36,8 @@ $M^X/M/1$.
 
 \begin{exercise}
   Relate $f(k)$, the distribution $F(k)$ of the batch size $B$ and the
-  survivor function~$G$. Which of the three alternatives is true:
-  $G(k) = 1-F(k)$, $G(k) = 1-F(k-1)$, $G(k) = 1-F(k+1)$?
+  survivor function~$G$. Which of the following is true:
+  $G(k) = 1-F(k)$, $G(k) = 1-F(k-1)$, or $G(k) = 1-F(k+1)$?
   \begin{hint}
 This exercise is just meant to become familiar with the notation.
   \end{hint}
@@ -75,9 +74,7 @@ As in  the limit $A(t)/t \to \lambda$ and $(A(t))^{-1}\sum_{k=1}^{A(t)} B_k \to 
 
 \begin{exercise}
 Conclude that   the \recall{load} must satisfy
-\begin{equation*}
-\rho = \frac{\lambda \E B} \mu < 1.
-\end{equation*}
+$\rho = \lambda \E B/\mu < 1$.
 \begin{solution}
 For stability, it is necessary that the service rate
 $\mu=1/\E S$ for items is larger than the rate at which items
@@ -107,9 +104,7 @@ in queue, then
 \end{equation*}
 \begin{exercise}
   Combine the above with  Little's law to show that
-\begin{equation*}
-  \E{W_{Q,b}} = \frac{\E{B_r}}{1-\rho}\E{S}.
-\end{equation*}
+  $\E{W_{Q,b}} = \E{B_r}/(1-\rho)\cdot\E{S}$.
 \begin{solution}
 \begin{equation*}
   \E{W_{Q,b}} 
@@ -133,12 +128,9 @@ Below we prove that
 
 
 \begin{exercise}\label{q:batch}
-To simplify the above, show that 
+To simplify this expression for $\E{B_r}$, show that 
 \begin{equation*}
-  \frac{\E{B^2}}{\E{B}} = (1+C_s^2)\E B, 
-\end{equation*}
-where 
-\begin{equation*}
+  \frac{\E{B^2}}{\E{B}} = (1+C_s^2)\E B, \quad\text{where }
 C_s^2 = \frac{\V B}{(\E B)^2},
 \end{equation*}
 is the square coefficient of variation of the batch sizes.  

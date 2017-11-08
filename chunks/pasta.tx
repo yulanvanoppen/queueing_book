@@ -2,7 +2,6 @@
 \label{sec:poisson-arrivals-see}
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -220,7 +219,6 @@ Think about the
     construction of the $M/M/1$ queue as a random walk, see
     Section~\ref{sec:queu-proc-as}.
   \end{hint}
-
  \begin{solution}
    The $M/M/1$-queue can be constructed as a reflection of the random
    walk $Z(t) = Z(0) + N_\lambda(t) - N_\mu(t)$. Clearly,
@@ -240,9 +238,7 @@ Think about the
 \begin{exercise}
   Use the PASTA property and the ideas of Section~\ref{sec:level-cross-balance}
  to derive  for the $M/M/1$ queue that
-  \begin{equation*}
-  (\lambda + \mu) \pi(n) = \lambda \pi(n-1) + \mu \pi(n+1)
-  \end{equation*}
+$(\lambda + \mu) \pi(n) = \lambda \pi(n-1) + \mu \pi(n+1)$
   \begin{hint}
     Consider some state $n$ and count all transitions that `go in and
     out of' this state. Specifically, $A(n,t) + D(n-1,t)$ counts all
@@ -359,7 +355,7 @@ node[pos=0.5, xshift=0.7cm]  {$X_{k+1}$};
 
 
 \begin{exercise}
-Show that~(\ref{eq:132}) is valid.
+Use the renewal reward theorem to show that~(\ref{eq:132}) is valid.
 \begin{hint}
 Check that the conditions of the renewal reward theorem are satisfied in the above prooff~\eqref{eq:1333}. Then define  
 \begin{align*}

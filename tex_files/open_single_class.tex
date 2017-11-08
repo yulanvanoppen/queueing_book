@@ -3,7 +3,6 @@
 
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -38,96 +37,8 @@ where we recognize the visit ratios.
 
 
 
-\begin{question}\label{ex:dep}
-  The aim of the question is the determine the distribution of the
-  interdeparture times of the $M/M/1$ queue. Once we have
-  characterized this distribution, we can characterize the
-  distribution of the arrival process of a queueing system
-  immediately downstream of the queueing system under
-  consideration. 
-
-We chop up the problem in small steps.
-  \begin{enumerate}
-  \item Is the output rate of the $M/M/1$ queue $\lambda$ or $\mu$?
-  \item Why is $\mu e^{-\mu t}$ not a reasonable density for the
-    inter-departure times?
-  \item Formulate a better guess for the inter-departure times.
-  \item Observe that when a customer arrives, the server can be either
-    idle $I$ or busy $B$.  What is $\P{I}$?
-  \item If customer $n$, say, finds the system empty, what will be the
-    expected duration of the inter-departure time between $D_{n-1}$ and
-    $D_n$?
-  \item What is the density of $D_{n} - D_{n-1}$ when job $n$ sees an
-    empty system?
-  \item What is $\P{B}$, i.e., the probability that a job arrives at a
-    busy station?
-  \item What is the density of the inter-departure time if the
-    server is busy?
-  \item What is the final result for the inter-departure time?
-  \item It can also be shown that the inter-departure times are independent. What is the implication of the last two statements? 
-
-  \end{enumerate}
-
-  \begin{hint}
-The final result is
-    $f_D(t) = f_{X+S}(t) \P{I} + f_S \P B = (1-\rho) f_{X+S}(t) +
-    \rho \mu e^{-\mu t}$.
-    Now use the above to simplify and see that
-    $f_D(t) = \lambda e^{-\lambda t}$.
-  \end{hint}
-
-    \begin{solution}
-      \begin{enumerate}
-      \item 
-       The output rate is $\lambda$ if $\lambda \leq \mu$.
-     \item        Because jobs do not leave at rate $\mu$. 
-     \item The simplest, but reasonable, inter-departure density would be $\lambda e^{-\lambda t}$. So this is what we will try to prove.
-     \item $\P I = p_0 =\pi_0$. Recall that $\pi_0$ is what
-    the jobs see upon arrival and $p(0)$ is the time-average. By PASTA
-    these are the same.  Recall also that $p_0 = 1-\rho$.
-  \item  When job $n$ finds an empty system, job $n-1$ left an empty
-    system behind. Thus, we first have to wait for an inter-arrival
-    time $X_n$. Then, since job $n$'s service starts right away, he
-    leaves when $D_n = D_{n-1}+X_n + S_n$.
-  \item       By the previous point, the density of $D_{n} - D_{n-1}$ is the
-      same as the density of $X_n + S_n$. Therefore, by conditioning,
-    \begin{equation*}
-      \begin{split}
-    f_{X+S}(t) 
-&= \P{X+S\in \d{t}} \\
-&= \int \P{S+x\in \d{t}}\P{X\in \d{x}} \\
-&=\int_0^t f_S(t-x) f_X(x) \d{x} \\
-     &= \int_0^t \mu e^{-\mu(t-x)} \lambda e^{-\lambda x} \d{x} \\
-     &= \lambda \mu e^{-\mu t} \int_0^t  e^{x(\mu-\lambda)} \d{x} \\
-& \frac{\lambda \mu}{\lambda - \mu} (e^{-\mu t} - e^{-\lambda t}).
-      \end{split}
-    \end{equation*}
-  \item        $\P B = \P{\text{busy}}=\rho$.
-  \item       \begin{equation*}
-        \begin{split}
-    f_D(t) 
-&= f_{X+S}(t) \P I + f_S \P B \\
-&= (1-\rho) f_{X+S}(t) +    \rho \mu e^{-\mu t} \\
-&= (1-\rho) \frac{\mu\lambda}{\lambda-\mu} \left(e^{-\mu t}-e^{-\lambda t}\right) +    \rho \mu e^{-\mu t} \\
-&= (1-\frac{\lambda}\mu) \frac{\mu\lambda}{\lambda-\mu}\left(e^{-\mu t}-e^{-\lambda t}\right)  +    \rho \mu e^{-\mu t} \\
-&= \frac{\mu-\lambda}\mu \frac{\mu\lambda}{\lambda-\mu}\left(e^{-\mu t}-e^{-\lambda t}\right)  +    \frac\lambda \mu \mu e^{-\mu t} \\
-&= \frac{\mu-\lambda}\mu \frac{\mu\lambda}{\lambda-\mu}\left(e^{-\mu t}-e^{-\lambda t}\right)  +    \lambda e^{-\mu t} \\
-&= - \lambda\left(e^{-\mu t}-e^{-\lambda t}\right)  +    \lambda e^{-\mu t} \\
-&=  \lambda e^{-\lambda t}.
-        \end{split}
-      \end{equation*}
-    \item       If the server is busy when a job arrives,  the density of the time to the next departure epoch must be exponential; note that we use the memoryless
-      property of the exponential distribution of the service times. Therefore, the density when the server is busy      is $\mu e^{-\mu t}$.
-    \item       Burke's law gives that the inter-departure times are independent.
-      The implication of all this is that the inter-departures times
-      form a set of i.i.d. exponentially distributed random variables.
-      Hence, the departure process is a Poisson($\lambda$) process.
-  \end{enumerate}
-    \end{solution}
-\end{question}
-
-
-\begin{question}[use=false]
+\begin{comment}
+\begin{exercise}[use=false]
   Use the ideas of Zijm.Eq.2.2 to set up a set of balance equations
   for a single-server queueing station with two queues such that queue
   1 is served with strict priority over queue 2, and service of a job
@@ -142,14 +53,14 @@ The final result is
   \begin{solution}
     TBD.
   \end{solution}
-\end{question}
+\end{exercise}
+  
+\end{comment}
 
-\begin{question}(Linear algebra refresher) Can you find an example to
+\begin{exercise}(Linear algebra refresher) Can you find an example to
   show for two matrices $A$ and $B$ that $AB\neq BA$, hence
   $x A \neq A x$.
-
   \begin{hint}
-    
     Let 
     \begin{equation*}
 A =
@@ -193,11 +104,10 @@ $, we get $Ax =
 Recall, horizontal vectors are not vertical vectors. The horizontal
 ones are to the left of a matrix, and the vertical ones to the right.
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}(Linear algebra refresher, 2) Suppose the matrix $A$
+\begin{exercise}(Linear algebra refresher, 2) Suppose the matrix $A$
   has an eigenvalue $0$. What is the geometric meaning of this fact? 
-  
   \begin{solution}
     Many students think that a matrix is just a bunch of numbers
     ordered in a grid. This is, in my opinion, the most unproductive
@@ -205,8 +115,8 @@ ones are to the left of a matrix, and the vertical ones to the right.
     matrix as an \emph{operator}. For instance, take $A$ to be a
     $3\times3$ matrix. Then it can be seen as \emph{mapping} from
     $\R^3$ to $\R^3$; it takes a vector $x\in\R^3$ and changes $x$
-    into a new vector $Ax\in \R^3$. Thus, $A$ typically changes the
-    size and direction of $x$. 
+    into a new vector $Ax\in \R^3$. Thus, a square matrix $A$ typically changes the
+ direction of a vector $x$. 
 
 With this idea, consider the simple example with
     \begin{equation*}
@@ -247,20 +157,20 @@ y\\
 \end{solution}
 
 
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.2.2.1
 \begin{solution}
 Because jobs cannot leave faster than they arrive.
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.2.2.2
 \begin{solution}
-  . Observe from Question~\ref{ex:dep} that the inter-departure times
+  Observe from Exercise~\ref{ex:dep} that the inter-departure times
   of the $M/M/1$ queue are also independent and identically
   exponentially distributed with rate $\lambda$. Since the arrival
   process at the second station is the departure process of the first
@@ -269,11 +179,11 @@ Zijm.Ex.2.2.2
   perspective of the second station it is as if there is not first
   station.
 \end{solution}
-\end{question}
+\end{exercise}
 
 
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.2.2.3 
 \begin{solution}
   The question is not well specified. We know from Burke's law that
@@ -285,17 +195,17 @@ Zijm.Ex.2.2.3
   are independent. Once you have information about the state of one of
   the queues, then certainly this is not in `steady-state'.
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.2.2.4
 \begin{solution}
   Simple algebra.  (I am not going to write it out here. If you are
   willing to provide me the answer in latex I'll include it.)
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
   Zijm.Ex.2.2.5. The problem is not entirely correctly formulated. It
   should be, if for at least one $i$, $\sum_{j=1}^M P_{i j} <1$ \ldots
 \begin{solution}
@@ -335,8 +245,6 @@ more jobs enter node $i$ from the network than that node $i$ sends
   consider $P^{M+1}$ in the hint.
 
 
-
-
   As a final remark for students with knowledge of Markov chains,
   observe that the routing matrix $P$ does not correspond to the
   transition matrix of a recurrent Markov chain. Since for at least
@@ -345,9 +253,9 @@ more jobs enter node $i$ from the network than that node $i$ sends
   irreducible, because for this to happen, the chain must stay in some
   absorbing set with probability 1.
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.2.2.6
 \begin{solution}
   Since $M$ is finite, and $k\leq M$, the set of numbers
@@ -430,9 +338,9 @@ unit circle. But then, by Gerschgorin's theorem, all eigenvalues of
 $P$ also lie strictly in the unit circle, hence all eigenvalues have
 modulus smaller than 1.
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}\label{ex:23}
+\begin{exercise}\label{ex:23}
   Show that Zijm.Eq.2.13 and 2.14 can be written as
   \begin{equation*}
     f_i(n_i) = \frac{1}{G(i)}\frac{1}{\Pi_{k=1}^{n_i} \min\{k, c_i\}}\left( \frac{\lambda_i}{\mu_i}\right)^{n_i}.
@@ -444,10 +352,10 @@ modulus smaller than 1.
     then $\Pi_{k=1}^{n_i} \min\{k, c_i\} = c_i! c_i^{n_i-c_i}$, and
     $(c_i\rho_i)^{n_i} = (\lambda_i/\mu_i)^{n_i} c_i^{n_i}.$.
   \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.2.2.7
 \begin{solution}
   \begin{equation*}
@@ -495,8 +403,8 @@ If $\alpha\uparrow 1$, the arrival rate at node $1$ explodes. If
 $\beta_1=0$ no jobs are sent from node 2 to node 1.
 
 \end{solution}
-\end{question}
-\begin{question}
+\end{exercise}
+\begin{exercise}
 Zijm.Ex.2.2.8
 \begin{solution}
   Yes, the network remains a Jackson network. By Burke's law the
@@ -510,30 +418,33 @@ Zijm.Ex.2.2.8
   Observe that the exponentiality of the service times and external
   inter-arrival times and Burke's law are essential for the argument.
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}[use=false]
+\begin{comment}
+  
+\begin{exercise}[use=false]
   Include an question that shows that it is necessary to check the
   guess for the product form solution everywhere on the state space,
   that is, in the interior, but also on the boundaries.
   \begin{solution}
     TBD
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}[use=false]
+\begin{exercise}[use=false]
   Apply the formula's of Zijm.Section 2.4 to a tandem queueing network.
   \begin{solution}
     TBD.
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}[use=false]
+\begin{exercise}[use=false]
   Include a case for Section 2.4.
   \begin{solution}
     TBD.
   \end{solution}
-\end{question}
+\end{exercise}
+\end{comment}
 
 
 

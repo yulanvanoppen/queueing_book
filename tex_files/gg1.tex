@@ -5,7 +5,6 @@
 
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -73,7 +72,7 @@ seen from the $G/G/1$ waiting time formula. Roughly:
 \item $\E{W_Q} \sim \E S$. Thus, working in smaller job sizes reduces
   the waiting time also. The average queue length does not decrease by
   working with smaller batches, but jobs are more `uniformly spread'
-  over the queue. This effect lies behind the idea to do
+  over the queue. This effect lies behind the idea of
   `lot-splitting', i.e., rather than process large jobs, split jobs
   into multiple small jobs (assuming that setup times are negligible),
   so that the waiting time per job can be reduced.
@@ -91,10 +90,207 @@ For the $G/G/c$ queue we also only have an approximation:
   \E{W_Q} = \frac{C_a^2+C_e^2}2 \frac{\rho^{\sqrt{2(c+1)}-1}}{c(1-\rho)} \E S.
 \end{equation}
 
+
 Even though the above results are only approximate, they prove to be
 exceedingly useful when designing queueing systems and analyzing the
 effect of certain changes, in particular  changes in capacity,
 variability and service times.
+
+\begin{exercise}($G/G/1$)
+  Show that the approximation~\eqref{eq:7} reduces to the result known for the $M/M/1$ and $M/G/1$ queues.
+  \begin{hint}
+ Take $c=1$.
+  \end{hint}
+  \begin{solution}
+    If $c=1$, as is the case for the $M/M/1$ queue, $\sqrt{2(c+1)} - 1=2-1=1$, so that~\eqref{eq:7} reduces to $\E{W_Q} = \rho/(1-\rho) \E S$. Recall that $C_a^2=C_s^2=1$ for the $M/M/1$. 
+  \end{solution}
+\end{exercise}
+
+
+
+
+
+\begin{exercise}
+  Is Eq.~\eqref{eq:24} also valid for the $G/G/1$ queue? Why (not)?
+  \begin{solution}
+    Not necessarily. Since jobs do not arrive in general as a Poisson
+    process, we cannot use the PASTA property to conclude that the
+    time average queue length $\E{L_Q}$ is the same as the average
+    queue length as observed by customers.
+
+(Can you provide an example that shows this difference?
+    Hint, we did this earlier.)
+  \end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}
+  Consider a queue $n$ servers, with generally distributed
+  interarrival times, generally distributed service times, and the
+  system can contain at most $K$ customers, i.e, the $G/G/n/K$ queue.
+  Let $\lambda$ be the arrival rate, $\mu$ the service rate, $\beta$
+  the long-run fraction of customers lost, and $\rho$  the average
+  number of busy/occupied servers
+  Show that 
+  \begin{equation*}
+    \beta = 1 - \rho\frac{\mu}{\lambda}.
+  \end{equation*}
+\begin{solution}
+  This follows from the observation that $\lambda(1-\beta)$ is the net
+  arrival rate, as jobs are lost at a rate $\lambda\beta$ . Hence, the
+  load must be $\lambda(1-\beta)/\mu$. As the load must be equal to
+  $\rho$, it follows that $\rho = \lambda(1-\beta)/\mu$, from which the
+  other result immediately follows.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+ Consider a single-server queue at which every minute a
+    customer arrives, precisely at the first second. Each customer
+    requires precisely $50$ seconds of service. 
+What are $\rho$,
+    $\E L$, $C_a^2$, and $C_S^2$?
+  \begin{solution}
+ $\rho = \lambda \E S = 1/60 \cdot 50 = 5/6$. Since job
+      arrivals do not overlap any job service, the number of jobs in
+      the system is 1 for $50$ seconds, then the server is idle for 10
+      seconds, and so on. Thus $\E L = 1\cdot5/6 = 5/6$. There is no
+      variance in the interarrival times, and also not in the service
+      times, thus $C_a^2 = C_s^2 = 0$. Also $\E{W_Q}=0$ since
+      $\E{L_Q}=0$. Interestingly, we get the same from Kingman's formula.
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}
+ Consider the same single-server system as in the previous exercise, but now the customer
+    service time is stochastic: with probability $1/2$ a customer
+    requires $1$ minute and $20$ seconds of service, and with
+    probability $1/2$ the customer requires only $20$ seconds of
+    service.  What are $\rho$, $C_a^2$, and $C_S^2$?
+  \begin{solution}
+ Again $\E S$ is 50 seconds, so that $\rho = 5/6$. Also
+      $C_a^2=0$. For the $C_S^2$ we have to do some work. 
+      \begin{equation*}
+        \begin{split}
+          \E S &=  \frac{20}2 + \frac{80}2 = 50 \\
+          \E{S^2} &=  \frac{400}2 + \frac{6400} 2 = 3400 \\
+          \V S &=  \E S^2 - (\E S)^2 = 3400 - 2500 = 900 \\
+          C_S^2 &=  \frac{\V S}{(\E S)^2} = \frac{900}{2500}=\frac{9}{25}.
+        \end{split}
+      \end{equation*}
+  \end{solution}
+\end{exercise}
+
+It is crucial to remember from the above exercises that knowledge of the   utilization is not sufficient to characterize the average queue   length.
+
+\begin{exercise}
+  For the $G/G/1$ queue, prove that the fraction of jobs that see $n$
+  jobs in the system is the same as the the fraction of departures that
+  leave $n$ jobs behind. What condition have you used to prove this?
+%\item Motivate that for  the $G/M/1$, $\delta(n) = p(n)$, i.e.,  departures see time averages. 
+  \begin{solution}
+    All follows straightaway from the definitions in the main text. In
+    the $G/G/1$ queue jobs arrive and depart in single units. Hence,
+    $|A(n,t)-D(n,t)|\leq 1$, c.f., Eq.~(\ref{eq:19}). Then, 
+    \begin{equation*}
+      \frac{A(t)}{t}\frac{A(n,t)}{A(t)} \approx 
+      \frac{D(t)}{t}\frac{D(n,t)}{D(t)}. 
+    \end{equation*}
+    The left hand side goes to $\lambda \pi(n)$ as $t\to\infty$, and
+    the right hand side to $\gamma \delta(n)$. Use the fact that we
+    always assume, implicitly, that the system is stable, so that
+    $\lambda = \gamma$. As a consequence $\delta(n) = \pi(n)$.
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}
+  Suppose for the $G/G/1$ that a job sees $n$ jobs in the system upon
+  arrival. Can you use the central limit law to estimate the
+  distribution of waiting time in queue for this job?  
+  \begin{hint}
+ Let $S_n = \sum_{k=1}^n X_k$ and $\sigma_n^2 = n\V X$. Then,
+    under conditions you can find on the internet,
+    \begin{equation*}
+    \frac{S_n - n \E X}{\sigma_n} \to \mathcal{N}(0,1), \quad\text{as } n\to \infty,
+    \end{equation*}
+    where $\mathcal{N}(0,1)$ is a normally distributed random variable
+    with $\mu=0$ and $\sigma^2=1$. But then 
+    \begin{align*}
+    \frac{S_n - n \E X}{\sigma_n} &\approx  \mathcal{N}(0,1)  \iff\\
+    S_n - n \E X &\approx  \sigma_n \mathcal{N}(0,1)  \iff\\
+    S_n - n \E X &\approx  \mathcal{N}(0,\sigma_n^2)  \iff\\
+    S_n  &\approx   n \E X + \mathcal{N}(0,\sigma_n^2)  \iff\\
+    S_n  &\approx    \mathcal{N}(n \E X,\sigma_n^2),
+    \end{align*}
+    hence, $S_n$ is approximately distributed as
+    $\mathcal{N}(n\E X, \sigma_n^2)$.
+  \end{hint}
+\begin{solution} If the number in the system is $n$, then the total
+  service time required to process these $n$ jobs is the sum of the
+  service times, i.e.,$W_{Q,k} = \sum_{k=1}^n S_k$ where $k$ counts over the
+  $n$ jobs in the system. Then, with the hint,
+  \begin{equation*}
+    W_{Q, k} \sim  \mathcal{N}(n\E S, \sigma_n^2)
+  \end{equation*}
+where $\sigma_n^2 = n \V S$. 
+Thus, the waiting time in queue is approximately normally distributed with mean $n \E S$ and variance $n \V S$. 
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+  (Hall 5.19) When a bus reaches the end of its line, it undergoes a
+  series of inspections. The entire inspection takes 5 minutes on
+  average, with a standard deviation of 2 minutes. Buses arrive with
+  interarrival times uniformly distributed on $[3,9]$ minutes.
+
+As a first case,  assuming a single server, estimate $\E{W_Q}$ with the $G/G/1$ waiting time formula. As a second case, compare this result to an $M/G/1$ system with arrival rate 10 per hour and the same service time distribution. Explain why your previous answer is smaller. 
+  \begin{hint}
+ It took me some time to understand the details of part a. I
+    then decided to read part b first, which clarified the intent of
+    part a.
+  \end{hint}
+  \begin{solution}
+\begin{enumerate}
+\item 
+<<term=True>>=
+a = 3.
+b = 9. 
+EA = (b+a)/2.
+EA
+labda = 1./EA # per minute
+labda
+VA = (b-a)*(b-a)/12.
+CA2 = VA/(EA*EA)
+CA2
+
+ES = 5.
+sigma = 2
+VS = sigma*sigma
+CS2 = VS/(ES*ES)
+CS2
+
+rho = labda*ES
+rho
+
+Wq = (CA2+CS2)/2. * rho/(1.-rho) * ES
+Wq
+@
+
+\item 
+<<term=True>>=
+Wq = (1.+CS2)/2.*rho/(1.-rho)*ES
+Wq
+@
+
+The arrival process with uniform interarrival times is much more
+regular than a Poisson process. In the first case, bus arrivals are
+spaced in time at least with 3 minutes.
+  \end{enumerate}
+    \end{solution}
+\end{exercise}
+
+
 
 Clearly, Kingman's equation requires an estimate of the SCV $C_a^2$ of
 the interarrival times and the SCV $C_s^2$ of the service times. Now
@@ -213,206 +409,6 @@ Finally, for $t$ large (or, by the same token $k$ large),
 \end{equation*}
 where the last equation follows from the above definition of $C_a^2$.  The proof is complete.
 \end{proof}
-
-
-
-\begin{question}
-  Show that the approximation~\eqref{eq:7} for the $G/G/1$ queue
-  reduces to the result known for the $M/M/1$ and $M/G/1$ queues.
-  \begin{hint}
- Take $c=1$.
-  \end{hint}
-  \begin{solution}
-    If $c=1$, as is the case for the $M/M/1$ queue, $\sqrt{2(c+1)} - 1=2-1=1$, so that~\eqref{eq:7} reduces to $\E{W_Q} = \rho/(1-\rho) \E S$. Recall that $C_a^2=C_s^2=1$ for the $M/M/1$. 
-  \end{solution}
-\end{question}
-
-
-\begin{question}
-  Is Eq.~\eqref{eq:24} also valid for the $G/G/1$ queue? Why (not)?
-  \begin{solution}
-    Not necessarily. Since jobs do not arrive in general as a Poisson
-    process, we cannot use the PASTA property to conclude that the
-    time average queue length $\E{L_Q}$ is the same as the average
-    queue length as observed by customers.
-
-(Can you provide an example that shows this difference?
-    Hint, we did this earlier.)
-  \end{solution}
-\end{question}
-
-
-
-\begin{question}
-  Consider a queue $n$ servers, with generally distributed
-  interarrival times, generally distributed service times, and the
-  system can contain at most $K$ customers, i.e, the $G/G/n/K$ queue.
-  Let $\lambda$ be the arrival rate, $\mu$ the service rate, $\beta$
-  the long-run fraction of customers lost, and $\rho$  the average
-  number of busy/occupied servers
-  Show that 
-  \begin{equation*}
-    \beta = 1 - \rho\frac{\mu}{\lambda}.
-  \end{equation*}
-\begin{solution}
-  This follows from the observation that $\lambda(1-\beta)$ is the net
-  arrival rate, as jobs are lost at a rate $\lambda\beta$ . Hence, the
-  load must be $\lambda(1-\beta)/\mu$. As the load must be equal to
-  $\rho$, it follows that $\rho = \lambda(1-\beta)/\mu$, from which the
-  other result immediately follows.
-\end{solution}
-\end{question}
-
-\begin{question}
-  \begin{enumerate}
-  \item Consider a single-server queue at which every minute a
-    customer arrives, precisely at the first second. Each customer
-    requires precisely $50$ seconds of service. 
-What are $\rho$,
-    $\E L$, $C_a^2$, and $C_S^2$?
-  \item Consider the same single-server system, but now the customer
-    service time is stochastic: with probability $1/2$ a customer
-    requires $1$ minute and $20$ seconds of service, and with
-    probability $1/2$ the customer requires only $20$ seconds of
-    service.  What are $\rho$, $C_a^2$, and $C_S^2$?
-  \end{enumerate}
-  \begin{solution}
-    \begin{enumerate}
-    \item $\rho = \lambda \E S = 1/60 \cdot 50 = 5/6$. Since job
-      arrivals do not overlap any job service, the number of jobs in
-      the system is 1 for $50$ seconds, then the server is idle for 10
-      seconds, and so on. Thus $\E L = 1\cdot5/6 = 5/6$. There is no
-      variance in the interarrival times, and also not in the service
-      times, thus $C_a^2 = C_s^2 = 0$. Also $\E{W_Q}=0$ since
-      $\E{L_Q}=0$. Interestingly, we get the same from Kingman's formula.
-    \item Again $\E S$ is 50 seconds, so that $\rho = 5/6$. Also
-      $C_a^2=0$. For the $C_S^2$ we have to do some work. 
-      \begin{equation*}
-        \begin{split}
-          \E S &=  \frac{20}2 + \frac{80}2 = 50 \\
-          \E{S^2} &=  \frac{400}2 + \frac{6400} 2 = 3400 \\
-          \V S &=  \E S^2 - (\E S)^2 = 3400 - 2500 = 900 \\
-          C_S^2 &=  \frac{\V S}{(\E S)^2} = \frac{900}{2500}=\frac{9}{25}.
-        \end{split}
-      \end{equation*}
-    \end{enumerate}
-  It is crucial to remember from this exercise that knowledge of the
-  utilization is not sufficient to characterize the average queue
-  length.
-  \end{solution}
-\end{question}
-
-\begin{question}
-  For the $G/G/1$ queue, prove that the fraction of jobs that see $n$
-  jobs in the system is the same as the the fraction of departures that
-  leave $n$ jobs behind. What condition have you used to prove this?
-%\item Motivate that for  the $G/M/1$, $\delta(n) = p(n)$, i.e.,  departures see time averages. 
-  \begin{solution}
-    All follows straightaway from the definitions in the main text. In
-    the $G/G/1$ queue jobs arrive and depart in single units. Hence,
-    $|A(n,t)-D(n,t)|\leq 1$, c.f., Eq.~(\ref{eq:19}). Then, 
-    \begin{equation*}
-      \frac{A(t)}{t}\frac{A(n,t)}{A(t)} \approx 
-      \frac{D(t)}{t}\frac{D(n,t)}{D(t)}. 
-    \end{equation*}
-    The left hand side goes to $\lambda \pi(n)$ as $t\to\infty$, and
-    the right hand side to $\gamma \delta(n)$. Use the fact that we
-    always assume, implicitly, that the system is stable, so that
-    $\lambda = \gamma$. As a consequence $\delta(n) = \pi(n)$.
-  \end{solution}
-\end{question}
-
-\begin{question}
-  Suppose for the $G/G/1$ that a job sees $n$ jobs in the system upon
-  arrival. Can you use the central limit law to estimate the
-  distribution of waiting time in queue for this job?  
-
-  \begin{hint}
-    
-  \hint{ Let $S_n = \sum_{k=1}^n X_k$ and $\sigma_n^2 = n\V X$. Then,
-    under conditions you can find on the internet,
-    \begin{equation*}
-    \frac{S_n - n \E X}{\sigma_n} \to \mathcal{N}(0,1), \quad\text{as } n\to \infty,
-    \end{equation*}
-    where $\mathcal{N}(0,1)$ is a normally distributed random variable
-    with $\mu=0$ and $\sigma^2=1$. But then 
-    \begin{align*}
-    \frac{S_n - n \E X}{\sigma_n} &\approx  \mathcal{N}(0,1)  \iff\\
-    S_n - n \E X &\approx  \sigma_n \mathcal{N}(0,1)  \iff\\
-    S_n - n \E X &\approx  \mathcal{N}(0,\sigma_n^2)  \iff\\
-    S_n  &\approx   n \E X + \mathcal{N}(0,\sigma_n^2)  \iff\\
-    S_n  &\approx    \mathcal{N}(n \E X,\sigma_n^2),
-    \end{align*}
-    hence, $S_n$ is approximately distributed as
-    $\mathcal{N}(n\E X, \sigma_n^2)$.
-}
-  \end{hint}
-
-\begin{solution} If the number in the system is $n$, then the total
-  service time required to process these $n$ jobs is the sum of the
-  service times, i.e.,$W_{Q,k} = \sum_{k=1}^n S_k$ where $k$ counts over the
-  $n$ jobs in the system. Then, with the hint,
-  \begin{equation*}
-    W_{Q, k} \sim  \mathcal{N}(n\E S, \sigma_n^2)
-  \end{equation*}
-where $\sigma_n^2 = n \V S$. 
-Thus, the waiting time in queue is approximately normally distributed with mean $n \E S$ and variance $n \V S$. 
-\end{solution}
-\end{question}
-
-\begin{question}
-  (Hall 5.19) When a bus reaches the end of its line, it undergoes a
-  series of inspections. The entire inspection takes 5 minutes on
-  average, with a standard deviation of 2 minutes. Buses arrive with
-  interarrival times uniformly distributed on $[3,9]$ minutes.
-  \begin{enumerate}
-  \item Assuming a single server, estimate $\E{W_Q}$ with the $G/G/1$ waiting time formula.
-  \item Compare this result to an $M/G/1$ system with arrival rate 10 per hour and the same service time distribution. Explain why your previous answer is smaller. 
-  \end{enumerate}
-  \begin{hint}
- It took me some time to understand the details of part a. I
-    then decided to read part b first, which clarified the intent of
-    part a.
-  \end{hint}
-  \begin{solution}
-\begin{enumerate}
-\item 
-<<term=True>>=
-a = 3.
-b = 9. 
-EA = (b+a)/2.
-EA
-labda = 1./EA # per minute
-labda
-VA = (b-a)*(b-a)/12.
-CA2 = VA/(EA*EA)
-CA2
-
-ES = 5.
-sigma = 2
-VS = sigma*sigma
-CS2 = VS/(ES*ES)
-CS2
-
-rho = labda*ES
-rho
-
-Wq = (CA2+CS2)/2. * rho/(1.-rho) * ES
-Wq
-@
-
-\item 
-<<term=True>>=
-Wq = (1.+CS2)/2.*rho/(1.-rho)*ES
-Wq
-@
-
-The arrival process with uniform interarrival times is much more
-regular than a Poisson process. In the first case, bus arrivals are
-spaced in time at least with 3 minutes.
-  \end{enumerate}
-    \end{solution}
-\end{question}
 
 
 

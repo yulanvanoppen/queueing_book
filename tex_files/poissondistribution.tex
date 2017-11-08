@@ -95,14 +95,12 @@ $\lambda$, and write $N(t)\sim P(\lambda t)$.
   Show how the binomial distribution~\eqref{eq:bin} converges to the
   Poisson distribution~\eqref{eq:pois} if $n\to\infty$, $p\to0$ such
   that $np=\lambda$. 
-
   \begin{hint}
 First find $p$, $n$, $\lambda$ and $t$ are such that the rate
     at which event occur in both processes are the same. Then consider
     the binomial distribution and use the standard limit
     $(1-x/n)^n \to e^{-x}$ as $n\to \infty$. 
   \end{hint}
-
   \begin{solution} Now we like to relate $N_n(t)$ and $N(t)$. It is
     clear that we at least want the expectations to be the same, that
     is, $np = \lambda t$. This implies that
@@ -139,13 +137,7 @@ is easy, so that, as $n\to\infty$,  the above converges to
 \end{exercise}
 
 \begin{exercise}
-  Show that if $N(t)$ is Poisson distributed with parameter $\lambda$, $\E{N(t)} = \lambda t$ and $\V{N(t)} = \lambda t$. 
-
-
-  \begin{hint}
-  You might use generating functions here.
-  \end{hint}
-
+  Show that if $N(t)\sim P(\lambda)$, $\E{N(t)} = \lambda t$ and $\V{N(t)} = \lambda t$. 
   \begin{solution} 
     When a random variable $N$ is Poisson distributed with parameter
     $\lambda$,
@@ -183,10 +175,7 @@ distributed with parameter $\lambda t$.
 
 \begin{exercise}
 Show that the moment generating function of a Poisson distributed random variable $N$ is
-\begin{equation*}
-\phi(z)=  \E{z^N}  = e^{(z-1)\lambda},
-\end{equation*}
-and use this to compute $\V N$ and $\E N$. 
+$\phi(z)=  \E{z^N}  = e^{(z-1)\lambda}$ and use this to compute $\V N$ and $\E N$. 
 \begin{hint}
   How does   $\E N$ relate to the derivative of $\phi(z)$? 
 \end{hint}
@@ -216,7 +205,6 @@ $\phi''(z)=\E{N(N-1)z^{N-2}}$, hence $\phi''(1)=\E{N(N-1)}$. With this,
 
 \begin{exercise}
 Show that   the SCV of $N(t)$ is equal to $1/\lambda t$. 
-
   \begin{solution}
     \begin{equation*}
 SCV = \frac{\V{N(t)}}{(\E{N(t)})^2} = \frac{\lambda t}{(\lambda t)^2} = \frac1{(\lambda t)^2}.
@@ -230,7 +218,6 @@ exponentially distributed random variable is 1; the SCV of the related
 Poisson process $N_\lambda(t)$ is \emph{not} identically~1 for all
 $t$.
   \end{solution}
-
 \end{exercise}
 
 
@@ -304,7 +291,6 @@ We are done.
   \end{enumerate}
  where $o(h)$ is a function
     $f(h)$ such $f(h)/h \to 0$ as $h\to 0$.
-
     \begin{hint}
     Think about the meaning of the formula
       $\P{N(h) = n \given N(0) = n}$. It is a conditional probability
@@ -318,9 +304,7 @@ We are done.
       $\sum_{i=2}^\infty x^i/i! = \sum_{i=0}^\infty x^i/i! - x -1 = e^x -x 
       - 1$.
     \end{hint}
-
 \begin{solution}
-
 \begin{enumerate}
   \item 
   $\P{N(h) = n | N(0) = n} = \P{N(h) = 0} = e^{-\lambda h} (\lambda
@@ -362,20 +346,14 @@ We can also use the results of the previous parts to see that
 
 \begin{exercise}
 Show that  for a Poisson process $N$, 
-\begin{equation*}
-  \P{N(0,s] =1\given N(0,t]=1} = \frac st.
-\end{equation*}
-Thus, if you know that $N(0,t]=1$, the arrival is distributed
+$ \P{N(0,s] =1\given N(0,t]=1} = s/t$. Thus, if you know that $N(0,t]=1$, the arrival is distributed
 uniformly on the interval $[0,t]$.
-
-
 \begin{hint}
 Use Bayes' law for conditional probability. Observe that 
   \begin{equation*}
 \{N(0,s]+N(s,t]=1\}\cap\{N(0,s]=1\} = \{1+N(s,t]=1\}\cap\{N(0,s]=1\}=\{N(s,t]=0\}\cap\{N(0,s]=1\}.
   \end{equation*}
 \end{hint}
-
 \begin{solution}
 \begin{equation*}
   \begin{split}
@@ -433,7 +411,6 @@ Use a conditioning argument or use probability generating
     $\P{A B_i} = \P{A \given B_i} \P{B_i}$.  Now choose practical sets
     $B_i$.  
   \end{hint}
-
     \begin{solution}
 First we show how to  use conditioning. 
   \begin{equation*}
@@ -502,7 +479,6 @@ Suppose
       given one of the two processes `fired', what is the probability
       that $N_a$ was the one that `fired'.
     \end{hint}
-
     \begin{solution}
   With the above:
   \begin{equation*}
@@ -589,7 +565,6 @@ The concept of thinning is particularly useful to analyze queueing
 \begin{exercise}
 Show that the Poisson process obtained by thinning the original
   process is $\sim P(\lambda t p)$ for any~$t$.
-
   \begin{hint}
  Condition on the total number of arrivals $N(t)=m$ up to time
       $t$. Realize that the probability that a job is of type 1 is
@@ -612,7 +587,6 @@ You might also consider the random variable
   generating function of $Y$ is equal to the moment generating
   function of a Poisson random variable with parameter $\lambda p$.
   \end{hint}
-
     \begin{solution}
 Suppose that  $N_1$ is the  thinned stream, and $N$ the total stream. Then
 \begin{equation*}
@@ -658,7 +632,6 @@ Thus, $Y$ has the same moment generating function as a Poisson
 distributed random variable with parameter $\lambda p$. Since
 moment-generating functions specify the distribution uniquely,
 $Y\sim P(\lambda p)$.
-
 \end{solution}
 \end{exercise}    
 

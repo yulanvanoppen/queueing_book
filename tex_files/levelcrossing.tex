@@ -3,7 +3,6 @@
 
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -134,14 +133,12 @@ What is the difference between $A(n,t)$ and $A(t)$?
   $0, 2,4, \ldots$ customers arrive, each customer requires $1$ unit
   of service, and there is one server. Find an expression for
   $Y(n,t)$.What acronym would describe this queueing situation?
-
   \begin{hint}
 For the acronym, observe that the service times and
     interarrival are \emph{D}eterministic and there is one server. For
     the computation of $Y(n,t)$, make make a plot of $L(s)$ as a
     function of time for $n=1$.
   \end{hint}
-
     \begin{solution}
       First, it is the $D/D/1$ queue, since there is one server and
       the interarrival times and service times are constant, i.e.,
@@ -670,11 +667,8 @@ simulation, as they relate the theoretical concepts to actual measurements.
   i.e., the $M/M^2/1/3$ queue.  Single jobs arrive at rate $\lambda$
   and the interarrival times are exponentially distributed. The batch
   service times are also exponentially distributed with mean $1/\mu$.
-  At most 3 jobs fit in the system. Make a drawing
-
-  Make a graph of the state-space and show, with arrows, the
+  At most 3 jobs fit in the system.   Make a graph of the state-space and show, with arrows, the
   transitions that can occur.
-
   \begin{solution}
 \begin{tikzpicture}[scale=1,->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
                     semithick]
@@ -693,7 +687,6 @@ simulation, as they relate the theoretical concepts to actual measurements.
 \draw[-, dotted, gray] (4,-2.)--(4,2.0) node[above, black] {level $1$};
 
 \end{tikzpicture}
-    
   \end{solution}
 \end{exercise}
 

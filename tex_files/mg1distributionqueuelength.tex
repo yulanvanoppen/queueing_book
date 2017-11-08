@@ -5,263 +5,39 @@
 
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-In Section~\ref{sec:mg1} we derived the Pollackzek-Khintchine
-Eq.~\eqref{eq:710} by which we can compute the average waiting time in
-queue for the $M/G/1$ queue. Then, with Little's law, we therefore
-also have the average queue length. However, if we need the loss
-probability $\P{L>n}$, we need expressions for the stationary
-distribution of the number of jobs in the system $p(n)=\P{L=n}$.  Here
-we present a set of recursions by which we can compute $p(n)$ for
-a given arrival rate $\lambda$ and service distribution~$F$ of the
-service times. 
 
-To derive the stationary distribution $p(n)$ we work in steps, and use
-similar level-crossing arguments as in
-Section~\ref{sec:batch-arrivals}.  However, we cannot simply copy the
-derivation of the $M^X/M/1$ queue to the $M/G/1$ queue. To see this,
-note that in the $M^X/M/1$ queue, the service times are exponential,
-hence memoryless. For this reason, the service times `restart from
-anew' at any moment in time, in particular at arrival moments. For the
-$M/G/1$ queue, service times are, in general, not exponential, hence
-not memoryless, hence do not restart at arrival times. For this reason
-we need to focus on moments in time in which the system `restarts'. As
-we will see, the argumentation is quite subtle, as it uses an
-interplay of the PASTA property and the relation of Eq.~\eqref{eq:39}
-between $\pi(n)$, $p(n)$ and $\delta(n)$. The important idea is to
-focus on the \emph{departure} moments, as these moments can be
-considered as restarts of the service times, and on the number of
-arrivals $Y_k$ during the service time of the $k$th job.  Assume that
-$f(j) = \P{Y_k = j}$ is given and write $G(j) = \P{Y_k > j}$.
+In Section~\ref{sec:batch-arrivals} we used level-crossing arguments 
+to find a recursive method to compute  the stationary distribution $p(n)$ of the number of items in an $M^X/M/1$ queue. Here we apply similar arguments to find $p(n)$ for the $M/G/1$ queue.
+However, we cannot simply copy the derivation of the $M^X/M/1$ queue to the $M/G/1$ queue, because in the $M^X/M/1$ queue the item service times are exponential,
+hence memoryless, while in the $M/G/1$ this is not the case. When job service times are 
+not memoryless, hence do not restart at arrival times, we cannot choose any moment we like to apply level-crossing. Thus, for the $M/G/1$ queue
+we need to focus on moments in time in which the system `restarts', which as we will see are job departure epochs.  The argumentation is quite subtle, as it uses an
+interplay of the PASTA property and relation~\eqref{eq:39}
+between $\pi(n)$, $p(n)$ and $\delta(n)$.  
 
-First we concentrate on a downcrossing of level $n$, see
-Figure~\ref{fig:mg1_2}; recall that level $n$ lies between states $n$
-and $n+1$.  Suppose now that job `$k-1$' leaves $n+1$ jobs behind
-after its service completion. Precisely when job $k$ leaves $n$ jobs
-behind a downcrossing occurs, i.e., when
-$\1{L(D_{k-1}) = n+1}\1{L(D_k)=n} = 1$. Let us write this in another
-way. Observe that if $L(D_{k-1})=n+1$ and no other jobs arrive during
-the service time $S_k$ of job $k$, i.e., when $Y_k=0$, it must also be
-that job $k$ leaves $n$ jobs behind. If, however, $Y_k>0$, then
-$L(D_k)\geq n+1$.  Thus, we see that
-\begin{equation*}
-  \1{L(D_{k-1}) = n+1}\1{L(D_k)=n} =  \1{L(D_{k-1}) = n+1}\1{Y_k=0}.
-\end{equation*}
-Consequently, the number of downcrossings up to time $t$ is
-\begin{equation*}
-  \begin{split}
-  D(n+1, 0, t) 
-%&= \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k})=n} \\
-&= \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k-1})=n+1}\1{Y_k=0}.
-  \end{split}
-\end{equation*}
-By using the definitions and limits developed in
-Sections~\ref{sec:rate-stability} and~\ref{sec:poisson-arrivals-see},
-\begin{equation*}
-  \begin{split}
-  \lim_{t\to\infty} \frac{  D(n+1, 0, t)}t 
-&=   \lim_{t\to\infty}  \frac{D(t)}t \frac{D(n+1, t)}{D(t)}\frac{ D(n+1, 0, t)}{D(n+1,t)} \\
-&=   \gamma \delta(n+1) \lim_{t\to\infty} \frac{ D(n+1, 0, t)}{D(n+1,t)} \\
-&=   \gamma \delta(n+1) \P{Y=0}\\
-& = \gamma \delta(n+1) f(0),
-  \end{split}
-\end{equation*}
-where the last limit follows from the independence of $Y_k$ and
-$L(D_{k-1})$, compare the derivation of~\eqref{eq:1332}.
-
-\begin{figure}[tb]
-  \centering
-                  
-\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
-                    semithick]
-\node[state] (0) {$\delta(0)$}; 
-\node[state] (1) [right of=0] {$\delta(1)$}; 
-\node[state] (2) [right of=1] {$\delta(2)$}; 
-\node[state] (3) [right of=2] {$\delta(3)$}; 
-\node[state] (4) [right of=3] {$\delta(4)$}; 
-%\node[state] (5) [right of=4] {$\cdots$}; 
-\node (5) [above of=4] {};
-
-\path 
-(0) edge [bend left] node[above, very near start, fill=white] {$G(3)$} (5)
-(0) edge [loop below] node[below, midway, fill=white] {$f(0)$} (0)
-(1) edge [bend left] node[above, very near start, fill=white] {$G(3)$} (5)
-(1) edge [loop below] node[below, midway, fill=white] {$f(1)$} (1)
-(1) edge [bend left] node[below, midway, fill=white] {$f(0)$} (0)
-(2) edge [bend left] node[above, very near start, fill=white] {$G(2)$} (5)
-(2) edge [bend left] node[below, midway, fill=white] {$f(0)$} (1)
-(2) edge [loop below] node[below, midway, fill=white] {$f(1)$} (2)
-(3) edge [bend left] node[above, very near start, fill=white] {$G(1)$} (5)
-(3) edge [loop below] node[below, midway, fill=white] {$f(1)$} (3)
-(3) edge [bend left] node[below, midway, fill=white] {$f(0)$} (2)
-(4) edge [bend left] node[below, near start] {$f(0)$} (3);
-
-% \node[circ, right=of n-2] (n-1) {$n-1$}
-% edge[loop below, thick]  node[midway, fill=white] {$\lambda f(0)$} (n-1); 
-
-\draw[-, dotted, gray] (9.7,-1)--(9.7, 4.0) node[below, black] {level $3$};
+An important role below is played by  the number of  arrivals $Y_k$ during the service time of the $k$th job.  Since the service times of the jobs for an i.i.d. sequence of random variables, the sequence $\{Y_k\}$ is also i.i.d. Let $Y$ be the common random variable with probability mass
+ $f(j) = \P{Y = j}$ ; write $G(j) = \P{Y_k > j}$ for the survivor function.
 
 
-\end{tikzpicture}
-\caption{Level $3$ is crossed from below with rate
-  $\gamma\delta(0)G(3) + \gamma\delta(1)G(3) + \cdots \gamma \delta(3) G(1)$ and crossed
-  from above with rate $\gamma\delta(4) f(0)$. }
-\label{fig:mg1_2}
-\end{figure}
-
-
-For the upcrossings, suppose first that $L(D_{k-1})=n>0$ and observe
-that an upcrossing whenever $\1{L(D_{k-1})=n} \1{L(D_{k})>n} = 1$.
-Again, we can convert this into a statement with the number of
-arrivals during the service time $S_k$ of job $k$.  If $Y_k=0$, then
-job $k$ must leave $n-1$ jobs behind, so no upcrossing can
-happen. Next, if $Y_k=1$, then job $k$ leaves $n$ jobs behind, so
-still no upcrossing occurs. In fact, level $n$ is upcrossed when iff
-more than one job arrives during the service of job $k$, thus,
-\begin{equation*}
-\1{L(D_{k-1})=n} \1{L(D_{k})>n} = \1{L(D_{k-1})=n} \1{Y_{k}>1}.
-\end{equation*}
-More generally, level $n$ is upcrossed for $0<m\leq n$ whenever
-\begin{equation*}
-\1{L(D_{k-1})=m} \1{L(D_{k})>n} = \1{L(D_{k-1})=m} \1{Y_{k}>n-m+1},
-\end{equation*}
-while if $m=0$ (think about this),
-\begin{equation*}
-\1{L(D_{k-1})=0} \1{L(D_{k})>n} = \1{L(D_{k-1})=0} \1{Y_{k}>n}.
-\end{equation*}
-Again we define proper counting functions (c.f., one of the exercises
-below), divide, and take suitable limits to find for upcrossing rate
-\begin{equation}\label{eq:555}
-\gamma \delta(0) G(n) + \gamma \sum_{m=1}^n \delta(m) G(n-m+1).
-\end{equation}
-
-Finally, equating the downcrossing and upcrossing rates and dividing
-by $\gamma$ gives
-\begin{equation}\label{eq:72}
-  f(0) \delta(n+1) = \delta(0) G(n) + \sum_{m=1}^{n} \delta(m) G(n+1-m).
-\end{equation}
-Noting that $\pi(n) = \delta(n)$, which follows from~\eqref{eq:39} and
-the fact that the $M/G/1$ queue length process has one-step
-transitions, we arrive at
-\begin{equation*}
-  f(0) \pi(n+1) = \pi(0) G(n) + \sum_{m=1}^{n} \pi(m) G(n+1-m).
-\end{equation*}
-
-Again, we obtain a recursion by which we can compute, iteratively, the
-state probabilities.  Setting $\pi(0)=1$ at first, $\pi(1)$ follows
-from the above recursion. Then, with $\pi(0)=1$ and $\pi(1)$ we find
-$\pi(2)$, and so on, up to some limit $N$. Then, set
-$G=\sum_{n=0}^N \pi(n)$ as the normalization constant. As a practical
-approach to determine whether $N$ is sufficiently large, compute
-$p(n)$ also for a couple for values above $N$. If these values
-decrease when $n$ becomes larger and they are very small compared to
-the $p(n)$ with $n<N$, $N$ is most surely sufficiently large. However,
-getting formal bounds on a proper size of $N$ requires more work than
-we can do here.
-
-\begin{question}
-Provide the details behind the derivation of Eq.~\ref{eq:555}.
-\begin{hint}
-  
-\hint{Define for $m=1,\ldots, n$
-\begin{equation*}
-  D(m, n, t) = \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k-1})=m}\1{Y_k>n-m+1},
-\end{equation*}
-and 
-\begin{equation*}
-  D(0, n, t) = \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k-1})=0}\1{Y_k>n}.
-\end{equation*}
-Then, divide by $D(n,t)$ and $D(t)$ and take limits.}
-\end{hint}
-
-\begin{solution}
- Define, for the first term,
-\begin{equation*}
-  D(0, n, t) = \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k-1})=0}\1{Y_k>n}
-\end{equation*}
-Then
-\begin{equation*}
-  \begin{split}
-  \lim_{t\to\infty} \frac{  D(0, n, t)}t 
-&=   \lim_{t\to\infty}  \frac{D(t)}t \frac{D(0, t)}{D(t)}\frac{ D(0, n, t)}{D(0,t)} \\
-&=   \gamma \delta(0) \lim_{t\to\infty} \frac{ D(0, n, t)}{D(0,t)} \\
-&=   \gamma \delta(0) \P{Y>n}\\
-& = \gamma \delta(0) G(n).
-  \end{split}
-\end{equation*}
-For the second term, define
-\begin{equation*}
-  D(m, n, t) = \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k-1})=m}\1{Y_k>n-m+1}
-\end{equation*}
-then
-\begin{equation*}
-  \begin{split}
-  \lim_{t\to\infty} \frac{  D(m, n, t)}t 
-&=   \lim_{t\to\infty}  \frac{D(t)}t \frac{D(m, t)}{D(t)}\frac{ D(m, n, t)}{D(m,t)} \\
-&=   \gamma \delta(m) \lim_{t\to\infty} \frac{ D(m, n, t)}{D(m,t)} \\
-&=   \gamma \delta(m) \P{Y>n-m+1}\\
-& = \gamma \delta(m) G(n-m+1).
-  \end{split}
-\end{equation*}
-
-
-\end{solution}
-\end{question}
-
-
-\begin{question}
-  Suppose that for the $M/G/1$ queue, $L(D_{k-1})>0$. Why is
-  $S_k = D_k - D_{k-1}$?  If $L(D_{k-1}) = 0$, the time between
-  $D_{k-1}$ and $D_k$ is \emph{not} equal to $S_k$. What is then the
-  distribution of $D_k-D_{k-1}$?
-  \begin{hint}
-    
-\hint{  Realize that if $L(D_{k-1})=0$, job $k-1$ leaves behind an empty
-  system. Thus, before job $k$ can leave, it has to arrive. In other
-  words, $D_{k-1}<A_k$.  Since job $k$ arrives to an empty system,
-  his service starts right away, to that the time between $A_k$ and
-  $D_k$ is equal to the service time of job $k$.}
-  \end{hint}
-
-\begin{solution}
-  When $L(D_{k-1})>0$, job $k$ is already in the system when job $k-1$
-  finishes its service and leaves. Thus, at the departure time
-  $D_{k-1}$ of job $k-1$, the service of job $k$ can start right away
-  at $D_{k-1}$. Then, $D_k=D_{k-1}+S_k$.
-
-
-    When job $k-1$ leaves an empty system behind, $D_k= A_k + S_k$,
-    since job $k$ sees an empty system, hence its service can start
-    right away after its arrival time at time $A_k$. Since the arrival
-    process is Poisson by assumption, the time to the next arrival
-    after $D_{k-1}$ is exponentially distributed with rate
-    $\lambda$. (Recall the memoryless property of the interarrival
-    times.) Thus, $A_k - D_{k-1}$ has the same distribution as $X_k$,
-    so that $\P{D_k - D_{k-1} \leq x} = \P{X_k + S_k\leq x}$. BTW: Can
-    you simplify this expression by using conditioning on $X_k$?
-\end{solution}
-\end{question}
-
-\begin{question}
- Explain that if the service time is $s$, then
+\begin{exercise}
+ Explain that if the service time is constant and equal to $s$, then
 \begin{equation}\label{eq:4}
   \P{Y_k = j\given S=s} = e^{-\lambda s}\frac{(\lambda s)^j}{j!}.
 \end{equation}
 \begin{hint}
-  
-\hint{ If $s$ is deterministic, the number of arrival during a fixed
-    period of time with length $s$ must be Poisson distributed.}
+If $s$ is deterministic, the number of arrival during a fixed
+    period of time with length $s$ must be Poisson distributed.
 \end{hint}
   \begin{solution}
-If the service time is $s$ units long, we need to know the number of arrivals during this interval. By assumption, the arrival process is Poisson. 
+See the hint.  The period during which the arrivals occur is $s$. 
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
  Explain that 
 \begin{equation}\label{eq:10}
   \P{Y_k = j} = \int_0^\infty e^{-\lambda x}\frac{(\lambda x)^j}{j!}\, \d F(x).
@@ -273,7 +49,7 @@ where $F$ is the distribution of the service times.
   various ways in the literature: $F(\d x) = \d F(x) = \P{S\in \d x}$,
   but this all means the same thing, it is only the notation that
   differs.  (As an aside, to properly define this we need measure
-  theory\ldots). When $F$ has a density $f$, then
+  theory). When $F$ has a density $f$, then
   $\d F(x) = f(x) \d x$.  Note that when $S$ is discrete, it does not
   have a density everywhere. With this,
     \begin{equation*}
@@ -282,21 +58,17 @@ where $F$ is the distribution of the service times.
     \end{equation*}
     Using the answer of the previous problem we arrive at the result.
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
   If $S$ is deterministic and equal to $s$, show that
   Eq.~\eqref{eq:10} reduces to Eq.~\eqref{eq:4}.  
-
   \begin{hint}
-    
-\hint{If $S=s$ then
+ $S=s$ then
     $\P{S=s}=1$, i.e., all probability mass lies at $s$. Thus, all
-    arrivals must occur during $[0,s]$.}
+    arrivals must occur during $[0,s]$.
   \end{hint}
-
   \begin{solution}
-
     Let us first attack this problem from a general point of
     view. Suppose the service time $S$ can take values
     $s_1<s_2<\cdots <s_n$, and $\P{S=s_i}=\alpha_i$. Then of course we
@@ -312,7 +84,6 @@ where $F$ is the distribution of the service times.
   Thus, the integral of $g$ with respect to $F$ is the sum of $g$ at
   the points at which $F$ makes a jump times the weight of $F$ at
   these points. 
-
 
   As an example, in case $S\equiv 10$ (the service time is always 10
   time units long) the distribution function $F$ makes just one jump
@@ -364,12 +135,10 @@ Hence,
     \P{Y_k=j} = \int_0^\infty \P{Y_k =j\given S=x} \d F(x) = 
     g(s) = e^{-\lambda s}\frac{(\lambda s)^j}{j!}.
     \end{equation*}
-
-
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
  If $S\sim \exp(\mu)$, show that 
   \begin{equation} \label{eq:41}
 f(j) = \P{Y_k = j} = \frac{\mu}{\lambda+\mu}\left(\frac{\lambda}{\lambda+\mu}\right)^j.
@@ -398,9 +167,9 @@ service occurs, is the same as the probability that a geometrically
 distributed random variable with success probability
 $\mu/(\lambda+\mu) = 1-p$ takes the value $j$.
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
  If $S\sim \exp(\mu)$, show that 
   \begin{equation}
 G(j) = \sum_{k=j+1}^\infty f(k) =  \left(\frac{\lambda}{\lambda+\mu}\right)^{j+1}.
@@ -418,27 +187,224 @@ G(j) = \sum_{k=j+1}^\infty f(k) =  \left(\frac{\lambda}{\lambda+\mu}\right)^{j+1
   \end{split}
 \end{equation*}
     \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
-  Clearly, the $M/M/1$ queue is a special case of the $M/G/1$
-  queue. For this reason, Eq.~\eqref{eq:41} must also apply to the
-  $M/M/1$ queue.  Thus, to check our work, show that this recursion,
-  when applied to the $M/M/1$ queue, gives the queue length
-  distribution for the $M/M/1$ queue, i.e., $p(n)=(1-\rho)\rho^n$. 
+Let us concentrate on a downcrossing of level $n$, see
+Figure~\ref{fig:mg1_2}; recall that level $n$ lies between states $n$
+and $n+1$. For job $k$ to generate a downcrossing of level $n$, two events must take place: 
+ job `$k-1$' must leave $n+1$ jobs behind after its service completion, and  job $k$ must leave $n$ jobs behind. Thus, 
+ \begin{equation*}
+   \text{Downcrossing of level $n$} \iff \1{L(D_{k-1}) = n+1}\1{L(D_k)=n} = 1.
+ \end{equation*}
+Let us write this in another
+way. Observe that if $L(D_{k-1})=n+1$ and no other jobs arrive during
+the service time $S_k$ of job $k$, i.e., when $Y_k=0$, it must also be
+that job $k$ leaves $n$ jobs behind. If, however, $Y_k>0$, then
+$L(D_k)\geq n+1$.  Thus, we see that
+ \begin{equation*}
+   \text{Downcrossing of level $n$} \iff \1{L(D_{k-1}) = n+1}\1{Y_k=0} = 1.
+ \end{equation*}
+% \begin{equation*}
+%   \1{L(D_{k-1}) = n+1}\1{L(D_k)=n} =  \1{L(D_{k-1}) = n+1}\1{Y_k=0}.
+% \end{equation*}
+Consequently, the number of downcrossings of level $n$ up to time $t$ is
+\begin{equation*}
+  \begin{split}
+  D(n+1, 0, t) 
+%&= \sum_{k=1}^\infty \1{D_{k}\leq t}\1{L(D_{k})=n} \\
+&= \sum_{k=1}^{D(t)}\1{L(D_{k-1})=n+1}\1{Y_k=0}.
+  \end{split}
+\end{equation*}
 
+\begin{exercise}
+Use a similar derivation as in~\eqref{eq:1332} to   show that 
+\begin{equation*}
+  \lim_{t\to\infty} \frac{  D(n+1, 0, t)}t  = \gamma \delta(n+1) f(0),
+\end{equation*}
+where $f(0)=\P{Y=0}$.
+\begin{solution}
+By using the definitions and limits developed in
+Sections~\ref{sec:rate-stability} and~\ref{sec:poisson-arrivals-see},
+\begin{equation*}
+  \begin{split}
+  \lim_{t\to\infty} \frac{  D(n+1, 0, t)}t 
+&=   \lim_{t\to\infty}  \frac{D(t)}t \frac{D(n+1, t)}{D(t)}\frac{ D(n+1, 0, t)}{D(n+1,t)} \\
+&=   \gamma \delta(n+1) \lim_{t\to\infty} \frac{ D(n+1, 0, t)}{D(n+1,t)} \\
+&=   \gamma \delta(n+1) \P{Y=0}\\
+& = \gamma \delta(n+1) f(0),
+  \end{split}
+\end{equation*}
+where the last limit follows from the independence of $Y_k$ and
+$L(D_{k-1})$, 
+\end{solution}
+\end{exercise}
+
+\begin{figure}[tb]
+  \centering
+                  
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+\node[state] (0) {$\delta(0)$}; 
+\node[state] (1) [right of=0] {$\delta(1)$}; 
+\node[state] (2) [right of=1] {$\delta(2)$}; 
+\node[state] (3) [right of=2] {$\delta(3)$}; 
+\node[state] (4) [right of=3] {$\delta(4)$}; 
+%\node[state] (5) [right of=4] {$\cdots$}; 
+\node (5) [above of=4] {};
+
+\path 
+(0) edge [bend left] node[above, very near start, fill=white] {$G(3)$} (5)
+(0) edge [loop below] node[below, midway, fill=white] {$f(0)$} (0)
+(1) edge [bend left] node[above, very near start, fill=white] {$G(3)$} (5)
+(1) edge [loop below] node[below, midway, fill=white] {$f(1)$} (1)
+(1) edge [bend left] node[below, midway, fill=white] {$f(0)$} (0)
+(2) edge [bend left] node[above, very near start, fill=white] {$G(2)$} (5)
+(2) edge [bend left] node[below, midway, fill=white] {$f(0)$} (1)
+(2) edge [loop below] node[below, midway, fill=white] {$f(1)$} (2)
+(3) edge [bend left] node[above, very near start, fill=white] {$G(1)$} (5)
+(3) edge [loop below] node[below, midway, fill=white] {$f(1)$} (3)
+(3) edge [bend left] node[below, midway, fill=white] {$f(0)$} (2)
+(4) edge [bend left] node[below, near start] {$f(0)$} (3);
+
+% \node[circ, right=of n-2] (n-1) {$n-1$}
+% edge[loop below, thick]  node[midway, fill=white] {$\lambda f(0)$} (n-1); 
+
+\draw[-, dotted, gray] (9.7,-1)--(9.7, 4.0) node[below, black] {level $3$};
+
+
+\end{tikzpicture}
+\caption{Level $3$ is crossed from below with rate
+  $\gamma\delta(0)G(3) + \gamma\delta(1)G(3) + \cdots \gamma \delta(3) G(1)$ and crossed
+  from above with rate $\gamma\delta(4) f(0)$. }
+\label{fig:mg1_2}
+\end{figure}
+
+Before we deal with the upcrossing, it is important to do the next exercise.
+\begin{exercise} Suppose that $L(D_{k-1})>0$. Why is
+  $S_k = D_k - D_{k-1}$?  However, if $L(D_{k-1}) = 0$, the time between
+  $D_{k-1}$ and $D_k$ is \emph{not} equal to $S_k$. Why not and what the
+  distribution of $D_k-D_{k-1}$?
   \begin{hint}
-    
-\hint{ Define shorthands
+Realize that if $L(D_{k-1})=0$, job $k-1$ leaves behind an empty
+  system. Thus, before job $k$ can leave, it has to arrive. In other
+  words, $D_{k-1}<A_k$.  Since job $k$ arrives to an empty system,
+  his service starts right away, to that the time between $A_k$ and
+  $D_k$ is equal to the service time of job $k$.
+  \end{hint}
+\begin{solution}
+  When $L(D_{k-1})>0$, job $k$ is already in the system when job $k-1$
+  finishes its service and leaves. Thus, at the departure time
+  $D_{k-1}$ of job $k-1$, the service of job $k$ can start right away
+  at $D_{k-1}$. Then, $D_k=D_{k-1}+S_k$.
+
+
+    When job $k-1$ leaves an empty system behind, $D_k= A_k + S_k$,
+    since job $k$ sees an empty system, hence its service can start
+    right away after its arrival time at time $A_k$. Since the arrival
+    process is Poisson by assumption, the time to the next arrival
+    after $D_{k-1}$ is exponentially distributed with rate
+    $\lambda$. (Recall the memoryless property of the interarrival
+    times.) Thus, $A_k - D_{k-1}$ has the same distribution as $X_k$,
+    so that $\P{D_k - D_{k-1} \leq x} = \P{X_k + S_k\leq x}$. BTW: Can
+    you simplify this expression by using conditioning on $X_k$?
+\end{solution}
+\end{exercise}
+
+For the upcrossings, assuming that $L(D_{k-1})=n>0$, then an upcrossing of level $n>0$  must have occurred when $L(D_k)>n$, i.e, 
+ \begin{equation*}
+ \1{L(D_{k-1}) = n}\1{L_k>n} = 1 \implies   \text{Upcrossing of level $n$}.
+ \end{equation*}
+Again, we can convert this into a statement about  the number of
+arrivals $Y_k$ that occurred during the service time $S_k$ of job $k$.  If $Y_k=0$, then
+job $k$ must leave $n-1$ jobs behind, so no upcrossing can
+happen. Next, if $Y_k=1$, then job $k$ leaves $n$ jobs behind, so
+still no upcrossing occurs. In fact, level $n$ is upcrossed from level $n$ can only occur if
+more than one job arrives during the service of job $k$, i.e.,
+\begin{equation*}
+\1{L(D_{k-1})=n} \1{Y_{k}>1}  \implies   \text{Upcrossing of level $n$}.
+\end{equation*}
+More generally, level $n$ is upcrossed from level $m$, $0<m\leq n$ whenever
+\begin{equation*}
+\1{L(D_{k-1})=m} \1{Y_{k}>n-m+1}  \implies   \text{Upcrossing of level $n$}.
+\end{equation*}
+However,  if $m=0$ (think about this),
+\begin{equation*}
+\1{L(D_{k})>n} = \1{L(D_{k-1})=0} \1{Y_{k}>n}   \implies   \text{Upcrossing of level $n$}.
+\end{equation*}
+
+Again we define proper counting functions,  divide by $t$, and take suitable limits to find for upcrossing rate
+\begin{equation}\label{eq:555}
+\gamma \delta(0) G(n) + \gamma \sum_{m=1}^n \delta(m) G(n-m+1).
+\end{equation}
+
+\begin{exercise}
+Provide the details behind the derivation of Eq.~\ref{eq:555}.
+\begin{hint}
+Define for $m=1,\ldots, n$
+\begin{equation*}
+  D(m, n, t) = \sum_{k=1}^{D(t)}\1{L(D_{k-1})=m}\1{Y_k>n-m+1},
+\end{equation*}
+and 
+\begin{equation*}
+  D(0, n, t) = \sum_{k=1}^{D(t)}\1{L(D_{k-1})=0}\1{Y_k>n}.
+\end{equation*}
+Then, divide by $D(n,t)$ and $D(t)$ and take limits.
+\end{hint}
+\begin{solution}
+With the definition of the hint, 
+\begin{equation*}
+  \begin{split}
+  \lim_{t\to\infty} \frac{  D(0, n, t)}t 
+&=   \lim_{t\to\infty}  \frac{D(t)}t \frac{D(0, t)}{D(t)}\frac{ D(0, n, t)}{D(0,t)} \\
+&=   \gamma \delta(0) \lim_{t\to\infty} \frac{ D(0, n, t)}{D(0,t)} \\
+&=   \gamma \delta(0) \P{Y>n}\\
+& = \gamma \delta(0) G(n).
+  \end{split}
+\end{equation*}
+
+\begin{equation*}
+  \begin{split}
+  \lim_{t\to\infty} \frac{  D(m, n, t)}t 
+&=   \lim_{t\to\infty}  \frac{D(t)}t \frac{D(m, t)}{D(t)}\frac{ D(m, n, t)}{D(m,t)} \\
+&=   \gamma \delta(m) \lim_{t\to\infty} \frac{ D(m, n, t)}{D(m,t)} \\
+&=   \gamma \delta(m) \P{Y>n-m+1}\\
+& = \gamma \delta(m) G(n-m+1).
+  \end{split}
+\end{equation*}
+\end{solution}
+\end{exercise}
+
+Equating the downcrossing and upcrossing rates and dividing
+by $\gamma$ gives
+\begin{equation*}
+  f(0) \delta(n+1) = \delta(0) G(n) + \sum_{m=1}^{n} \delta(m) G(n+1-m).
+\end{equation*}
+Noting that $\pi(n) = \delta(n)$, which follows from~\eqref{eq:39} and
+the fact that the $M/G/1$ queue length process has one-step
+transitions, we arrive at
+\begin{equation}\label{eq:72}
+  f(0) \pi(n+1) = \pi(0) G(n) + \sum_{m=1}^{n} \pi(m) G(n+1-m).
+\end{equation}
+
+Clearly, we have  again obtained a recursion by which we can compute, iteratively, the
+state probabilities.  Setting $\pi(0)=1$ at first, $\pi(1)$ follows
+from the above recursion. Then, with $\pi(0)=1$ and $\pi(1)$ we find
+$\pi(2)$, and so on, up to some limit $N$. Then, set
+$G=\sum_{n=0}^N \pi(n)$ as the normalization constant. 
+
+
+
+\begin{exercise}
+  Clearly, the $M/M/1$ queue is a special case of the $M/G/1$
+  queue. Apply Eq.~\eqref{eq:72} to the $M/M/1$ queue to obtain $p(n)=(1-\rho)\rho^n$. 
+  \begin{hint}
+ Define shorthands
     such as $\alpha=\lambda/(\lambda+\mu)$, so that
     $1-\alpha = \mu/(\lambda+\mu)$, and
-    $\alpha/(1-\alpha) = \lambda /\mu = \rho$.  Then, with the
-    previous exercise that $f(n) = \alpha^n(1-\alpha)$ and
-    $G(n) = \alpha^{n+1}$.  (I did not get this result for
-    `free'. Indeed, it's just algebra, but please try to derive this
-    yourself. Its good to hone your computational skills.)}
+    $\alpha/(1-\alpha) = \lambda /\mu = \rho$.  Then, with Eq.~\ref{eq:41}, $f(n) = \alpha^n(1-\alpha)$ and $G(n) = \alpha^{n+1}$.  (These results do not `come for
+    `free'. Of course, it's just algebra, but please try to derive this
+    yourself. Its good to hone your computational skills.)
   \end{hint}
-
     \begin{solution}
       Take $n=0$. Then $f(0) \pi(1) = (1-\alpha)\pi(1)$, and
       $\pi(0)G(0) = \pi(0)\alpha$. Thus,
@@ -477,16 +443,15 @@ Since $\rho=\alpha/(1-\alpha)$ we see that the left and right hand sides are the
 Thus we get that $\pi(n) = \delta(n) = (1-\rho) \pi(0)$; a result we
 obtained earlier for the $M/M/1$ queue.
 \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
- With the above results we can compute
-  Eq.~\eqref{eq:10} for deterministic service times or exponential
-  service times. When, however, the service distribution $F$ is some
-  general distribution function, we need numerical methods to evaluate
-  Eq.~\eqref{eq:10}. Can you design a suitable numerical method for
-  this problem?
+\begin{exercise}
+  Can you design a suitable numerical method to evaluate   Eq.~\eqref{eq:10} for more 
+  general distribution functions $F$? (This topic is not strictly necessary for this course, but I hope that you study it nonetheless.)
+\begin{hint}
+Discretize time to  a grid of points, and   approximate the integral by a summation over the grid.
+\end{hint}
   \begin{solution}
   A simple numerical method is as follows. Make a grid of
   size $\d x$, for some small number $\d x$, e.g. $\d x=1/100$, and write
@@ -499,9 +464,7 @@ obtained earlier for the $M/M/1$ queue.
     \end{split}
 \end{equation*}
 
-Lets try a numerical experiment. Topics like these are, of course, not
-necessary for the course, but I hope that you study it nonetheless.
-You will have to use it for other courses later anyway.
+Lets try a numerical experiment. 
 
 <<wrap=False>>=
 import numpy as np
@@ -542,8 +505,8 @@ $\d x=1/100$ is sufficiently small. In general, however, one must take
 care and try various values for $\d x$ and the integration limits.
 
 
-In general, for more complicated situations is it best to use a
-numerical library to compute the above integral. The methods have been
+For more complicated situations is it best to use a
+numerical library to compute the above integral. These methods have been
 designed to produce good and reliable results, and, typically, it is
 very hard to improve these methods. Thus, let's try a real number
 cruncher.
@@ -557,22 +520,20 @@ def g(x):
 print(quad(g, 0, np.inf))
 @
 
-Comparing these results to our simple estimates we see that they are
-the same.
+This is the same as our earlier answer.
 \end{solution}
-\end{question}
+\end{exercise}
 
 
 \begin{comment}
-  
-\begin{question}[use=false]
+\begin{exercise}[use=false]
   To analyze the distribution of $L$ of the $M/G/1$ we concentrated on
   the departure epochs. Why will this not help to find the
   distribution of $L$ for the $M/G/c$ queue?
   \begin{solution}
     \TBD.
   \end{solution}
-\end{question}
+\end{exercise}
 \end{comment}
 
 
@@ -582,7 +543,7 @@ the same.
 \input{hint}
 \subsection*{Solutions}
 \input{ans}
-
+\clearpage
 
 
 

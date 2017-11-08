@@ -4,7 +4,6 @@
 \label{sec:constr-discr-time}
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -611,7 +610,6 @@ different from mine, then your answer is just as good.
   the day. Yet another possibility is that faulty items are collected
   until there are $N$, say, and then the entire batch of $N$ is
   repaired.)
-
   \begin{solution}
     Suppose again that a fraction $p$ is faulty. Since these faulty
     items require less processing time than a new job, the service
@@ -631,7 +629,6 @@ different from mine, then your answer is just as good.
     Q_{k,B} &= Q_{k-1, B} + a_{k,B} - d_{k,B}.
   \end{split}
 \end{equation*}
-
   \end{solution}
 \end{exercise}
 
@@ -715,7 +712,6 @@ we need. The total cost up to time $T$ becomes:
   How would you model (in terms of recursions) a server whose capacity
   depends on the queue length? Consider, as an example, a rule such
   that the server only works if the queue is larger than a threshold $t$. 
-
   \begin{solution}
     One model could be to let the server only switch on when the queue
     is larger than some threshold $t$, and when the server is on, it
@@ -746,7 +742,6 @@ and likewise for the other queue.
     a system with two queues served by one server, but such that one
     queue, queue $A$ gets priority over the other
     queue. Again find a set of recursions to describe this case.
-
     \begin{solution}
       The rules below implement a strict priority rule for jobs type
       A, i.e., jobs sent into queue A.
@@ -806,7 +801,6 @@ d_{k,B} &= \min\{Q_{k-1, B}, c_k-d_{k,A}\}.
     divided in different groups, each receiving a minimal capacity. It
     there less patients of some group, then the capacity can be
     planned/given to other patient groups. 
-
   \end{solution}
 \end{exercise}
 
@@ -821,7 +815,6 @@ d_{k,B} &= \min\{Q_{k-1, B}, c_k-d_{k,A}\}.
 
   Let $r_A$ be the reserved capacity for queue A, and likewise for
    $r_B$. We assume of course that $c_k\geq r_A + r_B$, for all $k$.
-
    \begin{solution} Queue A can use all capacity, except what is
      reserved for queue B:
 \begin{equation*}
@@ -934,8 +927,7 @@ Realize that Stations A and B have their own arrivals.
 
 
 \begin{exercise} (Merging incoming streams) 
-Consider a
-  single-server queue that servers two customer `streams' in a FIFO
+Consider a   single-server queue that servers two customer `streams' in a FIFO
   discipline. Thus, both streams enter one queue that is served by the
   server. Let $\{a_k^a\}$ be the number of arrivals of stream $a$ in
   period $k$ and $\{a_k^b\}$ be the number of arrivals of stream
@@ -943,7 +935,6 @@ Consider a
   analyze the waiting time distribution of each of the streams. Assume
   that the service capacity $c$ is constant for all periods, and that
   jobs that arrive in period $k$ can also be served in period $k$.
-
   \begin{solution}
     The behavior of the queue length  process is easy: 
     \begin{equation*}
@@ -1000,8 +991,6 @@ It is then sensible to set
 
 \tbd I currently lack time to check whether the above does not contain
 any off-by-one errors. For future work, implement it in a simulator\ldots
-
-
   \end{solution}
 \end{exercise}
 
@@ -1063,12 +1052,10 @@ any off-by-one errors. For future work, implement it in a simulator\ldots
   weeks the number of items to be produced per week. Formulate this
   problem as an LP problem, taking into account the inventory
   dynamics.  
-
   \begin{hint}
 Formulate the decision variables/controls, the
     objective and the constraints.    
   \end{hint}
-
   \begin{solution}
     The decision variables are $X_k$, $Y_K$ and $S_k$ (note, it is not
     necessary to meet all demand:  the production cost and profit

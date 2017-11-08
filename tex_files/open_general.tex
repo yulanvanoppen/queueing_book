@@ -4,7 +4,6 @@
 \label{sec:general-job-shop}
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -128,7 +127,7 @@ As a conclusion, the analysis of a real situation often requires several
 models, each with their own strengths and weaknesses.
 
 
-\begin{question}
+\begin{exercise}
   It is mentioned in the text that there are $5M+M^2$ input parameters
   required to characterize an $M$ station network of $G/G/1$ queues. What are these parameters?
   \begin{hint}
@@ -149,13 +148,13 @@ models, each with their own strengths and weaknesses.
       parameters.
     \end{enumerate}
   \end{solution}
-\end{question}
+\end{exercise}
 
 
-%\begin{question}[use=false]
-\begin{question}
+%\begin{exercise}[use=false]
 Here is an example to show how to use the formulas for the general open network.
 
+\begin{exercise}
 Consider a single-machine station with deterministic (very regular)
 production times such that each job takes $S=10$ minutes. Jobs arrive
 as a Poisson process with rate $\lambda=4$ per hour. Thus, we model
@@ -163,7 +162,6 @@ the station as an $M/D/1$ queue. Jobs fail with probability $1/5$ and
 are sent back the machine for repair. The production times for repair
 jobs are also 10 minutes.  What is the influence of faulty jobs on the
 queueing times? 
-
 \begin{hint}
 Apply the formulas (2.30)--(2.33) of Zijm to a single station
   queueing network with rework.
@@ -254,8 +252,7 @@ and, since $\rho_1 = 5/6$,
   \end{split}
 \end{equation*}
 Hence,
-\begin{equation*}
-  \begin{split}
+\begin{align*}
   C_{1a}^2 
 &= w_1 \sum_{i=0,1} Q_{i1} C_{i1}^2 + 1 - w_1 \\
 &= \frac{17}{18} \left(\frac 45 C_{01}^2 + \frac 1 5 C_{11}^2 \right) + 1 - \frac{17}{18}\\
@@ -264,8 +261,7 @@ Hence,
 &\approx \frac 45 + \frac{1}{5\times 18} C_{a1}^2 + \frac 15 \\
 &\approx 1 + \frac{1}{5\times 18} C_{a1}^2 \\
 &\approx 1.
-  \end{split}
-\end{equation*}
+\end{align*}
 
 So, provided all the estimations and approximations I used above are
 not too way off, we see that we can take $C_{1a}^2=1$. And then, including the rework,
@@ -282,12 +278,11 @@ not too way off, we see that we can take $C_{1a}^2=1$. And then, including the r
   algebra has been reduced to a set of linear equations to compute
   $C_{a,i}^2$ for stations $i=1,\ldots,M$.
 \end{solution}
-\end{question}
+\end{exercise}
 
 
-
-
-\begin{question}[use=false]
+\begin{comment}
+\begin{exercise}[use=false]
   \begin{enumerate}
   \item Three M/M/1 FIFO stations in tandem
   \item $\gamma_1 = 2/h$,  $\gamma_2 = 3/h$, $\gamma_3 = 1/h$
@@ -336,7 +331,8 @@ not too way off, we see that we can take $C_{1a}^2=1$. And then, including the r
   estimate the distribution function of the throughput times.
   \end{enumerate}
 \end{solution}
-\end{question}
+\end{exercise}
+\end{comment}
 
 
 

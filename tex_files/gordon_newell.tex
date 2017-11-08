@@ -4,7 +4,6 @@
 
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -31,7 +30,7 @@ do not mix up $VP=V$ with $PV=V$, as in general, $VP \neq PV$.  We use
 $VP=V$.
 
 
-\begin{question}\label{ex:mva}
+\begin{exercise}\label{ex:mva}
   Compute the visit ratios for a network with three stations such that all jobs from station 0 move to station 1, from station 1 all move to station 2, and from station 2 half of the jobs move to station 0 and the other half to station 1. 
   \begin{solution}
     The routing matrix $P$ is
@@ -48,23 +47,25 @@ $VP=V$.
     item, $V_2 = V_1$, and from the first $V_0 = V_2/2$. Since
     $V_0=1$, it follows that $V_2 = 2V_0$ and $V_1=V_2=2 V_0$.
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{comment}
+\begin{exercise}
   What if $P$ has an eigenvalue $\alpha$ whose modulus $|\alpha|>$? What if for all eigenvalues $\alpha_i$ we have that $|\alpha_i|<1$?
   \begin{solution}
     TBD.
   \end{solution}
-\end{question}
+\end{exercise}
+\end{comment}
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.3.1.1 
 \begin{solution}
 If a part would need refitting or repositioning at the load/unload station, the part would visit the load/unload station more than once during its stay in the network. The visit ratio of the load/unload station can then no longer be set to 1.
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.3.1.2
 \begin{solution}
 Lets number the states from 1 to 4. If station 1 feeds into station 2, and so on, and station 4 into station 1, then 
@@ -79,9 +80,9 @@ Lets number the states from 1 to 4. If station 1 feeds into station 2, and so on
 \end{equation*}
 The visit ratios are, of course, $V_1= V_2 = V_3 = V_4$. 
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.3.1.3
 \begin{solution}
 We number  station a as 1, and so on.
@@ -111,18 +112,18 @@ $1$ is the indicator matrix. Clearly, $V$ is must be a left
 eigenvector of the matrix $1-P$ with eigenvalue 0 (recall that
 $V(1-P) = 0 = 0\cdot V$). Thus, at least one row or column of the matrix $1-P$ is superflous to solve for $V$. 
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
   Relate Zijm.Eq.3.3 to the form of the steady-state distribution of
   the number of jobs in an $M/M/c$ queue.
   \begin{solution}
     Except for the normalization constant, the expressions are the
     same as equations 1.36 and 1.37 of Zijm's book.
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.3.1.4
 \begin{solution}
 Consider network one with routing $1\to3\to4\to2\to1$, each transition occuring with probability one, i.e.,
@@ -155,9 +156,9 @@ at least one (left) eigenvector $V$ in common. Observe that the visit
 ratio equation $VP=P$ implies that $V$ is a left eigenvector with
 eigenvalue 1.
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.3.1.5
 \begin{hint}
  First write down all  different states, and then use Zijm.Eq.3.2 and 3.3.
@@ -183,10 +184,8 @@ Zijm.Ex.3.1.5
     \vec n &= (0,1,1) & f_0(0)f_1(1)f_2(1) &= \frac{V_1}{\mu_1}\frac{V_2}{\mu_2}.
   \end{align*}
 Finally, add up all the above numbers to make $G(M,N)$: 
-
-
 \end{solution}
-\end{question}
+\end{exercise}
 
 
 

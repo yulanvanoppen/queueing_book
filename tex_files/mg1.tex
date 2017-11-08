@@ -5,7 +5,6 @@
 
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -90,9 +89,7 @@ the interchange being allowed by the positivity of $R_k(s)$.
 
 \begin{exercise}
 Show that for $k<n$, so that $D_k< D_n$,
-\begin{equation*}
-\int_0^{D_n} R_k(s) \d s = \frac{S_k^2}2.
-\end{equation*}
+$\int_0^{D_n} R_k(s) \d s = \frac{S_k^2}2.$
 \begin{hint}
   Graphically, the result follows from Figure~\ref{fig:mg1remainingservicetime}.   
 \end{hint}
@@ -127,12 +124,10 @@ Thus,
 \begin{exercise}
 Show that
 \begin{equation}\label{eq:32}
-  \lambda \E{S^2} = (1+C_s^2)\rho\E S,
+  \lambda \E{S^2} = (1+C_s^2)\rho\E S, \quad\text{where }
+ C_s^2 = \frac{\V S }{(\E S)^2}
 \end{equation}
-where the \recall{square coefficient of variation} is defined as
-\begin{equation*}
- C_s^2 = \frac{\V S }{(\E S)^2}.
-\end{equation*}
+is the \recall{square coefficient of variation}.
 \begin{solution}
 Use that 
 \begin{equation*}
@@ -157,10 +152,7 @@ The problems below will clarify how useful this result is.
 
 
 \begin{exercise}\label{ex:9}
-Show  from Eq.~\eqref{eq:34} that
-\begin{equation*}
-  \E{S_r\given S_r>0} = \frac{\E{S^2}}{2 \E S}
-\end{equation*}
+Show  from Eq.~\eqref{eq:34} that $\E{S_r\given S_r>0} = \E{S^2}/2 \E S$.
 \begin{solution}
  From Eq.~\eqref{eq:37} and the sentences above this equation,
     we have that

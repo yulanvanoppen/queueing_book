@@ -5,7 +5,6 @@
 
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -36,8 +35,24 @@ Thus, if $n$ becomes larger, the service time $S$ is represented by
 ever larger batches, but such that the service time of each unit
 becomes ever smaller. These arguments can be made precise in a
 probabilistic sense, but here we rely on our intuition to conclude
-that, in some sense, $B^{(n)}/n \to S$\footnote{For the interested, we
-  mean convergence in distribution here.}.
+that, in some sense, $B^{(n)}/n \to S$\footnote{For the interested, this is convergence in distribution here.}.
+
+\begin{exercise}
+Why do we consider $\P{B^{(n)} = i} = \P{ S\in(i/n, (i+1)/n]}$ rather than
+\begin{equation*}
+\P{B^{(n)} = i} = \P{S\in[i/n, (i+1)/n]},  
+\end{equation*}
+i.e., we use a half open interval $(,]$ rather than the closed
+interval $[,]$?
+\begin{solution}
+  Starting from the distribution function $\P{S\leq x}$, we define
+  \begin{equation*}
+  \P{B^{(n)} = i} = \P{ S\leq (i+1)/n} - \P{S\leq i/n} = \P{
+  S\in(i/n, (i+1)/n]}.
+     \end{equation*}
+\end{solution}
+\end{exercise}
+
 
 Let us see how this limit can be used to show that the expected
 waiting in queue for the batch queue leads to the
@@ -94,33 +109,16 @@ Thus, based on this  limit we expect that
 \end{equation*}
 but this is the same as Eq.~\eqref{eq:710}!
 
-\begin{question}
-In Eq.~(\ref{eq:69}) we  define $\P{B^{(n)} = i} = \P{ S\in(i/n, (i+1)/n]}$ and not 
-\begin{equation*}
-\P{B^{(n)} = i} = \P{S\in[i/n, (i+1)/n]},  
-\end{equation*}
-i.e., we use a half open interval $(,]$ rather than the closed
-interval $[,]$. Why is that?
-\begin{solution}
-  Starting from the distribution function $\P{S\leq x}$, we define
-  \begin{equation*}
-  \P{B^{(n)} = i} = \P{ S\leq (i+1)/n} - \P{S\leq i/n} = \P{
-  S\in(i/n, (i+1)/n]}.
-     \end{equation*}
-\end{solution}
-\end{question}
-
-\begin{question}
+\begin{exercise}
   Why do we consider $\E{L^{(n)}}/n \to \E{W_Q}$, and not
   $\E{L^{(n)}}/n \to \E W$? 
   \begin{hint}
-    
-  \hint{What is the expected service time of one
-  unit of a job in the $M^X/M/1$ queue in the limiting case?}
+What is the expected service time of one
+  unit of a job in the $M^X/M/1$ queue in the limiting case?
   \end{hint}
   \begin{solution}
     The time it takes to serve one unit is $1/n$. Thus, the fraction
-    of time in service in the batch queue becomes negligible compared
+    of time an item spends in service in the batch queue becomes negligible compared
     to the time in queue. Another way to see this, is to use 
     \begin{equation*}
       \frac{\E{L^{(n)}}}n = 
@@ -128,10 +126,11 @@ interval $[,]$. Why is that?
     \end{equation*}
 Since $L^{(n)}_s \leq 1$, $\E{L^{(n)}}/n \approx \E{L^{(n)}_Q}/n$ for $n$ large.
   \end{solution}
-\end{question}
+\end{exercise}
 
+\begin{comment}
   
-\begin{question}[use=false]
+\begin{exercise}[use=false]
 Can you model the $M^X/M/1$ as an $M/G/1$ queue, thereby deriving Eq.~(\ref{eq:43}) from Eq.~(\ref{eq:710})? 
   \begin{solution}
 I guess this is a bit hard, so I include a partial answer for the interested. 
@@ -153,7 +152,8 @@ random batch $B$ of i.i.d. exponentials so that $S = \sum_{i=1}^B S_i$. Now
 where $f(k)=\P{B=k}$, and we obtain the $M^X/M/1$ from the $M/G/1$
 queue by taking this distribution function for the service times.
   \end{solution}
-\end{question}
+\end{exercise}
+\end{comment}
 
 % the distribution $F$ of the service times of the $M/G/1$ on a grid of size $1/n$, like so:
 % \begin{equation*}

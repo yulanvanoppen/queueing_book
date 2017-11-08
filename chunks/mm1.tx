@@ -5,7 +5,6 @@
 
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -57,6 +56,7 @@ Show that the average number of jobs in an  $M/M/1$ queue is given by
 \begin{equation}\label{eq:el}
   \E L = \frac \rho{1-\rho}.
 \end{equation}
+Thus,  $\E L \sim (1-\rho)^{-1}$ for $\rho\to 1$.
   \begin{solution}
 \begin{align*}
 \E L &= \sum_{n=0}^\infty n p(n) \\
@@ -78,7 +78,7 @@ to justify the interchange of the summations.
 
   \end{solution}
 \end{exercise}
-
+j
 Let us interpret this expression. The fact
 that $\E L \sim (1-\rho)^{-1}$ for $\rho\to 1$ implies that the
 average waiting time increases very fast when $\rho\to1$.  If we want to avoid  long waiting times, this formula tells us that  situations with
@@ -86,10 +86,8 @@ $\rho\approx 1$ should be avoided. As a practical guideline, it is typically bes
 
 
 \begin{exercise}
-  Show that the excess probability $\P{L\geq n}$, i.e., the probability that a long queue occurs, is 
-\begin{equation}\label{eq:pn}
-  \P{L\geq n} = \rho^n.
-\end{equation}
+  Show that the excess probability, i.e., the probability that a long queue occurs, is 
+$\P{L\geq n} = \rho^n$.
   \begin{hint}
 $\P{L\geq n} = \sum_{k\geq n} p(k)$.
   \end{hint}
@@ -123,16 +121,143 @@ distributed with parameter $\mu$. Assume also that customers who
 cannot be served from on-hand stock are backlogged, that is, they wait
 until their item has been produced. What are the average on-hand
 inventory level and the average number of customer in backlog?
-
 \begin{hint}
   Realize that the inventory level $I(t)$ at time $t$ can be
   modeled as $I(t) = r+1-L(t)$, where $L$ is the number of jobs in an
   $M/M/1$ queue.
 \end{hint}
-
   \begin{solution}
 Average on-hand: $\E{I} = \sum_{i=0}^{r+1} (r+1-i) p(i)$. Average number of customers in backlog: $\E B = \sum_{i=r+1}^\infty (i-r-1) p(i)$. 
   \end{solution}
+\end{exercise}
+
+
+The aim of the next set of exercises is to determine the distribution of the
+interdeparture times of the $M/M/1$ queue.  We chop this problem up in small steps.
+
+
+\begin{exercise}\label{ex:dep}
+Is the output rate of the $M/M/1$ queue $\lambda$ or $\mu$?
+\begin{solution}
+       The output rate is $\lambda$ if $\lambda \leq \mu$.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Why is $\mu e^{-\mu t}$ not a reasonable density for the
+    inter-departure times?
+    \begin{solution}
+         Because jobs do not leave at rate $\mu$. 
+    \end{solution}
+\end{exercise}
+
+\begin{exercise}
+ Formulate a better guess for the inter-departure times.
+ \begin{solution}
+ The simplest, but reasonable, inter-departure density would be $\lambda e^{-\lambda t}$. So this is what we will try to prove.
+ \end{solution}
+\end{exercise}
+
+ Observe that when a customer arrives, the server can be either
+    idle $I$ or busy $B$.  
+
+\begin{exercise}
+What is $\P{I}$?
+    \begin{solution}
+ $\P I = p_0 =\pi_0$. Recall that $\pi_0$ is what
+    the jobs see upon arrival and $p(0)$ is the time-average. By PASTA
+    these are the same.  Recall also that $p_0 = 1-\rho$.
+    \end{solution}
+\end{exercise}
+
+\begin{exercise}
+ If customer $n$, say, finds the system empty, what will be the
+    expected duration of the inter-departure time between $D_{n-1}$ and
+    $D_n$?
+    \begin{hint}
+      After job $n-1$ left, job $n$ has to arrive, so we need to wait first for this interarrival time. Then job $n$ must be served. 
+    \end{hint}
+    \begin{solution}
+  When job $n$ finds an empty system, job $n-1$ left an empty
+    system behind. Thus, we first have to wait for an inter-arrival
+    time $X_n$. Then, since job $n$'s service starts right away, he
+    leaves when $D_n = D_{n-1}+X_n + S_n$. Thus, the expected duration is $\E{X_n + S_n}=1/\lambda + 1/\mu$. 
+    \end{solution}
+\end{exercise}
+
+\begin{exercise}
+What is the density of $D_{n} - D_{n-1}$ when job $n$ sees an
+    empty system?
+    \begin{solution}
+      By the previous point, the density of $D_{n} - D_{n-1}$ is the
+      same as the density of $X_n + S_n$. Therefore, by conditioning,
+    \begin{equation*}
+      \begin{split}
+    f_{X+S}(t) 
+&= \P{X+S\in \d{t}} \\
+&= \int \P{S+x\in \d{t}}\P{X\in \d{x}} \\
+&=\int_0^t f_S(t-x) f_X(x) \d{x} \\
+     &= \int_0^t \mu e^{-\mu(t-x)} \lambda e^{-\lambda x} \d{x} \\
+     &= \lambda \mu e^{-\mu t} \int_0^t  e^{x(\mu-\lambda)} \d{x} \\
+& \frac{\lambda \mu}{\lambda - \mu} (e^{-\mu t} - e^{-\lambda t}).
+      \end{split}
+    \end{equation*}
+    \end{solution}
+\end{exercise}
+
+\begin{exercise}
+ What is $\P{B}$, i.e., the probability that a job arrives at a
+    busy station?
+    \begin{solution}
+        $\P B = \P{\text{busy}}=\rho$.
+    \end{solution}
+\end{exercise}
+
+\begin{exercise}
+ What is the density of the inter-departure time if the
+    server is busy?
+    \begin{hint}
+Use the memoryless  property of the exponential distribution of the service times. 
+    \end{hint}
+    \begin{solution}
+     If the server is busy when a job arrives,  the density of the time to the next departure epoch must be exponential. By the memoryless property, we may assume that the service restarts at an arrival epoch. Therefore, an arrival `sees' that $\mu e^{-\mu t}$ as the  density of the departure time when the server is busy.
+    \end{solution}
+\end{exercise}
+
+\begin{exercise}
+  What is the density of  the inter-departure time? 
+  \begin{hint}
+The final result is
+    $f_D(t) = f_{X+S}(t) \P{I} + f_S \P B = (1-\rho) f_{X+S}(t) +
+    \rho \mu e^{-\mu t}$.
+    Now use the above exercises to simplify and see that
+    $f_D(t) = \lambda e^{-\lambda t}$.
+  \end{hint}
+  \begin{solution}
+       \begin{equation*}
+        \begin{split}
+    f_D(t) 
+&= f_{X+S}(t) \P I + f_S \P B \\
+&= (1-\rho) f_{X+S}(t) +    \rho \mu e^{-\mu t} \\
+&= (1-\rho) \frac{\mu\lambda}{\lambda-\mu} \left(e^{-\mu t}-e^{-\lambda t}\right) +    \rho \mu e^{-\mu t} \\
+&= \left(1-\frac{\lambda}\mu\right) \frac{\mu\lambda}{\lambda-\mu}\left(e^{-\mu t}-e^{-\lambda t}\right)  +    \rho \mu e^{-\mu t} \\
+&= \frac{\mu-\lambda}\mu \frac{\mu\lambda}{\lambda-\mu}\left(e^{-\mu t}-e^{-\lambda t}\right)  +    \frac\lambda \mu \mu e^{-\mu t} \\
+% &= \frac{\mu-\lambda}\mu \frac{\mu\lambda}{\lambda-\mu}\left(e^{-\mu t}-e^{-\lambda t}\right)  +    \lambda e^{-\mu t} \\
+&= - \lambda\left(e^{-\mu t}-e^{-\lambda t}\right)  +    \lambda e^{-\mu t} \\
+&=  \lambda e^{-\lambda t}.
+        \end{split}
+      \end{equation*}
+
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}
+It can also be shown that the inter-departure times are independent. 
+Explain that this, together with the result of the previous exercise, implies \recall{Burke's law} which states that the departure process is a Poisson($\lambda$) process.
+\begin{solution}
+The implication of all this is that the inter-departures times form a set of i.i.d. exponentially distributed random variables with mean $1/\lambda$. Thus, the departures times form a Poisson process with rate $\lambda$
+\end{solution}
 \end{exercise}
 
 \subsection*{Supermarket Planning}
@@ -252,6 +377,7 @@ such that
 \end{equation*}
 for all hours $t$ the shop is open and $\lambda_t$ is the demand for
 hour $t$.
+
 
 
 

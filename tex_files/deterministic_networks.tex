@@ -3,13 +3,12 @@
 \label{sec:determ-queu-netw}
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
 The simplest possible single-server queueing system is such that job
-interarrival times are deterministic and that all service times are
+interarrival times are deterministic and all service times are
 equal. In such cases it is easy to determine the maximal throughput,
 i.e., the capacity of the queueing system. Clearly, if the service
 time is $t_1$, then the service rate is $r_1 = 1/t_1$. We can also
@@ -27,23 +26,19 @@ $\lambda = r_1$, so that
 Since, in the single server case $T_0 = t_1$, we see that
 $W_0=r_1 t_1 = t_1^{-1}t_1 = 1$. This result is evident: to get
 maximal throughput, it is necessary that the server is always busy,
-hence it must be that $W_0\geq 1$. Given that we deal with a $D/D/1$,
+hence it must be that $W_0\geq 1$. Given that we deal with a $D/D/1$ queue,
 by assumption, we can tune the arrivals such that whenever a job
 leaves, a new job arrives.
 
 When we deal with \emph{networks}, determining $W_0$ and $T_0$ is not
 so simple anymore. These quantities, however, are important to
-know. It is not possible to organize the network such that jobs spend
-less time than $T_0$ in the network. The raw processing time is the
-sum of the required processing times and does not include, by
-assumption, any queueing times. The critical WIP $W_0$ is important,
-because if the network contains less jobs than this amount, throughput
-will suffer. Stated in other terms, there not sufficient jobs in the
-network to keep bottleneck machines fully loaded with work. For these
+know. Clearly,  jobs need at least the raw processing time $T_0$ in the network, which is the sum of the required processing times but does not include, by assumption, any queueing times. The critical WIP $W_0$ is also important, because if the network contains less jobs than this amount, throughput
+will suffer. The reason is that when there are  not sufficient jobs in the
+network, the bottleneck machines are not always fully loaded with work. For these
 reasons $T_0$ and $W_0$ act as lower bounds on the time jobs spend in
 the network and the amount of work required to achieve a certain
 throughput.  Finally, it is important to know the bottleneck capacity
-$r_b$ of the network: The maximal throughput of the network cannot
+$r_b$ of the network as the maximal throughput of the network cannot
 exceed the bottleneck capacity. Thus, when accepting jobs, one needs
 to respect the capacity of the network. 
 
@@ -52,10 +47,10 @@ familiarize ourselves with the behavior of networks of queueing
 systems in the simplest setting possible.  For this we need some
 further definitions. A queueing network can be represented as
 \emph{graph}. \emph{Stations} form the nodes in the graph, and edges
-between nodes represents the possibility that jobs that can move from
+between nodes represents the routing, which  is  the possibility that jobs can move from
 one station to another. A simple example is a tandem network with two
 stations. Jobs arrive at station~1 and after service they move to
-station~2. After service at station~2, they leave the network. A
+station~2. After service at station~2, they leave the network. Also, a
 station can contain one or more servers. For instance, a single-server
 station contains just one server. Finally, we assume that job service
 times are constant at all servers at all stations. In other words,
@@ -72,23 +67,58 @@ $S$. Jobs arrive at rate $\lambda$. Then  the raw processing time
 \begin{equation*}
   T_0= n S.
 \end{equation*}
-Suppose now that we would release just one job in the system, in other
-words, only when the first job has visited all stations, the next job
-is released. In that case, the capacity $\mu$ of the network is
-$1/T_0$. In general, a bit of thought will show that if we are
-prepared to release $w$ jobs, then the capacity of the network is
+
+\begin{exercise}
+Suppose we would release just one job in the system: only when the first job has visited all stations, the next job is released. What is the capacity of the network?
+\begin{solution}
+In this case, the capacity $\mu$ of the network is $1/T_0$: only one server at a time is serving a job, the rest of the servers are forced to be idle.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Motivate that if we are prepared to release $w$ jobs, the capacity of the network is
 given by
 \begin{equation*}
   \mu(w) = \min\{w, n\} \frac 1{T_0}.
 \end{equation*}
-Thus, we need a minimal amount $w$ in the network to guarantee that
-$\mu(w)> \lambda$. We also see that the maximal capacity of the
-network is achieved when $w\geq n$, in which case,
+Conclude that we need a minimal amount $w$ in the network to guarantee that
+the network's throughput $\mu(w)$ exceeds the arrival rate $\lambda$, that is, there is a minimal $w$ such that $\mu(w) \geq \lambda$.
+\begin{solution}
+If there is one job in the system, $\mu(1) = 1/T_0$. If there are two, both jobs can be simultaneously worked on, each at  a different station, hence $\mu(2)=2/T_0$. And so on, until all stations are filled, at the same time, by a job, in which case $\mu(n) = n/T_0$. When there are yet more jobs in the network, only $n$ can be simultaneously in service, the rest must wait at some station.
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+Show that  only when $w\geq n$.
+\begin{equation*}
+\mu(w) = \frac 1S,
+\end{equation*}
+in which case the maximal capacity of the network is achieved.
+\begin{solution}
 \begin{equation*}
   \mu(w) = \frac{n}{T_0} = \frac{n}{n S} = \frac 1S.
 \end{equation*}
-Finally, for given $w$ we can maximize the waiting time by setting
-$\lambda = \mu(w)$, and then by Little's law,
+\end{solution}
+\end{exercise}
+
+Finally, for given $w$  the largest arrival rate we can handle is 
+$\lambda = \mu(w)$. 
+
+\begin{exercise}
+  Show that when $\lambda=\mu(w)$, 
+\begin{equation*}
+  \E W = 
+\begin{cases}
+  T_0=nS, & \text{ if } w\leq n, \\
+  \frac{w}{n} T_0 = w S, & \text{ if } w\geq n,
+\end{cases}
+\end{equation*}
+is the waiting time in the network.
+\begin{hint}
+  Use Little's law.
+\end{hint}
+  \begin{solution}
 \begin{equation*}
   \begin{split}
   \E W 
@@ -100,23 +130,35 @@ $\lambda = \mu(w)$, and then by Little's law,
 \end{cases}
   \end{split}
 \end{equation*}
-Thus, we see that $w>n$, there must be $w-n$ jobs in queue and the
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}
+  What do you conclude from the above exercises?
+  \begin{hint}
+   If $w<n$, then what happens? If $w>n$, what are the $w-n$ jobs doing?
+  \end{hint}
+  \begin{solution}
+When $w>n$, there must be $w-n$ jobs in queue and the
 other $n$ jobs are in service. So, in conclusion, in determinstic
 tandem networks adding more than $n$ jobs does not increase the
 network capacity, but only increases the waiting times. On the other
 hand, setting $w<n$, minimizes the waiting times, but also negatively
-affects the capacity.
+affects the capacity of the network. 
+
+Thus, to balance waiting times and capacity, we need to tune the amount of work in the system. The critical WIP $W_0$ is the minimal WIP we need to keep all bottleneck machines occupied without adding extra waiting time.
+  \end{solution}
+\end{exercise}
 
 The problems below are generalizations to networks with multi-server
 stations, servers with different processing rates, and multiple
 routings. They are meant to help you become acquainted with networking
-behavior (and also Little's law, as we use this time and again
-here). The problems appear much simpler than they are; I had much less
-trouble making the problems than solving them. In fact, to ensure that
-I got the answer right, I often tried to find two different ways to
-solve the same problem. Be warned!
+behavior, and also with Little's law, which we we use time and again
+here. Warning, these problems are quite challenging, despite their apparent simplicity; I had much less trouble making the problems than solving them. In fact, to ensure that
+I got the answer right, I often tried to find at least two different ways to
+solve the same problem. 
 
-\begin{question}
+\begin{exercise}
   A production system consists of 2 separate stations. Jobs never go
   from one machine to another. The processing times are
   $(t_1, t_2) = (1, 2)$ hours. The arrival rates are
@@ -147,18 +189,29 @@ Can we see this in another way? Yes, because $2$ out of $3$ jobs have service ti
   \frac23 1 + \frac 1 3 2 = \frac 4 3.
 \end{equation*}
   \end{solution}
-\end{question}
+\end{exercise}
 
 
 
-\begin{question}
+\begin{exercise}
   A production network consists of 3 single-machine stations in
   tandem, i.e., in series, c.f. Figure~\ref{fig:tandemraw}. The
   processing times are $(2, 3, 2)$ hours respectively, i.e., constant
   and such that $t_1=2$ hours, $t_2=3$ hours and $t_3=2$ hours.
-
 What are the critical WIP $W_0$, bottleneck
   capacity $r_b$ and raw processing time~$T_0$?
+  \begin{solution} 
+    The raw processing time is just the sum of the processing times at
+    each station. All stations have the same arrival rate, hence
+    machine, being the slowest, is the bottleneck. Hence,
+ \begin{align*}
+      T_0 &= 2 + 3 + 2 = 7\\
+   r_b &= \mu_2 = \frac13 \\
+      W_0 &= r_b T_0 = \frac73.
+    \end{align*}
+  \end{solution}
+\end{exercise}
+
 
   \begin{figure}[ht]
     \centering
@@ -189,20 +242,8 @@ queuei/.pic={
 \label{fig:tandemraw}
   \end{figure}
 
-  \begin{solution} 
-    The raw processing time is just the sum of the processing times at
-    each station. All stations have the same arrival rate, hence
-    machine, being the slowest, is the bottleneck. Hence,
- \begin{align*}
-      T_0 &= 2 + 3 + 2 = 7\\
-   r_b &= \mu_2 = \frac13 \\
-      W_0 &= r_b T_0 = \frac73.
-    \end{align*}
-  \end{solution}
-\end{question}
 
-
-\begin{question}
+\begin{exercise}
   A production network consists of 3 single-machine stations in tandem
   with processing times $(2, 3, 2)$ hours.  Suppose we modify this
   network by adding one extra machine to station 2, with processing
@@ -232,15 +273,14 @@ Is the new machine placed in parallel or in series?
     multi-server stations. Thus, realize that the raw processing time
     at station 2 is still $3$ hours, not $3/2$.
   \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
   A production network consists of 3 single-machine stations in tandem
   with processing times $(2, 3, 2)$ hours.  Suppose we modify this
   network by adding one extra machine to station 2 with
   processing time $t=4$ hours.  What are $W_0$, $r_b$ and $T_0$?
-
   \begin{hint}
 Check your reasoning very carefully here. It is easy to do it wrong.
   \end{hint}
@@ -315,25 +355,24 @@ general, it might be that schedules that mininime $T_0$ (on average)
 are not work-conserving (i.e., such that when jobs are waiting, not
 all machines are idle.)
 \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
 Why does the critical WIP change in the different cases above? 
-\end{question}
+\end{exercise}
 \begin{solution}
   Because $T_0$ increases and/or the bottleneck rate increases. In
   both cases, we need more $W_0$ to fill the network and achieve that
   the throughput can be equal to $r_b$ in the best case.
-
 \end{solution}
 
-\begin{question}
+\begin{exercise}
   A production network consists of 3 single-machine stations in tandem
   with processing times $(2, 3, 2)$ hours.  Suppose we modify this
   network by adding one extra machine to station 2 with 
   processing time $t=1$ hour.  What are $W_0$, $r_b$ and $T_0$?
-\end{question}
+\end{exercise}
 \begin{solution}
   Now the slow machine at station 2 becomes superfluous. The fast
   machine at station 2 can cope with all jobs that arrive from station
@@ -352,7 +391,7 @@ Why does the critical WIP change in the different cases above?
 Taking  $T_2=(1+3)/2=2$ is plainly silly. 
 \end{solution}
 
-\begin{question}
+\begin{exercise}
   In the previous question, it might seem that one machine at the
   second station is superfluous. Which one, and why? Would you remove
   this superfluous machine in a real production network?
@@ -362,7 +401,7 @@ Taking  $T_2=(1+3)/2=2$ is plainly silly.
   capacity is useful. However, if it is very costly to keep the slow
   machine operational, I would scrap it.
 \end{solution}
-\end{question}
+\end{exercise}
 
 
 % What would you have
@@ -370,12 +409,12 @@ Taking  $T_2=(1+3)/2=2$ is plainly silly.
 % hours? Then you simply cannot give half of the jobs to the slow
 % machine; it will overflow.
 
-\begin{question}
+\begin{exercise}
   A production network consists of 3 single-machine stations in tandem
   with processing times $(2, 3, 2)$ hours.  Suppose we modify this
   network by adding one extra machine to station 2 with processing
   time $t=7$ hours.  What are $W_0$, $r_b$ and $T_0$?
-\end{question}
+\end{exercise}
 \begin{solution}
   \begin{align*}
   r_2 &= \frac13 + \frac17 = \frac{10}{21} < \frac12\\
@@ -391,7 +430,7 @@ W_0 &= r_b T_0.
 \end{solution}
 
 
-\begin{question}
+\begin{exercise}
   A production network consists of 3 single-machine stations in tandem
   with processing times $(2, 3, 2)$ hours.  Suppose we modify this
   network such that $2/3$ of the jobs \emph{ leave after the first}
@@ -436,16 +475,16 @@ W_0 = r_b T_0 = \frac12\frac{11}3 = \frac{11}6,
 \end{equation*}
 which agrees with our earlier result.
 \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
   A production network consists of 3 single-machine stations in tandem
   with processing times $(2, 3, 2)$ hours.  Suppose we modify this
   network such that 4/5 of the jobs \emph{bypass the second} station,
   i.e., 1/5 of the jobs have the routing $[1,2,3]$, but 4/5 have
   routing $[1,3]$.  What are $W_0$, $r_b$ and $T_0$?
-\end{question}
+\end{exercise}
 \begin{solution}
   Now stations 1 and 3 are bottlenecks with $r_b = 1/2$. For $T_0$ we have
   \begin{equation*}
@@ -457,10 +496,10 @@ W_0 = r_b T_0 = \frac 12 \frac{23}5 = \frac{23}{10}.
 \end{equation*}
 \end{solution}
 
-% \begin{question}
+% \begin{exercise}
 %   Building up on the previous question, which stations would you
 %   include anyway in a CONWIP loop, and why?
-% \end{question}
+% \end{exercise}
 % \begin{solution}
 %   Now stations 1 and 3 are bottleneck. Thus, both stations need to be
 %   part of the conwip loop. For that matter, it is just as easy to also
@@ -469,28 +508,8 @@ W_0 = r_b T_0 = \frac 12 \frac{23}5 = \frac{23}{10}.
 % \end{solution}
 
 
-
-\begin{question}
-  For the interested: production situations can be pretty
-  complicated. Jobs can enter the network at different places, not
-  just at station 1 as we considered here. Jobs may also need rework
-  at one or more stations. One consequence of these aspects is that
-  the slowest machines or stations need not be the bottlenecks. Can
-  you find or develop a general algorithm by which we can compute
-  $T_0$, $W_0$ and $r_b$ for any network of reasonable size? (I have
-  not tried this yet. It might be too difficult. \tbd.) 
-
-  One way to approach this problem is by placing (imaginary) huge
-  amounts of work in front of each station and just see how the network drains. 
-  \begin{solution}
-    As indicated in the problem, I don't have a solution for this
-    problem. However, given the elegance of the problem, I am pretty
-    sure it has been solved.
-  \end{solution}
-
-\end{question}
-
-
+Production situations can be pretty  complicated. Jobs can enter the network at different places, not  just at station 1 as we considered here. Jobs may also need rework  at one or more stations. One consequence of these aspects is that   the slowest machines or stations need not be the bottlenecks. If you like, you can try to find or develop a general algorithm to compute
+ $T_0$, $W_0$ and $r_b$ for any network of reasonable size.  One way to approach this problem might be to  place (imaginary) huge  amounts of work in front of each station and just see how the network drains. Given the elegance of the problem, I am quite   sure it has been solved, but I haven't as yet.
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}

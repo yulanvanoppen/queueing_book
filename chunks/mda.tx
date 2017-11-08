@@ -3,7 +3,6 @@
 \label{sec:mda}
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -51,12 +50,12 @@ Up- and down-crossing of level $k$ gives that
   \TH_j(n) p(k-1|n-1) = \min(k,c_j) p(k|n). 
 \end{equation}
 
-\begin{question}
-  Apply the MDA algorithm to the network discussed in Question~\ref{ex:mva_numerical}, but now assume that station 1 has 2 servers. 
+\begin{exercise}
+  Apply the MDA algorithm to the network discussed in Exercise~\ref{ex:mva_numerical}, but now assume that station 1 has 2 servers. 
   \begin{hint}
  Just follow the description of the algorithm of the book of
     Zijm. I expect that you have read the solution of
-    Question~\ref{ex:mva_numerical}.
+    Exercise~\ref{ex:mva_numerical}.
   \end{hint}
   \begin{solution}
     Take $n=1$.
@@ -113,17 +112,17 @@ p_1(0|2) &= 1 - p_1(1|2) - p_1(2|2).
     I am done (and fed up). Its time to for the computer to take over
     \ldots
   \end{solution}
-\end{question}
+\end{exercise}
 
 
-
-\begin{question}[use=false]
+\begin{comment}
+\begin{exercise}[use=false]
   \begin{enumerate}
   \item 
   Provide an interpretation of a single-server queueing server with a
   finite calling population in terms of a closed network.
 \item Apply the MDA algorithm to this situation and show that the
-  results of Question~\ref{ex:calling} come out.
+  results of Exercise~\ref{ex:calling} come out.
 \end{enumerate}
 \begin{solution}
   \begin{enumerate}
@@ -139,9 +138,11 @@ p_1(0|2) &= 1 - p_1(1|2) - p_1(2|2).
   \item     TBD.
   \end{enumerate}
   \end{solution}
-\end{question}
+\end{exercise}
+\end{comment}
 
-\begin{question}
+
+\begin{exercise}
 Zijm.Ex.3.1.15
 \begin{solution}
   There is no end to the number of variations we can make. An
@@ -252,11 +253,10 @@ All is according to intuition. Indeed, the throughput increases
 slightly. Thus, it may be interesting to increase the production rate
 of non-bottleneck machines, provided its (much) easier/cheaper than
 improving the bottleneck.
-
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
   Consider Example 3.5. Suppose you would add an extra machine to
   station 0. What will become the throughput and the average number of
   jobs at each station? Use the Marginal Distribution Analysis
@@ -265,7 +265,7 @@ improving the bottleneck.
   \begin{solution}
     I first implement the algorithm. Then I use the case, i.e., the
     data of Example 3.4, and compare, as a test, the results to the
-    results of the previous question.
+    results of the previous exercise.
 
 
 \begin{lstlisting}
@@ -366,32 +366,25 @@ print(TH(0, n) * EW(0, n)) # Little's law as a check.
 
 Finally, plot the probability mass functions for stations 0, 1, and 2.
 
+  
 
 \begin{lstlisting}
 import matplotlib.pyplot as plt
-import seaborn as sns
-sns.set_context("paper")
 
 plt.figure(figsize=(6, 2))
 plt.plot([float(p(0, k, n)) for k in range(n + 1)], label="S0")
 plt.plot([float(p(1, k, n)) for k in range(n + 1)], label="S1")
 plt.plot([float(p(2, k, n)) for k in range(n + 1)], label="S2")
 plt.legend()
-plt.show()
 filename = "figures/mda_mass.pdf"
 plt.savefig(filename)
 plt.close()
-\end{lstlisting}\begin{lstlisting}
-/usr/local/lib/python3.5/dist-packages/IPython/html.py:14:
-ShimWarning: The `IPython.html` package has been deprecated since
-IPython 4.0. You should import from `notebook` instead.
-`IPython.html.widgets` has moved to `ipywidgets`.
-  "`IPython.html.widgets` has moved to `ipywidgets`.", ShimWarning)
 \end{lstlisting}
 
 \includegraphics{mda_mass}
+
   \end{solution}
-\end{question}
+\end{exercise}
 
 
 

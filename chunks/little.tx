@@ -71,9 +71,7 @@ until $T$.
 
 \begin{exercise}
   Use the result of the previous exercise to show  \recall{Little's law}
-\begin{equation*}
-\E L = \lambda \E W.
-\end{equation*}
+$\E L = \lambda \E W.$
 \begin{hint}
   Divide both sides by $T$. At the right hand side use that $1/T =  A(T)/T \cdot 1/A(T)$. Take limits.
 \end{hint}
@@ -147,21 +145,17 @@ $\E{L_S} = \rho$.
   For a given single server queueing system the average number of
   customers in the system is $\E L = 10$, customers arrive at rate
   $\lambda=5$ per hour and are served at rate $\mu=6$ per hour.
-  \begin{enumerate}
-  \item What is the average time customers spend in the system?
-  \item Suppose at the moment you join the system, the number of
+ What is the average time customers spend in the system?
+ Suppose at the moment you join the system, the number of
     customers in the system is 10. What is your expected time in the
     system? 
-  \item Why are the answers between these two questions different?
-  \end{enumerate}
+ Why are the answers between these two questions different?
   \begin{hint}
  Think about the data that is given in either situation. Check
     the units when applying Little's law.
   \end{hint}
-
     \begin{solution}
-      \begin{enumerate}
-      \item This was my initial answer (which is wrong):
+ This was my initial answer (which is wrong):
         `$\E W = \lambda \E L = \lambda 10$'.  Interestingly, I typed
         in Little's law in the wrong way\ldots So, be aware! It's all
         too easy to make mistakes with Little's law.
@@ -171,15 +165,16 @@ $\E{L_S} = \rho$.
       \E W = \E L/\lambda = 10/\lambda = 10/5 = 2
     \end{equation*}
     and \emph{not} $\E W = 10/\mu=10/6=5/3$ hour.
-  \item The time you spend in the system is the expected remaining
+
+ The time you spend in the system is the expected remaining
     service time $\E{S_r}$, i.e., the time to serve the customer in
     service at the moment of arrival, plus $9/\mu$, i.e., the time to
     clear the queue of 9 customers (recall, 1 job is in service.)
-  \item In the second question, it is \emph{given} that the system
+
+ In the second question, it is \emph{given} that the system
     length is 10 at the moment of arrival. Now, $L$ as `seen' by a
     given customer upon arrival need not be the same as the
     time-average $L$.
-  \end{enumerate}
     \end{solution}
 \end{exercise}
 
@@ -242,6 +237,7 @@ Hence, Little's law follows.
 \input{hint}
 \subsection*{Solutions}
 \input{ans}
+\clearpage
 
 
 

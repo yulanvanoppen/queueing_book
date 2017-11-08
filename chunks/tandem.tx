@@ -4,40 +4,35 @@
 
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-\paragraph{Example}
 
-Consider two stations in tandem. The service process at both stations
+Consider two single-server stations in tandem. The service process at both stations
 is subject to variability. Suppose you have some money to spend on
 reducing the variability of just one, but not both, of the machines.
-Which one is the better one to spend it on?\footnote{You should
-  realize the relevancy of modeling for this problem. Due to the lack
-  of money you can only achieve one of the alternatives; hence there
-  is no way of finding out what would have happened if you would have
-  made the other choice.}
+Which one is the better one to spend it on?  As stated, this problem is of course not clear cut. To come with a well balanced answer we need some extra information, such as which of the two
+stations has the larger variability. However, with the queueing tools we developed up to now, we can provide some general insight into this problem. Realize the relevancy of modeling for this problem. Due to the lack  of money you can only achieve one of the alternatives; hence there   is no way of finding out what would have happened if you would have   made the other choice. Thus, we need models, simulations and/or experiments to find out what is the best option.
 
-The answer to this problem is of course not clear cut. A well balanced
-answer requires some extra information, such as which of the two
-stations has the larger variability. However, we can provide some
-general insights into this problem.
-
-We first compute the expected waiting time in the queue at both
+To obtain some initial insights, we first compute the expected waiting time in the queue at both
 stations for a  reference situation. Then we derive similar
 expressions for the waiting times in case we spend all money on the
-second or first station. 
-
-\emph{The reference situation} As a reference scenario, suppose that
-the arrival process has a Poisson distribution with rate $\lambda$,
-and that the service distributions at the first and second server,
+second or first station.  As a reference scenario, suppose that the arrival process has a Poisson distribution with rate $\lambda$, and that the service distributions at the first and second server,
 respectively, are exponential with rate $\mu_1$ and $\mu_2$,
 respectively. This is, from an analytic point of view, about the
-simplest situation we can consider.  We now focus on the waiting times
-for each station separately.
+simplest situation we can consider.  
 
+\begin{exercise}
+Show that for the reference situation the average queueing time is given by
+\begin{equation}
+\E{W_Q}  = \frac{\rho_1}{1-\rho_1} \frac1{\mu_1} + \frac{\rho_2}{1-\rho_2} \frac1{\mu_2},
+\end{equation}
+where $\rho_i = \lambda/\mu_i$ and $\E{S_i} = 1/\mu_i$, for $i=1,2$. 
+\begin{hint}
+Focus on the waiting times for each station separately, and realize that each is an $M/M/1$ queue.
+\end{hint}
+\begin{solution}
 The first queue is the familiar $M/M/1$ queue.  (Why?) For the sequel
 it is important to observe that the departure process of the first
 station, i.e., the distribution of times between jobs leaving the
@@ -65,10 +60,21 @@ the total waiting time has the form:
   \end{split}
 \end{equation}
 where $\rho_i = \lambda/\mu_i$ and $\E{S_i} = 1/\mu_i$, for $i=1,2$. 
+\end{solution}
+\end{exercise}
 
 
-\emph{Case1: Spend all the money on the second server} 
-
+\begin{exercise}
+Suppose we spend all our  money on the second server and that this suffices to entirely remove all  variability of  service process. This  is of course (a bit) optimistic; the situation will not get any  better than this. Show that  in this case
+\begin{equation*}
+  \E{W_Q}= \frac{\rho_1}{1-\rho_1} \frac1{\mu_1} +
+  \frac12\frac{\rho_2}{1-\rho_2} \frac1{\mu_2}. 
+\end{equation*}
+is the total time in queue.
+\begin{hint}
+  If we can reduce all service variability at the second server, the second station can be modelled as an $M/D/1$ queue.
+\end{hint}
+\begin{solution}
 As we reduce the variability of the second server, the service process
 is no longer exponential. However, the arrival process at the second
 station is still Poisson. As a consequence, the queueing discipline
@@ -81,8 +87,7 @@ where $C_{s,2}^2$ is the squared coefficient of variation of the
 service process of the second server.
 
 Suppose the money we have suffices to entirely remove the variability
-of the second server.  (This is of course also the best we can
-possibly achieve.) This yields that the coefficient of variation
+of the second server.  This yields that the coefficient of variation
 $C_{s,2}^s = 0$. As an aside, observe that as all variability has been
 removed, the service process is entirely deterministic: each service
 takes exactly the same amount of time. As a result, we arrive at the
@@ -96,15 +101,27 @@ from~(\ref{eq:200}) by setting $C_{s,2}^2 =0$:
 Clearly, this is half the waiting time of the  $M/M/1$ queue. 
 
 Since we do not change the first station in any way, this is still an
-$M/M/1$ queue. Thus, the total time in queue for this scenario becomes:
+$M/M/1$ queue. 
+Thus, the total time in queue for this scenario becomes:
 \begin{equation*}
   \E{W_Q}= \frac{\rho_1}{1-\rho_1} \frac1{\mu_1} +
   \frac12\frac{\rho_2}{1-\rho_2} \frac1{\mu_2}. 
 \end{equation*}
+\end{solution}
+\end{exercise}
 
-
-\emph{Case 2: Spend the money on the first server} Analogous to the
-previous situation, suppose we can set the coefficient of variation
+\begin{exercise}
+Suppose now that we spend all our money on the first station, and that now the service process of the first station becomes completely regular. Motivate that 
+\begin{equation*}
+  \E{W_Q}= \frac12\frac{\rho_1}{1-\rho_1} \frac1{\mu_1} +
+  \frac12\frac{\rho_2}{1-\rho_2} \frac1{\mu_2}
+\end{equation*}
+is a reasonable approximation of the queueing time. Compare this to the queueing time of the reference situation.
+  \begin{hint}
+    Realize that now also the distribution of interdeparture times of the first station changes and becomes more regular.
+  \end{hint}
+  \begin{solution}
+Analogous to the previous situation, suppose we can set the coefficient of variation
 $C_{1,s}^2$ of the first server to zero. Thus, this becomes an $M/D/1$
 queue, so that, similar to~(\ref{eq:300}):
 \begin{equation*}
@@ -152,8 +169,16 @@ becomes:
 \end{equation*}
 which is half the waiting time of the reference scenario, and still
 less than the first scenario.
+  \end{solution}
+\end{exercise}
 
-\emph{Conclusion} As a general guide line, it seems best to reduce the
+\begin{exercise}
+  What do you conclude from the above exercises?
+  \begin{hint}
+    What would you do if there would be third station in this tandem network?
+  \end{hint}
+  \begin{solution}
+As a general guide line, it seems best to reduce the
 variability at the first station. The main point to remember is that
 reducing the variability of the service process at the first station
 also reduces the variability of its departure process, hence the
@@ -167,26 +192,24 @@ there were a third station, also its input process would behave better
 than Poisson. Consequently, reducing variability upstream reduces (in
 general) the variability of the arrival processes at all stations
 downstream, reducing the waiting time all along the chain. 
+  \end{solution}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
   Assume that in a network of five stations the last station is the
   bottleneck. Under what conditions would you invest in this last
   work station?
   \begin{solution}
-    If it would be cheap. However, as the previous question should
-    show you, by reducing variability at the first station the waiting
-    time of all stations along the line goes down. Thus, by improving
+    If it would be cheap. However, as the previous exercise explains, by reducing variability at the first station the waiting     time of all stations along the line goes down. Thus, by improving
     the first or second machine the total average waiting time may go
     down more than by only improving the situation at the last,
     bottleneck, machine. 
 
-    Thus, we need models, simulations and/or experiments to find out
-    what is the best option.
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
   (Hall 5.22). At a large hotel, taxi cabs arrive at a rate of 15 per
   hour, and parties of riders arrive at the rate of 12 per
   hour. Whenever taxicabs are waiting, riders are served immediately
@@ -198,17 +221,13 @@ downstream, reducing the waiting time all along the chain.
   \item Calculate the expected waiting time for cabs and the expected waiting for parties. (For cabs, compute the average among those that do not go elsewhere.)
   \item In words, what would be the impact of allowing four cabs to wait at a time?
   \end{enumerate}
-  
   \begin{hint}
-Try to adapt the ideas behind Figure 2.2 of Zijm to this case.
+This is really a neat problem. Please spend serious time on it to
+solve before looking at the answer. It requires some ingenuity on your part.  Try to adapt the ideas behind Figure 2.2 of Zijm to this case.
   \end{hint}
-
     \begin{solution}
       \begin{enumerate}
       \item 
-This is really a neat problem. Please spend serious time on it to
-solve before looking at the answer. It requires some ingenuity on your part. 
-
 Let $p_{ij}$ be the fraction of time that the system contains $i$
 riders and $j$ taxi cabs. I assume that all members of a party of
 riders can be served by a single cab (that is, the parties do not
@@ -397,7 +416,7 @@ Lp
 \end{lstlisting}
   \end{enumerate}
     \end{solution}
-\end{question}
+\end{exercise}
 
 
 \Closesolutionfile{hint}

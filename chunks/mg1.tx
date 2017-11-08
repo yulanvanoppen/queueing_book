@@ -5,7 +5,6 @@
 
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -90,9 +89,7 @@ the interchange being allowed by the positivity of $R_k(s)$.
 
 \begin{exercise}
 Show that for $k<n$, so that $D_k< D_n$,
-\begin{equation*}
-\int_0^{D_n} R_k(s) \d s = \frac{S_k^2}2.
-\end{equation*}
+$\int_0^{D_n} R_k(s) \d s = \frac{S_k^2}2.$
 \begin{hint}
   Graphically, the result follows from Figure~\ref{fig:mg1remainingservicetime}.   
 \end{hint}
@@ -127,12 +124,10 @@ Thus,
 \begin{exercise}
 Show that
 \begin{equation}\label{eq:32}
-  \lambda \E{S^2} = (1+C_s^2)\rho\E S,
+  \lambda \E{S^2} = (1+C_s^2)\rho\E S, \quad\text{where }
+ C_s^2 = \frac{\V S }{(\E S)^2}
 \end{equation}
-where the \recall{square coefficient of variation} is defined as
-\begin{equation*}
- C_s^2 = \frac{\V S }{(\E S)^2}.
-\end{equation*}
+is the \recall{square coefficient of variation}.
 \begin{solution}
 Use that 
 \begin{equation*}
@@ -157,10 +152,7 @@ The problems below will clarify how useful this result is.
 
 
 \begin{exercise}\label{ex:9}
-Show  from Eq.~\eqref{eq:34} that
-\begin{equation*}
-  \E{S_r\given S_r>0} = \frac{\E{S^2}}{2 \E S}
-\end{equation*}
+Show  from Eq.~\eqref{eq:34} that $\E{S_r\given S_r>0} = \E{S^2}/2 \E S$.
 \begin{solution}
  From Eq.~\eqref{eq:37} and the sentences above this equation,
     we have that
@@ -365,7 +357,7 @@ L
     \begin{equation*}
 \E{W_Q} = \frac{1+1}2\frac{\rho}{1-\rho} \E S = \frac{\rho}{1-\rho} \E S,
     \end{equation*}
-which we also found in the previous section.
+which we also found in a previous section.
     \end{solution}
 \end{exercise}
 
@@ -375,10 +367,7 @@ which we also found in the previous section.
   service time is always~$T$. Compare $\E{L(M/D/1)}$ to $\E{L(M/M/1)}$
   where the mean service time is the same in both cases.
 \begin{solution}
-  For the $M/D/1$ the service time is deterministic. 
-
-  Thus, the service time $S=T$ always; recall that $S$ is
-  deterministic under the assumptions in the exercise. Therefore, we
+  For the $M/D/1$ the service time is deterministic. Thus, the service time $S=T$ always; recall that $S$ is   deterministic under the assumptions in the exercise. Therefore, we
   must have that $\P{S\leq T} = 1$. As an immediate consequence,
   $\P{S>T} = 1-\P{S\leq T} = 0$. Also, $\P{S \leq x} = 0$ for all
   $x<T$. Thus, all probability mass is concentrated on the point $T$,
@@ -392,7 +381,7 @@ which we also found in the previous section.
   coefficient of variation. I use these steps time and again.
 
   First, $\E S = T$ since $\P{S=T} =1$. We can also obtain this in a
-  more formal way. The density $F(x)$ of $S$ has a, so-called, atom at
+  more formal way. The distribution $F(x)$ of $S$ has a, so-called, atom at
   $x=T$, such $F(T) - F(T-) =1$.  Using this,
   \begin{equation*}
     \E S = \int_0^\infty x \d F(x) = T\cdot (F(T)-F(T-)) = T.

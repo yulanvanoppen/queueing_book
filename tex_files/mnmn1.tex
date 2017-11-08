@@ -4,7 +4,6 @@
 \label{sec:mnmn1}
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -211,7 +210,7 @@ Observe that the right hand side is precisely equal to $\rho c G$, and hence,
 \end{exercise}
 
 \begin{exercise}
-  Check that  Eq.\eqref{eq:9} for the $M/M/c$ queue reduces to the $M/M/1$ queue if you take $c=1$.
+  Check that  Eq.\eqref{eq:9} for the $M/M/c$ queue reduces to the $M/M/1$ queue if $c=1$.
   \begin{hint}
 Fill in $c=1$. Realize that this is a check on the formulas.
   \end{hint}
@@ -256,13 +255,8 @@ patients as jobs.
 \begin{exercise}
 Consider the $M/M/2/3$ queue with arrival rate $\lambda$ and
 service rate $\mu$ (thus, at most 2 jobs can be in service and 1 in queue.)
-\begin{enumerate}
-\item Derive the level-crossing equations for this queueing system. 
-\item Derive a simple and closed form expressions for the state 
-   probabilities in steady state. 
- \end{enumerate}
- 
- \begin{hint}
+ Derive first the level-crossing equations for this queueing system, then  derive a simple and closed form expressions for the state    probabilities in steady state. 
+  \begin{hint}
  Think about what would be the appropriate model choices for
    $\lambda(n)$ and $\mu(n)$ and use the level-crossing equations
    $\lambda(n) p(n) = \mu(n+1)p(n+1)$.  For instance, realize that
@@ -272,9 +266,7 @@ service rate $\mu$ (thus, at most 2 jobs can be in service and 1 in queue.)
    busy when the system contains 2 or more jobs?  What does this say
    about $\mu(k)$ for $k=2$ or $k=3$.
   \end{hint}
-
   \begin{solution}
-
     \begin{enumerate}
     \item Use this figure. Make sure you understand why $\mu(2)=2\mu$ and so on. 
 
@@ -330,12 +322,10 @@ p(0) = (1+\rho + \rho^2/2 + \rho^3/4)^{-1}.
   $M/M/c/c+K$ queue in which at most $c$ jobs can be in service and $K$ in queue. Try to derive the steady state probabilities
   $p(0)$, $p(1), \ldots$. You do not have to compute the normalization
   constant $G$. 
-
   \begin{hint}
 Use $\lambda(n) p(n) = \mu(n+1)p(n+1)$ and
     find suitable expressions for $\lambda(n)$ and $\mu(n+1)$. 
   \end{hint}
-
   \begin{solution}
     $\lambda(n) \equiv \lambda$ for all $n<c+K$. When $n=c+K$,
     $\lambda(n)=0$, since then the system is full, and all arriving
@@ -503,8 +493,6 @@ that can arrive to the queueing system is only 8.
 \end{solution}
 \end{exercise}
 
-
-
 \begin{comment}
 \begin{exercise}[use=false]
   (Hall 5.21) The queueing operator of the previous problem has
@@ -568,29 +556,21 @@ queue).
 
   \end{solution}
 \end{exercise}
-  
 \end{comment}
 
 
 \begin{exercise}(Systems with finite calling population)
-  \begin{enumerate}
-  \item Derive the steady state probabilities $p(n)$ for a
+ Derive the steady state probabilities $p(n)$ for a
     single-server queue with a finite calling population with $N$
     members, i.e., jobs that are in service cannot arrive to the system.
-  \item Check the answer you obtained for the cases $N=1$ and
+ Check the answer you obtained for the cases $N=1$ and
     $N=2$. Interpret the results.
-  \item Derive the steady state probabilities $p(n)$ for a queue with
-    a finite calling population with $N$ members and $N$ servers,
-    i.e., the number of servers in the queueing system is equal the
-    size of the calling population.
-  \end{enumerate}
-  
   \begin{hint}
 Use $\lambda(n) p(n) = \mu(n+1)p(n+1)$, and realize that for
       this case $\lambda(n) = (N-n)\lambda$ and $\mu(n) = \mu$.
   \end{hint}
     \begin{solution}
-1) Take $\lambda(n) = (N-n)\lambda$ and $\mu(n) = \mu$, and solve
+ Take $\lambda(n) = (N-n)\lambda$ and $\mu(n) = \mu$, and solve
     Eq.~\eqref{eq:25} and \eqref{eq:20}.  Thus: 
     \begin{equation*}
       \begin{split}
@@ -615,10 +595,15 @@ We see from this that $p(0)$ times some constant must be $1$. Hence, dividing by
   p(0) = \left(\sum_{n=0}^N \rho^n \frac{N!}{(N-n)!}\right)^{-1}.
 \end{equation*}
 I asked WolframAlpha to simplify this, but the answer I got was not particularly revealing. 
+    \end{solution}
+\end{exercise}
 
-2) \tbd
-
-3)   Take $\lambda(n) = (N-n)\lambda$ and $\mu(n) = n \mu$. Then 
+\begin{exercise}  Derive the steady state probabilities $p(n)$ for a queue with
+    a finite calling population with $N$ members and $N$ servers,
+    i.e., the number of servers in the queueing system is equal the
+    size of the calling population.
+    \begin{solution}
+  Take $\lambda(n) = (N-n)\lambda$ and $\mu(n) = n \mu$. Then 
     \begin{equation*}
       \begin{split}
       p(n+1) 
@@ -638,7 +623,6 @@ I asked WolframAlpha to simplify this, but the answer I got was not particularly
 \end{exercise}
 
 
-
 \begin{exercise}
   What would be the difference between a multi-server queue and a
   single-server queue with a fast server? We can use the formulas for
@@ -647,20 +631,15 @@ I asked WolframAlpha to simplify this, but the answer I got was not particularly
   $M/M/3$ queue, with arrival rate $\lambda = 5$ per day and $\mu=2$
   per server, and we compare it to an $M/M/1$ with the same arrival
   rate but with a service rate of $\mu = 3\cdot 2 = 6$. 
-
-
  When is it OK to approximate the $M/M/c$ queue by an $M/M/1$
     queue with a fast server?
-
     \begin{hint}
 Implement the formulas for $\E{L_Q(M/M/3)}$ for the $M/M/3$ queue in
   some computer program (R, excel, python, whatever) and compare this
   to $\E{L_Q(M/M/1)}$ for the fast $M/M/1$ case.  Make plots of
   $\E{L_Q(M/M/3)}$ and $\E{L(M/M/3)}$ as functions of $\rho$.
     \end{hint}
-
   \begin{solution}
-
 I am going to implement the formulas of Eq.~(\ref{eq:9}) in python. First the results for the $M/M/3$ queue.
 
 <<term=True>>=
@@ -729,16 +708,14 @@ is hardly any queueing time, if at all.  Thus, there must be more jobs
 in the system on average in the $M/M/3$ queue than in the fast $M/M/1$
 queue.
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
 % see progs/multi_server_queue.py
 \input{progs/multi_vs_single_server.tex}
 \caption{multi server versus single fast server}
   \label{fig:multisingle}
 \end{figure}
-
 The  code can be found on \texttt{github} in the \texttt{progs} directory.
-
 \end{solution}
 \end{exercise}
 

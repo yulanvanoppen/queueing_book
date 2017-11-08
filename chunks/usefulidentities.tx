@@ -3,7 +3,6 @@
 
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -77,7 +76,6 @@ since, evidently, $\E{S_r\given S_r=0}=0$.
 This requires some extra definitions, similar to
   $A(n,t)$ as defined in~\eqref{eq:19}.
   \end{hint}
-
   \begin{solution}
     This is, admittedly, not simple, so let us work in stages. Define
     $A(+,t)$ as the number of arrivals that see a job in service. As
@@ -165,9 +163,9 @@ With  Little's law $\E{L_Q} = \lambda \E{W_Q}$. Using this,
   \E{W_Q} = \E{S_r} + \lambda \E{W_Q} \E S  =\E{S_r} + \rho \E{W_Q},
 \end{equation*}
 since $\rho=\lambda \E S$. But this gives for the $M/G/1$ queue that
-\begin{equation}\label{eq:35}
+\begin{equation*}
   \E{W_Q} = \frac{\E{S_r}}{1-\rho} = \frac{\rho}{1-\rho} \E{S_r\given S_r>0},
-\end{equation}
+\end{equation*}
 where we use~(\ref{eq:37}) in the last equation.
 \end{solution}
 \end{exercise}
@@ -277,10 +275,7 @@ equal to the expected number of busy servers.
 \end{exercise}
 
 \begin{exercise}($M/M/1$) Explain that
-  \begin{equation*}
-\E{L_Q} = \sum_{n=1}^\infty (n-1)\pi(n),
-  \end{equation*}
-and  use this to find that $\E{L_Q}=\rho^2/(1-\rho)$.
+$\E{L_Q} = \sum_{n=1}^\infty (n-1)\pi(n)$, and  use this to find that $\E{L_Q}=\rho^2/(1-\rho)$.
   \begin{solution}
     The fraction of time the system contains $n$ jobs is $\pi(n)$ (by
     PASTA). When the system contains $n>0$ jobs, the number in queue
@@ -321,22 +316,15 @@ Another way to get the same result is by splitting:
 
 
 
+
 \begin{exercise}($M/M/1$)
-  \begin{enumerate}
-  \item 
   Use the PASTA property to see that the expected waiting time in the
   system must also be equal to
-\begin{equation*}
-  \E W = \sum_{n=0}^\infty \E{W_Q \given N=n} \pi(n) + \E S,
-\end{equation*}
+  $\E W = \sum_{n=0}^\infty \E{W_Q \given N=n} \pi(n) + \E S$, 
 where $\E{W_Q \given N=n}$ is the waiting time in queue given that an
-arrival sees $N=n$ customers upon arrival. 
-\item Motivate that $\E{W_Q \given N=1} = \E S$. 
-\item  Combine the above to see that 
-\begin{equation*}
-  \E W = \E S \sum_{n=0}^\infty n \pi(n) + \E S = \E S \E L + \E S.
-\end{equation*}
-  \end{enumerate}
+arrival sees $N=n$ customers upon arrival. Then, 
+ motivate that $\E{W_Q \given N=1} = \E S$. Finally, combine the above to see that 
+$\E W = \E S \sum_{n=0}^\infty n \pi(n) + \E S = \E S \E L + \E S$.
   \begin{solution}
     \begin{enumerate}
     \item The time in the system $\E W$ is the sum of the time in
@@ -380,10 +368,7 @@ arrival sees $N=n$ customers upon arrival.
 
 \begin{exercise}($M/G/1$)
 Show that the variance of the number of jobs in the system $L$ is
-\begin{equation*}
-\V L = \frac{\rho}{(1-\rho)^2}.
-\end{equation*}
-
+$\V L = \rho/(1-\rho)^2.$
   \begin{hint}
     $\V{L} = \E{L^2} - (\E L)^2$. We already know $\E L$ so it remains
     to compute $\E{L^2}$. Then, $\E{L^2 }= \sum_{n=0}^\infty n^2 \pi(n)$. Use that $\pi(n)=\rho^n(1-\rho)$ is the probability to see $n$ jobs in the system. Now simplify.    
@@ -525,10 +510,7 @@ distribution.
 
 \begin{exercise}
   An $M/M/2$ queueing system is very heavily utilized, with an arrival rate of 11 customers per hour, and a  service rate of 6 customers per hour per server.
-  \begin{enumerate}
-  \item Determine $\E{L_Q}$ and $\E{W_Q}$.
-  \item Compare your solution to an $M/M/1$ queue with $\rho=11/12$. Why are your answers similar or different?
-  \end{enumerate}
+ Determine $\E{L_Q}$ and $\E{W_Q}$. Compare your solution to an $M/M/1$ queue with $\rho=11/12$. Why are your answers similar or different?
   \begin{solution}
   \begin{enumerate}
   \item 
@@ -633,22 +615,17 @@ It is of interest to compare the M/M/2 system to the M/M/1 system with twice the
 \end{exercise}
 
 
-
-
+We will use the following result to derive algorithms to compute the
+performance measures for the analysis of closed-queueing network.
 \begin{exercise}
   Generalize the single-server relation
   $\E{W_Q} = \rho \E{S_r\given S_r>0} + \E{L_Q} \E S$ to the $M/M/c$
   multi-server queue. 
-
-We will use this result later to derive algorithms to compute the
-performance measures for the analysis of closed-queueing network.
-
 \begin{hint}
 Interpret each component at the right hand side of the equation
     and generalize it to a multi-server queueing system. 
 \end{hint}
   \begin{solution}
-
     Recall that for the $M/M/1$ queue, $\E{S_r\given S_r>0} = 1/\mu$.
     Applying Little's law to the queue, we have that
     $\lambda \E{W_Q} =\ E{L_Q}$, so that it follows that
@@ -705,7 +682,6 @@ one of the jobs in service.
 
 Observe also that, by PASTA, we have $\pi(k) = p(k)$, so that the
 arriving job also sees $p(k)$.
-
   \end{solution}
 \end{exercise}
 
@@ -720,8 +696,6 @@ arriving job also sees $p(k)$.
 \item Determine $\V{L}$ and $\V{L_Q}$.
   \item Determine the service time and the utilization.
   \end{enumerate}
-  
-
     \begin{solution}
       \begin{enumerate}
       \item 
@@ -875,11 +849,7 @@ idle
 \begin{exercise}
   (Hall 5.5) An $M/M/1$ queue has an arrival rate of 100 per hour and
   a service rate of 140 per hour.
-  \begin{enumerate}
-  \item What is $p(n)$?
-\item What are $\E{L_Q}$, $\E L$ 
-\end{enumerate}
-
+ What is $p(n)$?  What are $\E{L_Q}$, $\E L$ 
 \begin{solution}
   \begin{enumerate}
   \item 
@@ -932,12 +902,8 @@ Wq
 
 \begin{exercise}(Hall, 5.6)
   An $M/M/1$ queue has been found to have an average waiting time in queue of 1 minute. The arrival rate is known to be 5 customers per minute.
-  \begin{enumerate}
-  \item What are the service rate and utilization?
-  \item Calculate $\E{L_Q}$,  $\E L$ and $\E W$.
-  \item The queue operator would like to provide chairs for waiting customers. He would like to have a sufficient number so that all customers can sit down at least 90 percent of the time. How many chairs should he provide?
-  \end{enumerate}
-  
+ What are the service rate and utilization? Calculate $\E{L_Q}$,  $\E L$ and $\E W$. Finally, 
+ The queue operator would like to provide chairs for waiting customers. He would like to have a sufficient number so that all customers can sit down at least 90 percent of the time. How many chairs should he provide?
     \begin{solution}
       \begin{enumerate}
       \item $\E{W_Q} = \frac{1}{\lambda}\frac{\rho^2}{1-\rho}$. Since
@@ -1031,7 +997,6 @@ As a check, I use that $(1-\rho) \sum_{j=0}^n \rho^j = 1-\rho^{n+1}$.
 And indeed, we found the right $n$.
 
   \end{enumerate}
-
     \end{solution}
 \end{exercise}
 
@@ -1056,17 +1021,12 @@ Use the level-crossing equations of the $M(n)/M(n)/1$ queue.
   (Hall 5.14) An airline phone reservation line has one server and a
   buffer for two customers. The arrival rate 6 customers per hour, and
   a service rate of just 5 customers per hour. Arrivals are Poisson and service times are exponential. 
-  \begin{enumerate}
-  \item Estimate $\E{L_Q}$ and the average number of customers served per hour.
-  \item Estimate $\E{L_Q}$ for a buffer of size 5. What is the impact of the increased buffer size on the number of customers served per hour?
-  \end{enumerate}
-  
+ Estimate $\E{L_Q}$ and the average number of customers served per hour. Then, estimate $\E{L_Q}$ for a buffer of size 5. What is the impact of the increased buffer size on the number of customers served per hour?
   \begin{hint}
 This is a queueing system with loss, in particular the $M/M/1/1+2$ queue.
   \end{hint}
     \begin{solution}
       \begin{enumerate}
-
       \item 
 
 
@@ -1228,8 +1188,6 @@ for various values of $\lambda$.
 \end{comment}
 
 
-
-
 \begin{exercise}(Hall 5.3) After observing a queue with two servers
   for several days, the following steady-state probabilities have been
   determined: $p(0)=0.4$, $p(1) = 0.3$, $p(2)=0.2$, $p(3)=0.05$ and
@@ -1240,7 +1198,6 @@ for various values of $\lambda$.
   \item Determine $\V L$ and $\V{L_Q}$.
   \item Determine the service time and the utilization.
   \end{enumerate}
-
   \begin{solution}
     \begin{enumerate}
     \item 
@@ -1321,11 +1278,8 @@ sqrt(var_q)
   reluctant to use the stand, fearing that the food is
   unsavory. People are also reluctant to use the stand when the queue
   is long. This yields the following arrival rates (in numbers per hour): $\lambda(0) = 10$, $\lambda(1)=15$, $\lambda(2)=15$, $\lambda(3)=10$, $\lambda(4)=5$, $\lambda(n)=0, n\geq 5$. The stand has two servers, each of which can operate at 5 per hour. Service times are exponential, and the arrival process is Poisson.
-  \begin{enumerate}
-  \item Calculate the steady state probabilities.
-  \item What is the average arrival rate?
-  \item Determine $\E L$, $\E{L_Q}$, $\E W$ and $\E{W_Q}$.
-  \end{enumerate}
+ Calculate the steady state probabilities. Next,  what is the average arrival rate? Finally,
+ Determine $\E L$, $\E{L_Q}$, $\E W$ and $\E{W_Q}$.
   \begin{solution}
       \begin{enumerate}
       \item 
@@ -1438,11 +1392,7 @@ Wq # time in queue
   Poisson process with rate 28 per hour. The customers are actually
   maintenance workers at the facility, and are compensated at the same
   rate as the tool crib employees.
-  \begin{enumerate}
-  \item What is $\E W$ for $c=1, 2, 3$, or $4$ servers?
-  \item How many employees should work in the tool crib?
-  \end{enumerate}
-
+ What is $\E W$ for $c=1, 2, 3$, or $4$ servers? How many employees should work in the tool crib?
   \begin{hint}
 Realize that we have to control the number of servers. Hence,
     we are dealing with a multi-server queue, i.e., the $M/M/c$
@@ -1457,7 +1407,6 @@ queueing systems always somebody has to wait, either the customer in queue or
 the server being idle. If it is very expensive to let customers wait, the number
 of servers must be high, whereas if servers are relatively expensive, customers have to do the waiting.)
   \end{hint}
-
   \begin{solution}
     \begin{enumerate}
     \item 
@@ -1615,6 +1564,7 @@ Clearly, $c=3$ should do.
 \input{hint}
 \subsection*{Solutions}
 \input{ans}
+\clearpage
 
 %%% Local Variables:
 %%% mode: latex

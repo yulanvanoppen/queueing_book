@@ -2,7 +2,6 @@
 \label{sec:rate-stability}
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -41,7 +40,6 @@ guarantees that the above limit exists.
 \begin{exercise}
   Can you make an arrival process such that $A(t)/t$ does not have a
   limit?  
-
   \begin{hint}
 As a start, the function $\sin(t)$ has not a limit as
     $t\to\infty$. However, the time-average $\sin(t)/t \to 0$.  Now
@@ -99,14 +97,12 @@ expected interarrival time.
   is right-continuous. (This exercise is meant to provide some insight into what needs
   to be done to put everything on solid ground.  If you are not
   interested in the maths, you can skip the problem.)
-
     \begin{hint}
  Use that $A_{A(t)} \leq t < A_{A(t)+1}$. Divide by $A(t)$
       and take suitable limits. BTW, such type of proof is used quite
       often to show that the existence of one limit implies, and is
       implied by, the existence of another type of limit.  
     \end{hint}
-
  \begin{solution}
  Observing that $A_{A(t)}$ is the arrival time of the last job
     before time $t$ and that $A_{A(t)+1}$ is the arrival time of the
@@ -287,7 +283,6 @@ Remember that $\{X_k\}$ and $\{S_k\}$ are sequences of i.i.d. random variables. 
 
 \begin{exercise}
   Show that $\E{S}/\E{X}$ is the fraction of time the server is busy.
-
   \begin{hint}
 Let $T_1>A_1$ be the first time after the arrival of job 1
     that arrives at an empty system. (Observe that job 1 also arrives
@@ -299,8 +294,6 @@ Let $T_1>A_1$ be the first time after the arrival of job 1
     What is the fraction of time the server has been busy in this
     cycle?
   \end{hint}
-
-
   \begin{solution}
  The
     fraction of time that the server has been busy during $[X_1, T_1)$
@@ -420,10 +413,7 @@ What is the rate in, and what is the service capacity?
 
 \begin{exercise}\label{ex:11}
   If $\E{B}$ is the expected busy time and $\E{I}$ is the expected idle
-  time, show that 
-\begin{equation*}
-  \E{B} = \frac{\rho }{1-\rho} \E{I}. 
-\end{equation*}
+  time, show that $\E{B} = \E{I} \rho/(1-\rho) $
  is the fraction of time the  server is busy.
 \begin{solution}
   Consider a busy cycle, that is, a cycle that starts with the first
@@ -459,13 +449,7 @@ What is the rate in, and what is the service capacity?
 \begin{equation*}
   \text{minimize }  T
 \end{equation*}
-such that
-\begin{align*}
- T&=  k_A t_A + S + k_B t_B, \\
- \lambda_A T &< k_A,  \\
- \lambda_B T &< k_B.
-\end{align*}
-
+such that $ T=  k_A t_A + S + k_B t_B$, $\lambda_A T < k_A$ and $\lambda_B T < k_B$.
 \begin{hint}
 Here are some questions to help you interpret this formulation.
 \begin{enumerate}

@@ -3,7 +3,6 @@
 \label{sec:convolution}
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -27,15 +26,16 @@ We can then compute the rest of the performance measures as
 The rest of the equations in Section 3.1.2 are interesting, but not
 necessary for an implementation in computer code. 
 
-\begin{question}
+\begin{exercise}
   Explain Zijm.Eq.3.13.
   \begin{solution}
     It follows directly from the fact that $G(0,N)$ is a normalization
     constant. When there is just one station, i.e., station 0, all jobs are at that station. Hence, $\pi_0(N)=1$. From Zijm.Eq.3.1--Zijm.Eq.3.3, it follows that $f_0(N)=(V_0/\mu_0)^N$, so that $G(0,N)$ must be $1/f_0(N)$. Finally, since $V_0=1$ always, we get $G(0,N)=\mu_0^{-N}$.
   \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{comment}
+\begin{exercise}
 TBD. Relate the following to the arrival theorem below.  The derivation of
 Zijm.Eq.3.8 is particularly interesting. Rewrite Zijm.Eq.3.5 as
 \begin{equation*}
@@ -61,18 +61,19 @@ i.e., $N_i=k-1$.
   \begin{solution}
     TBD.
   \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}[use=false]
+\begin{exercise}[use=false]
   Show in the one of the examples below how to compute $\E L_i$
   \begin{solution}
     TBD.
   \end{solution}
-\end{question}
+\end{exercise}
+\end{comment}
 
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.3.1.6
 \begin{solution}
   This is related to the famous ball/boxes problem in Feller. Given
@@ -96,9 +97,9 @@ Zijm.Ex.3.1.6
   Now interpret the boxes as stations and the jobs as balls. Since we
   have $M+1$ stations, we get the result.
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.3.1.7
 \begin{solution}
   If the production rate at station $i$ is infinitely large, the time
@@ -110,10 +111,10 @@ Zijm.Ex.3.1.7
   $P_{j,k}' = P_{ji}P_{ik} + P_{j,k} $) it comes down to
   `short-circuiting' node $i$.
 \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.3.1.8
 \begin{solution}
 From Zijm.Eq.3.3 for $c_i=1$ we see that $f_i(n_i) = (V_i/\mu_i)^{n_i}$, since $\min\{c_i, k\} = \min\{1, k\} = 1$. Now using Zijm.Eqs 3.5 and 3.6,
@@ -131,12 +132,15 @@ From Zijm.Eq.3.3 for $c_i=1$ we see that $f_i(n_i) = (V_i/\mu_i)^{n_i}$, since $
   For $c>1$, the expression for $f_i$ is less simple, and the above
   derivation is not possible anymore.
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
-  Zijm.Ex.3.1.9. This question forces you to really trace down all
+\begin{exercise}
+  Zijm.Ex.3.1.9. 
+  \begin{hint}
+This problem forces you to really trace down all
   relevant definitions. Please try to do it yourself first. It is
   harder than you might think initially.
+  \end{hint}
 \begin{solution}
   The last time I solved this problem was in 2001. My answer below
   reflects my train of thought, including the mistakes. 
@@ -214,10 +218,10 @@ most natural guess is then that the time spent at a station, provided
 the visit ratios are one and there is one job, is proportional to its
 service time.
 \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.3.1.10. Assume that the visit ratios are 1.
 \begin{hint}
  Compare Zijm.Question 3.1.5.
@@ -262,10 +266,10 @@ Filling in the above, we get
   G(2,2) = \mu_0^{-2}+\mu_1^{-1}+\mu_2^{-2} + (\mu_0\mu_1)^{-1} + (\mu_1\mu_2)^{-1} + (\mu_0\mu_2)^{-1}.
 \end{equation*}
 \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.3.1.11
 \begin{solution}
   With the code I can check the results of the previous problem.  I'll
@@ -421,9 +425,9 @@ rest can be, more or less, neglected, or modeled with very simple
 models.
 
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.3.1.12
 \begin{solution}
   Because then the form of $f_i(n_i)\neq (V_i/\mu_i)^{n_i}$, but much
@@ -449,9 +453,8 @@ print(G(2, 2))
 \end{lstlisting}\begin{lstlisting}
 2.36111111111
 \end{lstlisting}
-
 \end{solution}
-\end{question}
+\end{exercise}
 
 
 

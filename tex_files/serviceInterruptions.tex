@@ -3,7 +3,6 @@
 
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -11,7 +10,7 @@
 
 See the related section 1.11 of the book of Zijm.
 
-\begin{question}
+\begin{exercise}
   Determine the expectation and variance of $S_N = \sum_{i=1}^N X_i$
   where $N$ is a random variable (with finite second moment) and
   $\{X_i\}$ are i.i.d. as the generic random variable $X$.
@@ -67,10 +66,10 @@ And finally,
 \end{equation}
 
 \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question} 
+\begin{exercise} 
 
   A small company receives orders at a rate $\lambda$.  Interarrival
   times between orders are exponentially distributed. Once $B$ orders
@@ -87,15 +86,13 @@ And finally,
   batch size $B$.
 \end{enumerate}
 \begin{hint}
-  
-\hint{1: If the batch sizes $B$ are small, relatively much time is
+1: If the batch sizes $B$ are small, relatively much time is
   spent on setups. 2: If the setup time $S$ is constant, then the
   number of orders that arrive is Poisson distributed. 3: Given a
   batch size $B$, find the time to produce such a batch, then include
   a setup time $S$ to compute the length of one production cycle. The
-  expected number of jobs served during such a cycle must not exceed the number of jobs served during the cycle.}
+  expected number of jobs served during such a cycle must not exceed the number of jobs served during the cycle.
 \end{hint}
-
 \begin{solution}
 \begin{enumerate}
 \item Only from below. If batches are very large, the fraction of time spent on setups becomes very small.
@@ -118,24 +115,24 @@ To see this, note that  the number of arrivals $N$ during a constant time is Poi
   discussed before, that it not a good idea.
 \end{enumerate}
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.1.11.1
  \begin{solution}
 Yes. The availability is $93\%$. Since $\E{S_e} = \E{S_0}/A$, and if $\E{S_0} $ is known, $\E{S_e}$ follows.
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.1.11.2
  \begin{solution}
    No, from Zijm.Eq.1.51, the average repair time has to be known. The
    repair time here is of course the time it takes for a mechanic to
    show up at work again.
 \end{solution}
-\end{question}
-\begin{question}
+\end{exercise}
+\begin{exercise}
 Zijm.Ex.1.11.3
  \begin{solution}
    It might, but perhaps a normal distribution would be better. It
@@ -149,8 +146,8 @@ Zijm.Ex.1.11.3
 
 The sensitivity study would be an interesting topic for simulation. 
 \end{solution}
-\end{question}
-\begin{question}
+\end{exercise}
+\begin{exercise}
 Zijm.Ex.1.11.4 and 1.11.5
  \begin{solution}
    We need to make an assumption about the distribution of the repair
@@ -170,9 +167,9 @@ from math import exp, factorial
 exp(-10) * sum((10)**n / factorial(n) for n in range(21))
 @
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.1.11.4
 
  \begin{solution}
@@ -185,9 +182,9 @@ where  I used
 exp(-10) * sum((10)**n / factorial(n) for n in range(11))
 @
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.1.11.6
  \begin{solution}
    Cleaning times will be pretty constant. Changing dies, or other
@@ -197,9 +194,9 @@ Zijm.Ex.1.11.6
    temporary adjustments, then the variation in setup times may be
    quite a bit higher.
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.1.11.7
  \begin{solution}
    Then the effective service times, and in particular, $C_e^2$ will
@@ -211,11 +208,11 @@ Zijm.Ex.1.11.7
    problem is to have you check the relevant formulas and notice that
    the variance of $N_s$ appears in the formulas.
 \end{solution}
-\end{question}
+\end{exercise}
 
 \begin{comment}
   
-\begin{question}[use=false]
+\begin{exercise}
   Suppose a single machine workstation has to process $n$ different
   product families. Jobs of family $i$ arrive as a Poisson process
   with rate $\lambda_i$.  Service times are exponentially distributed
@@ -234,7 +231,7 @@ Zijm.Ex.1.11.7
     even more general, dependent on the sequence in which the families
     are planned? This is a very hard problem. 
   \end{solution}
-\end{question}
+\end{exercise}
 \end{comment}
 
 

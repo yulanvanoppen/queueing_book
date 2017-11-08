@@ -2,7 +2,6 @@
 \label{sec:expon-distr}
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -464,7 +463,6 @@ Use that $X$ and $S$ are independent to get
       \end{split}
     \end{equation*}
   \end{solution}
-
 \end{exercise}
 
 \begin{exercise}\label{ex:3}
@@ -560,7 +558,7 @@ When $X$ and $S$ are not exponentially distributed, such computations are much h
 \begin{exercise}
   If $S\sim U[0,7]$ and $X\sim U[0,10]$, where $U[I]$ stands for the
   uniform distribution concentrated on the interval $I$, compute
-  $\P{S-X\leq u}$, assuming that $S$ and $X$ are independent.
+  $\P{S-X\leq u}$, for  $S$ and $X$ independent.
   \begin{hint}
   This is elementary, hence it might appear trivial, but it's not\ldots In fact, I had a hard time finding a simple way to get the answer.  It is good practice to try yourself before looking at the answer. Check also the previous problem, and make a drawing of the region over which you have to integrate.
   \end{hint}
@@ -727,10 +725,7 @@ probabilities. We write
 for the \emph{survivor function} of $B$.  
 
 \begin{exercise}\label{ex:6}
- Use indicator functions to prove that
-    \begin{equation*}
-      \sum_{n=0}^\infty G(n) = \E B.
-    \end{equation*}
+ Use indicator functions to prove that $ \sum_{n=0}^\infty G(n) = \E B$.
     \begin{hint}
 Write 
 $\sum_{n=0}^\infty G(n) = \sum_{n=0}^\infty \sum_{i=n+1}^\infty \P{B=i}$ and then do the algebra.
@@ -758,9 +753,7 @@ you are interested.)
 
 \begin{exercise}\label{ex:66}
  Use indicator functions to prove that
-    \begin{equation*}
-\sum_{i=0}^\infty i G(i) =  \frac{\E B^2}2 - \frac{\E B}{2}.
-    \end{equation*}
+$\sum_{i=0}^\infty i G(i) =  \E{B^2}/2 - \E{B}/2.$
     \begin{hint}
 $\sum_{i=0}^\infty i G(i) = \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^\infty i 1\{n\geq i+1\}$.
     \end{hint}
@@ -780,9 +773,7 @@ Let $S$ be a continuous random variable $S$ with distribution function $F$.
 
 \begin{exercise}
  Use indicator functions to prove that 
-\begin{equation*}
-    \E S = \int_0^\infty x \d F  = \int_0^\infty G(y) \d y,
-\end{equation*}
+$   \E S = \int_0^\infty x \d F  = \int_0^\infty G(y) \d y,$
 where $G(x) = 1 - F(x)$. 
 \begin{hint}
 $\E S = \int_0^\infty x \d F  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d F(x)$.
@@ -801,9 +792,7 @@ $\E S = \int_0^\infty x \d F  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d 
 \begin{exercise}
  Use indicator functions to prove that for  a continuous random
     variable $S$ with distribution function $F$, 
-\begin{equation*}
-    \E{S^2} = \int_0^\infty x^2 \d F  = 2 \int_0^\infty y G(y) \d y,
-\end{equation*}
+$    \E{S^2} = \int_0^\infty x^2 \d F  = 2 \int_0^\infty y G(y) \d y,$
 where $G(x) = 1 - F(x)$. 
 \begin{hint}
 $\int_0^\infty y G(y) \d y = \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d x \d y$.
@@ -824,9 +813,7 @@ $\int_0^\infty y G(y) \d y = \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d
 \begin{exercise}
  Use integration by parts to show that for  a continuous random
     variable $S$ with distribution function $F$ and survivor function $G=1-F$, 
-\begin{equation*}
-\int_0^\infty y G(y) \d y = \frac{\E{S^2}}2.
-\end{equation*}
+$\int_0^\infty y G(y) \d y = \E{S^2}/2.$
 \begin{solution}
   \begin{equation}
       \int_0^\infty y G(y) \d y 

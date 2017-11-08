@@ -5,14 +5,12 @@
 
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-In Section~\ref{sec:mxm1-queue:-expected} we established expressions for the average queue length and waiting times for the $M^X/M/1$ queue. To compute more difficult performance measures we typically need the probability distribution of the number of items in the system. In this section
-We present a numerical, recursive, scheme to compute the stationary distribution
-of the number of items in queue. 
+In Sections~\ref{sec:mxm1-queue:-expected} and~\ref{sec:mg1} we established the Pollackzek-Khintchine formula for the waiting times of the $M^X/M/1$ queue and $M/G/1$ queue, respectively. To compute more difficult performance measures, for instance the loss
+probability $\P{L>n}$, we need expressions for the stationary distribution of the number of jobs in the system $p(n)=\P{L=n}$.   Here we present a numerical, recursive, scheme to compute the stationary distribution of the number of items in an $M^X/M/1$ queue. 
 
 To find the distribution $p(n)$, which is equal to $\pi(n)$ by PASTA,
 we turn to level-crossing arguments. However, the arguments that lead
@@ -171,7 +169,7 @@ As in Section~\ref{sec:level-cross-balance}, we are primarily intested in  long-
 \begin{equation}\label{eq:16}
   \frac{A(m,n,t)}t =   \frac{A(t)}t \frac{A(m,t)}{A(t)}\frac{A(m,n,t)}{A(m,t)}.
 \end{equation}
-By similar assumptions as in Section~\ref{sec:poisson-arrivals-see},  $A(t)/t\to\lambda$ and $A(m,t)/A(t)\to\pi(m)$.  Now, provided the limit exists, we define
+By the assumptions of Section~\ref{sec:poisson-arrivals-see},  $A(t)/t\to\lambda$ and $A(m,t)/A(t)\to\pi(m)$.  Now, provided the limit exists, we define
 \begin{equation}\label{eq:1332}
 \lim_{t\to\infty} \frac{A(m,n,t)}{A(m,t)} = 
 \lim_{t\to\infty} \frac{\sum_{k=1}^{A(t)}\1{L(A_k-) = m, B_k > n-m}}
@@ -180,9 +178,11 @@ By similar assumptions as in Section~\ref{sec:poisson-arrivals-see},  $A(t)/t\to
 where the random variable $L(A-)$   denotes the number in the system seen by an arbitrary arrival.
 
 \begin{exercise}
-Use that $B$ and $L(A-)$ are independent to conclude
-$\P{B>n-m\given L(A-)=m}=\P{B>n-m}$. 
+Show that $\P{B>n-m\given L(A-)=m}=\P{B>n-m}$
 \begin{solution}
+  \begin{hint}
+    Realize that $B$ and $L(A-)$ are assumed to be independent.
+  \end{hint}
 \begin{equation*}
 \P{B>n-m\given L(A-)=m} =
 \frac{\P{B>n-m,L(A-)=m}}{\P{L(A-)=m}}=
@@ -236,14 +236,12 @@ Thus, taking the limit $t\to\infty$ in this equation, we conclude that
 
 \begin{exercise}
 With $\alpha = \lambda/\mu$,  show that that \emph{unnormalized} state probabilities are given by
-\begin{equation*}
-  \begin{split}
-\pi(0) & = 1 \\
+\begin{align*}
+\pi(0) & = 1 &
   \pi(1) &= \alpha \\
-  \pi(2) &= \alpha^2 + \alpha G(1), \\
+  \pi(2) &= \alpha^2 + \alpha G(1), &
   \pi(3) &= \alpha[ \alpha^2 + 2 \alpha G(1)) + G(2)].
-  \end{split}
-\end{equation*}
+\end{align*}
 We leave the rest to the computer to continue with this.
 \begin{hint}
 For $n=1$, we have
@@ -266,14 +264,16 @@ not lead to a closed form expression for $p(n)$, such as
 Eq.~\eqref{eq:23}, we need to use a criterion to stop this iterative
 procedure. Finding general conditions on when to stop is not directly
 easy, but a pragmatic approach is to simply stop at some (large)
-number $N$ and take $G=\sum_{i=0}^N \pi(i)$ as the normalization
-constant. Then $\pi(0)=1/G$, $\pi(1)=\alpha/G$, and so on.
+number $N$ such that $p(k)\ll p(0)$ for $k>N$ and is steadily decreasing. (An interesting question, why should it decrease monotonically after some, large, $N$?)
+Then take $G=\sum_{i=0}^N \pi(i)$ as the normalization
+constant, so that $\pi(0)=1/G$, $\pi(1)=\alpha/G$, and so on.
+While this is a practical approach, getting formal bounds on a proper size of $N$ requires more work than we can do here.
 
-And now that we have the state probabilities, we can compute the \emph{excess probability}
+Now that we have the state probabilities, we can compute the \emph{excess probability}
 \begin{equation}
   \P{L> n } = \sum_{i=n+1}^\infty \pi(i).
 \end{equation}
-This performance measure is  of interest in inventory systems and---recall the supermarket example discussed in the Introduction---when there are costs associated with the occurence of long queues. 
+This performance measure is  of interest in inventory systems or---recall the supermarket example discussed in the Introduction---when there are costs associated with the occurence of long queues. 
 
 An interesting extension is to consider a queueing process with batch
 services, i.e., the $M/M^Y/1$ queue. Construction a recursion for the

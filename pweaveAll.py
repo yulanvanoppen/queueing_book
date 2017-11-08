@@ -30,7 +30,7 @@ filenames = [
 
 # to select some files temporarily
 
-filenames = [
+filenames_s = [
     #"constructiondiscretetime",
     #"constructioncontinuoustime",
     #"random_walk",
@@ -42,7 +42,7 @@ filenames = [
     #"pasta",
     #"little",
     #"usefulidentities",
-    "mg1",
+    #"mg1",
     #"batcharrivals",
     #"mg1distributionqueuelength",
     #"gg1",

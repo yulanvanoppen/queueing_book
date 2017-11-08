@@ -2,7 +2,6 @@
 \label{sec:queu-proc-as}
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -81,7 +80,6 @@ Show that  $Q_k$ satisfies the relation
 \end{equation}
 where $Z_k$ is defined by the above random walk and
 $a\wedge b = \min\{a,b\}$ 
-
 \begin{hint}
 Note first that from the expression for $Z_k$,
   $a_k - c_k = Z_k - Z_{k-1}$. Use this to get
@@ -93,7 +91,6 @@ Note first that from the expression for $Z_k$,
 &\max\{-a, -b \} = -\min\{a,b\}.
 \end{align*}
 \end{hint}
- 
 \begin{solution}
 Note first that from the expression
 for $Z_k$, $a_k - c_k = Z_k - Z_{k-1}$. Using this in the recursion
@@ -197,8 +194,6 @@ It is actually not hard, even though the expression looks
   terms. Then fiddle a bit with the terms to get
   $(t\sqrt{\lambda\mu})$. 
 \end{hint}
-
-
 \begin{solution}
 With this we have a characterization of the queue length process as a
 function of time until it hits zero for the first time. What can we
@@ -228,7 +223,6 @@ With this,
 = e^{-(\lambda+\mu)t} \left(\frac\lambda\mu\right)^{(n-m)/2} \sum_{k=0}^\infty 
 \frac{(t\sqrt{\lambda\mu} )^{2k+m-n}}{k!(k+m-n)!}.
 \end{equation*}
-  
 \end{solution}
 \end{exercise}
 
@@ -236,7 +230,6 @@ With this,
 \begin{exercise}
   Can you relate the construction of $\{Q_k\}$ as a discrete-time
   random walk to a continuous-time construction of the $M/M/1$ queue?
-
   \begin{hint}
 Consider $Z(t)=Z(0) + N_\lambda( t) -N_\mu(t)$ at the embedded
     set of epochs at which either $N_\lambda$ or $N_\mu$ changes. What
@@ -244,7 +237,6 @@ Consider $Z(t)=Z(0) + N_\lambda( t) -N_\mu(t)$ at the embedded
     two Poisson processes fires? Relate this to $\{a_k\}$ and
     $\{c_k\}$.
   \end{hint}
-
     \begin{solution}
       We use that merging two Poisson processes leads to another
       Poisson process and that a Poisson process can be split with
@@ -275,7 +267,6 @@ Consider $Z(t)=Z(0) + N_\lambda( t) -N_\mu(t)$ at the embedded
       $N_\mu$ constructed based on the sequences $\{a_k\}$ and
       $\{c_k\}$, is the continuous-time random walk underlying the
       $M/M/1$ queue.
-
     \end{solution}
 \end{exercise}
 
@@ -379,7 +370,6 @@ stationary state will occupy us for the rest of the book.
   Suppose that $X_k\in\{1,3\}$ such that $\P{X_k=1}=\P{X_k=3}$ and
   $S_k\in\{1,2\}$ with $\P{S_k=1}=\P{S_k=2}$. Write a computer program
   to see how fast the distributions of $W_{Q,k}$ converge to a limiting distribution function.
-
   \begin{solution}
 Here is an example with python. In R it must be equally simple.
 I compute the 
@@ -419,8 +409,6 @@ for k in range(1, 10):
 So, after some 10 customers, the distribution hardly changes anymore. 
 
   \end{solution}
-
-
   \end{exercise}
 
 \begin{exercise}

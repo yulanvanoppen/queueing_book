@@ -3,12 +3,12 @@
 \label{sec:mva}
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-\begin{question}[use=false]
+\begin{comment}
+\begin{exercise}[use=false]
   Assume that there are $M$ stations, each with one server. The
   service time at station $i$, $i=0,\ldots,M$ is deterministic and
   equal to $1/\mu_i$. Suppose that the routing is such that station
@@ -19,9 +19,10 @@
   \begin{solution}
     TBD. See Factory Physics.
   \end{solution}
-\end{question}
+\end{exercise}
+\end{comment}
 
-\begin{question}\label{ex:mva_numerical}
+\begin{exercise}\label{ex:mva_numerical}
   Consider two stations in tandem, stations 0 and 1. The service times
   are $\E{ S_0} = 2=1/\mu_0$ and $\E{ S_1} = 3=1/\mu_1$ hours. The routing matrix is
   \begin{equation*}
@@ -31,12 +32,10 @@
 1/2 & 1/2\\
     \end{pmatrix}.
   \end{equation*}
-Apply the MVA algorith to this case.
-
+Apply the MVA algorithm to this case.
 \begin{hint}
 Start with $n=1$, then consider $n=2$ and so on.
 \end{hint}
-
 \begin{solution}
   From $V P = V$ we conclude that $V_1=2V_0$.  Take $n=1$.
   \begin{align*}
@@ -59,10 +58,10 @@ Now take $n=2$.
   \end{align*}
 And so on.
 \end{solution}
-\end{question}
+\end{exercise}
 
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.3.1.13. Assume that all stations have just one server.
 \begin{solution}
   Since there are quite a lot of jobs, and station 0 is the
@@ -76,11 +75,11 @@ Zijm.Ex.3.1.13. Assume that all stations have just one server.
   with $\mu_1=2.5$. Hence, $\rho_1 = \lambda_1/\mu_1=2/2.5 = 4/5$,
   hence $L_1 = \rho_1/(1-\rho_1) = (4/5)/(1/5) = 4$.
 \end{solution}
-\end{question}
+\end{exercise}
 
 
 
-\begin{question}
+\begin{exercise}
 Zijm.Ex.3.1.14
 \begin{solution}
   I use the MVA algorithm to compute the expected number of jobs at
@@ -209,15 +208,15 @@ For the last line, with $n=29$, the number of jobs at station 0 must
 therefore be approximately $29-4-2-2-2 = 19$. The algorithm supports
 our intuition!
 \end{solution}
-\end{question}
+\end{exercise}
 
-\begin{question}
+\begin{exercise}
   Implement the MVA algorithm in your preferred computer language and
   make Figure 3.2.
   \begin{solution}
     See the answer of the previous question.
   \end{solution}
-\end{question}
+\end{exercise}
 
 
 

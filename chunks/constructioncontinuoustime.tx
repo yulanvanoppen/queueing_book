@@ -4,7 +4,6 @@
 \label{sec:constr-gg1-queu}
 
 \subsection*{Theory and Exercises}
-\label{sec:exercises}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -246,7 +245,6 @@ This in turn specifies the departure process $\{D(t)\}$ as
   \begin{hint}
 Use Eq.~(\ref{eq:59}).
 \end{hint}
-
 \begin{solution}  First find the distribution of $Y_k:=S_{k-1}-X_k$ so that we can write
   $W_{Q,k}=[W_{Q,k-1}+Y_k]^+$.  Use independence of $\{S_k\}$ and $\{X_k\}$:
 \begin{align*}
@@ -494,9 +492,7 @@ Why don't we need separate notation for $D_s(t)$, the number
 
 
 \begin{exercise} Show that $L(t) = A(t)-D(t)$ implies that 
-  \begin{equation*}
-    L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}.
-  \end{equation*}
+$L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}$.
   \begin{hint}
   Use Boolean algebra.  Write, for notational ease,
     $A=\1{A_k \leq t}$ and $\bar A = 1- A = \1{A_k > t}$, and define
@@ -568,7 +564,6 @@ Why don't we need separate notation for $D_s(t)$, the number
 % \hint{ Realize that $L_k = k - 1 - D(A_k)$. 
 % what happens to job k-1?
 % }
-
 \begin{solution}
   Let $L_{k} = L(A_{k}-)$, i.e., the number of jobs in the system as
   `seen by' job $k$. It must be that $L_{k}=k-1 - D(A_{k})$. To see
@@ -595,7 +590,6 @@ Why don't we need separate notation for $D_s(t)$, the number
     $k-2-D(A_k)$). Hence, the jobs with index from
     $k-1-L_{k-1}, k-L_{k-1}, \ldots, k-1$, could have left the system
     between the arrival of job $k-1$ and job $k$.
-
 \end{solution}
 \end{exercise}
 
@@ -624,11 +618,9 @@ $R$ or python will reveal that this is easy.
 \begin{exercise}
   Provide a specification of the virtual waiting time process $\{V(t)\}$ for
     all $t$.
-
     \begin{hint}Make a plot of the function $A_{A(t)}-t$. What is the meaning of $V(A_{A(t)})?$ What is
 $V(A_{A(t)} + A_{A(t)}-t$?
     \end{hint}
-
     \begin{solution}
       There is a funny way to do this. Recall from a previous exercise
       that if $A(t)=n$, then $A_n$ is the arrival time of the $n$th
@@ -655,7 +647,7 @@ $V(A_{A(t)} + A_{A(t)}-t$?
 
 
 \begin{exercise}  Try to extend the recursions~(\ref{eq:45})  to a situation in which one queue is
-  served by two servers.  (This is a hard problem, only for the interested student.)
+  served by two servers.  (This is a hard problem, only for the interested.)
     \begin{hint} The problem is
       that in a multi-server queueing systems, unlike for
       single-server queues, jobs can overtake each other: a small job
@@ -665,7 +657,6 @@ $V(A_{A(t)} + A_{A(t)}-t$?
       solution below is a modification of N. Krivulin, `Recursive
       equations based models of queueing systems'. 
     \end{hint}
-
   \begin{solution}
 The recursions for the two-server system are this: 
       \begin{equation*}
@@ -714,17 +705,12 @@ In an attempt to   extend the above to $m>2$ servers, I came up with this scheme
 
 
 
-
-
-
-
-
 \begin{exercise} Suppose one server serves two
   queues, such that jobs in queue A are served with priority over jobs
   in queue B. Assume that service is not-preemptive.  Can you develop
   a similar set of recursions for each of the queues, or, otherwise,
   an algorithm? Can you extend this to cover the LIFO (Last-In-First-Out) queue?
-(This is  a hard problem. You can skip it if you like.)
+(This is  a hard problem; only for the interested.)
   \begin{solution}
     This question came up in class. I don't think this can be
     constructed as a straightforward recursion, and a search on the
@@ -748,7 +734,7 @@ In an attempt to   extend the above to $m>2$ servers, I came up with this scheme
     then, within the class of jobs with the same priority, sort in
     ascending order of arrival time.
 
-    In python the code is like this, where I include the FIFO case for
+    The python code is like this, where I include the FIFO case for
     comparison. As always, it is not obligatory to memorize the  code.
 
 
