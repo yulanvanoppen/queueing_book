@@ -188,7 +188,7 @@ effort. Suppose $N$ is a Poisson distributed random variable. Then
 &=  \E{z^N} \\
 &= \sum_{k=0}^\infty z^k \P{N=k} \\
 &= \sum_{k=0}^\infty z^k \frac{\lambda^k}{k!} e^{-\lambda}  \\
-&= e^{-\lambda} \sum_{k=0}^\infty  \frac{(z\lambda^k}{k!}  \\
+&= e^{-\lambda} \sum_{k=0}^\infty  \frac{(z\lambda)^k}{k!}  \\
 &= e^{-\lambda} e^{z \lambda} \\
 &= e^{(z-1)\lambda}.
   \end{split}
@@ -440,21 +440,21 @@ Thus,
 Now   with the probability generating functions.
       \begin{equation*}
         \begin{split}
-          M_a(z) 
+          \phi_a(z) 
 &= \E{z^{N_a(t)}} = \sum_{k=0}^\infty z^k \P{N_a(t) = k} \\
 &= \sum_{k=0}^\infty z^k e^{-\lambda t} \frac{(\lambda t)^k}{k!} \\
 &= e^{-\lambda t} \sum_{k=0}^\infty  \frac{(z \lambda t)^k}{k!} \\
-&=\exp(\lambda t (z-1)). 
+&=e^{\lambda t (z-1)}. 
         \end{split}
       \end{equation*}
       Use this, and the similar expression for $N_s(t)$ and
       independence to see that
 \begin{equation*}
-M(z) = \E{z^{N(t)}} = \E{z^{N_a(t)}} \E{z^{N_s(t)}} = \exp((\lambda +\mu)t (z-1)). 
+\phi_n(z) = \E{z^{N(t)}} = \E{z^{N_a(t)}} \E{z^{N_s(t)}} = e^{\lambda(z-1)}e^{\mu(z-10} = e^{(\lambda +\mu)t (z-1)}. 
 \end{equation*}
 Finally, since the  generating function uniquely characterizes
 the distribution, and since the above expression has the same form as
-$M_1(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\sim P((\lambda +\mu) t)$.
+$\phi_a(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\sim P((\lambda +\mu) t)$.
     \end{solution}
 \end{exercise}
 

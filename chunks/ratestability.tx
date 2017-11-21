@@ -250,10 +250,7 @@ $\mu > \lambda$.
 
 
 \begin{exercise} 
-Define the random variables $\{\tilde X_k,k=1,\ldots\}$ as
-  \begin{equation*}
-    \tilde X_k = S_{k-1}-X_k.
-  \end{equation*}
+Define the random variables $\{\tilde X_k,k=1,\ldots\}$ as $\tilde X_k = S_{k-1}-X_k$.
   For stability of the queueing process it is essential that
   $\tilde X_k$ has negative expectation, i.e.,
   $\E{\tilde X_k} = \E{S_{k-1}-X_k} < 0$.  What is the conceptual
@@ -338,7 +335,7 @@ Let $T_1>A_1$ be the first time after the arrival of job 1
 \end{exercise}
 
 The concept of \recall{load} or \emph{utilization}, denoted by the
-symbol $\rho$, is fundamental. One way to define it is as the limiting
+symbol $\rho$, is fundamental. One way to define this is  as the limiting
 fraction of time the server is busy, i.e.,
 \begin{equation*}
   \rho = \lim_{t\to\infty} \frac 1 t \int_0^t \1{L(s)>0} \d s.
@@ -367,7 +364,7 @@ a further set of relations:
   \rho = \lambda \E S = \frac{\lambda}{\mu} = \frac{\E S}{\E X}.
 \end{equation*}
 Thus, the load has also the interpretation as the rate at which jobs
-arrive multiplied by the average amount of work per job.  Finally,
+arrive times the average amount of work per job.  Finally,
 recall that for a system to be rate-stable, it is necessary that
 $\mu> \lambda$, implying in turn that $\rho < 1$. The relation
 $\rho=\E S/ \E X < 1$ then tells us that the average time it takes to

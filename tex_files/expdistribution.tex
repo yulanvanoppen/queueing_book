@@ -126,19 +126,19 @@ The  above exercises can also be easily solved with the concept of \recall{momen
 \begin{exercise}
     Use the moment generating function to show that 
     \begin{align*}
-      \E{X} &= M'(0)=\frac1\lambda, & 
-      \E{X^2} &= M''(0)=\frac2{\lambda^2}, 
+      \E{X} &= M_X'(0)=\frac1\lambda, & 
+      \E{X^2} &= M_X''(0)=\frac2{\lambda^2}, 
     \end{align*}
 where $M'(t) = \frac{\d}{\d t} M(t)$. 
 \begin{solution}
-  $M'(0)=\lambda/(\lambda-t)^2$. Hence, $M'(0)=1/\lambda$. And, $M''(t)=2\lambda/(\lambda-t)^3$, hence $\E{X^2}=M''(1)=2\lambda/\lambda^3=2\lambda^{-2}$. 
+  $M_X'(0)=\lambda/(\lambda-t)^2$. Hence, $M_X'(0)=1/\lambda$. And, $M_X''(t)=2\lambda/(\lambda-t)^3$, hence $\E{X^2}=M_X''(1)=2\lambda/\lambda^3=2\lambda^{-2}$. 
 \end{solution}
   \end{exercise}
 
 
 Define the \recall{square coefficient of variation (SCV)} as
   \begin{equation}
-C_a^2 = \frac{\V X}{(\E X)^2}.
+C^2 = \frac{\V X}{(\E X)^2}.
   \end{equation}
 As
   will become clear later, the SCV is a very important concept in
@@ -146,7 +146,7 @@ As
   variability}.
 
 \begin{exercise}
-  Prove that when $X$ is exponentially distributed, $C_a^2 =1$.  
+  Prove that when $X$ is exponentially distributed, $C^2 =1$.  
 \begin{solution}
   By the previous problems, $\V X = 1/\lambda^2$ and $\E X=1/\lambda$.
 \end{solution}
@@ -230,9 +230,17 @@ Use that
     \frac{i!}\lambda$.
     Another way would be to use that, once you have the moment
     generating function of some random variable $X$,
-    $\E X = \frac{\d}{\d t} M(t) |_{t=0}$. 
+    $\E X = \frac{\d}{\d t} M_X(t) |_{t=0}$. 
  \end{hint}
   \begin{solution}
+The simplest way to obtain the answer is to use that the expectation is a linear operator, i.e., $\E{X+Y}= \E X + \E Y$ for any r.v. $X$ and $Y$. Then,
+\begin{equation*}
+\E{A_i} = \E{\sum_{k=1}^i X_k} = i \E{X} = \frac 1 \lambda.
+\end{equation*}
+(Just as a reminder, $\E{XY} \neq \E X \E Y$ in general. Only when $X$ and $Y$ are uncorrelated (which is implied by independence), the product of the expectations is the expection of the products.)
+
+However, the idea of the exercise is to practice with the formulas. 
+
   \begin{equation*}
 \E{A_i} = \int_0^\infty t f_{A_i} (t) \, \d t  = 
 \int_0^\infty t  \lambda e^{-\lambda t} \frac{(\lambda t)^{i-1}}{(i-1)!}\, \d t.
@@ -255,12 +263,6 @@ What if we would use the moment generating function, as derived by the previous 
   \end{split}
 \end{equation*}
 
-Finally, the simplest way to obtain the answer is to use that the expectation is a linear operator, i.e., $\E{X+Y}= \E X + \E Y$ for any r.v. $X$ and $Y$. Then,
-\begin{equation*}
-\E{A_i} = \E{\sum_{k=1}^i X_k} = i \E{X} = \frac 1 \lambda.
-\end{equation*}
-
-Just as a reminder, $\E{XY} \neq \E X \E Y$ in general. Only when $X$ and $Y$ are uncorrelated (which is implied by independence), the product of the expectations is the expection of the products.
   \end{solution}
 \end{exercise}
 
@@ -576,7 +578,9 @@ Thus,
   \end{split}
 \end{equation*}
 
-Now we need to chop up the domain of $\P{S-X\leq u}$, for which we use the following figure.
+Now we need to chop up the domain of $\P{S-X\leq u}$, for which we use Figure~\ref{fig:P_S_X}
+.
+\begin{figure}[th]
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 %\draw[[-{Triangle[open]},dotted] (0,10)--(8.5,10);
@@ -606,6 +610,10 @@ Now we need to chop up the domain of $\P{S-X\leq u}$, for which we use the follo
 \node at (1.5,3) {$s\leq x+3$};
 \end{tikzpicture}
 \end{center}
+\caption{Computing the probability that $S-X\leq u$.}
+\label{fig:P_S_X}
+\end{figure}
+
 
 It is clear that  the indicated rectangle has no overlap with the set of points $(x,s)$ such that $s\leq u + x$ for $u<-10$. (To see this, draw the line $s=x-10$ in the figure.) At $u=-10$, the overlap is a single point, at $(10,0)$. Thus, 
 \begin{equation*}

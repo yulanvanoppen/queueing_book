@@ -41,6 +41,7 @@ period. In the first case, the jobs can be served in period $k$,
 in the latter case, they \emph{cannot} be served in period~$k$.
 
 
+
 Since $Q_{k-1}$ is the queue length at the end of period $k-1$, it
 must also be the queue length at the start of period $k$. Assuming
 that jobs arriving in period $k$ cannot be served in period~$k$,
@@ -58,6 +59,8 @@ $k$ is given by
     Q_k = Q_{k-1} -d_k + a_k.
 \end{equation}
 \end{subequations}
+
+Note that in this type of queueing system, there is not a job in service, we only count the jobs in queue at the start and end of a period. Thus, the number of jobs in the system and in queue coincide; in this section we will therefore only use the term `queue length'.
 
 \begin{exercise}
 Suppose that $c_k= 7$ for all $k$, and $a_1=5$, $a_2=4$
