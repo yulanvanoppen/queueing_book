@@ -4,6 +4,7 @@
 
 \usepackage{graphicx}
 \usepackage{mathtools,amsthm,amssymb}
+\usepackage{changepage} % to change the width of the exercise environment
 \usepackage{mathrsfs}
 \usepackage{verbatim}
 \usepackage{enumitem}
@@ -90,22 +91,44 @@
 % \newcommand{\hint}[1]{\SetQuestionProperties{ hint = {#1}}}
 %\newcommand{\hint}[1]{\hintsymbol\SetQuestionProperties{ hint = {#1}}}
 
-\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
 \theoremstyle{definition} % font type for theorems and related environments
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
-%\newtheorem{question}{Exercise}[section]
-\newtheorem{exercise}{}[section]
-\AtEndEnvironment{exercise}{\hspace{\stretch1}\ensuremath\qedsymbol}
+
+\usepackage{geometry}
+\usepackage{framed}
+\usepackage{fancybox}
+
+\newenvironment{myleftbar}{%
+\def\FrameCommand{\vrule width 2pt\hspace{0.6em}}%
+\MakeFramed{\advance\hsize-\width \FrameRestore}}%
+{\endMakeFramed}
+\usepackage{thmtools}
+
+%\newtheorem{exercise}{}[section]
+\definecolor{light-gray}{gray}{0.9}
+\declaretheorem[numberwithin=section,name={},
+shaded={bgcolor=light-gray},
+%postheadhook=\leavevmode\myleftbar, %
+% postheadhook=\myleftbar, %
+% prefoothook = \endmyleftbar
+]{exercise}
+
+% \usepackage{etoolbox}% necessary for the command below
+% %\AtBeginEnvironment{exercise}{\begin{adjustwidth}{0em}{2em}}
+% %\AtEndEnvironment{exercise}{\hspace{\stretch1}\ensuremath\qedsymbol\end{adjustwidth}}
+%\AtBeginEnvironment{exercise}{\leavevmode\myleftbar}
+%\AtEndEnvironment{exercise}{\end{myleftbar}}
+%\BeforeBeginEnvironment{exercise}{\myleftbar}
+%\AfterEndEnvironment{exercise}{\endmyleftbar}
+
 
 \Newassociation{solution}{Solution}{ans}
 \Newassociation{sol}{Solution}{ans}
 \Newassociation{hint}{Hint}{hint}
-%\renewcommand{\Hintlabel}[1]{\textbf{Hint #1:}}
-%\renewcommand{\Solutionlabel}[1]{\textbf{Solution #1:}}
-\renewcommand{\Hintlabel}[1]{\textbf{H: #1}}
-\renewcommand{\Solutionlabel}[1]{\textbf{S: #1}}
+\renewcommand{\Hintlabel}[1]{\textbf{h.#1}}
+\renewcommand{\Solutionlabel}[1]{\textbf{s.#1}}
 
 
 \newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1} \nameref*{#1}}} % One single link

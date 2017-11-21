@@ -40,7 +40,7 @@ means, roughly speaking, that knowing that $N(s_1,t_1)= n$, does not
 help to make any predictions about $N(s_2, t_2)$ if the intervals
 $(s_1,t_1)$ and $(s_2, t_2)$ have no overlap.
 
-To find the distribution of $N(0,t)$, let us split the interval
+To find the distribution of $N(t) = N(0,t)$, let us split the interval
 $[0,t]$ into $n$ sub-intervals, all of equal length, and ask: `What is
 the probability that the machine will fail in some given
 sub-interval.'  By our second assumption, the failure behavior is
@@ -137,7 +137,7 @@ is easy, so that, as $n\to\infty$,  the above converges to
 \end{exercise}
 
 \begin{exercise}
-  Show that if $N(t)\sim P(\lambda)$, $\E{N(t)} = \lambda t$ and $\V{N(t)} = \lambda t$. 
+  Show that if $N(t)\sim P(\lambda t)$, $\E{N(t)} = \lambda t$ and $\V{N(t)} = \lambda t$. 
   \begin{solution} 
     When a random variable $N$ is Poisson distributed with parameter
     $\lambda$,
@@ -229,21 +229,19 @@ $A_0=0$, must be larger than $t$.  Therefore,
 \end{equation*}
 
 The relations we discussed above are of paramount importance in the
-analysis of queueing process. We summarize this by a theorem.
-\begin{theorem}\label{thr:1}
-  A counting process $\{N(t)\}$ is a Poisson process with rate $\lambda$ if and only if
-  the inter-arrival times $\{X_i\}$, i.e., the times between consecutive
-  arrivals, are i.i.d. and $\P{ X_1\leq t} = 1 - e^{-\lambda t}$. In other words, $X_i\sim \exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t)$ 
-\end{theorem}
+analysis of queueing process. Thus,  a counting process $\{N(t)\}$ is a \recall{Poisson process} with rate $\lambda$ if and only if  the inter-arrival times $\{X_i\}$ are i.i.d. and exponentially distributed with mean $1/\lambda$,  in short, 
+\begin{equation*}
+X_i\sim \exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t).
+\end{equation*}
 
-
+Define the  \recall{indicator function} $\1{A}$  of the set $A$ as $\1{A}=1$ if the event
+$A$ is true, and $\1{A}=0$ if $A$ is not true. 
 
 \begin{exercise}
   Assume a timer fires at times $0=T_0<T_1<T_2< \cdots$, such that
   $T_{k}-T_{k-1}\sim\exp(\lambda)$. Define
-  $N(t) = \sum_{k=0}^\infty k \1{T_k \leq t < T_{k+1}}$, where $\1{}$
-  is the \recall{indicator function}, that is, $\1{A}=1$ if the event
-  $A$ is true, and $\1{A}=0$ if $A$ is not true. What is the
+  $N(t) = \sum_{k=0}^\infty k \1{T_k \leq t < T_{k+1}}$, 
+What is the
   distribution of $N(t)$?
 \begin{solution}
 $N(t) \sim \text{P}(\lambda t)$. 
@@ -281,6 +279,7 @@ We are done.
 \end{exercise}
 
 
+\recall{Recall} that  $o(h)$ is a function  $f(h)$ such $f(h)/h \to 0$ as $h\to 0$.
 
 \begin{exercise}
   Show that if $N(t) \sim P(\lambda t)$, we have for small $h$,
@@ -289,8 +288,6 @@ We are done.
   \item $\P{N(h) = n+1 \given N(0) = n} = \lambda h + o(h)$ 
   \item $\P{N(h) \geq n+2 \given N(0) = n} = o(h)$,
   \end{enumerate}
- where $o(h)$ is a function
-    $f(h)$ such $f(h)/h \to 0$ as $h\to 0$.
     \begin{hint}
     Think about the meaning of the formula
       $\P{N(h) = n \given N(0) = n}$. It is a conditional probability
@@ -300,7 +297,7 @@ We are done.
       i.e, $N(h)=n$? Then use the definition of the Poisson
       distribtuion to compute this probability. Finally, use Taylor's
       expension of $e^{x}$ to see that $e^{x} = 1 +x + o(x)$ for
-      $|x| << 1$.  Furthermore, use that
+      $|x| \ll 1$.  Furthermore, use that
       $\sum_{i=2}^\infty x^i/i! = \sum_{i=0}^\infty x^i/i! - x -1 = e^x -x 
       - 1$.
     \end{hint}
@@ -459,6 +456,16 @@ $\phi_a(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(
 \end{exercise}
 
 
+\begin{exercise}
+ Assume that $N_a(t)\sim \text{P}(\lambda t)$ ,
+  $N_s(t) \sim \text{P}(\mu t)$ and independent.  What is the
+  meaning of the event
+  $\{N_a(h) = 1, N_s(h) = 0\}\cap\{N_a(h) + N_s(h) = 1\}$?
+    \begin{solution}
+ This means that, given that an event occurred, the event was an arrival, i.e., $N_a$ was the first.
+    \end{solution}
+\end{exercise}
+
 \begin{exercise} Assume that
   $N_a(t)\sim \text{P}(\lambda t)$ , $N_s(t) \sim \text{P}(\mu t)$ and
   independent. Use that  $N_a(t) + N_s(t) \sim \text{P}((\lambda + \mu)t)$ to conclude
@@ -496,30 +503,8 @@ Suppose
 \end{exercise}
 
 
-\begin{exercise}
- Assume that $N_a(t)\sim \text{P}(\lambda t)$ ,
-  $N_s(t) \sim \text{P}(\mu t)$ and independent.  What is actually the
-  meaning of the event
-  $\{N_a(h) = 1, N_s(h) = 0\}\cap\{N_a(h) + N_s(h) = 1\}$?
-    \begin{solution}
- This means that, given that an event occurred, the event was an arrival, i.e., $N_a$ was the first.
-    \end{solution}
-\end{exercise}
-
-Besides merging Poisson streams, we can also consider the concept of splitting a stream into substreams. Take a Poisson process and split it in
-  the following way.  When a job arrives, throw a coin that lands
-  heads with probability $p$ and tails with $q=1-p$. When the coin
-  lands heads, call the job of type 1, otherwise of type 2.  Another
-  way of thinning is by modeling the stream of people passing a shop
-  as a Poisson process with rate $\lambda$. With probability $p$ a
-  person decides, independent of anything else, to enter the shop,
-  c.f. the figure below. The crosses at the upper line are passersby
-  in the street. The crosses at the lower line are the customers that
-  enter the shop. The outcome of the $k$th throw of a coin is
-  indicated by $B_k$. In the figure below,  $B_1=1$ so that the first passerby turns into a
-  customer entering the shop; the second passerby does not enter as
-  $B_2=0$, and so on. Like this, the stream of passerby's is thinned
-  with Bernoulli distributed random variables.
+Besides merging Poisson streams, we can also consider the concept of splitting a stream into substreams, as follows.  When a job arrives, throw a coin that lands   heads with probability $p$ and tails with $q=1-p$. When the coin   lands heads, call the job of type 1, otherwise of type 2.  Another   way of thinning is by modeling the stream of people passing a shop   as a Poisson process with rate $\lambda$. With probability $p$ a   person decides, independent of anything else, to enter the shop,  c.f. the figure below. The crosses at the upper line are passersby  in the street. The crosses at the lower line are the customers that   enter the shop. The outcome of the $k$th throw of a coin is   indicated by $B_k$. In the figure below,  $B_1=1$ so that the first passerby turns into a
+  customer entering the shop; the second passerby does not enter as   $B_2=0$, and so on. Like this, the stream of passerby's is thinned   with Bernoulli distributed random variables.
 
   \begin{center}
 \begin{tikzpicture}[scale=1]
@@ -556,8 +541,8 @@ node[below, fill=white] {$B_6=0$};
  
 The concept of thinning is particularly useful to analyze queueing
   networks. Suppose the departure stream of a machine is split into
-  two substreams, e.g., a fraction $p$ of the jobs move on another
-  machine and the rest ($1-p$) of the jobs leave the system. Then we
+  two substreams, e.g., a fraction $p$ of the jobs moves to on another
+  machine and the rest ($1-p$) of the jobs leaves the system. Then we
   can model the arrival stream at the second machine as a thinned
   stream (with probability $p$) of the departures of the first
   machine.
