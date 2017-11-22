@@ -90,13 +90,14 @@ above states that the arrival rate $\lambda$ is the inverse of the
 expected interarrival time.
 
 \begin{exercise}
-    Eq. (\ref{eq:54}) we replaced the limit with respect to $n$ by a
+(This exercise is meant to provide some insight into what needs
+  to be done to put everything on solid ground.  If you are not
+  interested in the maths, you can skip the problem.)
+   In  Eq. (\ref{eq:54}) we replaced the limit with respect to $n$ by a
     limit with respect to $t$.  Use
     the notation $A_{A(t)}$ to show that  this is allowed.
   Show next that the function $t\to A(t)$ as defined by Eqs.~(\ref{eq:2})
-  is right-continuous. (This exercise is meant to provide some insight into what needs
-  to be done to put everything on solid ground.  If you are not
-  interested in the maths, you can skip the problem.)
+  is right-continuous. 
     \begin{hint}
  Use that $A_{A(t)} \leq t < A_{A(t)+1}$. Divide by $A(t)$
       and take suitable limits. BTW, such type of proof is used quite
@@ -120,12 +121,6 @@ expected interarrival time.
   inequalities that $\lim_n A_n/n = \lim_t t/A(t)$.
      
 
-  Hopefully this problem, and its solution, clarifies that even such
-  small details require attention. If we want to make some progress
-  with respect to developing some queueing theory, we have to skip
-  most of the proofs and mathematical problems; we simply don't have
-  enough time in this course  to be concerned with all theorems
-  and proofs.
 
 
   For the right-continuity of $A(t)$, define $f(t) = 1\{A_1 \leq
@@ -146,18 +141,24 @@ expected interarrival time.
     $u\in(t, t+\delta) \Rightarrow |f(u) -f(t)| < \epsilon$. (Note the
     differences with the regular definition of continuity.) Since, by
     assumption, $t$ is such that $f(t)=0$, and $f\in\{0,1\}$ we need
-    to show that $f(u)=0$ for $u\in(t, t+\delta)$. Now, clearly, if
+    to show that $f(u)=0$ for $u\in(t, t+\delta)$. Now, clearly, 
     $f(t)=0$ only if $t < A_1$.  But, then for any $u\in(t, A_1)$, we
     have that $f(u) = 0$. Thus, taking $\delta = A_1 - t$ suffices.
 
     The next step is to observe that $A(t)$ is a sum of
     right-continuous functions whose steps do not overlap since by
     assumption $0<A_1 < A_2 < \cdots$. As $A$ is (almost surely)
-    finite sum of bounded, increasing and right-continuous functions,
+    a finite sum of bounded, increasing and right-continuous functions,
     it is also right-continuous.
 
     If you like, you can try to prove this last step too. 
 
+  Hopefully this problem, and its solution, clarifies that even such
+  small details require attention. If we want to make some progress
+  with respect to developing some queueing theory, we have to skip
+  most of the proofs and mathematical problems; we simply don't have
+  enough time in this course  to be concerned with all theorems
+  and proofs.
 
     % For finite sums it is simple. Suppose that $f$ and $g$ are
     % right-continuous, then

@@ -273,16 +273,11 @@ The \emph{service objective} is to determine the minimal service
 capacity such that the fraction of the time more than 
 10 people in queue is less than 1\%. (If the supermarket has 3 cashiers open, 10 people in queue  means about 3 people per queue.)
 
-The next step is to find the \emph{relevant data}: the arrival rate and service time distribution. For a supermarket this is relatively easy: the cash registers track all customers
+The next step is to find the \emph{relevant data}: the arrival process and the service time distribution. For the arrival process it is reasonable to model it as a Poisson process. There are many potential custeromers, each choosing with small probability to go the supermarket on a certain moment in time. Thus, we only have to  characterize the arrival rate. Estimating this for a supermarket  is relatively easy: the cash registers track all customers
 payments. Thus, we know the number of customers that left the shop,
 hence entered the shop. (We neglect the time customers spend in the
-shop.) Based on these data we can make a \emph{demand profile}: the
-customer arrival rate per hour, c.f. Figure~\ref{fig:loadprofile}. It
-is also easy to find the service distribution from the cash
-registers. The first item scanned after a payment determines the start
-of a new service, and the payment closes the service. (As there is
-always a bit of time between the payment and the start of a new
-service we might add 15 seconds, say, to any service.)
+shop.) Based on these data we make a \emph{demand profile}: the
+average number of customers arriving per hour, c.f. Figure~\ref{fig:loadprofile}. Then we model the arrival process as Poisson with an arrival rate that is constant during a certain hour and is specified by the demand profile, 
 
 \begin{figure}[t]
   \centering
@@ -321,28 +316,29 @@ service we might add 15 seconds, say, to any service.)
   \label{fig:loadprofile}
 \end{figure}
 
-To keep things simple, we model the arrival process as Poisson with an
-arrival rate that is constant during an hour and is specified by the
-demand profile, and we take the service time distribution as
-exponential with a mean of $1.5$ minutes. We also \emph{model} the
-behavior of all the cashiers together (a multi-server queue) as a single fast server. Thus, we neglect any differences between a station with, for instance, 3 cashiers and a
-single server that works 3 times as fast as a normal cashier.  As yet
-another simplification, we change the objective somewhat such that the
-number of jobs in the queueing system should not exceed 10. (Thus, the
-objective is no longer formulated in terms of queue lengths.)
 
-The required number of servers per hour  follows from the
-objective $1\% \geq \P{L>10}=\rho^{11}$. This  translates into $\rho \leq 0.67$. Using that $\rho = \lambda \E S/c$ and our estimate $\E{S}=1.5$ minutes,  we get  the following rough bound on $c$:
+It is also easy to find the service distribution from the cash
+registers. The first item scanned after a payment determines the start
+of a new service, and the payment closes the service. (As there is
+always a bit of time between the payment and the start of a new
+service we might add 15 seconds, say, to any service.)
+To keep things simple here, and we just model the service time distribution as
+exponential with a mean of $1.5$ minutes. 
+
+We also \emph{model} the behavior of all the cashiers together (a multi-server queue) as a single fast server. Thus, we neglect any differences between a station with, for instance, 3 cashiers and a
+single server that works 3 times as fast as a normal cashier.  As a yet
+another simplification, we change the objective somewhat such that the
+number of jobs in the system, rather than the number in queue, should not exceed 10. 
+
+We now find a formula to convert the demand profile into the \emph{load profile}, which is the minimal number of servers per hour needed to meet the service objective. We already know for the $M/M/1$ that $\P{L>10}=\rho^{11}$.  Combining this with the objective $\P{L>10}\leq 1\%$, we get that $\rho^{11}\leq 0.01$, which  translates into $\rho \leq 0.67$. Using that $\rho = \lambda \E S/c$ and our estimate $\E{S}=1.5$ minutes,  we get  the following rough bound on $c$:
 \begin{equation*}
 c \geq \frac{\lambda \E S}{0.67} \approx \frac{3}2 \cdot \lambda \cdot 1.5  \approx 2.5 \lambda,
 \end{equation*}
 where $\lambda$ is the arrival rate (per minute, \emph{not} per hour).
-For instance, for the hour from 12 to 13, we read in  the demand profile that $\lambda= 120$ customers per hour, hence $c=2.5 \cdot 120/60 = 5$. Thus, the conversion of the demand profile to a \emph{load} profile, which tells us the minimal number of cashiers needed
-per hour, is trivial: divide the hourly arrival rate by $60$ and multiply by
-2.5. 
+For instance, for the hour from 12 to 13, we read in  the demand profile that $\lambda= 120$ customers per hour, hence $c=2.5 \cdot 120/60 = 5$. With this formula, the conversion of the demand profile to the load profile becomes trivial: divide the hourly arrival rate by $60$ and multiply by
+$2.5$. 
 
-
-Now we need to \emph{cover the load profile with service shifts}. This
+The last step is to \emph{cover the load profile with service shifts}. This
 is typically not easy since shifts have to satisfy all kinds of rules,
 such as: after 2 hours of work a cashier should take a break of at least
 10 minutes; a shift length must be at least four hours, and not longer

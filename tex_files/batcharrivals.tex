@@ -184,9 +184,11 @@ Show that $\P{B>n-m\given L(A-)=m}=\P{B>n-m}$
     Realize that $B$ and $L(A-)$ are assumed to be independent.
   \end{hint}
 \begin{equation*}
-\P{B>n-m\given L(A-)=m} =
-\frac{\P{B>n-m,L(A-)=m}}{\P{L(A-)=m}}=
-\frac{\P{B>n-m}\P{L(A-)=m}}{\P{L(A-)=m}} = \P{B>n-m}.
+  \begin{split}
+\P{B>n-m\given L(A-)=m} &=
+\frac{\P{B>n-m,L(A-)=m}}{\P{L(A-)=m}}\\
+&=\frac{\P{B>n-m}\P{L(A-)=m}}{\P{L(A-)=m}} = \P{B>n-m}.
+  \end{split}
 \end{equation*}
 \end{solution}
 \end{exercise}
@@ -447,17 +449,15 @@ print(EL)
 @
 This does the job.
 
-As a last step, I want to check Eq.~(\ref{eq:43}).
+As a last step, I want to check Eq.~(\ref{eq:43}). In fact, I spent at least one hour to
+get Eq.~(\ref{eq:43}) correct. Now I can also numerically check it.
 <<term=True>>=
 VB = EB2 - EB*EB
 C2 = VB/EB/EB
 EL = (1+C2)/2*rho/(1-rho)*EB + rho/(1-rho)/2
 EL
 @
-
-The algebra is, most probably, correct. I spent at least one hour to
-get Eq.~(\ref{eq:43}) correct. I am now, also numerically, convinced
-that all results are ok.
+The results agree. 
 \end{solution}
 \end{exercise}
 

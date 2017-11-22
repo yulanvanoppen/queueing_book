@@ -7,6 +7,7 @@
 \Opensolutionfile{ans}
 
 
+
 As we will see in the sections to come, the modeling and analysis of
 any queueing system involves the specification of the (probability)
 distribution of the time between consecutive arrival epochs of jobs,
@@ -265,6 +266,7 @@ What if we would use the moment generating function, as derived by the previous 
 
   \end{solution}
 \end{exercise}
+
 
 To plot the \recall{empirical distribution function}, or the
 \emph{histogram}, of the interarrival times at the shop, we need to count the
@@ -556,6 +558,7 @@ Straightforward integration gives the final result.
 \end{solution}
 \end{exercise}
 
+
 When $X$ and $S$ are not exponentially distributed, such computations are much harder.   
 \begin{exercise}
   If $S\sim U[0,7]$ and $X\sim U[0,10]$, where $U[I]$ stands for the
@@ -578,9 +581,9 @@ Thus,
   \end{split}
 \end{equation*}
 
-Now we need to chop up the domain of $\P{S-X\leq u}$, for which we use Figure~\ref{fig:P_S_X}
-.
-\begin{figure}[th]
+Now we need to chop up the domain of $\P{S-X\leq u}$, for which we use the figure below.
+
+%\begin{figure}[ht]
 \begin{center}
 \begin{tikzpicture}[scale=0.7]
 %\draw[[-{Triangle[open]},dotted] (0,10)--(8.5,10);
@@ -610,9 +613,9 @@ Now we need to chop up the domain of $\P{S-X\leq u}$, for which we use Figure~\r
 \node at (1.5,3) {$s\leq x+3$};
 \end{tikzpicture}
 \end{center}
-\caption{Computing the probability that $S-X\leq u$.}
-\label{fig:P_S_X}
-\end{figure}
+%\caption{Computing the probability that $S-X\leq u$.}
+%\label{fig:P_S_X}
+%\end{figure}
 
 
 It is clear that  the indicated rectangle has no overlap with the set of points $(x,s)$ such that $s\leq u + x$ for $u<-10$. (To see this, draw the line $s=x-10$ in the figure.) At $u=-10$, the overlap is a single point, at $(10,0)$. Thus, 
@@ -878,12 +881,14 @@ If $F(x) = 1 - e^{-\mu x}$, we obtain that
 \end{exercise}
 \end{comment}
 
+
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}
 \subsection*{Hints}
 \input{hint}
 \subsection*{Solutions}
 \input{ans}
+
 \clearpage  
 
 
