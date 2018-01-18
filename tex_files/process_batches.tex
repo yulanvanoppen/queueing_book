@@ -13,13 +13,13 @@ Zijm.Ex.1.12.1
  \begin{solution}
 Zijm, Eq. 1.66
 
-<<term=True>>=
+\begin{pyconsole}
 labda = 10
 mu = 30
 ESs = 2 #days
 
 labda*ESs/(1-labda/mu)
-@
+\end{pyconsole}
 
 At least 30 jobs need to be served in a batch.
 \end{solution}
@@ -29,7 +29,8 @@ At least 30 jobs need to be served in a batch.
 Zijm.Ex.1.12.2
  \begin{solution}
 
-<<term=True>>=
+\begin{pyconsole}
+  
 N = 50
 VarSs = 0 # fixed setup time
 ES0 = 1/mu
@@ -46,11 +47,12 @@ labdaB
 
 rho = labdaB*ESb # Eq.1.65
 rho 
-@
+\end{pyconsole}
 
 When inspecting the SCV, I find it a bit small. To see whether I made a mistake, I'll try to make Figure 1.6 of Zijm.
 
-<<>>=
+\begin{pyconsole}
+  
 VarSs = 0
 ES0 = 1 / mu
 VarS0 = 1 / mu**2  # M/M/1, hence exponential service times
@@ -63,7 +65,8 @@ for N in range(31, 120, 5):
     Cab2 = 1 / N  # recall that Ca2=1 for M/M/1
     W = (Cab2 + Csb2) / 2 * rho / (1 - rho) * ESb + ESb
     print("{} {:f} {:f} {:f} {:f}".format(N, ESb, Csb2, rho, W))
-@
+
+\end{pyconsole}
 
 This is not the same as the results of Figure 1.6. After closely
 inspecting my results above, I can't find a mistake\ldots Perhaps you see what's wrong.

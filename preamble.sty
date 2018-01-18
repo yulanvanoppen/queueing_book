@@ -27,13 +27,17 @@
 \pgfplotsset{compat=newest}
 \usepgfplotslibrary{groupplots}
 
-% \usepackage{fancyhdr}
-% \pagestyle{fancy}
-% \fancyhead{} % clear all header fields
-% \fancyhead[LO, LE]{\rightmark}
-% \fancyfoot{} % clear all footer fields
-% \fancyfoot[C]{\thepage}
-% \setlength{\headheight}{14pt} 
+% I don't know why, pythontext should appear somewhere above some
+% other packages. I don't know which ones, but at this spot it works.
+\usepackage{pythontex}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\fancyhead[LO, LE]{\rightmark}
+\fancyfoot{} % clear all footer fields
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt} 
 
 \usepackage{xcolor}
 \usepackage{cprotect}
@@ -96,9 +100,10 @@
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
 
+
 \usepackage{geometry}
 \usepackage{framed}
-\usepackage{fancybox}
+%\usepackage{fancybox}
 
 \newenvironment{myleftbar}{%
 \def\FrameCommand{\vrule width 2pt\hspace{0.6em}}%

@@ -512,23 +512,24 @@ distribution.
   An $M/M/2$ queueing system is very heavily utilized, with an arrival rate of 11 customers per hour, and a  service rate of 6 customers per hour per server.
  Determine $\E{L_Q}$ and $\E{W_Q}$. Compare your solution to an $M/M/1$ queue with $\rho=11/12$. Why are your answers similar or different?
   \begin{solution}
-  \begin{enumerate}
-  \item 
 
-<<term=True>>=
+Here are the results for the $M/M/2$ queue.
 
+\begin{pyconsole}
 labda = 11.
 mu = 6
 c = 2
 
 rho = labda/mu
 rho < c  # is the system stable?
-@ 
+\end{pyconsole}
 
-Compute Ls and so on
+Compute $L_s$ and so on
 
 
-<<term=True>>=
+\begin{pyconsole}
+from math import factorial
+
 G = sum(rho**n/factorial(n) for n in range(c))
 G += rho**c/factorial(c)/(1.-rho/c)
 P0 = 1./G
@@ -544,12 +545,11 @@ Ls/labda # Ws
 
 ES = 1./mu # expected service time
 ES
+\end{pyconsole}
 
-@ 
+Now consider the $M/M/1$ queue with twice the service rate, i.e., now we take $\mu = 6c = 12$. 
 
-\item 
-
-<<term=True>>=
+\begin{pyconsole}
 mu = c*6
 
 rho = labda/mu
@@ -567,9 +567,7 @@ Ls/labda # Ws
 
 ES = 1./mu # expected service time
 ES
-@ 
-It is of interest to compare the M/M/2 system to the M/M/1 system with twice the capacity. 
-  \end{enumerate}
+\end{pyconsole}
     \end{solution}
 \end{exercise}
 
@@ -668,26 +666,26 @@ arriving job also sees $p(k)$.
       the computations below I typically use the simplest, but often
       not the most efficient, code.)
 
-<<term=True>>=
+\begin{pyconsole}
 P = [0.4, 0.3, 0.2, 0.05, 0.05]
 L = sum(n*P[n] for n in range(len(P)))
 L
-@ 
+\end{pyconsole}
 
 There can only be a queue when a job is in service. Since there is
 $m=1$ server, we subtract $m$ from the amount of jobs in the system.
 Before we do this, we need to ensure that $n-m$ does not become
 negative. Thus, $\E{L_Q} = \sum_n \max\{n-m, 0\} p(n)$.
 
-<<term=True>>=
+\begin{pyconsole}
 m = 1
 Lq = sum(max(n-m,0)*P[n] for n in range(len(P)))
 Lq
-@
+\end{pyconsole}
 
 \item 
 
-<<term=True>>=
+\begin{pyconsole}
 labda = 10./60
 Wq = Lq/labda # in minutes
 Wq
@@ -696,45 +694,45 @@ Wq/60 # in hours
 W = L/labda # in minutes
 W
 W/60 # in hours
-@ 
+\end{pyconsole}
 
 \item 
 
-<<term=True>>=
+\begin{pyconsole}
 from math import sqrt
 var_L = sum((n-L)**2*P[n] for n in range(len(P)))
 var_L
 sqrt(var_L)
-@
+\end{pyconsole}
 
 
-<<term=True>>=
+\begin{pyconsole}
 var_Lq = sum((max(n-m,0)-Lq)**2*P[n] for n in range(len(P)))
 var_Lq
 sqrt(var_Lq)
-@ 
+\end{pyconsole}
 
 \item 
 
-<<term=True>>=
+\begin{pyconsole}
 mu = 1./(W-Wq)
 1./mu # in minutes
 
 rho = labda/mu
 rho
-@ 
+\end{pyconsole}
 
-<<term=True>>=
+\begin{pyconsole}
 rho = L-Lq
 rho
-@ 
+\end{pyconsole}
 This checks the previous line.
 
 The utilization must also by equal to the fraction of time the server is busy. 
-<<term=True>>=
+\begin{pyconsole}
 u = 1 - P[0]
 u
-@ 
+\end{pyconsole}
 
 Yet another way: Suppose we have $m$ servers. If the system is empty,
 all $m$ servers are idle. If the system contains one customer, $m-1$
@@ -747,10 +745,11 @@ as in case there are more than $m$ customers in the system, the
 number of idle servers is $0$.
 
 
-<<term=True>>=
+\begin{pyconsole}
 idle = sum( max(m-n,0)*P[n] for n in range(len(P)))
 idle
-@ 
+\end{pyconsole}
+
   \end{enumerate}
    \end{solution}
  
@@ -767,7 +766,7 @@ $p(n) = (1-\rho)\rho^n$
 
 \item 
 
-<<term=True>>=
+\begin{pyconsole}
 labda = 100. # per hour
 mu = 140. # per hour
 ES = 1./mu
@@ -784,7 +783,7 @@ W = 1./(1.-rho) * ES
 W
 Wq = rho/(1.-rho) * ES
 Wq
-@ 
+\end{pyconsole}
   \end{enumerate}
   \end{solution}
 \end{exercise}
@@ -800,7 +799,7 @@ Wq
         solve for $\rho$ with the abc-formula (and using that
         $\rho > 0$):
 
-<<term=True>>=
+\begin{pyconsole}
 labda = 5. # per minute
 Wq = 1.
 a = 1.
@@ -811,11 +810,11 @@ rho
 
 ES = rho/labda
 ES
-@ 
+\end{pyconsole} 
 
 \item 
 
-<<term=True>>=
+\begin{pyconsole}
 Lq = labda*Wq
 Lq
 
@@ -824,14 +823,14 @@ W
 
 L = labda*W
 L
-@ 
+\end{pyconsole} 
 
 \item 
 
 The problem is to find $n$ such that
       $\sum_{j=0}^n p_j > 0.9$.
 
-<<term = True>>=
+\begin{pyconsole} 
 total = 0. 
 j = 0
 while total <= 0.9:
@@ -841,16 +840,16 @@ while total <= 0.9:
 total
 j
 n = j- 1 # the number of chairs 
-@ 
+\end{pyconsole} 
 
 Observe that $j$ is one too high once the condition is satisfied, thus subtract one.
 
 As a check, I use that $(1-\rho) \sum_{j=0}^n \rho^j = 1-\rho^{n+1}$.
 
-<<term=True>>=
+\begin{pyconsole}
 1-rho**(n) #  this must be too small.
 1-rho**(n+1) # this must be OK.
-@ 
+\end{pyconsole} 
 
 And indeed, we found the right $n$.
 
@@ -886,14 +885,15 @@ This is a queueing system with loss, in particular the $M/M/1/1+2$ queue.
     \begin{solution}
       \begin{enumerate}
       \item 
+First compute $\E{L_Q}$ for the case with a buffer for $2$ customers.
 
-<<term=True>>=
+\begin{pyconsole}
 labda = 6.
 mu = 5.
 rho = labda/mu
 c = 1
 b = 2
-@ 
+\end{pyconsole} 
 
 Set $p(n) = \rho^n$ initially, and normalize later. Use the
 expressions for the $M(n)/M(n)/1$ queue.  Observe that $\rho>1$. Since
@@ -901,51 +901,54 @@ the size of the system is $c+b+1$ is finite, all formulas work for
 this case too.
 
 
-There are 4 states in total: $0,1,2,3$.
+There are 4 states in total: $0,1,2,3$. (The reason to import numpy here and convert the lists to arrays is to fix the output precision to 3, otherwise we get long floats in the output.)
 
-<<term=True>>=
-P = [rho**n for n in range(c+b+1)]
+\begin{pyconsole}
+import numpy as np
+np.set_printoptions(precision=3)
+
+P = np.array([rho**n for n in range(c+b+1)])
 P
 
 G = sum(P)
 G
 
-P = [p/G for p in P] # normalize
+P /= G # normalize
 P
-@ 
+\end{pyconsole} 
 
-<<term=True>>=
+\begin{pyconsole}
 L = sum(n*P[n] for n in range(len(P)))
 L
 
 Lq = sum((n-c)*P[n] for n in range(c,len(P)))
 Lq
-@ 
+\end{pyconsole} 
 
 
 The number of jobs served per hour must be equal to the number of jobs
 accepted, i.e., not lost. The fraction of customers lost is equal to
 the fraction of customers that sees a full system.
 
-<<term=True>>=
+\begin{pyconsole}
 lost = labda*P[-1] # the last element of P
 lost
 
 accepted = labda*(1.-P[-1]) # rate at which jobs are accepted
 accepted
-@  
+\end{pyconsole}  
 
 \item 
+Now increase the buffer $b$ to 5.
 
- Increase $b$ to 5
-<<term=True>>=
+\begin{pyconsole}
 b = 5
-P = [rho**n for n in range(c+b+1)]
+P = np.array([rho**n for n in range(c+b+1)])
 P
 G = sum(P)
 G
 
-P = [p/G for p in P] # normalize
+P /= G # normalize
 P
 
 L = sum(n*P[n] for n in range(len(P)))
@@ -953,7 +956,7 @@ L
 
 accepted = labda*(1.-P[-1])
 accepted
-@      
+\end{pyconsole}      
   \end{enumerate}
     \end{solution}
 \end{exercise}
@@ -1005,8 +1008,9 @@ for various values of $\lambda$.
   \end{enumerate}
   \begin{solution}
     \begin{enumerate}
-    \item 
-<<term=True>>=
+    \item Determine $\E L$ and  $\E{L_Q}$. 
+
+\begin{pyconsole}
 P = [0.4, 0.3, 0.2, 0.05, 0.05]
 
 c = 2
@@ -1015,10 +1019,10 @@ Lq
 
 L= sum(n*P[n] for n in range(len(P)))
 L
-@
+\end{pyconsole}
 
-\item 
-<<term=True>>=
+\item Using Little's formula, determine $\E W$ and $\E{W_Q}$. 
+\begin{pyconsole}
 labda = 10./60
 Wq = Lq/labda # in minutes
 Wq
@@ -1026,22 +1030,22 @@ Wq/60 # in hours
 
 W = L/labda
 W
-@ 
+\end{pyconsole} 
 
-\item 
-<<term=True>>=
+\item Determine $\V L$ and $\V{L_Q}$.
+\begin{pyconsole}
 from math import sqrt
 var_L = sum((n-L)**2*P[n] for n in range(len(P)))
 var_L
 sqrt(var_L)
-@ 
+\end{pyconsole} 
 
-\item 
-<<term=True>>=
+\item Determine the service time and the utilization.
+\begin{pyconsole}
 var_q = sum((max(n-c,0)-Lq)**2*P[n] for n in range(len(P)))
 var_q
 sqrt(var_q)
-@
+\end{pyconsole}
 
   \end{enumerate}
     \end{solution}
@@ -1056,10 +1060,8 @@ sqrt(var_q)
  Calculate the steady state probabilities. Next,  what is the average arrival rate? Finally,
  Determine $\E L$, $\E{L_Q}$, $\E W$ and $\E{W_Q}$.
   \begin{solution}
-      \begin{enumerate}
-      \item 
 
-<<term=True, wrap=False>>=
+\begin{pyconsole}
 import numpy as np
 labda = [10., 15., 15., 10., 5.]
 c = 2
@@ -1068,62 +1070,61 @@ mn[0] = 0  # no service if system is empty
 mn[1] = 1  # one busy server if just one job present
 mu = 5*mn # service rate is 5 times no of active servers
 mu
-@
+\end{pyconsole}
 
 Since there can be arrivals in states $0,\ldots, 4$,  the system can contain $0$ to $5$ customers, i.e., $p(0),\ldots, p(5)$.
 
 Use the level crossing result for the $M(n)/M(n)/1$ queue:
 
-<<>>=
+\begin{pyconsole}
 P = [1]*(len(labda)+1)
 for i in range(1,len(P)):
     P[i] = labda[i-1]/mu[i]*P[i-1]
-print(P) # unnormalized probabilities
-@
 
-<<term=True>>=
+P = np.array(P) # unnormalized probabilities
+P
+\end{pyconsole}
+
+\begin{pyconsole}
 G = sum(P) # normalization constant
 G
-P = [p/G for p in P]
-P # normed
-@ 
-
-\item 
+P /= G # normalize
+P 
+\end{pyconsole} 
 
 $\lambda = \sum_{n}\lambda(n) p(n)$.
 
-<<term=True>>=
+\begin{pyconsole}
 labdaBar = sum(labda[n]*P[n] for n in range(len(labda)))
 labdaBar
-@
+\end{pyconsole}
 
 
 The average number in the system is: 
-\item 
-<<term=True>>=
+
+\begin{pyconsole}
 Ls = sum(n*P[n] for n in range(len(P)))
 Ls
-@
+\end{pyconsole}
 
 
 The average number in queue 
-<<term=True>>=
+\begin{pyconsole}
 c = 2
 Lq = sum((n-c)*P[n] for n in range(c,len(P)))
 Lq
-@ 
+\end{pyconsole} 
 
 And now the waiting times:
 
-<<term=True>>=
+\begin{pyconsole}
 Ws = Ls/labdaBar
 Ws # time in the system
 
 Wq = Lq/labdaBar
 Wq # time in queue
-@ 
+\end{pyconsole} 
 
-  \end{enumerate}
     \end{solution}
 \end{exercise}
 
@@ -1153,11 +1154,11 @@ of servers must be high, whereas if servers are relatively expensive, customers 
     \begin{enumerate}
     \item 
       Would one server/person do? 
-<<term=True>>=
+\begin{pyconsole}
 labda = 28./60 # arrivals per minute
 ES = 4.
 labda*ES
-@ 
+\end{pyconsole} 
 
 If $c=1$, the load $\rho=\lambda \E S/c >1$ is clearly undesirable for one server.  We need at
 least two servers.
@@ -1170,41 +1171,40 @@ It is not relevant to focus on the time in the system , as time
 I just convert the formulas of~\eqref{eq:9} to python code. This saves
 me time during the computations.
 
-<<term = False>>=
-from math import factorial
-
+\begin{pyconsole}
 def WQ(c, labda, ES):
     rho = labda*ES/c
     G = sum([(c*rho)**n/factorial(n) for n in range(c)])
     G += (c*rho)**c/(1.-rho)/factorial(c)
     Lq = (c*rho)**c/(factorial(c)*G) * rho/(1.-rho)**2
     return Lq/labda # Wq, Little's law
-@ 
+
+\end{pyconsole} 
 
 Considering the scenario with one server is superfluous as $\rho>1$ in
 that case.
 
 What is the waiting time for $c=2$ servers?
 
-<<term=True>>=
+\begin{pyconsole}
 WQ(2, 28./60, 4) # in minutes
 WQ(2, 28./60, 4)/60. # in hours
-@
+\end{pyconsole}
 
 What is the waiting time for $c=3$ servers?
 
-<<term=True>>=
+\begin{pyconsole}
 WQ(3, 28./60, 4)   # in minutes
 WQ(3, 28./60, 4)/60. # in hours
-@
+\end{pyconsole}
 
 
 What is the waiting time for $c=4$ servers?
 
-<<term=True>>=
+\begin{pyconsole}
 WQ(4, 28./60, 4) # in minutes
 WQ(4, 28./60, 4)/60. # in hours
-@ 
+\end{pyconsole} 
 
 In the next  part of the question we will interpret these numbers.
 
@@ -1220,29 +1220,29 @@ employees are equally expensive, we need to choose $c$ such that
 the number of maintenance workers waiting (i.e., being idle because they are waiting in queue), is  equal to the number of crib workers being idle. In other words, we search for a $c$ such that $\E{L_Q} \approx c- \lambda \E S$ (where, of course, $\E{L_Q}$ depends on $c$.)
 
 
-<<term=True>>=
+\begin{pyconsole}
 labda = 28./60
 ES = 4.
 c = 2
 ELQ = labda*WQ(c, labda, ES)
 ELQ
 c-labda*ES
-@ 
+\end{pyconsole} 
 Now the maintenance employees wait more than the tool crib employees.
 
-<<term=True>>=
+\begin{pyconsole}
 c = 3
 ELQ = labda*WQ(c, labda, ES)
 ELQ
 c-labda*ES
-@ 
+\end{pyconsole} 
 
-<<term=True>>=
+\begin{pyconsole}
 c = 4
 ELQ = labda*WQ(c, labda, ES)
 ELQ
 c-labda*ES
-@ 
+\end{pyconsole} 
 
 Clearly, $c=3$ should do.
   \end{enumerate}

@@ -162,10 +162,10 @@ Zijm.Ex.1.11.4 and 1.11.5
    \end{equation*}
 i.e., very small.  This is the code I used: 
 
-<<term=True>>=
+\begin{pyconsole}
 from math import exp, factorial
 exp(-10) * sum((10)**n / factorial(n) for n in range(21))
-@
+\end{pyconsole}
 \end{solution}
 \end{exercise}
 
@@ -178,9 +178,9 @@ If the shop already contains 10 jobs, somewhere upstream of the broken machine, 
      \P{N(2) > 10} = 1- 0.58.
    \end{equation*}
 where  I used
-<<term=True>>=
+\begin{pyconsole}
 exp(-10) * sum((10)**n / factorial(n) for n in range(11))
-@
+\end{pyconsole}
 \end{solution}
 \end{exercise}
 

@@ -28,7 +28,7 @@ systems, measurements of the interarrival times between consecutive
 arrivals show that it is reasonable to model an interarrival $X$ as
 an \recall{exponentially distributed} random variable, i.e.,
 \begin{equation*}
-  \P{X \leq t} = 1- e^{-\lambda t} := G(t)
+  \P{X \leq t} = 1- e^{-\lambda t}
 \end{equation*}
 The constant $\lambda$ is often called the \recall{rate}. The reason
 behind this will be clarified once we relate the exponential
@@ -36,6 +36,19 @@ distribution to the Poisson process in
 Section~\ref{sec:poisson-distribution}.  In the sequel we often write
 $X\sim \exp(\lambda)$ to mean that $X$ is exponentially distributed
 with rate $\lambda$.
+
+
+\begin{exercise} 
+In the above expression for $\P{X\leq t}$ we require that $\lambda>0$. What would happen if you would allow $\lambda$ to be zero or negative?
+\begin{hint}
+  What is the interpretation of the function $1-e^{-\lambda t}$?
+\end{hint}
+\begin{solution}
+  If $\lambda<0$, then $1-e^{-\lambda t}$ grows to $-\infty$ if $t\to \infty$. Just by itsel this is not a problem. However, in our case $1-e^{-\lambda t}$ has the interpretation of a distribution function. Now, recall that a distribution function is bounded to values in the interval $[0,1]$.
+
+Suppose $\lambda=0$. Then $\P{X\leq t} = 1-e^{0} = 0$. In words, this would mean that the probability of a finite interarrival time between any two customers is zero. So, no customers can arrive in this case. 
+\end{solution}
+\end{exercise}
 
 \begin{exercise} 
   If the random variable $X\sim\exp(\lambda)$, show that its mean $\E X = \frac{1}\lambda.$
@@ -97,10 +110,27 @@ $\V X = \lambda^{-2}$.
   \end{solution}
 \end{exercise}
 
-The  above exercises can also be easily solved with the concept of \recall{moment generating function} which is defined for a random variable $X\geq 0$ as 
+The  above exercises can also be easily solved with the concept of \recall{moment generating function} which is defined for a random variable $X\geq 0$ and $t$ a real number as 
 \begin{equation*}
-  M_X(t) = \E{e^{tX}}.
+  M_X(t) = \E{e^{tX}} = \int_0^\infty e^{tx} \lambda e^{-\lambda x} \d x.
 \end{equation*}
+
+\begin{exercise}
+Why do we require that $t \in [0, \lambda)$ in the definition of $M_X(t)$?
+\begin{solution}
+\begin{equation*}
+  M_X(t) = \E{e^{tX}} = \lambda \int_0^\infty e^{-(\lambda-t) x}\d x.
+\end{equation*}
+  If $t - \lambda>0$, then this integral becomes $\infty$. 
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+  What is $M_x(0)?$
+  \begin{solution}
+    $M_X(0) = \E{e^{0 X}} = \E{e^0} = \E{1} = 1$
+  \end{solution}
+\end{exercise}
 
 \begin{exercise}\label{ex:33}
  If $X$ is an exponentially distributed random variable with

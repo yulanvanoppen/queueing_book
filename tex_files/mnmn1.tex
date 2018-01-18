@@ -518,13 +518,13 @@ In Chapter 8 of Ross, Introduction to Probability Models, this problem
 is also analyzed. With a bit of effort you can study this analysis.
 
 First copy some data from the previous problem.
-<<term=True>>=
+\begin{pyconsole}
 labda = 11. # per hour
 mu = 6. # per hour
 
 rho = labda/mu
 rho
-@ 
+\end{pyconsole}
 
 To estimate $\E L_Q$ I use Figure 5.10. Using the line $rho =
 2$, as here $\rho = 11/6 \approx 2$, and $K=2$, we see
@@ -642,7 +642,7 @@ Implement the formulas for $\E{L_Q(M/M/3)}$ for the $M/M/3$ queue in
   \begin{solution}
 I am going to implement the formulas of Eq.~(\ref{eq:9}) in python. First the results for the $M/M/3$ queue.
 
-<<term=True>>=
+\begin{pyconsole}
 from math import exp, factorial
 
 labda = 5
@@ -662,12 +662,11 @@ ELS = rho * c
 ELS
 EL = ELQ + ELS
 EL
-
-@
+\end{pyconsole}
 
 Now for the $M/M/1$ queue:
 
-<<term=True>>=
+\begin{pyconsole}
 labda = 5
 c = 3
 mu = 2*c
@@ -683,7 +682,7 @@ EL = ELS + ELQ
 EL
 
 rho/(1-rho) # this must also be EL, just a check
-@
+\end{pyconsole}
 
 Note the last check. As a rule, you should always compare your results
 with known results. BTW, that is one of the reasons I prefer to code

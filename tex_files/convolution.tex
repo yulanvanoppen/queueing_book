@@ -279,11 +279,12 @@ Zijm.Ex.3.1.11
 
 We first need a few libraries. 
 
-<<>>=
+\begin{pyconsole}
 from functools import lru_cache
 import numpy as np
 from numpy.linalg import eig
-@
+  
+\end{pyconsole}
 
 Since the convolution algorithm is recursive I use caching to store
 the results of intermediate computations. The storage is taken care of
@@ -296,7 +297,7 @@ exponential to linear complexity..
 
 The data is this:
 
-<<>>=
+\begin{pyconsole}
 mu = np.array([2, 1, 3])
 c = np.array([1, 1, 1]) # single server stations
 P = np.matrix([
@@ -305,7 +306,8 @@ P = np.matrix([
     [1, 0, 0]
 ]
 )
-@
+  
+\end{pyconsole}
 
 I now compute the visit ratios $V$. This vector is the left
 eigenvector of the routing matrix~$P$ with eigenvalue $1$, i.e.,
@@ -319,26 +321,27 @@ eigenvalue 1 is the largest of all eigenvalues.
 
 Compute the eigenvalues and eigenvectors:
 
-<<>>=
+\begin{pyconsole}
 v, w = eig(P.T)
-@ 
+\end{pyconsole}
 
 Get the index of the  eigenvalue with the largest real part, i.e., the  eigenvalue 1:
-<<>>=
+\begin{pyconsole}
 x = v.real.argmax() 
-@
+\end{pyconsole}
 
 V is the eigenvector with eigenvalue 1; take the real part of the entries of $V$:
-<<>>=
+\begin{pyconsole}
 V = w[:,x].real 
-@
+\end{pyconsole}
 
 Normalize so that $V_0 = 1$. 
 
-<<term=True>>=
+\begin{pyconsole}
 V = V / V[0] 
 V
-@
+  
+\end{pyconsole}
 This is what we expected.
 
 It follows from Zijm.Eq.3.3 that 
@@ -350,19 +353,20 @@ It follows from Zijm.Eq.3.3 that
   \end{cases}
 \end{equation*}
 
-<<>>=
+\begin{pyconsole}
 @lru_cache(maxsize=None)
 def f(i, n_i):
     if n_i == 0:
         return 1
     return V[i] / mu[i] / min(n_i, c[i]) * f(i, n_i - 1)
-@
+  
+\end{pyconsole}
 
 Note that the cache stores the results of intermediate computations.
 
 Finally the convolution algorithm.
 
-<<>>=
+\begin{pyconsole}
 @lru_cache(maxsize=None) 
 def G(m, n):
     if n == 0:
@@ -370,21 +374,22 @@ def G(m, n):
     if m == 0:
         return 1 / mu[0]**n
     return sum(f(m, k) * G(m - 1, n - k) for k in range(n + 1))
-@
+  
+\end{pyconsole}
 
 Observe how simple this implementation is compared to the
 specification in the text. I also find it much easier to read. 
 
 The result of the previous example must be 
 
-<<term=True>>=
+\begin{pyconsole}
 G(2, 2)
-@
+\end{pyconsole}
 
 Testing code is crucial, just as crucial as testing formulas. The
 analytic result of the previous question becomes in code:
 
-<<>>=
+\begin{pyconsole}
 def test():
     res = 1 / mu[0]**2 + 1 / mu[1]**2 + 1 / mu[2]**2
     res += 1 / mu[0] * 1 / mu[1] + 1 / mu[0] * \
@@ -392,7 +397,8 @@ def test():
     print(res)
 
 test()
-@
+  
+\end{pyconsole}
 
 The  outcomes of both procedures are the same. 
 
@@ -417,7 +423,7 @@ Zijm.Ex.3.1.12
 
 We can try the recursion of Example 3.3.
 
-<<>>=
+\begin{pyconsole}
 mu = np.array([2, 1, 3])
 V = np.array([1, 1, 1])
 
@@ -431,7 +437,8 @@ def G(M, N):
     return G(M - 1, N) + G(M, N - 1) * V[M] / mu[M]
 
 print(G(2, 2))
-@
+  
+\end{pyconsole}
 \end{solution}
 \end{exercise}
 

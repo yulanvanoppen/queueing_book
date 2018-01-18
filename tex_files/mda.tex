@@ -167,7 +167,7 @@ Zijm.Ex.3.1.15
 
 First the old results again:
 
-<<>>=
+\begin{pyconsole}
 from functools import lru_cache
 import numpy as np
 from numpy.linalg import eig
@@ -216,12 +216,13 @@ for n in range(8, 11):
         res += "{:6.2f}".format(float(EL(j, n)))
     res += "{:6.2f}".format(float(TH(0,n)))
     print(res)
-@
+  
+\end{pyconsole}
 
 Now we need to clear the cache, and redo the computations
 The visit ratios do not change, only the processing rates.
 
-<<>>=
+\begin{pyconsole}
 EL.cache_clear()
 EW.cache_clear()
 TH.cache_clear()
@@ -235,7 +236,8 @@ for n in range(8, 11):
         res += "{:6.2f}".format(float(EL(j, n)))
     res += "{:6.2f}".format(float(TH(0,n)))
     print(res)
-@
+  
+\end{pyconsole}
 
 All is according to intuition. Indeed, the throughput increases
 slightly. Thus, it may be interesting to increase the production rate
@@ -255,7 +257,7 @@ improving the bottleneck.
     data of Example 3.4, and compare, as a test, the results to the
     results of the previous exercise.
 
-<<>>=
+\begin{pyconsole}
 from functools import lru_cache
 import numpy as np
 from numpy.linalg import eig
@@ -303,13 +305,14 @@ def TH(j, n):
         return V[j] * TH(0, n)
 
 print(TH(0, 10))
-@
+  
+\end{pyconsole}
 
 This is the same as what we see earlier. I guess all is ok. 
 
 Now add a machine to station 0. Don't forget to clear the cache!
 
-<<term=True>>=
+\begin{pyconsole}
 p.cache_clear()
 EW.cache_clear()
 TH.cache_clear()
@@ -320,13 +323,14 @@ n = 10
 TH(0, n)
 n = 30
 TH(0, n)
-@
+  
+\end{pyconsole}
 
 As expected, station 1 with processing rate $\mu_1=2.5$ now determines
 the throughput of the network.
 
 
-<<evaluate=True>>=
+\begin{pyconsole}
 def ELQ(j, n):
     return sum((k - c[j]) * p(j, k, n) for k in range(c[j], n + 1))
 
@@ -336,12 +340,13 @@ def EL(j, n):
 
 print(EL(0, n))
 print(TH(0, n) * EW(0, n)) # Little's law as a check.
-@
+  
+\end{pyconsole}
 
 Finally, plot the probability mass functions for stations 0, 1, and 2.
 
   
-<<evaluate=False,fig = True, width = '12 cm'>>=
+\begin{pyconsole}
 import matplotlib.pyplot as plt
 
 plt.figure(figsize=(6, 2))
@@ -352,7 +357,8 @@ plt.legend()
 filename = "figures/mda_mass.pdf"
 plt.savefig(filename)
 plt.close()
-@
+  
+\end{pyconsole}
 
 \includegraphics{mda_mass}
 

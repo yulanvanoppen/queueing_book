@@ -380,7 +380,8 @@ the distributions of $W_k$ and $W_{k+1}$,
 \end{equation*}
 for $x$ in the support of $W_{Q,k}$. 
 
-<<term=True,wrap=False>>=
+\begin{pyconsole}
+  
 from lea import Lea
 
 S = Lea.fromVals(1,  2)
@@ -393,7 +394,8 @@ for k in range(1, 10):
     m = max(abs(W_new.cdf(x)-W.cdf(x))  for x in range(W_new.support()[-1]))
     print(k, m) 
     W = W_new
-@
+
+\end{pyconsole}
 
 So, after some 10 customers, the distribution hardly changes anymore. 
 

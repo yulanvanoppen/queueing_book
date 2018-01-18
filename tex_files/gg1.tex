@@ -85,11 +85,11 @@ demand or increasing the capacity), then try to reduce the variability
 split jobs into multiple smaller jobs and use the resulting freedom to
 reschedule jobs in the queue.
 
-For the $G/G/c$ queue we also only have an approximation.
+For the $G/G/c$ queue we can Sakasegawa's approximation, \cite{sakasegawa77:_l}, 
 \begin{equation}\label{eq:7}
-  \E{W_Q} = \frac{C_a^2+C_e^2}2 \frac{\rho^{\sqrt{2(c+1)}-1}}{c(1-\rho)} \E S.
+  \E{W_Q} = \frac{C_a^2+C_e^2}2 \frac{\rho^{\sqrt{2(c+1)}-1}}{c(1-\rho)} \E S
 \end{equation}
-We refer to \cite{hopp08:_factor_physic} for a discussion of this formula and its many applications, and to \cite{bolch06:_queuein_networ_markov_chain} for related approximations.
+to estimate the time in queue.  We refer to \cite{hopp08:_factor_physic} for a discussion of this formula and its many applications.
 
 
 Even though the above results are only approximate, they prove to be
@@ -253,8 +253,10 @@ As a first case,  assuming a single server, estimate $\E{W_Q}$ with the $G/G/1$ 
   \end{hint}
   \begin{solution}
 \begin{enumerate}
-\item 
-<<term=True>>=
+\item  First the $G/G/1$ case.
+
+\begin{pyconsole}
+  
 a = 3.
 b = 9. 
 EA = (b+a)/2.
@@ -276,13 +278,15 @@ rho
 
 Wq = (CA2+CS2)/2. * rho/(1.-rho) * ES
 Wq
-@
+\end{pyconsole}
 
 \item 
-<<term=True>>=
+Now  the $M/G/1$ case.
+
+\begin{pyconsole}
 Wq = (1.+CS2)/2.*rho/(1.-rho)*ES
 Wq
-@
+\end{pyconsole}
 
 The arrival process with uniform interarrival times is much more
 regular than a Poisson process. In the first case, bus arrivals are

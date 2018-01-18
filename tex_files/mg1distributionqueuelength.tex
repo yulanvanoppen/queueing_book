@@ -466,7 +466,7 @@ Discretize time to  a grid of points, and   approximate the integral by a summat
 
 Lets try a numerical experiment. 
 
-<<wrap=False>>=
+\begin{pyconsole}
 import numpy as np
 
 labda = 3
@@ -488,13 +488,14 @@ def term(i):
     res *= (labda * i * dx)**j / np.math.factorial(j)
     res *= f(i*dx) * dx
     return res
-@
 
-<<term=True, wrap=False>>=
+\end{pyconsole}
+
+\begin{pyconsole}
 print(sum(term(i) for i in range(50)))
 print(sum(term(i) for i in range(500)))
 print(sum(term(i) for i in range(5000)))
-@
+\end{pyconsole}
 
 Since I don't know when to stop the integral I just try a few values;
 of course stopping the integration at $x=50$ is too small, since
@@ -511,14 +512,14 @@ designed to produce good and reliable results, and, typically, it is
 very hard to improve these methods. Thus, let's try a real number
 cruncher.
 
-<<term=True, wrap=False>>=
+\begin{pyconsole}
 from scipy.integrate import quad
 
 def g(x):
     return np.exp(-labda*x) * (labda*x)**j/np.math.factorial(j) * f(x)
 
 print(quad(g, 0, np.inf))
-@
+\end{pyconsole}
 
 This is the same as our earlier answer.
 \end{solution}

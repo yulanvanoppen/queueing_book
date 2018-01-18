@@ -317,7 +317,7 @@ The expected number of cabs waiting must be
 
 and the expected number of parties waiting must be $\sum_{j=1}^\infty j p_{j,0}$
 
-<<term=False>>=
+\begin{pyconsole}
 labda = 12. # per hour
 mu = 15. # per hour
 rho = labda/mu
@@ -325,13 +325,15 @@ rho = labda/mu
 def p(i,j):
     q  = 3 - j + i
     return rho**q*(1.-rho)
-@ 
+
+\end{pyconsole}
 
 Expected number of  cabs waiting:
-<<term=True>>=
+\begin{pyconsole}
 Lc = sum(j*p(0,j) for j in range(0,4)) # recall this sums up to 4, not including 4
 Lc
-@ 
+  
+\end{pyconsole}
 
 
 To compute the expected number of parties waiting we formally have to
@@ -339,25 +341,25 @@ sum to infinity. Rather than doing the algebra, I chose to truncate
 the summation at an $i$ such that $\rho^i \ll 1$, i.e.,
 negligble.  Truncating at 30 seems reasonable enough:
 
-<<term=True>>=
+\begin{pyconsole}
 trunc = 30
 rho**trunc
-@ 
+\end{pyconsole}
 
 Hm. At second thought this is not yet really small. 
 
-<<term=True>>=
+\begin{pyconsole}
 trunc = 50
 rho**trunc
-@ 
+\end{pyconsole}
 
 
 This is better. Now go for what we want to know:
 
-<<term=True>>=
+\begin{pyconsole}
 Lp = sum(i*p(i,0) for i in range(trunc))
 Lp
-@ 
+\end{pyconsole}
 
 \item 
 This is tricky. I first, naively, computed $W_q = L_c/\mu$. This
@@ -369,28 +371,30 @@ queueing time we need to use $\lambda$, not
 $\mu$. Similarly (and more formally by the mapping developed in
 part a), for our cab system we also need to use $\lambda$.
 
-<<term=True>>=
+\begin{pyconsole}
 Wq = Lc/labda
 Wq
-@ 
+\end{pyconsole}
 
 Thinking in templates is often useful, but makes one sloppy\ldots
 
 What would be the impact of allowing 4 cabs? Funny question, and with the above, trivial to answer.
 
-<<term=False>>=
+\begin{pyconsole}
 def p(i,j):
     q  = 4 - j + i
     return rho**q*(1.-rho)
-@ 
+  
+\end{pyconsole}
 
-<<term=True>>=
+\begin{pyconsole}
 Lc = sum(j*p(0,j) for j in range(0,4))
 Lc
 
 Lp = sum(i*p(i,0) for i in range(trunc))
 Lp
-@ 
+  
+\end{pyconsole}
   \end{enumerate}
     \end{solution}
 \end{exercise}

@@ -369,13 +369,13 @@ where $l=3$.
 
 In python this reads:
 
-<<evaluate=False>>=
+\begin{pyverbatim}
 p[n] = labda / mu * sum(p[n - 1 - i] * G[i] for i in range(min(n, l)))
-@
+\end{pyverbatim}
 
 The following code carries out the recursion for the $M/M/1$ queue and compares the result to the \emph{unnormalized} probabilities $(\lambda/\mu)^n$ (unnormalized means that I do  not multiply with $1-\rho$). Thus, we can test the code right away. 
 
-<<wrap=False>>=
+\begin{pyconsole}
 import numpy as np
 
 l = 1 # M/M/1 has batch size 1
@@ -392,10 +392,11 @@ p = np.ones(num)
 for n in range(1, num):
     p[n] = labda / mu * sum(p[n - 1 - i] * G[i] for i in range(min(n, l)))
     print(n, p[n], (labda / mu)**n)
-@
+
+\end{pyconsole}
 The test is convincing.
 
-<<wrap=False>>=
+\begin{pyconsole}
 l = 3
 f = np.ones(l + 1) / l
 f[0] = 0
@@ -406,25 +407,27 @@ p = np.ones(num)
 for n in range(1, num):
     p[n] = labda / mu * sum(p[n - 1 - i] * G[i] for i in range(min(n, l)))
     print(n, p[n])
-@
+
+\end{pyconsole}
 Stopping at 30 seems ok. The last step is normalize.
-<<wrap=False>>=
+\begin{pyconsole}
 p /= p.sum()  # normalize
 for n in range(1, num):  # print normalized results
     print(n, p[n])
-@
+
+\end{pyconsole}
 
 Now that we have the probabilities we can do all experiments we like. 
-<<term=True>>=
+\begin{pyconsole}
 EL = sum(n*p[n] for n in range(len(p)))
 EL 
-@
+\end{pyconsole}
 
 It is of interest to compare this result to the equation above
 Eq.~(\ref{eq:43}).
 
 
-<<term=True>>=
+\begin{pyconsole}
 EB = sum(k*fk for k,fk in enumerate(f))
 EB2 = sum(k*k*fk for k,fk in enumerate(f))
 EB2
@@ -432,31 +435,34 @@ rho=labda*EB/mu
 RHS = labda/mu*EB2/2 + rho/2
 EL=RHS/(1-rho)
 EL
-@
+\end{pyconsole}
 
 So, after all, stopping at 30 seems not quite ok: there is a slight
 difference between the two expectations. Lets run the recursion up to
 100, and see what we get then.
 
-<<wrap=False>>=
+\begin{pyconsole}
 num = 100
 p = np.ones(num)
+
 for n in range(1, num):
     p[n] = labda / mu * sum(p[n - 1 - i] * G[i] for i in range(min(n, l)))
+
 p /= p.sum()  # normalize
 EL = sum(n*p[n] for n in range(len(p)))
 print(EL)
-@
+\end{pyconsole}
 This does the job.
 
 As a last step, I want to check Eq.~(\ref{eq:43}). In fact, I spent at least one hour to
 get Eq.~(\ref{eq:43}) correct. Now I can also numerically check it.
-<<term=True>>=
+
+\begin{pyconsole}
 VB = EB2 - EB*EB
 C2 = VB/EB/EB
 EL = (1+C2)/2*rho/(1-rho)*EB + rho/(1-rho)/2
 EL
-@
+\end{pyconsole}
 The results agree. 
 \end{solution}
 \end{exercise}
