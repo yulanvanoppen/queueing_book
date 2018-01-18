@@ -1,7 +1,7 @@
 Analysis of queueing systems with sample paths and simulation. 
 ===================
 
-The most important file is `book.pdf', which contains the notes on my
+The most important file is 'book.pdf', which contains the notes on my
 course on queueing theory. Comments are more
 than welcome of course: `n.d.van.foreest@rug.nl`.
 
