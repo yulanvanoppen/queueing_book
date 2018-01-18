@@ -13,7 +13,9 @@ than welcome of course: `n.d.van.foreest@rug.nl`.
 To make the book, run:
 
   pdflatex book
+
   pythontex book
+
   pdflatex book
 
 
