@@ -277,7 +277,6 @@ And, then
 
 Typing the solution becomes  boring\ldots, let's use the computer.
 
-%<<term=True>>=
 \begin{pyconsole}
 from lea import Lea
 
@@ -295,7 +294,6 @@ W
 W = Lea.fastMax(W + S - X, 0)
 W
 \end{pyconsole}
-%@
 Great! Our handiwork matches with the computer's results. 
 
 \end{solution}
@@ -726,7 +724,6 @@ In an attempt to   extend the above to $m>2$ servers, I came up with this scheme
     The python code is like this, where I include the FIFO case for
     comparison. As always, it is not obligatory to memorize the  code.
 
-%<<evaluate=False>>=
 \begin{pyverbatim}
 class Fifo(Queue):
     def __init__(self):
@@ -736,7 +733,6 @@ class Priority(Queue): # a priority queue
     def __init__(self, numServers = 1):
         self.queue = SortedSet(key = lambda job: job.p)
 \end{pyverbatim}
-%@
 
 Interestingly, once we have a proper environment to carry out
 simulations, changing the queueing discipline is a one-liner!.
@@ -746,18 +742,20 @@ With the above, an algorithm for the LIFO is
     ascending order of arrival time, just sort them in descending
     order of arrival time. 
 
-% <<evaluate=False>>=
-% class Lifo(Queue):
-%     def __init__(self):
-%         self.queue = SortedSet(key = lambda job: -job.arrivalTime)
-% @
+\begin{pyverbatim}
+class Lifo(Queue):
+    def __init__(self):
+        self.queue = SortedSet(key = lambda job: -job.arrivalTime)
+  
+\end{pyverbatim}
 
-% Another interesting queueing rule is to sort in increasing job size;
-% <<evaluate=False>>=
-%   class SPTF(Queue): # shortest processing time first
-%     def __init__(self):
-%         self.queue = SortedSet(key = lambda job: job.serviceTime)
-% @
+Another interesting queueing rule is to sort in increasing job size;
+\begin{pyverbatim}
+  class SPTF(Queue): # shortest processing time first
+    def __init__(self):
+        self.queue = SortedSet(key = lambda job: job.serviceTime)
+  
+\end{pyverbatim}
 
 Do you see how sort in descending order of job size (it just a matter
 of putting a minus sign at the right place)?
