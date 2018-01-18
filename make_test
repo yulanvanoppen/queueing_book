@@ -1,1 +1,3 @@
-./pweaveAll.py && pdflatex booktest
+pdflatex booktest
+pythontex booktest
+pdflatex booktest
