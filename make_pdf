@@ -2,3 +2,10 @@ pdflatex book
 #bibtex book
 pythontex book
 pdflatex book
+pdflatex book
+
+pdflatex book_mobile
+#bibtex book
+pythontex book_mobile
+pdflatex book_mobile
+pdflatex book_mobile

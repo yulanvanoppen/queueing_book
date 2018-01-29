@@ -1,4 +1,5 @@
-\documentclass[a4paper,11pt]{scrbook}
+\documentclass[a5paper]{scrbook}
+%\documentclass[a5paper]{article}
 
 %\usepackage[nosolutionfiles]{answers}
 \usepackage{answers}
@@ -6,13 +7,15 @@
 
 % handle indentation below figure captions
 %\setcapwidth[c]{.8\textwidth}
-\setcapwidth{0.95\textwidth}
-\setcapindent{0pt}
+% \setcapwidth{0.95\textwidth}
+% \setcapindent{0pt}
 %\addtokomafont{caption}{\centering}
 
-\input{book_contents.tex}
+\usepackage[top=5mm, left=5mm, right=5mm, bottom=2cm]{geometry}
 
+\input{book_contents.tex}
 \end{document}
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t

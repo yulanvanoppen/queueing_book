@@ -1,0 +1,8 @@
+rm *.log *.aux *.blg *.pdf *.toc *.tex~ *.rel *.tx *.out _region_.tex *.pytxcode
+rm tex_files/*.aux
+rm tex_files/*.rel
+rm tex_files/*.log
+rm -rf pythontex-files-book
+rm -rf pythontex-files-booktest
+rm -rf pythontex-files-book_mobile
+rm ans.tex hint.tex
