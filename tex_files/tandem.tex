@@ -9,47 +9,33 @@
 \Opensolutionfile{ans}
 
 
-Consider two single-server stations in tandem. The service process at both stations
-is subject to variability. Suppose you have some money to spend on
-reducing the variability of just one, but not both, of the machines.
-Which one is the better one to spend it on?  As stated, this problem is of course not clear cut. To come with a well balanced answer we need some extra information, such as which of the two
-stations has the larger variability. However, with the queueing tools we developed up to now, we can provide some general insight into this problem. Realize the relevancy of modeling for this problem. Due to the lack  of money you can only achieve one of the alternatives; hence there   is no way of finding out what would have happened if you would have   made the other choice. Thus, we need models, simulations and/or experiments to find out what is the best option.
-
-To obtain some initial insights, we first compute the expected waiting time in the queue at both
-stations for a  reference situation. Then we derive similar
-expressions for the waiting times in case we spend all money on the
-second or first station.  As a reference scenario, suppose that the arrival process has a Poisson distribution with rate $\lambda$, and that the service distributions at the first and second server,
-respectively, are exponential with rate $\mu_1$ and $\mu_2$,
-respectively. This is, from an analytic point of view, about the
-simplest situation we can consider.  
+Consider two $M/M/1$ stations in tandem. Suppose we can remove the variability in the service processing times at one, but not both, of the servers. which one is the better one to spend it on, in terms of reducing waiting times?  After we obtained some insights into this question, we will provide a model to approximate the waiting time in a tandem  of $G/G/1$ queues.
 
 \begin{exercise}
-Show that for the reference situation the average queueing time is given by
+Assuming that jobs arrive at the first station at rate $\lambda$, and are served at rate $\mu_i$ at station $i$, show that the average queueing time for the tandem of two $M/M/1$ queues is given by
 \begin{equation}
 \E{W_Q}  = \frac{\rho_1}{1-\rho_1} \frac1{\mu_1} + \frac{\rho_2}{1-\rho_2} \frac1{\mu_2},
 \end{equation}
 where $\rho_i = \lambda/\mu_i$ and $\E{S_i} = 1/\mu_i$, for $i=1,2$. 
 \begin{hint}
-Focus on the waiting times for each station separately, and realize that each is an $M/M/1$ queue.
+Focus on the waiting times for each station separately, and realize that each is an $M/M/1$ queue. What is the arrival process at the second station? Recall Burke's law, c.f., \ref{ex:burke}.
 \end{hint}
 \begin{solution}
 The first queue is the familiar $M/M/1$ queue.  (Why?) For the sequel
 it is important to observe that the departure process of the first
 station, i.e., the distribution of times between jobs leaving the
 first station, is the same as the arrival process. Consequently, the
-inter-departure times are also exponentially distributed with parameter
-$\lambda$. (However, the service times are exponentially distributed
-with parameter $\mu_1$. ) This claim can be proved, but is not
-immediate. 
+inter-departure times are also exponentially distributed with parameter~$\lambda$. (However, the service times are exponentially distributed
+with parameter $\mu_1$. ) 
 
 What can we say about the second station?  Clearly, the jobs departing
 at the first stations are the arrivals at the second station. Hence,
 the departure process being exponential with rate $\lambda$, the
 inter-arrival times at the second station are also exponential with
-rate $\lambda$. Consequently, the second queue is also an $M/M/1$
+rate~$\lambda$. Consequently, the second queue is also an $M/M/1$
 queue.
 
-It is well known that, for this case, the total waiting time in the
+The total waiting time in the
 system, i.e., the time spent in both queues, is the sum of the waiting
 times at the first and second station. As each is an $M/M/1$ queue,
 the total waiting time has the form:
@@ -65,14 +51,13 @@ where $\rho_i = \lambda/\mu_i$ and $\E{S_i} = 1/\mu_i$, for $i=1,2$.
 
 
 \begin{exercise}
-Suppose we spend all our  money on the second server and that this suffices to entirely remove all  variability of  service process. This  is of course (a bit) optimistic; the situation will not get any  better than this. Show that  in this case
+Suppose we can remove all variability of  service process at the second station. Show that  in this case  the total time in queue is equal to
 \begin{equation*}
   \E{W_Q}= \frac{\rho_1}{1-\rho_1} \frac1{\mu_1} +
-  \frac12\frac{\rho_2}{1-\rho_2} \frac1{\mu_2}. 
+  \frac12\frac{\rho_2}{1-\rho_2} \frac1{\mu_2}.
 \end{equation*}
-is the total time in queue.
 \begin{hint}
-  If we can reduce all service variability at the second server, the second station can be modelled as an $M/D/1$ queue.
+  If we can reduce all service variability at the second server, the second station can be modeled as an $M/D/1$ queue.
 \end{hint}
 \begin{solution}
 As we reduce the variability of the second server, the service process
@@ -86,12 +71,10 @@ has the form:
 where $C_{s,2}^2$ is the squared coefficient of variation of the
 service process of the second server.
 
-Suppose the money we have suffices to entirely remove the variability
-of the second server.  This yields that the coefficient of variation
-$C_{s,2}^s = 0$. As an aside, observe that as all variability has been
-removed, the service process is entirely deterministic: each service
-takes exactly the same amount of time. As a result, we arrive at the
-$M/D/1$ queue to model the queueing process at the second station.
+By assumption we can entirely remove the variability of the second
+server.  This yields that the coefficient of variation
+$C_{s,2}^s = 0$. Thus, the service process being deterministic, the
+second station becomes the $M/D/1$ queue.
 
 The expected waiting time for the $M/D/1$ queue follows immediately
 from~(\ref{eq:200}) by setting $C_{s,2}^2 =0$:
@@ -111,7 +94,8 @@ Thus, the total time in queue for this scenario becomes:
 \end{exercise}
 
 \begin{exercise}
-Suppose now that we spend all our money on the first station, and that now the service process of the first station becomes completely regular. Motivate that 
+Suppose now that we reduce the variability of the service process of the first station.
+Motivate that 
 \begin{equation*}
   \E{W_Q}= \frac12\frac{\rho_1}{1-\rho_1} \frac1{\mu_1} +
   \frac12\frac{\rho_2}{1-\rho_2} \frac1{\mu_2}
@@ -129,22 +113,19 @@ queue, so that, similar to~(\ref{eq:300}):
 \end{equation*}
 
 Contrary to the $M/M/1$ queue, the inter-departures of the $M/D/1$
-queue are not exponentially distributed. Rather, as long as the first
-server is busy, they are deterministic, i.e., equally separated in
-time.  When the first server is idle, for the next departure we first
-need to wait for the next arrival, with exponentially distributed
-interarrival time $X$, and then for this arrival to finish, which
-takes $D$. Thus, the time to the next departure is $X+D$.  Hence, the
-departure process is not deterministic. However, for the sake of
-simplicity, we assume in the sequel of this example that the departure
-process \emph{is} deterministic.
+queue are not exponentially distributed. When the first
+server is busy, they are deterministic. When the first server is idle, we first
+need to wait for the next arrival, which is exponentially distributed, and then for this arrival to finish its service, which
+takes $D$. Thus, the time to the next departure is $X+D$.  
+
+However, for the sake of simplicity, let us simply assume in the sequel of this
+example that the departure process \emph{is} deterministic.
 
 As we previously remarked, the departure process of the first station
 forms the arrival process at the second station.  Since the departures
 are assumed to be deterministic, the arrivals at the second station
-are also deterministic.  The service times, however, are still
-exponential.  (Recall we do not spend money on the second server to
-reduce its variability). Thus, the second station can be modeled as
+are also deterministic.  The service times at the second station, however, are still
+exponential.  Thus, the second station can be modeled as
 the $D/M/1$ queue. For this queue we need to derive an expression for
 the waiting time. The simplest approximation follows from an
 expression for the waiting time of the $G/G/1$ queue.
@@ -167,8 +148,7 @@ becomes:
   \E{W_Q}= \frac12\frac{\rho_1}{1-\rho_1} \frac1{\mu_1} +
   \frac12\frac{\rho_2}{1-\rho_2} \frac1{\mu_2}, 
 \end{equation*}
-which is half the waiting time of the reference scenario, and still
-less than the first scenario.
+which is half the waiting time of the two $M/M/1$ stations in tandem, but also smaller than the situation in which we reduce the variability at the second station.
   \end{solution}
 \end{exercise}
 
@@ -185,219 +165,90 @@ also reduces the variability of its departure process, hence the
 variability of the arrival processes at the second station. Thus, the
 situation improves at two locations of the chain of stations, rather
 than at one.
-
-Interestingly, the departure process of the $D/M/1$ queue is not
-Poisson; the coefficient of variation is less than $1$. Hence, if
-there were a third station, also its input process would behave better
-than Poisson. Consequently, reducing variability upstream reduces (in
-general) the variability of the arrival processes at all stations
-downstream, reducing the waiting time all along the chain. 
   \end{solution}
 \end{exercise}
 
+For a tandem network of $G/G/1$ queues, observe that the SCV of the departure process $C_{d,i}^2$ of the $i$th station $i$ is the SCV of the arrival process $C_{a,i+1}^2$ at station $i+1$.  Thus, if we have $C_{d,i}^2$ we can compute the average waiting time at station $i+1$ by means of the $G/G/1$ waiting time approximation. 
+
+To obtain an estimate for $C_{d,i}^2$ we reason as follows. Suppose that the load $\rho_i$ at station~$i$ is very high. Then the server will seldom be idle, so that the departure process must be reasonable well approximated by the service process. If, however, the load is small, the server will be idle most of the time, and interdeparture times must be  approximately distributed as that interarrival times. Based on this, we interpolate between these two extremes to get
+\begin{equation}
+  \label{eq:40}
+  C_{d,i}^2 \approx (1-\rho_i)^2 C_{a,i}^2 + \rho_i^2 C_{s,i}^2.
+\end{equation}
 
 \begin{exercise}
-  Assume that in a network of five stations the last station is the
-  bottleneck. Under what conditions would you invest in this last
-  work station?
-  \begin{solution}
-    If it would be cheap. However, as the previous exercise explains, by reducing variability at the first station the waiting     time of all stations along the line goes down. Thus, by improving
-    the first or second machine the total average waiting time may go
-    down more than by only improving the situation at the last,
-    bottleneck, machine. 
+What is $C_d^2$ for the $D/D/1$ queue according to~\eqref{eq:40}?
 
-  \end{solution}
+\begin{solution}
+  Since the interarrival times and the service times are deterministic, $C_a^2=C_s^2=0$. Hence $C_d^2=0$. 
+\end{solution}
 \end{exercise}
 
 \begin{exercise}
-  (Hall 5.22). At a large hotel, taxi cabs arrive at a rate of 15 per
-  hour, and parties of riders arrive at the rate of 12 per
-  hour. Whenever taxicabs are waiting, riders are served immediately
-  upon arrival. Whenever riders are waiting, taxicabs are loaded
-  immediately upon arrival. A maximum of three cabs can wait at a time (other cabs must go elsewhere).
-  \begin{enumerate}
-  \item Let $p_{ij}$ be the steady-state probability of there being $i$ parties of riders and $j$ taxicabs waiting at the hotel. Write the state transition equation for the system. 
-  \item Calculate the expected number of cabs waiting and the expected number of parties waiting.
-  \item Calculate the expected waiting time for cabs and the expected waiting for parties. (For cabs, compute the average among those that do not go elsewhere.)
-  \item In words, what would be the impact of allowing four cabs to wait at a time?
-  \end{enumerate}
-  \begin{hint}
-This is really a neat problem. Please spend serious time on it to
-solve before looking at the answer. It requires some ingenuity on your part.  Try to adapt the ideas behind Figure 2.2 of Zijm to this case.
-  \end{hint}
-    \begin{solution}
-      \begin{enumerate}
-      \item 
-Let $p_{ij}$ be the fraction of time that the system contains $i$
-riders and $j$ taxi cabs. I assume that all members of a party of
-riders can be served by a single cab (that is, the parties do not
-exceed the capacity of a cab and all members of a party have the same
-destination). For clarity, write $\mu$ for the rate at which cabs
-arrive, and $\lambda$ for the arrival rate of parties of riders.  Then
-the transitions are as in the figure below. Suppose first that there
-are $3$ taxi cabs. When a group arrives (at rate $\lambda$), there is
-one taxi less, and so on, until there are no more taxi's
-left. Finally, if yet more groups arrive, they have to wait. When a
-new taxi arrives, the number of groups is reduced by one, and so on,
-until there are $3$ taxi's waiting and no groups of people.
+What is $C_d^2$ for the $M/M/1$ queue according to~\eqref{eq:40}?  
 
-
-    \begin{center}
-
-\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.8cm,
-                    semithick]
-  \node[state] (0) {$p(0,3)$} ;
-  \node[state] (1) [right of=0] {$p(0,2)$};
-  \node[state] (2) [right of=1] {$p(0,1)$};
-  \node[state] (3) [right of=2] {$p(0,0)$};
-  \node[state] (4) [right of=3] {$p(1,0)$};
-  \node[state] (5) [right of=4] {$p(2,0)$};
-  \node[state] (6) [right of=5] {$p(\cdot, \cdot)$};
-
-\path 
- (0) edge [bend left] node {$\lambda$} (1)
- (1) edge [bend left] node {$\mu$} (0)
- (1) edge [bend left] node {$\lambda$} (2)
- (2) edge [bend left] node {$\mu$} (1)
- (2) edge [bend left] node {$\lambda$} (3)
- (3) edge [bend left] node {$\mu$} (2)
- (3) edge [bend left] node {$\lambda$} (4)
- (4) edge [bend left] node {$\mu$} (3)
- (4) edge [bend left] node {$\lambda$} (5)
- (5) edge [bend left] node {$\mu$} (4)
- (5) edge [bend left] node {$\lambda$} (6)
- (6) edge [bend left] node {$\mu$} (5)
-;
-\end{tikzpicture}
-      
-    \end{center}
-
-From this figure, we see that
-\begin{align*}
-\lambda p_{0,3} &= \mu p_{0,2} \\
-(\lambda+\mu) p_{0,2} &= \mu p_{0,1} + \lambda p_{0,3}\\
-(\lambda+\mu) p_{0,1} &= \mu p_{0,0} + \lambda p_{0,2}\\
-(\lambda+\mu) p_{0,0} &= \mu p_{1,0} + \lambda p_{0,1}\\
-(\lambda+\mu) p_{1,0} &= \mu p_{2,0} + \lambda p_{0,0}\\
-(\lambda+\mu) p_{2,0} &= \mu p_{3,0} + \lambda p_{1,0}\\
-\end{align*}
-And so on. Thus, it is left to compute $p_{ij}$. Observe from this
-scheme, or the above figure, that the situation with the taxi's
-correspond to an $M/M/1$ queue, only the states have a `different
-name'. Let $q$ be the number of jobs in an M/M/1 queue. Some thought
-will reveal that the queueing system with cabs and parties can be
-mapped to an equivalent M/M/1 queueing system. In fact, consider the
-following table
-\begin{center}
-\begin{tabular}{ccc}
-$j$ & $i$ & $q$\\
-3&         0 &         0\\
-2 &        0&          1\\
-1 &        0&          2\\
-0&         0&          3\\
-0&         1&          4\\
-0&         2&          5\\
-\end{tabular}
-\end{center}
-and so on. Therefore, in general, it must be that 
-
-\begin{equation*}
-q = 3 - j +i.
-\end{equation*}
-From the M/M/1 queue we know right away that $p_q = \rho^q
-(1-\rho)$.  With the above relation we can therefore immediately find
-that $p_{ij} = \rho^{3-j+i}(1-\rho)$, save that $i$ and
-$j$ must satisfy the constraints imposed by the model.
-\item       
-The expected number of cabs waiting must be 
-
-\begin{equation*}
-1p_{0,1} + 2 p_{0,2} + 3p_{0,3}
-\end{equation*}
-
-and the expected number of parties waiting must be $\sum_{j=1}^\infty j p_{j,0}$
-
-\begin{pyconsole}
-labda = 12. # per hour
-mu = 15. # per hour
-rho = labda/mu
-
-def p(i,j):
-    q  = 3 - j + i
-    return rho**q*(1.-rho)
-
-\end{pyconsole}
-
-Expected number of  cabs waiting:
-\begin{pyconsole}
-Lc = sum(j*p(0,j) for j in range(0,4)) # recall this sums up to 4, not including 4
-Lc
-  
-\end{pyconsole}
-
-
-To compute the expected number of parties waiting we formally have to
-sum to infinity. Rather than doing the algebra, I chose to truncate
-the summation at an $i$ such that $\rho^i \ll 1$, i.e.,
-negligble.  Truncating at 30 seems reasonable enough:
-
-\begin{pyconsole}
-trunc = 30
-rho**trunc
-\end{pyconsole}
-
-Hm. At second thought this is not yet really small. 
-
-\begin{pyconsole}
-trunc = 50
-rho**trunc
-\end{pyconsole}
-
-
-This is better. Now go for what we want to know:
-
-\begin{pyconsole}
-Lp = sum(i*p(i,0) for i in range(trunc))
-Lp
-\end{pyconsole}
-
-\item 
-This is tricky. I first, naively, computed $W_q = L_c/\mu$. This
-seems to make sense, as cabs arrive at rate $\mu$, so that this
-expression follows from a standard application of Little's
-law. However, this is wrong, of course. When using Little's law to
-relate the number of jobs in queue (i.e., in the M/M/1 queue) and the
-queueing time we need to use $\lambda$, not
-$\mu$. Similarly (and more formally by the mapping developed in
-part a), for our cab system we also need to use $\lambda$.
-
-\begin{pyconsole}
-Wq = Lc/labda
-Wq
-\end{pyconsole}
-
-Thinking in templates is often useful, but makes one sloppy\ldots
-
-What would be the impact of allowing 4 cabs? Funny question, and with the above, trivial to answer.
-
-\begin{pyconsole}
-def p(i,j):
-    q  = 4 - j + i
-    return rho**q*(1.-rho)
-  
-\end{pyconsole}
-
-\begin{pyconsole}
-Lc = sum(j*p(0,j) for j in range(0,4))
-Lc
-
-Lp = sum(i*p(i,0) for i in range(trunc))
-Lp
-  
-\end{pyconsole}
-  \end{enumerate}
-    \end{solution}
+\begin{solution}
+  Since the interarrival times and the service times are exponential, $C_a^2=C_s^2=1$. Hence $C_d^2=1$. This is precisely in line with our earlier insights, in which we obtained that the departure process of an $M/M/1$ queue is Poisson.
+\end{solution}
 \end{exercise}
+
+\begin{exercise}
+Consider two $G/G/1$ station in tandem. Suppose $\lambda=2$ per hour, $C_{a,1}^2=2$ at station~1, $C_s^2=0.5$ at both stations, and $\E{S_1}=20$ minutes and $\E{S_2}=25$ minutes. What is the total time jobs spend on average in the system? What is the average number of jobs in the network?
+
+\begin{solution}
+First station 1.
+\begin{pyconsole}
+labda = 2.
+S1 = 20./60
+rho1 = labda*S1
+rho1
+ca1 = 2.
+cs1 = 0.5
+EW1 = (ca1+cs1)/2 * rho1/(1-rho1) * S1
+EW1
+W1 = EW1 + S1
+W1
+\end{pyconsole}
+
+Now station 2. We first need to compute $C_{d1}^2$. 
+
+\begin{pyconsole}
+cd1 = (1-rho1**2)*ca1 + rho1**2*cs1
+cd1
+\end{pyconsole}
+
+
+\begin{pyconsole}
+labda = 2
+S2 = 25./60
+rho2 = labda*S2
+rho2
+ca2 = cd1 # here we use our formula
+cs2 = 0.5
+EW2 = (ca2+cs2)/2 * rho2/(1-rho2) * S2
+EW2
+W2 = EW2 + S2
+W2
+\end{pyconsole}
+
+With Little's law.
+\begin{pyconsole}
+W=W1+W2
+W
+L = labda*W
+L
+\end{pyconsole}
+
+
+\end{solution}
+\end{exercise}
+
+
+
+For the interested reader we refer to Zijm, Section 2.4.2, for a discussion of an extension for $G/G/c$ queues in tandem, and to networks. In particular, in networks we need to be concerned with output streams merging into a single input stream at one station, and the splitting of the output stream of a station to several other stations. The algorithm discussed in Zijm, Section 2.4.2, is mainly useful for numerical analysis. We will not discuss it here. 
+
+
+
 
 
 \Closesolutionfile{hint}
@@ -407,3 +258,8 @@ Lp
 \subsection*{Solutions}
 \input{ans}
 \clearpage
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../booktest"
+%%% End:

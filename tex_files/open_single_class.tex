@@ -420,6 +420,199 @@ Zijm.Ex.2.2.8
 \end{solution}
 \end{exercise}
 
+\begin{exercise}
+  (Hall 5.22). At a large hotel, taxi cabs arrive at a rate of 15 per
+  hour, and parties of riders arrive at the rate of 12 per
+  hour. Whenever taxicabs are waiting, riders are served immediately
+  upon arrival. Whenever riders are waiting, taxicabs are loaded
+  immediately upon arrival. A maximum of three cabs can wait at a time (other cabs must go elsewhere).
+  \begin{enumerate}
+  \item Let $p_{ij}$ be the steady-state probability of there being $i$ parties of riders and $j$ taxicabs waiting at the hotel. Write the state transition equation for the system. 
+  \item Calculate the expected number of cabs waiting and the expected number of parties waiting.
+  \item Calculate the expected waiting time for cabs and the expected waiting for parties. (For cabs, compute the average among those that do not go elsewhere.)
+  \item In words, what would be the impact of allowing four cabs to wait at a time?
+  \end{enumerate}
+  \begin{hint}
+This is really a neat problem. Please spend serious time on it to
+solve before looking at the answer. It requires some ingenuity on your part.  Try to adapt the ideas behind Figure 2.2 of Zijm to this case.
+  \end{hint}
+    \begin{solution}
+      \begin{enumerate}
+      \item 
+Let $p_{ij}$ be the fraction of time that the system contains $i$
+riders and $j$ taxi cabs. I assume that all members of a party of
+riders can be served by a single cab (that is, the parties do not
+exceed the capacity of a cab and all members of a party have the same
+destination). For clarity, write $\mu$ for the rate at which cabs
+arrive, and $\lambda$ for the arrival rate of parties of riders.  Then
+the transitions are as in the figure below. Suppose first that there
+are $3$ taxi cabs. When a group arrives (at rate $\lambda$), there is
+one taxi less, and so on, until there are no more taxi's
+left. Finally, if yet more groups arrive, they have to wait. When a
+new taxi arrives, the number of groups is reduced by one, and so on,
+until there are $3$ taxi's waiting and no groups of people.
+
+
+    \begin{center}
+
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.8cm,
+                    semithick]
+  \node[state] (0) {$p(0,3)$} ;
+  \node[state] (1) [right of=0] {$p(0,2)$};
+  \node[state] (2) [right of=1] {$p(0,1)$};
+  \node[state] (3) [right of=2] {$p(0,0)$};
+  \node[state] (4) [right of=3] {$p(1,0)$};
+  \node[state] (5) [right of=4] {$p(2,0)$};
+  \node[state] (6) [right of=5] {$p(\cdot, \cdot)$};
+
+\path 
+ (0) edge [bend left] node {$\lambda$} (1)
+ (1) edge [bend left] node {$\mu$} (0)
+ (1) edge [bend left] node {$\lambda$} (2)
+ (2) edge [bend left] node {$\mu$} (1)
+ (2) edge [bend left] node {$\lambda$} (3)
+ (3) edge [bend left] node {$\mu$} (2)
+ (3) edge [bend left] node {$\lambda$} (4)
+ (4) edge [bend left] node {$\mu$} (3)
+ (4) edge [bend left] node {$\lambda$} (5)
+ (5) edge [bend left] node {$\mu$} (4)
+ (5) edge [bend left] node {$\lambda$} (6)
+ (6) edge [bend left] node {$\mu$} (5)
+;
+\end{tikzpicture}
+      
+    \end{center}
+
+From this figure, we see that
+\begin{align*}
+\lambda p_{0,3} &= \mu p_{0,2} \\
+(\lambda+\mu) p_{0,2} &= \mu p_{0,1} + \lambda p_{0,3}\\
+(\lambda+\mu) p_{0,1} &= \mu p_{0,0} + \lambda p_{0,2}\\
+(\lambda+\mu) p_{0,0} &= \mu p_{1,0} + \lambda p_{0,1}\\
+(\lambda+\mu) p_{1,0} &= \mu p_{2,0} + \lambda p_{0,0}\\
+(\lambda+\mu) p_{2,0} &= \mu p_{3,0} + \lambda p_{1,0}\\
+\end{align*}
+And so on. Thus, it is left to compute $p_{ij}$. Observe from this
+scheme, or the above figure, that the situation with the taxi's
+correspond to an $M/M/1$ queue, only the states have a `different
+name'. Let $q$ be the number of jobs in an M/M/1 queue. Some thought
+will reveal that the queueing system with cabs and parties can be
+mapped to an equivalent M/M/1 queueing system. In fact, consider the
+following table
+\begin{center}
+\begin{tabular}{ccc}
+$j$ & $i$ & $q$\\
+3&         0 &         0\\
+2 &        0&          1\\
+1 &        0&          2\\
+0&         0&          3\\
+0&         1&          4\\
+0&         2&          5\\
+\end{tabular}
+\end{center}
+and so on. Therefore, in general, it must be that 
+
+\begin{equation*}
+q = 3 - j +i.
+\end{equation*}
+From the M/M/1 queue we know right away that $p_q = \rho^q
+(1-\rho)$.  With the above relation we can therefore immediately find
+that $p_{ij} = \rho^{3-j+i}(1-\rho)$, save that $i$ and
+$j$ must satisfy the constraints imposed by the model.
+\item       
+The expected number of cabs waiting must be 
+
+\begin{equation*}
+1p_{0,1} + 2 p_{0,2} + 3p_{0,3}
+\end{equation*}
+
+and the expected number of parties waiting must be $\sum_{j=1}^\infty j p_{j,0}$
+
+\begin{pyconsole}
+labda = 12. # per hour
+mu = 15. # per hour
+rho = labda/mu
+
+def p(i,j):
+    q  = 3 - j + i
+    return rho**q*(1.-rho)
+
+\end{pyconsole}
+
+Expected number of  cabs waiting:
+\begin{pyconsole}
+Lc = sum(j*p(0,j) for j in range(0,4)) 
+# Recall this sums up to 4, not including 4
+Lc
+  
+\end{pyconsole}
+
+
+To compute the expected number of parties waiting we formally have to
+sum to infinity. Rather than doing the algebra, I chose to truncate
+the summation at an $i$ such that $\rho^i \ll 1$, i.e.,
+negligble.  Truncating at 30 seems reasonable enough:
+
+\begin{pyconsole}
+trunc = 30
+rho**trunc
+\end{pyconsole}
+
+Hm. At second thought this is not yet really small. 
+
+\begin{pyconsole}
+trunc = 50
+rho**trunc
+\end{pyconsole}
+
+
+This is better. Now go for what we want to know:
+
+\begin{pyconsole}
+Lp = sum(i*p(i,0) for i in range(trunc))
+Lp
+\end{pyconsole}
+
+\item 
+This is tricky. I first, naively, computed $W_q = L_c/\mu$. This
+seems to make sense, as cabs arrive at rate $\mu$, so that this
+expression follows from a standard application of Little's
+law. However, this is wrong, of course. When using Little's law to
+relate the number of jobs in queue (i.e., in the M/M/1 queue) and the
+queueing time we need to use $\lambda$, not
+$\mu$. Similarly (and more formally by the mapping developed in
+part a), for our cab system we also need to use $\lambda$.
+
+\begin{pyconsole}
+Wq = Lc/labda
+Wq
+\end{pyconsole}
+
+Thinking in templates is often useful, but makes one sloppy\ldots
+
+What would be the impact of allowing 4 cabs? Funny question, and with the above, trivial to answer.
+
+\begin{pyconsole}
+def p(i,j):
+    q  = 4 - j + i
+    return rho**q*(1.-rho)
+  
+\end{pyconsole}
+
+\begin{pyconsole}
+Lc = sum(j*p(0,j) for j in range(0,4))
+Lc
+
+Lp = sum(i*p(i,0) for i in range(trunc))
+Lp
+  
+\end{pyconsole}
+  \end{enumerate}
+    \end{solution}
+\end{exercise}
+
+
+
 \begin{comment}
   
 \begin{exercise}[use=false]
@@ -445,7 +638,6 @@ Zijm.Ex.2.2.8
   \end{solution}
 \end{exercise}
 \end{comment}
-
 
 
 \Closesolutionfile{hint}
