@@ -110,7 +110,7 @@ R(D_n)
 = \frac{1}{D_n} \sum_{k=1}^n \frac{S_k^2}2 = \frac{n}{D_n} \frac 1 n\sum_{k=1}^n \frac{S_k^2}2.
 \end{equation*}
 Finally, assuming that along this sample path, $D_n\to \infty$ as
-$t\to \infty$, $n/D_n \to \gamma$, $\gamma=\lambda$ by rate stability,
+$t\to \infty$, $n/D_n \to \delta$, $\delta=\lambda$ by rate stability,
 and the limit $n^{-1}\sum_{k=1}^n S_k^2$ exists as $n\to\infty$, we
 get
 \begin{equation}\label{eq:34}
@@ -447,8 +447,8 @@ The rate of
     Let $p(0)$ be the fraction of time the server is idle. By PASTA,
     $\pi(0)=p(0)$. Thus, the rate of accepted jobs is
     $\lambda\pi(0)$. Therefore, the departure rate
-    $\gamma=\lambda\pi(0)$. The loss rate is
-    $\lambda-\gamma = \lambda (1-\pi(0))$.
+    $\delta=\lambda\pi(0)$. The loss rate is
+    $\lambda-\delta = \lambda (1-\pi(0))$.
 
     Since $\lambda\pi(0)$ is the rate at which jobs enter the system,
     the load must be $\lambda\pi(0)\E S$. Since the load is also
@@ -459,7 +459,7 @@ The rate of
     \end{equation*}
 which is the same an in the previous problem.
 
-Note that  $\gamma < \lambda$, as it should be the case. 
+Note that  $\delta < \lambda$, as it should be the case. 
   \end{solution}
 \end{exercise}
 
@@ -475,7 +475,7 @@ Provide an  example.
 
   Again, take jobs with duration 59 minutes and interarrival times of
   1 hour. The load is $59/60$, but no job is lost, also not in the
-  $G/G/1/1$ case. Thus, $\gamma=\lambda$ in this case.
+  $G/G/1/1$ case. Thus, $\delta=\lambda$ in this case.
   \end{solution}
 \end{exercise}
 

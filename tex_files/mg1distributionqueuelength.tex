@@ -219,7 +219,7 @@ Consequently, the number of downcrossings of level $n$ up to time $t$ is
 \begin{exercise}
 Use a similar derivation as in~\eqref{eq:1332} to   show that 
 \begin{equation*}
-  \lim_{t\to\infty} \frac{  D(n+1, 0, t)}t  = \gamma \delta(n+1) f(0),
+  \lim_{t\to\infty} \frac{  D(n+1, 0, t)}t  = \delta \delta(n+1) f(0),
 \end{equation*}
 where $f(0)=\P{Y=0}$.
 \begin{solution}
@@ -229,9 +229,9 @@ Sections~\ref{sec:rate-stability} and~\ref{sec:poisson-arrivals-see},
   \begin{split}
   \lim_{t\to\infty} \frac{  D(n+1, 0, t)}t 
 &=   \lim_{t\to\infty}  \frac{D(t)}t \frac{D(n+1, t)}{D(t)}\frac{ D(n+1, 0, t)}{D(n+1,t)} \\
-&=   \gamma \delta(n+1) \lim_{t\to\infty} \frac{ D(n+1, 0, t)}{D(n+1,t)} \\
-&=   \gamma \delta(n+1) \P{Y=0}\\
-& = \gamma \delta(n+1) f(0),
+&=   \delta \delta(n+1) \lim_{t\to\infty} \frac{ D(n+1, 0, t)}{D(n+1,t)} \\
+&=   \delta \delta(n+1) \P{Y=0}\\
+& = \delta \delta(n+1) f(0),
   \end{split}
 \end{equation*}
 where the last limit follows from the independence of $Y_k$ and
@@ -274,8 +274,8 @@ $L(D_{k-1})$,
 
 \end{tikzpicture}
 \caption{Level $3$ is crossed from below with rate
-  $\gamma\delta(0)G(3) + \gamma\delta(1)G(3) + \cdots \gamma \delta(3) G(1)$ and crossed
-  from above with rate $\gamma\delta(4) f(0)$. }
+  $\delta\delta(0)G(3) + \delta\delta(1)G(3) + \cdots \delta \delta(3) G(1)$ and crossed
+  from above with rate $\delta\delta(4) f(0)$. }
 \label{fig:mg1_2}
 \end{figure}
 
@@ -334,7 +334,7 @@ However,  if $m=0$ (think about this),
 
 Again we define proper counting functions,  divide by $t$, and take suitable limits to find for upcrossing rate
 \begin{equation}\label{eq:555}
-\gamma \delta(0) G(n) + \gamma \sum_{m=1}^n \delta(m) G(n-m+1).
+\delta \delta(0) G(n) + \delta \sum_{m=1}^n \delta(m) G(n-m+1).
 \end{equation}
 
 \begin{exercise}
@@ -356,9 +356,9 @@ With the definition of the hint,
   \begin{split}
   \lim_{t\to\infty} \frac{  D(0, n, t)}t 
 &=   \lim_{t\to\infty}  \frac{D(t)}t \frac{D(0, t)}{D(t)}\frac{ D(0, n, t)}{D(0,t)} \\
-&=   \gamma \delta(0) \lim_{t\to\infty} \frac{ D(0, n, t)}{D(0,t)} \\
-&=   \gamma \delta(0) \P{Y>n}\\
-& = \gamma \delta(0) G(n).
+&=   \delta \delta(0) \lim_{t\to\infty} \frac{ D(0, n, t)}{D(0,t)} \\
+&=   \delta \delta(0) \P{Y>n}\\
+& = \delta \delta(0) G(n).
   \end{split}
 \end{equation*}
 
@@ -366,16 +366,16 @@ With the definition of the hint,
   \begin{split}
   \lim_{t\to\infty} \frac{  D(m, n, t)}t 
 &=   \lim_{t\to\infty}  \frac{D(t)}t \frac{D(m, t)}{D(t)}\frac{ D(m, n, t)}{D(m,t)} \\
-&=   \gamma \delta(m) \lim_{t\to\infty} \frac{ D(m, n, t)}{D(m,t)} \\
-&=   \gamma \delta(m) \P{Y>n-m+1}\\
-& = \gamma \delta(m) G(n-m+1).
+&=   \delta \delta(m) \lim_{t\to\infty} \frac{ D(m, n, t)}{D(m,t)} \\
+&=   \delta \delta(m) \P{Y>n-m+1}\\
+& = \delta \delta(m) G(n-m+1).
   \end{split}
 \end{equation*}
 \end{solution}
 \end{exercise}
 
 Equating the downcrossing and upcrossing rates and dividing
-by $\gamma$ gives
+by $\delta$ gives
 \begin{equation*}
   f(0) \delta(n+1) = \delta(0) G(n) + \sum_{m=1}^{n} \delta(m) G(n+1-m).
 \end{equation*}

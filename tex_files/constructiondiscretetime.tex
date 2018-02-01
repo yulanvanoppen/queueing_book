@@ -9,17 +9,16 @@
 \Opensolutionfile{ans}
 
 
-To provide real-life motivation to analyze queueing systems we discuss a case. However, as it turns out, this case is too hard to analyze by mathematical means;  we need to develop a set of recursions to simulate the queueing system in discrete time.  Interestingly, the structure of the simulation is very simple so that  it is also  an exceedingly convincing tool to
-communicate the results of an analysis of a queueing system to managers (and the like).  
+To provide real-life motivation to analyze queueing systems we discuss a case.  As this case is too hard to analyze by mathematical means,  we need to develop a model to simulate the queueing system in discrete time.  Interestingly, the structure of the simulation is very simple so that  it is also  an exceedingly convincing tool to communicate the results of an analysis of a queueing system to managers (and the like).  
 
 Let us start with discussing the essentials of the simulation of a queueing system. The easiest way  to construct queueing processes is to `chop up' time in periods and develop recursions for the behavior of the queue from period to period. Note that the length of such a period depends on the
 case for which the model is developed.  For instance, to study queueing processes at a supermarket, a period can consist of $5$ minutes, while for a production environment, e.g., a job shop, it can
 be a day, or even a week.
 
-Using fixed sized periods has it advantages as it does not require to
+Using fixed sized periods has the advantage that we do not have to
 specify specific inter-arrival times or service times of individual
 customers. Only the number of arrivals in a period and the number of
-potential services need to be specified, which is useful since in many
+potential services are relevant, which is useful since in many
 practical settings, e.g., production environments, it is easier to
 provide data in these terms then in terms of inter-arrival and service
 times. 
@@ -40,7 +39,7 @@ that the arriving jobs arrive either at the start or at the end of the
 period. In the first case, the jobs can be served in period $k$,
 in the latter case, they \emph{cannot} be served in period~$k$.
 
-
+Note that in this type of queueing system, there is not a job in service, we only count the jobs in the system at the start and end of a period. Thus, the number of jobs in the system and in queue coincide; in this section `queue length' henceforth means the number of jobs in the system.
 
 Since $Q_{k-1}$ is the queue length at the end of period $k-1$, it
 must also be the queue length at the start of period $k$. Assuming
@@ -60,7 +59,6 @@ $k$ is given by
 \end{equation}
 \end{subequations}
 
-Note that in this type of queueing system, there is not a job in service, we only count the jobs in queue at the start and end of a period. Thus, the number of jobs in the system and in queue coincide; in this section we will therefore only use the term `queue length'.
 
 \begin{exercise}
 Suppose that $c_k= 7$ for all $k$, and $a_1=5$, $a_2=4$

@@ -136,8 +136,14 @@ is easy, so that, as $n\to\infty$,  the above converges to
   \end{solution}
 \end{exercise}
 
+The Poisson \emph{process} $\{N(t), t\geq 0\}$ is a much more complicated
+object than the Poisson distributed random variable $N(t)$. The
+process is the set of random variables $N(t)$ for all $t\geq 0$, which is an \emph{ uncountable set} of random variables, whereas $N(t)$ is just \emph{one} random variable that is Poisson
+distributed with parameter $\lambda t$. 
+
+
 \begin{exercise}
-  Show that if $N(t)\sim P(\lambda t)$, $\E{N(t)} = \lambda t$ and $\V{N(t)} = \lambda t$. 
+  Show that if $N(t)\sim P(\lambda t)$, $\E{N(t)} = \lambda t$.
   \begin{solution} 
     When a random variable $N$ is Poisson distributed with parameter
     $\lambda$,
@@ -152,7 +158,14 @@ is easy, so that, as $n\to\infty$,  the above converges to
 &= \lambda.
       \end{split}
     \end{equation*}
-Similarly, using that $\V N = \E{N^2} - (\E N)^2$, 
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+  Show that if $N(t)\sim P(\lambda t)$, $\V{N(t)} = \lambda t$. 
+  \begin{solution} 
+Using that $\V N = \E{N^2} - (\E N)^2$, 
     \begin{equation*}
       \begin{split}
       \E{N^2}
@@ -163,43 +176,50 @@ Similarly, using that $\V N = \E{N^2} - (\E N)^2$,
 &= \lambda^2  + \lambda.
 \end{split}
 \end{equation*}
-
-The Poisson \emph{process} $\{N(t)\}$ is a much more complicated
-object than the Poisson distributed random variable $N(t)$. The
-process contains it is an \emph{ uncountable set} of random variables,
-whereas $N(t)$ is just \emph{one} random variable that is Poisson
-distributed with parameter $\lambda t$. 
 \end{solution}
 \end{exercise}
 
+With moment generating functions we compute the mean and variance of $N(t)$ with less effort. 
 
 \begin{exercise}
-Show that the moment generating function of a Poisson distributed random variable $N$ is
-$\phi(z)=  \E{z^N}  = e^{(z-1)\lambda}$ and use this to compute $\V N$ and $\E N$. 
-\begin{hint}
-  How does   $\E N$ relate to the derivative of $\phi(z)$? 
-\end{hint}
+Show that the moment generating function of a Poisson distributed random variable $N(t)$ is
+$M_{N(t)}(s)=  \E{e^{sN(t)}}  = \exp{\lambda t(e^s-1)}$.
+  \begin{hint}
+    Use that $\P{N(t)=k}=e^{-\lambda t}(\lambda t)^k/k!$
+  \end{hint}
 \begin{solution}
-With generating functions we get the result without too much
-effort. Suppose $N$ is a Poisson distributed random variable. Then 
+Since $N(t)$ is Poisson distributed with parameter $\lambda t$, 
 \begin{equation*}
   \begin{split}
-\phi(z)
-&=  \E{z^N} \\
-&= \sum_{k=0}^\infty z^k \P{N=k} \\
-&= \sum_{k=0}^\infty z^k \frac{\lambda^k}{k!} e^{-\lambda}  \\
-&= e^{-\lambda} \sum_{k=0}^\infty  \frac{(z\lambda)^k}{k!}  \\
-&= e^{-\lambda} e^{z \lambda} \\
-&= e^{(z-1)\lambda}.
+M(s)
+&=  \E{e^{N(t)}} \\
+&= \sum_{k=0}^\infty e^{s k} \P{N=k} \\
+&= \sum_{k=0}^\infty e^{s k} \frac{(\lambda t)^k}{k!} e^{-\lambda t}  \\
+&= e^{-\lambda t} \sum_{k=0}^\infty  \frac{(e^s \lambda t)^k}{k!}  \\
+&= \exp(-\lambda t + e^s \lambda t) =\exp(\lambda t(e^s - 1)).
   \end{split}
 \end{equation*}
-Observe that $\phi'(z) = \E{N z^N}$, so that $\phi'(1)=\E{N}$; also
-$\phi''(z)=\E{N(N-1)z^{N-2}}$, hence $\phi''(1)=\E{N(N-1)}$. With this,
-  \begin{align*}
-    \E N &= \phi'(1)= \lambda,\\
-\E{N^2} &= \phi''(1) + \E{N} = \lambda^2 + \lambda,\\
-\V N &= \E{N^2}-(\E N)^2 = \lambda,\\
-  \end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Use  the moment generating function of $N(t)$ to compute $\E{N(t)}$ and $\V{N(t)}$. 
+\begin{hint}
+  Recall that $M'(0) = \E{N(t)}$ and $M''(s)= \E{(N(t))^2}$. 
+\end{hint}
+\begin{solution}
+Using the expression for the moment generating function of the previous exercise,
+  \begin{equation*}
+    M'(s) = \lambda t e^s \exp(\lambda t(e^s - 1)).
+  \end{equation*}
+Hence $\E{N(t)} = M'(0) = \lambda t $. Next, 
+  \begin{equation*}
+    M''(s) = (\lambda t e^s + (\lambda t e^s)^2) \exp(\lambda t(e^s - 1)),
+  \end{equation*}
+hence $\E{(N(t))^2} = M''(0) = \lambda t + (\lambda t)^2$. And thus, 
+\begin{equation*}
+\V{N(t)} =\E{(N(t))^2}-(\E{N(t)})^2 = \lambda t + (\lambda t)^2 - (\lambda t)^2 = \lambda t.
+\end{equation*}
 \end{solution}
 \end{exercise}
 
@@ -348,8 +368,9 @@ uniformly on the interval $[0,t]$.
 \begin{hint}
 Use Bayes' law for conditional probability. Observe that 
   \begin{equation*}
-\{N(0,s]+N(s,t]=1\}\cap\{N(0,s]=1\} = \{1+N(s,t]=1\}\cap\{N(0,s]=1\}=\{N(s,t]=0\}\cap\{N(0,s]=1\}.
+\{N(0,s]+N(s,t]=1\}\cap\{N(0,s]=1\} = \{1+N(s,t]=1\}\cap\{N(0,s]=1\}=\{N(s,t]=0\}\cap\{N(0,s]=1\};
   \end{equation*}
+these two events are independent.
 \end{hint}
 \begin{solution}
 \begin{equation*}
@@ -390,14 +411,15 @@ In the study of queueing networks, we will be concerned with  merging (also call
 \end{tikzpicture}
 \end{center}
 
+For the next set of exercises,  assume that $N_\lambda(t)\sim \text{P}(\lambda t)$, $N_\mu(t) \sim \text{P}(\mu t)$ and are independent.
+
 \begin{exercise} 
- Assuming that
-  $N_a(t)\sim \text{P}(\lambda t)$ , $N_s(t) \sim \text{P}(\mu t)$ and
-  independent, show that
-  $N_a(t) + N_s(t) \sim \text{P}((\lambda + \mu)t)$. 
+Show that   $N_\lambda(t) + N_\mu(t) \sim \text{P}((\lambda + \mu)t)$. 
   \begin{hint}
-Use a conditioning argument or use probability generating
-    functions (i.e. $\E{z^X}=\sum_k z^k \P{X=k}$. In particular, for
+Use a conditioning argument or use moment generating
+    functions 
+
+In particular, for
     conditioning, use that $\P{AB} = \P{A\given B}\P{B}$. More
     generally, if the set $A$ can be split into disjoint sets $B_i$,
     i.e, $A=\bigcup_{i=1}^n B_i$, then
@@ -412,21 +434,21 @@ Use a conditioning argument or use probability generating
 First we show how to  use conditioning. 
   \begin{equation*}
     \begin{split}
-\P{N_a(t) + N_s(t) = n} 
-&= \sum_{i=0}^n \P{N_a(t) + N_s(t) = n|N_a(t) = i}\P{N_a(t)=i} \\
+\P{N_\lambda(t) + N_\mu(t) = n} 
+&= \sum_{i=0}^n \P{N_\lambda(t) + N_\mu(t) = n|N_\lambda(t) = i}\P{N_\lambda(t)=i} \\
 \end{split}
 \end{equation*}
-Now, if $N_a(t)=i$, then 
+Now, if $N_\lambda(t)=i$, then 
 \begin{equation*}
-N_a(t)+N_s(t) = n \iff 
-i+N_s(t) = n \iff 
-N_s(t) = n-i.
+N_\lambda(t)+N_\mu(t) = n \iff 
+i+N_\mu(t) = n \iff 
+N_\mu(t) = n-i.
 \end{equation*}
 Thus,
   \begin{equation}\label{eq:002}
     \begin{split}
-\P{N_a(t) + N_s(t) = n} 
-&= \sum_{i=0}^n \P{ N_s(t) = n-i}\P{N_a(t)=i} \\
+\P{N_\lambda(t) + N_\mu(t) = n} 
+&= \sum_{i=0}^n \P{ N_\mu(t) = n-i}\P{N_\lambda(t)=i} \\
 &= \sum_{i=0}^n \frac{(\mu t)^{n-i}}{(n-i)!} \frac{(\lambda t)^i}{i!} e^{-(\mu+\lambda)t} \\
 &= e^{-(\mu+\lambda)t} \sum_{i=0}^n \frac{(\mu t)^{n-i}}{(n-i)!} \frac{(\lambda t)^i}{i!}  \\
 &= e^{-(\mu+\lambda)t}\frac 1{n!} \sum_{i=0}^n {n \choose i }(\mu t)^{n-i}(\lambda t)^i  \\
@@ -434,66 +456,57 @@ Thus,
     \end{split}
   \end{equation}
 
-Now   with the probability generating functions.
-      \begin{equation*}
-        \begin{split}
-          \phi_a(z) 
-&= \E{z^{N_a(t)}} = \sum_{k=0}^\infty z^k \P{N_a(t) = k} \\
-&= \sum_{k=0}^\infty z^k e^{-\lambda t} \frac{(\lambda t)^k}{k!} \\
-&= e^{-\lambda t} \sum_{k=0}^\infty  \frac{(z \lambda t)^k}{k!} \\
-&=e^{\lambda t (z-1)}. 
-        \end{split}
-      \end{equation*}
-      Use this, and the similar expression for $N_s(t)$ and
-      independence to see that
+Now with the moment generating functions of $N_\lambda(t)$ and $N_\mu(t)$, and using that by the independence of  $N_\lambda(t)$ and $N_\mu(t)$, the moment generating function of $N_\lambda + N_\mu$ is the product of the moment generating functions of $N_\lambda$ and $N_\mu$, 
 \begin{equation*}
-\phi_n(z) = \E{z^{N(t)}} = \E{z^{N_a(t)}} \E{z^{N_s(t)}} = e^{\lambda(z-1)}e^{\mu(z-10} = e^{(\lambda +\mu)t (z-1)}. 
+  \begin{split}
+M_{N_\lambda(t)+N_\mu(t)}(s) 
+&= M_{N_\lambda(t)}(s) M_{N_\mu(s)} \\
+&=\exp(\lambda t (e^s -1)) \exp(\mu t(e^s-1)) \\
+&= \exp((\lambda + \mu)t (e^s-1)).
+  \end{split}
 \end{equation*}
-Finally, since the  generating function uniquely characterizes
-the distribution, and since the above expression has the same form as
-$\phi_a(z)$ but with $\lambda+\mu$ replacing $\lambda$, we can conclude that $N(t)\sim P((\lambda +\mu) t)$.
+Finally, since  generating function uniquely characterizes
+the distribution, and since the above expression has the same form as a Poisson random variable  with parameter $(\lambda+\mu)t$, we can conclude that $N(t)\sim P((\lambda +\mu) t)$.
     \end{solution}
 \end{exercise}
 
 
 \begin{exercise}
- Assume that $N_a(t)\sim \text{P}(\lambda t)$ ,
-  $N_s(t) \sim \text{P}(\mu t)$ and independent.  What is the
+What is the
   meaning of the event
-  $\{N_a(h) = 1, N_s(h) = 0\}\cap\{N_a(h) + N_s(h) = 1\}$?
+  $\{N_\lambda(h) = 1, N_\mu(h) = 0\}\cap\{N_\lambda(h) + N_\mu(h) = 1\}$?
     \begin{solution}
- This means that, given that an event occurred, the event was an arrival, i.e., $N_a$ was the first.
+ This means that, given that an event occurred, the event was an arrival, i.e., $N_\lambda$ was the first.
     \end{solution}
 \end{exercise}
 
-\begin{exercise} Assume that
-  $N_a(t)\sim \text{P}(\lambda t)$ , $N_s(t) \sim \text{P}(\mu t)$ and
-  independent. Use that  $N_a(t) + N_s(t) \sim \text{P}((\lambda + \mu)t)$ to conclude
+\begin{exercise} 
+Use that  $N_\lambda(t) + N_\mu(t) \sim \text{P}((\lambda + \mu)t)$ to conclude
     \begin{equation*}
-    \P{N_a(h) = 1,  N_s(h) = 0 | N_a(h) + N_s(h) = 1} =
+    \P{N_\lambda(h) = 1,  N_\mu(h) = 0 | N_\lambda(h) + N_\mu(h) = 1} =
 \frac{\lambda}{\lambda+\mu}.
     \end{equation*}
     Note that the right-hand-side does not depend on $h$, hence it
     holds for any time $h$, whether it is small or not.  
     \begin{hint}
 Suppose
-      we write $N(t)=N_a(t) + N_s(t)$. Then
+      we write $N(t)=N_\lambda(t) + N_\mu(t)$. Then
       \begin{equation*}
-      \P{N_a(h) = 1, N_s(h) = 0 | N(h) = 1}
+      \P{N_\lambda(h) = 1, N_\mu(h) = 0 | N(h) = 1}
       \end{equation*}
-      is the probability that $N_a(h)=1$ and $N_s(h)=0$ \emph{given}
+      is the probability that $N_\lambda(h)=1$ and $N_\mu(h)=0$ \emph{given}
       that $N(t)=1$. In other words, the question is find out that,
       given one of the two processes `fired', what is the probability
-      that $N_a$ was the one that `fired'.
+      that $N_\lambda$ was the one that `fired'.
     \end{hint}
     \begin{solution}
   With the above:
   \begin{equation*}
     \begin{split}
-&    \P{N_a(h) = 1,  N_s(h) = 0 | N_a(h) + N_s(h) = 1} \\
-&= \frac{\P{N_a(h) = 1,  N_s(h) = 0, N_a(h) + N_s(h) = 1} }{ \P{N_a(h) + N_s(h) = 1}} \\ 
-&= \frac{\P{N_a(h) = 1,  N_s(h) = 0}}{ \P{N_a(h) + N_s(h) = 1}} \\ 
-&= \frac{\P{N_a(h) = 1}\P{N_s(h) = 0}}{ \P{N_a(h) + N_s(h) = 1}} \\ 
+&    \P{N_\lambda(h) = 1,  N_\mu(h) = 0 | N_\lambda(h) + N_\mu(h) = 1} \\
+&= \frac{\P{N_\lambda(h) = 1,  N_\mu(h) = 0, N_\lambda(h) + N_\mu(h) = 1} }{ \P{N_\lambda(h) + N_\mu(h) = 1}} \\ 
+&= \frac{\P{N_\lambda(h) = 1,  N_\mu(h) = 0}}{ \P{N_\lambda(h) + N_\mu(h) = 1}} \\ 
+&= \frac{\P{N_\lambda(h) = 1}\P{N_\mu(h) = 0}}{ \P{N_\lambda(h) + N_\mu(h) = 1}} \\ 
 &= \frac{\lambda h \exp{-\lambda h} \exp{-\mu h}}{((\lambda+\mu)h)\exp{(-(\lambda+\mu)h)}}\\
 &= \frac{\lambda h \exp{(-(\lambda + \mu)h)}}{((\lambda+\mu)h)\exp{(-(\lambda+\mu)h)}}\\
 &= \frac{\lambda}{\lambda+\mu}
@@ -610,7 +623,7 @@ Then, using conditioning on $N$,
  = \E{\E{\left(1+p(e^s-1)\right)^n \given N=n }} \\
 &= \sum_{n=0}^\infty \left(1+p(e^s-1)\right)^n e^{-\lambda} \frac{\lambda^n}{n!}
 = e^{-\lambda} \sum_{n=0}^\infty \frac{\left(1+p(e^s-1)\right)^n \lambda^n}{n!}\\
-&= e^{-\lambda} e^{\lambda (1+p(e^s-1))} = e^{\lambda p (e^s - 1)}.
+&= \exp(-\lambda+ \lambda (1+p(e^s-1))) = \exp(\lambda p (e^s - 1)).
   \end{split}
 \end{equation*}
 Thus, $Y$ has the same moment generating function as a Poisson

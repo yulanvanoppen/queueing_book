@@ -157,32 +157,32 @@ Eq.~\eqref{eq:28} and define, analogous to \eqref{eq:132},
 \end{equation}
 Thus, $\delta(n)$ is the long-run fraction of jobs that leave $n$ jobs
 \emph{behind}. Clearly, then, if the limits exist, the right hand side
-tends to $\gamma \delta(n)$ as $t\to\infty$. Hence, for (queueing)
+tends to $\delta \delta(n)$ as $t\to\infty$. Hence, for (queueing)
 systems in which customers arrive and leave as single units, we have
 \begin{equation}
   \label{eq:36}
-  \lambda \pi(n) = \gamma \delta(n).
+  \lambda \pi(n) = \delta \delta(n).
 \end{equation}
-Moreover, if the system is rate-stable, i.e., the output rate $\gamma$ is equal to the input rate $\lambda$, we obtain
+Moreover, if the system is rate-stable, i.e., the output rate $\delta$ is equal to the input rate $\lambda$, we obtain
 \begin{equation}
   \label{eq:39}
-\lambda = \gamma \iff  \pi(n) = \delta(n).
+\lambda = \delta \iff  \pi(n) = \delta(n).
 \end{equation}
 This means that the system as seen by arrivals, i.e., $\pi(n)$, is
 the same as what jobs leave behind, i.e., $\delta(n)$.
 
 
 \begin{exercise}
-  When $\lambda\neq \gamma$, is $\pi(n)\geq \delta(n)$?  
+  When $\lambda\neq \delta$, is $\pi(n)\geq \delta(n)$?  
   \begin{hint}
 Use that
-    $\lambda \geq \gamma$ always, and $\lambda=\gamma$ when the system
+    $\lambda \geq \delta$ always, and $\lambda=\delta$ when the system
     is rate-stable.
   \end{hint}
   \begin{solution}
     We have shown for one-step transition processes that
-    $\lambda \pi(n) = \gamma \delta(n)$. Thus,
-    $\pi(n) = \delta(n)\gamma /\lambda$. Since $\lambda\geq \gamma$,
+    $\lambda \pi(n) = \delta \delta(n)$. Thus,
+    $\pi(n) = \delta(n)\delta /\lambda$. Since $\lambda\geq \delta$,
     we have that $\pi(n) \leq \delta(n)$.
   \end{solution}
 \end{exercise}
@@ -190,7 +190,7 @@ Use that
 \begin{exercise}
 Show that 
 \begin{equation*}
-\lambda  \pi(n) = \lambda(n) p(n) = \mu(n+1) p(n+1) = \gamma \delta(n).
+\lambda  \pi(n) = \lambda(n) p(n) = \mu(n+1) p(n+1) = \delta \delta(n).
 \end{equation*}
 What is the important condition for this to be true?
 \begin{hint}
@@ -205,7 +205,7 @@ Check all definitions of $Y(n,t)/t$ and so on.
   \frac{A(n,t)}{t} &=   \frac{A(n,t)}{A(t)} \frac{A(t)}{t} \to \pi(n) \lambda\\
   \frac{A(n,t)}{t} &=   \frac{A(n,t)}{Y(n,t)} \frac{Y(n,t)}{t} \to \lambda(n)p(n)\\
   \frac{D(n,t)}{t} &=   \frac{D(n,t)}{Y(n+1,t)} \frac{Y(n+1,t)}{t} \to \mu(n+1)p(n+1)\\
-  \frac{D(n,t)}{t} &=   \frac{D(n,t)}{D(t)} \frac{D(t)}{t} \to \delta(n)\gamma \\
+  \frac{D(n,t)}{t} &=   \frac{D(n,t)}{D(t)} \frac{D(t)}{t} \to \delta(n)\delta \\
 \end{align*}
 \end{solution}
 \end{exercise}

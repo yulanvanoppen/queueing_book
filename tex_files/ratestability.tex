@@ -182,7 +182,7 @@ The development of the departure times $\{D_k\}$ is entirely analogous
 to that of the arrival times; we leave it to the reader to provide the
 details. As a result we can define the \recall{departure rate} as
 \begin{equation}\label{eq:28}
-  \lim_{t\to\infty} \frac{D(t)}t = \gamma
+  \lim_{t\to\infty} \frac{D(t)}t = \delta
 \end{equation}
 
 
@@ -224,25 +224,25 @@ Now observe that, if the system is empty at time $0$, it must be that
 at any time the number of departures must be smaller than the number
 of arrivals, i.e., $D(t) \leq A(t)$ for all $t$. Therefore,
 \begin{equation}\label{eq:26}
-\gamma :=   \lim_t \frac{D(t)}t \leq \lim_t \frac{A(t)}t = \lambda.
+\delta :=   \lim_t \frac{D(t)}t \leq \lim_t \frac{A(t)}t = \lambda.
 \end{equation}
 We call a system \recall{(rate) stable} if
 \begin{equation*}
-  \lambda = \gamma,
+  \lambda = \delta,
 \end{equation*}
 in other words, the system is stable if, on the long run, jobs leave
 the system just as fast as they arrive. Of course, if
-$\lambda > \gamma$, the system length process $L(t) \to \infty$ as
+$\lambda > \delta$, the system length process $L(t) \to \infty$ as
 $t\to \infty$.
 
 It is also evident that jobs cannot depart faster than they can be
 served, hence, $D(t) \leq U(t)$ for all~$t$. Combining this with the
-fact that $\gamma \leq \lambda$, we get
+fact that $\delta \leq \lambda$, we get
 \begin{equation*}
-  \gamma \leq \min\{\lambda, \mu\}.
+  \delta \leq \min\{\lambda, \mu\}.
 \end{equation*}
 When $\mu \geq \lambda$ the above inequality reduces to
-$\gamma = \lambda$ for rate-stable systems. (It is interesting to
+$\delta = \lambda$ for rate-stable systems. (It is interesting to
 prove this.) As it turns out, when $\mu = \lambda$ and the variance of
 the service times $\V{S} > 0$ or $\V{X} >0$ then $\lim_t L(t)/t$
 does not necessarily exist. For this reason we henceforth require that
@@ -355,9 +355,9 @@ $A(t)\to \infty$ as $t\to\infty$,
 \end{equation*}
 Applying similar limits to the other inequality gives
 \begin{equation*}
-\lambda \E S \geq \rho \geq \gamma \E S.
+\lambda \E S \geq \rho \geq \delta \E S.
 \end{equation*}
-Hence, if $\gamma=\lambda$, $\rho = \lambda \E S$.  
+Hence, if $\delta=\lambda$, $\rho = \lambda \E S$.  
 
 From the identies $\lambda^{-1} = \E X$ and $\mu^{-1} = \E S$, we get
 a further set of relations:

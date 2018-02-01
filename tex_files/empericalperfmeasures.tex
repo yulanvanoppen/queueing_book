@@ -208,7 +208,7 @@ edge[pil,bend left=25, <-] (mu.east);
     \draw[->] (A_t.east) [out=20, in = 40] to  (Q_t);
     %edge[pil, bend right=95, <-]  (A_t.north);
 
-    \node[block, right=1cm of  D_t] (gamma) {$\frac{D(t)}t \to \gamma$} 
+    \node[block, right=1cm of  D_t] (delta) {$\frac{D(t)}t \to \delta$} 
     edge[pil, <-]  (D_t);
 
 
@@ -218,8 +218,8 @@ edge[pil,bend left=25, <-] (mu.east);
     % edge[pil, <-]  (L)
     % edge[pil, <-]  (W);
 
-    \node[block, right=1cm of  Q_t] (hoi) {$\gamma \leq \lambda$} 
-    edge[pil, <-]  (gamma)
+    \node[block, right=1cm of  Q_t] (hoi) {$\delta \leq \lambda$} 
+    edge[pil, <-]  (delta)
     edge[pil, bend right=10, <-]  (lambda)
     edge[pil, bend left = 30, <-]  node[below] {$L(t)>0$} (Q_t);
 

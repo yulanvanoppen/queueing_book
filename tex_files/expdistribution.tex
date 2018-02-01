@@ -763,25 +763,29 @@ probabilities. We write
 \begin{equation*}
   G(k) = \P{B>k} = \sum_{m=k+1}^\infty f(m),
 \end{equation*}
-for the \emph{survivor function} of $B$.  
+for the \emph{survivor function} of $B$.  We can write this with an indicator function as
+\begin{equation*}
+  G(k) = \sum_{m=0}^\infty \1{m>k} f(m),
+\end{equation*}
+which makes the compution of certain expressions quite a bit easier. 
 
 \begin{exercise}\label{ex:6}
- Use indicator functions to prove that $ \sum_{n=0}^\infty G(n) = \E B$.
+ Use indicator functions to prove that $ \sum_{k=0}^\infty G(k) = \E B$.
     \begin{hint}
 Write 
-$\sum_{n=0}^\infty G(n) = \sum_{n=0}^\infty \sum_{i=n+1}^\infty \P{B=i}$ and then do the algebra.
-    \end{hint}
-\begin{solution}
-  Realize that this sort of problem is just a regular probability
+$\sum_{k=0}^\infty G(k) = \sum_{k=0}^\infty \sum_{m=k+1}^\infty \P{B=m}$, reverse the summations. Then realize that $\sum_{k=0}^\infty \1{k<m} = m$. 
+You should be aware that this sort of problem is just a regular probability
   theory problem, nothing fancy. We use/adapt the tools you learned in
   calculus to carry out 2D integrals (or in this case 2D summations.)
+    \end{hint}
+\begin{solution}
 \begin{align*}
-\sum_{n=0}^\infty G(n) 
-&= \sum_{n=0}^\infty \P{B>n} 
-= \sum_{n=0}^\infty \sum_{i=n+1}^\infty \P{B=i}  \\
-& = \sum_{n=0}^\infty \sum_{i=0}^\infty 1\{n<i\} \P{B=i} 
-= \sum_{i=0}^\infty \sum_{n=0}^\infty 1 \{n<i\} \P{B=i} \\
-&= \sum_{i=0}^\infty i \P{B=i} = \E B.
+\sum_{k=0}^\infty G(k) 
+&= \sum_{k=0}^\infty \P{B>k} 
+= \sum_{k=0}^\infty \sum_{m=k+1}^\infty \P{B=m}  \\
+& = \sum_{k=0}^\infty \sum_{m=0}^\infty 1\{m>k\} \P{B=m} 
+= \sum_{m=0}^\infty \sum_{k=0}^\infty 1 \{m>k\} \P{B=m} \\
+&= \sum_{m=0}^\infty m\P{B=k} = \E B.
 \end{align*}
 In case you are interested in mathematical justifications: the
 interchange of the two summations is allowed because the summands are
@@ -796,7 +800,8 @@ you are interested.)
  Use indicator functions to prove that
 $\sum_{i=0}^\infty i G(i) =  \E{B^2}/2 - \E{B}/2.$
     \begin{hint}
-$\sum_{i=0}^\infty i G(i) = \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^\infty i 1\{n\geq i+1\}$.
+$\sum_{i=0}^\infty i G(i) = \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^\infty i 1\{n\geq i+1\}$,
+and reverse the summations.
     \end{hint}
 \begin{solution}
 \begin{align*}
@@ -810,7 +815,7 @@ $\sum_{i=0}^\infty i G(i) = \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^\infty i 1\{n\g
 \end{exercise}
 
 
-Let $S$ be a continuous random variable $S$ with distribution function $F$.
+Let $S$ be a continuous random variable $S$ with distribution function $F$. 
 
 \begin{exercise}
  Use indicator functions to prove that 

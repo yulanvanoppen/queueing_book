@@ -34,11 +34,11 @@ $L(t)$ remains finite, or more generally $L(t)/t \to 0$ as $t\to\infty$, then it
 must be that
 \begin{equation*}
   \lambda =  \lim_t \frac{A(t)}t  = \lim_t \frac{D(t)+L(t)}t =  \lim_t \frac{D(t)}t + \lim_t \frac{L(t)}t 
-  = \gamma.  
+  = \delta.  
 \end{equation*}
 Hence, when $L(t)/t\to0$, the \recall{up crossing rate}
 $\lim_t A(t)/t = \lambda$ is equal to the \emph{down-crossing rate}
-$\lim_t D(t)/t = \gamma$.  We will generalize these notions of up- and
+$\lim_t D(t)/t = \delta$.  We will generalize these notions of up- and
 downcrossing in this section to derive the \recall{stationary}---also known as \emph{long-run time average} or \emph{steady-state},
 distribution---$p(n)$ that the system contains $n$ jobs. 
 
@@ -263,9 +263,9 @@ the time the system contains $n$ jobs.
 
 \begin{exercise}
   Why is $ \lim_{t\to\infty} \frac{A(n,t)}t = 0$ if
-  $\lambda > \gamma$, i.e., if the system is not rate-stable?
+  $\lambda > \delta$, i.e., if the system is not rate-stable?
   \begin{solution}
- If $\lambda > \gamma$, then $L(t)\to\infty$. But then there
+ If $\lambda > \delta$, then $L(t)\to\infty$. But then there
       must be last time, $s$ say, that $L(s) = n+1$, and $L(t) > n+1$
       for all $t>s$. Hence, after time $s$ no job will see the system
       with $n$ jobs. Thus $A(t,n) = A(s,n)$ for all $t>s$.  This is a
@@ -277,13 +277,13 @@ the time the system contains $n$ jobs.
 Is it always true that 
     $\lambda = \lim_{t} \frac{A(t)}t = \lim_{t} \frac{A(n,t)}t$.
   \begin{solution}
- When $\gamma < \lambda$, $\lambda$ can still be finite, but
+ When $\delta < \lambda$, $\lambda$ can still be finite, but
     the server is simply too slow. In that case both limits can exists,
     the first limit is positive but the second is $0$.
 
-    Note that $\gamma\leq \lambda$ (always): jobs cannot depart faster
+    Note that $\delta\leq \lambda$ (always): jobs cannot depart faster
     than they arrive. Hence, we do not have to consider the case
-    $\gamma>\lambda$ in the above.
+    $\delta>\lambda$ in the above.
   \end{solution}
 \end{exercise}
 
@@ -555,7 +555,7 @@ edge[pil,<-] (level);
 \node[block, below=1cm of A] (At) {$\frac{A(t)}t \approx \frac{D(t)}t$} 
 edge[pil,<-] (A); 
 
-\node[block, below=1.5cm of At] (lambda) {$\lambda=\gamma$} 
+\node[block, below=1.5cm of At] (lambda) {$\lambda=\delta$} 
 edge[pil,<-] node[fill=white] {$t\to\infty$} (At); 
 
 \node[block, below=1cm of An] (AnDn) {$\frac{A(n,t)}t\approx\frac{D(n,t)}t$}
