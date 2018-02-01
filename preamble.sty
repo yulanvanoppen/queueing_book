@@ -95,6 +95,12 @@
 % \newcommand{\hint}[1]{\SetQuestionProperties{ hint = {#1}}}
 %\newcommand{\hint}[1]{\hintsymbol\SetQuestionProperties{ hint = {#1}}}
 
+\Newassociation{solution}{Solution}{ans}
+\Newassociation{sol}{Solution}{ans}
+\Newassociation{hint}{Hint}{hint}
+\renewcommand{\Hintlabel}[1]{\textbf{h.#1}}
+\renewcommand{\Solutionlabel}[1]{\textbf{s.#1}}
+
 \theoremstyle{definition} % font type for theorems and related environments
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{remark}[theorem]{Remark}
@@ -128,12 +134,6 @@ shaded={bgcolor=light-gray},
 %\BeforeBeginEnvironment{exercise}{\myleftbar}
 %\AfterEndEnvironment{exercise}{\endmyleftbar}
 
-\usepackage{answers}
-\Newassociation{solution}{Solution}{ans}
-\Newassociation{sol}{Solution}{ans}
-\Newassociation{hint}{Hint}{hint}
-\renewcommand{\Hintlabel}[1]{\textbf{h.#1}}
-\renewcommand{\Solutionlabel}[1]{\textbf{s.#1}}
 
 
 \newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1} \nameref*{#1}}} % One single link
