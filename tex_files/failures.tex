@@ -1,4 +1,5 @@
-\section{Service Interruptions}
+%\section{Service Interruptions}
+\section{Interruptions due to Failures}
 \label{sec:serv-interr}
 
 
@@ -101,7 +102,7 @@ We can similar ideas to derive an expression for the variance of $S$. The next e
 \begin{exercise}
   Why is $\V{S} \neq \V{S_0} + \V{\sum_{i=0}^N D_i}$?
   \begin{solution}
-    Because $S_0$ and $N$ are not independent.
+    Because $S_0$ and $N$ are not independent, given $S_0$, $N_0$ is Poisson distributed with mean $\lambda_f S_0$. 
   \end{solution}
 \end{exercise}
 
@@ -258,13 +259,17 @@ The average time in queue reduces for $\approx 0.6$ to $\approx 0.2$ hours, a re
 \end{solution}
 \end{exercise}
 
-\begin{comment}
+Consider the compound Poisson process such that $S(t) = \sum_{i=1}^{N(t)} D_i$, where $N(t)$ is the number of customers arrived up to time $t$, and $D_i$ is the service demand of the $i$th customer. The demands $\{D_i\}$ are i.i.d. with mean $\E D$ and variance $\V D$, and $N(t)$ is Poisson distributed with rate $\lambda$. 
+
 \begin{exercise}
-If $N=n$, show that $\E{S_n^2}=n\E{D^2} + n(n-1)(\E D)^2$.
-\begin{hint}
-  Use that $\left(\sum_{i=1}^n D_i\right)^2 = \sum_i D_i^2 + \sum_i \sum_{j\neq i } D_i D_j$, and that $D_i$ and $D_j$ are assumed to be independent.
-\end{hint}
+First assume that $N$ is some general random variable. Use the tools you learned above to show that
+\begin{equation*}
+\V{S(t)} = \E{N(t)} \V D + \V{N(t)} (\E D)^2.
+\end{equation*}
 \begin{solution}
+The mean is $\E{S(t)}= \E{N(t)} \E D$.
+
+It remains to compute $\E{S^2(t)}$.  If $N=n$, 
 \begin{equation*}
   \begin{split}
   \E{ S_n^2 } 
@@ -278,16 +283,8 @@ that the $\{D_i\}$ are i.i.d. as $D$,
 \begin{equation*}
   \E{ S_n^2} = n \E{D^2} + n(n-1) (\E D)^2. 
 \end{equation*}
-\end{solution}
-\end{exercise}
 
-\begin{exercise}
-Now $N$ is a random variable, with $p_n=\P{N=n}$. Use this to show that
-\begin{equation*}
-%\E{S_N^2}=\sum_{n=0}^\infty p_n (n\E{D^2} + n(n-1)(\E D)^2) = \E N \V{D} + \E{N^2} (\E D)^2.
-\E{S_N^2}= \E N \V{D} + \E{N^2} (\E D)^2.
-\end{equation*}
-\begin{solution}
+Now take $N$ as a random variable, with $p_n=\P{N=n}$,
 \begin{equation*}
   \begin{split}
 \E{ S_N^2}  &= 
@@ -298,12 +295,8 @@ Now $N$ is a random variable, with $p_n=\P{N=n}$. Use this to show that
 & = \E N \V D + \E{N^2} (\E D)^2.
   \end{split}
 \end{equation*}
-\end{solution}
-\end{exercise}
 
-\begin{exercise}
-Use the above to conclude that $\V{S_N} = \E{N} \V D + \V N (\E D)^2$.
-\begin{solution}
+Hence, 
 \begin{equation}
   \begin{split}
   \V{S_N} 
@@ -316,61 +309,18 @@ Use the above to conclude that $\V{S_N} = \E{N} \V D + \V N (\E D)^2$.
 \end{solution}
 \end{exercise}
 
-
-
-
 \begin{exercise}
-  What is the variance of the compound Poisson process?
-\end{exercise}
-  
-\end{comment}
-
-
-\begin{exercise} 
-
-  A small company receives orders at a rate $\lambda$.  Interarrival
-  times between orders are exponentially distributed. Once $B$ orders
-  have been assembled, the company starts produces this batch of $B$
-  jobs.  The average service time of an order is $1/\mu$. Between two
-  batches the company has to re-adjust some of the machines before it
-  can start processing another batch. These setup times form an
-  i.i.d. sequence of times with average $\E{S}$ time units.
-
-\begin{enumerate}
-\item Should the batch size be limited from above or below to ensure that the system remains stable? 
-\item How many orders arrive on average during a setup?
-\item Use the above two points to determine a criterion on the minimal
-  batch size~$B$.
-\end{enumerate}
-\begin{hint}
- If the batch sizes $B$ are small, relatively much time is
-  spent on setups. 2: If the setup time $S$ is constant, then the
-  number of orders that arrive is Poisson distributed. 3: Given a
-  batch size $B$, find the time to produce such a batch, then include
-  a setup time $S$ to compute the length of one production cycle. The
-  expected number of jobs served during such a cycle must not exceed the number of jobs served during the cycle.
-\end{hint}
+  Now assume that $N(t)$ is Poisson with rate $\lambda$. Then, show that 
+\begin{equation}
+  \V{S_{N(t)}} = \lambda t \E{D^2}.
+\end{equation}
 \begin{solution}
-\begin{enumerate}
-\item Only from below. If batches are very large, the fraction of time spent on setups becomes very small.
-\item The expected number of arrivals is 
-\begin{equation*}
-    \lambda \E S.
-  \end{equation*}
-To see this, note that  the number of arrivals $N$ during a constant time is Poisson. Thus,
-\begin{equation*}
-  \E{N} = \E{ \E{N\given S}} = \E{ \E{\lambda S\given S}} = \lambda \E{\E{S \given S}} = \lambda \E{S}.
-\end{equation*}
-
-\item  The number of jobs that arrive, on average, during one
-  production cycle must be smaller than the total amount of jobs that
-  can be served, on average, during one cycle.   The number of arrivals during the setup is $\lambda \E{S}$. The number of arrivals during serving the batch is $\lambda B/\mu$. Thus, 
-  \begin{equation*}
-    \lambda ( B/\mu + \E{S}) \leq B.
-  \end{equation*}
-  When equality holds here, the system is critically loaded. As we
-  discussed before, that it not a good idea.
-\end{enumerate}
+\begin{equation}
+  \begin{split}
+  \V{S_{N(t)}}  = \E N \V D + \V N (\E D)^2 =\lambda t \V D + \lambda t (\E D)^2 = \lambda t \E{D^2}.
+  \end{split}
+\end{equation}
+  
 \end{solution}
 \end{exercise}
 
