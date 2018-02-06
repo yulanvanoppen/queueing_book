@@ -813,7 +813,7 @@ and reverse the summations.
 &= \sum_{i=0}^\infty i \sum_{n=i+1}^\infty \P{B=n} = \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^\infty i 1\{n\geq i+1\} \\
 &= \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^{n-1}i  = \sum_{n=0}^\infty \P{B=n} \frac{(n-1)n}{2} \\
 &= \sum_{n=0}^\infty  \frac{n^2}{2} \P{B=n} - \frac{\E B}{2}
-= \frac{\E B^2}2 - \frac{\E B}{2}.
+= \frac{\E{B^2}}{2} - \frac{\E B}{2}.
 \end{align*}
 \end{solution}
 \end{exercise}
@@ -856,9 +856,9 @@ $\int_0^\infty y G(y) \d y = \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d
     \begin{split}
 \int_0^\infty y G(y) \d y 
 &=  \int_0^\infty y \int_y^\infty f(x)\, \d x \d y =  \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d x \d y\\
-&=  \int_0^\infty f(x) \int_0^\infty y 1\{y \leq x\}\, \d x \d y
-=  \int_0^\infty f(x) \int_0^x y\, \d x \d y\\
-&=  \int_0^\infty f(x) \frac{x^2}2 \d x =\frac{\E S^2}2.
+&=  \int_0^\infty f(x) \int_0^\infty y 1\{y \leq x\}\, \d y \d x
+=  \int_0^\infty f(x) \int_0^x y\, \d y \d x\\
+&=  \int_0^\infty f(x) \frac{x^2}2 \d x =\frac{\E{S^2}}2.
     \end{split}
   \end{equation*}
 \end{solution}
@@ -873,7 +873,7 @@ $\int_0^\infty y G(y) \d y = \E{S^2}/2.$
       \int_0^\infty y G(y) \d y 
 = \frac{y^2}2 G(y) \bigg|_0^\infty  - \int_0^\infty \frac{y^2}2 g(y)\d y = \int_0^\infty \frac{y^2}2 f(y)\d y = \frac{\E{S^2}}2,
   \end{equation}
-  since $g(y) = G'(y) = - F'(y) = f(y)$.
+  since $g(y) = G'(y) = - F'(y) = - f(y)$.
 \end{solution}
 \end{exercise}
 
