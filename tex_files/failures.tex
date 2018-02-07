@@ -1,5 +1,5 @@
 %\section{Service Interruptions}
-\section{Interruptions due to Failures}
+\section{Preemptive Interruptions, Server Failures}
 \label{sec:serv-interr}
 
 
@@ -10,7 +10,7 @@
 
 %See section 1.11 of Zijm's book for the theory.
 
-Up to now we assumed that servers are never interrupted while serving a job. In many situations this is not true, a person  might be receive short phone calls while working on a job, a machine mail fail in the midst of processing. In this section we develop a model to account for such interruptions, and compute the influence on the mean waiting time. 
+Up to now we assumed that servers are never interrupted while serving a job. In many situations this is not true, a person  might be receive short phone calls while working on a job, a machine may fail in the midst of processing, and so on. In this section we develop a model to account for such \emph{preemptive interruptions}, i.e., interruptions that occur \emph{during} a service, and compute the influence on the mean waiting time. 
 
 Let us assume that a job's normal service, without interruptions, is given by $S_0$. The durations of the interruptions are given by the i.i.d. random variables $\{D_i\}$ and have common mean $\E D$ and variance $\V D$. If $N$ interruptions occur, the real, total, service time will then be
 \begin{equation*}

@@ -1,11 +1,13 @@
+rm -rf pythontex-files-book/
 pdflatex book
 #bibtex book
-pythontex book
+pythontex --interpreter python:python3 book
 pdflatex book
 pdflatex book
 
+rm -rf pythontex-files-book_mobile/
 pdflatex book_mobile
 #bibtex book
-pythontex book_mobile
+pythontex --interpreter python:python3 book_mobile
 pdflatex book_mobile
 pdflatex book_mobile

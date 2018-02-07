@@ -1,4 +1,4 @@
-\section{Interruptions due to Setups}
+\section{Setups and Batch Processing}
 
 
 \subsection*{Theory and Exercises}
@@ -6,18 +6,13 @@
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-%See section 1.11 of Zijm's book for the theory.
+Setups are often required when a machine has to undergo some changeovers when changing from process one type of job to  another type. For instance, a painting machine requires a clean up when changing color, or an oven has to warm up or cool down when items require a different temperature. In service settings, when people have to move from part of a building to another, like the customs at Schiphol, the time they spend walking from one place to another they  cannot serve customers.  In this section we develop a simple model to incorporate the effects  of setups on the averate time jobs spend in the system.
 
-Besides failures, another type of service interruption can occur. When jobs are processed in batches and a setup time occurs between the processing of two batches, then the server is also not available for work. Setups differ from failures in that they typically are done \recall{between} two jobs, while failures often occur \recall{during} the service of a job. Therefore, setups are known as \emph{non-preemptive outages}, while failures are known as \recall{preemptive outages}. 
+Setups differ from random interruptions in that they occur, often, between any $B$ jobs, and service starts once $B$ jobs have been assembled into a batch. As we will see, this has considerable consequences on the system times. 
 
-Setups are often required when a machine has to undergo some change to be able to process another type of job, for instance, a painting machine requires a clean up when changing color, an oven has to warm up or cool down when items require a different temperature. In service settings, when people have to move from part of a building to another, like the customs at Schiphol, the time they spend walking cannot be used for service. 
-
-In this section we develop a simple model to incorporate the effects on the SCV of the service times, so that we again can estimate waiting times with the $G/G/1$ waiting time formula. 
-
-
-Suppose that $B$ is the number of jobs that make up a batch and the setup time is a random variable $T$. Let the average net service time of a job be $\E{S_0}$. 
+Suppose that we produce in batch sizes of $B$ jobs and the setup time is a random variable $T$ independent of the normal job service times. Let the average normal (or net) service time of a job be $\E{S_0}$. 
 \begin{exercise}
-  Show that the average \recall{effective} processing time $S_e$, i.e., the time the service is occupied with processing jobs including setups, is 
+  Show that the average \recall{effective} processing time $S_e$, i.e., the average time the server is occupied with processing a job including setups, is 
   \begin{equation*}
     \E{S_e} = \E{S_0} + \frac{\E{T}} B.
   \end{equation*}
@@ -29,197 +24,118 @@ Suppose that $B$ is the number of jobs that make up a batch and the setup time i
   \end{solution}
 \end{exercise}
 
-To compute the variance of the effective service times requires to make a model of how the setups are planned between the jobs, for instance, one setup between every 10 jobs. One particularly simple model is to assume that setups occur geometrically distributed between any two jobs with a mean of $B$ jobs between any two setups.  Thus, the probability of a setup between two jobs is $p=1/B$. 
-
-\begin{exercise}
-  Show that, with this model of setups, again $E{S_e} = \E{S_0} + \E T/ B.$
-  \begin{hint}
-    What is the  time a job occupies the server when a setup occurs just before the job? What is the probability that this occurs?
-  \end{hint}
-  \begin{solution}
-    \begin{equation*}
-      \E{S_e} = \E{S_0} \frac{B-1}B + (\E{S_0} + \E T) \frac 1B.
-    \end{equation*}
-  \end{solution}
-\end{exercise}
-
-The next step is to compute $\E{S_e^2}$. 
-\begin{exercise}
-  Show that
-  \begin{equation*}
-    \E{S_e^2} = \E{S_0^2} + 2\frac{\E{S_0}\E{T}} B + \frac{\E{T^2}}B.
-  \end{equation*}
-  \begin{solution}
-  \begin{equation*}
-    \begin{split}
-    \E{S_e^2} 
-&= \E{S_0^2}\frac{B-1}B + \E{(S_0+T)^2}\frac 1B \\
-&= \E{S_0^2}\frac{B-1}B + \E{S_0^2} \frac 1 B + 2 \E{S_0} \E T\frac 1B + \E{T^2}\frac 1B
-    \end{split}
-  \end{equation*}
-  \end{solution}
-\end{exercise}
-
-\begin{exercise}
-  Use the above to find that
-  \begin{equation*}
-    \V{S_e} = \V{S_0} + \frac{\V{T}} B + (B-1)\left(\frac{\E T}{B}\right)^2.
-  \end{equation*}
-  \begin{solution}
-    \begin{equation*}
-      \begin{split}
-\V{S_e} 
-&=\E{S_e^2} - (E{S_e})^2 \\
-&= \E{S_0^2} + 2 \E{S_0} \E T\frac 1B + \E{T^2}\frac 1B  \\
-&\quad - (\E{S_0})^2 - 2\E{S_0}\E T \frac 1 B - (\E T)^2\frac1{B^2}\\
-&=  \V{S_0} + ((\E{T^2} - (\E T)^2)\frac 1 B + (\E T)^2\left(\frac 1B - \frac 1{B^2}\right).
-      \end{split}
-    \end{equation*}
-  \end{solution}
-\end{exercise}
-
-
+Observing that
+\begin{equation*}
+  \lambda_B = \frac \lambda B,
+\end{equation*}
+the load is given by 
+\begin{equation*}
+\rho = \lambda_B (B \E{S_0} + \E T) = \lambda (\E{S_0} + \E{T}/B).
+\end{equation*}
+The first equality has the interpretation of the batch arrival rate times the work per batch, while the second means the job arrival rate times the effective work per job. 
 
 \begin{exercise} 
-
-  A small company receives orders at a rate $\lambda$.  Interarrival
-  times between orders are exponentially distributed. Once $B$ orders
-  have been assembled, the company starts produces this batch of $B$
-  jobs.  The average service time of an order is $\E S$. Between two
-  batches the company has to re-adjust some of the machines before the processing of another batch can start. These setup times form an   i.i.d. sequence of times with average $\E{T}$ time units.
-
-Determine that  the minimal batch size~$B$ must be such that
+Show that  the minimal batch size~$B$ must satisfy the constraint
   \begin{equation*}
- B>\frac{\lambda \E T}{1-\lambda \E S}.
+ B>\frac{\lambda \E T}{1-\lambda \E{S_0}}.
   \end{equation*}
 
-\begin{hint}
- If the batch sizes $B$ are small, relatively much time is
-  spent on setups. 2: If the setup time $S$ is constant, then the
-  number of orders that arrive is Poisson distributed. 3: Given a
-  batch size $B$, find the time to produce such a batch, then include
-  a setup time $S$ to compute the length of one production cycle. The
-  expected number of jobs that arrive during such a cycle should not exceed the number of jobs that are served during the cycle.
-\end{hint}
 \begin{solution}
-The expected number of arrivals during a setup is
+This follows right away from requiring that $\rho < 1$.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Show that the effective variance of a job is  
 \begin{equation*}
-    \lambda \E T.
-  \end{equation*}
-To see this, note that  the number of arrivals $N$ during a constant time is Poisson. Thus,
-\begin{equation*}
-  \E{N} = \E{ \E{N\given T}} = \E{ \E{\lambda T\given T}} = \lambda \E{\E{T \given T}} = \lambda \E{T}.
+  \V{S_e} = \V{S_0} + \V{T}/B.
 \end{equation*}
-
-The number of jobs that arrive, on average, during one
-  production cycle must be smaller than the total amount of jobs that
-  can be served, on average, during one cycle.   The number of arrivals during the setup is $\lambda \E{T}$. The number of arrivals during serving the batch is $\lambda B \E{S}$. Thus, 
-  \begin{equation*}
-    \lambda ( B \E S + \E{T}) \leq B.
-  \end{equation*}
-  When equality holds here, the system is critically loaded. As we
-  discussed before, that it not a good idea.
-
-Finally, bring $B$ to one side.
-\end{solution}
-\end{exercise}
-
-
-
-\begin{exercise}
-A machine requires a setup with average $5$ hours and standard deviation of $2$ hours. Jobs arrive as a Poisson process with rate $\lambda=9$ per working day. The machine works two $8$ hour shifts a day. Work not processed on a day is carried over to the next day. Job service times are 1.5 hours, on average, with standard deviation of $0.5$ hour. Typical batch sizes are $30$ jobs.
-
-Compute the average waiting time in queue.
 \begin{hint}
-  Get the units right. First compute the load, and then compute the rest.
+  What is the variance of a batch?
 \end{hint}
 \begin{solution}
-  First we determine the load. 
-  \begin{pyconsole}
-B=30
-ES0 = 1.5
-labda = 9/(2*8) # arrival rate per hour
-ET=5
-ESe=ES0+ET/B
-ESe
-rho = labda*ESe
-rho
-  \end{pyconsole}
-So, at least the system is stable.
-
-\begin{pyconsole}
-VS0 = 0.5*0.5
-VT = 2*2
-VSe = VS0 + VT/B + (B-1)*(ET/B)**2
-VSe
-Ce2 = VSe/(ESe*ESe)
-Ce2
-\end{pyconsole}
-
-And now we can fill in the waiting time formula
-\begin{pyconsole}
-Ca2=1 # Poisson arrivals
-EW = (Ca2+Ce2)/2 * rho/(1-rho) * ESe
-EW  
-\end{pyconsole}
+  The variance of a batch is $\V{\sum_{i=1}^B S_{0,i} + T} = B\V{S_0} + \V T$, since the normal service times $S_{0,i}, i=1,\ldots, B$ of the job are independent, and also independent of the setup time $T$  of the batch.
 \end{solution}
 \end{exercise}
 
-Observe that with these formulas we can obtain quantitative insights into the effects of reducing the setup times, or the variability of the setup times, or the batch sizes. In particular, sensitivity analysis is very relevant for practical cases to find out the dominating parameters. 
-
-
-
-\begin{comment}
+With the above, we can characterize the SCV $C_e^2$ of the service times. We also need the SCV $C_a^2$ of the interarrival times of the batches; recall, jobs are first assembled into batches, and these batches are sent to the server for processing.
 
 \begin{exercise}
-Zijm.Ex.1.11.6
- \begin{solution}
-   Cleaning times will be pretty constant. Changing dies, or other
-   machine parts, is also typically quite predictable, although it can
-   take a lot of time, in particular in case a crane or other heavy
-   machinery is needed to replace parts. If the machine require
-   temporary adjustments, then the variation in setup times may be
-   quite a bit higher.
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-Zijm.Ex.1.11.7
- \begin{solution}
-   Then the effective service times, and in particular, $C_e^2$ will
-   be quite a bit bigger. It is preferable to avoid such a situation. 
-
-   Mathematically, it is only given that $N_s$ is a random
-   variable. As, however, this does not state anything about its
-   distribution, we cannot make any general claim. The intent of the
-   problem is to have you check the relevant formulas and notice that
-   the variance of $N_s$ appears in the formulas.
-\end{solution}
-\end{exercise}
-
-
-  
-\begin{exercise}
-  Suppose a single machine workstation has to process $n$ different
-  product families. Jobs of family $i$ arrive as a Poisson process
-  with rate $\lambda_i$.  Service times are exponentially distributed
-  with average $\mu_i^{-1}$ for family $i$. A setup of time $S$ is
-  required if the machine switches from one family to another. If the
-  machine works according to a cyclic schedule, i.e., produce family
-  1, then 2, then 3, and so on until family $n$, Can you find batch
-  sizes $B_i$ for family $i$ such that an average waiting time can be
-  guaranteed?
+  Why is $C_{a,e}^2$ of the batch equal to $C_{a}^2/B$, with $C_a^2$ the SCV of interarrival times of individual jobs?
   \begin{solution}
-    \TBD. 
-
-    This problem can be generalized and has been widely studied as one
-    of the core problems in stochastic machine scheduling. For
-    instance, what to do if the setup times are family-dependent, or
-    even more general, dependent on the sequence in which the families
-    are planned? This is a very hard problem. 
+The variance of the interarrival time of batches is $B$ times the variance of job interarrival times. The interarrival times of batches is also $B$ times the interarrival times of jobs. Thus, 
+\begin{equation*}
+  C_{a,e}^2 = \frac{B \V{X}}{(B \E X)^2} = \frac{\V X}{(\E X)^2} \frac 1 B =  \frac{C_a^2}{B}.
+\end{equation*}
   \end{solution}
 \end{exercise}
-\end{comment}
+
+\begin{exercise}
+  Jobs arrive at $\lambda=3$ per hour at a machine with $C_a^2=1$; service times are exponential with average 15 minutes.  Between any two batches, the machine requires a cleanup of 4 hours, with a standard deviation of $1$ hour, during which it is unavailable for service.  Suppose the batch size $B=60$ jobs. What is the minimal batch size?  What is the average time, batches spend in queue? 
+  \begin{solution}
+First check the load.
+\begin{pyconsole}
+labda = 3 # per hour
+ES0 = 15./60 # hour
+ES0
+ET = 4.
+B = 60
+ESe = ES0+ ET/B
+ESe
+
+rho = labda*ESe
+rho
+\end{pyconsole}
+
+The minimal batch size is
+\begin{pyconsole}
+Bmin = labda*ET/(1-labda*ES0)
+Bmin
+\end{pyconsole}
+
+Now the time in queue
+\begin{pyconsole}
+Cae = 1.
+CaB = Cae/B
+Ce = 1 # SCV of service times
+VS0 = Ce*ES0*ES0
+VT = 1*1. # Var is sigma squared
+VSe = B*VS0 + VT
+CeB = VSe/ESe/ESe
+CeB
+ESb = B*ES0 + ET
+ESb
+EWq = (CaB+CeB)/2 * rho/(1-rho) * ESb
+EWq
+\end{pyconsole}
+
+This is terrible.  The batch size is way too small, because $\rho$ is very high.
+  \end{solution}
+\end{exercise}
+
+Now that we can compute the average time a batch spends in queue, we can also compute the total time a job spends in the system. When a job arrives, it first needs to wait until a batch is formed. Then it enters (as part of a batch) a queue of batches. And, finally,  the batch is processed. 
+
+First we consider the time it takes to form a batch. 
+\begin{exercise}
+  Show that the total time to form a batch is $(B-1)/\lambda$. Hence, the average time a job spends 
+waiting until the batch is complete is
+\begin{equation*}
+  \E{W_f} = \frac{B-1}{2\lambda}.
+\end{equation*}
+\begin{solution}
+  Suppose a batch is just finished. The first job of a new batch needs to wait, on average, $B-1$  interarrival times until the batch is complete, the second $B-2$ interarrival times, and so on. The last job does not have to wait at all. Thus, the total time to form a batch is $(B-1)/\lambda$. 
+
+An arbitrary job can be anywhere in the batch, hence the average time of a job until the batch is complete is half the total time. 
+\end{solution}
+\end{exercise}
+
+Finally, when the batch is taken into service, there can be various rules to determine when the job's service finished. If the job has to wait until all jobs in the batch are served, the time a job spends at the server is $B \E{S_0} + \E T$. If, however, it can leave right after being served, the expected time is $B \E{S_0} + \E T$. Yet other rules apply when the job has to wait for transport. Then it needs to wait until a transport batch has formed, and the size of the transport batch may be larger or smaller than $B$. 
+
+Observe now that the times to form and process batches are linear functions of the batch size $B$. 
+
+Clearly, batch sizes need to be tuned to minimize the time jobs spend in the system. When the batchsizes are small, the load $\rho$ is near to one (in other words, the server spends a relatively large fraction of its time on setups), so that the queueing times are long, but the times to form a batch are small. If, however, the batch sizes are large, the queueing times will be relatively short, but the times to form and process batches will be large. 
+
+
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}

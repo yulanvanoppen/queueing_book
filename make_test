@@ -1,3 +1,4 @@
+rm -rf pythontex-files-booktest/
 pdflatex booktest
-pythontex booktest
+pythontex --interpreter python:python3 booktest
 pdflatex booktest
