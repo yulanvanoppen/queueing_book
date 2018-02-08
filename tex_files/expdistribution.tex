@@ -353,9 +353,9 @@ $A_i \sim \Gamma(i,\lambda)$, i.e., $A_i$ is Gamma distributed.
 \begin{exercise}
   Use the density $f_{A_i}$ of the previous exercise to show that $\E{A_i}=i/\lambda$. 
   \begin{hint}
-Use that
-    $\int_0^\infty (\lambda t)^i e^{- \lambda t} \d t =
-    \frac{i!}\lambda$.
+Use the standard integral 
+    $\int_0^\infty x^n e^{-\alpha x} \d x =
+    \alpha^{-n-1}n!$. 
     Another way would be to use that, once you have the moment
     generating function of some random variable $X$,
     $\E X = \frac{\d}{\d t} M_X(t) |_{t=0}$. 

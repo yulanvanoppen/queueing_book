@@ -277,48 +277,61 @@ provided $\P{B}>0$.
 
 \begin{exercise}
   Show that if $N(t) \sim P(\lambda t)$, we have for small $h$,
-$\P{N(h) = n \given N(0) = n} = 1-\lambda h + o(h)$.
+  \begin{equation*}
+\P{N(t+h) = n \given N(t) = n} = 1-\lambda h + o(h).
+  \end{equation*}
 \recall{Recall} that  $o(h)$ is a function  $f(h)$ such $f(h)/h \to 0$ as $h\to 0$.
     \begin{hint}
 Recall the definition of the conditional probability $\P{A\given B} = \P{AB}/\P{B}$, where we write $AB = A\cap B$. This definition only holds when $\P{B} > 0$. 
 
     Think about the meaning of the formula
-      $\P{N(h) = n \given N(0) = n}$. It is a conditional probability
-      that should be read like this: given that up to time $0$ we have
-      seen $n$ arrivals (i.e, $N(0)=n$), what is the probability that
-      just a little later ($h$) the number of arrivals is still $n$,
-      i.e, $N(h)=n$? Then use the definition of the Poisson
+      $\P{N(t+h) = n \given N(t) = n}$. It is a conditional probability
+      that should be read like this: given that up to time $t$ we have
+      seen $n$ arrivals (i.e, $N(t)=n$), what is the probability that
+      just a little later (at $t+h$) the number of arrivals is still $n$,
+      i.e, $N(t+h)=n$? Then use the definition of the Poisson
       distribution to compute this probability. Finally, use Taylor's
       expansion of $e^{x}$ to see that $e^{x} = 1 +x + o(x)$ for
       $|x| \ll 1$.  
     \end{hint}
 \begin{solution}
+Write $N(s, t]$ for the number of arrivals in the interval $(s,t]$. First we make a few simple observations: $N(t+h)= N(t) + N(t, t+h]$, hence
+\begin{equation*}
+  \begin{split}
+  \1{N(t+h)=n, N(t)=n}
+&=  \1{N(t) + N(t, t+h) = n}\1{N(t)=n}  \\
+&\1{N(t, t+h] = 0}\1{N(t)=n}.
+  \end{split}
+\end{equation*}
+Thus, 
     \begin{equation*}
       \begin{split}
-  \P{N(h) = n | N(0) = n} 
-&=  \P{N(h) = n \& N(0) = n}/\P{N(0)=n} \\
-&=  \P{N(h) = n} \P{N(0) = n}/\P{N(0)=n}, \\
-& \quad\text{(by independence of } N(h)=n\text{ and } N(0)=n)\\
-&= \P{N(h) = 0} \\
+  \P{N(t+h) = n | N(t) = n} 
+&=  \P{N(t+h) = n \& N(t) = n}/\P{N(t)=n} \\
+&=  \P{N(t, t+h] = 0 \& N(t) = n}/\P{N(t)=n} \\
+&=  \P{N(t, t+h] = 0} \P{N(t) = n}/\P{N(t)=n}, \\
+& \quad\text{(by independence of } N(h, t+h] \text{ and } N(t))\\
+&= \P{N(t, t+h] = 0} \\
+&= \P{N(0 h] = 0} \\
+&\quad\text{(by stationarity of the Poisson process)}\\
 &= e^{-\lambda h} (\lambda h)^0/0! \\
-&= e^{-\lambda h} = 1-\lambda h + o(h),
+&= e^{-\lambda h} = 1-\lambda h + o(h).
       \end{split}
     \end{equation*}
-  as follows from a standard argument in analysis that
-  $e^{-\lambda h} = 1 -\lambda h + o(h)$  for $h$ small. 
 \end{solution}
 \end{exercise}
 
 \begin{exercise}
   Show that if $N(t) \sim P(\lambda t)$, we have for small $h$,
- $\P{N(h) = n+1 \given N(0) = n} = \lambda h + o(h)$. 
+ $\P{N(t+h) = n+1 \given N(t) = n} = \lambda h + o(h)$. 
     \begin{hint} Use the previous exercise.
     \end{hint}
 \begin{solution}
   \begin{equation*}
     \begin{split}
-  \P{N(h) = n +1 | N(0) = n} 
-&= \P{N(h) = 1} = e^{-\lambda h} (\lambda h)^1/1! \\
+  \P{N(t+h) = n +1 | N(t) = n} 
+&=  \P{N(t+h) = n +1 \& N(t) =n}/\P{N(t) = n}\\
+&= \P{N(t, t+h] = 1} = e^{-\lambda h} (\lambda h)^1/1! \\
 &= (1-\lambda h + o(h))\lambda h  = \lambda h - \lambda^2 h^2 + o(h) \\
 &= \lambda h + o(h). 
     \end{split}
@@ -328,15 +341,15 @@ Recall the definition of the conditional probability $\P{A\given B} = \P{AB}/\P{
 
 \begin{exercise}
   Show that if $N(t) \sim P(\lambda t)$, we have for small $h$,
- $\P{N(h) \geq n+2 \given N(0) = n} = o(h)$.
+ $\P{N(t+h) \geq n+2 \given N(t) = n} = o(h)$.
     \begin{hint}
  Use that  $\sum_{i=2}^\infty x^i/i! = \sum_{i=0}^\infty x^i/i! - x -1 = e^x -x - 1$.
     \end{hint}
 \begin{solution}
   \begin{equation*}
     \begin{split}
-  \P{N(h) \geq n+2 | N(0) = n} 
-&= \P{N(h) \geq 2} \\
+  \P{N(t+h) \geq n+2 | N(t) = n} 
+&= \P{N(t, t+h] \geq 2} \\
 &= e^{-\lambda h} \sum_{i=2}^\infty \frac{(\lambda h)^i}{i!} 
 = e^{-\lambda h} \left(\sum_{i=0}^\infty \frac{(\lambda h)^i}{i!} - \lambda h - 1\right)\\
 &= e^{-\lambda h}(e^{\lambda h} - 1 - \lambda h) 
@@ -350,9 +363,9 @@ Recall the definition of the conditional probability $\P{A\given B} = \P{AB}/\P{
 We can also use the results of the previous parts to see that
 \begin{equation*}
     \begin{split}
-  \P{N(h) \geq n+2 | N(0) = n} 
-&= \P{N(h) \geq 2} = 1- \P{N(h)<2} \\
-&= 1 - \P{N(h)= 0} - \P{N(h)=1} \\
+  \P{N(t+h) \geq n+2 | N(t) = n} 
+&= \P{N(t, t+h] \geq 2} = 1- \P{N(t, t+h]<2} \\
+&= 1 - \P{N(t, t+h]= 0} - \P{N(t, t+h]=1} \\
 &= 1 - (1-\lambda h) + o(h) ) - (\lambda h + o(h)) \\
 &= o(h).
 \end{split}  
