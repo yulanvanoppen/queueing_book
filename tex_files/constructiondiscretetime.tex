@@ -441,17 +441,15 @@ different from mine, then your answer is just as good.
 \begin{exercise} (Queue with Blocking) Consider a queueing system
   under daily review, i.e., at the end of the day the queue length is
   measured. We assume that at the end of the day no jobs are still in
-  service. We assume that jobs that arrive at day $n$ cannot be served
-  in day $n$. The queue length cannot exceed level $K$.  Formulate a
-  set of recursions to cover this case.
+  service. We assume that jobs that arrive at day $k$ cannot be served
+  in day $k$. The queue length cannot exceed level $K$.  Formulate a
+  set of recursions to cover this case. What is the loss per period? What is the fraction of jobs lost?
   \begin{solution}
 
     All jobs that arrive such that the queue become larger than $K$
-    must be dropped. Thus, the accepted arrivals $a_n'$ in week $n$
-    are such that $a_n' = \min\{a_n, K-Q_{n-1}\}$, where $a_n$ are all
-    arrivals in period $n$.  The rest of the recursions remain the
-    same.
+    must be dropped. 
 
+First $d_k = \min\{Q_{k-1}, c_k\}$. Then, $Q_k' = Q_{k-1}+a_k-d_k$ is the queue without blocking. Then $Q_k=\min\{Q_k', K\}$ is the queue with blocking. Finally, the loss $l_k=Q_k'-Q_k$, i.e., the excess arrivals. The fraction lost is $l_k/a_k$. 
   \end{solution}
 \end{exercise}
 
@@ -958,7 +956,7 @@ any off-by-one errors. For future work, implement it in a simulator\ldots
   exercises above can also be applied to analyze inventory control
   policies. Consider a production system that can produce maximally
   $M_k$ items per week during normal working hours, and maximally
-  $N_k$ items during extra (weekend and evening hours). Let, for
+  $N_k$ items during extra (weekend and evening) hours. Let, for
   period $k$,
   \begin{align*}
     D_k &= \text{Demand in  week $k$}, \\
@@ -974,7 +972,7 @@ any off-by-one errors. For future work, implement it in a simulator\ldots
   Management needs a production plan that specifies for the next $T$
   weeks the number of items to be produced per week. Formulate this
   problem as an LP problem, taking into account the inventory
-  dynamics.  
+  dynamics.  Assume that demand must be met from on-hand inventory.
   \begin{hint}
 Formulate the decision variables/controls, the
     objective and the constraints.    
