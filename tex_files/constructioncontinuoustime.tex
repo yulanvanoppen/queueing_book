@@ -27,7 +27,7 @@ concepts, such as the arrival times of individual jobs. Specially, if
 we know that $A(s) = k-1$ and $A(t) = k$, then the arrival time $A_k$
 of the $k$th job must lie somewhere in $(s,t]$. Thus, from $\{A(t)\}$, we can define
 \begin{equation}\label{eq:27}
-  A_k = \min\{t: A(t) \geq k\},
+  A_k = \inf\{t: A(t) \geq k\},
 \end{equation}
 and set $A_0 = 0$. Once we have the set of arrival times $\{A_k\}$,
 the \recall{inter-arrival times} $\{X_k, k=1, 2, \ldots\}$ between
@@ -38,7 +38,7 @@ consecutive customers can be constructed as
 
 Often the basic data consists of the inter-arrival times
 $\{X_k; k=1,2,\ldots\}$ rather than the arrival times $\{A_k\}$ or
-the number of arrivals $\{A(t)\}$. Then we  construct the arrival
+the arrival process~$\{A(t)\}$. Then we  construct the arrival
 times as
 \begin{equation*}
   A_k = A_{k-1} + X_k,
@@ -54,7 +54,7 @@ where $\1{}$ is the indicator function. Thus, in the above we count
 all arrivals that occur up to time~$t$. Another, equivalent, way to
 define $A(t)$ is
 \begin{equation}
-  A(t) = \max\{k: A_k \leq t\}.
+  A(t) = \sup\{k: A_k \leq t\}.
 \end{equation}
 \end{subequations}
 
@@ -81,7 +81,7 @@ memorize it may be helpfull to write it like this:
 \end{exercise}
 
 \begin{exercise}
-  Would it make sense to define $A(t)$ as $\min\{k : A_k \geq t\}$?
+  Would it make sense to define $A(t)$ as $\inf\{k : A_k \geq t\}$?
   \begin{hint}
 Compare this to the definition in (\ref{eq:2}).
   \end{hint}
@@ -172,13 +172,12 @@ node[right] (c2) at (5,-1.5) {$A_{k}$}
 node[midway, fill=white] {$X_{k}$};
 \end{tikzpicture}
 \caption{Construction of the $G/G/1$ queue in continuous time. The
-  sojourn time $W_{k}$ of the $k$th job is sum of the work in queue
-  $W_{Q,k}$ at its arrival epoch $A_k$ and its service time $S_k$;
+  sojourn time~$W_{k}$ of the~$k$th job is sum of the work in queue~$W_{Q,k}$ at its arrival epoch~$A_k$ and its service time~$S_k$;
   its departure time is then $D_k=A_k + W_k$. The waiting time of job
-  $k$ is clearly equal to $W_{k-1}-X_{k}$. We also see that job $k+1$
+  $k$ is clearly equal to $W_{k-1}-X_{k}$. We also see that job~$k+1$
   arrives at an empty system, hence its sojourn time
   $W_{k+1}=S_{k+1}$. Finally, the virtual waiting time process is
-  shown by the lines with slope $-1$.}
+  shown by the lines with slope~$-1$.}
   \label{fig:waitingtimegg1}
 \end{figure}
 
@@ -190,9 +189,7 @@ because a job can only move to the server after its arrival plus the
 time it needs to wait in queue.  Note that we here explicitly use the
 FIFO assumption.
 
-Right after the job moves from the
-queue to the server, its service starts.  Thus, $D_{Q,k}$ is the epoch
-at which the service of job $k$ starts. After completing its service,
+Right after the job moves from the queue to the server, its service starts.  Thus,~$D_{Q,k}$ is the epoch at which the service of job~$k$ starts. After completing its service,
 the job leaves the system. Hence, the \recall{departure time of the
   system} is
 \begin{equation*}
@@ -207,7 +204,7 @@ see that
 \end{equation}
 where each of these equations has its own interpretation. 
 
-A bit of similar reasoning gives another recursion for $W_k$:
+A bit of similar reasoning gives another recursion for~$W_k$:
 \begin{align}
   \label{eq:59}
   W_{Q,k} &= [W_{k-1} - X_k]^+, &

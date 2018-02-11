@@ -126,13 +126,11 @@ For further discussion, if you are interested, refer to
 \end{solution}
 \end{exercise}
 
-This recursion for $Q_k$ leads to really
-interesting graphs, see Figures~\ref{fig:random_bernoulli}
-and~\ref{fig:random_walk}. We consider two examples. Let
-$a_k \sim B(0.3)$, i.e., $a_k$ is Bernoulli-distributed with success
+This recursion for $Q_k$ leads to really interesting graphs. In Figures~\ref{fig:random_bernoulli}
+ we take $a_k \sim B(0.3)$, i.e., $a_k$ is Bernoulli-distributed with success
 parameter $p=0.3$, i.e., $\P{a_k = 1} = 0.3 = 1- \P{a_k=0}$, and
-$c_k \sim B(0.4)$. As a second example, we take $a_k\sim B(0.49)$ and
-construct the random walk as
+$c_k \sim B(0.4)$. In Figure~\ref{fig:random_walk},  $a_k\sim B(0.49)$ and
+the random walk is constructed as
 \begin{equation*}
   Z_k = Z_{k-1} + 2 a_k -1.
 \end{equation*}
@@ -214,7 +212,7 @@ We can write this a bit simpler by noting that
   (\lambda t)^k (\mu t) ^{k + m - n} t^{k+m-n} 
 &=  \lambda^k t^k\mu^{k + m - n} t^{k+m-n} \\
 &= \lambda^k \mu^{k + m - n} (t\sqrt{\lambda \mu})^{2k+m-n} (\lambda\mu)^{-k + (n-m)/2} \\
-&= (\lambda/\mu)^{(n-m)2} (t\sqrt{\lambda \mu})^{2k+m-n}.
+&= (\lambda/\mu)^{(n-m)/2} (t\sqrt{\lambda \mu})^{2k+m-n}.
   \end{split}
 \end{equation*}
 With this,
@@ -281,7 +279,7 @@ complicated yet.  We therefore give up the analysis of such transient
 queueing systems and we henceforth contend ourselves with the analysis
 of queueing systems in the limit as $t\to\infty$.  This of course
 warrants two questions: what type of limit is actually meant here, and
-is such limiting situation reached in any reasonable time? We address
+what is the rate of convergence to this limiting situation? We address
 these questions subsequently.
 
 The \emph{long-run limiting behavior} of a queueing system is an
@@ -317,8 +315,7 @@ details require measure theory and more advanced probability theory
 than we can deal with in this course. However, it can all be made
 precise. 
 
-Next, as an example, we address the rate of convergence of the
-sequence of waiting times $\{W_{Q,k}\}$ to a limiting random variable
+We illustrate the rate of convergence to the limiting situation by means of an example. Specifically, we consider the sequence of waiting times $\{W_{Q,k}\}$ to a limiting random variable
 $W_Q$, where $W_{Q,k}$ is constructed according to the recursion
 Eq.~(\ref{eq:56}). Suppose that $X_k\sim U\{1,2,4\}$ and
 $S_k\sim U\{1,2,3\}$.  Starting with $W_{Q,0}=5$ we use
@@ -333,7 +330,7 @@ panel we show the results of a set of \emph{simulations} for
 increasing simulation length, up to $N=1000$ samples. Here the
 \emph{empirical distribution} for the simulation is defined as
 \begin{equation*}
-\P{W_Q\leq x} =   \frac 1n n\sum_{k=1}^n \1{W_{Q,k} \leq x},
+\P{W_Q\leq x} =   \frac 1n \sum_{k=1}^n \1{W_{Q,k} \leq x},
 \end{equation*}
 where $W_{Q,k}$ is obtained by simulation. As should be clear from the
 figure, the simulated distribution also seems to converge quite fast to
