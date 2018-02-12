@@ -135,7 +135,7 @@ Thus, if we assume that the arrival rate of customers is constant for some amoun
 \begin{exercise}
   Show that if $N(t)\sim P(\lambda t)$, $\E{N(t)} = \lambda t$.
   \begin{solution} 
-    When a random variable $N$ is Poisson distributed with parameter
+    When a random variable~$N$ is Poisson distributed with parameter
     $\lambda$,
     \begin{equation*}
       \begin{split}
@@ -177,18 +177,24 @@ Recall that the \recall{moment generating function}  of a random variable $X\geq
 
 
 \begin{exercise}
-Show that the moment generating function of a Poisson distributed random variable $N(t)$ is
-$M_{N(t)}(s)=  \E{e^{sN(t)}}  = \exp{\lambda t(e^s-1)}$.
-  \begin{hint}
-    Use that $\P{N(t)=k}=e^{-\lambda t}(\lambda t)^k/k!$
+Show that the moment generating function of a Poisson distributed random variable~$N(t)$ is
+\begin{equation*}
+M_{N(t)}(s)=  \E{e^{sN(t)}}  = \exp{\lambda t(e^s-1)}.
+\end{equation*}
+  \begin{hint}Observe first that for a random variable $X\in\N$ and some function $f$, we have that
+    \begin{equation*}
+\E{f(X)}=\sum_{n=0}^\infty f(n) \P{X=n}.      
+    \end{equation*}
+Then take the function $f(x)=e^{s x}$. Finally, use that $\P{N(t)=k}=e^{-\lambda t}(\lambda t)^k/k!$
   \end{hint}
 \begin{solution}
 Since $N(t)$ is Poisson distributed with parameter $\lambda t$, 
 \begin{equation*}
   \begin{split}
-M(s)
+M_{N(t)}(s)
 &=  \E{e^{N(t)}} \\
-&= \sum_{k=0}^\infty e^{s k} \P{N=k} \\
+&= \sum_{k=0}^\infty e^{s k} \P{N(t)=k} \\
+&\quad\text{where we use that $\E{f(N(t))}=\sum_{n=0}^\infty f(n) \P{N(t)=n}$}\\
 &= \sum_{k=0}^\infty e^{s k} \frac{(\lambda t)^k}{k!} e^{-\lambda t}  \\
 &= e^{-\lambda t} \sum_{k=0}^\infty  \frac{(e^s \lambda t)^k}{k!}  \\
 &= \exp(-\lambda t + e^s \lambda t) =\exp(\lambda t(e^s - 1)).
@@ -200,16 +206,16 @@ M(s)
 \begin{exercise}
 Use  the moment generating function of $N(t)$ to compute $\E{N(t)}$ and $\V{N(t)}$. 
 \begin{hint}
-  Recall that $M'(0) = \E{N(t)}$ and $M''(s)= \E{(N(t))^2}$. 
+  Recall that $M_{N(t)}'(0) = \E{N(t)}$ and $M_{N(t)}''(s)= \E{(N(t))^2}$. 
 \end{hint}
 \begin{solution}
 Using the expression for the moment generating function of the previous exercise,
   \begin{equation*}
-    M'(s) = \lambda t e^s \exp(\lambda t(e^s - 1)).
+    M_{N(t)}'(s) = \lambda t e^s \exp(\lambda t(e^s - 1)).
   \end{equation*}
-Hence $\E{N(t)} = M'(0) = \lambda t $. Next, 
+Hence $\E{N(t)} = M_{N(t)}'(0) = \lambda t $. Next, 
   \begin{equation*}
-    M''(s) = (\lambda t e^s + (\lambda t e^s)^2) \exp(\lambda t(e^s - 1)),
+    M_{N(t)}''(s) = (\lambda t e^s + (\lambda t e^s)^2) \exp(\lambda t(e^s - 1)),
   \end{equation*}
 hence $\E{(N(t))^2} = M''(0) = \lambda t + (\lambda t)^2$. And thus, 
 \begin{equation*}

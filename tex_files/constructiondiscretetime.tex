@@ -365,7 +365,7 @@ intakes less. Here, $e=1$ or $2$, or perhaps a larger number; it
 corresponds to the amount of control we want to exercise. When
 $Q_{n-1}>24$, i.e., larger than two weeks of intakes, do $e$ intakes
 more. Let's consider three different control levels, $e=1$, $e=2$, and
-$e=5$; thus in the last case all psychiatrists do five extra intake.
+$e=5$; thus in the last case all psychiatrists do five extra intakes.
 The previous simulation shows that it is safe to disregard the holiday
 plans, so just assume a flat service capacity of 12 intakes a week.
 
@@ -476,7 +476,7 @@ First $d_k = \min\{Q_{k-1}, c_k\}$. Then, $Q_k' = Q_{k-1}+a_k-d_k$ is the queue 
 
       We can also tag the last customer that arrives in period
       $k$. This customer will certainly have left if $m$ is such that
-      $c_k+\cdot+c_m > Q_{k-1}+a_k$.
+      $c_k+\cdot+c_m \geq Q_{k-1}+a_k$.
 
       In formulas the above comes down to the following.  A job that
       arrives in period $k$ cannot be served before period
@@ -486,7 +486,7 @@ First $d_k = \min\{Q_{k-1}, c_k\}$. Then, $Q_k' = Q_{k-1}+a_k-d_k$ is the queue 
     and it must have been served before period
     \begin{equation*}
       W_{+,k}:= \min\left\{m: \sum_{i=k}^{k+m} c_i \geq
-        Q_{k}\right\}.
+        Q_{k-1}+a_k\right\}.
     \end{equation*}
     Thus, the waiting time of jobs arriving in period $k$ must lie in
     the interval $[W_{-,k}, W_{+,k}]$.
