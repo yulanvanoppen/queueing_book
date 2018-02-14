@@ -55,18 +55,15 @@ When we use the other scheme,
 \end{exercise}
 
 
-Observe now that the relation for $Q_k$
-shares a resemblance to a random walk $\{Z_k, k=0,1,\ldots\}$ with  $Z_k$ 
+Observe now that the relation for $Q_k$ shares a resemblance to a random walk $\{Z_k, k=0,1,\ldots\}$ with  $Z_k$ 
 given by
-\begin{equation*}
+\begin{equation}\label{eq:44}
   Z_k = Z_{k-1} + a_k - c_k.
-\end{equation*}
+\end{equation}
 Clearly, $\{Z_k\}$ is `free', i.e., it can take positive and negative
 values, but $\{Q_k\}$ is restricted to the non-negative integers.  In
 this section we show how to build the queueing process $\{Q_k\}$ from
-the random walk $\{Z_k\}$ by a device called a \emph{reflection map}.
-Besides the elegance of this construction, the construction leads to
-spectacularly fast simulations. Moreover, we can use the probabilistic
+the random walk $\{Z_k\}$ by a device called a \emph{reflection map}, which gives an  elegant construction of a queueing process. Moreover, we can use the probabilistic
 tools that have been developed for the random walk to analyze queueing
 systems. One example is the distribution of the time until an
 especially large queue length is reached; these times can be
@@ -83,7 +80,7 @@ $a\wedge b = \min\{a,b\}$
 \begin{hint}
 Note first that from the expression for $Z_k$,
   $a_k - c_k = Z_k - Z_{k-1}$. Use this to get
-  $Q_k = [Q_{k-1} +Z_k- Z_{k-1}]^+$. Subtract $Z_k$, use recursion and
+  $Q_k = [Q_{k-1} +Z_k- Z_{k-1}]^+$. Subtract $Z_k$ from both sides, use recursion and
   use subsequently,
 \begin{align*}
 &\max\{\max\{a,b\}, c\} = \max\{a,b,c\}, \\
@@ -102,7 +99,7 @@ thus,
 \begin{equation*}
   Q_k - Z_{k} = \max\{Q_{k-1} - Z_{k-1}, -Z_k\}.
 \end{equation*}
-From this, and using recursion, we see that
+From this, using recursion and the hints, we see that
 \begin{equation*}
   \begin{split}
   Q_k - Z_{k} 
@@ -111,31 +108,23 @@ From this, and using recursion, we see that
 &= \max\{Q_{k-2} - Z_{k-2}, -Z_{k-1}, -Z_k\} \\
 &= \max\{Q_{0} - Z_{0}, -Z_1, \ldots, -Z_k\} \\
 &= \max\{0, -Z_1, \ldots, -Z_k\} \\
-&= - \min\{0, Z_1, \ldots, Z_k\},
+&= - \min\{0, Z_1, \ldots, Z_k\}.
   \end{split}
   \end{equation*}
-where we subsequently use that
-\begin{align*}
-&\max\{\max\{a,b\}, c\} = \max\{a,b,c\}, \\
-&Q_0 = Z_0, \\
-&\max\{-a, -b \} = -\min\{a,b\}.
-\end{align*}
- 
 For further discussion, if you are interested, refer to
   \citet{baccelli88:_sampl_m_m}.
 \end{solution}
 \end{exercise}
 
-This recursion for $Q_k$ leads to really interesting graphs. In Figures~\ref{fig:random_bernoulli}
+This recursion for $Q_k$ leads to really interesting graphs. In Figure~\ref{fig:random_bernoulli}
  we take $a_k \sim B(0.3)$, i.e., $a_k$ is Bernoulli-distributed with success
 parameter $p=0.3$, i.e., $\P{a_k = 1} = 0.3 = 1- \P{a_k=0}$, and
 $c_k \sim B(0.4)$. In Figure~\ref{fig:random_walk},  $a_k\sim B(0.49)$ and
 the random walk is constructed as
-\begin{equation*}
+\begin{equation}\label{eq:51}
   Z_k = Z_{k-1} + 2 a_k -1.
-\end{equation*}
-Thus, if $a_k=1$, the random walk increases by one step, while if
-$a_k=0$, the random walk decreases by one step. 
+\end{equation}
+Thus, if $a_k=1$, the random walk increases by one step, while if $a_k=0$, the random walk decreases by one step, so that $Z_k \neq Z_{k-1}$  always. Observe that this is slightly different from a random walk that satisfies~\eqref{eq:44}; there, $Z_{k}=Z_{k-1}$, if $a_k=c_k$.
 
 
 \begin{figure}[ht]
@@ -159,26 +148,41 @@ $a_k=0$, the random walk decreases by one step.
 \end{figure}
 
 
-Now that we have seen that random walks can be converted into queueing
-systems, we can study the transient distribution,
-i.e., the distribution as a function of time, of the random walk
-$\{Z_k\}$. 
+With~(\ref{eq:reich1}),  we see that a random walk $\{Z_k\}$ can be converted into a queueing
+process $\{Q_k\}$, and we might try to understand the transient behavior of the latter by investigating the transient behavior of the former.  For this, we first relate the random walk of the type~\eqref{eq:51} to a random walk in continuous time. 
 
-\begin{exercise}  The
-  free $M/M/1$ queue is a queueing process that can become
-  negative. Thus, it is just the random walk
+\begin{exercise}
+  Let $N_{\lambda+\mu}$ be a Poisson process with rate $\lambda+\mu$. If $\{a_k\}$ is an i.i.d. sequence of Bernoulli random variables such that $\P{a_k=1} = \lambda/(\lambda+\mu)=1-\P{a_k=0}$, show that the random variable
+  \begin{equation*}
+    N_\lambda(t) = \sum_{k=1}^\infty a_k \1{N_{\lambda+\mu}(t) \leq k},
+  \end{equation*}
+has a Poisson distribution with rate $\lambda t$. 
+\begin{solution}
+  From Exercise~\ref{ex:1} we know that thinning  a rate $\lambda$ Poisson process  with i.i.d. Bernoulli random variables with success probability $p$  leads to another Poisson process with rate $\lambda p$. In the present case, the original Poisson process has rate $\lambda+\mu$ and $p=\lambda/(\lambda+\mu)$. Hence, the random variable $N_{\lambda t}\sim P\left(\frac\lambda{\lambda+\mu} (\lambda+\mu)t\right) = P(\lambda t)$.
+\end{solution}
+\end{exercise}
+
+Similarly, let
 \begin{equation*}
-  Z(t) = Z(0) + N_\lambda(t) - N_\mu(t), 
+  N_\mu(t) = N_{\lambda+\mu}(t) - N_\lambda(t) = \sum_{k=1}^\infty (1-a_k) \1{N_{\lambda+\mu}(t) \leq k};
 \end{equation*}
-where the arrival process is a Poisson process $N_\lambda(t)$ and the
-departure process is a Poisson process $N_\mu(t)$. Show that
+but this is $N_{\lambda+\mu}(t)$ thinned by the Bernoulli random variables $\{1-a_k\}$. Let  $N_\lambda = \{N_\lambda(t)\}$ and $N_\mu = \{N_\mu(t)\}$  be the associated Poisson processes. 
+
+With the processes $N_\lambda$ and $N_\mu$ constructed above from the sequence $\{a_k\}$ and the Poisson process $N_{\lambda+\mu}$ we can define the process $Z=\{Z(t)\}$ such that
+\begin{equation*}
+  Z(t) = Z(0)+N_\lambda(t) - N_\mu(t).
+\end{equation*}
+Thus, we let $N_\lambda$ correspond to the arrival of jobs and $N_\mu$ to the departures. Observe that the times $\{T_k\}$ at which $Z$ makes jumps are such that $T_k-T_{k-1}$ have exponential distribution with mean $1/(\lambda+\mu)$. At the jump times, $Z(T_k) = Z_k$, where $Z_k$ satisfies~\eqref{eq:51} with $\P{a_k = 1} = \lambda/(\lambda+\mu)$.  We call $Z$ the \emph{free} $M/M/1$ queue as, contrary to the real $M/M/1$ queue, $Z$ can take negative values. 
+
+\begin{exercise}  
+Show that
 \begin{equation*}
     \P{Z(t)=n}_m 
 = e^{-(\lambda+\mu)t} \left(\frac\lambda\mu\right)^{(n-m)/2} \sum_{k=0}^\infty 
 \frac{(t\sqrt{\lambda\mu} )^{2k+m-n}}{k!(k+m-n)!},
 \end{equation*}
 where $\P{\cdot}_m$ means that the random walk starts at $m$, i.e.,
-$Z(0)=m$ 
+$Z(0)=m$.
 
 As an aside, the summation includes negative factorials when
 $k+m-n<0$. The tacit assumption is to take $n!\in \{\pm \infty\}$ for
@@ -189,8 +193,7 @@ It is actually not hard, even though the expression looks
   hard. Use conditioning to see that
   $\P{Z(t)=n}_m = \P{N_\mu(t) - N_\lambda(t) = m - n}$. Then write out
   the definitions of the two Poisson distributions. Assemble
-  terms. Then fiddle a bit with the terms to get
-  $(t\sqrt{\lambda\mu})$. 
+  terms. Then fiddle a bit with the terms to get~$t\sqrt{\lambda\mu}$. 
 \end{hint}
 \begin{solution}
 With this we have a characterization of the queue length process as a
@@ -225,53 +228,10 @@ With this,
 \end{exercise}
 
 
-\begin{exercise}
-  Can you relate the construction of $\{Q_k\}$ as a discrete-time
-  random walk to a continuous-time construction of the $M/M/1$ queue?
-  \begin{hint}
-Consider $Z(t)=Z(0) + N_\lambda( t) -N_\mu(t)$ at the embedded
-    set of epochs at which either $N_\lambda$ or $N_\mu$ changes. What
-    is the probability that $N_\lambda$ fires, given that one of the
-    two Poisson processes fires? Relate this to $\{a_k\}$ and
-    $\{c_k\}$.
-  \end{hint}
-    \begin{solution}
-      We use that merging two Poisson processes leads to another
-      Poisson process and that a Poisson process can be split with
-      Bernoulli random variables to form a thinned Poisson
-      process. See one of the exercises of
-      Section~\ref{sec:poisson-distribution}. 
-
-      Consider the Poisson process $N_{\lambda+\mu}(t)$. This counting
-      process has, for fixed $t$, the same distribution as
-      $N_\lambda(t)+N_\mu(t)$. Let $\{A_k\}$ be the epochs at which
-      the arrivals of $N_{\lambda+\mu}(t)$ occur. At $A_k$, throw a
-      coin that lands heads with probability $\lambda/(\lambda+\mu)$
-      and tails with probability $\mu/(\lambda+\mu)$. Set $a_k=1$ and
-      $c_k=0$ if the coin lands heads, and set $a_k=0$ and $c_k=1$ if
-      it turns tails. The processes
-      \begin{align*}
-        N_\lambda(t) &= \sum_{k=1}^\infty a_k \1{A_k \leq t},\\
-        N_\mu(t) &= \sum_{k=1}^\infty c_k \1{A_k \leq t},
-      \end{align*}
-      are our original Poisson processes.  Observe that with this
-      procedure we have established a relation between the sequences
-      $\{a_k\}$ and $\{c_k\}$ and the Poisson processes $N_\lambda$ and $N_\mu$. 
-
-      The process $Z_k = Z_{k-1}+a_k - c_k$ is a random walk in
-      discrete time and its reflection results in the discrete-time
-      $M/M/1$ queue. The process
-      $Z(t) = Z(0) + N_\lambda(t) - N_\mu(t)$, with $N_\lambda$ and
-      $N_\mu$ constructed based on the sequences $\{a_k\}$ and
-      $\{c_k\}$, is the continuous-time random walk underlying the
-      $M/M/1$ queue.
-    \end{solution}
-\end{exercise}
-
 The solution of the above exercise shows that there is no simple
 function by which we can compute the transient distribution of 
-the  simple random walk $\{Z(t)\}$. Since a queueing process is typically a
-more complicated object (as it is a constrained random walk), our
+this simple random walk $Z$. Since a queueing process is typically a
+more complicated object (as we need to obtain $Q$ from $Z$ via~\eqref{eq:reich1}), our
 hopes to finding anything simple for the transient analysis of the
 $M/M/1$ queue should not be too high. And the $M/M/1$ is but the
 simplest queueing system; other queueing systems will be more
@@ -282,7 +242,7 @@ warrants two questions: what type of limit is actually meant here, and
 what is the rate of convergence to this limiting situation? We address
 these questions subsequently.
 
-The \emph{long-run limiting behavior} of a queueing system is an
+The \emph{long-run limiting behavior} of a queueing system (i.e., the first question) is an
 important topic by itself. The underlying question is what happens if
 we simulate the system for a long time. For instance, does there exist
 a random variable $Q$ such that $Q_k\to Q$ in some sense? The answer
@@ -315,8 +275,7 @@ details require measure theory and more advanced probability theory
 than we can deal with in this course. However, it can all be made
 precise. 
 
-We illustrate the rate of convergence to the limiting situation by means of an example. Specifically, we consider the sequence of waiting times $\{W_{Q,k}\}$ to a limiting random variable
-$W_Q$, where $W_{Q,k}$ is constructed according to the recursion
+We illustrate the rate of convergence to the limiting situation (i.e., the second question) by means of an example. Specifically, we consider the sequence of waiting times $\{W_{Q,k}\}$ to a limiting random variable $W_Q$, where $W_{Q,k}$ is constructed according to the recursion
 Eq.~(\ref{eq:56}). Suppose that $X_k\sim U\{1,2,4\}$ and
 $S_k\sim U\{1,2,3\}$.  Starting with $W_{Q,0}=5$ we use
 Eq.~(\ref{eq:56}) to compute the \emph{exact} distribution of
