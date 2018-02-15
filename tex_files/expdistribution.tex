@@ -326,7 +326,7 @@ is  the density of $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$.
 \begin{hint}
  Check the result for $i=1$ by filling in $i=1$ (just to be
      sure that you have read the formula right), and compare the result
-     to the exponential density. Then write $A_i =\sum_{i=1}^k X_k$, and compute the moment
+     to the exponential density. Then write $A_i =\sum_{k=1}^i X_k$, and compute the moment
      generating function for $A_i$ and use that the interarrival times
      $X_i$ are independent. Use the moment generating function  of $X_i$.
 \end{hint}
@@ -377,9 +377,8 @@ What if we would use the moment generating function, as derived by the previous 
     \E{A_i} 
 &= \left.\frac{\d}{\d t} M_{A_i}(t)\right|_{t=0} \\
 &= \left.\frac{\d}{\d t} \left(\frac{\lambda}{\lambda-t}\right)^i\right|_{t=0} \\
-&= i \left.\left(\frac{\lambda}{\lambda-t}\right)^{i-1}\frac{\lambda}{(\lambda-t)^2}\right|_{t=0} \\
-&= \frac i\lambda \left.\left(\frac{\lambda}{\lambda-t}\right)^{i-1}\right|_{t=0} \\
-&= \frac i\lambda.
+&= i \left.\left(\frac{\lambda}{\lambda-t}\right)^{i-1}\frac{\lambda}{(\lambda-t)^2}\right|_{t=0} 
+= \frac i\lambda.
   \end{split}
 \end{equation*}
 

@@ -46,7 +46,7 @@ probability that two or more customers arrive in one such tiny interval.
 As a consequence, then, we can model the occurrence of an arrival in
 some period $i$ as a Bernoulli distributed random variable $B_i$ such
 that $p=\P{B_i =1}$ and $\P{B_i=0} = 1-\P{B_i = 1}$, and we assume that
-$\{B_i\}$ are independent. The total number of failures $N_n(t)$ that
+$\{B_i\}$ are independent. The total number of arrivals $N_n(t)$ that
 occur in $n$ intervals is then binomially distributed
 \begin{equation}\label{eq:bin}
   \P{N_n(t) = k} = {n \choose k} p^k (1-p)^{n-k}.
@@ -132,8 +132,14 @@ is easy, so that, as $n\to\infty$,  the above converges to
 Thus, if we assume that the arrival rate of customers is constant for some amount of time, e.g., an hour in a shop, and we assume that the probability of a customer arriving in some very small amount of time,  e.g., a milli second, is small, the resulting number arrival of customers is Poisson distributed. 
 
 
-\begin{exercise}
+\begin{exercise}\label{ex:2}
   Show that if $N(t)\sim P(\lambda t)$, $\E{N(t)} = \lambda t$.
+  \begin{hint}
+Apply the definition of the expectation, and in the computations use that 
+\begin{equation*}
+\sum_{n=0}^\infty n \frac{\lambda^n}{n!} = \sum_{n=1}^\infty n \frac{\lambda^n}{n!} = \sum_{n=1}^\infty \frac{\lambda^n}{(n-1)!} = \lambda \sum_{n=0}^\infty \frac{\lambda^n}{n!} = \lambda e^{\lambda}.
+\end{equation*}
+  \end{hint}
   \begin{solution} 
     When a random variable~$N$ is Poisson distributed with parameter
     $\lambda$,
@@ -154,8 +160,11 @@ Thus, if we assume that the arrival rate of customers is constant for some amoun
 
 \begin{exercise}
   Show that if $N(t)\sim P(\lambda t)$, $\V{N(t)} = \lambda t$. 
+  \begin{hint}
+Realize that $\V N = \E{N^2} - (\E N)^2$. Compute $\E{N^2}$, use Exercise~\ref{ex:2} for $(\E{N})^2$ and the hint of Exercise~\ref{ex:2} to simplify the calculations. 
+  \end{hint}
   \begin{solution} 
-Using that $\V N = \E{N^2} - (\E N)^2$, 
+
     \begin{equation*}
       \begin{split}
       \E{N^2}
@@ -163,9 +172,11 @@ Using that $\V N = \E{N^2} - (\E N)^2$,
 &= e^{-\lambda} \sum_{n=1}^\infty n \frac{\lambda^n}{(n-1)!}  \\
 &= e^{-\lambda} \sum_{n=0}^\infty (n+1) \frac{\lambda^{n+1}}{n!}  \\
 &= e^{-\lambda} \lambda \sum_{n=0}^\infty n \frac{\lambda^{n}}{n!}  +e^{-\lambda}\lambda \sum_{n=0}^\infty\frac{\lambda^{n}}{n!}  \\
+&\quad\text{now use the hint to simplify the first summation} \\
 &= \lambda^2  + \lambda.
 \end{split}
 \end{equation*}
+Hence, $\V N = \E{N^2} - (\E N)^2 = \lambda^2 + \lambda - \lambda^2 = \lambda$.
 \end{solution}
 \end{exercise}
 
@@ -179,7 +190,9 @@ Recall that the \recall{moment generating function}  of a random variable $X\geq
 \begin{exercise}
 Show that the moment generating function of a Poisson distributed random variable~$N(t)$ is
 \begin{equation*}
-M_{N(t)}(s)=  \E{e^{sN(t)}}  = \exp{\lambda t(e^s-1)}.
+M_{N(t)}(s) 
+%=  \E{e^{sN(t)}}  
+= \exp{\lambda t(e^s-1)}.
 \end{equation*}
   \begin{hint}Observe first that for a random variable $X\in\N$ and some function $f$, we have that
     \begin{equation*}
@@ -279,6 +292,26 @@ provided $\P{B}>0$.
   \end{solution}
 \end{exercise}
 
+Below, and elsewhere, we use the following efficient notation:  the function $f=o(h)$ means that $f$ is such $f(h)/h \to 0$ as $h\to 0$.  The next exercise helps you practice with this. 
+\begin{exercise}
+  If $c$ is a constant (in $\R$) and the functions $f, g =o(h)$, then $c\cdot f = o(h)$, $f+g=o(h)$, $f(h) \to 0$ as $h\to 0$, and $f\cdot g=o(h)$.  (If you believe this right away, you may skip the solution. The proof is perhaps harder than you think.) 
+ \begin{solution}
+First, 
+\begin{align*}
+\lim_{h\to 0} \frac{c f(h)}{h} &=  c \lim_{h\to 0} \frac{f(h)}{h} = 0, \; \text{as } f = o(h) \\
+\lim_h \frac{f(h) + g(h)} h &= \lim_h \frac{f(h)} h + \lim_h \frac{g(h)} h = 0.
+\end{align*}
+As a consequence, $f=o(h)\implies -f = o(h)$.  Therefore $|f| = \max\{f, -f\} = o(h)$. Furthermore, letting $f^+ = \max\{f, 0\}$, we have that $2f^+ = |f| + f$, hence $f^+=o(h)$. Likewise $f^- = f-f^+ = o(h)$. 
+Then, if $h \in(0,1)$, 
+\begin{equation*}
+  -f^-(h)/h \leq f(h) \leq f^+(h)/h, 
+\end{equation*}
+we see that $f(h) \to 0$ since $f^-, f^+=o(h)$.  Finally,   $f\cdot g = o(h)$, since
+    \begin{align*}
+\lim_h \frac{f(h)g(h)}h &= \lim_h f(h)\, \lim_h \frac{g(h)}{h} = 0.
+    \end{align*}
+  \end{solution}
+\end{exercise}
 
 
 \begin{exercise}
@@ -286,7 +319,6 @@ provided $\P{B}>0$.
   \begin{equation*}
 \P{N(t+h) = n \given N(t) = n} = 1-\lambda h + o(h).
   \end{equation*}
-\recall{Recall} that  $o(h)$ is a function  $f(h)$ such $f(h)/h \to 0$ as $h\to 0$.
     \begin{hint}
 Recall the definition of the conditional probability $\P{A\given B} = \P{AB}/\P{B}$, where we write $AB = A\cap B$. This definition only holds when $\P{B} > 0$. 
 
@@ -301,24 +333,24 @@ Recall the definition of the conditional probability $\P{A\given B} = \P{AB}/\P{
       $|x| \ll 1$.  
     \end{hint}
 \begin{solution}
-Write $N(s, t]$ for the number of arrivals in the interval $(s,t]$. First we make a few simple observations: $N(t+h)= N(t) + N(t, t+h]$, hence
+Write $N(s, t]$ for the number of arrivals in the interval $(s,t]$. First we make a few simple observations: $N(t+h]= N(t) + N(t, t+h]$, hence
 \begin{equation*}
   \begin{split}
-  \1{N(t+h)=n, N(t)=n}
-&=  \1{N(t) + N(t, t+h) = n}\1{N(t)=n}  \\
-&\1{N(t, t+h] = 0}\1{N(t)=n}.
+  \1{N(t+h)=n, N(t]=n}
+&=  \1{N(t) + N(t, t+h] = n, N(t)=n}  \\
+&\1{N(t, t+h] = 0, N(t)=n}.
   \end{split}
 \end{equation*}
 Thus, 
     \begin{equation*}
       \begin{split}
   \P{N(t+h) = n | N(t) = n} 
-&=  \P{N(t+h) = n \& N(t) = n}/\P{N(t)=n} \\
-&=  \P{N(t, t+h] = 0 \& N(t) = n}/\P{N(t)=n} \\
+&=  \P{N(t+h) = n, N(t) = n}/\P{N(t)=n} \\
+&=  \P{N(t, t+h] = 0,  N(t) = n}/\P{N(t)=n} \\
 &=  \P{N(t, t+h] = 0} \P{N(t) = n}/\P{N(t)=n}, \\
-& \quad\text{(by independence of } N(h, t+h] \text{ and } N(t))\\
+& \quad\text{(by independence of } N(t, t+h] \text{ and } N(t))\\
 &= \P{N(t, t+h] = 0} \\
-&= \P{N(0 h] = 0} \\
+&= \P{N(0, h] = 0} \\
 &\quad\text{(by stationarity of the Poisson process)}\\
 &= e^{-\lambda h} (\lambda h)^0/0! \\
 &= e^{-\lambda h} = 1-\lambda h + o(h).
@@ -384,24 +416,27 @@ process is an uncountable set of random variables $N(t)$ for all $t\geq 0$, wher
 
 \begin{exercise}
 Show that  for a Poisson process $N$, 
-$ \P{N(0,s] =1\given N(0,t]=1} = s/t$. Thus, if you know that $N(0,t]=1$, the arrival is distributed
+\begin{equation*}
+\P{N(0,s] =1\given N(0,t]=1} = \frac s t.  
+\end{equation*}
+Thus, if you know that an arrival occured during $[0,t]$, the arrival is distributed
 uniformly on the interval $[0,t]$.
 \begin{hint}
  Observe that 
   \begin{equation*}
-\{N(0,s]+N(s,t]=1\}\cap\{N(0,s]=1\} = \{1+N(s,t]=1\}\cap\{N(0,s]=1\}=\{N(s,t]=0\}\cap\{N(0,s]=1\};
+\{N(0,s]+N(s,t]=1\}\cap\{N(0,s]=1\} = \{1+N(s,t]=1\}\cap\{N(0,s]=1\}=\{N(s,t]=0\}\cap\{N(0,s]=1\}.
   \end{equation*}
-these two events are independent.
+Next use that these two events are independent.
 \end{hint}
 \begin{solution}
+From the hint,
 \begin{equation*}
   \begin{split}
   \P{N(0,s] =1\given N(0,t]=1} 
 &= \frac{\P{N(0,s] =1, N(0,t]=1}}{\P{N(0,t]=1}} \\
-&=   \P{N(0,t] =1\given N(0,s]=1} \frac{\P{N(0,s] =1}}{\P{N(0,t]=1}} \\
-&=   \P{N(0,s] + N(s,t] =1\given N(0,s]=1} \frac{e^{-\lambda s}\lambda s}{e^{-\lambda t} \lambda t} \\
-&=   \P{1 + N(s,t] =1\given N(0,s]=1} e^{-\lambda (s-t)} \frac{s}{t} \\
-&=   \P{N(s,t] =0} e^{-\lambda (s-t)} \frac{s}{t} = e^{-\lambda(t-s)} e^{-\lambda (s-t)} \frac{s}{t} = \frac st.
+&= \frac{\P{N(0,s] =1, N(s,t]=0}}{\P{N(0,t]=1}} \\
+&= \frac{\P{N(0,s] =1}\P{N(s,t]=0}}{\P{N(0,t]=1}} \\
+&= \frac{\lambda s e^{-\lambda s} e^{-\lambda (t-s)}}{\lambda t e^{-\lambda t}} = \frac s t.
   \end{split}
 \end{equation*}
 \end{solution}
@@ -450,13 +485,18 @@ In particular, for
     where we use the conditioning formula to see that
     $\P{A B_i} = \P{A \given B_i} \P{B_i}$.  Now choose practical sets
     $B_i$.  
+
+In the computations, use the standard binomial formula $(a+b)^n = \sum_{i=0}^b {n \choose i} a^{n-i} b^i$. 
   \end{hint}
     \begin{solution}
+Choose $B_i = \{N_\lambda(t) = i\}$. Then, $\{N_\lambda(t) + N_\mu(t) = n\} = \cup_{i=0}^n \{N_\lambda(t) = i\}$. (To see this, consider an example. Cats arrive at rate $\lambda$, dogs with rate $\mu$. Suppose that $5$ animals (cats plus dogs) arrived. Then the number of cats must be in the set $\{0, 1, \ldots, 5\}$, and if I know that the number of cats is, e.g., 3, then the number of dogs is 2.)
+
+
 First we show how to  use conditioning. 
   \begin{equation*}
     \begin{split}
 \P{N_\lambda(t) + N_\mu(t) = n} 
-&= \sum_{i=0}^n \P{N_\lambda(t) + N_\mu(t) = n|N_\lambda(t) = i}\P{N_\lambda(t)=i} \\
+&= \sum_{i=0}^n \P{N_\lambda(t) + N_\mu(t) = n|N_\lambda(t) = i}\P{N_\lambda(t)=i}.
 \end{split}
 \end{equation*}
 Now, if $N_\lambda(t)=i$, then 
@@ -465,14 +505,14 @@ N_\lambda(t)+N_\mu(t) = n \iff
 i+N_\mu(t) = n \iff 
 N_\mu(t) = n-i.
 \end{equation*}
-Thus,
+With this, 
   \begin{equation}\label{eq:002}
     \begin{split}
 \P{N_\lambda(t) + N_\mu(t) = n} 
 &= \sum_{i=0}^n \P{ N_\mu(t) = n-i}\P{N_\lambda(t)=i} \\
 &= \sum_{i=0}^n \frac{(\mu t)^{n-i}}{(n-i)!} \frac{(\lambda t)^i}{i!} e^{-(\mu+\lambda)t} \\
 &= e^{-(\mu+\lambda)t} \sum_{i=0}^n \frac{(\mu t)^{n-i}}{(n-i)!} \frac{(\lambda t)^i}{i!}  \\
-&= e^{-(\mu+\lambda)t}\frac 1{n!} \sum_{i=0}^n {n \choose i }(\mu t)^{n-i}(\lambda t)^i  \\
+&= e^{-(\mu+\lambda)t}\frac 1{n!} \sum_{i=0}^n {n \choose i }(\mu t)^{n-i}(\lambda t)^i, \quad\text{ (binomial formula)}   \\
 &= \frac{((\mu+\lambda)t))^n}{n!}e^{-(\mu+\lambda)t}.
     \end{split}
   \end{equation}
@@ -491,43 +531,45 @@ the distribution, and since the above expression has the same form as a Poisson 
     \end{solution}
 \end{exercise}
 
-
+\begin{comment}
+  
 \begin{exercise}
 What is the
   meaning of the event
   $\{N_\lambda(h) = 1, N_\mu(h) = 0\}\cap\{N_\lambda(h) + N_\mu(h) = 1\}$?
     \begin{solution}
- This means that, given that an event occurred, the event was an arrival, i.e., $N_\lambda$ was the first.
+There are two arrival processes, arrivals of the first type occur with rate $\lambda$, arrivals of the second  type with rate $\mu$.  If the event  $\{N_\lambda(h) + N_\mu(h) = 1\}$ is true, it tells us that precisely one arrival occured.  The event $\{N_\lambda(h) = 1, N_\mu(h) = 0\}$ means that up to time $t$, only an arrival of the first type occurred. Thus, the intersection of these events means that an arrival occured \emph{and} that this arrival was of the first type. 
     \end{solution}
 \end{exercise}
+\end{comment}
+
+Again, there are two Poisson arrival processes. Let arrivals of the first type occur with rate $\lambda$, arrivals of the second  type with rate $\mu$.  Given that an arrival occured, the next question asks you to compute  the probablity that the arrival was of the first type. 
 
 \begin{exercise} 
-Use that  $N_\lambda(t) + N_\mu(t) \sim \text{P}((\lambda + \mu)t)$ to conclude
-    \begin{equation*}
-    \P{N_\lambda(h) = 1,  N_\mu(h) = 0 | N_\lambda(h) + N_\mu(h) = 1} =
+Show that     \begin{equation*}
+    \P{N_\lambda(h) = 1 | N_\lambda(h) + N_\mu(h) = 1} =
 \frac{\lambda}{\lambda+\mu}.
     \end{equation*}
     Note that the right-hand-side does not depend on $h$, hence it
     holds for any time $h$, whether it is small or not.  
     \begin{hint}
-Suppose
-      we write $N(t)=N_\lambda(t) + N_\mu(t)$. Then
-      \begin{equation*}
-      \P{N_\lambda(h) = 1, N_\mu(h) = 0 | N(h) = 1}
-      \end{equation*}
-      is the probability that $N_\lambda(h)=1$ and $N_\mu(h)=0$ \emph{given}
-      that $N(t)=1$. In other words, the question is find out that,
-      given one of the two processes `fired', what is the probability
-      that $N_\lambda$ was the one that `fired'.
+Use the standard formula for conditional probability and that  $N_\lambda(t) + N_\mu(t) \sim \text{P}((\lambda + \mu)t)$ to conclude
+% Suppose
+%       we write $N(t)=N_\lambda(t) + N_\mu(t)$. Then
+%       \begin{equation*}
+%       \P{N_\lambda(h) = 1| N(h) = 1}
+%       \end{equation*}
+%       is the probability that $N_\lambda(h)=1$ and $N_\mu(h)=0$ \emph{given}
+%       that $N(t)=1$. Use the standard formula for condtional probabiliy. 
     \end{hint}
     \begin{solution}
   With the above:
   \begin{equation*}
     \begin{split}
-&    \P{N_\lambda(h) = 1,  N_\mu(h) = 0 | N_\lambda(h) + N_\mu(h) = 1} \\
-&= \frac{\P{N_\lambda(h) = 1,  N_\mu(h) = 0, N_\lambda(h) + N_\mu(h) = 1} }{ \P{N_\lambda(h) + N_\mu(h) = 1}} \\ 
-&= \frac{\P{N_\lambda(h) = 1,  N_\mu(h) = 0}}{ \P{N_\lambda(h) + N_\mu(h) = 1}} \\ 
-&= \frac{\P{N_\lambda(h) = 1}\P{N_\mu(h) = 0}}{ \P{N_\lambda(h) + N_\mu(h) = 1}} \\ 
+&    \P{N_\lambda(h) = 1 | N_\lambda(h) + N_\mu(h) = 1} \\
+&= \frac{\P{N_\lambda(h) = 1,  N_\lambda(h) + N_\mu(h) = 1} }{ \P{N_\lambda(h) + N_\mu(h) = 1}} \\ 
+&= \frac{\P{N_\lambda(h) = 1,  N_\mu(h) = 0}}{ \P{N_{\lambda+\mu}(h) = 1}} \\ 
+&= \frac{\P{N_\lambda(h) = 1}\P{N_\mu(h) = 0}}{ \P{N_{\lambda+\mu}(h)  = 1}} \\ 
 &= \frac{\lambda h \exp(-\lambda h) \exp(-\mu h)}{((\lambda+\mu)h)\exp{(-(\lambda+\mu)h)}}\\
 &= \frac{\lambda h \exp{(-(\lambda + \mu)h)}}{((\lambda+\mu)h)\exp{(-(\lambda+\mu)h)}}\\
 &= \frac{\lambda}{\lambda+\mu}.
@@ -587,10 +629,12 @@ Show that the Poisson process obtained by thinning the original
   \begin{hint}
 There are (at least) two ways to get this result. 
 
-Method 1:  Condition on the total number of arrivals $N(t)=m$ up to time
-      $t$. Realize that the probability that a job is of type 1 is
-      Bernoulli distributed, hence when you consider $m$ jobs in
-      total, the number of type 1 jobs is binomially distributed.
+Method 1:  Condition on the total number of arrivals $N(t)=n$ up to time
+      $t$. Then, realize that the probability that a job is of type 1 is $p$. Hence when you consider $n$ jobs in
+      total, the number $N_1(t)$ of type 1 jobs is binomially distributed. Thus, given that $n$ jobs arrived, the probability of $k$ `successes' (i.e., arrivals of type 1), is 
+      \begin{equation*}
+        \P{N_1=k \given N = n} = {n \choose k} p^k (1-p)^{n-k}.
+      \end{equation*}
 
       Again use that if the set $A$ can be split into disjoint sets
       $B_i$, i.e, $A=\bigcup_{i=1}^n B_i$, then
@@ -608,14 +652,14 @@ Method 2: You might also consider the random variable
   function of a Poisson random variable with parameter $\lambda p$.
   \end{hint}
     \begin{solution}
-Method 1: Suppose that  $N_1$ is the  thinned stream, and $N$ the total stream. Then
+Method 1: Suppose that  $N_1$ is the  thinned stream, and $N$ the total stream. Then, dropping the dependence on $t$ for the moment,
 \begin{equation*}
   \begin{split}
     \P{N_1 = k}
 &= \sum_{n=k}^\infty \P{N_1 =k, N = n} 
 = \sum_{n=k}^\infty \P{N_1 =k\given N = n}\P{N=n} \\
-&= \sum_{n=k}^\infty \P{N_1 =k\given N = n}e^{-\lambda} \frac{\lambda^n}{n!}
-= \sum_{n=k}^\infty {n \choose k} p^k (1-p)^{n-k} e^{-\lambda} \frac{\lambda^n}{n!}\\
+&= \sum_{n=k}^\infty \P{N_1 =k\given N = n}e^{-\lambda} \frac{\lambda^n}{n!}\\
+&= \sum_{n=k}^\infty {n \choose k} p^k (1-p)^{n-k} e^{-\lambda} \frac{\lambda^n}{n!}, \quad\text{by the hint}\\
 &= e^{-\lambda}\sum_{n=k}^\infty  \frac{p^k (1-p)^{n-k}}{k! (n-k)!} \lambda^n
 = e^{-\lambda} \frac{(\lambda p)^k}{k!} \sum_{n=k}^\infty  \frac{(\lambda (1-p))^{n-k}}{(n-k)!}\\
 &= e^{-\lambda} \frac{(\lambda p)^k}{k!} \sum_{n=0}^\infty  \frac{(\lambda (1-p))^{n}}{n!}
