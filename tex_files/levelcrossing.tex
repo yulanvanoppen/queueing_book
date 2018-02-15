@@ -46,7 +46,7 @@ distribution---$p(n)$ that the system contains $n$ jobs.
   If $L(t)/t \to 0$ as $t\to\infty$, can $\E{L}>0$? 
   \begin{solution}
     \begin{equation*}
-      \E{L} = \lim_{t\to\infty} \frac 1 t \int_0^t L(s) \d s \neq \lim{t\to\infty} \frac{L(t)}t.
+      \E{L} = \lim_{t\to\infty} \frac 1 t \int_0^t L(s) \d s \neq \lim_{t\to\infty} \frac{L(t)}t.
     \end{equation*}
 If $L(t)=1$ for all $t$, $\E{L} =1 $, but $L(t)/t \to 0$. 
   \end{solution}
@@ -135,20 +135,6 @@ What is the difference between $A(n,t)$ and $A(t)$?
       finite number, while $t\to\infty$, so that $A(n,t)/t \to 0$.
   \end{solution}
  \end{exercise}
-
-\begin{exercise}
-Is it always true that 
-    $\lambda = \lim_{t} \frac{A(t)}t = \lim_{t} \frac{A(n,t)}t$.
-  \begin{solution}
- When $\delta < \lambda$, $\lambda$ can still be finite, but
-    the server is simply too slow. In that case both limits can exists,
-    the first limit is positive but the second is $0$.
-
-    Note that $\delta\leq \lambda$ (always): jobs cannot depart faster
-    than they arrive. Hence, we do not have to consider the case
-    $\delta>\lambda$ in the above.
-  \end{solution}
-\end{exercise}
 
 Next, let 
 \begin{equation} \label{eq:17} 

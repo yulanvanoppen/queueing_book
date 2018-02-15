@@ -55,11 +55,12 @@ When we use the other scheme,
 \end{exercise}
 
 
-Observe now that the relation for $Q_k$ shares a resemblance to a random walk $\{Z_k, k=0,1,\ldots\}$ with  $Z_k$ 
-given by
+Observe now that the relation for $Q_k$ shares a resemblance to a random walk $\{Z_k, k=0,1,\ldots\}$ with  $Z_k$ given by
 \begin{equation}\label{eq:44}
   Z_k = Z_{k-1} + a_k - c_k.
 \end{equation}
+To see that $\{Z_k\}$ is indeed a random walk, observe that $Z$ makes  jumps of size $a_k-c_k, k=1,\ldots$, and $\{a_k-c_k\}$ is a sequence of i.i.d. random variables since, by assumption,  $\{a_k\}$ and $\{c_k\}$ are i.i.d.
+
 Clearly, $\{Z_k\}$ is `free', i.e., it can take positive and negative
 values, but $\{Q_k\}$ is restricted to the non-negative integers.  In
 this section we show how to build the queueing process $\{Q_k\}$ from

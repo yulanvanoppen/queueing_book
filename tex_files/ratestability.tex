@@ -281,22 +281,15 @@ Remember that $\{X_k\}$ and $\{S_k\}$ are sequences of i.i.d. random variables. 
 \begin{exercise}
   Show that $\E{S}/\E{X}$ is the fraction of time the server is busy.
   \begin{hint}
-Let $T_1>A_1$ be the first time after the arrival of job 1
-    that arrives at an empty system. (Observe that job 1 also arrives
-    at an empty system.)  Suppose, for ease of writing, that this job
-    is the $n+1$th job, so that up to time $T_1$ the number of
-    arrivals is $n$. Since the first job arrived at time $A_1=X_1$,
-    the first $n$ jobs arrived during $[X_1, T_1)$. The total amount
-    of service that arrived during this period is $\sum_{i=1}^n S_i$.
-    What is the fraction of time the server has been busy in this
-    cycle?
+Suppose that the $n+1$th job is the first job after time $A_1$ that sees an empty system.  Thus, job $n$ leaves an empty system behind. The very first job that arrives,  at time $A_1=X_1$, also sees an empty system. The total amount of service that arrived during $[A_1, A_{n+1})$ is $\sum_{i=1}^n S_i$.
+    What is the fraction of time the server has been busy during $[A_1, A_{n+1})$? 
   \end{hint}
   \begin{solution}
  The
-    fraction of time that the server has been busy during $[X_1, T_1)$
+    fraction of time that the server has been busy during $[A_1, A_{n+1})$
     is
         \begin{equation*}
-\frac{\sum_{i=1}^n S_i}{T_1-X_1} 
+\frac{\sum_{i=1}^n S_i}{A_{n+1}-A_1} 
 =          \frac{\sum_{i=1}^n S_i}{\sum_{i=1}^{n+1}X_i -X_1} 
 =          \frac{\sum_{i=1}^n S_i}{\sum_{i=2}^{n+1}X_i} 
         \end{equation*}
@@ -310,7 +303,9 @@ Let $T_1>A_1$ be the first time after the arrival of job 1
  \frac{ \E S }{ \E X}.
         \end{equation*}
 
-        These busy cycles occur over and over again. Thus, the
+We call periods like $[A_1, A_{n+1})$ `busy cycles', as they start with the moment the server start working, until the next arrival after the server has been idle. 
+
+Such  busy cycles occur over and over again. Thus, the
         long-run average fraction of time the server is busy must also
         be $\E S/\E X$. (For the die-hards, there is a subtle point
         here: the arrival epochs of the $G/G/1$ queue are not real
