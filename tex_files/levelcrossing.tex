@@ -57,8 +57,8 @@ Let us say that the system is in \emph{state $n$ when it contains $n$
   jobs}, c.f. Figure~\ref{fig:A_n_t}, and the system \emph{crosses}
 level $n$ when the state changes from $n$ to $n+1$, either `from
 below' when an arrival occurs, or `from above' when a departure
-occurs.  The main result we derive in this section is the rate at
-which level $n$ is crossed from below and above must match, i.e.,
+occurs.  The main result we derive in this section is that the rate at
+which level $n$ is crossed from below must match the rate at which it is crossed from above, i.e.,
 \begin{equation*}
   \lambda(n) p(n) = \mu(n+1) p(n+1),
 \end{equation*}
@@ -78,29 +78,24 @@ Define\footnote{It is common to write
   queueing systems we are concerned with processes with jumps, we need
   to be quite particular about left and right limits at jump epochs.}
 \begin{subequations}\label{eq:rates_}
-\begin{align}
-  A(n,t) &= \sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = n} \label{eq:19} \\
-\intertext{as the number of arrivals up to time
-$t$ that saw $n$ customers in the system at their arrival, c.f. Figure~\ref{fig:Y_1_t},}
-   Y(n,t) &= \int_0^t  \1{L(s) = n} \d s \label{eq:17} \\
-\intertext{as the total time the system contains n jobs during $[0,t]$, and}
-   p(n,t) &= \frac 1 t \int_0^t  \1{L(s) = n} \d s = \frac{Y(n,t)}t, \label{eq:18}
-\end{align}
-\end{subequations}
-as the fraction of time that $L(s) =n$ in $[0,t]$ (Recall that $L(t)$
-is \emph{right-continuous} in the definition of $A(n,t)$.)
+\begin{equation}\label{eq:19} 
+  A(n,t) = \sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = n}
+\end{equation}
+as the number of arrivals up to time $t$ that saw $n$ customers in the system at their arrival, c.f. Figure~\ref{fig:Y_1_t}.
 
 \begin{exercise}
   Should we  take $L(A_k-)=n$ or $L(A_k)$ in the definition of $A(n,t)$?
+  \begin{hint}
+Recall that $L(t)$ is \emph{right-continuous}.
+  \end{hint}
     \begin{solution}
     $L(t)$ is the number of customers in the system at time $t$. As
     such the function $t\to L(t)$ is \textsl{right-continuous}. The
-    definition of $L(A_k-) = \lim_{t\uparrow A_k} L(t)$, i.e., the
+    definition of $L(A_k-) = \lim_{t\uparrow A_k} L(t)$ is the
     limit from the left.  The customer therefore `sees' $L(A_k-)$ just
     before he arrives. 
 \end{solution}  
 \end{exercise}
-
 
 \begin{exercise}
 What is the difference between $A(n,t)$ and $A(t)$? 
@@ -110,7 +105,7 @@ What is the difference between $A(n,t)$ and $A(t)$?
   the jobs that see $n$ jobs in the system just before they arrive.
     \end{solution}
 \end{exercise}
-  
+
 \begin{exercise}
  Show that $A(n,t) \leq A(t)$. 
 \begin{solution}
@@ -126,6 +121,46 @@ What is the difference between $A(n,t)$ and $A(t)$?
     queue length fluctuates.
     \end{solution}
 \end{exercise}
+
+
+
+\begin{exercise}
+  Why is $ \lim_{t\to\infty} \frac{A(n,t)}t = 0$ if
+  $\lambda > \delta$, i.e., if the system is not rate-stable?
+  \begin{solution}
+ If $\lambda > \delta$, then $L(t)\to\infty$. But then there
+      must be last time, $s$ say, that $L(s) = n+1$, and $L(t) > n+1$
+      for all $t>s$. Hence, after time $s$ no job will see the system
+      with $n$ jobs. Thus $A(t,n) = A(s,n)$ for all $t>s$.  This is a
+      finite number, while $t\to\infty$, so that $A(n,t)/t \to 0$.
+  \end{solution}
+ \end{exercise}
+
+\begin{exercise}
+Is it always true that 
+    $\lambda = \lim_{t} \frac{A(t)}t = \lim_{t} \frac{A(n,t)}t$.
+  \begin{solution}
+ When $\delta < \lambda$, $\lambda$ can still be finite, but
+    the server is simply too slow. In that case both limits can exists,
+    the first limit is positive but the second is $0$.
+
+    Note that $\delta\leq \lambda$ (always): jobs cannot depart faster
+    than they arrive. Hence, we do not have to consider the case
+    $\delta>\lambda$ in the above.
+  \end{solution}
+\end{exercise}
+
+Next, let 
+\begin{equation} \label{eq:17} 
+   Y(n,t) = \int_0^t  \1{L(s) = n} \d s
+\end{equation}
+be  the total time the system contains n jobs during $[0,t]$, and
+\begin{equation} \label{eq:18}
+   p(n,t) = \frac 1 t \int_0^t  \1{L(s) = n} \d s = \frac{Y(n,t)}t,
+\end{equation}
+\end{subequations}
+be the fraction of time that $L(s) =n$ in $[0,t]$.
+  
 
 
 \begin{exercise}
@@ -252,40 +287,14 @@ Define also the limits:
 as the \emph{arrival rate in state $n$} and the \emph{long-run fraction of
   time the system spends in state $n$}. To clarify the former
 definition, observe that $A(n,t)$ counts the number of arrivals that
-see $n$ jobs in the system, while $Y(n,t)$ tracks the amount of time
-the system contains $n$ jobs. Suppose that at $T$ a job arrives that
-sees $n$ in the system. Then $A(n,T)=A(n, T-)+1$, and this job arrives
-in an interval that it tracked by $Y(n,t)$, precisely because this job
+see $n$ jobs in the system upon arrival, while $Y(n,t)$ tracks the amount of time
+the system contains $n$ jobs. Suppose that at time~$T$ a job arrives that
+sees $n$ in the system. Then $A(n,T)=A(n, T-)+1$, and this job finishes
+an interval that is tracked by $Y(n,t)$, precisely because this job
 sees $n$ in the system just prior to its arrival. Thus, just as
 $A(t)/t$ is the total number of arrivals during $[0,t]$ divided by~$t$, $A(n,t)/Y(n,t)$ is the number of arrivals that see $n$ divided by
 the time the system contains $n$ jobs.
 
-
-\begin{exercise}
-  Why is $ \lim_{t\to\infty} \frac{A(n,t)}t = 0$ if
-  $\lambda > \delta$, i.e., if the system is not rate-stable?
-  \begin{solution}
- If $\lambda > \delta$, then $L(t)\to\infty$. But then there
-      must be last time, $s$ say, that $L(s) = n+1$, and $L(t) > n+1$
-      for all $t>s$. Hence, after time $s$ no job will see the system
-      with $n$ jobs. Thus $A(t,n) = A(s,n)$ for all $t>s$.  This is a
-      finite number, while $t\to\infty$, so that $A(n,t)/t \to 0$.
-  \end{solution}
- \end{exercise}
-
-\begin{exercise}
-Is it always true that 
-    $\lambda = \lim_{t} \frac{A(t)}t = \lim_{t} \frac{A(n,t)}t$.
-  \begin{solution}
- When $\delta < \lambda$, $\lambda$ can still be finite, but
-    the server is simply too slow. In that case both limits can exists,
-    the first limit is positive but the second is $0$.
-
-    Note that $\delta\leq \lambda$ (always): jobs cannot depart faster
-    than they arrive. Hence, we do not have to consider the case
-    $\delta>\lambda$ in the above.
-  \end{solution}
-\end{exercise}
 
 
 Similarly, denoting by
