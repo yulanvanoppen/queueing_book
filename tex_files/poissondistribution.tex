@@ -129,7 +129,7 @@ is easy, so that, as $n\to\infty$,  the above converges to
   \end{solution}
 \end{exercise}
 
-Thus, if we assume that the arrival rate of customers is constant for some amount of time, e.g., an hour in a shop, and we assume that the probability of a customer arriving in some very small amount of time,  e.g., a milli second, is small, the resulting number arrival of customers is Poisson distributed. 
+Thus, if we assume that the arrival rate of customers is constant for some amount of time, e.g., an hour in a shop, and we assume that the probability of a customer arriving in some very small amount of time,  e.g., a millisecond, is small, the resulting number arrival of customers is Poisson distributed. 
 
 
 \begin{exercise}\label{ex:2}
@@ -183,7 +183,7 @@ Hence, $\V N = \E{N^2} - (\E N)^2 = \lambda^2 + \lambda - \lambda^2 = \lambda$.
 With moment generating functions we compute the mean and variance of $N(t)$ with less effort. 
 Recall that the \recall{moment generating function}  of a random variable $X\geq 0$ and $t$ a real number is defined as
 \begin{equation*}
-  M_X(t) = \E{e^{tX}}.
+  M_X(t) = \E{e^{t X}}.
 \end{equation*}
 
 
@@ -419,7 +419,7 @@ Show that  for a Poisson process $N$,
 \begin{equation*}
 \P{N(0,s] =1\given N(0,t]=1} = \frac s t.  
 \end{equation*}
-Thus, if you know that an arrival occured during $[0,t]$, the arrival is distributed
+Thus, if you know that an arrival occurred during $[0,t]$, the arrival is distributed
 uniformly on the interval $[0,t]$.
 \begin{hint}
  Observe that 
@@ -489,10 +489,13 @@ In particular, for
 In the computations, use the standard binomial formula $(a+b)^n = \sum_{i=0}^b {n \choose i} a^{n-i} b^i$. 
   \end{hint}
     \begin{solution}
-Choose $B_i = \{N_\lambda(t) = i\}$. Then, $\{N_\lambda(t) + N_\mu(t) = n\} = \cup_{i=0}^n \{N_\lambda(t) = i\}$. (To see this, consider an example. Cats arrive at rate $\lambda$, dogs with rate $\mu$. Suppose that $5$ animals (cats plus dogs) arrived. Then the number of cats must be in the set $\{0, 1, \ldots, 5\}$, and if I know that the number of cats is, e.g., 3, then the number of dogs is 2.)
+Choose the \emph{sets} $B_i$ as $\{N_\lambda(t) = i\}$. Then, the set $\{N_\lambda(t) + N_\mu(t) = n\}$ can be decomposed into the subsets $B_i$, i.e., 
+\begin{equation*}
+\{N_\lambda(t) + N_\mu(t) = n\} =  \cup_{i=0}^n \{N_\lambda(t) = i\}.
+\end{equation*}
+To see this, consider an example. Cats arrive at rate $\lambda$, dogs with rate $\mu$. Suppose that $5$ animals (cats plus dogs) arrived. Then  there are 6 possibilities to form a set with 5 animals in total: 0 cats + 5 dogs, 1 cat + 4 dogs, \ldots, 5 cats + 0 dogs. The right-hand side of the equality decomposes  the fact that $5$ animals arrive into sets in which we know that the number of cats is $0, 1, 2,\ldots, 5$. Also,  if we know the number of cats, we also know the number of dogs, as this is $5$ minus the number of cats. %Hence, the same set is created and the equality holds. 
 
-
-First we show how to  use conditioning. 
+Now that we know how to conveniently split up the set $\{N_\lambda(t) + N_\mu(t) = n\}$,  we can use conditioning: 
   \begin{equation*}
     \begin{split}
 \P{N_\lambda(t) + N_\mu(t) = n} 
@@ -538,12 +541,12 @@ What is the
   meaning of the event
   $\{N_\lambda(h) = 1, N_\mu(h) = 0\}\cap\{N_\lambda(h) + N_\mu(h) = 1\}$?
     \begin{solution}
-There are two arrival processes, arrivals of the first type occur with rate $\lambda$, arrivals of the second  type with rate $\mu$.  If the event  $\{N_\lambda(h) + N_\mu(h) = 1\}$ is true, it tells us that precisely one arrival occured.  The event $\{N_\lambda(h) = 1, N_\mu(h) = 0\}$ means that up to time $t$, only an arrival of the first type occurred. Thus, the intersection of these events means that an arrival occured \emph{and} that this arrival was of the first type. 
+There are two arrival processes, arrivals of the first type occur with rate $\lambda$, arrivals of the second  type with rate $\mu$.  If the event  $\{N_\lambda(h) + N_\mu(h) = 1\}$ is true, it tells us that precisely one arrival occurred.  The event $\{N_\lambda(h) = 1, N_\mu(h) = 0\}$ means that up to time $t$, only an arrival of the first type occurred. Thus, the intersection of these events means that an arrival occurred \emph{and} that this arrival was of the first type. 
     \end{solution}
 \end{exercise}
 \end{comment}
 
-Again, there are two Poisson arrival processes. Let arrivals of the first type occur with rate $\lambda$, arrivals of the second  type with rate $\mu$.  Given that an arrival occured, the next question asks you to compute  the probablity that the arrival was of the first type. 
+Again, there are two Poisson arrival processes. Let arrivals of the first type occur with rate $\lambda$, arrivals of the second  type with rate $\mu$.  Given that an arrival occurred, the next question asks you to compute  the probability that the arrival was of the first type. 
 
 \begin{exercise} 
 Show that     \begin{equation*}
@@ -579,7 +582,7 @@ Use the standard formula for conditional probability and that  $N_\lambda(t) + N
 \end{exercise}
 
 
-Besides merging Poisson streams, we can also consider the concept of \emph{splitting}, or \emph{thinning}, a stream into substreams, as follows.  When a customer arrives, throw a coin that lands   heads with probability $p$ and tails with $q=1-p$. When the coin   lands heads, the customer is of type 1 (e.g., a woman), otherwise of type 2 (e.g., a child).  Another   way of thinning is by modeling the stream of people passing a shop   as a Poisson process with rate $\lambda$. With probability $p$ a   person decides, independent of anything else, to enter the shop,  c.f. the figure below. The crosses at the upper line are passersby  in the street. The crosses at the lower line are the customers that   enter the shop. The outcome of the $k$th throw of a coin is   indicated by $B_k$. In the figure below,  $B_1=1$ so that the first passerby turns into a
+Besides merging Poisson streams, we can also consider the concept of \emph{splitting}, or \emph{thinning}, a stream into sub-streams, as follows.  When a customer arrives, throw a coin that lands   heads with probability $p$ and tails with $q=1-p$. When the coin   lands heads, the customer is of type 1 (e.g., a woman), otherwise of type 2 (e.g., a child).  Another   way of thinning is by modeling the stream of people passing a shop   as a Poisson process with rate $\lambda$. With probability $p$ a   person decides, independent of anything else, to enter the shop,  c.f. the figure below. The crosses at the upper line are passersby  in the street. The crosses at the lower line are the customers that   enter the shop. The outcome of the $k$th throw of a coin is   indicated by $B_k$. In the figure below,  $B_1=1$ so that the first passerby turns into a
   customer entering the shop; the second passerby does not enter as   $B_2=0$, and so on. Like this, the stream of passerby's is thinned   with Bernoulli distributed random variables.
 
   \begin{center}
@@ -617,7 +620,7 @@ node[below, fill=white] {$B_6=0$};
  
 The concept of merging and thinning are also  useful to analyze queueing
   networks. Suppose the departure stream of a machine splits into
-  two substreams, e.g., a fraction $p$ of the jobs moves to on another
+  two sub-streams, e.g., a fraction $p$ of the jobs moves to on another
   machine and the rest ($1-p$) of the jobs leaves the system. Then we
   can model the arrival stream at the second machine as a thinned
   stream (with probability $p$) of the departures of the first

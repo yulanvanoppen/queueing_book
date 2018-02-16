@@ -212,11 +212,11 @@ Since $A=1/(1+\lambda_f \E D)$,
   \begin{solution}
 Lets first compute the load. If $\rho>1$ we are in trouble.
     \begin{pyconsole}
-labda = 4
-ES0 = 10/60 # in hours
-labda_f = 1/3
-ED = 30/60 # in hours
-A = 1/(1+labda_f*ED)
+labda = 4.
+ES0 = 10./60 # in hours
+labda_f = 1./3
+ED = 30./60 # in hours
+A = 1./(1+labda_f*ED)
 A
 ES = ES0/A
 ES
@@ -225,8 +225,8 @@ rho
     \end{pyconsole}
 As $\rho<1$, the system is not in overload. Now for the queueing time.
 \begin{pyconsole}
-Ca2 = 1
-C02 = 0 # deterministic service times
+Ca2 = 1.
+C02 = 0. # deterministic service times
 Ce2 = C02 + 2*A*(1-A)*ED/ES0
 Ce2
 EW = (Ca2+Ce2)/2 * rho/(1-rho) * ES
@@ -241,13 +241,13 @@ EW + ES # sojourn time
   \begin{solution}
 Now we don't need to take availability into account: the machine never fails so $A=1$. 
     \begin{pyconsole}
-labda = 4
-ES0 = 10/60 # in hours
+labda = 4.
+ES0 = 10./60 # in hours
 rho = labda*ES0
 rho
-Ca2 = 1
-C02 = 0 # deterministic service times
-EW = (Ca2+C02)/2 * rho/(1-rho) * ES
+Ca2 = 1.
+C02 = 0. # deterministic service times
+EW = (Ca2+C02)/2 * rho/(1.-rho) * ES
 EW
 EW + ES # sojourn time
 \end{pyconsole}
