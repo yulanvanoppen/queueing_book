@@ -182,7 +182,7 @@ $\{X_k^i, k=1,2, \ldots\}$ of customer $i$ by some distribution
 function, for instance the uniform distribution. Then, with
 $A_{0}^i=0$ for all~$i$, define 
 \begin{equation}\label{eq:A_kk}
-A_k^i = A_{k-1}^i + X_k^i = \sum_{j=1}^n X_j^i,
+A_k^i = A_{k-1}^i + X_k^i = \sum_{j=1}^k X_j^i,
 \end{equation}
 as the arrival moment of the $k$th visit of customer $i$.  Now the
 shop owner `sees' the superposition of the arrivals of all
@@ -782,6 +782,7 @@ You should be aware that this sort of problem is just a regular probability
   calculus to carry out 2D integrals (or in this case 2D summations.)
     \end{hint}
 \begin{solution}
+Observe first that $\sum_{k=0}^\infty \1{m>k} = m$, since $\1{m>k}=1$ if $k<m$ and $\1{m>k} = 0$ if $k\geq m$. With this, 
 \begin{align*}
 \sum_{k=0}^\infty G(k) 
 &= \sum_{k=0}^\infty \P{B>k} 

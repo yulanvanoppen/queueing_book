@@ -205,7 +205,7 @@ Since $N(t)$ is Poisson distributed with parameter $\lambda t$,
 \begin{equation*}
   \begin{split}
 M_{N(t)}(s)
-&=  \E{e^{N(t)}} \\
+&=  \E{e^{s N(t)}} \\
 &= \sum_{k=0}^\infty e^{s k} \P{N(t)=k} \\
 &\quad\text{where we use that $\E{f(N(t))}=\sum_{n=0}^\infty f(n) \P{N(t)=n}$}\\
 &= \sum_{k=0}^\infty e^{s k} \frac{(\lambda t)^k}{k!} e^{-\lambda t}  \\
@@ -556,7 +556,7 @@ Show that     \begin{equation*}
     Note that the right-hand-side does not depend on $h$, hence it
     holds for any time $h$, whether it is small or not.  
     \begin{hint}
-Use the standard formula for conditional probability and that  $N_\lambda(t) + N_\mu(t) \sim \text{P}((\lambda + \mu)t)$ to conclude
+Use the standard formula for conditional probability and that  $N_\lambda(t) + N_\mu(t) \sim \text{P}((\lambda + \mu)t)$.
 % Suppose
 %       we write $N(t)=N_\lambda(t) + N_\mu(t)$. Then
 %       \begin{equation*}
