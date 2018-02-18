@@ -56,8 +56,11 @@ Show that the average number of jobs in an  $M/M/1$ queue is given by
 \begin{equation}\label{eq:el}
   \E L = \frac \rho{1-\rho}.
 \end{equation}
-Thus,  $\E L \sim (1-\rho)^{-1}$ for $\rho\to 1$.
+\begin{hint}
+There are various ways to get this result, one is with indicator functions, another with moment generating functions.   
+\end{hint}
   \begin{solution}
+With indicators, a bit long, but I spell out every step.
 \begin{align*}
 \E L &= \sum_{n=0}^\infty n p(n) \\
 &= \sum_{n=0}^\infty \sum_{i=1}^n \1{i\leq n} p(n)  && n=\sum_{i=1}^n \1{i\leq n}\\
@@ -76,9 +79,26 @@ Thus,  $\E L \sim (1-\rho)^{-1}$ for $\rho\to 1$.
 Note that, since the summands are positive, we can use Fubini's theorm
 to justify the interchange of the summations.
 
+With moment generating functions it is a bit shorter. 
+\begin{equation*}
+  \begin{split}
+  M_L(s) 
+&= \E{e^{s L}} = \sum_{n=0}^\infty e^{sn}p(n) = (1-\rho) \sum_n e^{sn} \rho^n \\
+&=\frac{1-\rho}{1-e^{s}\rho},
+  \end{split}
+\end{equation*}
+where we assume that $s$ is such that $e^s \rho < 1$. Then, 
+\begin{equation*}
+  M_L'(s) = (1-\rho) \frac{1}{(1-e^s\rho)^2} e^s \rho.
+\end{equation*}
+Hence, $\E L = M_L'(0) = \rho/(1-\rho)$.
   \end{solution}
 \end{exercise}
-j
+
+From the previous exercise, it follows that
+\begin{equation*}
+ \E L \sim \frac 1{1-\rho}, \quad \text{ as }\rho\to 1..
+\end{equation*}
 Let us interpret this expression. The fact
 that $\E L \sim (1-\rho)^{-1}$ for $\rho\to 1$ implies that the
 average waiting time increases very fast when $\rho\to1$.  If we want to avoid  long waiting times, this formula tells us that  situations with

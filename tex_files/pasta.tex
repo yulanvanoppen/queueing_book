@@ -14,17 +14,17 @@ Suppose the following limit exists:
 \end{equation}
 where $\pi(n)$ is the long-run fraction of jobs that observe $n$
 customers in the system at the moment of arrival.  It is natural to
-ask whether $\pi(n)$ and $p(n)$ are related, that is, whether what
+ask whether $\pi(n)$ and $p(n)$, as defined by~\eqref{eq:p(n)}, are related, that is, whether what
 customers see upon arrival is related to the time-average behavior of
-the system. In this section we will derive the famous \recall{PASTA (Poisson arrivals see time averages} condition  that ensures that  $\pi(n)=p(n)$. 
+the system. In this section we will derive the famous \recall{Poisson arrivals see time averages (PASTA)} condition  that ensures that  $\pi(n)=p(n)$. 
 
 \begin{exercise}\label{ex:8}
   To see that $p(n)$ and $\pi(n)$ can be very different, consider a
   queueing system in which the inter-arrival times $\{X_i\}$ are all
   identical to 1 hour, and the service times are all identical to
-  $S_i=59$ minutes.  What are $\rho$, $p(0)$, $p(n)$ for $n\geq 2$. What is $\pi(n)$?
+  $S_i=59$ minutes.  What are $\rho$, $p(0)$, $p(n)$ for $n\geq 1$. What is $\pi(n)$?
   What is the time average system length $\E L$? What is the queue
-  length as observed by customers?  Check Eq.~(\ref{eq:13}) for this case.
+  length as observed by customers?  
 \begin{hint}
 Check the definitions of $Y(0,t)$, $Y(1,t)$, $A(0,t)$ and so on. Make a drawing of $Y(0, t)$ and $Y(1,t)$ as functions of $t$. 
 \end{hint}
@@ -49,6 +49,7 @@ p(1)  &= \frac{59}{60}, \\
   \end{solution}
 \end{exercise}
 
+\begin{comment}
 \begin{exercise}
  Consider another (theoretical) queueing system in which each
   customer requires precisely 1 minute. At the start of each hour, 59
@@ -77,6 +78,7 @@ Note in particular $p(59)=1/60 \neq \pi(59) = 0$.
 The time average system length is $\E L = 59/60 + 58/60 + \cdots 1/60 + 0/60 = 59/2$. 
   \end{solution}
 \end{exercise}
+\end{comment}
 
 We can make some progress by rewriting $\pi(n)$ in
 the following way. Since $A(t)\to \infty$ as $t\to\infty$, it is reasonable 
@@ -91,11 +93,10 @@ that\footnote{See below for the proof.}
 where we use~\eqref{eq:19} in the last row. But, 
 \begin{equation}\label{eq:1333}
  \frac{A(n,t)}{t} 
-=   \frac{A(n,t)}{A(t)} \frac{A(t)}t 
 = \frac{A(t)}t \frac{A(n,t)}{A(t)}
 \to \lambda  \pi(n), \quad\text{as } t \to \infty, 
 \end{equation}
-where we use Eq.~\eqref{eq:3} (i.e., $A(t)/t \to \lambda$). 
+where we use Eq.~\eqref{eq:3}, i.e., $A(t)/t \to \lambda$. 
 Next, by  Eq.~\eqref{eq:21}, 
 \begin{equation*}
 \frac{A(n,t)}t = \frac{A(n,t)}{Y(n,t)}\frac{Y(n,t)}t \to \lambda(n) p(n), \quad\text{as } t \to \infty.
@@ -126,12 +127,13 @@ time-average $p(n)$, i.e., $\pi(n)=p(n)$. But, when $\pi(n)=p(n)$, the
 customer perception at arrival moments, i.e., $\pi(n)$, is the same as
 the server perception, i.e., $p(n)$.
 
-At the exercises above show, this property is not satisfied for any general queueing
-system.  However, it is true when the arrival process is
-Poisson. This fact is typically called \recall{PASTA: Poisson
-Arrivals See Time Averages}. Thus, when customers arrive in accordance to a Poisson process (so
-that the inter-arrival times are exponentially distributed), it must
-be that $\pi(n) = p(n)$, hence, for the $M/M/1$ queue, we see that
+At the exercises above show, this property is not satisfied in
+general.  However,  when the arrival process is
+Poisson we have that $\lambda(n)=\lambda$. This fact is typically called \recall{PASTA:
+  Poisson Arrivals See Time Averages}. Thus, when customers arrive in
+accordance to a Poisson process (hence the inter-arrival times are
+exponentially distributed), it must be that $\pi(n) = p(n)$, and
+for the $M/M/1$ queue,
 \begin{equation*}
   \pi(n) = p(n) = (1-\rho)\rho^n.
 \end{equation*}
@@ -284,7 +286,7 @@ while in $A(n,t)/t$ we take the limit over time. Now the observant
 reader might ask why these limits should relate at all.  The
 resolution lies in the \recall{renewal reward theorem}. This
 theorem is very useful in its own right, and states  intuitively that 
-when customers arrive at rate $\lambda$ and each customer pays an average amount $X$, then the system earns money at rate $Y=\lambda X$.  Figure~\ref{fig:renewal} provides graphical motivation about why this theorem is true; \citet{el-taha98:_sampl_path_analy_queuein_system}.
+when customers arrive at rate $\lambda$ and each customer pays an average amount $X$, then the system earns money at rate $Y=\lambda X$.  Figure~\ref{fig:renewal} provides graphical motivation about why this theorem is true; \citet{el-taha98:_sampl_path_analy_queuein_system}
 gives  a (simple) proof.
 
 \begin{theorem}[Renewal Reward Theorem, $Y=\lambda X$]
@@ -395,3 +397,8 @@ Thus, Eq.~\eqref{eq:1333} follows from the renewal reward theorem.
 \subsection*{Solutions}
 \input{ans}
 \clearpage
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../book"
+%%% End:

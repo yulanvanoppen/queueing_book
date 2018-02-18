@@ -43,7 +43,7 @@ downcrossing in this section to derive the \recall{stationary}---also known as \
 distribution---$p(n)$ that the system contains $n$ jobs. 
 
 \begin{exercise}
-  If $L(t)/t \to 0$ as $t\to\infty$, can $\E{L}>0$? 
+  If $L(t)/t \to 0$ as $t\to\infty$, can it still be true that $\E{L}>0$? 
   \begin{solution}
     \begin{equation*}
       \E{L} = \lim_{t\to\infty} \frac 1 t \int_0^t L(s) \d s \neq \lim_{t\to\infty} \frac{L(t)}t.
@@ -57,14 +57,57 @@ Let us say that the system is in \emph{state $n$ when it contains $n$
   jobs}, c.f. Figure~\ref{fig:A_n_t}, and the system \emph{crosses}
 level $n$ when the state changes from $n$ to $n+1$, either `from
 below' when an arrival occurs, or `from above' when a departure
-occurs.  The main result we derive in this section is that the rate at
+occurs.  
+
+
+\begin{figure}[th]
+  \centering
+\begin{tikzpicture}[scale=1,->,>=stealth',shorten >=1pt,auto,node distance=1.8cm,
+                    semithick]
+  \node[state] (0) {$p(0)$} ;
+  \node[state] (1) [right of=0] {$p(1)$};
+  \node[state] (2) [right of=1] {$p(2)$};
+  \node[state] (3) [right of=2] {$p(3)$};
+  \node[state] (4) [right of=3] {$\cdots$};
+
+\path 
+ (0) edge [bend left] node {$\lambda(0)$} (1)
+ (1) edge [bend left] node {$\mu(1)$} (0)
+ (1) edge [bend left] node {$\lambda(1)$} (2)
+ (2) edge [bend left] node {$\mu(2)$} (1)
+ (2) edge [bend left] node {$\lambda(2)$} (3)
+ (3) edge [bend left] node {$\mu(3)$} (2)
+ (3) edge [bend left] node {$\lambda(3)$} (4)
+ (4) edge [bend left] node {$\mu(4)$} (3);
+
+\draw[-, dotted, gray] (2.7,-2.)--(2.7,2.0) node[above, black] {level $2$};
+\draw[->] (2,1.5)  node[left] {$A(1,t)$} -- (3.5,1.5);
+\draw[<-] (2,-1.2) node[left] {$D(1,t)$} --(3.5,-1.2) ;
+
+\end{tikzpicture}
+\caption{ $A(1,t)$ counts the number of jobs up to time $t$ that saw 1
+  job in the system; thus, right after the arrival of such a job the
+  system contains 2 jobs. Similarly, $D(1,t)$ counts the number of
+  departures that leave 1 job behind.  Each time $A(1,t)$ increases by
+  one or $D(1,t)$ decreases by one, level $2$ (the dotted line
+  separating states 1 and 2) is crossed.  The number of times this
+  level is crossed from below must be the same (plus or minus 1) the
+  number of times it is crossed from above. }
+\label{fig:A_n_t}
+\end{figure}
+
+
+
+The main result we derive in this section is that the rate at
 which level $n$ is crossed from below must match the rate at which it is crossed from above, i.e.,
 \begin{equation*}
   \lambda(n) p(n) = \mu(n+1) p(n+1),
 \end{equation*}
 where $\lambda(n)$ is the arrival rate in state $n$, $p(n)$ the
 fraction of time the system is in state $n$ and $\mu(n+1)$ the
-departure rate from $n+1$. To establish this we need a few definitions
+departure rate from $n+1$. 
+
+To establish this we need a few definitions
 that are quite subtle and might seem a bit abstract, but below we will
 provide intuitive interpretations in terms of system KPIs. Once we
 have the proper definitions, the above result will follow
@@ -81,7 +124,7 @@ Define\footnote{It is common to write
 \begin{equation}\label{eq:19} 
   A(n,t) = \sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = n}
 \end{equation}
-as the number of arrivals up to time $t$ that saw $n$ customers in the system at their arrival, c.f. Figure~\ref{fig:Y_1_t}.
+as the number of arrivals up to time $t$ that saw $n$ customers in the system at their arrival.
 
 \begin{exercise}
   Should we  take $L(A_k-)=n$ or $L(A_k)$ in the definition of $A(n,t)$?
@@ -136,6 +179,32 @@ What is the difference between $A(n,t)$ and $A(t)$?
   \end{solution}
  \end{exercise}
 
+
+\begin{exercise}\label{ex:111}
+  Consider the following (silly) queueing process. At times
+  $0, 2,4, \ldots$ customers arrive, each customer requires $1$ unit
+  of service, and there is one server. What acronym would describe this queueing situation? 
+Find an expression for $A(n,t)$. 
+  \begin{hint}
+For the acronym, observe that the service times and
+    interarrival are \emph{D}eterministic and there is one server. For
+    the computation of $Y(n,t)$, make a plot of $L(s)$ as a
+    function of time for $n=1$.
+
+Make a plot of $L(s)$ for $n=1$ as a function of time. 
+  \end{hint}
+    \begin{solution}
+      It is the $D/D/1$ queue, since there is one server and
+      the interarrival times and service times are constant, i.e.,
+      \emph{D}eterministic.
+
+
+$A_k = 2k$ as jobs arrive at $t=0, 2, 4, \ldots$, hence,  $A(t) \approx t/2$ when $t\gg 0$. We also know that $L(s)=1$ if $s\in [2i, 2i+1)$ and $L(s)=0$ for $s\in[2i-1, 2i)$ for $i=0, 1, 2, \ldots$. Thus, $L(A_k-) = L(2k-)=0$. Hence, $A(0,t) \approx t/2$ for $t\gg 0$, and $A(n,t)=0$ for $n\geq 1$. 
+    \end{solution}
+
+\end{exercise}
+
+
 Next, let 
 \begin{equation} \label{eq:17} 
    Y(n,t) = \int_0^t  \1{L(s) = n} \d s
@@ -145,30 +214,15 @@ be  the total time the system contains n jobs during $[0,t]$, and
    p(n,t) = \frac 1 t \int_0^t  \1{L(s) = n} \d s = \frac{Y(n,t)}t,
 \end{equation}
 \end{subequations}
-be the fraction of time that $L(s) =n$ in $[0,t]$.
+be the fraction of time that $L(s) =n$ in $[0,t]$. Figure~\ref{fig:Y_1_t} illustrates the relation between $Y(n,t)$ and $A(n,t)$.
   
 
 
-\begin{exercise}
-  Consider the following (silly) queueing process. At times
-  $0, 2,4, \ldots$ customers arrive, each customer requires $1$ unit
-  of service, and there is one server. Find an expression for
-  $Y(n,t)$.What acronym would describe this queueing situation?
-  \begin{hint}
-For the acronym, observe that the service times and
-    interarrival are \emph{D}eterministic and there is one server. For
-    the computation of $Y(n,t)$, make make a plot of $L(s)$ as a
-    function of time for $n=1$.
-  \end{hint}
+\begin{exercise}\label{ex:112} Continuation of Exercise~\ref{ex:111}. 
+Find an expression for $Y(n,t)$. 
     \begin{solution}
-      First, it is the $D/D/1$ queue, since there is one server and
-      the interarrival times and service times are constant, i.e.,
-      \emph{D}eterministic.
-
       Next, to get $Y(n,t)$, observe that the system never contains
-      more than 1 job. Hence, $Y(n,t)=0$ for all $n\geq 2$.  Then,
-      make a plot of $L(s)$ for $n=1$ as a function of time.  function
-      of time. Then we see that
+      more than 1 job. Hence, $Y(n,t)=0$ for all $n\geq 2$.  Then we see that
       $Y(1,t) = \int_0^t \1{L(s) = 1}\d s.$ Now observe that for our
       queueing system $L(s)=1$ for $s\in[0,1)$, $L(s)=0$ for
       $s\in[1,2)$, $L(s)=1$ for $s\in[2,3)$, and so on, Thus, when
@@ -267,9 +321,9 @@ node (c3) at (6.3,2)  {};
 
 
 Define also the limits:
-\begin{align*}
+\begin{align}\label{eq:p(n)}
   \lambda(n) &= \lim_{t\to\infty} \frac{A(n,t)}{Y(n,t)}, &p(n) &=\lim_{t\to\infty} p(n,t),
-\end{align*}
+\end{align}
 as the \emph{arrival rate in state $n$} and the \emph{long-run fraction of
   time the system spends in state $n$}. To clarify the former
 definition, observe that $A(n,t)$ counts the number of arrivals that
@@ -281,14 +335,25 @@ sees $n$ in the system just prior to its arrival. Thus, just as
 $A(t)/t$ is the total number of arrivals during $[0,t]$ divided by~$t$, $A(n,t)/Y(n,t)$ is the number of arrivals that see $n$ divided by
 the time the system contains $n$ jobs.
 
+\begin{exercise}\label{ex:113} Continuation of Exercises~\ref{ex:111} and~\ref{ex:112}.  Compute $p(n)$  and $\lambda(n)$. 
+  \begin{solution}
+    From the other exercises:
+    \begin{align*}
+      \lambda(0) &\approx \frac{A(0,t)}{Y(0,t)} \approx \frac{t/2}{t/2} = 1, \\
+      \lambda(1) &\approx \frac{A(1,t)}{Y(1,t)} \approx \frac{0}{t/2} = 0, \\
+      p(0) &\approx \frac{Y(0,t)}{t} \approx \frac{t/2}{t} = \frac 1 2, \\
+      p(1) &\approx \frac{Y(1,t)}{t} \approx \frac{t/2}{t} = \frac 1 2.
+    \end{align*}
+For the rest $\lambda(n) = 0$, and $p(n)=0$, for $n\geq 2$.
+  \end{solution}
+\end{exercise}
 
-
-Similarly, denoting by
+Similar as the definition for $A(n,t)$, denote by
 \begin{equation*}
     D(n,t) = \sum_{k} \1{D_k \leq t} \1{L(D_k) = n}
   \end{equation*}
   the number of departures up to time $t$ that\emph{ leave $n$
-    customers behind}, we define
+    customers behind}. Then,  define
 \begin{equation*}
   \mu(n+1) = \lim_{t\to\infty} \frac{D(n,t)}{Y(n+1,t)},
 \end{equation*}
@@ -306,44 +371,12 @@ Should  we take $D(n-1,t)$ or  $D(n,t)$ in the definition of $\mu(n)$?
 \end{solution}
 \end{exercise}
 
-
-\begin{figure}[th]
-  \centering
-\begin{tikzpicture}[scale=1,->,>=stealth',shorten >=1pt,auto,node distance=1.8cm,
-                    semithick]
-  \node[state] (0) {$p(0)$} ;
-  \node[state] (1) [right of=0] {$p(1)$};
-  \node[state] (2) [right of=1] {$p(2)$};
-  \node[state] (3) [right of=2] {$p(3)$};
-  \node[state] (4) [right of=3] {$\cdots$};
-
-\path 
- (0) edge [bend left] node {$\lambda(0)$} (1)
- (1) edge [bend left] node {$\mu(1)$} (0)
- (1) edge [bend left] node {$\lambda(1)$} (2)
- (2) edge [bend left] node {$\mu(2)$} (1)
- (2) edge [bend left] node {$\lambda(2)$} (3)
- (3) edge [bend left] node {$\mu(3)$} (2)
- (3) edge [bend left] node {$\lambda(3)$} (4)
- (4) edge [bend left] node {$\mu(4)$} (3);
-
-\draw[-, dotted, gray] (2.7,-2.)--(2.7,2.0) node[above, black] {level $2$};
-\draw[->] (2,1.5)  node[left] {$A(1,t)$} -- (3.5,1.5);
-\draw[<-] (2,-1.2) node[left] {$D(1,t)$} --(3.5,-1.2) ;
-
-\end{tikzpicture}
-\caption{ $A(1,t)$ counts the number of jobs up to time $t$ that saw 1
-  job in the system; thus, right after the arrival of such a job the
-  system contains 2 jobs. Similarly, $D(1,t)$ counts the number of
-  departures that leave 1 job behind.  Each time $A(1,t)$ increases by
-  one or $D(1,t)$ decreases by one, level $2$ (the dotted line
-  separating states 1 and 2) is crossed.  The number of times this
-  level is crossed from below must be the same (plus or minus 1) the
-  number of times it is crossed from above. }
-\label{fig:A_n_t}
-\end{figure}
-
-
+\begin{comment}
+\tbd
+\begin{exercise} Continuation of Exercises~\ref{ex:111},~\ref{ex:112}, and~\ref{ex:113}.  Compute 
+$D(n,t)$ and $\mu(n+1)$ for $n\geq 0$.
+\end{exercise}
+\end{comment}
 
 Observe that customers arrive and depart as single units. Thus, if
 $\{T_k\}$ is the ordered set of arrival and departure times of the
@@ -375,6 +408,13 @@ Combining this with~\eqref{eq:15} we arrive at \recall{the
 \begin{equation}\label{eq:12}
   \lambda(n) p(n) = \mu(n+1)p(n+1).
 \end{equation}
+
+\begin{exercise} Continuation of Exercises~\ref{ex:111},~\ref{ex:112}, and~\ref{ex:113}.  Compute 
+$\lambda(n) p(n)$ for $n\geq 0$.
+\begin{solution}
+  $\lambda(0)p(0)=1\cdot 1/2 = 1/2$, $\lambda(n)p(n)= 0$ for $n>1$, as $\lambda(n)=0$ for $n>0$.
+\end{solution}
+\end{exercise}
 
 This result turns out to be exceedingly useful. Once we can specify
 $\lambda(n)$ and $\mu(n)$, we can compute the long-run fraction of
@@ -541,13 +581,13 @@ probabilistic results.
 \node[block, below=1cm of level] (An) {$|A(n,t)-D(n,t)|\leq 1$}
 edge[pil,<-] (level); 
 
-\node[block, left=1.5cm of An] (A) {$|A(t)-D(t)|\leq 1$} 
+\node[block, left=1.5cm of An] (A) {$A(t)-D(t)=L(t)$} 
 edge[pil,<-] (level); 
 
 \node[block, right=1.5cm of An] (Anm) {$|A(m,n,t)-D(n,t)|\leq 1$}
 edge[pil,<-] (level); 
 
-\node[block, below=1cm of A] (At) {$\frac{A(t)}t \approx \frac{D(t)}t$} 
+\node[block, below=1cm of A] (At) {$\frac{A(t)}t \approx \frac{D(t)}t$ if $\frac{L(t)}t \to 0$} 
 edge[pil,<-] (A); 
 
 \node[block, below=1.5cm of At] (lambda) {$\lambda=\delta$} 

@@ -13,7 +13,7 @@ modeled and analyzed by making a judicious choice of $\lambda(n)$ and
 $\mu(n)$ in~\eqref{eq:25}, to wit,
 $ \lambda(n) p(n) = \mu(n+1)p(n+1)$. For these queueing systems we
 just present the results. In the exercises we ask you to derive the
-formulas.
+formulas---the main challenge is not to make computational errors. 
 
 For the $M/M/1/K$, i.e., a system that cannot contain more than $K$ jobs, take
   \begin{align*}
@@ -267,12 +267,8 @@ service rate $\mu$ (thus, at most 2 jobs can be in service and 1 in queue.)
    about $\mu(k)$ for $k=2$ or $k=3$.
   \end{hint}
   \begin{solution}
-    \begin{enumerate}
-    \item Use this figure. Make sure you understand why $\mu(2)=2\mu$ and so on. 
-
-
+ Use the figure below. Make sure you understand why $\mu(2)=2\mu$ and so on. 
     \begin{center}
-
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.8cm,
                     semithick]
   \node[state] (0) {$p(0)$} ;
@@ -298,7 +294,7 @@ From this figure it follows right away that:
    \lambda p(2)  &= 2\mu p(3)\\
     \end{align*}
 
-  \item From the above, with $\rho=\lambda/\mu$: 
+Then,  from the above, with $\rho=\lambda/\mu$: 
     \begin{align*}
       p(1) &= \rho p(0), \\
       p(2) &= (\rho/2) p(1) = (\rho^2/2) p(0), \\
@@ -312,10 +308,8 @@ hence,
 \begin{equation*}
 p(0) = (1+\rho + \rho^2/2 + \rho^3/4)^{-1}.
 \end{equation*}
-\end{enumerate}
    \end{solution}
 \end{exercise}
-
 
 
 \begin{exercise}(Multi-server queue with blocking) Consider the
@@ -639,6 +633,7 @@ Implement the formulas for $\E{L_Q(M/M/3)}$ for the $M/M/3$ queue in
   to $\E{L_Q(M/M/1)}$ for the fast $M/M/1$ case.  Make plots of
   $\E{L_Q(M/M/3)}$ and $\E{L(M/M/3)}$ as functions of $\rho$.
     \end{hint}
+
   \begin{solution}
 I am going to implement the formulas of Eq.~(\ref{eq:9}) in python. First the results for the $M/M/3$ queue.
 
