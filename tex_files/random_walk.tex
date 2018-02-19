@@ -155,7 +155,7 @@ process $\{Q_k\}$, and we might try to understand the transient behavior of the 
 \begin{exercise}
   Let $N_{\lambda+\mu}$ be a Poisson process with rate $\lambda+\mu$. If $\{a_k\}$ is an i.i.d. sequence of Bernoulli random variables such that $\P{a_k=1} = \lambda/(\lambda+\mu)=1-\P{a_k=0}$, show that the random variable
   \begin{equation*}
-    N_\lambda(t) = \sum_{k=1}^\infty a_k \1{N_{\lambda+\mu}(t) \leq k},
+    N_\lambda(t) = \sum_{k=1}^\infty a_k \1{k \leq N_{\lambda+\mu}(t)},
   \end{equation*}
 has a Poisson distribution with rate $\lambda t$. 
 \begin{solution}
