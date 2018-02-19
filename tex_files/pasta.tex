@@ -18,13 +18,8 @@ ask whether $\pi(n)$ and $p(n)$, as defined by~\eqref{eq:p(n)}, are related, tha
 customers see upon arrival is related to the time-average behavior of
 the system. In this section we will derive the famous \recall{Poisson arrivals see time averages (PASTA)} condition  that ensures that  $\pi(n)=p(n)$. 
 
-\begin{exercise}\label{ex:8}
-  To see that $p(n)$ and $\pi(n)$ can be very different, consider a
-  queueing system in which the inter-arrival times $\{X_i\}$ are all
-  identical to 1 hour, and the service times are all identical to
-  $S_i=59$ minutes.  What are $\rho$, $p(0)$, $p(n)$ for $n\geq 1$. What is $\pi(n)$?
-  What is the time average system length $\E L$? What is the queue
-  length as observed by customers?  
+
+\begin{comment}
 \begin{hint}
 Check the definitions of $Y(0,t)$, $Y(1,t)$, $A(0,t)$ and so on. Make a drawing of $Y(0, t)$ and $Y(1,t)$ as functions of $t$. 
 \end{hint}
@@ -48,6 +43,7 @@ p(1)  &= \frac{59}{60}, \\
   arrive when the server is free.
   \end{solution}
 \end{exercise}
+  \end{comment}
 
 \begin{comment}
 \begin{exercise}
@@ -110,12 +106,23 @@ from which  follows our final result:
   \lambda(n) = \lambda \iff \pi(n) = p(n), 
 \end{equation*}
 
+\begin{exercise}\label{ex:8} Show that for the case of Exercises~\ref{ex:111} and~\ref{ex:112}.  
+$\pi(0)=1$, $\pi(n)=0$, for $n>0$.
+
+\begin{solution}
+  All arrivals see an empty system. Hence $A(0,t)/A(t) \approx (t/2)/(t/2) = 1$, and $A(n,t)=0$ for $n>0$. Thus, $\pi(0) = \lim_t A(0,t)/A(t) = 1$ and $\pi(n)=0$ for $n>0$. Recall from the other exercises that $p(0)=1/2$. Hence, time average statistics are not the same as statistics at arrival moments. 
+\end{solution}
+
+\end{exercise}
+
 \begin{exercise}
-  Check that this relation holds for the system of Exercise~\ref{ex:8}
+  Check that~(\ref{eq:13})  holds for the system of Exercise~\ref{ex:8}
   \begin{solution}
- We have to check that $\lambda(n) p(n) = \lambda \pi(n)$.  First
-  take $n=0$. By the above: $\lambda(0) p(0) = 60\cdot 1/60 = 1$,
-  $\lambda \pi(0) = 1\cdot 1 = 1$.  For $n=1$: $\lambda(1) p(1) = 0$. Since $\pi(1)=0$ the result is again OK for $n=1$. And so on .
+From the relevant previous exercises, $\lambda = \lim_t A(t)/t = 1/2$. $\lambda(0)=1$, $p(0)=1/2$, and $\pi(0)=1$. Hence,
+\begin{equation*}
+  \lambda \pi(0) = \lambda(0) p(0) \implies  \frac 1 2 \times 1 = 1\times \frac 1 2.
+\end{equation*}
+For $n>0$ its easy, everything is 0.
   \end{solution}
 \end{exercise}
 

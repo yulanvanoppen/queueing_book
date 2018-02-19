@@ -373,12 +373,6 @@ $D(t)$ as functions of $t$, then the difference $L(t)$ between the
 graphs of $A(t)$ and $D(t)$ tracks the number in the system, see
 Figure~\ref{fig:atltdt}. 
 
-The number in the system as seen by the $k$th arrival is defined as
-\begin{equation}
-  \label{eq:Lk}
-  L_k = L(A_k), 
-\end{equation}
-since the $k$th job arrives at time $A_k$ and $\{L(s)\}$ is right-continuous.
 
 
 \begin{figure}[t]
@@ -499,7 +493,7 @@ Why don't we need separate notation for $D_s(t)$, the number
 \end{exercise}
 
 
-\begin{exercise} Show that $L(t) = A(t)-D(t)$ implies that 
+\begin{exercise} Show that $L(t) = A(t)-D(t)$ and the system starts empty, implies that 
 $L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}$.
   \begin{hint}
   Use Boolean algebra.  Write, for notational ease,
@@ -564,7 +558,15 @@ $L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}$.
 
 
 
-\begin{exercise} Can you derive the following (algorithmic efficient) procedure to
+\begin{exercise} 
+Define the number in the system as seen by the $k$th arrival  as
+\begin{equation}
+  \label{eq:Lk}
+  L_k = L(A_k-),
+\end{equation}
+where $L(A_k-) = \lim_{h\downarrow 0} L(A_k - h)$. (Observe that the $k$th job arrives at time $A_k$ and $\{L(s)\}$ is right-continuous.)
+
+Can you derive the following (algorithmic efficient) procedure to
     compute the number of jobs in the system as seen by arrivals,
   \begin{equation*}
     L_k = L_{k-1}+1 - \sum_{i= k-1 - L_{k-1}}^{k-1} \1{D_i< A_k}?
@@ -790,3 +792,8 @@ of putting a minus sign at the right place)?
 \subsection*{Solutions}
 \input{ans}
 \clearpage
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../book"
+%%% End:
