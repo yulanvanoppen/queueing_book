@@ -40,13 +40,13 @@ reason we colloquially say that $\E W$ is the average waiting time as
 Finally, the (sample) \recall{average number of jobs} in the system as seen by
 arrivals is given by
 \begin{equation}\label{eq:EQ}
-\E L =  \lim_{n\to\infty}\frac 1 n \sum_{k=1}^n L_k,
+\E L =  \lim_{n\to\infty}\frac 1 n \sum_{k=1}^n L(A_k-),
 \end{equation}
-where $L_k = L(A_k)$, i.e., the number in system at the arrival epoch
+where $L(A_k-)$, i.e., the number in system at the arrival epoch
 of the $k$th job.  The \recall{distribution of $\{L(t)\}$ as seen by
   customers upon arrival}, is
 \begin{equation}\label{eq:Qm}
-\P{L\leq m} = \lim_{n\to\infty} \frac 1 n \sum_{k=1}^n \1{L_k \leq m}.
+\P{L\leq m} = \lim_{n\to\infty} \frac 1 n \sum_{k=1}^n \1{L(A_k-) \leq m}.
 \end{equation}
 
 
@@ -54,7 +54,7 @@ of the $k$th job.  The \recall{distribution of $\{L(t)\}$ as seen by
  Assume that $X_k = 10$ minutes and $S_k = 11$ minutes for all
     $k$, i.e., $X_k$ and $S_k$ are deterministic and constant. What
     are $\lambda$ and $\mu$?  Compute $A_k$, $W_k$, $D_k$ and
-    $L_k$. How do these numbers behave as a function of $k$?
+    $L(A_k-)$. How do these numbers behave as a function of $k$?
   \begin{solution}
  $\lambda=6$ per hour, and $\mu=60/11$ per hour. Note that
       $\mu < \lambda$. $A_0 = 0$, $A_1=10$, $A_2=20$, etc., hence
@@ -86,7 +86,7 @@ average at sampling (observation) moments. Thus, if we simulate the
 queueing system up to time $t$, the \recall{time-average number of
 jobs in the system} is given by
 \begin{equation}\label{eq:11}
-\mathcal{L}(t) = \frac 1 t\int_0^t L(s)\d s =  \frac 1 t\int_0^t (A(s)-D(s)) \d s,
+\frac 1 t\int_0^t L(s)\d s =  \frac 1 t\int_0^t (A(s)-D(s)) \d s,
 \end{equation}
 where we use that $L(t)=A(t) - D(t) + L(0)$ is the total number of jobs in
 the system at time $t$ and $L(0)=0$, c.f. Figure~\ref{fig:atltdt}.  Observe from the second equation that $\int_0^t L(s)\d s$ is the area enclosed between the graphs of $\{A(t)\}$
@@ -98,7 +98,7 @@ and $\{D(t)\}$. Assuming the limit exists for $t\to\infty$, we define
 Observe that, notwithstanding that the symbols are the same, this
 expectation need not be the same as~\eqref{eq:EQ}: in general,
 \begin{equation*}
-  \lim_{t\to\infty} \frac 1 t\int_0^t L(s)\, \d s \neq   \lim_{n\to\infty}\frac 1n  \sum_{k=1}^n L_k.
+  \lim_{t\to\infty} \frac 1 t\int_0^t L(s)\, \d s \neq   \lim_{n\to\infty}\frac 1n  \sum_{k=1}^n L(A_k-).
 \end{equation*}
 
 \begin{exercise}
@@ -109,7 +109,7 @@ Consider a queueing system with constant service and interarrival times.
 \begin{solution}
   Take $X_k = 10$ and $S_k = 10-\epsilon$ for some tiny
   $\epsilon$. Then $L(t) = 1$ nearly all of the time. In fact,
-  $\E L = 1-\epsilon/10$. However, $L_k=0$ for all $k$.
+  $\E L = 1-\epsilon/10$. However, $L(A_k-)=0$ for all $k$.
 \end{solution}
 \end{exercise}
 

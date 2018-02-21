@@ -458,7 +458,7 @@ $L(s)$ is an integer),
 \end{equation*}
 With this we can write for the time-average number of jobs in the system
 \begin{equation}\label{eq:1}
-  \mathscr{L}(t) = \frac 1 t \int_0^t \left(\sum_n n\, \1{L(s) = n}\right) \d s
+\frac 1 t \int_0^t L(s) \d s = \frac 1 t \int_0^t \left(\sum_n n\, \1{L(s) = n}\right) \d s
 = \sum_n \frac n t \int_0^t   \1{L(s) = n} \d s,
 \end{equation}
 where we interchange the integral and the summation\footnote{This is
@@ -466,16 +466,15 @@ where we interchange the integral and the summation\footnote{This is
   interested reader should check Fubini's theorem.}.  It then follows
   from Eq.~(\ref{eq:18}) that
 \begin{equation*}
-  \mathscr{L}(t) =  \sum_n n\, p(n,t).
+\frac 1 t \int_0^t L(s) \d s =  \sum_n n\, p(n,t).
 \end{equation*}
 Finally, assuming that the limit $p(n,t) \to p(n)$ exists as
 $t\to\infty$ (and that the summation and limit can be interchanged in
 the above), it follows that 
 \begin{equation*}
-  \mathscr{L}(t) \to  \sum_{n=0}^\infty n p(n) = \E L, \text{ as } t \to \infty.
+\frac 1 t \int_0^t L(s) \d s \to  \sum_{n=0}^\infty n p(n) = \E L, \text{ as } t \to \infty.
 \end{equation*}
-In words, $ \mathscr{L}(t)$ converges to the long-run time average
-$\E L$ of the number in the system. In a loose sense we can say that
+In a loose sense we can say that
 $\E L$ is the average number in the system as perceived by the
 \emph{server}. (Recall that this is not necessarily the same as what
 \emph{arriving} jobs `see').  Similarly, the probability that the

@@ -150,7 +150,7 @@ jobs in queue perceived by arriving customers is also the
 \end{exercise}
  
 \begin{exercise}($M/G/1$)
-  Use the previous problem to show that 
+  Use the previous problem and Little's law to derive that 
 \begin{equation}\label{eq:35}
   \E{W_Q} = \frac{\E{S_r}}{1-\rho} = \frac{\rho}{1-\rho} \E{S_r\given S_r>0}.
 \end{equation}
@@ -238,7 +238,7 @@ Think about the consequences of memoryless service times.
   \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}($M/M/1$)
 Show that 
 \begin{equation}\label{eq:wqes}
   \E{W_Q} = \E L \E S = \frac{\rho^2}{1-\rho} \frac 1 \lambda,
@@ -507,9 +507,9 @@ distribution.
   \end{solution}
 \end{exercise}
 
-
+\begin{comment}
 \begin{exercise}
-  An $M/M/2$ queueing system is very heavily utilized, with an arrival rate of 11 customers per hour, and a  service rate of 6 customers per hour per server.
+Consider an $M/M/2$ queueing system that is very heavily utilized, with an arrival rate of 11 customers per hour, and a  service rate of 6 customers per hour per server.
  Determine $\E{L_Q}$ and $\E{W_Q}$. Compare your solution to an $M/M/1$ queue with $\rho=11/12$. Why are your answers similar or different?
   \begin{solution}
 
@@ -570,77 +570,9 @@ ES
 \end{pyconsole}
     \end{solution}
 \end{exercise}
+\end{comment}
 
 
-We will use the following result to derive algorithms to compute the
-performance measures for the analysis of closed-queueing network.
-\begin{exercise}
-  Generalize the single-server relation
-  $\E{W_Q} = \rho \E{S_r\given S_r>0} + \E{L_Q} \E S$ to the $M/M/c$
-  multi-server queue. 
-\begin{hint}
-Interpret each component at the right hand side of the equation
-    and generalize it to a multi-server queueing system. 
-\end{hint}
-  \begin{solution}
-    Recall that for the $M/M/1$ queue, $\E{S_r\given S_r>0} = 1/\mu$.
-    Applying Little's law to the queue, we have that
-    $\lambda \E{W_Q} =\ E{L_Q}$, so that it follows that
-    \begin{equation*}
-    \E{W_Q} = \rho \E{S_r \given S_r > 0} + \E{L_Q}\E S = \frac{\rho}\mu + \rho \E{W_Q},
-    \end{equation*}
-    where we use that $\rho=\lambda \E S$. In words, the first term
-    (at the right-hand side) is the probability to find a job in
-    service, which is $\rho$ times the expected remaining service
-    time if the server is busy, which is $1/\mu$ for exponentially
-    distributed processing times. The second term is the probability
-    to find the server busy, so that the arriving job has to wait,
-    times the expected waiting time. 
-
-    For the $M/M/c$ queue we now derive the corresponding expressions
-    for this first and second term.
-
-    For the first, note that the probability that the job has to wait
-    is the same as the probability that all servers are occupied at
-    arrival. This is, clearly, $\sum_{k=c}^\infty p(k)$. If all
-    servers are busy, the expected time until a service completion is
-    $1/c\mu$, since there are $c$ servers and the expected time to
-    completion is $1/\mu$ for each individual server. Thus, the time
-    until the first departure is the minimum of the remaining services
-    at each of the servers. This has expectation $1/c\mu$. Thus, for the
-    $M/M/c$ queue
-    \begin{equation*}
-\rho\E{S_r\given S_r>0}  = \sum_{k=c}^\infty p(k) \frac 1{c\mu}.
-    \end{equation*}
-
-    For the second term, since there are $c$ servers, jobs depart from
-    the queue (hence enter service) at rate $c\mu$. The expected time
-    in queue when there are $n$ jobs in front, is therefore
-    $n/c\mu$. Thus, on average, since the expected queue length is $\E{L_Q}=\sum_{k=c}^\infty (k-c)p(k)$, we 
-get 
-\begin{equation*}
-  \E{L_Q}\frac{\E S}c = \sum_{k=c}^\infty \frac{k-c}{c\mu}p(k).
-\end{equation*}
-
-All in all,
-\begin{equation*}
-  \begin{split}
-  \E{W_Q} 
-&= \rho\E{S_r\given S_r>0}  +   \E{L_Q}\frac{\E S}c \\
-&= \sum_{k=c}^\infty p(k)\frac{1+k-c}{c\mu}.
-  \end{split}
-\end{equation*}
-
-We can also give this a natural interpretation. How many jobs have to
-leave before the service of the arriving job can start? Well, the
-entire queue must be cleared plus one job in service. Thus, if there
-are $k-c$ job in queue, we have to wait for these jobs to finish, plus
-one of the jobs in service. 
-
-Observe also that, by PASTA, we have $\pi(k) = p(k)$, so that the
-arriving job also sees $p(k)$.
-  \end{solution}
-\end{exercise}
 
 
 \begin{exercise}(Hall 5.2) \label{exer: Hall} After observing a single server queue for
@@ -1060,7 +992,7 @@ sqrt(var_q)
  Calculate the steady state probabilities. Next,  what is the average arrival rate? Finally,
  Determine $\E L$, $\E{L_Q}$, $\E W$ and $\E{W_Q}$.
   \begin{solution}
-
+First the service rates.
 \begin{pyconsole}
 import numpy as np
 labda = [10., 15., 15., 10., 5.]

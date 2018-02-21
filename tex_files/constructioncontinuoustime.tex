@@ -562,43 +562,43 @@ $L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}$.
 Define the number in the system as seen by the $k$th arrival  as
 \begin{equation}
   \label{eq:Lk}
-  L_k = L(A_k-),
+  L(A_k-),
 \end{equation}
 where $L(A_k-) = \lim_{h\downarrow 0} L(A_k - h)$. (Observe that the $k$th job arrives at time $A_k$ and $\{L(s)\}$ is right-continuous.)
 
 Can you derive the following (algorithmic efficient) procedure to
     compute the number of jobs in the system as seen by arrivals,
   \begin{equation*}
-    L_k = L_{k-1}+1 - \sum_{i= k-1 - L_{k-1}}^{k-1} \1{D_i< A_k}?
-  \end{equation*} Why do we take $i=k-1-L_{k-1}$ in  the sum, and not $i=k-2-L_{k-1}$?
+    L(A_k-) = L(A_{k-1}-)+1 - \sum_{i= k-1 - L(A_{k-1}-)}^{k-1} \1{D_i< A_k}?
+  \end{equation*} Why do we take $i=k-1-L(A_{k-1}-)$ in  the sum, and not $i=k-2-L(A_{k-1}-)$?
 % \hint{ Realize that $L_k = k - 1 - D(A_k)$. 
 % what happens to job k-1?
 % }
 \begin{solution}
-  Let $L_{k} = L(A_{k}-)$, i.e., the number of jobs in the system as
-  `seen by' job $k$. It must be that $L_{k}=k-1 - D(A_{k})$. To see
+  Let $ L(A_{k}-)$, i.e., the number of jobs in the system as
+  `seen by' job $k$. It must be that $L(A_{k}-)=k-1 - D(A_{k})$. To see
   this, assume first that no job has departed when job $k$
   arrives. Then job $k$ must see $k-1$ jobs in the system. In general,
   if at time $A_k$ the number of departures is $D(A_k)$, then the
-  above relation for $L_k$ must hold. Applying this to job $k-1$ we get that $L_{k-1} = k-2 - D(A_{k-1})$. 
+  above relation for $L(A_k-)$ must hold. Applying this to job $k-1$ we get that $L(A_{k-1}-) = k-2 - D(A_{k-1})$. 
 
-  For the computation of $L_k$ we do not have to take the departures
+  For the computation of $L(A_k-)$ we do not have to take the departures
   before $A_{k-1}$ into account as these have already been
-  `incorporated in' $L_{k-1}$.  Therefore,
+  `incorporated in' $L(A_{k-1}-)$.  Therefore,
   \begin{equation*}
-    L_k = L_{k-1} + 1 - \sum_{i= k-1 - L_{k-1}}^{k-1} \1{D_i< A_k}.
+    L(A_k-) = L(A_{k-1}-) + 1 - \sum_{i= k-1 - L(A_{k-1}-)}^{k-1} \1{D_i< A_k}.
   \end{equation*}
 
     Suppose $L_{k-1}=0$, i.e., job $k-1$ finds an empty system at its
     arrival and $D_{k-1}>A_{k}$, i.e., job $k-1$ is still in the
-    system when job $k$ arrives. In this case, $L_{k}=1$, which checks
-    with the formula.  Also, if $L_{k-1}=0$ and $D_{k-1}< A_k$ then
-    $L_k = 0$. This also checks with the formula. 
+    system when job $k$ arrives. In this case, $L(A_{k}-)=1$, which checks
+    with the formula.  Also, if $L(A_{k-1}-)=0$ and $D_{k-1}< A_k$ then
+    $L(A_k-) = 0$. This also checks with the formula. 
 
-    The reason to start at $k-1-L_{k-1}$ is that the number in the
+    The reason to start at $k-1-L(A_{k-1}-)$ is that the number in the
     system as seen by job $k$ is $k-1 - D(A_k)$ (not
     $k-2-D(A_k)$). Hence, the jobs with index from
-    $k-1-L_{k-1}, k-L_{k-1}, \ldots, k-1$, could have left the system
+    $k-1-L(A_{k-1}-), k-L(A_{k-1}-), \ldots, k-1$, could have left the system
     between the arrival of job $k-1$ and job $k$.
 \end{solution}
 \end{exercise}
