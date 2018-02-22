@@ -518,19 +518,20 @@ First $d_k = \min\{Q_{k-1}, c_k\}$. Then, $Q_k' = Q_{k-1}+a_k-d_k$ is the queue 
 
 \begin{exercise}
   (Rework) A machine produces items, but a fraction $p$ of the items
-  do not meet the quality requirements after the first service but
+  does not meet the quality requirements after the first service but
   need some extra service time but less than an entirely new arriving
   job. Make a model to analyze this case. Compare this case with the
   yield loss problem above. 
 
   Let's assume that the repair of a faulty requires half of the work
   of a new job, and that the faulty jobs are processed with priority
-  over the new jobs. (There are of course many different policies to
-  treat rework; here we make this assumption. For your interest:
-  another possibility is that faulty items are processed at the end of
+  over the new jobs.  Also asume that faulty items do not need more than one repair (hence, faulty items that are repaired cannot be faulty anymore).
+
+There are of course many different policies to
+  treat rework.   Another possibility is that faulty items are processed at the end of
   the day. Yet another possibility is that faulty items are collected
   until there are $N$, say, and then the entire batch of $N$ is
-  repaired.)
+  repaired.
   \begin{solution}
     Suppose again that a fraction $p$ is faulty. Since these faulty
     items require less processing time than a new job, the service
@@ -546,6 +547,7 @@ First $d_k = \min\{Q_{k-1}, c_k\}$. Then, $Q_k' = Q_{k-1}+a_k-d_k$ is the queue 
     d_{k,A} &= \min\{Q_{k-1, A}, 2c_k\}, \text{ as faulty jobs require half of the processing time})\\
     c_{k,B} &= c_k - d_{k,A}/2, \\
     d_{k,B} &= \min\{Q_{k-1, B}, c_{k,B}\}, \\
+    a_{k,A} &= p d_{k-1, B}, \\
     Q_{k,A} &= Q_{k-1, A} + a_{k,A} - d_{k,A}, \\
     Q_{k,B} &= Q_{k-1, B} + a_{k,B} - d_{k,B}.
   \end{split}
