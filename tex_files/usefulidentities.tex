@@ -1,4 +1,4 @@
-\section{Some Useful Identities}
+\section{Applications and Useful Identities}
 \label{sec:some-usef-ident}
 
 
@@ -7,8 +7,8 @@
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 With the PASTA property and Little's law we can derive a number of
-useful and simple results for the $M/G/1$ queue by which we can analyze a large number of practical queueing situations, see Exercise~\ref{exer: Hall} and below. In particular, we concentrate here on server utilization, i.e., $\rho$, and average queue length and waiting times. Recall, to use the
-PASTA, we need to assume that jobs arrive as a Poisson process.
+useful and simple results for the $M/G/1$ queue by which we can analyze a large number of practical queueing situations, see Exercise~\ref{exer: Hall} and below. In particular, we derive expressions for  the following performance measures: server utilization, i.e., $\rho$, average queue length and waiting times. We assume that jobs arrive in accordance to a Poisson process so that we can use the PASTA property.
+
 
 The fraction of time the server is empty is $1-\rho = p(0)$. By PASTA,
 $\pi(0)=p(0)$, hence the fraction of customers that enter an empty
@@ -366,12 +366,14 @@ $\E W = \E S \sum_{n=0}^\infty n \pi(n) + \E S = \E S \E L + \E S$.
 \end{exercise}
 \end{comment}
 
-\begin{exercise}($M/G/1$)
+\begin{exercise}($M/M/1$)
 Show that the variance of the number of jobs in the system $L$ is
 $\V L = \rho/(1-\rho)^2.$
   \begin{hint}
     $\V{L} = \E{L^2} - (\E L)^2$. We already know $\E L$ so it remains
     to compute $\E{L^2}$. Then, $\E{L^2 }= \sum_{n=0}^\infty n^2 \pi(n)$. Use that $\pi(n)=\rho^n(1-\rho)$ is the probability to see $n$ jobs in the system. Now simplify.    
+
+You might use the moment-generating trick of Exercise~\ref{ex:12}.
   \end{hint}
   \begin{solution}
 The starting point is  $\V{L} = \E{L^2} - (\E L)^2$. 
@@ -389,9 +391,9 @@ With wolfram alpha we get
 \V L = \frac{\rho(1+\rho)}{(1-\rho)^2}-\frac{\rho^2}{(1-\rho)^2} = \frac{\rho}{(1-\rho)^2}.
 \end{equation*}
 
+Here are three methods to to  get the result for $\E{L^2}$.  
 
-Lets see whether I can get the result for $\E{L^2}$ by myself.  One way
-is to use the standard formula for a geometric series with $\rho < 1$:
+One way is to use the standard formula for a geometric series with $\rho < 1$:
 \begin{equation*}
 \dfrac{1}{1-\rho} = \sum_{n=0}^{\infty}\rho^n.
 \end{equation*}
@@ -454,7 +456,7 @@ $\sum_n n^2 \rho^n$ leads to
 \end{split}
 \end{equation*}
 
-A last method is based on $z$-transforms:
+A third method is based on $z$-transforms, which is the same thing as moment generating functions. Writing $z=e^s$, we have $\E{e^{s L}} = \E{z^L}$. Hence
 \begin{equation*}
   \phi(z) = \E{z^L} = \sum_{n=0}^\infty z^n p(n) = (1-\rho) \sum_{n=0}^\infty (\rho z)^n = \frac{1-\rho}{1-\rho z}.
 \end{equation*}
@@ -507,73 +509,9 @@ distribution.
   \end{solution}
 \end{exercise}
 
-\begin{comment}
-\begin{exercise}
-Consider an $M/M/2$ queueing system that is very heavily utilized, with an arrival rate of 11 customers per hour, and a  service rate of 6 customers per hour per server.
- Determine $\E{L_Q}$ and $\E{W_Q}$. Compare your solution to an $M/M/1$ queue with $\rho=11/12$. Why are your answers similar or different?
-  \begin{solution}
-
-Here are the results for the $M/M/2$ queue.
-
-\begin{pyconsole}
-labda = 11.
-mu = 6
-c = 2
-
-rho = labda/mu
-rho < c  # is the system stable?
-\end{pyconsole}
-
-Compute $L_s$ and so on
-
-
-\begin{pyconsole}
-from math import factorial
-
-G = sum(rho**n/factorial(n) for n in range(c))
-G += rho**c/factorial(c)/(1.-rho/c)
-P0 = 1./G
-P0
-
-Lq = rho**(c+1)/c/(factorial(c)*(1.-rho/c)**2)*P0
-Lq
-Lq/labda # Wq
-
-Ls = Lq + rho
-Ls
-Ls/labda # Ws
-
-ES = 1./mu # expected service time
-ES
-\end{pyconsole}
-
-Now consider the $M/M/1$ queue with twice the service rate, i.e., now we take $\mu = 6c = 12$. 
-
-\begin{pyconsole}
-mu = c*6
-
-rho = labda/mu
-
-P0 = 1-rho
-P0
-
-Lq = rho**2/(1.-rho)
-Lq
-Lq/labda # Wq
-
-Ls = rho/(1.-rho)
-Ls
-Ls/labda # Ws
-
-ES = 1./mu # expected service time
-ES
-\end{pyconsole}
-    \end{solution}
-\end{exercise}
-\end{comment}
-
-
-
+When a problem is mainly of a computational type, I coded the solutions and show you all the steps in between so that you can check each step in your computations. As the code is typically nearly identical to the mathematical formulas, you should not have any difficulty
+understanding the code. (In the computations below I typically use the simplest, but often
+not the most efficient, code.)
 
 \begin{exercise}(Hall 5.2) \label{exer: Hall} After observing a single server queue for
   several days, the following steady-state probabilities have been
@@ -585,18 +523,8 @@ ES
 \item Determine $\V{L}$ and $\V{L_Q}$.
   \item Determine the service time and the utilization.
   \end{enumerate}
-    \begin{solution}
-      \begin{enumerate}
-      \item 
-      When a problem is mainly of a computational type, I coded the
-      solutions and show you all the numerical answers. Thus, please
-      read the code too since this shows the precise steps by which I
-      obtain the answer. (The code is typically nearly identical to
-      the mathematical formulas; you should not have any difficulty
-      understanding the code.) I also show many intermediate numerical
-      results so that you can check each step in your computations. (In
-      the computations below I typically use the simplest, but often
-      not the most efficient, code.)
+    \begin{solution} First find $\E L$
+
 
 \begin{pyconsole}
 P = [0.4, 0.3, 0.2, 0.05, 0.05]
@@ -615,7 +543,6 @@ Lq = sum(max(n-m,0)*P[n] for n in range(len(P)))
 Lq
 \end{pyconsole}
 
-\item 
 
 \begin{pyconsole}
 labda = 10./60
@@ -628,7 +555,6 @@ W
 W/60 # in hours
 \end{pyconsole}
 
-\item 
 
 \begin{pyconsole}
 from math import sqrt
@@ -644,7 +570,6 @@ var_Lq
 sqrt(var_Lq)
 \end{pyconsole}
 
-\item 
 
 \begin{pyconsole}
 mu = 1./(W-Wq)
@@ -682,7 +607,6 @@ idle = sum( max(m-n,0)*P[n] for n in range(len(P)))
 idle
 \end{pyconsole}
 
-  \end{enumerate}
    \end{solution}
  
 \end{exercise}
@@ -723,10 +647,9 @@ Wq
 \begin{exercise}(Hall, 5.6)
   An $M/M/1$ queue has been found to have an average waiting time in queue of 1 minute. The arrival rate is known to be 5 customers per minute.
  What are the service rate and utilization? Calculate $\E{L_Q}$,  $\E L$ and $\E W$. Finally, 
- The queue operator would like to provide chairs for waiting customers. He would like to have a sufficient number so that all customers can sit down at least 90 percent of the time. How many chairs should he provide?
+ the queue operator would like to provide chairs for waiting customers. He would like to have a sufficient number so that all customers can sit down at least 90 percent of the time. How many chairs should he provide?
     \begin{solution}
-      \begin{enumerate}
-      \item $\E{W_Q} = \frac{1}{\lambda}\frac{\rho^2}{1-\rho}$. Since
+ $\E{W_Q} = \frac{1}{\lambda}\frac{\rho^2}{1-\rho}$. Since
         $\E{W_Q}$ and $\lambda$ is given we can use this formula to
         solve for $\rho$ with the abc-formula (and using that
         $\rho > 0$):
@@ -744,7 +667,6 @@ ES = rho/labda
 ES
 \end{pyconsole} 
 
-\item 
 
 \begin{pyconsole}
 Lq = labda*Wq
@@ -757,9 +679,8 @@ L = labda*W
 L
 \end{pyconsole} 
 
-\item 
 
-The problem is to find $n$ such that
+The next problem is to find $n$ such that
       $\sum_{j=0}^n p_j > 0.9$.
 
 \begin{pyconsole} 
@@ -785,7 +706,6 @@ As a check, I use that $(1-\rho) \sum_{j=0}^n \rho^j = 1-\rho^{n+1}$.
 
 And indeed, we found the right $n$.
 
-  \end{enumerate}
     \end{solution}
 \end{exercise}
 
@@ -1183,9 +1103,6 @@ Clearly, $c=3$ should do.
 
 
 
-
-
-
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}
 \subsection*{Hints}
@@ -1196,5 +1113,5 @@ Clearly, $c=3$ should do.
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: t
+%%% TeX-master: "../book"
 %%% End:
