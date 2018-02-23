@@ -650,13 +650,19 @@ Wq
  the queue operator would like to provide chairs for waiting customers. He would like to have a sufficient number so that all customers can sit down at least 90 percent of the time. How many chairs should he provide?
 
  \begin{hint}
-$\E{L_Q}$ follows right away from an application of Little's law. For $\E{W}$, one can use that 
+$\E{L_Q}$ follows right away from an application of Little's law. For the other quantities we need to find $\E S$.  One can use that 
 \begin{equation*}
 \E{W_Q}= \E L \E S = (\E{L_Q} + \E{L_S}) \E S = (\E{L_Q} + \lambda \E{S})\E{S}.
 \end{equation*}
+
+
 Now $\lambda$ and $\E{W_Q}=1$ are given, and $\E{L_Q}$ has just been computed. Hence, $\E{S}$ (which is the unknown here) can computed with the abc-formula.
+
+Another way is to realize that, for the $M/M/1$-queue,  $\E{W_Q} = \frac{1}{\lambda}\frac{\rho^2}{1-\rho}$. Then solve for $\rho$, and since $\lambda$ is known, $\E S$ follows. 
  \end{hint}
     \begin{solution}
+
+
  $\E{W_Q} = \frac{1}{\lambda}\frac{\rho^2}{1-\rho}$. Since
         $\E{W_Q}$ and $\lambda$ is given we can use this formula to
         solve for $\rho$ with the abc-formula (and using that
