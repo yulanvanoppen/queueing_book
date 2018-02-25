@@ -24,22 +24,20 @@ Recall that Eq.~\eqref{eq:35} states that
   \E{W_Q} = \frac{\E{S_r}}{1-\rho}
 \end{equation*}
 This equation is valid for the $M/G/1$ queue, as in the derivation we
-used the PASTA property but did not make any assumption about the
-service time distribution, except that it has a finite mean. To use
-it, we need to compute the average remaining service time for
-generally distributed service times. This is what we will do here.
+used the PASTA property but did not need that the
+service time distribution is exponential. Thus, we need to compute the average remaining service time $\E{S_r}$ for generally distributed service times. We turn to this task now.
 
 Consider the $k$th job of some sample path the $M/G/1$ queueing
 process. This job requires $S_k$ units of service, let its service
-time start at time $A_k$ so that it departs the server at time
-$D_k=A_k + S_k$, c.f. Figure~\ref{fig:mg1remainingservicetime}. Define
+time start at time $\tilde A_k$ so that it departs the server at time
+$D_k=\tilde A_k + S_k$, c.f. Figure~\ref{fig:mg1remainingservicetime}. Define
 \begin{equation*}
-R_k(s) = (D_k-s)\1{A_k \leq s < D_k}
+R_k(s) = (D_k-s)\1{\tilde A_k \leq s < D_k}
 \end{equation*}
 as the remaining service time at time $s$ of job $k$. So see this,
-observe that when the time $s\in [A_k, D_k)$, the remaining service
+observe that when the time $s\in [\tilde A_k, D_k)$, the remaining service
 time until job $k$ departs is $D_k-s $, while if
-$s\not \in [A_k, D_k)$, job $k$ is not in service so it cannot have
+$s\not \in [\tilde A_k, D_k)$, job $k$ is not in service so it cannot have
 any remaining service as well.
 
 \begin{figure}[ht]
@@ -53,7 +51,7 @@ any remaining service as well.
           node (c2) at (3,0)[open, label={}]
      (c1) to (c2);
     \draw[dotted] (0,0) -- (0,3) node[midway, rotate=90, fill=white] {$S_k$};
-    \node[below] at (0,0) {$A_k$};
+    \node[below] at (0,0) {$\tilde A_k$};
     \node[below] at (3,0) {$D_k$};
 
     \draw[<->, dotted] (0.75,0) -- (0.75,2.25) node[midway,fill=white,rotate=90] {$D_k-s$};
@@ -97,8 +95,8 @@ $\int_0^{D_n} R_k(s) \d s = \frac{S_k^2}2.$
 If $k<n$,  $D_k< D_n$, and then
 \begin{align*}
 \int_0^{D_n} R_k(s) \d s
-&= \int_0^{D_n} (D_k-s)\1{A_k \leq s < D_k}\, \d s = \int_{A_k}^{D_k} (D_k-s) \, \d s \\
-&= \int_{A_k}^{A_k+S_k} (A_k+S_k-s) \, \d s  = \int_{0}^{S_k} (S_k-s) \, \d s \\
+&= \int_0^{D_n} (D_k-s)\1{\tilde A_k \leq s < D_k}\, \d s = \int_{\tilde A_k}^{D_k} (D_k-s) \, \d s \\
+&= \int_{\tilde A_k}^{\tilde A_k+S_k} (\tilde A_k+S_k-s) \, \d s  = \int_{0}^{S_k} (S_k-s) \, \d s \\
 &= \int_{0}^{S_k} s \, \d s = \frac{S_k^2}2.
 \end{align*}
   \end{solution}

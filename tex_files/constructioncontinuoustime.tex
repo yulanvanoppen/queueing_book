@@ -183,24 +183,24 @@ node[midway, fill=white] {$X_{k}$};
 
 The time job $k$ \emph{leaves the queue and moves on to the server} is
 \begin{equation*}
- D_{Q,k} = A_k + W_{Q,k},
+ \tilde A_k = A_k + W_{Q,k},
 \end{equation*}
 because a job can only move to the server after its arrival plus the
 time it needs to wait in queue.  Note that we here explicitly use the
 FIFO assumption.
 
-Right after the job moves from the queue to the server, its service starts.  Thus,~$D_{Q,k}$ is the epoch at which the service of job~$k$ starts. After completing its service,
+Right after the job moves from the queue to the server, its service starts.  Thus,~$\tilde A_{k}$ is the epoch at which the service of job~$k$ starts. After completing its service,
 the job leaves the system. Hence, the \recall{departure time of the
   system} is
 \begin{equation*}
-  D_k = D_{Q,k} + S_k.
+  D_k = \tilde A_{k} + S_k.
 \end{equation*}
 
 The \recall{sojourn time}, or \emph{waiting time in the system}, is the
 time a job spends in the entire system. With the above relations we
 see that
 \begin{equation}
-  W_k = D_k - A_k = D_{Q,k} + S_k -A_k = W_{Q,k} + S_k,
+  W_k = D_k - A_k = \tilde A_{k} + S_k -A_k = W_{Q,k} + S_k,
 \end{equation}
 where each of these equations has its own interpretation. 
 
@@ -429,15 +429,15 @@ Figure~\ref{fig:atltdt}.
 Observe that in a queueing system, jobs can be in queue or in
 service. For this reason we distinguish between the number in the
 system $L(t)$, the number in queue $L_Q(t)$, and the number of jobs in
-service $L_s(t)$. If we know $D_Q(t)$, i.e. the number of jobs that
+service $L_s(t)$. If we know $\tilde A(t)$, i.e. the number of jobs that
 departed from the queue up to time $t$, then
 \begin{equation*}
-  L_Q(t) = A(t) - D_Q(t)
+  L_Q(t) = A(t) - \tilde A(t)
 \end{equation*}
 must be the number of jobs in queue. The above expressions for $L(t)$
 and $L_Q(t)$ then show that the number in service must be
 \begin{equation*}
-L_s(t) = D_Q(t) - D(t) = L(t) - L_Q(t).
+L_s(t) = \tilde A(t) - D(t) = L(t) - L_Q(t).
 \end{equation*}
 
 
@@ -454,10 +454,10 @@ Why don't we need separate notation for $D_s(t)$, the number
 
 
 \begin{exercise}
- Is $D_Q(t) \leq D(t)$ or $D_Q(t) \geq D(t)$?
+ Is $\tilde A(t) \leq D(t)$ or $\tilde A(t) \geq D(t)$?
 \begin{solution}
  All customers that left the system must have left the
-    queue. Thus, $D_Q(t) \geq D(t)$.
+    queue. Thus, $\tilde A(t) \geq D(t)$.
   \end{solution}
 \end{exercise}
 
@@ -466,7 +466,7 @@ Why don't we need separate notation for $D_s(t)$, the number
 \begin{exercise}
  Why is $L(t) = L_Q(t) + L_s(t)$?
 \begin{solution}
- $L_Q(t) = A(t) - D_Q(t)$. $L_S(t) = D_Q(t) - D(t)$. This is in
+ $L_Q(t) = A(t) - \tilde A(t)$. $L_S(t) = \tilde A(t) - D(t)$. This is in
     line with the fact that $L(t) = L_Q(t) + L_s(t) = A(t) - D(t)$.
 \end{solution}
 \end{exercise}
@@ -474,16 +474,16 @@ Why don't we need separate notation for $D_s(t)$, the number
 
 
 \begin{exercise}
- Express $L_Q(t)$ and $L_s(t)$ in terms of $A(t)$, $D_Q(t)$ and $D(t)$.
+ Express $L_Q(t)$ and $L_s(t)$ in terms of $A(t)$, $\tilde A(t)$ and $D(t)$.
 \begin{solution}
- $L_Q(t) = A(t) - D_Q(t)$. $L_S(t) = D_Q(t) - D(t)$. This is in
+ $L_Q(t) = A(t) - \tilde A(t)$. $L_S(t) = \tilde A(t) - D(t)$. This is in
     line with the fact that $L(t) = L_Q(t) + L_s(t) = A(t) - D(t)$.
 \end{solution}
 \end{exercise}
 
 \begin{exercise}
  Consider a multi-server queue with $m$ servers. Suppose that
-    at some time~$t$ it happens that $D_Q(t) - D_s(t) < m$ even though
+    at some time~$t$ it happens that $\tilde A(t) - D_s(t) < m$ even though
     $A(t) - D_s(t) > m$. How can this occur? 
 \begin{solution}
  In this case, there are servers idling while there are still

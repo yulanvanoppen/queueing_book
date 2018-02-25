@@ -772,6 +772,25 @@ for the \emph{survivor function} of $B$.  We can write this with an indicator fu
 \end{equation*}
 which makes the compution of certain expressions quite a bit easier. 
 
+\begin{exercise}\label{ex:5}
+  Express the probability mass  $f(k)$ and the survivor function $G(k)$ in terms of the distribution $F(k)$ of the batch size $B$. Which of the following is true:
+  $G(k) = 1-F(k)$, $G(k) = 1-F(k-1)$, or $G(k) = 1-F(k+1)$?
+  \begin{hint}
+This exercise is just meant to become familiar with the notation.
+  \end{hint}
+  \begin{solution}
+    \begin{align*}
+    f(k) &= \P{B=k} = \P{B\leq k} - \P{B\leq k-1} = F(k)-F(k-1), \\
+    G(k) &= \P{B>k} = 1 - \P{B\leq k} = 1-F(k).        
+    \end{align*}
+    It is all too easy to make, so called, off-by-one errors, such as
+    in the three alternatives above.  I nearly always check simple
+    cases to prevent such simple mistakes. I advise you to acquire the
+    same habit.
+  \end{solution}
+\end{exercise}
+
+
 \begin{exercise}\label{ex:6}
  Use indicator functions to prove that $ \sum_{k=0}^\infty G(k) = \E B$.
     \begin{hint}
@@ -937,5 +956,5 @@ If $F(x) = 1 - e^{-\mu x}$, we obtain that
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "book"
+%%% TeX-master: "../book"
 %%% End:
