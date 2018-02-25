@@ -81,22 +81,22 @@ This requires some extra definitions, similar to
     $A(+,t)$ as the number of arrivals that see a job in service. As
     the server is only busy at time $t$ when $L(t)>0$, we define
     \begin{equation*}
-      A(+,t) = \sum_{k=1}^\infty \1{A_k\leq t}\1{L(A_k) > 0}.
+      A(+,t) = \sum_{k=1}^\infty \1{A_k\leq t}\1{L(A_k-) > 0}.
     \end{equation*}
     Next, define $\tilde D_k = \min\{D_i: D_i \geq A_k\}$ as the first
     departure after the arrival time $A_k$ of job $k$. We need to
     consider two cases. If $\tilde D_k = D_k$ then, obviously, the
     first departure after $A_k$ coincides with the departure time of
-    job $k$. This is only possible if $L(A_k) = 0$. But then, it must
+    job $k$. This is only possible if $L(A_k-) = 0$. But then, it must
     be that the remaining service time of the job in service at time
-    $A_k$ is 0, as there is no job in service. Otherwise, if
-    $L(A_k)>0$ it must be that $\tilde D_k < D_k$, and, as a
+    $A_k-$ is 0, as there is no job in service. Otherwise, if
+    $L(A_k-)>0$ it must be that $\tilde D_k < D_k$, and, as a
     consequence, the remaining service time of the job in service at
-    time $A_k$ is equal to $\tilde D_k - A_k$. All in all, the total
+    time $A_k-$ is equal to $\tilde D_k - A_k$. All in all, the total
     amount of remaining service times added up for all arrivals up to
     time $t$ can be written as
     \begin{equation*}
-      S_r(t) = \sum_{k=1}^\infty (\tilde D_k - A_k) \1{A_k \leq t, L(A_k) > 0}.
+      S_r(t) = \sum_{k=1}^\infty (\tilde D_k - A_k) \1{A_k \leq t, L(A_k-) > 0}.
     \end{equation*}
     The remaining service time averaged over all arrivals up to
     time $t$ is therefore $S_r(t)/A(t)$. We can now rewrite this to
@@ -107,7 +107,7 @@ This requires some extra definitions, similar to
 and interpret these fractions.  First, consider
 \begin{equation*}
   \frac{A(+,t)}{A(t)} = 
-\frac{\sum_{k=1}^\infty \1{A_k\leq t, L(A_k) > 0}}{\sum_{k=1}^\infty \1{A_k\leq t}}.
+\frac{\sum_{k=1}^\infty \1{A_k\leq t, L(A_k-) > 0}}{\sum_{k=1}^\infty \1{A_k\leq t}}.
 \end{equation*}
 This is the number of jobs up to time $t$ that see at least one job in
 the system divided by the total number of arrivals up to time $t$. Thus, as $t\to\infty$, 
@@ -117,7 +117,7 @@ the system divided by the total number of arrivals up to time $t$. Thus, as $t\t
 With PASTA we can conclude that $1-\pi(0) = 1-p(0)= \rho$. Second,
 \begin{equation*}
 \frac{S_r(t)}{A(+,t)} 
-= \frac{\sum_{k=1}^\infty (\tilde D_k - A_k) \1{A_k\leq t, L(A_k) > 0}}{\sum_{k=1}^\infty \1{A_k\leq t, L(A_k)>0}},
+= \frac{\sum_{k=1}^\infty (\tilde D_k - A_k) \1{A_k\leq t, L(A_k-) > 0}}{\sum_{k=1}^\infty \1{A_k\leq t, L(A_k-)>0}},
 \end{equation*}
 is the total amount of remaining service time up to time $t$ divided by
 the number of arrivals up to time $t$ that see at least one job in the system. Thus, 
