@@ -129,30 +129,10 @@ an estimator of the fraction of customers lost.
 % In the context of inventory theory these equations are particularly
 % useful, see one of the questions below.
 
-\begin{exercise}
-
-Customers of fast-food restaurants prefer to be served from stock. For this reason such
-restaurants often use a `produce-up-to' policy: When the on-hand inventory $I$ is equal or lower than some threshold $r$, the company produces items until the inventory level equals $r+1$ again. The level $r$ is the known as the reorder level.
-
-Suppose that customers arrive as a Poisson process with rate $\lambda$
-and the production times of single items are i.i.d. and exponentially
-distributed with parameter $\mu$. Assume also that customers who
-cannot be served from on-hand stock are backlogged, that is, they wait
-until their item has been produced. What are the average on-hand
-inventory level and the average number of customer in backlog?
-\begin{hint}
-  Realize that the inventory level $I(t)$ at time $t$ can be
-  modeled as $I(t) = r+1-L(t)$, where $L$ is the number of jobs in an
-  $M/M/1$ queue.
-\end{hint}
-  \begin{solution}
-Average on-hand: $\E{I} = \sum_{i=0}^{r+1} (r+1-i) p(i)$. Average number of customers in backlog: $\E B = \sum_{i=r+1}^\infty (i-r-1) p(i)$. 
-  \end{solution}
-\end{exercise}
 
 
 The aim of the next set of exercises is to determine the distribution of the
-interdeparture times of the $M/M/1$ queue.  We will need these results when we analyse networks of queues---observe that in a network of queues the departures from one queueing station form the arrivals at another station. We chop up this problem in small steps.
+interdeparture times of the $M/M/1$ queue.  We will need these results when we analyse networks of queues---observe that in a network of queues the departures from one queueing station form the arrivals at another station. We chop up this problem in small steps to help you find the answer mostly by yourself. 
 
 
 \begin{exercise}\label{ex:dep}
@@ -273,6 +253,60 @@ Explain that we arrived at \recall{Burke's law} which states that the departure 
 The above exercises show that inter-departures times have the same density, i.e., $\lambda e^{-\lambda t}$. The remark above states these times are independent. Thus,  the inter-departures times form a set of i.i.d. exponentially distributed random variables with mean $1/\lambda$. Consequently, the departures times form a Poisson process with rate $\lambda$.
 \end{solution}
 \end{exercise}
+
+\subsection*{Relation between Inventory and Queueing Systems}
+
+There exists an interesting relation between inventory and queueing systems, c.f. Figure~\ref{fig:inv_queue}.  When a job arrives in the queueing system, the virtual workload~$V(t)$ increases by the service of the job. In the inventory system, the inventory $I(t)$ decreases by the amount the demand of a customer. The first demand of size $D_1$  corresponds to a production job of size $S_1=D_1$.  If the inventory is controlled by an order-up-to policy (produce as long as the ivnentory is below $S$ and stop otherwise), then the figure shows that the inventory level $I(t)$ is equal to $S-V(t)$.  Thus, queueing theory and inventory theory are very related branches of (applied) probability theory.
+
+
+\begin{figure}[th]
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\draw[->] (0,0) -- coordinate (x axis mid) (8.5,0);
+\draw[->] (0,0) -- coordinate (y axis mid) (0,10.5);
+\node[below=0.2cm] at (x axis mid) {$t$};
+
+\draw plot coordinates {(1,0) (1,2) (2,1) (2,4) (4,2) (4,3.5) (7.5,0)};
+\node[left]  at (7,1.5) {$V(t)$};
+\node[fill=white, rotate=90]  at (1,1) {$S_1$};
+\node[fill=white, rotate=90]  at (2,2.5) {$S_2$};
+\node[fill=white, rotate=90]  at (4,2.75) {$S_3$};
+
+\node  at (4,5) {$I(t)=S-V(t)$};
+
+\draw[dotted] (0,10)--(8.5,10);
+\node[left]  at (0,10) {$S$};
+\node[left]  at (7,8.5) {$I(t)$};
+\draw plot coordinates {(1,10) (1,8) (2,9) (2,6) (4,8) (4,6.5) (7.5,10)};
+\node[fill=white, rotate=90]  at (1,9) {$D_1$};
+\node[fill=white, rotate=90]  at (2,7.5) {$D_2$};
+\node[fill=white, rotate=90]  at (4,7.25) {$D_3$};
+\end{tikzpicture}
+\end{center}
+\caption{The relation between inventory and queueing systems. Here $I(t)$ models the evolution of the inventory level in an  inventory system, while $V(t)$ shows the virtual workload, and $S$ is the order up to level.} \label{fig:inv_queue}
+\end{figure}
+
+
+\begin{exercise}\label{ex:7}
+Customers of fast-food restaurants prefer to be served from stock. For this reason such
+restaurants often use a `produce-up-to' policy: When the on-hand inventory $I$ is equal or lower than some threshold $S-1$, the company produces items until the inventory level equals $S$ again. The level $S$ is known as the order-up-to level, and $S-1$ as the reorder level.
+
+Suppose that customers arrive as a Poisson process with rate $\lambda$
+and the production times of single items are i.i.d. and exponentially
+distributed with parameter $\mu$. Assume also that customers who
+cannot be served from on-hand stock are backlogged, that is, they wait
+until their item has been produced. What are the average on-hand
+inventory level and the average number of customer in backlog?
+\begin{hint}
+Use Figure~\ref{fig:inv_queue} to realize that the inventory level $I(t)$ (here measured in the number of items on stock) at time $t$ can be
+  modeled as $I(t) = S+1-L(t)$, where $L$ is the number of jobs in an
+  $M/M/1$ queue. Note that the number of jobs in queue corresponds to the number of items to be produced. A customer of an item, i.e., a demand of the inventory system, turns into  job at the queueing system, i.e., the demand becomes a job for the cook to replenish the item.
+\end{hint}
+  \begin{solution}
+In the $M/M/1$ queue, $p(n)$ corresponds to the fraction of time there are $n$ jobs in the system. In the inventory system, it means that the cook has $n$ jobs to satisfy, hence the inventory is $n$ jobs short relative to the order up to level $S$.  Hence, the average on-hand inventory is $S$ minus the average number of jobs at the cook. i.e., $\E{I} = \sum_{i=0}^{S} (S-i) p(i)$. The average number of customers in backlog is the fraction of time there are more than $S$ replenishment jobs at the cook, i.e., $\E B = \sum_{i=S+1}^\infty (i-S) p(i)$. 
+  \end{solution}
+\end{exercise}
+
 
 \subsection*{Supermarket Planning}
 
