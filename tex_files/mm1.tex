@@ -75,14 +75,14 @@ With indicators, a bit long, but I spell out every step.
 &= \rho \sum_{i=0}^\infty \rho^i \\
 &= \frac{\rho}{1-\rho}.
 \end{align*}
-Note that, since the summands are positive, we can use Fubini's theorm
+Note that, since the summands are positive, we can use Fubini's theorem
 to justify the interchange of the summations.
 
 With moment generating functions it is a bit shorter. 
 \begin{equation*}
   \begin{split}
   M_L(s) 
-&= \E{e^{s L}} = \sum_{n=0}^\infty e^{sn}p(n) = (1-\rho) \sum_n e^{sn} \rho^n \\
+&= \E{e^{s L}} = \sum_{n=0}^\infty e^{s n}p(n) = (1-\rho) \sum_n e^{s n} \rho^n \\
 &=\frac{1-\rho}{1-e^{s}\rho},
   \end{split}
 \end{equation*}
@@ -132,7 +132,7 @@ an estimator of the fraction of customers lost.
 
 
 The aim of the next set of exercises is to determine the distribution of the
-interdeparture times of the $M/M/1$ queue.  We will need these results when we analyse networks of queues---observe that in a network of queues the departures from one queueing station form the arrivals at another station. We chop up this problem in small steps to help you find the answer mostly by yourself. 
+interdeparture times of the $M/M/1$ queue.  We will need these results when we analyze networks of queues---observe that in a network of queues the departures from one queueing station form the arrivals at another station. We chop up this problem in small steps to help you find the answer mostly by yourself. 
 
 
 \begin{exercise}\label{ex:dep}
@@ -256,7 +256,11 @@ The above exercises show that inter-departures times have the same density, i.e.
 
 \subsection*{Relation between Inventory and Queueing Systems}
 
-There exists an interesting relation between inventory and queueing systems, c.f. Figure~\ref{fig:inv_queue}.  When a job arrives in the queueing system, the virtual workload~$V(t)$ increases by the service of the job. In the inventory system, the inventory $I(t)$ decreases by the amount the demand of a customer. The first demand of size $D_1$  corresponds to a production job of size $S_1=D_1$.  If the inventory is controlled by an order-up-to policy (produce as long as the ivnentory is below $S$ and stop otherwise), then the figure shows that the inventory level $I(t)$ is equal to $S-V(t)$.  Thus, queueing theory and inventory theory are very related branches of (applied) probability theory.
+There exists an interesting relation between inventory and queueing systems, c.f. Figure~\ref{fig:inv_queue}.  When a job arrives in the queueing system, the virtual workload~$V(t)$ increases by the service time of the job. In the inventory system, the inventory $I(t)$ decreases by the  demand size of the customer. Like this, the demand size of a customer at the inventory system converts into a production time (i.e., a service time) of a job at a queueing  system. In the figure, the demand size $D_1$  of the first customer corresponds to a production time of duration  $S_1=D_1$, and so on. Thus, even though in the inventory system, customers do not have to wait, their demands spawn production times at a server who has to replenish the consumed items. 
+
+Assume now that  the inventory process is controlled by an order-up-to policy: produce (refill the inventory) as long as the inventory level is below $S$ and stop otherwise.  Then the figure shows that the inventory level $I(t)$ is equal to $S-V(t)$.   
+
+In more general terms, in a queueing system or an inventory system, there is always `something' or `somebody'  waiting. Items in a supermarket are produced ahead of the moment they are `consumed', hence they `wait' for customers. In a queueing system, customers are waiting  while their product is `produced' by the server. When there are no customers in a queueing system, the server waits until a new customers comes along. Thus, queueing and inventory theory are both focused on the distribution of waiting times, either by customers, servers, or items, hence  both are related branches of (applied) probability theory.
 
 
 \begin{figure}[th]
@@ -272,7 +276,7 @@ There exists an interesting relation between inventory and queueing systems, c.f
 \node[fill=white, rotate=90]  at (2,2.5) {$S_2$};
 \node[fill=white, rotate=90]  at (4,2.75) {$S_3$};
 
-\node  at (4,5) {$I(t)=S-V(t)$};
+\node  at (4,5) {$V(t)=S-I(t)$};
 
 \draw[dotted] (0,10)--(8.5,10);
 \node[left]  at (0,10) {$S$};
@@ -283,7 +287,7 @@ There exists an interesting relation between inventory and queueing systems, c.f
 \node[fill=white, rotate=90]  at (4,7.25) {$D_3$};
 \end{tikzpicture}
 \end{center}
-\caption{The relation between inventory and queueing systems. Here $I(t)$ models the evolution of the inventory level in an  inventory system, while $V(t)$ shows the virtual workload, and $S$ is the order up to level.} \label{fig:inv_queue}
+\caption{The relation between inventory and queueing systems. Here $I(t)$ models the evolution of the inventory level in an  inventory system, while $V(t)$ shows the virtual workload, and $S$ is the order up to level. When a customer requires $D_1$ items, say, it takes a server of a time $S_1=D_1$ to produce these items. Thus, demands at the inventory system convert into production times in a queueing system.  When the inventory is always replenished to level $S$, then the shortage of the inventory level relative to $S$, i.e., $S-I(t)$, becomes the workload $V(t)$ for the server in terms of amount of items or production time.} \label{fig:inv_queue}
 \end{figure}
 
 
@@ -321,7 +325,7 @@ The \emph{service objective} is to determine the minimal service
 capacity such that the fraction of the time more than 
 10 people in queue is less than 1\%. (If the supermarket has 3 cashiers open, 10 people in queue  means about 3 people per queue.)
 
-The next step is to find the \emph{relevant data}: the arrival process and the service time distribution. For the arrival process it is reasonable to model it as a Poisson process. There are many potential custeromers, each choosing with small probability to go the supermarket on a certain moment in time. Thus, we only have to  characterize the arrival rate. Estimating this for a supermarket  is relatively easy: the cash registers track all customers
+The next step is to find the \emph{relevant data}: the arrival process and the service time distribution. For the arrival process it is reasonable to model it as a Poisson process. There are many potential customers, each choosing with small probability to go the supermarket on a certain moment in time. Thus, we only have to  characterize the arrival rate. Estimating this for a supermarket  is relatively easy: the cash registers track all customers
 payments. Thus, we know the number of customers that left the shop,
 hence entered the shop. (We neglect the time customers spend in the
 shop.) Based on these data we make a \emph{demand profile}: the
