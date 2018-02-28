@@ -160,9 +160,9 @@ Next,
   \E{L_Q} 
 &=\sum_{n=c}^\infty (n-c) p(n) \\
 &=\sum_{n=c}^\infty (n-c) \frac{c^c}{c!}\rho^{n} p(0) \\
-&=\frac{c^c\rho^c}{Gc!} \sum_{n=c}^\infty (n-c) \rho^{n-c} \\
-&=\frac{c^c\rho^c}{Gc!} \sum_{n=0}^\infty n \rho^n 
-=\frac{c^c\rho^c}{Gc!} \frac{\rho}{(1-\rho)^2},
+&=\frac{c^c\rho^c}{G c!} \sum_{n=c}^\infty (n-c) \rho^{n-c} \\
+&=\frac{c^c\rho^c}{G c!} \sum_{n=0}^\infty n \rho^n 
+=\frac{c^c\rho^c}{G c!} \frac{\rho}{(1-\rho)^2},
   \end{split}
 \end{equation*}
 where, with our common trick (if we don't want to use generating functions),
@@ -191,7 +191,7 @@ by
       \E{L_S} = \sum_{n=0}^{c} n p(n) + \sum_{n=c+1}^{\infty} c p(n).
     \end{equation*}
     This expression is not the easiest to start with. With a slight
-    modification the entire derivation becomes easier. I also premultiply by the normalization constant $G$ to get rid of it on the right hand side. 
+    modification the entire derivation becomes easier. I also pre-multiply by the normalization constant $G$ to get rid of it on the right hand side. 
     \begin{equation*}
       \begin{split}
       G \E{L_S}
@@ -540,7 +540,7 @@ that, in Problem 11, $L_q = 9.6$ and $W_q = 0.9$ hours.
 This is unexpected, at least at first. Why is the difference so large?
 
 It must be because the model of Problem 21 assumes that the number of
-available servers is unlimited. Hence, any time the queue upcrosses the
+available servers is unlimited. Hence, any time the queue up-crosses the
 threshold $K=2$, an extra server is called. Thus, even though in
 both cases the number of busy servers is 2, (i.e., $B\approx 2$
 here, and two servers (the M/M/2 queue ) in Problem 11), more server

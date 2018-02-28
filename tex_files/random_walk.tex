@@ -329,9 +329,8 @@ stationary state will occupy us for the rest of the book.
   to see how fast the distributions of $W_{Q,k}$ converge to a limiting distribution function.
   \begin{solution}
 Here is an example with python. In R it must be equally simple.
-I compute the 
-difference, i.e., the Kolmogorov-Smirnov statistic, between
-the distributions of $W_k$ and $W_{k+1}$, 
+I compute the  difference, i.e., the Kolmogorov-Smirnov statistic, between
+the distributions of $W_{Q,k-1}$ and $W_{Q,k}$, 
 \begin{equation*}
   \max_x\{ |\P{W_{Q,k}\leq x} - \P{W_{Q,k-1}\leq x}|\},
 \end{equation*}

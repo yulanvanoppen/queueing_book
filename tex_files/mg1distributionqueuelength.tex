@@ -11,16 +11,15 @@
 
 
 In Section~\ref{sec:batch-arrivals} we used level-crossing arguments 
-to find a recursive method to compute  the stationary distribution $p(n)$ of the number of items in an $M^X/M/1$ queue. Here we apply similar arguments to find $p(n)$ for the $M/G/1$ queue.
-However, we cannot simply copy the derivation of the $M^X/M/1$ queue to the $M/G/1$ queue, because in the $M^X/M/1$ queue the item service times are exponential,
+to find a recursive method to compute  the stationary distribution $p(n)$ of the number of items in an $M^X/M/1$ queue. Here we apply similar arguments to find $p(n)=\P{L=n}$ for the $M/G/1$ queue.
+However, we cannot simply copy the derivation of the $M^X/M/1$ queue to the $M/G/1$ queue, because in the $M^X/M/1$ queue the service times of the items are exponential,
 hence memoryless, while in the $M/G/1$ this is not the case. When job service times are 
 not memoryless, hence do not restart at arrival times, we cannot choose any moment we like to apply level-crossing. Thus, for the $M/G/1$ queue
-we need to focus on moments in time in which the system `restarts', which as we will see are job departure epochs.  The argumentation is quite subtle, as it uses an
-interplay of the PASTA property and relation~\eqref{eq:39}
+we need to focus on moments in time in which the system `restarts', which as we will see are job departure epochs.  All in all, the argumentation to find the recursion for $\{p(n)\}$ is quite subtle, as it uses an interplay of the PASTA property and relation~\eqref{eq:39}
 between $\pi(n)$, $p(n)$ and $\delta(n)$.  
 
 An important role below is played by  the number of  arrivals $Y_k$ during the service time of the $k$th job.  Since the service times of the jobs for an i.i.d. sequence of random variables, the sequence $\{Y_k\}$ is also i.i.d. Let $Y$ be the common random variable with probability mass
- $f(j) = \P{Y = j}$ ; write $G(j) = \P{Y_k > j}$ for the survivor function.
+ $f(j) = \P{Y = j}$; write $G(j) = \P{Y_k > j}$ for the survivor function.
 
 
 \begin{exercise}
@@ -282,8 +281,8 @@ $L(D_{k-1})$,
 Before we deal with the upcrossing, it is important to do the next exercise.
 \begin{exercise} Suppose that $L(D_{k-1})>0$. Why is
   $S_k = D_k - D_{k-1}$?  However, if $L(D_{k-1}) = 0$, the time between
-  $D_{k-1}$ and $D_k$ is \emph{not} equal to $S_k$. Why not and what the
-  distribution of $D_k-D_{k-1}$?
+  $D_{k-1}$ and $D_k$ is \emph{not} equal to $S_k$. Why not? Can you find an expression for
+  distribution of $D_k-D_{k-1}$ in case $L(D_{k-1})=0$?
   \begin{hint}
 Realize that if $L(D_{k-1})=0$, job $k-1$ leaves behind an empty
   system. Thus, before job $k$ can leave, it has to arrive. In other
@@ -310,7 +309,7 @@ Realize that if $L(D_{k-1})=0$, job $k-1$ leaves behind an empty
 \end{solution}
 \end{exercise}
 
-For the upcrossings, assuming that $L(D_{k-1})=n>0$, then an upcrossing of level $n>0$  must have occurred when $L(D_k)>n$, i.e, 
+For the upcrossings, assume first that $L(D_{k-1})=n>0$.  Then an upcrossing of level $n>0$  must have occurred when $L(D_k)>n$, i.e, 
  \begin{equation*}
  \1{L(D_{k-1}) = n}\1{L(D_k)>n} = 1 \implies   \text{Upcrossing of level $n$}.
  \end{equation*}
@@ -318,7 +317,7 @@ Again, we can convert this into a statement about  the number of
 arrivals $Y_k$ that occurred during the service time $S_k$ of job $k$.  If $Y_k=0$, then
 job $k$ must leave $n-1$ jobs behind, so no upcrossing can
 happen. Next, if $Y_k=1$, then job $k$ leaves $n$ jobs behind, so
-still no upcrossing occurs. In fact, level $n$ is upcrossed from level $n$ can only occur if
+still no upcrossing occurs. In fact, level $n$ can only be  upcrossed from level $n$ if
 more than one job arrives during the service of job $k$, i.e.,
 \begin{equation*}
 \1{L(D_{k-1})=n} \1{Y_{k}>1}  \implies   \text{Upcrossing of level $n$}.
@@ -387,10 +386,7 @@ transitions, we arrive at
 \end{equation}
 
 Clearly, we have  again obtained a recursion by which we can compute, iteratively, the
-state probabilities.  Setting $\pi(0)=1$ at first, $\pi(1)$ follows
-from the above recursion. Then, with $\pi(0)=1$ and $\pi(1)$ we find
-$\pi(2)$, and so on, up to some limit $N$. Then, set
-$G=\sum_{n=0}^N \pi(n)$ as the normalization constant. 
+state probabilities, and follow the approach sketched below Exercise~\ref{ex:13}. 
 
 
 
