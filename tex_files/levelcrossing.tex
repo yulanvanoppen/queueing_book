@@ -80,7 +80,7 @@ occurs.
  (3) edge [bend left] node {$\lambda(3)$} (4)
  (4) edge [bend left] node {$\mu(4)$} (3);
 
-\draw[-, dotted, gray] (2.7,-2.)--(2.7,2.0) node[above, black] {level $2$};
+\draw[-, dotted, gray] (2.7,-2.)--(2.7,2.0) node[above, black] {level $1$};
 \draw[->] (2,1.5)  node[left] {$A(1,t)$} -- (3.5,1.5);
 \draw[<-] (2,-1.2) node[left] {$D(1,t)$} --(3.5,-1.2) ;
 
@@ -89,7 +89,7 @@ occurs.
   job in the system; thus, right after the arrival of such a job the
   system contains 2 jobs. Similarly, $D(1,t)$ counts the number of
   departures that leave 1 job behind.  Each time $A(1,t)$ increases by
-  one or $D(1,t)$ decreases by one, level $2$ (the dotted line
+  one or $D(1,t)$ decreases by one, level $1$ (the dotted line
   separating states 1 and 2) is crossed.  The number of times this
   level is crossed from below must be the same (plus or minus 1) the
   number of times it is crossed from above. }
@@ -427,8 +427,7 @@ Clearly, for all $n$ we have $\lambda(n)p(n)= \mu(n+1)p(n+1)$.
 \end{solution}
 \end{exercise}
 
-This result turns out to be exceedingly useful. Once we can specify
-$\lambda(n)$ and $\mu(n)$, we can compute the long-run fraction of
+The result~\ref{eq:12} turns out to be exceedingly useful, as will become evident from Section~\ref{sec:mm1} onward. More specifically, by specifying (i.e., modeling) $\lambda(n)$ and $\mu(n)$, we can compute the long-run fraction of
 time $p(n)$ that the system contains $n$ jobs. To see this, rewrite
 the above into
 \begin{equation}\label{eq:25}
@@ -704,15 +703,13 @@ in practical queueing situations; they are useful in theory and in
 simulation, as they relate the theoretical concepts to actual measurements.
 
 
-
+Finally, the following two exercises show that level-crossing arguments extend well beyond the queueing systems modeled by Figure~\ref{fig:A_n_t}.
 
 \begin{exercise}
   Consider a single server that serves one queue and serves only in
   batches of 2 jobs at a time (so never 1 job or more than 2 jobs),
   i.e., the $M/M^2/1/3$ queue.  Single jobs arrive at rate $\lambda$
-  and the interarrival times are exponentially distributed. The batch
-  service times are also exponentially distributed with mean $1/\mu$.
-  At most 3 jobs fit in the system.   Make a graph of the state-space and show, with arrows, the
+  and the interarrival times are exponentially distributed so that we can assume that $\lambda(n) = \lambda$. The batch service times are exponentially distributed with mean $1/\mu$. Then, by the memoryless property, $\mu(n) = \mu$. At most 3 jobs fit in the system.   Make a graph of the state-space and show, with arrows, the
   transitions that can occur.
 
   \begin{solution}
@@ -758,6 +755,8 @@ With level crossing
 hence $p(1) = p(0)(\mu + \lambda)/\mu$. 
   \end{solution}
 \end{exercise}
+
+
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}

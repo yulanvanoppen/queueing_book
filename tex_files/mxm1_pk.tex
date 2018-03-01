@@ -474,6 +474,43 @@ being busy, we get that $\E{B_r} = \rho \E R$, thereby yielding~\eqref{eq:br}.
 \end{exercise}
 
 
+\subsection*{Alternative derivation}
+Here is an alternative derivation of the fraction of jobs that see $i$ items at the server. Perhaps this is easier. If so, let me know. This is not obligatory reading, BTW. 
+
+Let $L_s(s)$ be the number of items (of the batch in service) at the server. Then, 
+\begin{equation*}
+  Y_S(i, t) = \int_0^t \1{L_S(s)=i} \d s
+\end{equation*}
+is the total time up to time $t$ that there are $i$ items at the server. Next,  write $S_{k,i}$ for the service time of the $i$th item of batch~$k$. Then,  trivially, only when $B_k geq i$ there can be an $i$th item of the batch with service time. Thus, $S_{k,i} = S_{k,i} \1{B_k \geq i}$. 
+
+If we focus on the departure time $D_n$ of the $n$th batch, then with the notation introduced above,
+\begin{equation*}
+  Y_S(i, D_n) = \sum_{k=1}^n \1{B_k\geq i} S_{k,i}.
+\end{equation*}
+Taking the time average and assuming that all limits exists, we get
+\begin{equation*}
+  \begin{split}
+\P{Y_S=i} &=\lim_n  \frac{Y_S(i, D_n)}{D_n} \\
+&= \lim_n \frac{n}{D_n}\frac{\sum_{k=1}^n \1{B_k\geq i}}n
+\frac{\sum_{k=1}^n \1{B_k\geq i} S_{k,i}}{\sum_{k=1}^n \1{B_k\geq i}}.
+  \end{split}
+\end{equation*}
+Observe now that the first fraction becomes the departure rate $\delta$, the second is the fraction of batches containing at least $i$ items, and the third converges to $\E S$ as the service times of  the items are i.i.d.  Thus, by rate stability, i.e., $\lambda = \delta$, 
+\begin{equation*}
+\P{Y_S=i} = \delta \P{B\geq i} \E S = \lambda G(i-1) \E S.
+\end{equation*}
+Observing that $\rho=\lambda \E S \E B$, we obtain
+\begin{equation*}
+\P{Y_S=i} = \rho \frac{G(i-1)}{\E B}.
+\end{equation*}
+
+
+Finally, note that the (time) average number of items at the server must be 
+\begin{equation*}
+  \E{B_r} = \sum_{i=0}^\infty i \P{Y_S=i} = \frac{\rho}{\E B} \sum_{i=1}^\infty i G(i-1).
+\end{equation*}
+
+
 
 
 
