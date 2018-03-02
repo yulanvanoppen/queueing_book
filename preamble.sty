@@ -103,9 +103,9 @@
 \newcommand{\abs}[1]{\left\vert#1\right\vert}
 \newcommand{\given}{\,\middle|\,}
 %\renewcommand{\P}[1]{\,\mathsf{P}\left\{#1\right\}}
-\newcommand{\V}[1]{\,\mathsf{V}\left\{#1\right\}}
+\newcommand{\V}[1]{\,\mathsf{V}\left[#1\right]}
 %\newcommand{\E}[1]{\,\mathbb{E}\left\{#1\right\}}
-\newcommand{\E}[1]{\,\mathsf{E}\left\{#1\right\}}
+\newcommand{\E}[1]{\,\mathsf{E}\left[#1\right]}
 \renewcommand{\d}[1]{\,\text{d}#1}
 \newcommand{\1}[1]{\,\mathbb{1}{[#1]}} % indicator
 \renewcommand{\TH}{\mathrm{TH}} % indicator
@@ -133,7 +133,7 @@
 % \]
 
 \makeatletter
-\def\P#1{\def\temp@expr{\left\{#1\right\}}{\mathsf{P}}\prob@}
+\def\P#1{\def\temp@expr{\left(#1\right)}{\mathsf{P}}\prob@}
 \def\prob@{%
     \@ifnextchar{_}{\prob@sub}{%
     \@ifnextchar{^}{\prob@sup}{\temp@expr}}%

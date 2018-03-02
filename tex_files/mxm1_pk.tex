@@ -474,40 +474,73 @@ being busy, we get that $\E{B_r} = \rho \E R$, thereby yielding~\eqref{eq:br}.
 \end{exercise}
 
 
-\subsection*{Alternative derivation}
+\paragraph{Alternative derivation}
 Here is an alternative derivation of the fraction of jobs that see $i$ items at the server. Perhaps this is easier. If so, let me know. This is not obligatory reading, BTW. 
 
 Let $L_s(s)$ be the number of items (of the batch in service) at the server. Then, 
 \begin{equation*}
   Y_S(i, t) = \int_0^t \1{L_S(s)=i} \d s
 \end{equation*}
-is the total time up to time $t$ that there are $i$ items at the server. Next,  write $S_{k,i}$ for the service time of the $i$th item of batch~$k$. Then,  trivially, only when $B_k geq i$ there can be an $i$th item of the batch with service time. Thus, $S_{k,i} = S_{k,i} \1{B_k \geq i}$. 
+is the total time up to time $t$ that there are $i$ items at the server. 
 
-If we focus on the departure time $D_n$ of the $n$th batch, then with the notation introduced above,
+\begin{exercise}
+Let $\tilde A_k$ be the moment the $k$th batch moves to the server and $D_k$ its departure time. Show that, when $S_{k,i}$ is the service time of the $i$th item of batch~$k$,  
+\begin{equation*}
+  \int_{\tilde A_k}^{D_k} \1{L_S(s)=i} \d s = S_{k,i} \1{B_k \geq i}, 
+\end{equation*}
+\begin{solution}
+Only if $B_k \geq i$ there can be an $i$th item of the batch, and the time this $i$th item spends at the server is its service time $S_{k,i}$.   
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Show that 
 \begin{equation*}
   Y_S(i, D_n) = \sum_{k=1}^n \1{B_k\geq i} S_{k,i}.
 \end{equation*}
-Taking the time average and assuming that all limits exists, we get
+\begin{hint}
+  Observe that $n$ batches have been served at time $D_n$.
+\end{hint}
+\begin{solution}
+At the departure time $D_n$ of the $n$th batch, precisely $n$ batches have been served. Thus, each batch with more than $i$ items, contributed to the integral $\int_0^{D_n} \1{L_S(s) =i} \d s$ with the service time $S_{k,i}$. 
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+By taking the time average, show that
+\begin{equation*}
+\P{Y_S=i} =\lim_n  \frac{Y_S(i, D_n)}{D_n} = \rho \frac{G(i-1)}{\E B}.
+\end{equation*}
+\begin{hint}
+  Take the middle term and divide and multiply by suitable other counting functions along the sample path, such as $\sum_{k=1}^n \1{B_k \geq i}$ and $D_n$. Also use rate stability, i.e., $\lambda=\delta$. 
+\end{hint}
+  \begin{solution}
+By taking the time average and assuming that all limits exists, we get
 \begin{equation*}
   \begin{split}
 \P{Y_S=i} &=\lim_n  \frac{Y_S(i, D_n)}{D_n} \\
-&= \lim_n \frac{n}{D_n}\frac{\sum_{k=1}^n \1{B_k\geq i}}n
+&= \lim_n \frac{n}{D_n} \cdot \frac{\sum_{k=1}^n \1{B_k\geq i}}n \cdot
 \frac{\sum_{k=1}^n \1{B_k\geq i} S_{k,i}}{\sum_{k=1}^n \1{B_k\geq i}}.
   \end{split}
 \end{equation*}
-Observe now that the first fraction becomes the departure rate $\delta$, the second is the fraction of batches containing at least $i$ items, and the third converges to $\E S$ as the service times of  the items are i.i.d.  Thus, by rate stability, i.e., $\lambda = \delta$, 
+Observe now that the first fraction becomes the departure rate $\delta$, the second is the fraction of batches containing at least $i$ items, and the third converges to $\E S$ as the service times of  the items are i.i.d.  Thus, by rate stability and using that $G(i)=\P{B>i}$, 
 \begin{equation*}
-\P{Y_S=i} = \delta \P{B\geq i} \E S = \lambda G(i-1) \E S.
+\P{Y_S=i} = \delta \P{B\geq i} \E S = \lambda G(i-1) \E S = \rho \frac{G(i-1)}{\E B},
 \end{equation*}
-Observing that $\rho=\lambda \E S \E B$, we obtain
-\begin{equation*}
-\P{Y_S=i} = \rho \frac{G(i-1)}{\E B}.
-\end{equation*}
+where in the last step we use $\rho=\lambda \E S \E B$.
+  \end{solution}
+\end{exercise}
 
+\begin{exercise}
+Show that $\P{B_r=i} =\P{Y_S=i}$, i.e.,  the probability that a batch arriving at the system sees  $B_r=i$ items at the server is equal to the fraction of time that $Y_s=i$.
+\begin{solution}
+Follows right away from the PASTA property.
+\end{solution}
+\end{exercise}
 
-Finally, note that the (time) average number of items at the server must be 
+With the above exercises we conclude that
 \begin{equation*}
-  \E{B_r} = \sum_{i=0}^\infty i \P{Y_S=i} = \frac{\rho}{\E B} \sum_{i=1}^\infty i G(i-1).
+  \E{B_r} = \sum_{i=0}^\infty i \P{B_r=i} = \frac{\rho}{\E B} \sum_{i=1}^\infty i G(i-1).
 \end{equation*}
 
 
