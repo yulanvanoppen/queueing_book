@@ -1,9 +1,10 @@
 \documentclass[a5paper]{scrbook}
 %\documentclass[a5paper]{article}
 
-%\usepackage[nosolutionfiles]{answers}
-\usepackage{answers}
-%\usepackage{answers}
+\usepackage[solutionfiles]{optional}
+%\usepackage[nosolutionfiles]{optional}
+\opt{nosolutionfiles}{\usepackage[nosolutionfiles]{answers}}
+\opt{solutionfiles}{\usepackage{answers}}
 
 \usepackage{preamble}
 

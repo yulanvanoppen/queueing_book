@@ -39,62 +39,6 @@
 \fancyfoot[C]{\thepage}
 \setlength{\headheight}{14pt} 
 
-%\usepackage{xcolor}
-% \usepackage{cprotect}
-% \usepackage{listings}
-% \lstdefinestyle{customc}{
-%   belowcaptionskip=1\baselineskip,
-%   breaklines=true,
-%   %frame=L,
-%   %xleftmargin=\parindent,
-%   language=Python,
-%   showstringspaces=false,
-%   basicstyle=\footnotesize\ttfamily,
-%   keywordstyle=\bfseries\color{green!40!black},
-%   commentstyle=\itshape\color{purple!40!black},
-%   identifierstyle=\color{blue},
-%   stringstyle=\color{orange},
-%   morekeywords={lambda},
-%   tabsize=4,
-%   formfeed=newpage
-% }
-% \lstset{style=customc}
-
-% \usepackage{exsheets}
-% \DeclareQuestionProperty{hint}
-% \SetupExSheets{
-%   headings = runin,
-%   question/print = true,
-%   solution/print = false,
-%   counter-format = ch.se.qu,
-%   counter-within = section
-% }
-% % Get question references ok.
-% \renewcommand\thequestion{\thesection.\arabic{question}}
-% \setlist[enumerate,1]{label=\alph*),ref=\thequestion\alph*)}
-
-% % a command to print all given hints
-% \NewDocumentCommand\printquestionhints{}{%
-%    \ForEachQuestion
-%      {%
-%        \IfQuestionPropertyT{hint}{##1}{%
-%          \ExSheetsHeading
-%            {runin}               % headings style
-%            {Hint}                % heading
-%            {\QuestionNumber{##1}}% number
-%            {0}                   % points -- need to be zero here
-%            {0}                   % bonus points -- need to be zero here
-%            {##1}%                % ID
-%          \GetQuestionProperty{hint}{##1}%
-%          \par
-%          \medskip
-%        }%
-%      }%
-% }
-
-% \newcommand{\hint}[1]{\SetQuestionProperties{ hint = {#1}}}
-%\newcommand{\hint}[1]{\hintsymbol\SetQuestionProperties{ hint = {#1}}}
-
 \Newassociation{solution}{Solution}{ans}
 \Newassociation{sol}{Solution}{ans}
 \Newassociation{hint}{Hint}{hint}
@@ -107,31 +51,38 @@
 \newtheorem{example}[theorem]{Example}
 
 
-%\usepackage{geometry}
-\usepackage{framed}
-%\usepackage{fancybox}
-
-\newenvironment{myleftbar}{%
-\def\FrameCommand{\vrule width 2pt\hspace{0.6em}}%
-\MakeFramed{\advance\hsize-\width \FrameRestore}}%
-{\endMakeFramed}
-\usepackage{thmtools}
-
-%\newtheorem{exercise}{}[section]
+\usepackage{xcolor}
 \definecolor{light-gray}{gray}{0.9}
-\declaretheorem[numberwithin=section,name={},
-shaded={bgcolor=light-gray},
-%postheadhook=\leavevmode\myleftbar, %
-% postheadhook=\myleftbar, %
-% prefoothook = \endmyleftbar
-]{exercise}
+\usepackage{mdframed}
 
-% \usepackage{etoolbox}% necessary for the command below
-% %\AtBeginEnvironment{exercise}{\begin{adjustwidth}{0em}{2em}}
+\newtheorem{mdexercise}{}[section]
+\newenvironment{exercise}%
+  {\begin{mdframed}[backgroundcolor=light-gray, hidealllines=true]\begin{mdexercise}}%
+  {\end{mdexercise}\end{mdframed}}
+
+
+
+% \newenvironment{myleftbar}{%
+% \def\FrameCommand{\vrule width 2pt\hspace{0.6em}}%
+% \MakeFramed{\advance\hsize-\width \FrameRestore}}%
+% {\endMakeFramed}
+% \usepackage{thmtools}
+
+% \declaretheorem[numberwithin=section,name={},
+% shaded={bgcolor=light-gray},
+% %postheadhook=\leavevmode\myleftbar, %
+% ]{exercise}
+
+%\usepackage{etoolbox}% necessary for the command below
+%\AtBeginEnvironment{exercise}{\begin{adjustwidth}{0em}{2em}}
+%\AfterBeginEnvironment{exercise}{piet}
 % %\AtEndEnvironment{exercise}{\hspace{\stretch1}\ensuremath\qedsymbol\end{adjustwidth}}
 %\AtBeginEnvironment{exercise}{\leavevmode\myleftbar}
 %\AtEndEnvironment{exercise}{\end{myleftbar}}
+%\AtBeginEnvironment{exercise}{\pagecolor{light-gray}}
+%\AtEndEnvironment{exercise}{}}
 %\BeforeBeginEnvironment{exercise}{\myleftbar}
+%\BeforeBeginEnvironment{exercise}{jaap}
 %\AfterEndEnvironment{exercise}{\endmyleftbar}
 
 

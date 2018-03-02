@@ -2,10 +2,12 @@
 %\documentclass[a4paper,11pt]{book}
 \documentclass[a4paper,11pt]{scrbook}
 
-%\usepackage[nosolutionfiles]{answers}
-\usepackage{answers}
-\usepackage{preamble}
+%\usepackage[solutionfiles]{optional}
+\usepackage[nosolutionfiles]{optional}
+\opt{nosolutionfiles}{\usepackage[nosolutionfiles]{answers}}
+\opt{solutionfiles}{\usepackage{answers}}
 
+\usepackage{preamble}
 
 % handle indentation below figure captions
 %\setcapwidth[c]{.8\textwidth}
@@ -16,22 +18,6 @@
 % include  book references
 \usepackage{xr-hyper}
 \externaldocument{book}
-
-%\usepackage{bigfoot}
-% \DeclareNewFootnote{default} % if `normal' footnotes should be printed first
-%\DeclareNewFootnote{solution}
-%\renewcommand\thefootnotesolution{}
-
-%\renewcommand{\hint}[1]{\SetQuestionProperties{ hint = {#1}}}
-
-
-% \SetupExSheets{
-%   headings = runin,
-%   question/print = true,
-%   %solution/print = true,
-%   counter-within = section,
-%   counter-format = ch.se.qu
-% }
 
 
 \begin{document}
@@ -46,7 +32,7 @@
 %\input{tex_files/adjustments.tex}
 %\input{tex_files/setup_times.tex}
 %\input{tex_files/poissondistribution.tex}
-% \input{tex_files/expdistribution.tex}
+\input{tex_files/expdistribution.tex}
 %\input{tex_files/random_walk.tex}
 %\input{tex_files/ratestability.tex}
 %\input{tex_files/constructiondiscretetime.tex}
@@ -58,10 +44,10 @@
 % \input{tex_files/pasta.tex}
 %\input{tex_files/little.tex}
 %\input{tex_files/usefulidentities.tex}
-\input{tex_files/mxm1_pk.tex}
+%\input{tex_files/mxm1_pk.tex}
 %\input{tex_files/mg1.tex}
 %\input{tex_files/batcharrivals.tex}
-5\input{tex_files/mg1distributionqueuelength.tex}
+%\input{tex_files/mg1distributionqueuelength.tex}
 
 \begin{comment}
 \input{tex_files/single_station_intro.tex}
