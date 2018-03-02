@@ -190,7 +190,7 @@ where, with our common trick (if we don't want to use generating functions),
   \end{split}
 \end{equation*}
 Observe again that using indicators and Fubini's theorem
-(interchanging summations/integrals) makes the above computation
+(interchanging summations and integrals) makes the above computation
 painless. Realize, by the way, that
 \begin{equation*}
   \sum_{n=0}^\infty n p(n) = \sum_{n=1}^\infty n p(n).
@@ -700,7 +700,7 @@ So, returning to the results, as expected, the number of jobs in queue
 is smaller for the $M/M/3$ queue, but the number in service is higher.
 
 To put things in a larger perspective, see
-Figure~\ref{fig:multisingle} where we plot the ratio of the queue
+the figure below where we plot the ratio of the queue
 lengths and the system length as functions of $\rho$. We see, in case
 of high load, that $\E{L_Q}$ and $\E L$ are nearly the same for both
 systems. This is as expected: when the load is high, most jobs should
@@ -713,13 +713,11 @@ is hardly any queueing time, if at all.  Thus, there must be more jobs
 in the system on average in the $M/M/3$ queue than in the fast $M/M/1$
 queue.
 
-\begin{figure}[ht]
-  \centering
+\begin{center}
 % see progs/multi_server_queue.py
 \input{progs/multi_vs_single_server.tex}
-\caption{multi server versus single fast server}
-  \label{fig:multisingle}
-\end{figure}
+\end{center}
+
 The  code can be found on \texttt{github} in the \texttt{progs} directory.
 \end{solution}
 \end{exercise}
@@ -742,5 +740,5 @@ The  code can be found on \texttt{github} in the \texttt{progs} directory.
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "book"
+%%% TeX-master: "../queueing_book"
 %%% End:
