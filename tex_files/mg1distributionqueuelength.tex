@@ -144,14 +144,12 @@ f(j) = \P{Y_k = j} = \frac{\mu}{\lambda+\mu}\left(\frac{\lambda}{\lambda+\mu}\ri
   \end{equation}
   \begin{solution}
 Use conditional probability to see that 
-\begin{equation*}
-  \begin{split}
+\begin{align*}
   \P{Y_n = j} 
 &= \int_0^\infty e^{-\lambda x}\frac{(\lambda x)^j}{j!}\, \d F(x) = \int_0^\infty e^{-\lambda x}\frac{(\lambda x)^j}{j!} \mu e^{-\mu x}\, \d x \\
 &= \frac{\mu}{j!}\lambda^j \int_0^\infty e^{-(\lambda+\mu) x}x^j\,\d x = \frac{\mu}{j!}\left(\frac{\lambda}{\lambda+\mu}\right)^j \int_0^\infty e^{-(\lambda+\mu) x}((\lambda+\mu)x)^j\,\d x \\
 &= \frac{\mu}{j!}\left(\frac{\lambda}{\lambda+\mu}\right)^j \frac{j!}{\lambda+\mu}.
-\end{split}
-\end{equation*}
+\end{align*}
 Here I also used the hints and  results of Exercise~\ref{ex:33}.
 
 In hindsight, this result could have been derived in another way, in
@@ -176,15 +174,13 @@ G(j) = \sum_{k=j+1}^\infty f(k) =  \left(\frac{\lambda}{\lambda+\mu}\right)^{j+1
 \begin{solution}
   Take $\alpha = \lambda/(\lambda+\mu)$ so that
   $f(j) = (1-\alpha) \alpha^j$.
-\begin{equation*}
-  \begin{split}
+\begin{align*}
   G(j) 
 &= \sum_{k=j+1}^\infty f(k)  = (1-\alpha) \sum_{k=j+1}^\infty \alpha^k \\
 & = (1-\alpha) \sum_{k=0}^\infty \alpha^{k+j+1}, \text{ by change of variable}\\
 & = (1-\alpha) \sum_{k=0}^\infty \alpha^{k}\alpha^{j+1}= (1-\alpha)\alpha^{j+1} \sum_{k=0}^\infty \alpha^k \\
 &= (1-\alpha)\alpha^{j+1} \frac{1}{1-\alpha} = \alpha^{j+1}.
-  \end{split}
-\end{equation*}
+\end{align*}
     \end{solution}
 \end{exercise}
 
@@ -224,15 +220,13 @@ where $f(0)=\P{Y=0}$.
 \begin{solution}
 By using the definitions and limits developed in
 Sections~\ref{sec:rate-stability} and~\ref{sec:poisson-arrivals-see},
-\begin{equation*}
-  \begin{split}
+\begin{align*}
   \lim_{t\to\infty} \frac{  D(n+1, 0, t)}t 
 &=   \lim_{t\to\infty}  \frac{D(t)}t \frac{D(n+1, t)}{D(t)}\frac{ D(n+1, 0, t)}{D(n+1,t)} \\
 &=   \delta \delta(n+1) \lim_{t\to\infty} \frac{ D(n+1, 0, t)}{D(n+1,t)} \\
 &=   \delta \delta(n+1) \P{Y=0}\\
 & = \delta \delta(n+1) f(0),
-  \end{split}
-\end{equation*}
+\end{align*}
 where the last limit follows from the independence of $Y_k$ and
 $L(D_{k-1})$, 
 \end{solution}
@@ -351,25 +345,21 @@ Then, divide by $D(n,t)$ and $D(t)$ and take limits.
 \end{hint}
 \begin{solution}
 With the definition of the hint, 
-\begin{equation*}
-  \begin{split}
+\begin{align*}
   \lim_{t\to\infty} \frac{  D(0, n, t)}t 
 &=   \lim_{t\to\infty}  \frac{D(t)}t \frac{D(0, t)}{D(t)}\frac{ D(0, n, t)}{D(0,t)} \\
 &=   \delta \delta(0) \lim_{t\to\infty} \frac{ D(0, n, t)}{D(0,t)} \\
 &=   \delta \delta(0) \P{Y>n}\\
 & = \delta \delta(0) G(n).
-  \end{split}
-\end{equation*}
+\end{align*}
 
-\begin{equation*}
-  \begin{split}
+\begin{align*}
   \lim_{t\to\infty} \frac{  D(m, n, t)}t 
 &=   \lim_{t\to\infty}  \frac{D(t)}t \frac{D(m, t)}{D(t)}\frac{ D(m, n, t)}{D(m,t)} \\
 &=   \delta \delta(m) \lim_{t\to\infty} \frac{ D(m, n, t)}{D(m,t)} \\
 &=   \delta \delta(m) \P{Y>n-m+1}\\
 & = \delta \delta(m) G(n-m+1).
-  \end{split}
-\end{equation*}
+\end{align*}
 \end{solution}
 \end{exercise}
 
@@ -422,8 +412,7 @@ Dividing by $1-\alpha$, we get
 Finally, now that we suspect that $\pi(n) = \rho^n \pi(0)$, let's fill
 it in, and see whether it checks. We divide both sides by $\pi(0)$ so
 that we are left with checking that
-\begin{equation*}
-  \begin{split}
+\begin{align*}
     (1-\alpha)\rho^{n+1} 
 &= \alpha^{n+1} + \sum_{m=1}^n \rho^m \alpha^{n-m+2}  \\
 &= \alpha^{n+1} + \alpha^{n+2}\sum_{m=1}^n (\rho/\alpha)^m  \\
@@ -432,8 +421,7 @@ that we are left with checking that
 &= \alpha^{n+1} + \alpha^{n+1}\rho \frac{1-(\rho/\alpha)^n}{1-\rho/\alpha)}\\
 &= \alpha^{n+1} - \alpha^{n+1}(1-(\rho/\alpha)^n), \quad\text{as } \rho/\alpha = 1+\rho,\\
 &= \alpha^{n+1}(\rho/\alpha)^n = \alpha \rho^n.\\
-  \end{split}
-\end{equation*}
+\end{align*}
 Since $\rho=\alpha/(1-\alpha)$ we see that the left and right hand sides are the same. 
 
 Thus we get that $\pi(n) = \delta(n) = (1-\rho) \pi(0)$; a result we
@@ -544,7 +532,7 @@ This is the same as our earlier answer.
 \input{ans}
 }
 
-\clearpage
+%\clearpage
 
 
 

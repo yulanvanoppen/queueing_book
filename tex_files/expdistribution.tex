@@ -54,15 +54,13 @@ Suppose $\lambda=0$. Then $\P{X\leq t} = 1-e^{0} = 0$. In words, this would mean
   where~$f(t)=\lambda e^{-\lambda t}$ is the density function of the distribution function $F$ of $X$. Now solve the integral.
   \end{hint}
   \begin{solution}
-    \begin{equation*}
-      \begin{split}
+    \begin{align*}
 \E{X} 
 &= \int_0^\infty t \lambda e^{-\lambda t} \d t, \quad\text{density is } \lambda e^{-\lambda t} \\
 &=   \lambda^{-1} \int_0^\infty u e^{-u}\, \d u, \quad \text{ by  change of variable $u=\lambda t$},   \\
 &=  -\lambda^{-1}\left. t e^{- t}\right|_0^\infty + \lambda^{-1} \int_0^\infty e^{- t} \d t\\
 &=  - \lambda^{-1} \left. e^{- t} \right|_0^\infty =  \frac1\lambda.
-      \end{split}
-    \end{equation*}
+    \end{align*}
 
 For the interpretation, if jobs arrive at rate $\lambda$, the average time between two arrivals is $\lambda^{-1}$.
   \end{solution}
@@ -77,8 +75,7 @@ For the interpretation, if jobs arrive at rate $\lambda$, the average time betwe
   \end{equation*}
   \end{hint}
   \begin{solution}
-    \begin{equation*}
-      \begin{split}
+    \begin{align*}
 \E{X^2} 
 &= \int_0^\infty t^2 \lambda e^{-\lambda t} \d t \\
 &=   \lambda^{-2} \int_0^\infty u^2 e^{-u}\, \d u, \quad \text{ by  change of variable $u=\lambda t$},   \\
@@ -86,8 +83,7 @@ For the interpretation, if jobs arrive at rate $\lambda$, the average time betwe
 &=  -2\lambda^{-2}\left. t e^{- t}\right|_0^\infty + 2\lambda^{-2} \int_0^\infty e^{- t} \d t\\
 &=  - 2\lambda^{-2} \left. e^{- t} \right|_0^\infty \\
 &=  2/\lambda^2.
-      \end{split}
-    \end{equation*}
+    \end{align*}
   \end{solution}
 \end{exercise}
 
@@ -138,15 +134,13 @@ Why do we require that $t \in [0, \lambda)$ in the definition of $M_X(t)$?
 \end{equation*}
 \end{hint}
     \begin{solution}
-    \begin{equation*}
-      \begin{split}
+    \begin{align*}
       M_X(t) &= \E{\exp(t X)}  
 =\int_0^\infty e^{tx} f(x) \,\d x 
 =\int_0^\infty e^{tx} \lambda e^{-\lambda x} \,\d x  \\
 &=\lambda \int_0^\infty e^{(t-\lambda)x} \,\d x 
 =\frac{\lambda}{\lambda -t}.
-      \end{split}
-    \end{equation*}
+    \end{align*}
     \end{solution}
   \end{exercise}
 
@@ -336,15 +330,13 @@ is  the density of $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$.
     $A_i$. Let $X_i$ be the interarrival time between customers $i$
     and $i-1$, and $M_X(t)$ the associated moment generating
     function. Using the i.i.d. property of the $\{X_i\}$,
-\begin{equation*}
-  \begin{split}
+\begin{align*}
   M_{A_i}(t) &= \E{e^{t A_i}} = \E{\exp\left(t\sum_{j=1}^{i} X_j\right)} \\
 & = \prod_{j=1}^{i} \E{e^{tX_j}} = 
 \prod_{j=1}^{i} M_{X_j}(t) = 
 \prod_{j=1}^{i} \frac{\lambda}{\lambda -t }
  = \left(\frac{\lambda}{\lambda -t }\right)^i.
-  \end{split}
-\end{equation*}
+\end{align*}
 From a table of moment generation functions it follows immediately that
 $A_i \sim \Gamma(i,\lambda)$, i.e., $A_i$ is Gamma distributed.
 \end{solution}
@@ -372,15 +364,13 @@ Thus,
   where we used the hint.
 
 What if we would use the moment generating function, as derived by the previous exercise?
-\begin{equation*}
-  \begin{split}
+\begin{align*}
     \E{A_i} 
 &= \left.\frac{\d}{\d t} M_{A_i}(t)\right|_{t=0} \\
 &= \left.\frac{\d}{\d t} \left(\frac{\lambda}{\lambda-t}\right)^i\right|_{t=0} \\
 &= i \left.\left(\frac{\lambda}{\lambda-t}\right)^{i-1}\frac{\lambda}{(\lambda-t)^2}\right|_{t=0} 
 = \frac i\lambda.
-  \end{split}
-\end{equation*}
+\end{align*}
 
 
 \end{solution}
@@ -416,14 +406,12 @@ $N(t) \sim \text{P}(\lambda t)$.
     $\P{N(t)=k} = \P{A_k \leq t} - \P{A_{k+1} \leq t}$.  Using the
     density of $A_{k+1}$ as obtained previously and applying partial
     integration leads to
-\begin{equation*}
-  \begin{split}
+\begin{align*}
 \P{A_{k+1} \leq t} 
 &= \lambda \int_0^t \frac{(\lambda s)^{k}}{k!}e^{-\lambda s}\, \d s \\
 &= \lambda \frac{(\lambda s)^{k}}{k!}\frac{e^{-\lambda s}}{-\lambda} \Big|_{0}^t + \lambda \int_0^t \frac{(\lambda s)^{k-1}}{(k-1)!}e^{-\lambda s}\, \d s \\
 &= - \frac{(\lambda t)^{k}}{k!} e^{-\lambda t} + \P{A_k \leq t}
-  \end{split}
-\end{equation*}
+\end{align*}
 We are done.
     \end{solution}
 \end{exercise}
@@ -523,8 +511,7 @@ f_{X,S}(x,y) = f_X(x)f_S(y) = \lambda \mu e^{-\lambda x} e^{-\mu
   y}.
 \end{equation*}
 With this,
-\begin{equation*}
-  \begin{split}
+\begin{align*}
     \P{X\leq S} 
 &= \E{\1{X\leq S}} \\
 &= \int_0^\infty \int_0^\infty \1{x\leq y} f_{X,S}(x,y)\, \d y\,\d x\\
@@ -534,8 +521,7 @@ With this,
 &= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
 &= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
 &= 1 - \frac{\mu}{\lambda + \mu} 
-  \end{split}
-\end{equation*}
+\end{align*}
 
 Method 2. You only have to study this if you (want to) know about conditioning with respect to a random variable with a density, otherwise, skip it.  Start with  the law of total probability in the discrete case: 
 \begin{equation*}
@@ -570,15 +556,13 @@ Using the definition of $f_{X|S}(x|s)$ and the independence of $X$ and $S$ it fo
   f_{X|S}(x|s) = \frac{f_{X, S}( x, s)}{f_S(s)} = \frac{\lambda e^{-\lambda x} \mu e^{-\mu s}}{\mu e^{-\mu s}} = \lambda e^{-\lambda x}
 \end{equation*}
 from which we get that 
-\begin{equation*}
-  \begin{split}
+\begin{align*}
   \E{\1{X \leq S}| S=s } 
 &= \int_0^\infty \1{x \leq s}   f_{X|S}(x|s)\, \d x \\
 &= \int_0^\infty \1{x \leq s} \lambda e^{-\lambda x}\, \d x \\
 &= \int_0^s \lambda e^{-\lambda x}\, \d x \\
 &= 1 - e^{-\lambda s}.
-  \end{split}
-\end{equation*}
+\end{align*}
 
 And then,  
 \begin{equation*}
@@ -718,16 +702,14 @@ service times of jobs.
 \end{hint}
   \begin{solution}
 With the hint, 
-\begin{equation*}
-  \begin{split}
+\begin{align*}
   \E X 
 &= \E{\1{T=1} X_1} + \E{\1{T=2} X_2} \\
 &= \E{\1{T=1}} \E{ X_1} + \E{\1{T=2}} \E{X_2}, \text{ by the independence of $T$}, \\
 &= \P{T=1} /\mu_1 + \P{T=2}/ \mu_2 \\
 &= p /\mu_1 + q/ \mu_2 \\
 &= p \E{X_1}  + q \E{X_2}.
-  \end{split}
-\end{equation*}
+\end{align*}
 (The next derivation may seem a bit long, but the algebra is
 standard. I include all steps so that you don't have to use pen and
 paper yourself if you want to check the result.) Next, using that
@@ -735,8 +717,7 @@ paper yourself if you want to check the result.) Next, using that
 \1{T=1}\1{T=2} = 0 \text{ and } \1{T=1}^2 = \1{T=1},
 \end{equation*}
 we get
-\begin{equation*}
-  \begin{split}
+\begin{align*}
   \V X 
 &= \E{X^2} - (\E X)^2 \\
 &= \E{\left(\1{T=1} X_1 + \1{T=2} X_2\right)^2} - \left(\frac{p}{\mu_1}+\frac{q}{\mu_2}\right)^2 \\
@@ -755,8 +736,7 @@ we get
 -\frac{2pq}{\mu_1\mu_2}\\ 
 &= p \V{X_1} + q \V{X_2}
 + pq(\E{X_1} - \E{X_2})^2.
-\end{split}
-\end{equation*}
+\end{align*}
 \end{solution}
 \end{exercise}
 
@@ -954,7 +934,7 @@ If $F(x) = 1 - e^{-\mu x}$, we obtain that
 \input{ans}
 }
 
-\clearpage  
+%\clearpage  
 
 
 %%% Local Variables:

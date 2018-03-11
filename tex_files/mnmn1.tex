@@ -118,8 +118,7 @@ G &=\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{(1-\rho)c!}, \label
 
   \begin{solution}
 First we use the hint to  establish a generic relation for $p(n+1)$:
-    \begin{equation*}
-      \begin{split}
+    \begin{align*}
        p(n+1) 
 &= \frac{\lambda}{\mu(n+1)}p(n) 
 = \frac{\lambda}{\min\{c, n+1\} \mu }p(n) \\
@@ -127,28 +126,24 @@ First we use the hint to  establish a generic relation for $p(n+1)$:
 = \frac{1}{\min\{c, n+1\}}(c\rho) p(n) \\
 &= \frac{1}{\min\{c, n+1\}\min\{c, n\}}(c\rho)^2 p(n-1) 
 = \frac{1}{\Pi_{k=1}^{n+1}\min\{c, k\}}(c\rho)^{n+1} p(0).
-      \end{split}
-    \end{equation*}
+    \end{align*}
 Thus, if $n<c$:
 \begin{equation*}
   p(n) = \frac{1}{\Pi_{k=1}^{n}\min\{c, k\}}(c\rho)^{n} p(0) = \frac{(c\rho)^n}{n!} p(0),
 \end{equation*}
 since $\min\{c,k\}=k$ when $k<c$. If $n\geq c$:
-\begin{equation*}
-  \begin{split}
+\begin{align*}
   p(n) 
 &= \frac{1}{\Pi_{k=1}^{n}\min\{c, k\}}(c\rho)^{n} p(0) \\
 &= \frac{1}{\Pi_{k=1}^{c-1} k \cdot \Pi_{k=c}^{n} c}(c\rho)^{n} p(0) \\
 &= \frac{1}{(c-1)! c^{n-c+1}}c^n\rho^{n} p(0) \\
 &= \frac{1}{c! c^{n-c}}c^n\rho^{n} p(0) = \\
 &= \frac{c^c}{c!}\rho^{n} p(0).
-  \end{split}
-\end{equation*}
+\end{align*}
 
 
 For the normalization constant $G$ set $p(0)=1$ for the time being. 
-\begin{equation*}
-  \begin{split}
+\begin{align*}
 G &= \sum_{n=0}^\infty p(n) 
 = \sum_{n=0}^{c-1} p(n) + \sum_{n=c}^\infty p(n) \\
 &=\sum_{n=0}^{c-1}\frac{(c\rho)^n}{n!} + 
@@ -161,24 +156,20 @@ G &= \sum_{n=0}^\infty p(n)
 &= 
 \sum_{n=0}^{c-1}\frac{(c\rho)^n}{n!} + 
 \frac{(c\rho)^c}{c!(1-\rho)}.
-  \end{split}
-\end{equation*}
+\end{align*}
 
 
 Next, 
-\begin{equation*}
-  \begin{split}
+\begin{align*}
   \E{L_Q} 
 &=\sum_{n=c}^\infty (n-c) p(n) \\
 &=\sum_{n=c}^\infty (n-c) \frac{c^c}{c!}\rho^{n} p(0) \\
 &=\frac{c^c\rho^c}{G c!} \sum_{n=c}^\infty (n-c) \rho^{n-c} \\
 &=\frac{c^c\rho^c}{G c!} \sum_{n=0}^\infty n \rho^n 
 =\frac{c^c\rho^c}{G c!} \frac{\rho}{(1-\rho)^2},
-  \end{split}
-\end{equation*}
+\end{align*}
 where, with our common trick (if we don't want to use generating functions),
-\begin{equation*}
-  \begin{split}
+\begin{align*}
   \sum_{n=0}^\infty n \rho^n 
 &= \sum_{n=0}^\infty \sum_{i=1}^\infty \1{i\leq n} \rho^n
 = \sum_{i=1}^\infty   \sum_{n=0}^\infty \1{i\leq n} \rho^n\\
@@ -187,8 +178,7 @@ where, with our common trick (if we don't want to use generating functions),
 &= \frac1{1-\rho} \sum_{i=1}^\infty   \rho^i 
 = \frac\rho{1-\rho} \sum_{i=0}^\infty   \rho^i 
 = \frac\rho{(1-\rho)^2}.
-  \end{split}
-\end{equation*}
+\end{align*}
 Observe again that using indicators and Fubini's theorem
 (interchanging summations and integrals) makes the above computation
 painless. Realize, by the way, that
@@ -203,16 +193,14 @@ by
     \end{equation*}
     This expression is not the easiest to start with. With a slight
     modification the entire derivation becomes easier. I also pre-multiply by the normalization constant $G$ to get rid of it on the right hand side. 
-    \begin{equation*}
-      \begin{split}
+    \begin{align*}
       G \E{L_S}
 &= G \sum_{n=0}^{c} n p(n) + \sum_{n=c+1}^{\infty} c p(n) \\
 &= \sum_{n=1}^{c} n \frac{(c\rho)^n}{n!}  + \sum_{n=c+1}^{\infty} c \frac{c^c\rho^n}{c!} 
 = \sum_{n=1}^{c} \frac{(c\rho)^n}{(n-1)!}  + \frac{c^{c+1}}{c!}\sum_{n=c+1}^{\infty} \rho^n\\
 &= \sum_{n=0}^{c-1} \frac{(c\rho)^{n+1}}{n!}  + \frac{(c\rho)^{c+1}}{c!}\sum_{n=0}^{\infty} \rho^n
 = c\rho \left(\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!}  + \frac{(c\rho)^{c}}{c!(1-\rho)}\right).
-      \end{split}
-    \end{equation*}
+    \end{align*}
 Observe that the right hand side is precisely equal to $\rho c G$, and hence,
 \begin{equation*}
   \E{L_S} = c\rho = \frac\lambda\mu.
@@ -252,14 +240,12 @@ patients as jobs.
   Find $\lambda(n)$ and $\mu(n)$ for the $M/M/c/c$ queue, and determine the performance measures.
   \begin{solution}
     $\lambda(n) = \lambda$ if $n< c$, and $\lambda(n)=0$ for $n\geq c$. Then, $\mu(n) = n \mu$ for $n\leq c$. (And $n$ can never be larger than $c$, since $\lambda(n) = 0$ for $n\geq c$.) Define $\rho = \lambda/c \mu$. $p(n) = G^{-1}(c\rho)^n/n!$, $G=\sum_{n=0}^{c} (c\rho)^n/n!$. $\E{L_Q}=0$. 
-    \begin{equation*}
-      \begin{split}
+    \begin{align*}
       \E{L_S} 
 &= \sum_{n=0}^{c} n p(n) = G^{-1} \sum_{n=0}^c n (\lambda/\mu)^n/n! \\
 & G^{-1} \lambda/\mu \sum_{n=0}^{c-1} (\lambda/\mu)^{n-1}/(n-1)! =\\
 & \frac{\lambda}\mu \frac{G - (\lambda/\mu)^c/c!}{G}.
-      \end{split}
-    \end{equation*}
+    \end{align*}
   \end{solution}
 \end{exercise}
 
@@ -344,16 +330,14 @@ Use $\lambda(n) p(n) = \mu(n+1)p(n+1)$ and
       p(n) = \frac{\lambda}{n\mu} p(n-1) = \frac{(\lambda/\mu)^n}{n!} p(0)=\frac{(c\rho)^n}{n!}p(0).
      \end{equation*}
 For $c\leq n\leq c+K$ and using the above to get $p(c-1)$:
- \begin{equation*}
-   \begin{split}
+ \begin{align*}
  p(n) &= \frac{\lambda}{c\mu} p(n-1) 
 = \rho p(n-1) = \rho^2 p(n-2) = \ldots\\
 &=\rho^{n-c+1} p(c-1) 
 =\rho^{n-c+1} \frac{(c\rho)^{c-1}}{(c-1)!}p(0)\\
 &=\rho^{n} \frac{(c)^{c-1}}{(c-1)!}p(0) 
 =\rho^{n} \frac{(c)^{c-1}c}{(c-1)!c}p(0) =\frac{c^c \rho^n}{c!} p(0).
-   \end{split}
- \end{equation*}
+ \end{align*}
 The normalization is trivial, numerically at least.
   \end{solution}
 \end{exercise}
@@ -577,8 +561,7 @@ Use $\lambda(n) p(n) = \mu(n+1)p(n+1)$, and realize that for
     \begin{solution}
  Take $\lambda(n) = (N-n)\lambda$ and $\mu(n) = \mu$, and solve
     Eq.~\eqref{eq:25} and \eqref{eq:20}.  Thus: 
-    \begin{equation*}
-      \begin{split}
+    \begin{align*}
        p(n+1) 
 & = \frac{(N-n)\lambda}\mu p(n) 
  = \rho (N-n) p(n) \\
@@ -586,8 +569,7 @@ Use $\lambda(n) p(n) = \mu(n+1)p(n+1)$, and realize that for
 & = \rho^3 (N-n)(N-(n-1))(N-(n-2)) p(n-2) \\
 & = \rho^{n+1} (N-n)(N-(n-1))\cdots(N-(0)) p(0) \\
 &= \rho^{n+1} \frac{N!}{(N-(n+1))!}p(0). 
-      \end{split}
-    \end{equation*}
+    \end{align*}
     Next, we need to normalize this. Observe that
     $p(N+1)=P(N+2) = \ldots = 0$ since there are just $N$ customers,
     so that the system can never contain more than $N$
@@ -609,16 +591,14 @@ I asked WolframAlpha to simplify this, but the answer I got was not particularly
     size of the calling population.
     \begin{solution}
   Take $\lambda(n) = (N-n)\lambda$ and $\mu(n) = n \mu$. Then 
-    \begin{equation*}
-      \begin{split}
+    \begin{align*}
       p(n+1) 
 &= \frac{\lambda(n)}{\mu(n+1)} p(n) 
 = \frac{(N-n)\lambda}{(n+1)\mu} p(n) 
 = \frac{(N-n)(N-(n-1))}{(n+1)n}\frac{\lambda^2}{\mu^2} p(n-1) \\
 &= \frac{N!}{(N-(n+1))!}\frac1{(n+1)!}\rho^{n+1} p(0) 
   = {N \choose n+1}\rho^{n+1} p(0).
-      \end{split}
-    \end{equation*}
+    \end{align*}
     Hence, after normalization, i.e., requiring that $p(0)$ is such
     that $\sum_{n=0}^N p(n) = 1$, so that $p(0) = \left(\sum_{k=0}^N \rho^k { N \choose k} \right)^{-1}$, the final result becomes
 \begin{equation*}
@@ -736,7 +716,7 @@ The  code can be found on \texttt{github} in the \texttt{progs} directory.
 \input{ans}
 }
 
-\clearpage
+%\clearpage
 
 %%% Local Variables:
 %%% mode: latex

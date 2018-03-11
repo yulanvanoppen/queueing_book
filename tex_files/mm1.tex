@@ -186,8 +186,7 @@ Show that the density of $D_{n} - D_{n-1}$ is
     \begin{solution}
       By the previous point, the density of $D_{n} - D_{n-1}$ is the
       same as the density of $X_n + S_n$. Therefore, by conditioning,
-    \begin{equation*}
-      \begin{split}
+    \begin{align*}
     f_{X+S}(t) 
 &= \P{X+S\in \d{t}} \\
 &= \int \P{S+x\in \d{t}}\P{X\in \d{x}} \\
@@ -195,8 +194,7 @@ Show that the density of $D_{n} - D_{n-1}$ is
      &= \int_0^t \mu e^{-\mu(t-x)} \lambda e^{-\lambda x} \d{x} \\
      &= \lambda \mu e^{-\mu t} \int_0^t  e^{x(\mu-\lambda)} \d{x} \\
 & \frac{\lambda \mu}{\lambda - \mu} (e^{-\mu t} - e^{-\lambda t}).
-      \end{split}
-    \end{equation*}
+    \end{align*}
     \end{solution}
 \end{exercise}
 
@@ -228,8 +226,7 @@ The final result is
     $f_D(t) = \lambda e^{-\lambda t}$.
   \end{hint}
   \begin{solution}
-       \begin{equation*}
-        \begin{split}
+       \begin{align*}
     f_D(t) 
 &= f_{X+S}(t) \P I + f_S \P B \\
 &= (1-\rho) f_{X+S}(t) +    \rho \mu e^{-\mu t} \\
@@ -239,9 +236,7 @@ The final result is
 % &= \frac{\mu-\lambda}\mu \frac{\mu\lambda}{\lambda-\mu}\left(e^{-\mu t}-e^{-\lambda t}\right)  +    \lambda e^{-\mu t} \\
 &= - \lambda\left(e^{-\mu t}-e^{-\lambda t}\right)  +    \lambda e^{-\mu t} \\
 &=  \lambda e^{-\lambda t}.
-        \end{split}
-      \end{equation*}
-
+      \end{align*}
   \end{solution}
 \end{exercise}
 
@@ -265,26 +260,26 @@ In more general terms, in a queueing system or an inventory system, there is alw
 
 \begin{figure}[th]
 \begin{center}
-\begin{tikzpicture}[scale=0.8]
+\begin{tikzpicture}[yscale=0.5]
 \draw[->] (0,0) -- coordinate (x axis mid) (8.5,0);
 \draw[->] (0,0) -- coordinate (y axis mid) (0,10.5);
 \node[below=0.2cm] at (x axis mid) {$t$};
 
-\draw plot coordinates {(1,0) (1,2) (2,1) (2,4) (4,2) (4,3.5) (7.5,0)};
-\node[left]  at (7,1.5) {$V(t)$};
+\draw plot coordinates {(1,0) (1,2) (2,1) (2,4) (4,2) (4,4.2) (7.5,0)};
+\node[left]  at (7,2.5) {$V(t)$};
 \node[fill=white, rotate=90]  at (1,1) {$S_1$};
 \node[fill=white, rotate=90]  at (2,2.5) {$S_2$};
-\node[fill=white, rotate=90]  at (4,2.75) {$S_3$};
+\node[fill=white, rotate=90]  at (4,3.) {$S_3$};
 
-\node  at (4,5) {$V(t)=S-I(t)$};
+\node  at (7,5) {$V(t)=S-I(t)$};
 
 \draw[dotted] (0,10)--(8.5,10);
 \node[left]  at (0,10) {$S$};
-\node[left]  at (7,8.5) {$I(t)$};
-\draw plot coordinates {(1,10) (1,8) (2,9) (2,6) (4,8) (4,6.5) (7.5,10)};
+\node[left]  at (7,7.5) {$I(t)$};
+\draw plot coordinates {(1,10) (1,8) (2,9) (2,6) (4,8) (4,6.0) (7.5,10)};
 \node[fill=white, rotate=90]  at (1,9) {$D_1$};
 \node[fill=white, rotate=90]  at (2,7.5) {$D_2$};
-\node[fill=white, rotate=90]  at (4,7.25) {$D_3$};
+\node[fill=white, rotate=90]  at (4,7) {$D_3$};
 \end{tikzpicture}
 \end{center}
 \caption{The relation between inventory and queueing systems. Here $I(t)$ models the evolution of the inventory level in an  inventory system, while $V(t)$ shows the virtual workload, and $S$ is the order up to level. When a customer requires $D_1$ items, say, it takes a server of a time $S_1=D_1$ to produce these items. Thus, demands at the inventory system convert into production times in a queueing system.  When the inventory is always replenished to level $S$, then the shortage of the inventory level relative to $S$, i.e., $S-I(t)$, becomes the workload $V(t)$ for the server in terms of amount of items or production time.} \label{fig:inv_queue}
@@ -439,8 +434,6 @@ hour $t$.
 \input{ans}
 }
 
-
-\clearpage
 
 %%% Local Variables:
 %%% mode: latex

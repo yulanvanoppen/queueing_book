@@ -401,7 +401,7 @@ being busy, we get that $\E{B_r} = \rho \E R$, thereby yielding~\eqref{eq:br}.
 
 \begin{figure}[th]
   \centering
-  \begin{tikzpicture}[scale=0.8,
+  \begin{tikzpicture}[yscale=0.8,xscale=0.6,
   open/.style={shape=circle, fill=white, inner sep=1pt, draw, node contents=},
   closed/.style={shape=circle, fill=black, inner sep=1pt, draw, node contents=}]
 
@@ -493,8 +493,9 @@ Only if $B_k \geq i$ there can be an $i$th item of the batch, and the time this 
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
-Show that 
+
+\begin{exercise}\label{ex:14}
+Use the previous exercise to show that 
 \begin{equation*}
   Y_S(i, D_n) = \sum_{k=1}^n \1{B_k\geq i} S_{k,i}.
 \end{equation*}
@@ -505,6 +506,58 @@ Show that
 At the departure time $D_n$ of the $n$th batch, precisely $n$ batches have been served. Thus, each batch with more than $i$ items, contributed to the integral $\int_0^{D_n} \1{L_S(s) =i} \d s$ with the service time $S_{k,i}$. 
 \end{solution}
 \end{exercise}
+
+
+In Exercise~\ref{ex:14} we will use the result that
+\begin{equation*}
+\lim_{n\to\infty} \frac{\sum_{k=1}^n \1{B_k\geq i} S_{k,i}}{\sum_{k=1}^n \1{B_k\geq i}} = 
+\E{S \given B\geq i} = \E{S}
+ \end{equation*}
+where the last equality follows from independence.  The next exercise is meant to help understand this.
+
+\begin{exercise}
+We are given two i.i.d. sequences $A_1, A_2, \ldots $ and $H_1, H_2, \ldots$, where $A_k$ is the  $k$th person's age and $H_k$ the height. Show that
+\begin{equation*}
+\lim_{n\to\infty} 
+\frac{  \sum_{k=1}^n \1{A_k\leq 15, H_k \leq 1.8}}{\sum_{k=1}^n \1{A_k \leq 15}} 
+= \P{H\leq 1.8 \given A \leq 15},
+\end{equation*}
+where $H$ and $A$ are the limiting r.v.s associated with $\{H_k\}$ and $\{A_k\}$, respectively. With this, show that
+\begin{equation*}
+  \lim_{n\to\infty} \frac{ \sum_{k=1}^n H_k \1{A_k\leq 15}}{\sum_{k=1}^n \1{A_k \leq 15}} = \E{H \given A\leq 15}.
+\end{equation*}
+\begin{hint}
+  Divide and multiply by $1/n$. 
+\end{hint}
+\begin{solution}
+\begin{equation*}
+  \begin{split}
+\frac{  \sum_{k=1}^n \1{A_k\leq 15, H_k \leq 1.8}}{\sum_{k=1}^n \1{A_k \leq 15}} 
+&= \frac{ n^{-1} \sum_{k=1}^n \1{A_k\leq 15, H_k \leq 1.8}}{n^{-1}\sum_{k=1}^n \1{A_k \leq 15}} \\
+&\to \frac{\P{H\leq 1.8, A\leq 15}}{\P{A\leq 15}} = \P{H\leq 1.8 \given A\leq 15}.
+  \end{split}
+\end{equation*}
+
+The next equation is more subtle. Take some $\delta>0$. It is simple to see that
+\begin{equation*}
+\delta \sum_{m=0}^\infty m \1{H_k \in [m\delta, (m+1)\delta)}
+\leq H_k \leq \delta \sum_{m=0}^\infty (m+1) \1{H_k \in [m\delta, (m+1)\delta)}.
+\end{equation*}
+Morever, if $\delta\to 0$, the left and right hand side converge. Let us use the left hand side as an approximation for $H_k$. 
+
+\begin{align*}
+\frac{ \sum_{k=1}^n H_k \1{A_k\leq 15}}{\sum_{k=1}^n \1{A_k \leq 15}} 
+&\approx
+\delta \frac{ \sum_{k=1}^n  \sum_{m=0}^\infty m \1{A_k\leq 15, H_k \in [m\delta, (m+1)\delta)}}{\sum_{k=1}^n \1{A_k \leq 15}}  \\
+&= \delta \sum_{m=0}^\infty m \frac{ \sum_{k=1}^n   \1{A_k\leq 15, H_k \in [m\delta, (m+1)\delta)}}{\sum_{k=1}^n \1{A_k \leq 15}}  \\
+&\stackrel{n\to\infty}{\longrightarrow} \delta \sum_{m=0}^\infty m \frac{ \P{{A\leq 15, H \in [m\delta, (m+1)\delta)}}}{\P{A \leq 15}}  \\
+&=\delta \sum_{m=0}^\infty m \P{H \in [m\delta, (m+1)\delta)\given A \leq 15} \\
+&\stackrel{\delta\to0}{\longrightarrow}  \E{H\given A \leq 15}.
+\end{align*}
+Finally, if $H$ and $A$ would be independent (which they are not), then it is easy  in the above to take out the condition on $A\leq 15$ and conclude that $\E{H\given A\leq 15} = \E{H}$. 
+\end{solution}
+\end{exercise}
+
 
 \begin{exercise}
 By taking the time average, show that
@@ -557,10 +610,10 @@ With the above exercises we conclude that
 \input{ans}
 }
 
-\clearpage
+%\clearpage
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../book"
+%%% TeX-master: "../queueing_book"
 %%% End:
 

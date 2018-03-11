@@ -12,6 +12,9 @@ Besides failures, service interruptions  may occur between any two jobs, for ins
 but  \emph{between} two jobs.  In this section we develop a simple model to incorporate the effects on the SCV of the service times of non-preemptive outages, so that we again can estimate waiting times with the $G/G/1$ waiting time formula. 
 
 
+Setups differ from random interruptions in that they occur, often, between any $B$ jobs, and service starts once $B$ jobs have been assembled into a batch. As we will see, this has considerable consequences on the system times. 
+
+
 Suppose that an interruption occurs on average between $B$ jobs and the adjustment time is a random variable $T$. Let the average net service time of a job be $\E{S_0}$. 
 \begin{exercise}
   Show that the average \recall{effective} processing time $S_e$, i.e., the time the service is occupied with processing jobs including adjustments, is 
@@ -226,9 +229,9 @@ Zijm.Ex.1.11.7
 \input{ans}
 }
 
-\clearpage
+%\clearpage
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "booktest"
+%%% TeX-master: "../queueing_book"
 %%% End:

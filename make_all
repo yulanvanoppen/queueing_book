@@ -1,14 +1,13 @@
-source ~/progs/venv/bin/activate
-rm -rf pythontex-files-book/
+rm -rf pythontex-files-*
 pdflatex queueing_book
 #bibtex queueing_book
 pythontex --interpreter python:python3 queueing_book
 pdflatex queueing_book
 pdflatex queueing_book
 
-rm -rf pythontex-files-book_mobile/
 pdflatex queueing_book_mobile
 #bibtex queueing_book_mobile
 pythontex --interpreter python:python3 queueing_book_mobile
 pdflatex queueing_book_mobile
 pdflatex queueing_book_mobile
+
