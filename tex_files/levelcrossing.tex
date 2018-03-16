@@ -433,19 +433,28 @@ the above into
 \begin{equation}\label{eq:25}
   p(n+1) = \frac{\lambda(n)}{\mu(n+1)}p(n). 
 \end{equation}
-Thus, if we have $p(n)$ we can compute $p(n+1)$, and so on. In other
-words, if $p(0)$ is known, than $p(1)$ follows, from which $p(2)$
+Thus, this equation fixes the ratios between the probabilities. In other words, if we know $p(n)$ we can compute $p(n+1)$, and so on. Hence, if $p(0)$ is known, than $p(1)$ follows, from which $p(2)$
 follows, and so on. A straightaway iteration then leads to
 \begin{equation}\label{eq:38}
   p(n+1) = \frac{\lambda(n)\lambda(n-1)\cdots \lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)}p(0).
 \end{equation}
-Finally, to determine $p(0)$ we can use the fact that numbers $p(n)$
-have to be normalized.  Let the \recall{normalization constant} be given by
+
+To determine $p(0)$ we can use the fact that the numbers $p(n)$ represent probabilities, which means that the sum of the probabilities should be one. Hence, from the requirement
+\begin{align*}
+1 
+&= \sum_{n=0}^\infty p(n) \\
+&= p(0) \sum_{n=0}^\infty \frac{\lambda(n)\lambda(n-1)\cdots\lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)}
+\end{align*}
+we obtain  
+\begin{equation*}
+  p(0) = G^{-1},
+\end{equation*}
+where $G$ is the \recall{normalization constant}
 \begin{equation}
   \label{eq:20}
-G = 1 + \frac{\lambda(0)}{\mu(1)} + \frac{\lambda(0)\lambda(1)}{\mu(1)\mu(2)} + \cdots. 
+G = \sum_{n=0}^\infty \frac{\lambda(n)\lambda(n-1)\cdots\lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)}.
 \end{equation}
-Then,  $p(0)=G^{-1}$ and $p(n)$ follows from Eq.~\eqref{eq:38}. 
+Now that we know $p(0)$,  $p(n)$ follows from Eq.~\eqref{eq:38}. 
 
 Let us now express a few important performance measures in terms of
 $p(n)$: the average number of items $\E L$ in the system and the
@@ -771,7 +780,8 @@ hence $p(1) = p(0)(\mu + \lambda)/\mu$.
 
 %\clearpage
 
+
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../book"
+%%% TeX-master: "../queueing_book"
 %%% End:

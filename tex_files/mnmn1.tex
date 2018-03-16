@@ -35,17 +35,19 @@ For the $M/M/1/K$, i.e., a system that cannot contain more than $K$ jobs, take
   \end{cases} \\
 \mu(n) &= \mu.
   \end{align*}
-  Then,
+
+\begin{exercise} ($M/M/1/K$ queue)
+ Derive 
 \begin{subequations}\label{eq:8}
  \begin{align}
 p(n) &=  \frac{\rho^n}G, \quad 0\leq n \leq K,\\
-G &= \frac{1-\rho^{K+1}}{1-\rho}, \\
+G &= \frac{1-\rho^{K+1}}{1-\rho}, \text{ (normalization constant)},\\
 P_{\text{loss}} &= \P{L=K} = \frac{\rho^K}G = \frac{1-\rho}{1-\rho^{K+1}} \rho^K.
 \end{align}
 \end{subequations}
-
-\begin{exercise} ($M/M/1/K$ queue)
- Derive Eq.~\eqref{eq:8}
+\begin{hint}
+  Use the equations around~\eqref{eq:38}.
+\end{hint}
   \begin{solution}
 Note that 
 \begin{equation*}
@@ -59,7 +61,7 @@ and the result follows.
   \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise} 
    Show that as $K\to\infty$, the performance measures of the $M/M/1/K$ converge to those of the $M/M/1$ queue. 
   \begin{hint}
 Use that $\sum_{i=0}^n x^i = (1-x^{n+1})/(1-x)$. BTW, is it
@@ -94,12 +96,14 @@ For the $M/M/c$ queue we can take
   \end{cases}
   \end{align*}
 This model is also known as the \recall{Erlang $C$}-formula. 
+
+\begin{exercise}($M/M/c$)
 Define the load as 
 \begin{subequations}\label{eq:9}
 \begin{equation}
   \rho = \frac{\lambda}{c\mu}.
 \end{equation}
-  Then,
+  Then, derive
  \begin{align}
 p(n) &= \frac{1}G \frac{(c\rho)^n}{n!}, \quad n=0,\ldots, c, \label{eq:502}\\
 p(n) &= \frac{1}G \frac{c^c\rho^n}{c!}, \quad n=c,c+1, \ldots \\
@@ -108,10 +112,6 @@ G &=\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{(1-\rho)c!}, \label
 \E{L_S} &= \sum_{n=0}^{c}n p(n) + \sum_{n=c+1}^\infty c p(n) = \frac{\lambda}\mu.
 \end{align}
 \end{subequations}
-
-\begin{exercise}
-  Derive Eq.\eqref{eq:9} for the $M/M/c$ queue.
-
   \begin{hint}
  Use $\lambda(n)p(n) = \mu(n+1)p(n+1)=\min\{c, n+1\}\mu p(n+1)$.
   \end{hint}
@@ -142,22 +142,26 @@ since $\min\{c,k\}=k$ when $k<c$. If $n\geq c$:
 \end{align*}
 
 
-For the normalization constant $G$ set $p(0)=1$ for the time being. 
+To obtain  the normalization constant $G$,
 \begin{align*}
-G &= \sum_{n=0}^\infty p(n) 
+1 &= \sum_{n=0}^\infty p(n) 
 = \sum_{n=0}^{c-1} p(n) + \sum_{n=c}^\infty p(n) \\
-&=\sum_{n=0}^{c-1}\frac{(c\rho)^n}{n!} + 
- \sum_{n=c}^{\infty} \frac{c^c}{c!} \rho^{n}  \\
-&=\sum_{n=0}^{c-1}\frac{(c\rho)^n}{n!} + 
- \sum_{n=c}^{\infty} \frac{(c\rho)^c}{c!} \rho^{n-c}  \\
+&=p(0) \sum_{n=0}^{c-1}\frac{(c\rho)^n}{n!} + 
+ p(0)\sum_{n=c}^{\infty} \frac{c^c}{c!} \rho^{n}  \\
+&=p(0)\sum_{n=0}^{c-1}\frac{(c\rho)^n}{n!} + 
+ p(0) \sum_{n=c}^{\infty} \frac{(c\rho)^c}{c!} \rho^{n-c}  \\
 &= 
-\sum_{n=0}^{c-1}\frac{(c\rho)^n}{n!} + 
-\frac{(c\rho)^c}{c!} \sum_{n=0}^{\infty} \rho^n \\
+p(0)\sum_{n=0}^{c-1}\frac{(c\rho)^n}{n!} + 
+p(0)\frac{(c\rho)^c}{c!} \sum_{n=0}^{\infty} \rho^n \\
 &= 
-\sum_{n=0}^{c-1}\frac{(c\rho)^n}{n!} + 
-\frac{(c\rho)^c}{c!(1-\rho)}.
+p(0) \sum_{n=0}^{c-1}\frac{(c\rho)^n}{n!} + 
+p(0)\frac{(c\rho)^c}{c!(1-\rho)}.
 \end{align*}
-
+Hence, by setting
+\begin{equation*}
+  G= \sum_{n=0}^{c-1}\frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{c!(1-\rho)},
+\end{equation*}
+we get $p(0)=1/G$, and from this the rest follows. 
 
 Next, 
 \begin{align*}
@@ -215,6 +219,7 @@ Fill in $c=1$. Realize that this is a check on the formulas.
   \end{hint}
   \begin{solution}
 Take $c=1$
+\begin{subequations}
  \begin{align}
 p(0) &= \frac{1}G \frac{(c\rho)^0}{0!}=\frac1 G, \quad n=0,\ldots, 1-1 \\
 p(n) &= \frac{1}G \frac{c^c\rho^n}{c!} = \frac{1}G \frac{1^1\rho^n}{1!} =\frac{\rho^n}G , \quad n=1,1+1, \ldots \\
@@ -225,6 +230,7 @@ G &=\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{(1-\rho)c!}
 = \frac{\rho}{1/(1-\rho)}\frac{\rho}{(1-\rho)^2} = \frac{\rho^2}{1-\rho} \\
 \E{L_S} &= \sum_{n=0}^{c}n p(n) + \sum_{n=c+1}^\infty c p(n) = p(1) + 1 \sum_{n=2}^\infty p(n) = 1- p(0) = \rho.
 \end{align}
+\end{subequations}
 Everything is in accordance to the formulas we derived earlier for the $M/M/1$ queue.    
   \end{solution}
 \end{exercise}
@@ -236,15 +242,21 @@ is also known as the Erlang $B$-formula and is often used to determine
 the number of beds at hospitals, where the beds act as servers and the
 patients as jobs.
 
-\begin{exercise}
+\begin{exercise}($M/M/c/c$)
   Find $\lambda(n)$ and $\mu(n)$ for the $M/M/c/c$ queue, and determine the performance measures.
-  \begin{solution}
-    $\lambda(n) = \lambda$ if $n< c$, and $\lambda(n)=0$ for $n\geq c$. Then, $\mu(n) = n \mu$ for $n\leq c$. (And $n$ can never be larger than $c$, since $\lambda(n) = 0$ for $n\geq c$.) Define $\rho = \lambda/c \mu$. $p(n) = G^{-1}(c\rho)^n/n!$, $G=\sum_{n=0}^{c} (c\rho)^n/n!$. $\E{L_Q}=0$. 
+  \begin{solution} Take,
+    $\lambda(n) = \lambda$ if $n< c$, and $\lambda(n)=0$ for $n\geq c$. Also, let, $\mu(n) = n \mu$ for $n\leq c$. (And $n$ can never be larger than $c$, since $\lambda(n) = 0$ for $n\geq c$.) Define $\rho = \lambda/c \mu$. Then, we see that $p(n) = p(0)(c\rho)^n/n!$. For the normalization
+    \begin{equation*}
+      1=\sum_{n=0}^c p(n) = p(0) \sum_{n=0}^c \frac{(c\rho)^n}{n!}.
+    \end{equation*}
+Thus,  the normalization constant $G=\sum_{n=0}^{c}$, and $p(0)=G^{-1}$. 
+
+Since there are as many servers as places available in the system, $\E{L_Q}=0$. The expected number of servers busy is
     \begin{align*}
       \E{L_S} 
-&= \sum_{n=0}^{c} n p(n) = G^{-1} \sum_{n=0}^c n (\lambda/\mu)^n/n! \\
-& G^{-1} \lambda/\mu \sum_{n=0}^{c-1} (\lambda/\mu)^{n-1}/(n-1)! =\\
-& \frac{\lambda}\mu \frac{G - (\lambda/\mu)^c/c!}{G}.
+&= \sum_{n=0}^{c} n p(n) = G^{-1} \sum_{n=0}^c n \frac{(\lambda/\mu)^n}{n!} \\
+&= \frac{\lambda}{\mu G} \sum_{n=0}^{c-1} \frac{(\lambda/\mu)^{n-1}}{(n-1)!} \\
+&= \frac{\lambda}{G\mu} \left(G- \frac{(\lambda/\mu)^c}{c!}\right).
     \end{align*}
   \end{solution}
 \end{exercise}

@@ -501,26 +501,28 @@ This
   into two disjoint part: one part with states $0, 1, \ldots, n$ and
   the other part with states $n+1, n+2, \ldots, K$. We call this
   imaginary line `level $n$'.  We call an `upcrossing' a transition
-  from some state $m\leq n$ to a state $l\geq n+1$. We also say in
-  that case that level $n$ is `crossed from below', i.e., from some
-  state $m\leq n$ to a state $l\geq n+1$. Likewise, a `downcrossing'
-  of level $n$ happens when this level is crossed from `above',
-  i.e. from some state $l\geq n+1$ to some state $m\leq n$.
-
+  from some state $m\leq n$ to a state $l> n$. Likewise, a `downcrossing'  of level~$n$ is a transition from some state $l> n$ to some state $m\leq n$.
 
   If the system contains $n$ jobs,  level $n$ is
   crossed from below with rate $\lambda \pi(n) \P{B \leq K-n}$.  More generally,
   when the system is in state $m\leq n$, we need a batch of at least
-  $n+1-m$ to cross the $n$. Moreover, any batch larger than $K+1-m$
+  $n+1-m$ to cross level~$n$. Moreover, any batch larger than $K-m$
   gets rejected. Thus, when the system contains $m \leq n $ jobs, the
   rate at which level $n$ is crossed from below is
   \begin{equation*}
-  \lambda \pi(m) \P{n+1-m\leq B \leq K+1-m} = \lambda \pi(m)
-  [G(n-m)-G(K-m)].
+  \lambda \pi(m) \P{n+1-m\leq B \leq K-m}  = \lambda \pi(m)
+  [G(n-m)-G(K-m)],
   \end{equation*}
+where we use that
+\begin{align*}
+\P{n+1-m\leq B \leq K-m} 
+&= \P{B \leq K-m} - \P{B \leq n-m}  \\
+&= \P{B > n-m} - \P{B > K-m} \\
+&= G(n-m)-G(K-m).
+\end{align*}
 
   Since the server serves only single items, level $n$ can only be
-  crossed from above from state $n+1$. This happens at rate $\mu p(n+1)$. 
+  crossed from above from state $n+1$. This happens at rate $\mu p(n+1)$. With PASTA this is equal to $\mu \pi(n+1)$.
 
   Finally, since on the long run the number of up- and crossings must
   be the same, the up- and downcrossing rates must match. This implies

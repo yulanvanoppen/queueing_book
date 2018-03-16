@@ -246,10 +246,10 @@ Think about the
 
 \begin{exercise}
   Use the PASTA property and the ideas of Section~\ref{sec:level-cross-balance}
- to derive  for the $M/M/1$ queue that
+ to derive for the $M/M/1$ queue that
 $(\lambda + \mu) \pi(n) = \lambda \pi(n-1) + \mu \pi(n+1)$
   \begin{hint}
-    Consider some state $n$ and count all transitions that `go in and
+    Consider some state $n$ (not a level) and count all transitions that `go in and
     out of' this state. Specifically, $A(n,t) + D(n-1,t)$ counts all
     transitions out of state $n$: $A(n,t)$ counts the number of
     arrivals that see $n$ in the system upon arrival, hence
@@ -262,19 +262,14 @@ $(\lambda + \mu) \pi(n) = \lambda \pi(n-1) + \mu \pi(n+1)$
     state $n$ is entered). Now use that `what goes in must go out'.    
   \end{hint}
   \begin{solution}
-By  the hint,  the difference between the `in'
-    transitions and the `out' transitions is at most 1 for all $t$. Thus,  we can write
-    \begin{equation*}
-      A(n,t) + D(n-1,t) \approx A(n-1,t) + D(n,t)
-    \end{equation*}
-From this, 
-    \begin{equation*}
-      \begin{split}
+By  the hint,  the difference between the `out
+    transitions and the `in transitions is at most 1 for all $t$. Thus,  we can write
+    \begin{align*}
+\text{transitions out } &\approx \text{transitions in } \iff \\
       A(n,t) + D(n-1,t) &\approx A(n-1,t) + D(n,t)  \iff \\
       \frac{A(n,t) + D(n-1,t)}t &\approx \frac{A(n-1,t) + D(n, t)}t \iff \\
       \frac{A(n,t)}t + \frac{D(n-1,t)}t &\approx \frac{A(n-1,t)}t + \frac{D(n,t)}t.
-      \end{split}
-    \end{equation*}
+    \end{align*}
 Using the ideas of Section~\ref{sec:level-cross-balance} this becomes for $t\to\infty$, 
 \begin{equation*}
   (\lambda(n) +\mu(n))p(n) = \lambda(n-1)p(n-1) + \mu(n+1)p(n+1).
@@ -408,7 +403,8 @@ Thus, Eq.~\eqref{eq:1333} follows from the renewal reward theorem.
 }
 %\clearpage
 
+
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../book"
+%%% TeX-master: "../queueing_book"
 %%% End:

@@ -151,27 +151,26 @@ Why is $\mu e^{-\mu t}$ not a reasonable density for the
     \end{solution}
 \end{exercise}
 
-The simplest guess for the inter-departure density might be $\lambda e^{-\lambda t}$; so this is what we will try to prove. As we will see, this result hold.
+The simplest guess for the inter-departure density might be $\lambda e^{-\lambda t}$; so this is what we will try to prove. As we will see, this result hold. 
+
+We will focus on departure moments and use~\eqref{eq:39}, in particular that departures `see' what arrivals `see', i.e., $\delta(n)= \pi(n)$, and PASTA.
 
 
 \begin{exercise}
- Observe that when a customer arrives, the server can be either
+ Observe that when a customer departs, the server can be either
     idle $I$ or busy $B$.   Show that $\P{I} = 1-\rho$.
     \begin{solution}
- $\P I = p_0 =\pi_0$. Recall that $\pi_0$ is what
-    the jobs see upon arrival and $p(0)$ is the time-average. By PASTA
-    these are the same.  Recall also that $p_0 = 1-\rho$.
+ $\P I = p(0) =\pi(0)=\delta(0)$.  Recall now that $p_0 = 1-\rho$.
     \end{solution}
 \end{exercise}
 
 \begin{exercise}
- If job $n$, say, finds the system empty, show that the expected time between the departure  the $n$the job and  job $n-1$ is given by $\E{D_n - D_{n-1}} = 1/\lambda + 1/\mu$. 
+ If job $n-1$, say, leaves behind an empty system, show that the expected time until the next departure is $\E{D_n - D_{n-1}} = 1/\lambda + 1/\mu$. 
     \begin{hint}
       After job $n-1$ left, job $n$ has to arrive, so we need to wait first for this interarrival time. Then job $n$ must be served. This adds up to $1/\lambda + 1/\mu$. 
     \end{hint}
     \begin{solution}
-  When job $n$ finds an empty system, job $n-1$ left an empty
-    system behind. Thus, we first have to wait for an inter-arrival
+With the hint, we first have to wait for an inter-arrival
     time $X_n$. Then, since job $n$'s service starts right away, it
     leaves when $D_n = D_{n-1}+X_n + S_n$. Thus, the expected duration is $\E{X_n + S_n}=1/\lambda + 1/\mu$. 
     \end{solution}
@@ -180,10 +179,12 @@ The simplest guess for the inter-departure density might be $\lambda e^{-\lambda
 \begin{exercise}
 Show that the density of $D_{n} - D_{n-1}$ is
     \begin{equation*}
-    f_{X+S}(t) = \frac{\lambda \mu}{\lambda - \mu} (e^{-\mu t} - e^{-\lambda t}).
+    f_{X+S}(t) = \frac{\lambda \mu}{\lambda - \mu} (e^{-\mu t} - e^{-\lambda t})
     \end{equation*}
-
+if the server is idle after $D_{n-1}$.
     \begin{solution}
+BTW, I am in the process of rewriting this slightly. 
+
       By the previous point, the density of $D_{n} - D_{n-1}$ is the
       same as the density of $X_n + S_n$. Therefore, by conditioning,
     \begin{align*}
@@ -199,31 +200,30 @@ Show that the density of $D_{n} - D_{n-1}$ is
 \end{exercise}
 
 \begin{exercise}
-Why is the probability that a job arrives at a busy station equal to $\rho$?
+Show with  probability $\rho$ that a job leaves behind a busy station.
     \begin{solution}
-        $\P B = \P{\text{busy}}=\rho$.
+For the time average, 
+        $\P B = \sum_{n=1}^\infty p(n) = \rho$.
+    \end{solution}
+From PASTA $\pi(n) = p(n)$, hence the fraction of jobs that see a busy server must be $\rho$. Finally, as $\delta(n) = \pi(n)$, a fraction $\rho$ of the departures leaves a busy system behind.
+\end{exercise}
+
+\begin{exercise}
+Show  that when the server is busy at $D_{n-1}$, the density of the inter-departure time  $f_X(t) = \mu e^{-\mu t}$.
+    \begin{solution}
+The server can start right away with a new job. The departure times are exponentially distributed. 
     \end{solution}
 \end{exercise}
 
 \begin{exercise}
-Show that the density of the inter-departure time if the
-    server is busy is $f_X(t) = \mu e^{-\mu t}$.
-    \begin{hint}
-Use the memoryless  property of the exponential distribution of the service times. 
-    \end{hint}
-    \begin{solution}
-     If the server is busy when a job arrives,  the density of the time to the next departure epoch must be exponential. By the memoryless property, we may assume that the service restarts at an arrival epoch. Therefore, an arrival `sees' $\mu e^{-\mu t}$ as the  density of the departure time when the server is busy.
-    \end{solution}
-\end{exercise}
-
-\begin{exercise}
-Use conditioning to show that  the density of  the inter-departure time is $\lambda e^{-\lambda t}$
+Use conditioning on the server being idle or busy at a departure to show that  the density of  the inter-departure time is $\lambda e^{-\lambda t}$.
   \begin{hint}
-The final result is
-    $f_D(t) = f_{X+S}(t) \P{I} + f_S \P B = (1-\rho) f_{X+S}(t) +
-    \rho \mu e^{-\mu t}$.
-    Now use the above exercises to simplify and see that
-    $f_D(t) = \lambda e^{-\lambda t}$.
+Conditioning leads to 
+\begin{equation*}
+    f_D(t) = f_{X+S}(t) \P{I} + f_S \P B = (1-\rho) f_{X+S}(t) +
+    \rho \mu e^{-\mu t}.
+\end{equation*}
+    Now use the above exercises to simplify.
   \end{hint}
   \begin{solution}
        \begin{align*}
@@ -435,7 +435,8 @@ hour $t$.
 }
 
 
+
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../book"
+%%% TeX-master: "../queueing_book"
 %%% End:

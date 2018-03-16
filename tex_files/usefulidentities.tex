@@ -65,7 +65,7 @@ since, evidently, $\E{S_r\given S_r=0}=0$.
     Since the service times are deterministic (and constant), I would
     guess that on average half of the service time remains at the
     moment a job arrives. If the service time is $D$ always, then
-    $\E{S_r\given S_r>0} = \lambda D/2$.  
+    $\E{S_r\given S_r>0} = D/2$.  
   \end{solution}
 \end{exercise}
 
@@ -326,23 +326,23 @@ arrival sees $N=n$ customers upon arrival. Then,
  motivate that $\E{W_Q \given N=1} = \E S$. Finally, combine the above to see that 
 $\E W = \E S \sum_{n=0}^\infty n \pi(n) + \E S = \E S \E L + \E S$.
   \begin{solution}
-    \begin{enumerate}
-    \item The time in the system $\E W$ is the sum of the time in
+ The time in the system $\E W$ is the sum of the time in
       queue plus the service time of the job itself.  Conditioning on
       the number of jobs $N$ in the system at arrival moments, i.e.,
       conditioning on $\pi(n)$, gives the result.  
-    \item $\E{W_Q\given N=0}=0$, of course. If $N=1$, there must be a job
+
+ $\E{W_Q\given N=0}=0$, of course. If $N=1$, there must be a job
       in service.  Because of the memoryless property of the service
       times, the remaining service time of the customer in service is
       still exponentially distributed with mean $\E S$. Thus,
       $\E{W_Q\given N=1}=\E S$. 
-    \item The expected service time for a customer still in queue is
+
+ The expected service time for a customer still in queue is
       $\E S$.  Therefore, for each $n$ we have that, when service
       times are exponential, $\E{W_Q\given N=n}= n \E S$. The probability
       to see $n$ jobs in the system by an arrival is $\pi(n)$ which,
       by PASTA, is equal to $p(n)$. Since $\E L = \sum_n n p(n)$, the
       result follows.
-    \end{enumerate}
   \end{solution}
 \end{exercise}
 
@@ -528,8 +528,8 @@ not the most efficient, code.)
 
 \begin{pyconsole}
 P = [0.4, 0.3, 0.2, 0.05, 0.05]
-L = sum(n*P[n] for n in range(len(P)))
-L
+EL = sum(n*P[n] for n in range(len(P)))
+EL
 \end{pyconsole}
 
 There can only be a queue when a job is in service. Since there is
@@ -539,33 +539,34 @@ negative. Thus, $\E{L_Q} = \sum_n \max\{n-m, 0\} p(n)$.
 
 \begin{pyconsole}
 m = 1
-Lq = sum(max(n-m,0)*P[n] for n in range(len(P)))
-Lq
+ELq = sum(max(n-m,0)*P[n] for n in range(len(P)))
+ELq
 \end{pyconsole}
 
 
 \begin{pyconsole}
 labda = 10./60
-Wq = Lq/labda # in minutes
+Wq = ELq/labda # in minutes
 Wq
 Wq/60 # in hours
 
-W = L/labda # in minutes
+W = EL/labda # in minutes
 W
 W/60 # in hours
 \end{pyconsole}
 
+Lets us the standard definition of the variance, i.e., $\V X = \sum_{i} (x_i-\E X)^2 \P{X=x_i}$, for once.
 
 \begin{pyconsole}
 from math import sqrt
-var_L = sum((n-L)**2*P[n] for n in range(len(P)))
+var_L = sum((n-EL)**2*P[n] for n in range(len(P)))
 var_L
 sqrt(var_L)
 \end{pyconsole}
 
 
 \begin{pyconsole}
-var_Lq = sum((max(n-m,0)-Lq)**2*P[n] for n in range(len(P)))
+var_Lq = sum((max(n-m,0)-ELq)**2*P[n] for n in range(len(P)))
 var_Lq
 sqrt(var_Lq)
 \end{pyconsole}
@@ -580,7 +581,7 @@ rho
 \end{pyconsole}
 
 \begin{pyconsole}
-rho = L-Lq
+rho = EL-ELq
 rho
 \end{pyconsole}
 This checks the previous line.
@@ -616,11 +617,7 @@ idle
   a service rate of 140 per hour.
  What is $p(n)$?  What are $\E{L_Q}$, $\E L$ 
 \begin{solution}
-  \begin{enumerate}
-  \item 
-$p(n) = (1-\rho)\rho^n$
-
-\item 
+First, $p(n) = (1-\rho)\rho^n$. Now,
 
 \begin{pyconsole}
 labda = 100. # per hour
@@ -640,7 +637,7 @@ W
 Wq = rho/(1.-rho) * ES
 Wq
 \end{pyconsole}
-  \end{enumerate}
+
   \end{solution}
 \end{exercise}
 
@@ -749,8 +746,6 @@ Use the level-crossing equations of the $M(n)/M(n)/1$ queue.
 This is a queueing system with loss, in particular the $M/M/1/1+2$ queue.
   \end{hint}
     \begin{solution}
-      \begin{enumerate}
-      \item 
 First compute $\E{L_Q}$ for the case with a buffer for $2$ customers.
 
 \begin{pyconsole}
@@ -804,7 +799,6 @@ accepted = labda*(1.-P[-1]) # rate at which jobs are accepted
 accepted
 \end{pyconsole}  
 
-\item 
 Now increase the buffer $b$ to 5.
 
 \begin{pyconsole}
@@ -823,7 +817,6 @@ L
 accepted = labda*(1.-P[-1])
 accepted
 \end{pyconsole}      
-  \end{enumerate}
     \end{solution}
 \end{exercise}
 
@@ -873,8 +866,7 @@ for various values of $\lambda$.
   \item Determine the service time and the utilization.
   \end{enumerate}
   \begin{solution}
-    \begin{enumerate}
-    \item Determine $\E L$ and  $\E{L_Q}$. 
+ Determine $\E L$ and  $\E{L_Q}$. 
 
 \begin{pyconsole}
 P = [0.4, 0.3, 0.2, 0.05, 0.05]
@@ -887,7 +879,7 @@ L= sum(n*P[n] for n in range(len(P)))
 L
 \end{pyconsole}
 
-\item Using Little's formula, determine $\E W$ and $\E{W_Q}$. 
+ Using Little's formula, determine $\E W$ and $\E{W_Q}$. 
 \begin{pyconsole}
 labda = 10./60
 Wq = Lq/labda # in minutes
@@ -898,7 +890,7 @@ W = L/labda
 W
 \end{pyconsole} 
 
-\item Determine $\V L$ and $\V{L_Q}$.
+ Determine $\V L$ and $\V{L_Q}$.
 \begin{pyconsole}
 from math import sqrt
 var_L = sum((n-L)**2*P[n] for n in range(len(P)))
@@ -906,14 +898,12 @@ var_L
 sqrt(var_L)
 \end{pyconsole} 
 
-\item Determine the service time and the utilization.
+Determine the service time and the utilization.
 \begin{pyconsole}
 var_q = sum((max(n-c,0)-Lq)**2*P[n] for n in range(len(P)))
 var_q
 sqrt(var_q)
 \end{pyconsole}
-
-  \end{enumerate}
     \end{solution}
 \end{exercise}  
 
@@ -1017,8 +1007,7 @@ the server being idle. If it is very expensive to let customers wait, the number
 of servers must be high, whereas if servers are relatively expensive, customers have to do the waiting.)
   \end{hint}
   \begin{solution}
-    \begin{enumerate}
-    \item 
+
       Would one server/person do? 
 \begin{pyconsole}
 labda = 28./60 # arrivals per minute
@@ -1074,7 +1063,6 @@ WQ(4, 28./60, 4)/60. # in hours
 
 In the next  part of the question we will interpret these numbers.
 
-\item 
 Since both types of workers cost the same amount of money per unit
 time, it is best to divide the amount of waiting/idleness equally over
 both types of workers.  I am inclined to reason as follows. The
@@ -1111,7 +1099,6 @@ c-labda*ES
 \end{pyconsole} 
 
 Clearly, $c=3$ should do.
-  \end{enumerate}
     \end{solution}
 \end{exercise}
 
@@ -1129,7 +1116,8 @@ Clearly, $c=3$ should do.
 
 %\clearpage
 
+
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../book"
+%%% TeX-master: "../queueing_book"
 %%% End:

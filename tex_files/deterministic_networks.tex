@@ -206,7 +206,7 @@ What are the critical WIP $W_0$, bottleneck
   capacity $r_b$ and raw processing time~$T_0$?
 
     \centering
-    \begin{tikzpicture}[
+    \begin{tikzpicture}[xscale=0.9,
 ->-/.style={decoration={markings, mark=at position .5 with {\arrow{stealth}}},
 postaction={decorate}},
 queuei/.pic={
@@ -507,7 +507,7 @@ W_0 = r_b T_0 = \frac 12 \frac{23}5 = \frac{23}{10}.
 
 
 Production situations can be pretty  complicated. Jobs can enter the network at different places, not  just at station 1 as we considered here. Jobs may also need rework  at one or more stations. One consequence of these aspects is that   the slowest machines or stations need not be the bottlenecks. If you like, you can try to find or develop a general algorithm to compute
- $T_0$, $W_0$ and $r_b$ for any network of reasonable size.  One way to approach this problem might be to  place (imaginary) huge  amounts of work in front of each station and just see how the network drains. Given the elegance of the problem, I am quite   sure it has been solved, but I haven't as yet.
+ $T_0$, $W_0$ and $r_b$ for any network of reasonable size.  One way to approach this problem might be to  place (imaginary) huge  amounts of work in front of each station and just see how the network drains, another is to try to find an analogy with an electrical network. All in all, its an elegant  problem.
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}
@@ -520,7 +520,9 @@ Production situations can be pretty  complicated. Jobs can enter the network at 
 }
 
 %\clearpage
-%% Local Variables:
+
+
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../queueing_book"
 %%% End:

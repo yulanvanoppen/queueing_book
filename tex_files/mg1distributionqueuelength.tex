@@ -142,6 +142,9 @@ Hence,
   \begin{equation} \label{eq:41}
 f(j) = \P{Y_k = j} = \frac{\mu}{\lambda+\mu}\left(\frac{\lambda}{\lambda+\mu}\right)^j.
   \end{equation}
+  \begin{hint}
+Use the ideas of Exercise~\ref{ex:15} to simplify the standard integral.
+  \end{hint}
   \begin{solution}
 Use conditional probability to see that 
 \begin{align*}
@@ -150,7 +153,17 @@ Use conditional probability to see that
 &= \frac{\mu}{j!}\lambda^j \int_0^\infty e^{-(\lambda+\mu) x}x^j\,\d x = \frac{\mu}{j!}\left(\frac{\lambda}{\lambda+\mu}\right)^j \int_0^\infty e^{-(\lambda+\mu) x}((\lambda+\mu)x)^j\,\d x \\
 &= \frac{\mu}{j!}\left(\frac{\lambda}{\lambda+\mu}\right)^j \frac{j!}{\lambda+\mu}.
 \end{align*}
-Here I also used the hints and  results of Exercise~\ref{ex:33}.
+In the last integral, we use the hint. Specifically, 
+\begin{align*}
+  \int_0^\infty e^{-\alpha x} (\alpha x)^j \d x 
+&=  \alpha^{-1} \int_0^\infty e^{- x} x^j \d x  
+=  \alpha^{-1} -e^{-x}x^j |_0^\infty + j \int_0^\infty e^{- x} x^{j-1} \d x \\
+&= \alpha^{-1} j \int_0^\infty e^{- x} x^{j-1} \d x 
+= \alpha^{-1} j(j-1) \int_0^\infty e^{- x} x^{j-2} \d x \\
+&= \alpha^{-1} j! \int_0^\infty e^{- x} \d x 
+= j!/\alpha.
+\end{align*}
+
 
 In hindsight, this result could have been derived in another way, in
 fact by using the result of Exercise~\ref{ex:3} in which we analyzed a
@@ -538,5 +551,5 @@ This is the same as our earlier answer.
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../book"
+%%% TeX-master: "../queueing_book"
 %%% End:
