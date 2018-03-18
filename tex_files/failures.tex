@@ -249,7 +249,9 @@ Now we don't need to take availability into account: the machine never fails so 
     \begin{pyconsole}
 labda = 4.
 ES0 = 10./60 # in hours
-rho = labda*ES0
+A = 1
+ES = ES0/A
+rho = labda*ES
 rho
 Ca2 = 1.
 C02 = 0. # deterministic service times
@@ -257,7 +259,7 @@ EW = (Ca2+C02)/2 * rho/(1.-rho) * ES
 EW
 EW + ES # sojourn time
 \end{pyconsole}
-The average time in queue reduces for $\approx 0.6$ to $\approx 0.2$ hours, a reduction by a factor 3. 
+The average time in queue reduces for $\approx 0.6$ to $\approx 0.17$ hours, a reduction by about a factor 3. 
 \end{solution}
 \end{exercise}
 
