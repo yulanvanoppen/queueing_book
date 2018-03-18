@@ -199,7 +199,7 @@ by
     modification the entire derivation becomes easier. I also pre-multiply by the normalization constant $G$ to get rid of it on the right hand side. 
     \begin{align*}
       G \E{L_S}
-&= G \sum_{n=0}^{c} n p(n) + \sum_{n=c+1}^{\infty} c p(n) \\
+&= G \left( \sum_{n=0}^{c} n p(n) + \sum_{n=c+1}^{\infty} c p(n) \right) \\
 &= \sum_{n=1}^{c} n \frac{(c\rho)^n}{n!}  + \sum_{n=c+1}^{\infty} c \frac{c^c\rho^n}{c!} 
 = \sum_{n=1}^{c} \frac{(c\rho)^n}{(n-1)!}  + \frac{c^{c+1}}{c!}\sum_{n=c+1}^{\infty} \rho^n\\
 &= \sum_{n=0}^{c-1} \frac{(c\rho)^{n+1}}{n!}  + \frac{(c\rho)^{c+1}}{c!}\sum_{n=0}^{\infty} \rho^n
@@ -249,7 +249,7 @@ patients as jobs.
     \begin{equation*}
       1=\sum_{n=0}^c p(n) = p(0) \sum_{n=0}^c \frac{(c\rho)^n}{n!}.
     \end{equation*}
-Thus,  the normalization constant $G=\sum_{n=0}^{c}$, and $p(0)=G^{-1}$. 
+Thus,  the normalization constant $G=\sum_{n=0}^{c} \frac{(c\rho)^n}{n!}$, and $p(0)=G^{-1}$. 
 
 Since there are as many servers as places available in the system, $\E{L_Q}=0$. The expected number of servers busy is
     \begin{align*}
