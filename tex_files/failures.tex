@@ -16,7 +16,7 @@ Let us assume that a job's normal service, without interruptions, is given by $S
 S= S_0 + \sum_{n=1}^N D_i.
 \end{equation*}
 
-To compute the mean waiting time we can use the $G/G/1$ waiting time formula. From this formula it is clear that it suffices to find expressions for $\E S$ and $\V S$, since $C_e^2 = \V S /(\E S)^2$.  Thus, this will be our task for the rest of the section. We remark in passing that the results and the derivation are of general interest.
+To compute the mean waiting time we can use the $G/G/1$ waiting time formula. From this formula it is clear that it suffices to find expressions for $\E S$ and $\V S$, since $C_s^2 = \V S /(\E S)^2$.  Thus, this will be our task for the rest of the section. We remark in passing that the results and the derivation are of general interest.
 
 We first aim to find an expression for $\E S$.  Write  $S_N = \sum_{i=1}^N D_i$ for the total duration of the interruptions, so that the total job duration becomes $S = S_0 + S_N$.
 
@@ -24,7 +24,7 @@ We first aim to find an expression for $\E S$.  Write  $S_N = \sum_{i=1}^N D_i$ 
   Suppose that $N=n$, show that $\E{S_n}=n\E D$.
 
 \begin{hint}
-    Is it relevant that for the expection of $S_n$ that $D_1,\ldots, D_n$ are independent?
+    Is it relevant that for the expection of $S_n$ that $D_1,\ldots, D_n$ are mutually independent?
   \end{hint}
 \begin{solution}
 The expectation of the sum of random variables is the same as the sum of the expectations; independence is irrevelant. Hence,
@@ -37,13 +37,20 @@ where the last equation follows from the fact that the $D_i$ have the same distr
 
 Let $p_n=\P{N=n}$; then it is reasonable that $\E{S_N}=\sum_{n=0}^\infty \E{S_n}p_n$. (Compare the definition of $\E{f(X)}=\sum_{n} f(n) p_n$.)
 
-\begin{exercise}
+\begin{exercise}\label{ex:16}
 Use this expression to show that $\E{S_N}=\E D \E N$.
+\begin{hint}
+  Use that $\{D_i\}$ is a sequence of i.i.d. rv.s. Hence, $\E{\sum_{i=1}^n D_i} = n \E D$. 
+\end{hint}
 \begin{solution}
 Since $\E{S_n} = n \E D$, 
-\begin{equation*}
-  \E{\sum_{i=1}^N D_i} =  \sum_{n=0}^\infty p_n \E{S_n} = \sum_{n=0}^\infty p_n n \E D = \E D \E N.
-\end{equation*}
+\begin{align*}
+  \E{\sum_{i=1}^N D_i} 
+&=  \E{ \sum_{n=0}^\infty \1{N=n} \left(\sum_{i=1}^n D_i \right)} \\
+&=  \sum_{n=0}^\infty \E{\1{N=n} n\E{D}} \\
+&=  \E{D} \sum_{n=0}^\infty n \E{\1{N=n}} = \E D \sum_{n=0}^\infty p_n n \\
+&= \E D \E N.
+\end{align*}
 This result in known as Wald's equation. 
 \end{solution}
 \end{exercise}
@@ -84,11 +91,11 @@ The time to fail is the time in between to interruptions. We assumed that these 
 \E{S} = \frac{\E{S_0}} A = \E{S_0} (1+\lambda_f \E D).
   \end{equation*}
   \begin{hint}
-    Realize that $\E N = \lambda_f \E S_0$.
+    Realize that $\E N = \lambda_f \E{S_0}$.
   \end{hint}
   \begin{solution}
     \begin{equation*}
-      \E S = \E{S_0} + \E N \E D = \E{S_0} + \E D \lambda_f \E{S_0} = \E{S_0}(1+\lambda_f \E D).
+      \E S = \E{S_0} + \E N \E D = \E{S_0} +  \lambda_f \E{S_0} \E D= \E{S_0}(1+\lambda_f \E D).
     \end{equation*}
   \end{solution}
 \end{exercise}
@@ -105,7 +112,7 @@ We can similar ideas to derive an expression for the variance of $S$. The next e
 \begin{exercise}
   Why is $\V{S} \neq \V{S_0} + \V{\sum_{i=0}^N D_i}$?
   \begin{solution}
-    Because $S_0$ and $N$ are not independent, given $S_0$, $N_0$ is Poisson distributed with mean $\lambda_f S_0$. 
+    Observe that $S_0$ and $N$ are not independent. In fact, when $S_0=s$, the number of failures $N$ is Poisson distributed with mean $\lambda_f s$. 
   \end{solution}
 \end{exercise}
 
@@ -117,11 +124,11 @@ Show that
   \E{S^2} = \E{S_0^2} + 2\E{S_0 \sum_{i=1}^N D_i} + \E{\sum_{i=1}^N D_i^2} + \E{\sum_{i=1}^N \sum_{j\neq i} D_i D_j}
 \end{equation*}
 \begin{solution}
-  Just work out the square of $S_0+\sum_{i=1}^N$ and take the expectations. Realize that $(\sum_i D_i)^2 = \sum_i D_i^2 + \sum_i\sum_{j\neq i} D_i D_j$.  
+  Just work out the square of $S_0+\sum_{i=1}^N$ and take expectations. Realize that $(\sum_i D_i)^2 = \sum_i D_i^2 + \sum_i\sum_{j\neq i} D_i D_j$.  
 \end{solution}
 \end{exercise}
 
-For the last three components, we  assume at first that $S_0$ is known, so that $N\sim P(\lambda_f S_0)$, hence $\E{N\given S_0} = \lambda_f S_0$ and $\E{N^2\given S_0}= \lambda_f S_0 + \lambda_f^2 S_0^2$. 
+To simplify this, we  assume at first that $S_0$ is known, so that $N\sim \text{Poisson}(\lambda_f S_0)$, hence $\E{N\given S_0} = \lambda_f S_0$ and $\E{N^2\given S_0}= \lambda_f S_0 + \lambda_f^2 S_0^2$. 
 
 \begin{exercise}
   Show that $\E{S_0 \sum_{i=1}^N D_i\given S_0} = \lambda_f S_0^2 \E{D}$.
@@ -133,6 +140,17 @@ S_0 \E{\sum_{i=1}^N D_i\given S_0} = S_0 \E D \E N = \lambda_f \E D S_0^2$.
 
 \begin{exercise}
 Show that $\E{\sum_{i=1}^N D_i^2\given S_0} = \lambda_f S_0 \E{D^2}$.
+\begin{hint}
+  Use Wald's equation, which we derived in Exercise~\ref{ex:16}.
+\end{hint}
+\begin{solution}
+  \begin{align*}
+    \E{\sum_{i=1}^N D_i^2\given S_0} 
+&= \E{D^2}\E{ \sum_{i=1}^n n \1{N=n}\given S_0}\\
+&= \E{D^2} \E{N\given S_0} \\
+&= \lambda_f S_0 \E{D^2}.
+  \end{align*}
+\end{solution}
 \end{exercise}
 
 \begin{exercise}
@@ -171,7 +189,8 @@ Next, show that
   \end{equation*}
   \begin{solution}
     \begin{equation*}
-    \V{S} = \E{S^2} - (\E S)^2 = \frac{\E{S_0^2}}{A^2} + \lambda_f \E{D^2} \E{S_0} -\frac{(\E{S_0})^2}{A^2}.
+    \V{S} = \E{S^2} - (\E S)^2 = 
+\frac{\E{S_0^2}}{A^2} + \lambda_f \E{D^2} \E{S_0} -\frac{(\E{S_0})^2}{A^2}.
     \end{equation*}
   \end{solution}
 \end{exercise}
@@ -179,10 +198,18 @@ Next, show that
 \begin{exercise}
   Finally, show that
   \begin{equation*}
-    C_e^2 = \frac{\V{S}}{(\E S)^2} = C_0^2 + \frac{\lambda \E{D^2} A^2}{\E{S_0}}.
+    C_s^2 = \frac{\V{S}}{(\E S)^2} = C_0^2 + \frac{\lambda_f \E{D^2} A^2}{\E{S_0}}.
   \end{equation*}
 where $C_0^2$ is the SCV of $S_0$, i.e., the service time without interruptions. 
-\begin{solution} Just realize that $\E{S} = \E{S_0}/A$, and use the above.
+\begin{hint} Just realize that $\E{S} = \E{S_0}/A$, and use the above.
+\end{hint}
+\begin{solution}
+  \begin{align*}
+C_s^2 &= \frac{\V{S}}{(\E S)^2} =\frac{V(S) A^2}{(\E{S_0})^2} \\
+&=\frac{\E{S_0^2} + \lambda_f \E{D^2} \E{S_0}A^2 -(\E{S_0})^2}{(\E{S_0})^2} \\
+&=\frac{\E{S_0^2} -(\E{S_0})^2}{(\E{S_0})^2} + \frac{\lambda_f \E{D^2} \E{S_0}A^2}{(\E{S_0})^2} \\
+&=C_0^2 + \frac{\lambda_f \E{D^2}A^2}{\E{S_0}}.
+  \end{align*}
 \end{solution}
 \end{exercise}
 
@@ -193,7 +220,7 @@ If we assume that repair times are exponentially distributed with mean $\E{D}$, 
 \begin{exercise}
 With the above assumption on the distribution of $D$, show that
   \begin{equation*}
-    C_e^2 = C_0^2 + 2 A(1-A) \frac{\E{D}}{\E{S_0}}.
+    C_s^2 = C_0^2 + 2 A(1-A) \frac{\E{D}}{\E{S_0}}.
   \end{equation*}
 \begin{solution} 
 Since $A=1/(1+\lambda_f \E D)$, 
@@ -335,7 +362,7 @@ Hence,
 \begin{exercise}
 Zijm.Ex.1.11.1
  \begin{solution}
-Yes. The availability is $93\%$. Since $\E{S_e} = \E{S_0}/A$, and if $\E{S_0} $ is known, $\E{S_e}$ follows.
+Yes. The availability is $93\%$. Since $\E{S} = \E{S_0}/A$, and if $\E{S_0} $ is known, $\E{S_e}$ follows.
 \end{solution}
 \end{exercise}
 
@@ -354,7 +381,7 @@ Zijm.Ex.1.11.3
    makes sense to make a histogram of the recover times to see whether
    some clear pattern is present. 
 
-   Besides this, I don't know how sensitive the result for $C_e^2$ is
+   Besides this, I don't know how sensitive the result for $C_s^2$ is
    on the distribution of the repair times. Perhaps it is not that
    sensitive, so in that case it would be ok to simply use the
    exponential distribution. 
@@ -414,7 +441,7 @@ Zijm.Ex.1.11.6
 \begin{exercise}
 Zijm.Ex.1.11.7
  \begin{solution}
-   Then the effective service times, and in particular, $C_e^2$ will
+   Then the effective service times, and in particular, $C_s^2$ will
    be quite a bit bigger. It is preferable to avoid such a situation. 
 
    Mathematically, it is only given that $N_s$ is a random
