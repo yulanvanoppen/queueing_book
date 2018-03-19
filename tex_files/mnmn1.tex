@@ -106,7 +106,7 @@ Define the load as
   Then, derive
  \begin{align}
 p(n) &= \frac{1}G \frac{(c\rho)^n}{n!}, \quad n=0,\ldots, c, \label{eq:502}\\
-p(n) &= \frac{1}G \frac{c^c\rho^n}{c!}, \quad n=c,c+1, \ldots \\
+p(n) &= \frac{1}G \frac{c^c\rho^n}{c!}, \quad n=c,c+1, \ldots\label{eq:58} \\
 G &=\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{(1-\rho)c!}, \label{eq:501}\\
 \E{L_Q} &= \sum_{n=c}^\infty (n-c) p(n) = \frac{(c\rho)^c}{c! G}\frac{\rho}{(1-\rho)^2}, \\ 
 \E{L_S} &= \sum_{n=0}^{c}n p(n) + \sum_{n=c+1}^\infty c p(n) = \frac{\lambda}\mu.
@@ -370,17 +370,12 @@ Hence
 \begin{equation*}
 G =\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{(1-\rho)c!} \to \sum_{n=0}^{\infty} \frac{(c\rho)^n}{n!} = e^{\lambda/\mu}.
 \end{equation*}
-Next, for $n\geq c$:
-\begin{equation*}
-  p(n) = \frac{1}G \frac{c^c\rho^n}{c!} =\frac{\rho^n}{G}\frac{c^c}{c!} \to 0, 
-\quad\text{as } c\to\infty,
-\end{equation*}
-since, from a standard limit $n^n/n! \to 0$ as $n\to\infty$. Therefore, for $n<c$: 
+Next, for any fixed $n$, eventually $c>n$, and then, as $\rho=\lambda/(\mu c)$, 
 \begin{equation*}
   p(n) = \frac{1}G \frac{(c\rho)^n}{n!} = \frac{1}G \frac{(\lambda/\mu)^n}{n!} 
 \to e^{-\lambda/\mu}  \frac{(\lambda/\mu)^n}{n!}, \quad\text{as } c\to\infty.
 \end{equation*}
-We see that the number of busy servers in the $M/M/\infty$ queue is
+Moreover, there is no fixed $n$ such that $n>c$. Thus, the probabilities in~\eqref{eq:58} are no longer present. Thus, we see that the number of busy servers in the $M/M/\infty$ queue is
 Poisson distributed with parameter $\lambda/\mu$, and
 $\E{L} = \E{L_S} = \lambda/\mu$.  Observe that now $\lambda/\mu$ has
 no longer the interpretation of the fraction of time the server(s) are
