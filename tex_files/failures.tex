@@ -128,7 +128,7 @@ Show that
 \end{solution}
 \end{exercise}
 
-To simplify this, we  assume at first that $S_0$ is known, so that $N\sim \text{Poisson}(\lambda_f S_0)$, hence $\E{N\given S_0} = \lambda_f S_0$ and $\E{N^2\given S_0}= \lambda_f S_0 + \lambda_f^2 S_0^2$. 
+To simplify this, we  assume at first that $S_0$ is known, so that the number of failures that occur during a service time $S_0$ is Poisson distributed, i.e.,  $N\sim \text{Poisson}(\lambda_f S_0)$.  Hence $\E{N\given S_0} = \lambda_f S_0$ and $\E{N^2\given S_0}= \lambda_f S_0 + \lambda_f^2 S_0^2$. 
 
 \begin{exercise}
   Show that $\E{S_0 \sum_{i=1}^N D_i\given S_0} = \lambda_f S_0^2 \E{D}$.

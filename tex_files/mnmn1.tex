@@ -255,7 +255,7 @@ Since there are as many servers as places available in the system, $\E{L_Q}=0$. 
     \begin{align*}
       \E{L_S} 
 &= \sum_{n=0}^{c} n p(n) = G^{-1} \sum_{n=0}^c n \frac{(\lambda/\mu)^n}{n!} \\
-&= \frac{\lambda}{\mu G} \sum_{n=0}^{c-1} \frac{(\lambda/\mu)^{n-1}}{(n-1)!} \\
+&= G^{-1} \sum_{n=1}^c n \frac{(\lambda/\mu)^n}{n!} = \frac{\lambda}{\mu G} \sum_{n=0}^{c-1} \frac{(\lambda/\mu)^{n}}{(n)!} \\
 &= \frac{\lambda}{G\mu} \left(G- \frac{(\lambda/\mu)^c}{c!}\right).
     \end{align*}
   \end{solution}
