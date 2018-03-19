@@ -254,11 +254,16 @@ Thus,  the normalization constant $G=\sum_{n=0}^{c} \frac{(c\rho)^n}{n!}$, and $
 Since there are as many servers as places available in the system, $\E{L_Q}=0$. The expected number of servers busy is
     \begin{align*}
       \E{L_S} 
-&= \sum_{n=0}^{c} n p(n) = G^{-1} \sum_{n=0}^c n \frac{(\lambda/\mu)^n}{n!} \\
-&= G^{-1} \sum_{n=1}^c n \frac{(\lambda/\mu)^n}{n!} = \frac{\lambda}{\mu G} \sum_{n=0}^{c-1} \frac{(\lambda/\mu)^{n}}{(n)!} \\
-&= \frac{\lambda}{G\mu} \left(G- \frac{(\lambda/\mu)^c}{c!}\right).
+&= \sum_{n=0}^{c} n p(n) =  \sum_{n=1}^c n p(n)  \\
+&= G^{-1} \sum_{n=1}^c n \frac{(\lambda/\mu)^n}{n!} 
+= G^{-1} \sum_{n=1}^{c} \frac{(\lambda/\mu)^{n}}{(n-1)!} \\
+&= \frac{\lambda}{\mu G} \sum_{n=0}^{c-1} \frac{(\lambda/\mu)^{n}}{(n)!} 
+= \frac{\lambda}{G\mu} \left(G- \frac{(\lambda/\mu)^c}{c!}\right) \\
+&= \frac{\lambda}{\mu} \left(1- \frac{1}G\frac{(\lambda/\mu)^c}{c!}\right) \\
+&= \frac{\lambda}{\mu} \left(1- p(c)\right).
     \end{align*}
   \end{solution}
+This can be explained as follows: $\lambda(1-p(c))$ is the rate of accepted jobs (since a fraction $p(c)$ is lost). Thus, the load is $\lambda(1-p(c))/\mu$, and the load is the fraction of time the servers are busy. 
 \end{exercise}
 
 \begin{exercise}
