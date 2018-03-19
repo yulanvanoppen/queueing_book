@@ -7,69 +7,28 @@
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-The simplest possible single-server queueing system is such that job
-interarrival times are deterministic and all service times are
-equal. In such cases it is easy to determine the maximal throughput,
-i.e., the capacity, of the queueing system. Clearly, if the service
-time is $t_1$, then the service rate is $r_1 = 1/t_1$. We can also
-determine the minimal amount of jobs required to keep the server busy,
-hence achieve maximal throughput.  We call this the \emph{critical
-  work in progress (WIP)} and denote it by $W_0$. The minimal amount
-of time needed to move from the start of the system to the end, also
-called \emph{raw processing time}, is denoted by $T_0$.  With Little's
-law we can relate these two concepts for the single-server example.
-If the arrival rate is equal to the service rate, then
-$\lambda = r_1$, so that
-\begin{equation*}
-  W_0 = \lambda T_0 = r_1 T_0.
-\end{equation*}
-Since, in the single server case $T_0 = t_1$, we see that
-$W_0=r_1 t_1 = t_1^{-1}t_1 = 1$. This result is evident: to get
-maximal throughput, it is necessary that the server is always busy,
-hence it must be that $W_0\geq 1$. Given that we deal with a $D/D/1$ queue,
-by assumption, we can tune the arrivals such that whenever a job
-leaves, a new job arrives.
-
-When we deal with \emph{networks}, determining $W_0$ and $T_0$ is not
-so simple anymore. These quantities, however, are important to
-know. Clearly,  jobs need at least the raw processing time $T_0$ in the network, which is the sum of the required processing times but does not include, by assumption, any queueing times. The critical WIP $W_0$ is also important, because if the network contains less jobs than this amount, throughput
-will suffer. The reason is that when there are  not sufficient jobs in the
-network, the bottleneck machines are not always fully loaded with work. For these
-reasons $T_0$ and $W_0$ act as lower bounds on the time jobs spend in
-the network and the amount of work required to achieve a certain
-throughput.  Finally, it is important to know the bottleneck capacity
-$r_b$ of the network as the maximal throughput of the network cannot
-exceed the bottleneck capacity. Thus, when accepting jobs, one needs
-to respect the capacity of the network. 
-
 Before we study queueing networks in stochastic settings, we should
 familiarize ourselves with the behavior of networks of queueing
-systems in the simplest setting possible.  For this we need some
-further definitions. A queueing network can be represented as
-\emph{graph}. \emph{Stations} form the nodes in the graph, and edges
-between nodes represents the routing, which  is  the possibility that jobs can move from
-one station to another. A simple example is a tandem network with two
-stations. Jobs arrive at station~1 and after service they move to
-station~2. After service at station~2, they leave the network. Also, a
-station can contain one or more servers. For instance, a single-server
-station contains just one server. Finally, we assume that job service
-times are constant at all servers at all stations. In other words,
-service times need not be same from one machine/server or station
-to another, but each server works at constant speed.  The
-\emph{utilization} of station $i$ is the rate $\lambda_i t_i$, i.e.,
-the rate at which work arrives, times the (average) service time per
-job. The \emph{bottleneck} station is the station with the
-\emph{highest utilization}.
+systems in the simplest setting possible.  This is, arguably, a network in which all servers have constant service times, which is the topic for this section.
 
-As an example, consider $n$ single-server stations in tandem such that
-all stations have the same service time $S$.   The raw processing time  is then
-\begin{equation}\label{eq:t0}
-T_0= n S.
-\end{equation}
 
+A queueing network can be represented as a
+\emph{graph}. \emph{Stations} form the \emph{nodes} in the graph, and
+\emph{edges} between nodes represents the routing, which is the
+possibility that jobs can move from one station to another. A simple
+example is a network of $n$ stations in tandem. Jobs arrive at
+station~1, and after service they move to station~2. Then they move to
+station 3, and so on, until they leave the network after being served at
+station~$n$.  A station can contain one or more servers. We assume that all servers have constant  job processing times. However, service times need not be equal for all servers.  
+
+We need some more definitions. The \emph{raw processing time} $T_0$ is the minimal amount
+of time  needed to move from the start of the system to the end. The \emph{utilization} of station~$i$ is $\lambda_i/\mu_i$, i.e., the rate $\lambda_i$ at which work arrives divided by the processing rate of the server(s) at station~$i$. The \emph{bottleneck} station is the
+station with the highest utilization. We write $r_b$ for the processing rate of the bottleneck station.  The \emph{critical  work in progress (WIP)}  $W_0$ is defined  as $W_0=r_b T_0$. This is the minimal amount of work required in the network to keep the bottleneck station fully loaded. To see how this relates to Little's law, observe that if jobs leave the network at rate $r_b$, they have to arrive at the network at rate $r_b$---we also assume that interarrival times are constant so that no explosions occur. Note that this is the largest arrival rate that the network can handle with queues growing to infinity. But then, with Little's law, the amount of work in the system is equal to the arrival rate times the time in the system.
+
+In the next set of exercises we illustrate the above concepts by means of a network with $n$ single-server stations in tandem and all stations have the same service time $S$. 
 
 \begin{exercise}
-Suppose we would release just one job in the above tandem system so that only when the first job has visited all stations, the next job is released. What is the throughput of the network?
+Suppose we would release just one job at a time in the above tandem system, that is,  only when a job has visited all stations, the next job is released. What is the throughput of the network?
 \begin{solution}
 In this case, the throughput $\mu$ of the network is $1/T_0$: only one server at a time is serving a job, the rest of the servers are forced to be idle as we only allow one job at a time in the network. 
 \end{solution}
@@ -95,15 +54,13 @@ Show that  only when $w\geq n$.
 \end{equation*}
 in which case the maximal capacity of the network is achieved.
 \begin{solution}
-Using~(\ref{eq:t0}), 
 \begin{equation*}
   \mu(w) = \frac{n}{T_0} = \frac{n}{n S} = \frac 1S.
 \end{equation*}
 \end{solution}
 \end{exercise}
 
-Finally, for given $w$  the largest arrival rate we can handle is 
-$\lambda = \mu(w)$. 
+Thus, for given $w$  the largest arrival rate the network  can handle is  $\lambda = \mu(w)$, and the maximal rate at which it can process jobs is $r_b=1/S$. 
 
 \begin{exercise}
   Show that when $\lambda=\mu(w)$,  the waiting time in the network is 
@@ -144,10 +101,13 @@ tandem networks adding more than $n$ jobs does not increase the
 network's throughput, but only increases the waiting times. On the other
 hand, setting $w<n$ minimizes the waiting times, but also negatively
 affects the throughput of the network. 
-
-Thus, to balance waiting times and throughput, we need to tune the amount of work in the system. The critical WIP $W_0$ is the minimal WIP we need to keep all bottleneck machines occupied without adding extra waiting time.
   \end{solution}
 \end{exercise}
+
+In conclusion, to balance waiting times and throughput, we need to tune the amount of work in the system. The critical WIP $W_0$ is the minimal WIP we need to keep all bottleneck machines occupied without adding extra waiting time. Jobs can never pass through  the network in less time than $T_0$, and the maximal output rate of the network is $r_b = 1/S$. Thus, 
+\begin{align}\label{eq:t0}
+T_0&= n S, & r_b&= 1/S, & W_0 = r_b T_0 = n.
+\end{align}
 
 The problems below are generalizations to networks with multi-server
 stations, servers with different processing rates, and multiple
