@@ -560,9 +560,12 @@ where we use that
     \end{cases}
   \end{equation*}
 
+
+
+
+
   For the partial acceptance case, any job is accepted, but the system
-  only admits whatever fits. Thus, the rate at which level $n<K$ is
-  crossed is not affected by this acceptance policy, and therefore,
+  only admits whatever fits.  As level $n\in {0,1,...,K-1}$ is still upcrossed by any batch of size at least $n-m$ when the system is in state $m$, the formula for the upcrossing rate is identical to the case without this acceptance policy. Moreover, nothing changes to the formula for the downcrossing rate. Hence, 
   \begin{equation*}
     \mu \pi(n+1) = \lambda \sum_{m=0}^n \pi(m) G(n-m), 
   \end{equation*}
