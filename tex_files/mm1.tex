@@ -164,7 +164,7 @@ We will focus on departure moments and use~\eqref{eq:39}, in particular that dep
     \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}\label{ex:17}
  If job $n-1$, say, leaves behind an empty system, show that the expected time until the next departure is $\E{D_n - D_{n-1}} = 1/\lambda + 1/\mu$. 
     \begin{hint}
       After job $n-1$ left, job $n$ has to arrive, so we need to wait first for this interarrival time. Then job $n$ must be served. This adds up to $1/\lambda + 1/\mu$. 
@@ -172,7 +172,7 @@ We will focus on departure moments and use~\eqref{eq:39}, in particular that dep
     \begin{solution}
 With the hint, we first have to wait for an inter-arrival
     time $X_n$. Then, since job $n$'s service starts right away, it
-    leaves when $D_n = D_{n-1}+X_n + S_n$. Thus, the expected duration is $\E{X_n + S_n}=1/\lambda + 1/\mu$. 
+    leaves when $D_n = D_{n-1}+X_n + S_n$. Now observe that, due to the memoryless property of the interarrival times, $\E{X_n} = \E{A_n - D_{n-1}} = 1/\lambda$. Thus, the expected duration is $\E{X_n + S_n}=1/\lambda + 1/\mu$. 
     \end{solution}
 \end{exercise}
 
@@ -187,9 +187,9 @@ if the server is idle after $D_{n-1}$.
       same as the density of $X_n + S_n$.  Since $\{X_n\}$ and $\{S_n\}$ are both i.i.d. sequences, the problem becomes to find the density of $X+S$.  We will use two ways of computing this. 
 
 \newpage
-Since $X\sim \exp(\lambda)$ and $S\sim\exp(\mu)$, and $X$ and $S$ are independent, their joint density is $f_{X,Y}(x,y) = \lambda \mu e^{-\lambda x - \mu y}$. With this,
+Since $X\sim \exp(\lambda)$ and $S\sim\exp(\mu)$, and $X$ and $S$ are independent, their joint density is $f_{X,S}(x,y) = \lambda \mu e^{-\lambda x - \mu y}$. With this,
   \begin{align*}
-\P{X+Y\leq t } 
+\P{X+S\leq t } 
 &= \lambda \mu \int_0^\infty \int_0^\infty e^{-\lambda x - \mu y} \1{x+y\leq t} \d x \d y \\
 &= \lambda \mu \int_0^t \int_0^{t-x} e^{-\lambda x - \mu y} \d x \d y \\
 &= \lambda \mu \int_0^t e^{-\lambda x} \int_0^{t-x} e^{- \mu y} \d y \d x \\
@@ -229,7 +229,7 @@ From PASTA $\pi(n) = p(n)$, hence the fraction of jobs that see a busy server mu
 \end{exercise}
 
 \begin{exercise}
-Show  that when the server is busy at $D_{n-1}$, the density of the inter-departure time  $f_X(t) = \mu e^{-\mu t}$.
+Show  that when the server is busy at $D_{n-1}$, the density of the inter-departure time  $f_D(t) = \mu e^{-\mu t}$.
     \begin{solution}
 The server can start right away with a new job. The departure times are exponentially distributed. 
     \end{solution}
