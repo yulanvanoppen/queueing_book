@@ -20,12 +20,12 @@ To make the book, run:
 Here are the tools I use to make the text and the figures:
 
 * latex: https://www.latex-project.org/
-* `tikz <http://www.texample.net/tikz/>`_
-* `pythontex <https://github.com/gpoore/pythontex/>`_
-* `Python <http://www.python.org/>`_
-* `numpy <http://www.numpy.org/>`_
-* `Scipy <http://www.scipy.org/>`_
-* `matplotlib <http://matplotlib.org/>`_
-* `matplotlib2tikz <https://github.com/nschloe/matplotlib2tikz/>`_
+* pythontex: https://github.com/gpoore/pythontex/
+* Python: http://www.python.org/
+* numpy: http://www.numpy.org/
+* Scipy: http://www.scipy.org/_
+* tikz: http://www.texample.net/tikz/
+* matplotlib: http://matplotlib.org/
+* matplotlib2tikz: https://github.com/nschloe/matplotlib2tikz/
     
 
