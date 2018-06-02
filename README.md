@@ -1,9 +1,9 @@
-Analysis of queueing systems with sample paths and simulation. 
-===================
+# Analysis of queueing systems with sample paths and simulation. 
 
-The most important file is ''queueing_book.pdf'', which contains the notes on my
-course on queueing theory. Comments are more
-than welcome of course: `n.d.van.foreest@rug.nl`.
+The most important file is **queueing_book.pdf**, which contains the notes on my
+course on queueing theory. There is also a mobile friendly format: **queueing_book_mobile.pdf**.
+
+Comments are more than welcome of course: `n.d.van.foreest@rug.nl`.
 
 * ``tex_files/`` source files for the text
 * ``progs/``  programs, mainly python, to make the graphs and the simulations
@@ -18,9 +18,6 @@ To make the book, run:
 
   pdflatex queueing_book
 
-
-``makeClean`` does what its name says it does: delete ``*.aux`` and
-the like.
 
 Here are the tools I use to make the text and the figures:
 
