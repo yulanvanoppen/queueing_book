@@ -21,7 +21,7 @@ To make the book, run:
 
 Here are the tools I use to make the text and the figures:
 
-* `latex <https://www.latex-project.org/>`_
+* latex: https://www.latex-project.org/
 * `tikz <http://www.texample.net/tikz/>`_
 * `pythontex <https://github.com/gpoore/pythontex/>`_
 * `Python <http://www.python.org/>`_
