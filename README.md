@@ -12,11 +12,9 @@ Comments are more than welcome of course: `n.d.van.foreest@rug.nl`.
 
 To make the book, run:
 
-  pdflatex queueing_book
-
-  pythontex queueing_book
-
-  pdflatex queueing_book
+* pdflatex queueing_book
+* pythontex queueing_book
+* pdflatex queueing_book
 
 
 Here are the tools I use to make the text and the figures:
