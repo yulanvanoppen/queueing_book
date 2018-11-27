@@ -22,7 +22,7 @@ an \recall{exponentially distributed} random variable, i.e.,
 Moreover,  the exponential distribution  derives directly from the Poisson distribution. Observe that, if there are no arrivals in some interval $[0,t]$, then it
 must be that $N(t) = 0$. Hence, the first interarrival time $X$, i.e., the time until the first customer,  must be larger than $t$.  Therefore,
 \begin{equation*}
- \P{X1> t} = \P{N(t) = 0} = e^{-\lambda t} \frac{(\lambda t)^0}{0!}= e^{-\lambda t}.
+ \P{X_1> t} = \P{N(t) = 0} = e^{-\lambda t} \frac{(\lambda t)^0}{0!}= e^{-\lambda t}.
 \end{equation*}
 Recall that the constant $\lambda$ is called the arrival
 \recall{rate}.  
@@ -213,12 +213,12 @@ $6$ hours, and the average interarrival times $\E X = 5$. In a second
 simulation we take $N=3$ customers, and in the third, $N=10$
 customers. 
 
-The emperical distributions are shown, from left to right,
+Approximations of the probability density functions, based on the empirical distributions, are shown, from left to right,
 in the three panels in Figure~\ref{fig:uniformfew}. The continuous
 curve is the graph of $\lambda e^{-\lambda x}$ where
 $\lambda = N/\E X = N/5$. (Recall from Exercise~(\ref{exer:lambda}) that when $1$
 person visits the shop  with an average interarrival time of $5$
-hours,  the arrival rate is $1/5$. Hence, when $N$ customers visit the shop, each with an average interarrival time of 5 hours, the total arrival rate as seen by the shop must be $N/5$.)  
+hours,  the arrival rate is $1/5$. Hence, when $N$ customers visit the shop, each with an average interarrival time of 5 hours, the total arrival rate as seen by the shop must be $N/5$.)
 
 
 \begin{figure}[ht]
@@ -281,18 +281,16 @@ of customers, or a hospital, call center, in fact for nearly every
 system that deals with random demand, it seems reasonable to use the
 exponential distribution to model interarrival times.  In conclusion,
 the main conditions to use an exponential distribution are: 1)
-arrivals have to be drawn from a large population, and 2) each of the
+arrivals have to be drawn from a large population NO, WE DO NOT NEED THIS CONDITION; WE JUST SHOWED THAT A POPULATION OF 10 IS ENOUGH, and 2) each of the
 arriving customers decides, independent of the others, to visit the
 system.
 
-We next provide further relations between the Poisson distribtuion and the exponential distribution. 
+We next provide further relations between the Poisson distribution and the exponential distribution. 
 
   \begin{exercise}
     Assume that the interarrival times $\{X_i\}$ are i.i.d. and
     $X_i\sim\exp(\lambda)$. Let
-    $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$. Use the
-    density of $A_i$ or the moment generating function of $A_i$ to
-    show that
+    $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$. Show that %We do not need the MGF here.
  \begin{equation*}
 \E{A_i} = \frac i\lambda,
  \end{equation*}
@@ -742,8 +740,7 @@ we get
 \end{exercise}
 
 
-Let $B$ be a discrete random variable  such that $\P{B = k} = f(k)$, where $f(k)$ is a given set of
-probabilities. We write
+Let $B$ be a discrete random variable such that $\P{B = k} = f(k)$, where $f$ is the probability mass function of $B$. We write
 \begin{equation*}
   G(k) = \P{B>k} = \sum_{m=k+1}^\infty f(m),
 \end{equation*}
@@ -819,15 +816,15 @@ and reverse the summations.
 \end{exercise}
 
 
-Let $S$ be a continuous random variable with distribution function $F$.  We write 
+Let $S$ be a continuous non-negative random variable with distribution function $F$.  We write 
 \begin{equation*}
-  \E{X} = \int_0^\infty x \d F(x)
+  \E{S} = \int_0^\infty x \d F(x)
 \end{equation*}
-for the expection of $X$. Here $\d F(x)$ acts as a shorthand for $f(x) \d x$ when $X$ has a density. \footnote{For the interested $\int x \d F(x)$ is a Lebesgue-Stieltjes integral with respect to the measure induced by the distribution function $F$.}
+for the expection of $S$. Here $\d F(x)$ acts as a shorthand for $f(x) \d x$. \footnote{For the interested $\int x \d F(x)$ is a Riemann-Stieltjes integral with respect to the distribution function $F$.}
 
 \begin{exercise}
  Use indicator functions to prove that 
-$   \E S = \int_0^\infty x \d F  = \int_0^\infty G(y) \d y,$
+$   \E S = \int_0^\infty x \d F(x)  = \int_0^\infty G(y) \d y,$
 where $G(x) = 1 - F(x)$. 
 \begin{hint}
 $\E S = \int_0^\infty x \d F  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d F(x)$.
@@ -844,9 +841,9 @@ $\E S = \int_0^\infty x \d F  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d 
 \end{exercise}
 
 \begin{exercise}
- Use indicator functions to prove that for  a continuous random
+ Use indicator functions to prove that for a continuous non-negative random
     variable $S$ with distribution function $F$, 
-$    \E{S^2} = \int_0^\infty x^2 \d F  = 2 \int_0^\infty y G(y) \d y,$
+$    \E{S^2} = \int_0^\infty x^2 \d F(x)  = 2 \int_0^\infty y G(y) \d y,$
 where $G(x) = 1 - F(x)$. 
 \begin{hint}
 $\int_0^\infty y G(y) \d y = \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d x \d y$.
@@ -865,20 +862,21 @@ $\int_0^\infty y G(y) \d y = \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d
 \end{exercise}
 
 \begin{exercise}
- Use integration by parts to show that for  a continuous random
+ Use integration by parts to show that for a continuous non-negative random
     variable $S$ with distribution function $F$ and survivor function $G=1-F$, 
-$\int_0^\infty y G(y) \d y = \E{S^2}/2.$
+$\int_0^\infty y G(y) \d y = \E{S^2}/2,$
+if the latter expected value exists.
 \begin{solution}
   \begin{equation}
       \int_0^\infty y G(y) \d y 
 = \frac{y^2}2 G(y) \bigg|_0^\infty  - \int_0^\infty \frac{y^2}2 g(y)\d y = \int_0^\infty \frac{y^2}2 f(y)\d y = \frac{\E{S^2}}2,
   \end{equation}
-  since $g(y) = G'(y) = - F'(y) = - f(y)$.
+  since $g(y) = G'(y) = - F'(y) = - f(y)$. Note that we used $\frac{y^2}2 G(y) \bigg|_0^\infty = 0 - 0 = 0$, which follows from our assumption that $\E{S^2}$ exists, implying that $\lim_{y \to \infty} y^2G(y) = 0$.
 \end{solution}
 \end{exercise}
 
 \begin{exercise}
-  Use that $\E S = \int_0^\infty x \d F = \int_0^\infty G(y) \d y$ to
+  Use that $\E S = \int_0^\infty x \d F(x) = \int_0^\infty G(y) \d y$ to
   check that  $\E S = \mu^{-1}$ if $F(x) = 1 - e^{-\mu x}$.
 \begin{solution}
 If $F(x) = 1 - e^{-\mu x}$, we obtain that 
