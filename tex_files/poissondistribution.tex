@@ -87,7 +87,7 @@ $\lambda$, and write $N(t)\sim P(\lambda t)$.
 \begin{exercise}
   Show how the binomial distribution~\eqref{eq:bin} converges to the
   Poisson distribution~\eqref{eq:pois} if $n\to\infty$, $p\to0$ such
-  that $np=\lambda$. 
+  that $np=\lambda t$. 
   \begin{hint}
 First find $p$, $n$, $\lambda$ and $t$ such that the rate
     at which event occur in both processes are the same. Then consider
@@ -286,22 +286,19 @@ provided $\P{B}>0$.
 
 Below, and elsewhere, we use the following efficient notation:  the function $f=o(h)$ means that $f$ is such $f(h)/h \to 0$ as $h\to 0$.  The next exercise helps you practice with this. 
 \begin{exercise}
-  If $c$ is a constant (in $\R$) and the functions $f, g =o(h)$, then $c\cdot f = o(h)$, $f+g=o(h)$, $f(h) \to 0$ as $h\to 0$, and $f\cdot g=o(h)$.  (If you believe this right away, you may skip the solution. The proof is perhaps harder than you think.) 
+  If $c$ is a constant (in $\R$) and the functions $f, g =o(h)$, then $c\cdot f = o(h)$, $f+g=o(h)$, $f(h) \to 0$ as $h\to 0$, and $f\cdot g=o(h)$. 
  \begin{solution}
-First, 
+First,
 \begin{align*}
-\lim_{h\to 0} \frac{c f(h)}{h} &=  c \lim_{h\to 0} \frac{f(h)}{h} = 0, \; \text{as } f = o(h) \\
-\lim_h \frac{f(h) + g(h)} h &= \lim_h \frac{f(h)} h + \lim_h \frac{g(h)} h = 0.
+\lim_{h\to 0} \frac{c f(h)}{h} &=  c \lim_{h\to 0} \frac{f(h)}{h} = 0, \; \text{as } f = o(h), \\
+\lim_{h\to 0} \frac{f(h) + g(h)} h &= \lim_{h\to 0} \frac{f(h)} h + \lim_h \frac{g(h)} h = 0.
 \end{align*}
-As a consequence, $f=o(h)\implies -f = o(h)$.  Therefore $|f| = \max\{f, -f\} = o(h)$. Furthermore, letting $f^+ = \max\{f, 0\}$, we have that $2f^+ = |f| + f$, hence $f^+=o(h)$. Likewise $f^- = f-f^+ = o(h)$. 
-Then, if $h \in(0,1)$, 
-\begin{equation*}
-  -f^-(h)/h \leq f(h) \leq f^+(h)/h, 
-\end{equation*}
-we see that $f(h) \to 0$ since $f^-, f^+=o(h)$.  Finally,   $f\cdot g = o(h)$, since
-    \begin{align*}
-\lim_h \frac{f(h)g(h)}h &= \lim_h f(h)\, \lim_h \frac{g(h)}{h} = 0.
-    \end{align*}
+Finally, by the Algebraic Limit Theorem,
+\begin{align*}
+\lim_{h\to 0} \frac{f(h)g(h)}{h} &= \lim_{h\to 0} h \frac{f(h)}{h} \frac{g(h)}{h} \\
+&= \lim_{h\to 0} h \lim_{h\to 0} \frac{f(h)}{h} \lim_{h\to 0} \frac{g(h)}{h} \\
+&= 0 \cdot 0 \cdot 0 = 0.
+\end{align*}
   \end{solution}
 \end{exercise}
 
@@ -620,7 +617,7 @@ Method 1:  Condition on the total number of arrivals $N(t)=n$ up to time
     \begin{equation*}
       \P{A} = \sum_{i=1}^n \P{A\given B_i} \P{B_i}.
     \end{equation*}
-Now choose practical sets $B_i$. 
+Now choose practical sets $B_i$ and use $\sum_{k=0}^{\infty} \frac{x^k}{k!} = e^x$. 
 
 Method 2: You might also consider the random variable 
   \begin{equation*}
@@ -675,7 +672,7 @@ $Y\sim P(\lambda p)$.
 \end{solution}
 \end{exercise}    
 
-In fact, it can be proven that Poisson processes are the only arrival processes are such that, when merged  or thinned, the resulting processes are again Poisson processes. Thus, if you believe that it is reasonable that a thinned  processes has similar statistical properties as the original process, except that the mean becomes smaller, than the Poisson process is the only process that can be consistent with your intuition.
+In fact, it can be proven that Poisson processes are the only arrival processes such that, when merged  or thinned, the resulting processes are again Poisson processes. Thus, if you believe that it is reasonable that a thinned  processes has similar statistical properties as the original process, except that the mean becomes smaller, than the Poisson process is the only process that can be consistent with your intuition.
 
 
 \Closesolutionfile{hint}
