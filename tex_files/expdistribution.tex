@@ -846,21 +846,19 @@ $\E S = \int_0^\infty x \d F  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d 
 \begin{exercise}
  Use indicator functions to prove that for  a continuous random
     variable $S$ with distribution function $F$, 
-$    \E{S^2} = \int_0^\infty x^2 \d F  = 2 \int_0^\infty y G(y) \d y,$
+$\E{S^2} = \int_0^\infty x^2 \d F  = 2 \int_0^\infty y G(y) \d y,$
 where $G(x) = 1 - F(x)$. 
 \begin{hint}
 $\int_0^\infty y G(y) \d y = \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d x \d y$.
 \end{hint}
 \begin{solution}
-  \begin{equation*}
-    \begin{split}
+  \begin{align*}
 \int_0^\infty y G(y) \d y 
 &=  \int_0^\infty y \int_y^\infty f(x)\, \d x \d y =  \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d x \d y\\
 &=  \int_0^\infty f(x) \int_0^\infty y 1\{y \leq x\}\, \d y \d x
 =  \int_0^\infty f(x) \int_0^x y\, \d y \d x\\
 &=  \int_0^\infty f(x) \frac{x^2}2 \d x =\frac{\E{S^2}}2.
-    \end{split}
-  \end{equation*}
+  \end{align*}
 \end{solution}
 \end{exercise}
 

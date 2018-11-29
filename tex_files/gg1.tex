@@ -85,11 +85,15 @@ demand or increasing the capacity), then try to reduce the variability
 split jobs into multiple smaller jobs and use the resulting freedom to
 reschedule jobs in the queue.
 
-For the $G/G/c$ queue we can Sakasegawa's approximation, \cite{sakasegawa77:_l}, 
+For the $G/G/c$ queue we can use Sakasegawa's approximation, \cite{sakasegawa77:_l}, 
 \begin{equation}\label{eq:7}
   \E{W_Q} = \frac{C_a^2+C_s^2}2 \frac{\rho^{\sqrt{2(c+1)}-1}}{c(1-\rho)} \E S
 \end{equation}
-to estimate the time in queue.  We refer to \cite{hopp08:_factor_physic} for a discussion of this formula and its many applications.
+to estimate the time in queue.  Here
+\begin{equation*}
+  \rho = \frac{\lambda \E S}{c}
+\end{equation*}
+is the load of the station, not of the individual machines. We refer to \cite{hopp08:_factor_physic} for a discussion of this formula and its many applications.
 
 
 Even though the above results are only approximate, they prove to be

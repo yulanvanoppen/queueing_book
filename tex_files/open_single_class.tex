@@ -437,8 +437,6 @@ This is really a neat problem. Please spend serious time on it to
 solve before looking at the answer. It requires some ingenuity on your part.  Try to adapt the ideas behind Figure 2.2 of Zijm to this case.
   \end{hint}
     \begin{solution}
-      \begin{enumerate}
-      \item 
 Let $p_{ij}$ be the fraction of time that the system contains $i$
 riders and $j$ taxi cabs. I assume that all members of a party of
 riders can be served by a single cab (that is, the parties do not
@@ -463,7 +461,7 @@ until there are $3$ taxi's waiting and no groups of people.
   \node[state] (3) [right of=2] {$p(0,0)$};
   \node[state] (4) [right of=3] {$p(1,0)$};
   \node[state] (5) [right of=4] {$p(2,0)$};
-  \node[state] (6) [right of=5] {$p(\cdot, \cdot)$};
+  \node[state] (6) [right of=5] {$p(\cdot, 0)$};
 
 \path 
  (0) edge [bend left] node {$\lambda$} (1)
@@ -519,13 +517,11 @@ From the M/M/1 queue we know right away that $p_q = \rho^q
 (1-\rho)$.  With the above relation we can therefore immediately find
 that $p_{ij} = \rho^{3-j+i}(1-\rho)$, save that $i$ and
 $j$ must satisfy the constraints imposed by the model.
-\item       
-The expected number of cabs waiting must be 
 
+Second, the expected number of cabs waiting must be 
 \begin{equation*}
 1p_{0,1} + 2 p_{0,2} + 3p_{0,3}
 \end{equation*}
-
 and the expected number of parties waiting must be $\sum_{j=1}^\infty j p_{j,0}$
 
 \begin{pyconsole}
@@ -538,7 +534,6 @@ def p(i,j):
     return rho**q*(1.-rho)
 
 \end{pyconsole}
-
 Expected number of  cabs waiting:
 \begin{pyconsole}
 Lc = sum(j*p(0,j) for j in range(0,4)) 
@@ -573,8 +568,7 @@ Lp = sum(i*p(i,0) for i in range(trunc))
 Lp
 \end{pyconsole}
 
-\item 
-This is tricky. I first, naively, computed $W_q = L_c/\mu$. This
+For the last part: This is tricky. I first, naively, computed $W_q = L_c/\mu$. This
 seems to make sense, as cabs arrive at rate $\mu$, so that this
 expression follows from a standard application of Little's
 law. However, this is wrong, of course. When using Little's law to
