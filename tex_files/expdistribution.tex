@@ -22,7 +22,7 @@ an \recall{exponentially distributed} random variable, i.e.,
 Moreover,  the exponential distribution  derives directly from the Poisson distribution. Observe that, if there are no arrivals in some interval $[0,t]$, then it
 must be that $N(t) = 0$. Hence, the first interarrival time $X$, i.e., the time until the first customer,  must be larger than $t$.  Therefore,
 \begin{equation*}
- \P{X1> t} = \P{N(t) = 0} = e^{-\lambda t} \frac{(\lambda t)^0}{0!}= e^{-\lambda t}.
+ \P{X_1> t} = \P{N(t) = 0} = e^{-\lambda t} \frac{(\lambda t)^0}{0!}= e^{-\lambda t}.
 \end{equation*}
 Recall that the constant $\lambda$ is called the arrival
 \recall{rate}.  
@@ -213,12 +213,12 @@ $6$ hours, and the average interarrival times $\E X = 5$. In a second
 simulation we take $N=3$ customers, and in the third, $N=10$
 customers. 
 
-The emperical distributions are shown, from left to right,
+Approximations of the probability density functions, based on the empirical distributions, are shown, from left to right,
 in the three panels in Figure~\ref{fig:uniformfew}. The continuous
 curve is the graph of $\lambda e^{-\lambda x}$ where
 $\lambda = N/\E X = N/5$. (Recall from Exercise~(\ref{exer:lambda}) that when $1$
 person visits the shop  with an average interarrival time of $5$
-hours,  the arrival rate is $1/5$. Hence, when $N$ customers visit the shop, each with an average interarrival time of 5 hours, the total arrival rate as seen by the shop must be $N/5$.)  
+hours,  the arrival rate is $1/5$. Hence, when $N$ customers visit the shop, each with an average interarrival time of 5 hours, the total arrival rate as seen by the shop must be $N/5$.)
 
 
 \begin{figure}[ht]
@@ -276,23 +276,175 @@ As the graphs show, even when the customer population consists of 10
 members, each visiting the shop with an interarrival time that is
 quite `far' from exponential, the distribution of the interarrival
 times as observed by the shop is very well approximated by an
-exponential distribution. Thus, for a real shop, with many thousands
-of customers, or a hospital, call center, in fact for nearly every
-system that deals with random demand, it seems reasonable to use the
-exponential distribution to model interarrival times.  In conclusion,
-the main conditions to use an exponential distribution are: 1)
-arrivals have to be drawn from a large population, and 2) each of the
-arriving customers decides, independent of the others, to visit the
-system.
+exponential distribution. Thus, it appears reasonable to use the
+exponential distribution to model interarrival times of customers for systems (such as a shop, or a hospital or a call center) that handle many (thousands of)
+customers each of which  deciding independently to visit the system.
 
-We next provide further relations between the Poisson distribtuion and the exponential distribution. 
+
+A very important concept, related to the exponential distribution, is the following. A random variable $X$ is called \recall{memoryless} when it satisfies
+\begin{equation*}
+  \P{X > t+h | X>t} = \P{X>h}.
+\end{equation*}
+In words, the probability that $X$ is larger than some time $t+h$,
+conditional on it being larger than a time~$t$, is equal to the
+probability that $X$ is larger than $h$. Thus, no matter how long we
+have been waiting for the next arrival to occur, the probability that
+it will occur in the next $h$ seconds remains the same.  This property
+seems to be vindicated also in practice: suppose that a patient with a
+broken arm just arrived at the emergency room of a hospital, what does
+that tell us about the time the next patient will be brought in? Not
+much, as most of us will agree.
+
+
+\begin{exercise}
+  Show that an exponentially distributed random variable is
+  memoryless.  
+  \begin{hint}
+Condition on the event ${X>t}$. 
+  \end{hint}
+  \begin{solution}
+By  the definition of conditional probability
+\begin{equation*}
+  \P{X>t+h|X>t} = \frac{\P{X>t+h, X>t}}{\P{X>t}} = \frac{\P{X>t+h}}{\P{X>t}} = \frac{e^{-\lambda(t+h)}}{e^{-\lambda t}} = e^{-\lambda h} = \P{X>h}.
+\end{equation*}
+
+As an aside,  it can be shown that only exponential random variables have the
+memoryless property. The proof of this fact requires quite some work;
+we refer the reader to the literature if s/he want to check this, see
+e.g. \citet[Appendix 3]{yushkevich69:_markov_proces}.
+  \end{solution}
+\end{exercise}
+
+
+% Then reader should realize that it is simple, by means of
+% computers, to generate exponentially distributed interarrival
+% times. Thus, it is easy to use such exponentially distributed random
+% variables to simulate queueing systems. 
+
+
+\begin{exercise}\label{ex:10}
+  If $X\sim\exp(\lambda)$ and $S\sim\exp(\mu)$, and $X$ and $S$ are
+  independent, show that 
+  \begin{equation*}
+Z=\min\{X,S\}\sim\exp(\lambda+\mu),
+  \end{equation*}
+hence $\E Z = (\lambda+\mu)^{-1}$.
+\begin{hint}
+Use that if $Z=\min\{X, S\}>x$,  it then must be that $X>x$
+  and $S>x$. Then use independence of $X$ and $S$.
+\end{hint}
+  \begin{solution}
+Use that $X$ and $S$ are independent to get
+    \begin{equation*}
+      \begin{split}
+      \P{Z>x} 
+&= \P{\min\{X,S\}>x} = \P{X>x\text{ and } S>x} = \P{X>x}\P{S>x} \\
+&= e^{-\lambda x} e^{-\mu x} = e^{-(\lambda+\mu)x}.
+      \end{split}
+    \end{equation*}
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}\label{ex:3}
+   If $X\sim \exp(\lambda)$, $S\sim\exp(\mu)$, and $X$ and $S$ are independent, show that 
+    \begin{equation*}
+      \P{X\leq S} = \frac{\lambda}{\lambda+\mu}.
+    \end{equation*}
+    \begin{hint}
+     Define the joint distribution of $X$ and $S$ and carry out
+      the computations, or use conditioning, or use the result of the
+      previous exercise.
+    \end{hint}
+\begin{solution}
+There is more than one way to show that $\P{X\leq S} = \lambda/(\lambda+\mu)$.  
+
+Method 1. 
+Observe first that $X$ and $S$, being
+exponentially distributed, have a density. Moreover, as they are
+independent,  the joint density takes the form
+\begin{equation*}
+f_{X,S}(x,y) = f_X(x)f_S(y) = \lambda \mu e^{-\lambda x} e^{-\mu
+  y}.
+\end{equation*}
+With this,
+\begin{align*}
+    \P{X\leq S} 
+&= \E{\1{X\leq S}} \\
+&= \int_0^\infty \int_0^\infty \1{x\leq y} f_{X,S}(x,y)\, \d y\,\d x\\
+&= \lambda \mu \int_0^\infty \int_0^\infty \1{x\leq y} e^{-\lambda x} e^{-\mu y} \, \d y\,\d x\\
+&= \lambda \mu \int_0^\infty e^{-\mu y} \int_0^y e^{-\lambda x}\, \d x \, \d y \\
+&= \mu \int_0^\infty e^{-\mu y} (1-e^{-\lambda y})\,\d y\\
+&= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
+&= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
+&= 1 - \frac{\mu}{\lambda + \mu} 
+\end{align*}
+
+Method 2. You only have to study this if you (want to) know about conditioning with respect to a random variable with a density, otherwise, skip it.  Start with  the law of total probability in the discrete case: 
+\begin{equation*}
+  \E{A} = \sum_{i=1}^k \E{A\given B_i} \P{B_i},
+\end{equation*}
+where $B_1,\ldots, B_k$ forms a set of events such that $\cup_{i=1}^k B_i$ is equal to the sample space, $B_i\cap B_j = \varnothing$ and $\P{B_i}>0$. Now in \cite{capinski03:_probab_probl} it is shown that this can be extended to random variables $X$ and $Y$ with densities $f_X, f_Y$. The result is
+\begin{equation*}
+  \E{Y} = \int_0^\infty \E{Y\given X=x} f_X(x)\d x.
+\end{equation*}
+Here, conceptually, $f_X(x)\d x \approx \P{X\in \d x}$ plays the role of $\P{B_i}$ in the discrete case above. With this notion, and observing that $f_S(s) = \mu e^{-\mu s} \d s$,
+\begin{equation*}
+\P{X\leq S} = \E{\1{X\leq S}} = \int_0^\infty \E{\1{X\leq S}| S=s} \mu e^{-\mu s} \,  \d s.
+\end{equation*}
+
+Now, $\E{\1{X\leq S}| S=s}$ is a tricky object, as $\P{S=s} = 0$, so that 
+$\E{\1{X\leq S}\given S=s}$ \emph{cannot} be defined as 
+\begin{equation*}
+\frac{\E{\1{X\leq s}}}{\P{S=s}}.
+\end{equation*}
+The way to proceed is to consider the conditional probability density function of $X$ given that $S=s$, which is defined as
+\begin{equation*}
+  f_{X|S}(x|s) = \frac{f_{X, S}( x, s)}{f_S(s)},
+\end{equation*}
+where, as before, $f_{X, S}( x, s)$ is the joint density of $X$ and $S$. With this, we can properly define
+\begin{equation*}
+  \begin{split}
+  \P{X\leq S| S=s } = \E{\1{X \leq S}| S=s } = \int_0^\infty \1{x \leq s}   f_{X|S}(x|s)\, \d x.
+  \end{split}
+\end{equation*}
+Using the definition of $f_{X|S}(x|s)$ and the independence of $X$ and $S$ it follows that
+\begin{equation*}
+  f_{X|S}(x|s) = \frac{f_{X, S}( x, s)}{f_S(s)} = \frac{\lambda e^{-\lambda x} \mu e^{-\mu s}}{\mu e^{-\mu s}} = \lambda e^{-\lambda x}
+\end{equation*}
+from which we get that 
+\begin{align*}
+  \E{\1{X \leq S}| S=s } 
+&= \int_0^\infty \1{x \leq s}   f_{X|S}(x|s)\, \d x \\
+&= \int_0^\infty \1{x \leq s} \lambda e^{-\lambda x}\, \d x \\
+&= \int_0^s \lambda e^{-\lambda x}\, \d x \\
+&= 1 - e^{-\lambda s}.
+\end{align*}
+
+And then,  
+\begin{equation*}
+  \begin{split}
+  \P{X\leq S} &= \int \P{X\leq S| S=s} \mu e^{-\mu s}\d s \\
+&= \mu \int_0^\infty \E{\1{X \leq S}| S=s } e^{-\mu s} \d s= \mu \int_0^\infty (1 - e^{-\lambda s})e^{-\mu s} \d s.
+  \end{split}
+\end{equation*}
+Straightforward integration gives the final result.
+\end{solution}
+\end{exercise}
+
+
+
+The Poisson process $N$ and exponentially distributed interarrival times are intimately related: A counting process $\{N(t)\}$ is a \recall{Poisson process} with rate $\lambda$ if and only if  the inter-arrival times $\{X_i\}$ are i.i.d. and exponentially distributed with mean $1/\lambda$,  in short, 
+\begin{equation*}
+X_i\sim \exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t).
+\end{equation*}
+
+
+We next provide further relations between the Poisson distribution and the exponential distribution. 
 
   \begin{exercise}
     Assume that the interarrival times $\{X_i\}$ are i.i.d. and
     $X_i\sim\exp(\lambda)$. Let
-    $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$. Use the
-    density of $A_i$ or the moment generating function of $A_i$ to
-    show that
+    $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$. Show that %We do not need the MGF here.
  \begin{equation*}
 \E{A_i} = \frac i\lambda,
  \end{equation*}
@@ -418,163 +570,6 @@ We are done.
 \end{exercise}
 
 
-The relation between the Poisson process $N$ and exponentially distributed interarrival times we discussed above is  of paramount importance in the analysis of queueing processes: A counting process $\{N(t)\}$ is a \recall{Poisson process} with rate $\lambda$ if and only if  the inter-arrival times $\{X_i\}$ are i.i.d. and exponentially distributed with mean $1/\lambda$,  in short, 
-\begin{equation*}
-X_i\sim \exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t).
-\end{equation*}
-
-
-
-% Then reader should realize that it is simple, by means of
-% computers, to generate exponentially distributed interarrival
-% times. Thus, it is easy to use such exponentially distributed random
-% variables to simulate queueing systems. 
-
-
-
-Another very important concept is the following. A random variable $X$ is called \recall{memoryless} when it satisfies
-\begin{equation*}
-  \P{X > t+h | X>t} = \P{X>h}.
-\end{equation*}
-In words, the probability that $X$ is larger than some time $t+h$,
-conditional on it being larger than a time~$t$, is equal to the
-probability that $X$ is larger than $h$. Thus, no matter how long we
-have been waiting for the next arrival to occur, the probability that
-it will occur in the next $h$ seconds remains the same.  This property
-seems to be vindicated also in practice: suppose that a patient with a
-broken arm just arrived at the emergency room of a hospital, what does
-that tell us about the time the next patient will be brought in? Not
-much, as most of us will agree.
-
-
-\begin{exercise}
-  Show that an exponentially distributed random variable is
-  memoryless.  
-  \begin{hint}
-Condition on the event ${X>t}$. 
-  \end{hint}
-  \begin{solution}
-By  the definition of conditional probability
-\begin{equation*}
-  \P{X>t+h|X>t} = \frac{\P{X>t+h, X>t}}{\P{X>t}} = \frac{\P{X>t+h}}{\P{X>t}} = \frac{e^{-\lambda(t+h)}}{e^{-\lambda t}} = e^{-\lambda h} = \P{X>h}.
-\end{equation*}
-
-As an aside,  it can be shown that only exponential random variables have the
-memoryless property. The proof of this fact requires quite some work;
-we refer the reader to the literature if s/he want to check this, see
-e.g. \citet[Appendix 3]{yushkevich69:_markov_proces}.
-  \end{solution}
-\end{exercise}
-
-
-\begin{exercise}\label{ex:10}
-  If $X\sim\exp(\lambda)$ and $S\sim\exp(\mu)$, and $X$ and $S$ are
-  independent, show that 
-  \begin{equation*}
-Z=\min\{X,S\}\sim\exp(\lambda+\mu),
-  \end{equation*}
-hence $\E Z = (\lambda+\mu)^{-1}$.
-\begin{hint}
-Use that if $Z=\min\{X, S\}>x$,  it then must be that $X>x$
-  and $S>x$. Then use independence of $X$ and $S$.
-\end{hint}
-  \begin{solution}
-Use that $X$ and $S$ are independent to get
-    \begin{equation*}
-      \begin{split}
-      \P{Z>x} 
-&= \P{\min\{X,S\}>x} = \P{X>x\text{ and } S>x} = \P{X>x}\P{S>x} \\
-&= e^{-\lambda x} e^{-\mu x} = e^{-(\lambda+\mu)x}.
-      \end{split}
-    \end{equation*}
-  \end{solution}
-\end{exercise}
-
-\begin{exercise}\label{ex:3}
-   If $X\sim \exp(\lambda)$, $S\sim\exp(\mu)$, and $X$ and $S$ are independent, show that 
-    \begin{equation*}
-      \P{X\leq S} = \frac{\lambda}{\lambda+\mu}.
-    \end{equation*}
-    \begin{hint}
-     Define the joint distribution of $X$ and $S$ and carry out
-      the computations, or use conditioning, or use the result of the
-      previous exercise.
-    \end{hint}
-\begin{solution}
-There is more than one way to show that $\P{X\leq S} = \lambda/(\lambda+\mu)$.  
-
-Method 1. 
-Observe first that $X$ and $S$, being
-exponentially distributed, have a density. Moreover, as they are
-independent,  the joint density takes the form
-\begin{equation*}
-f_{X,S}(x,y) = f_X(x)f_S(y) = \lambda \mu e^{-\lambda x} e^{-\mu
-  y}.
-\end{equation*}
-With this,
-\begin{align*}
-    \P{X\leq S} 
-&= \E{\1{X\leq S}} \\
-&= \int_0^\infty \int_0^\infty \1{x\leq y} f_{X,S}(x,y)\, \d y\,\d x\\
-&= \lambda \mu \int_0^\infty \int_0^\infty \1{x\leq y} e^{-\lambda x} e^{-\mu y} \, \d y\,\d x\\
-&= \lambda \mu \int_0^\infty e^{-\mu y} \int_0^y e^{-\lambda x}\, \d x \, \d y \\
-&= \mu \int_0^\infty e^{-\mu y} (1-e^{-\lambda y})\,\d y\\
-&= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
-&= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
-&= 1 - \frac{\mu}{\lambda + \mu} 
-\end{align*}
-
-Method 2. You only have to study this if you (want to) know about conditioning with respect to a random variable with a density, otherwise, skip it.  Start with  the law of total probability in the discrete case: 
-\begin{equation*}
-  \E{A} = \sum_{i=1}^k \E{A\given B_i} \P{B_i},
-\end{equation*}
-where $B_1,\ldots, B_k$ forms a set of events such that $\cup_{i=1}^k B_i$ is equal to the sample space, $B_i\cap B_j = \varnothing$ and $\P{B_i}>0$. Now in \cite{capinski03:_probab_probl} it is shown that this can be extended to random variables $X$ and $Y$ with densities $f_X, f_Y$. The result is
-\begin{equation*}
-  \E{Y} = \int_0^\infty \E{Y\given X=x} f_X(x)\d x.
-\end{equation*}
-Here, conceptually, $f_X(x)\d x \approx \P{X\in \d x}$ plays the role of $\P{B_i}$ in the discrete case above. With this notion, and observing that $f_S(s) = \mu e^{-\mu s} \d s$,
-\begin{equation*}
-\P{X\leq S} = \E{\1{X\leq S}} = \int_0^\infty \E{\1{X\leq S}| S=s} \mu e^{-\mu s} \,  \d s.
-\end{equation*}
-
-Now, $\E{\1{X\leq S}| S=s}$ is a tricky object, as $\P{S=s} = 0$, so that 
-$\E{\1{X\leq S}\given S=s}$ \emph{cannot} be defined as 
-\begin{equation*}
-\frac{\E{\1{X\leq s}}}{\P{S=s}}.
-\end{equation*}
-The way to proceed is to consider the conditional probability density function of $X$ given that $S=s$, which is defined as
-\begin{equation*}
-  f_{X|S}(x|s) = \frac{f_{X, S}( x, s)}{f_S(s)},
-\end{equation*}
-where, as before, $f_{X, S}( x, s)$ is the joint density of $X$ and $S$. With this, we can properly define
-\begin{equation*}
-  \begin{split}
-  \P{X\leq S| S=s } = \E{\1{X \leq S}| S=s } = \int_0^\infty \1{x \leq s}   f_{X|S}(x|s)\, \d x.
-  \end{split}
-\end{equation*}
-Using the definition of $f_{X|S}(x|s)$ and the independence of $X$ and $S$ it follows that
-\begin{equation*}
-  f_{X|S}(x|s) = \frac{f_{X, S}( x, s)}{f_S(s)} = \frac{\lambda e^{-\lambda x} \mu e^{-\mu s}}{\mu e^{-\mu s}} = \lambda e^{-\lambda x}
-\end{equation*}
-from which we get that 
-\begin{align*}
-  \E{\1{X \leq S}| S=s } 
-&= \int_0^\infty \1{x \leq s}   f_{X|S}(x|s)\, \d x \\
-&= \int_0^\infty \1{x \leq s} \lambda e^{-\lambda x}\, \d x \\
-&= \int_0^s \lambda e^{-\lambda x}\, \d x \\
-&= 1 - e^{-\lambda s}.
-\end{align*}
-
-And then,  
-\begin{equation*}
-  \begin{split}
-  \P{X\leq S} &= \int \P{X\leq S| S=s} \mu e^{-\mu s}\d s \\
-&= \mu \int_0^\infty \E{\1{X \leq S}| S=s } e^{-\mu s} \d s= \mu \int_0^\infty (1 - e^{-\lambda s})e^{-\mu s} \d s.
-  \end{split}
-\end{equation*}
-Straightforward integration gives the final result.
-\end{solution}
-\end{exercise}
 
 In the sequel of this section we  develop numerous important probability concepts, which we will also use many times in the rest of the course.
 
@@ -742,8 +737,7 @@ we get
 \end{exercise}
 
 
-Let $B$ be a discrete random variable  such that $\P{B = k} = f(k)$, where $f(k)$ is a given set of
-probabilities. We write
+Let $B$ be a discrete random variable such that $\P{B = k} = f(k)$, where $f$ is the probability mass function of $B$. We write
 \begin{equation*}
   G(k) = \P{B>k} = \sum_{m=k+1}^\infty f(m),
 \end{equation*}
@@ -819,15 +813,15 @@ and reverse the summations.
 \end{exercise}
 
 
-Let $S$ be a continuous random variable with distribution function $F$.  We write 
+Let $S$ be a continuous non-negative random variable with distribution function $F$.  We write 
 \begin{equation*}
-  \E{X} = \int_0^\infty x \d F(x)
+  \E{S} = \int_0^\infty x \d F(x)
 \end{equation*}
-for the expection of $X$. Here $\d F(x)$ acts as a shorthand for $f(x) \d x$ when $X$ has a density. \footnote{For the interested $\int x \d F(x)$ is a Lebesgue-Stieltjes integral with respect to the measure induced by the distribution function $F$.}
+for the expection of $S$. Here $\d F(x)$ acts as a shorthand for $f(x) \d x$. \footnote{For the interested $\int x \d F(x)$ is a Riemann-Stieltjes integral with respect to the distribution function $F$.}
 
 \begin{exercise}
  Use indicator functions to prove that 
-$   \E S = \int_0^\infty x \d F  = \int_0^\infty G(y) \d y,$
+$   \E S = \int_0^\infty x \d F(x)  = \int_0^\infty G(y) \d y,$
 where $G(x) = 1 - F(x)$. 
 \begin{hint}
 $\E S = \int_0^\infty x \d F  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d F(x)$.
@@ -844,9 +838,9 @@ $\E S = \int_0^\infty x \d F  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d 
 \end{exercise}
 
 \begin{exercise}
- Use indicator functions to prove that for  a continuous random
+ Use indicator functions to prove that for a continuous non-negative random
     variable $S$ with distribution function $F$, 
-$\E{S^2} = \int_0^\infty x^2 \d F  = 2 \int_0^\infty y G(y) \d y,$
+$    \E{S^2} = \int_0^\infty x^2 \d F(x)  = 2 \int_0^\infty y G(y) \d y,$
 where $G(x) = 1 - F(x)$. 
 \begin{hint}
 $\int_0^\infty y G(y) \d y = \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d x \d y$.
@@ -863,20 +857,21 @@ $\int_0^\infty y G(y) \d y = \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d
 \end{exercise}
 
 \begin{exercise}
- Use integration by parts to show that for  a continuous random
+ Use integration by parts to show that for a continuous non-negative random
     variable $S$ with distribution function $F$ and survivor function $G=1-F$, 
-$\int_0^\infty y G(y) \d y = \E{S^2}/2.$
+$\int_0^\infty y G(y) \d y = \E{S^2}/2,$
+if the latter expected value exists.
 \begin{solution}
   \begin{equation}
       \int_0^\infty y G(y) \d y 
 = \frac{y^2}2 G(y) \bigg|_0^\infty  - \int_0^\infty \frac{y^2}2 g(y)\d y = \int_0^\infty \frac{y^2}2 f(y)\d y = \frac{\E{S^2}}2,
   \end{equation}
-  since $g(y) = G'(y) = - F'(y) = - f(y)$.
+  since $g(y) = G'(y) = - F'(y) = - f(y)$. Note that we used $\frac{y^2}2 G(y) \bigg|_0^\infty = 0 - 0 = 0$, which follows from our assumption that $\E{S^2}$ exists, implying that $\lim_{y \to \infty} y^2G(y) = 0$.
 \end{solution}
 \end{exercise}
 
 \begin{exercise}
-  Use that $\E S = \int_0^\infty x \d F = \int_0^\infty G(y) \d y$ to
+  Use that $\E S = \int_0^\infty x \d F(x) = \int_0^\infty G(y) \d y$ to
   check that  $\E S = \mu^{-1}$ if $F(x) = 1 - e^{-\mu x}$.
 \begin{solution}
 If $F(x) = 1 - e^{-\mu x}$, we obtain that 
