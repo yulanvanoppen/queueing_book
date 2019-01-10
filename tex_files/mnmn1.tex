@@ -428,35 +428,6 @@ Use that for any $x$, $x^n/n!\to 0$ as $n\to\infty$.
 \end{solution}
 \end{exercise}
 
-Finally, we consider queues with \recall{balking}, that is, queues in
-which customers leave when they find the queue too long at the moment
-they arrive. A simple example model with  customer balking is given by x
-  \begin{equation*}
-    \lambda(n) = 
-  \begin{cases}
-    \lambda, &\text{ if } n=0, \\
-    \lambda/2, &\text{ if } n=1, \\
-    \lambda/4, &\text{ if } n=2, \\
-    0, &\text{ if } n > 2, \\
-  \end{cases}
-  \end{equation*}
-and $\mu(n)=\mu$.   
-
-Observe that in the example with balking we made a subtle implicit
-assumption; in Section~\ref{sec:poisson-arrivals-see} we elaborate on
-this assumption. To make the problem clear, note that balking
-customers \emph{decide at the moment they arrive} to either join or
-leave; in other words, they decide based on what they `see upon
-arrival'. In yet other words, they make decisions based on the state
-of the system at arrival moments, not on time-averages. However, the
-notion of $p(n)$ is a long-run \emph{time-average}, and is typically
-not the same as what customers `see upon arrival'. As a consequence,
-the performance measure $\P{L\leq n}$ is not necessarily in accordance
-with the perception of customers. To relate these two `views', i.e.,
-time-average versus observer-average, we need a new concept,
-\emph{PASTA}, to be developed in in Section~\ref{sec:poisson-arrivals-see}.
-
-
 
 \begin{exercise}(Hall 5.1) Give two examples of systems that
   ordinarily have a finite buffer size. Give two examples of systems
@@ -471,28 +442,13 @@ A finite calling population occurs for instance at a factory with a
 number of machines. When a machine breaks down, it becomes a (repair)
 job at the repair department.  Thus, a break down forms an arrival at
 the repair shop.  The mechanics at the repair department form a set of
-parallel servers. Typically, the number of machines quite small, 10 or
+parallel servers. Typically, the number of machines is quite small, 10 or
 so, and when a machine is `down', i.e., broken, it cannot break again.
 Hence, when 2, say, machines are in repair, the number of `customers'
 that can arrive to the queueing system is only 8. 
   \end{solution}
 \end{exercise}
 
-\begin{exercise}
- In what way is a queueing system with balking, at level $b$
-    say, different from a queueing system with finite calling
-    population of size $b$? 
-\begin{solution}
- In a queueing system with balking, customers may decide to
-    balk at a level $b$. Thus, whether only $b$ customers are admitted
-    to the system (i.e., blocked), or balk at level $b$, the effect is
-    the same: the number of people in the system remains at or below
-    $b$. However, a fraction of customer may already balk at lower
-    levels, like in the example above, so that the arrival stream is
-    `thinned' due to balking customers. In that respect, a queueing
-    system with balking behaves differently.
-\end{solution}
-\end{exercise}
 
 \begin{comment}
 \begin{exercise}[use=false]
@@ -714,6 +670,51 @@ The  code can be found on \texttt{github} in the \texttt{progs} directory.
 \end{solution}
 \end{exercise}
 
+
+Finally, we consider queues with \recall{balking}, that is, queues in
+which customers leave when they find the queue too long at the moment
+they arrive. A simple example model with  customer balking is given by 
+  \begin{equation*}
+    \lambda(n) = 
+  \begin{cases}
+    \lambda, &\text{ if } n=0, \\
+    \lambda/2, &\text{ if } n=1, \\
+    \lambda/4, &\text{ if } n=2, \\
+    0, &\text{ if } n > 2, \\
+  \end{cases}
+  \end{equation*}
+and $\mu(n)=\mu$.   
+
+Observe that here we make a subtle implicit
+assumption; in Section~\ref{sec:poisson-arrivals-see} we elaborate on
+this assumption. To make the problem clear, note that balking
+customers \emph{decide at the moment they arrive} to either join or
+leave; in other words, they decide based on what they `see upon
+arrival'. In yet other words, they make decisions based on the state
+of the system at arrival moments, not on time-averages. However, the
+notion of $p(n)$ is a long-run \emph{time-average}, and is typically
+not the same as what customers `see upon arrival'. As a consequence,
+the performance measure $\P{L\leq n}$ is not necessarily in accordance
+with the perception of customers. To relate these two `views', i.e.,
+time-average versus observer-average, we need a new concept,
+\emph{PASTA}, to be developed in in Section~\ref{sec:poisson-arrivals-see}.
+
+
+\begin{exercise}
+ In what way is a queueing system with balking, at level $b$
+    say, different from a queueing system with finite calling
+    population of size $b$? 
+\begin{solution}
+ In a queueing system with balking, customers may decide to
+    balk at a level $b$. Thus, whether only $b$ customers are admitted
+    to the system (i.e., blocked), or balk at level $b$, the effect is
+    the same: the number of people in the system remains at or below
+    $b$. However, a fraction of customer may already balk at lower
+    levels, like in the example above, so that the arrival stream is
+    `thinned' due to balking customers. In that respect, a queueing
+    system with balking behaves differently.
+\end{solution}
+\end{exercise}
 
 
 
