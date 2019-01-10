@@ -54,15 +54,19 @@
 \input{tex_files/mva.tex}
 %\input{tex_files/mda.tex}
 
-
-\chapter{Notation}
-\label{sec:notation}
-\input{tex_files/notation}
-
-\chapter{Formula Sheet}
-\input{tex_files/formula_sheet}
-   
-
 \bibliographystyle{plainnat}
 \bibliography{biblio_nicky}
+\addcontentsline{toc}{chapter}{Bibliography}
 
+\chapter*{Notation}
+\label{sec:notation}
+\addcontentsline{toc}{chapter}{Notation}
+\input{tex_files/notation}
+
+\chapter*{Formula Sheet}
+\addcontentsline{toc}{chapter}{Formula Sheet}
+\input{tex_files/formula_sheet}
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Index}
+\printindex

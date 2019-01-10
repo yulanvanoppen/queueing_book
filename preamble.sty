@@ -11,6 +11,9 @@
 \usepackage{nicefrac}
 \usepackage[colorlinks=true]{hyperref}
 
+\usepackage{makeidx}
+\makeindex
+
 \usepackage[T1]{fontenc}
 \usepackage{fouriernc}
 \usepackage{manfnt} %for the dangerous bend
@@ -111,7 +114,8 @@
 \newcommand{\1}[1]{\,\mathbb{1}{[#1]}} % indicator
 \renewcommand{\TH}{\mathrm{TH}} % indicator
 
-\newcommand{\recall}[1]{\emph{#1}} %\recallsymbol}
+%\newcommand{\recall}[1]{\emph{#1}}%\recallsymbol}
+\newcommand{\recall}[1]{\emph{#1}\index{#1}}
 \newcommand{\nvf}[1]{\tbdsymbol}
 
 \makeatletter
