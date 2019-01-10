@@ -33,12 +33,12 @@ up to time $t$ minus the number of down-crossings up to time $t$. If
 $L(t)$ remains finite, or more generally $L(t)/t \to 0$ as $t\to\infty$, then it
 must be that
 \begin{equation*}
-  \lambda =  \lim_t \frac{A(t)}t  = \lim_t \frac{D(t)+L(t)}t =  \lim_t \frac{D(t)}t + \lim_t \frac{L(t)}t 
+  \lambda =  \lim_{t \to \infty} \frac{A(t)}t  = \lim_{t \to \infty} \frac{D(t)+L(t)}t =  \lim_{t \to \infty} \frac{D(t)}t + \lim_{t \to \infty} \frac{L(t)}t 
   = \delta.  
 \end{equation*}
-Hence, when $L(t)/t\to0$, the \recall{up-crossing rate}
-$\lim_t A(t)/t = \lambda$ is equal to the \emph{down-crossing rate}
-$\lim_t D(t)/t = \delta$.  We will generalize these notions of up- and
+Hence, when $L(t)/t\to0$, the \recall{up crossing rate}
+$\lim_{t \to \infty} A(t)/t = \lambda$ is equal to the \emph{down-crossing rate}
+$\lim_{t \to \infty} D(t)/t = \delta$.  We will generalize these notions of up- and
 downcrossing in this section to derive the \recall{stationary}---also known as \emph{long-run time average} or \emph{steady-state},
 distribution---$p(n)$ that the system contains $n$ jobs. 
 
@@ -172,7 +172,7 @@ What is the difference between $A(n,t)$ and $A(t)$?
   $\lambda > \delta$, i.e., if the system is not rate-stable?
   \begin{solution}
  If $\lambda > \delta$, then $L(t)\to\infty$. But then there
-      must be last time, $s$ say, that $L(s) = n+1$, and $L(t) > n+1$
+      must be a last time, $s$ say, that $L(s) = n+1$, and $L(t) > n+1$
       for all $t>s$. Hence, after time $s$ no job will see the system
       with $n$ jobs. Thus $A(t,n) = A(s,n)$ for all $t>s$.  This is a
       finite number, while $t\to\infty$, so that $A(n,t)/t \to 0$.
@@ -466,15 +466,15 @@ $L(s)$ is an integer),
 \end{equation*}
 With this we can write for the time-average number of jobs in the system
 \begin{equation}\label{eq:1}
-\frac 1 t \int_0^t L(s) \d s = \frac 1 t \int_0^t \left(\sum_n n\, \1{L(s) = n}\right) \d s
-= \sum_n \frac n t \int_0^t   \1{L(s) = n} \d s,
+\frac 1 t \int_0^t L(s) \d s = \frac 1 t \int_0^t \left(\sum_{n=0}^{\infty} n\, \1{L(s) = n}\right) \d s
+= \sum_{n=0}^{\infty} \frac n t \int_0^t   \1{L(s) = n} \d s,
 \end{equation}
 where we interchange the integral and the summation\footnote{This is
   allowed as the integrand is non-negative. More generally, the
   interested reader should check Fubini's theorem.}.  It then follows
   from Eq.~(\ref{eq:18}) that
 \begin{equation*}
-\frac 1 t \int_0^t L(s) \d s =  \sum_n n\, p(n,t).
+\frac 1 t \int_0^t L(s) \d s =  \sum_{n=0}^{\infty} n\, p(n,t).
 \end{equation*}
 Finally, assuming that the limit $p(n,t) \to p(n)$ exists as
 $t\to\infty$ (and that the summation and limit can be interchanged in

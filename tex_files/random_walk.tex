@@ -158,6 +158,9 @@ process $\{Q_k\}$, and we might try to understand the transient behavior of the 
     N_\lambda(t) = \sum_{k=1}^\infty a_k \1{k \leq N_{\lambda+\mu}(t)},
   \end{equation*}
 has a Poisson distribution with rate $\lambda t$. 
+\begin{hint}
+Use Exercise~\ref{ex:1}.
+\end{hint}
 \begin{solution}
   From Exercise~\ref{ex:1} we know that thinning  a rate $\lambda$ Poisson process  with i.i.d. Bernoulli random variables with success probability $p$  leads to another Poisson process with rate $\lambda p$. In the present case, the original Poisson process has rate $\lambda+\mu$ and $p=\lambda/(\lambda+\mu)$. Hence, the random variable $N_{\lambda t}\sim P\left(\frac\lambda{\lambda+\mu} (\lambda+\mu)t\right) = P(\lambda t)$.
 \end{solution}

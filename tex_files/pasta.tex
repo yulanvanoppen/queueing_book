@@ -16,7 +16,7 @@ where $\pi(n)$ is the long-run fraction of jobs that observe $n$
 customers in the system at the moment of arrival.  It is natural to
 ask whether $\pi(n)$ and $p(n)$, as defined by~\eqref{eq:p(n)}, are related, that is, whether what
 customers see upon arrival is related to the time-average behavior of
-the system. In this section we will derive the famous \recall{Poisson arrivals see time averages (PASTA)} condition  that ensures that  $\pi(n)=p(n)$. 
+the system. In this section we will derive the famous \recall{Poisson arrivals see time averages (PASTA)} condition  that ensures that  $\pi(n)=p(n)$ if the arrivals follow a Poisson process. 
 
 
 \begin{comment}
@@ -134,7 +134,7 @@ time-average $p(n)$, i.e., $\pi(n)=p(n)$. But, when $\pi(n)=p(n)$, the
 customer perception at arrival moments, i.e., $\pi(n)$, is the same as
 the server perception, i.e., $p(n)$.
 
-At the exercises above show, this property is not satisfied in
+As the exercises above show, this property is not satisfied in
 general.  However,  when the arrival process is
 Poisson we have that $\lambda(n)=\lambda$. This fact is typically called \recall{PASTA:
   Poisson Arrivals See Time Averages}. Thus, when customers arrive in
@@ -300,7 +300,7 @@ gives  a (simple) proof.
   $N(t) = \{k : T_k \leq t\}$. Then $Y(t)/t$ has a limit iff
   $n^{-1}\sum_k^n X_k$ has a limit in which case $Y=\lambda X$, i.e.,
   \begin{equation*}
-  \lim_t \frac{Y(t)}t=Y \iff \lim_n \frac 1n\sum_k^n X_k =X \implies Y=\lambda X.
+  \lim_{t \to \infty} \frac{Y(t)}t=Y \iff \lim_{n \to \infty} \frac 1n\sum_k^n X_k =X \implies Y=\lambda X.
   \end{equation*}
 \end{theorem}
 
