@@ -7,20 +7,20 @@
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-In the previous section we introduced the Poisson process as a natural model of the number of jobs arriving in during intervals of time.  As we will see in the sections to come, the modeling and analysis of any queueing system is typically easier if we specificy  the (probability)
-distribution of the interarrival times, i.e., the time between consecutive arrival epochs of jobs.
-A particular fruitful model for the distribution of the interarrival times is the exponential distribution. Here we show how this relates to the Poisson distribution,  and we also derive many useful general probability concepts and apply these to the exponential distribution.  Then we use simulation to provide yet further movivation for the use of the exponential distribution as a useful model for interarrival times of customers.
+In the previous section we introduced the Poisson process as a natural model of the number of jobs arriving in during intervals of time.  As we will see in the sections to come, the modeling and analysis of any queueing system is typically easier if we specify  the (probability)
+distribution of the inter-arrival times, i.e., the time between consecutive arrival epochs of jobs.
+A particular fruitful model for the distribution of the inter-arrival times is the exponential distribution. Here we show how this relates to the Poisson distribution,  and we also derive many useful general probability concepts and apply these to the exponential distribution.  Then we use simulation to provide yet further motivation for the use of the exponential distribution as a useful model for inter-arrival times of customers.
 
-Let us assume that the interarrival times form a sequence $\{X_i\}$ of \recall{independent and identically distributed  (i.i.d.)}  random variables, and let us write $X$ for the generic
+Let us assume that the inter-arrival times form a sequence $\{X_i\}$ of \recall{independent and identically distributed  (i.i.d.)}  random variables, and let us write $X$ for the generic
 random time between two successive arrivals. For many queueing
-systems, measurements of the interarrival times between consecutive
-arrivals show that it is reasonable to model an interarrival $X$ as
+systems, measurements of the inter-arrival times between consecutive
+arrivals show that it is reasonable to model an inter-arrival $X$ as
 an \recall{exponentially distributed} random variable, i.e.,
 \begin{equation*}
   \P{X \leq t} = 1- e^{-\lambda t}
 \end{equation*}
 Moreover,  the exponential distribution  derives directly from the Poisson distribution. Observe that, if there are no arrivals in some interval $[0,t]$, then it
-must be that $N(t) = 0$. Hence, the first interarrival time $X$, i.e., the time until the first customer,  must be larger than $t$.  Therefore,
+must be that $N(t) = 0$. Hence, the first inter-arrival time $X$, i.e., the time until the first customer,  must be larger than $t$.  Therefore,
 \begin{equation*}
  \P{X_1> t} = \P{N(t) = 0} = e^{-\lambda t} \frac{(\lambda t)^0}{0!}= e^{-\lambda t}.
 \end{equation*}
@@ -40,7 +40,7 @@ In the above expression for $\P{X\leq t}$ we require that $\lambda>0$. What woul
 \begin{solution}
   If $\lambda<0$, then $1-e^{-\lambda t}$ grows to $-\infty$ if $t\to \infty$. Just by itself this is not a problem. However, in our case $1-e^{-\lambda t}$ has the interpretation of a distribution function. Now, recall that a distribution function is bounded to values in the interval $[0,1]$.
 
-Suppose $\lambda=0$. Then $\P{X\leq t} = 1-e^{0} = 0$. In words, this would mean that the probability of a finite interarrival time between any two customers is zero. So, no customers can arrive in this case. 
+Suppose $\lambda=0$. Then $\P{X\leq t} = 1-e^{0} = 0$. In words, this would mean that the probability of a finite inter-arrival time between any two customers is zero. So, no customers can arrive in this case. 
 \end{solution}
 \end{exercise}
 
@@ -103,14 +103,14 @@ $\V X = \lambda^{-2}$.
 
 The  above exercises can also be easily solved with the moment generating function of $X\geq 0$
 \begin{equation*}
-  M_X(t) = \E{e^{tX}} = \int_0^\infty e^{tx} \lambda e^{-\lambda x} \d x.
+  M_X(t) = \E{e^{t X}} = \int_0^\infty e^{t x} \lambda e^{-\lambda x} \d x.
 \end{equation*}
 
 \begin{exercise}
 Why do we require that $t \in [0, \lambda)$ in the definition of $M_X(t)$?
 \begin{solution}
 \begin{equation*}
-  M_X(t) = \E{e^{tX}} = \lambda \int_0^\infty e^{-(\lambda-t) x}\d x.
+  M_X(t) = \E{e^{t X}} = \lambda \int_0^\infty e^{-(\lambda-t) x}\d x.
 \end{equation*}
   If $t - \lambda>0$, then this integral becomes $\infty$. 
 \end{solution}
@@ -131,7 +131,7 @@ Why do we require that $t \in [0, \lambda)$ in the definition of $M_X(t)$?
     \end{equation*}
    \begin{hint}
     \begin{equation*}
-      M_X(t) = \E{\exp(t X)} =\int_0^\infty e^{tx} f(x) \,\d x.
+      M_X(t) = \E{\exp(t X)} =\int_0^\infty e^{t x} f(x) \,\d x.
 \end{equation*}
 \end{hint}
     \begin{solution}
@@ -172,14 +172,14 @@ where $M'(t) = \frac{\d}{\d t} M(t)$.
 
 Let us now show with simulation how the exponential distribution
 originates. Consider $N$ people that regularly visit a shop. We assume
-that we can characterize the interarrival times
+that we can characterize the inter-arrival times
 $\{X_k^i, k=1,2, \ldots\}$ of customer $i$ by some distribution
 function, for instance the uniform distribution. Then, with
 $A_{0}^i=0$ for all~$i$, define 
 \begin{equation}\label{eq:A_kk}
 A_k^i = A_{k-1}^i + X_k^i = \sum_{j=1}^k X_j^i,
 \end{equation}
-as the arrival moment of the $k$th visit of customer $i$.  Now the
+as the arrival moment of the $k$Thu visit of customer $i$.  Now the
 shop owner `sees' the superposition of the arrivals of all
 customers. One way to compute the arrival moments of all customers
 together is to put all the arrival times
@@ -189,14 +189,14 @@ arrival times $\{A_k, k=1,2,\ldots\}$ at the shop of all customers together. Tak
 \begin{equation}\label{eq:X_kk}
 X_k = A_k - A_{k-1},
 \end{equation}
-must be the interarrival time between the $k-1$th and
-$k$th customer at the shop.  Thus, with this procedure, starting from interarrival times of
-individual customers, we can construct interarrival times as seen by
+must be the inter-arrival time between the $k-1$th and
+$k$th customer at the shop.  Thus, with this procedure, starting from inter-arrival times of
+individual customers, we can construct inter-arrival times as seen by
 the shop.
 
 
-Suppose that we  generate, by means of simulation, many interarrival times for a set of individual customers, compute the arrival times by~(\ref{eq:A_kk}), sort these, and compute with~(\ref{eq:X_kk}) the interarrival times $\{X_k\}$ of customers as seen by the shop.  To plot the \recall{empirical distribution function}, or the \emph{histogram}, of $\{X_k\}$, we just  count the
-number of interarrival times smaller than time $t$ for any $t$.  Then the emperical distribution of $\{X_k\}$ is defined as
+Suppose that we  generate, by means of simulation, many inter-arrival times for a set of individual customers, compute the arrival times by~(\ref{eq:A_kk}), sort these, and compute with~(\ref{eq:X_kk}) the inter-arrival times $\{X_k\}$ of customers as seen by the shop.  To plot the \recall{empirical distribution function}, or the \emph{histogram}, of $\{X_k\}$, we just  count the
+number of inter-arrival times smaller than time $t$ for any $t$.  Then the empirical distribution of $\{X_k\}$ is defined as
 \begin{equation*}
   \P{X \leq t}_{n} = \frac1{n}\sum_{k=1}^{n} \1{X_k\leq t},
 \end{equation*}
@@ -209,7 +209,7 @@ exponential distribution, i.e., to $\lambda e^{-\lambda t}$.  As a
 first example, take $N=1$ customer and let the computer generate
 $n=100$ uniformly distributed numbers on the set $[4, 6]$.  Thus, the
 time between two visits of this customer is somewhere between $4$ and
-$6$ hours, and the average interarrival times $\E X = 5$. In a second
+$6$ hours, and the average inter-arrival times $\E X = 5$. In a second
 simulation we take $N=3$ customers, and in the third, $N=10$
 customers. 
 
@@ -217,8 +217,8 @@ Approximations of the probability density functions, based on the empirical dist
 in the three panels in Figure~\ref{fig:uniformfew}. The continuous
 curve is the graph of $\lambda e^{-\lambda x}$ where
 $\lambda = N/\E X = N/5$. (Recall from Exercise~(\ref{exer:lambda}) that when $1$
-person visits the shop  with an average interarrival time of $5$
-hours,  the arrival rate is $1/5$. Hence, when $N$ customers visit the shop, each with an average interarrival time of 5 hours, the total arrival rate as seen by the shop must be $N/5$.)
+person visits the shop  with an average inter-arrival time of $5$
+hours,  the arrival rate is $1/5$. Hence, when $N$ customers visit the shop, each with an average inter-arrival time of 5 hours, the total arrival rate as seen by the shop must be $N/5$.)
 
 
 \begin{figure}[ht]
@@ -227,7 +227,7 @@ hours,  the arrival rate is $1/5$. Hence, when $N$ customers visit the shop, eac
 % see progs/convergence_to_exp.py
  \input{progs/uniform_to_exponential_few.tex}\\
   \end{tabular}
-  \caption{The interarrival process as seen by the shop owner. Observe
+  \caption{The inter-arrival process as seen by the shop owner. Observe
     that the density $\lambda e^{-\lambda x}$ intersects the $y$-axis
     at level $N/5$, which is equal to the arrival rate when $N$
     persons visit the shop. The parameter $n=100$ is the simulation
@@ -239,7 +239,7 @@ hours,  the arrival rate is $1/5$. Hence, when $N$ customers visit the shop, eac
 As a second
 example, we extend the simulation to $n=1000$ visits to the shop, see
 Figure~\ref{fig:uniformmany}. In the third example we take the
-interarrival times to be normally distributed times with mean $5$ and
+inter-arrival times to be normally distributed times with mean $5$ and
 $\sigma=1$, see Figure~\ref{fig:normal}.
 
 \begin{figure}[ht]
@@ -249,7 +249,7 @@ $\sigma=1$, see Figure~\ref{fig:normal}.
  \input{progs/uniform_to_exponential_many.tex}\\
   \end{tabular}
   \caption{Each of the $N$ customer visits the shop at uniformly 
-    distributed interarrival times, but now the number of visits is
+    distributed inter-arrival times, but now the number of visits is
     $n=1000$.}  
   \label{fig:uniformmany}
 \end{figure}
@@ -268,16 +268,16 @@ $\sigma=1$, see Figure~\ref{fig:normal}.
  \input{progs/normal_to_exponential.tex}
   \end{tabular}
   \caption{Each of the $N$ customer visits the shop with normally
-    distributed interarrival times with $\mu=5$ and
+    distributed inter-arrival times with $\mu=5$ and
     $\sigma=1$.}  \label{fig:normal}
 \end{figure}
 
 As the graphs show, even when the customer population consists of 10
-members, each visiting the shop with an interarrival time that is
-quite `far' from exponential, the distribution of the interarrival
+members, each visiting the shop with an inter-arrival time that is
+quite `far' from exponential, the distribution of the inter-arrival
 times as observed by the shop is very well approximated by an
 exponential distribution. Thus, it appears reasonable to use the
-exponential distribution to model interarrival times of customers for systems (such as a shop, or a hospital or a call center) that handle many (thousands of)
+exponential distribution to model inter-arrival times of customers for systems (such as a shop, or a hospital or a call center) that handle many (thousands of)
 customers each of which  deciding independently to visit the system.
 
 
@@ -433,7 +433,7 @@ Straightforward integration gives the final result.
 
 
 
-The Poisson process $N$ and exponentially distributed interarrival times are intimately related: A counting process $\{N(t)\}$ is a \recall{Poisson process} with rate $\lambda$ if and only if  the inter-arrival times $\{X_i\}$ are i.i.d. and exponentially distributed with mean $1/\lambda$,  in short, 
+The Poisson process $N$ and exponentially distributed inter-arrival times are intimately related: A counting process $\{N(t)\}$ is a \recall{Poisson process} with rate $\lambda$ if and only if  the inter-arrival times $\{X_i\}$ are i.i.d. and exponentially distributed with mean $1/\lambda$,  in short, 
 \begin{equation*}
 X_i\sim \exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t).
 \end{equation*}
@@ -442,7 +442,7 @@ X_i\sim \exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t).
 We next provide further relations between the Poisson distribution and the exponential distribution. 
 
   \begin{exercise}
-    Assume that the interarrival times $\{X_i\}$ are i.i.d. and
+    Assume that the inter-arrival times $\{X_i\}$ are i.i.d. and
     $X_i\sim\exp(\lambda)$. Let
     $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$. Show that %We do not need the MGF here.
  \begin{equation*}
@@ -456,14 +456,14 @@ The simplest way to obtain the answer is to use that the expectation is a linear
 \begin{equation*}
 \E{A_i} = \E{\sum_{k=1}^i X_k} = i \E{X} = \frac i \lambda.
 \end{equation*}
-(Just as a reminder, $\E{XY} \neq \E X \E Y$ in general. Only when $X$ and $Y$ are uncorrelated (which is implied by independence), the product of the expectations is the expection of the products.)
+(Just as a reminder, $\E{X Y} \neq \E X \E Y$ in general. Only when $X$ and $Y$ are uncorrelated (which is implied by independence), the product of the expectations is the expectation of the products.)
 
   \end{solution}
 \end{exercise}
 
   \begin{exercise}
  Let $A_i$ be the arrival time of customer $i$ and set $A_0=0$.
-    Assume that the interarrival times $\{X_i\}$ are i.i.d.  with
+    Assume that the inter-arrival times $\{X_i\}$ are i.i.d.  with
     exponential distribution with mean $1/\lambda$ for some
     $\lambda>0$.  Prove that
 \begin{equation*}
@@ -474,13 +474,13 @@ is  the density of $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$.
  Check the result for $i=1$ by filling in $i=1$ (just to be
      sure that you have read the formula right), and compare the result
      to the exponential density. Then write $A_i =\sum_{k=1}^i X_k$, and compute the moment
-     generating function for $A_i$ and use that the interarrival times
+     generating function for $A_i$ and use that the inter-arrival times
      $X_i$ are independent. Use the moment generating function  of $X_i$.
 \end{hint}
 \begin{solution}
  One way to find the distribution of $A_i$ is by using the
     moment generating function $M_{A_i}(t) = \E{e^{t A_i}}$ of
-    $A_i$. Let $X_i$ be the interarrival time between customers $i$
+    $A_i$. Let $X_i$ be the inter-arrival time between customers $i$
     and $i-1$, and $M_X(t)$ the associated moment generating
     function. Using the i.i.d. property of the $\{X_i\}$,
 \begin{align*}
@@ -642,12 +642,12 @@ When $u\in[-10, -3]$ we need to integrate over the triangle that results from cu
 \end{equation*}
 where we multiply with $70$ to get the normalization right. 
 
-When $u\in[-3, 0]$, we integrate over a parallellogram with base $3+u$ and height $7$ plus the triangle below the line $s=x-3$. The area is 
+When $u\in[-3, 0]$, we integrate over a parallelogram with base $3+u$ and height $7$ plus the triangle below the line $s=x-3$. The area is 
 \begin{equation*}
 70\, \P{S-X \leq u}= (3+u)7 + \frac{(10-3)^2}2=7u + \frac{91}2, \quad \text{for } -3 \leq u\leq 0.
 \end{equation*}
 
-For $u\in[0, 7]$, we integrate over the trapezoid that results from intersecting the set $\{(x,s) : x \leq s \leq s + u\}$ and the rectangle plus the parallellogram plus the triangle below the line $s=x-3$. The area is 
+For $u\in[0, 7]$, we integrate over the trapezoid that results from intersecting the set $\{(x,s) : x \leq s \leq s + u\}$ and the rectangle plus the parallelogram plus the triangle below the line $s=x-3$. The area is 
 \begin{equation*}
 70\, \P{S-X \leq u}=  \frac{7^2}2 - \frac{(7-u)^2}{2} + 3\cdot 7 + \frac{49}2 = 7 u - \frac{u^2}2 + \frac{91}2, \quad \text{for } 0\leq u\leq 7.
 \end{equation*}
@@ -657,15 +657,15 @@ Finally, for $u\geq 7$, the set $s\leq x+u$ covers the entire rectangle. Hence,
 70\, \P{S-X \leq u}=  70, \quad \text{for } 7\leq u.
 \end{equation*}
 
-Given the amount of effort I had to put into getting this answer, I wanted to check it. So I went to  Wolframalpha (which is a great site for symbolic computations), and typed this: 
+Given the amount of effort I had to put into getting this answer, I wanted to check it. So I went to  Wolfram alpha (which is a great site for symbolic computations), and typed this: 
 \begin{verbatim}
 \int_{0}^{10} \int_0^7 Boole[s<= x + u]  ds dx,
 \end{verbatim}
-so, once you know \LaTeX\/ you can use Wolframalpha.  Wolframalpha turned it to 
+so, once you know \LaTeX\/ you can use Wolfram alpha.  Wolfram alpha turned it to 
 \begin{verbatim}
 Integrate[Boole[s <= u + x], {x, 0, 10}, {s, 0, 7}]
 \end{verbatim}
-If you fill this in at Wolframalpa, you'll get the results that we obtained above in seconds, rather than in one hour or so (depending on your proficiency with carrying out integrals).
+If you fill this in at Wolfram, you'll get the results that we obtained above in seconds, rather than in one hour or so (depending on your proficiency with carrying out integrals).
 \end{solution}
 \end{exercise}
 
@@ -745,7 +745,7 @@ for the \emph{survivor function} of $B$.  We can write this with an indicator fu
 \begin{equation*}
   G(k) = \sum_{m=0}^\infty \1{m>k} f(m),
 \end{equation*}
-which makes the compution of certain expressions quite a bit easier. 
+which makes the computation of certain expressions quite a bit easier. 
 
 \begin{exercise}\label{ex:5}
   Express the probability mass  $f(k)$ and the survivor function $G(k)$ in terms of the distribution $F(k)$ of the batch size $B$. Which of the following is true:
@@ -788,7 +788,7 @@ Observe first that $\sum_{k=0}^\infty \1{m>k} = m$, since $\1{m>k}=1$ if $k<m$ a
 In case you are interested in mathematical justifications: the
 interchange of the two summations is allowed because the summands are
 all positive. (Interchanging the order of summations or integration is
-not allways allowed because the results can be different when part of
+not always allowed because the results can be different when part of
 the integrand is negative. Check Fubini's theorem for more on this if
 you are interested.)
 \end{solution}
@@ -817,7 +817,7 @@ Let $S$ be a continuous non-negative random variable with distribution function 
 \begin{equation*}
   \E{S} = \int_0^\infty x \d F(x)
 \end{equation*}
-for the expection of $S$. Here $\d F(x)$ acts as a shorthand for $f(x) \d x$. \footnote{For the interested $\int x \d F(x)$ is a Lebesgue-Stieltjes integral with respect to the distribution function $F$.}
+for the expectation of $S$. Here $\d F(x)$ acts as a shorthand for $f(x) \d x$. \footnote{For the interested $\int x \d F(x)$ is a Lebesgue-Stieltjes integral with respect to the distribution function $F$.}
 
 \begin{exercise}
  Use indicator functions to prove that 
@@ -903,7 +903,7 @@ If $F(x) = 1 - e^{-\mu x}$, we obtain that
       \end{split}
     \end{equation*}
     Here we introduce some notation that is commonly used in the
-    probabity literature to indicate the same conceptual idea, i.e,
+    probability literature to indicate the same conceptual idea, i.e,
     $\P{X\in \d x} = \d F(x) = F(\d x) = f(x) \d x$, where the last
     equality follows from the fact that $F$ has a density $f$
     everywhere on $[0,10]$. 

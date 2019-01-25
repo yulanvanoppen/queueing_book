@@ -1,96 +1,105 @@
-% This file was created by matplotlib2tikz v0.5.15.
+% This file was created by matplotlib2tikz v0.6.18.
 \begin{tikzpicture}
 
-\definecolor{color1}{rgb}{0.203921568627451,0.541176470588235,0.741176470588235}
 \definecolor{color0}{rgb}{0.886274509803922,0.290196078431373,0.2}
-\definecolor{color3}{rgb}{0.984313725490196,0.756862745098039,0.368627450980392}
+\definecolor{color1}{rgb}{0.203921568627451,0.541176470588235,0.741176470588235}
 \definecolor{color2}{rgb}{0.596078431372549,0.556862745098039,0.835294117647059}
+\definecolor{color3}{rgb}{0.984313725490196,0.756862745098039,0.368627450980392}
 
 \begin{axis}[
-title={Simulation},
-xmin=0, xmax=20,
-ymin=0, ymax=0.3,
-width=5cm,
-height=5cm,
-tick align=outside,
-xmajorgrids,
-x grid style={white},
-ymajorgrids,
-y grid style={white},
+axis background/.style={fill=white!89.80392156862746!black},
 axis line style={white},
-axis background/.style={fill=white!89.803921568627459!black},
+height=5cm,
 legend cell align={left},
-legend style={draw=white, fill=white!89.803921568627459!black},
-legend entries={{N=200},{N=400},{N=600},{N=800},{N=1000}}
+legend entries={{N=200},{N=400},{N=600},{N=800},{N=1000}},
+legend style={draw=white!80.0!black, fill=white!89.80392156862746!black},
+tick align=outside,
+tick pos=left,
+title={Simulation},
+width=5cm,
+x grid style={white},
+xmajorgrids,
+xmin=0, xmax=20,
+y grid style={white},
+ymajorgrids,
+ymin=0, ymax=0.3
 ]
-\addplot [color0]
-table {%
-0 0.22
-1 0.135
-2 0.15
-3 0.11
-4 0.085
-5 0.075
-6 0.055
-7 0.09
-8 0.07
-9 0.01
+\addlegendimage{no markers, color0}
+\addlegendimage{no markers, color1}
+\addlegendimage{no markers, color2}
+\addlegendimage{no markers, white!46.666666666666664!black}
+\addlegendimage{no markers, color3}
+\addplot [semithick, color0]
+table [row sep=\\]{%
+0	0.405 \\
+2	0.155 \\
+3	0.11 \\
+1	0.21 \\
+4	0.07 \\
+5	0.04 \\
+7	0.005 \\
+6	0.005 \\
 };
-\addplot [color1]
-table {%
-0 0.2875
-1 0.15
-2 0.165
-3 0.09
-4 0.09
-5 0.0675
-6 0.0425
-7 0.0575
-8 0.035
-9 0.0125
-10 0.0025
+\addplot [semithick, color1]
+table [row sep=\\]{%
+0	0.345 \\
+2	0.1725 \\
+3	0.11 \\
+1	0.195 \\
+4	0.0875 \\
+5	0.05 \\
+7	0.005 \\
+6	0.03 \\
+8	0.005 \\
 };
-\addplot [color2]
-table {%
-0 0.376666666666667
-1 0.158333333333333
-2 0.146666666666667
-3 0.0833333333333333
-4 0.0766666666666667
-5 0.05
-6 0.0333333333333333
-7 0.04
-8 0.025
-9 0.00833333333333333
-10 0.00166666666666667
+\addplot [semithick, color2]
+table [row sep=\\]{%
+0	0.338333333333333 \\
+2	0.171666666666667 \\
+3	0.0916666666666667 \\
+1	0.188333333333333 \\
+4	0.0716666666666667 \\
+5	0.0416666666666667 \\
+7	0.0233333333333333 \\
+6	0.03 \\
+8	0.0166666666666667 \\
+9	0.00833333333333333 \\
+10	0.0116666666666667 \\
+11	0.00333333333333333 \\
+12	0.00333333333333333 \\
 };
-\addplot [lightgray!62.222222222222221!black]
-table {%
-0 0.38125
-1 0.175
-2 0.14625
-3 0.09375
-4 0.075
-5 0.0425
-6 0.025
-7 0.035
-8 0.01875
-9 0.00625
-10 0.00125
+\addplot [semithick, white!46.666666666666664!black]
+table [row sep=\\]{%
+0	0.375 \\
+2	0.155 \\
+3	0.0775 \\
+1	0.21625 \\
+4	0.05875 \\
+5	0.03875 \\
+7	0.01875 \\
+6	0.0275 \\
+8	0.0125 \\
+9	0.00625 \\
+10	0.00875 \\
+11	0.0025 \\
+12	0.0025 \\
 };
-\addplot [color3]
-table {%
-0 0.392
-1 0.169
-2 0.134
-3 0.09
-4 0.076
-5 0.045
-6 0.029
-7 0.037
-8 0.02
-9 0.007
-10 0.001
+\addplot [semithick, color3]
+table [row sep=\\]{%
+0	0.371 \\
+2	0.159 \\
+3	0.075 \\
+1	0.204 \\
+4	0.065 \\
+5	0.042 \\
+7	0.02 \\
+6	0.03 \\
+8	0.011 \\
+9	0.008 \\
+10	0.007 \\
+11	0.003 \\
+12	0.004 \\
+13	0.001 \\
 };
 \end{axis}
 

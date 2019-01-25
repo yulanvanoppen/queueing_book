@@ -100,7 +100,7 @@ $n\gg 1000$, and so on.
     Below I fix the seed of the random number generator to ensure that
     I always get the same results from the simulator.  The arrival
     process is Poisson, and the number of services is fixed to 21 per
-    period. I use \texttt{Q = np.zeros\_like(a)} to make an array of the
+    period. I use \pyv{Q = np.zeros\_like(a)} to make an array of the
     same size as the number of arrival $a$ initially set to zeros. The
     rest of the code is nearly identical to the formulas in the text.
 
@@ -148,8 +148,8 @@ Q
 
 Suppose we define loss as the number of periods in which the queue length exceeds
 20. Of course, any other threshold can by taken. Counting the number
-of such periods is very easy in python: \texttt{(Q>20)} gives all
-entries of $Q$ such $Q>20$, the function \texttt{sum()} just adds
+of such periods is very easy in python: \pyv{(Q>20)} gives all
+entries of $Q$ such $Q>20$, the function \pyv{sum()} just adds
 them. 
 
 \begin{pyconsole}
@@ -169,7 +169,7 @@ Q.std()
   
 
 Since this is a small example, the mean number of departures, i.e.,
-\texttt{d.mean()}, is not equal to the arrival rate $\lambda$.  
+\pyv{d.mean()}, is not equal to the arrival rate $\lambda$.  
 Likewise for the computation of the mean, variance, and other
 statistical functions. 
 
@@ -205,6 +205,7 @@ construct/simulate the queueing process, you are `in business'. The
 rest is easy: make plots, do some counting, i.e., assemble statistics,
 vary parameters for sensitivity analysis, and so on.
 \end{solution}
+\end{exercise}
 
 
 \begin{exercise}
@@ -241,6 +242,7 @@ see why this is so.
   \end{solution}
 \end{exercise}
 
+
 \begin{exercise}
   Implement Eqs.~\ref{eq:31} in python and simulate a
   simple single-server queueing system. Assume that the $a_k \sim P(\lambda)$ with $\lambda=20$, and $c_k =\mu=21$. %\sim P(\mu)$ with $\mu=21$. 
@@ -248,7 +250,7 @@ see why this is so.
     Below I fix the seed of the random number generator to ensure that
     I always get the same results from the simulator.  The arrival
     process is Poisson, and the number of services is fixed to 21 per
-    period. I use \texttt{Q = np.zeros\_like(a)} to make an array of the
+    period. I use \pyv{Q = np.zeros\_like(a)} to make an array of the
     same size as the number of arrival $a$ initially set to zeros. The
     rest of the code is nearly identical to the formulas in the text.
 
@@ -296,8 +298,8 @@ Q
 
 Suppose we define loss as the number of periods in which the queue length exceeds
 20. Of course, any other threshold can by taken. Counting the number
-of such periods is very easy in python: \texttt{(Q>20)} gives all
-entries of $Q$ such $Q>20$, the function \texttt{sum()} just adds
+of such periods is very easy in python: \pyv{(Q>20)} gives all
+entries of $Q$ such $Q>20$, the function \pyv{sum()} just adds
 them. 
 
 \begin{pyconsole}
@@ -317,7 +319,7 @@ Q.std()
   
 
 Since this is a small example, the mean number of departures, i.e.,
-\texttt{d.mean()}, is not equal to the arrival rate $\lambda$.  
+\pyv{d.mean()}, is not equal to the arrival rate $\lambda$.  
 Likewise for the computation of the mean, variance, and other
 statistical functions. 
 
@@ -383,7 +385,6 @@ vary parameters for sensitivity analysis, and so on.
 
   \end{solution}
 \end{exercise}
-
 
 
 We now show how to apply~\eqref{eq:30} and~\eqref{eq:31} to a real case. At a mental health department five psychiatrists do intakes of future
@@ -485,6 +486,7 @@ versus balanced capacity, and spread out holidays versus simultaneous
 holidays.  The results are shown in Figure~\ref{fig:balanced}. It is
 apparent that suggestions 1 and 2 above do not significantly affect
 the behavior of the queue length process.  
+
 
 
 \begin{figure}[ht]
@@ -667,7 +669,7 @@ First $d_k = \min\{Q_{k-1}, c_k\}$. Then, $Q_k' = Q_{k-1}+a_k-d_k$ is the queue 
 
   Let's assume that the repair of a faulty requires half of the work
   of a new job, and that the faulty jobs are processed with priority
-  over the new jobs.  Also asume that faulty items do not need more than one repair (hence, faulty items that are repaired cannot be faulty anymore).
+  over the new jobs.  Also assume that faulty items do not need more than one repair (hence, faulty items that are repaired cannot be faulty anymore).
 
 There are of course many different policies to
   treat rework.   Another possibility is that faulty items are processed at the end of

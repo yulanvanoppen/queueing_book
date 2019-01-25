@@ -4,11 +4,11 @@ from matplotlib2tikz import save as tikz_save
 from matplotlib import style
 style.use('ggplot')
 
-from lea import Lea
+import lea
 
-W0 = 5  # Lea.fromVals(0, 1, 2)
-S = Lea.fromVals(1,  2, 3)
-X = Lea.fromVals(1,  2, 4)
+W0 = 5  
+S = lea.vals(1,  2, 3)
+X = lea.vals(1,  2, 4)
 U = S - X
 
 def simulate():
@@ -27,12 +27,12 @@ def simulate():
 
 
 def exact():
-    W = Lea.fastMax(W0 + U, 0)
+    W = lea.max_of(W0 + U, 0, fast=True)
     for k in range(1, 21):
         if k % 5 == 0:
-            plt.plot(W.support(), W.pmf(), label="k={}".format(k))
-        W = Lea.fastMax(W + U, 0)
-    return W.support(), W.pmf()
+            plt.plot(W.support, W.ps, label="k={}".format(k))
+        W = lea.max_of(W + U, 0, fast=True)
+    return W.support, W.ps
 
 
 plt.figure() 

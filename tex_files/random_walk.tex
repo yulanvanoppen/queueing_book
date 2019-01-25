@@ -337,24 +337,10 @@ the distributions of $W_{Q,k-1}$ and $W_{Q,k}$,
 \end{equation*}
 for $x$ in the support of $W_{Q,k}$. 
 
-\begin{pyconsole}
-  
-from lea import Lea
+The code can be found in the \pyv{exact} function in the file \pyv{waiting_time_simulation.py} at
+    \href{https://github.com/ndvanforeest/queueing_book/tree/master/progs}{github}.
 
-S = Lea.fromVals(1,  2)
-X = Lea.fromVals(1,  3)
-U = S-X
-
-W = Lea.fromVals(3)
-for k in range(1, 10):
-    W_new = Lea.fastMax(W + U, 0)
-    m = max(abs(W_new.cdf(x)-W.cdf(x))  for x in range(W_new.support()[-1]))
-    print(k, m) 
-    W = W_new
-
-\end{pyconsole}
-
-So, after some 10 customers, the distribution hardly changes anymore. 
+If you make a plot, you will see that after some 10 customers the distribution hardly changes any further. 
 
   \end{solution}
   \end{exercise}
@@ -362,10 +348,8 @@ So, after some 10 customers, the distribution hardly changes anymore.
 \begin{exercise}
   Validate the results of  Figure~\ref{fig:convergence} with simulation.
   \begin{solution}
-    You can study \texttt{waiting\_time\_simulation.py} at
-    \href{https://github.com/ndvanforeest/queueing_book/tree/master/progs}{github}
-    if you like, but skipping it is OK. Trying to make the graph in
-    your favorite programming language is fun.
+    The code is in the file \pyv{waiting_time_simulation.py} at
+    \href{https://github.com/ndvanforeest/queueing_book/tree/master/progs}{github}.
 \end{solution}
 \end{exercise}
 
