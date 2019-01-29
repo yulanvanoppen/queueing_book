@@ -763,7 +763,7 @@ the size of the system is $c+b+1$ is finite, all formulas work for
 this case too.
 
 
-There are 4 states in total: $0,1,2,3$. (The reason to import numpy here and convert the lists to arrays is to fix the output precision to 3, otherwise we get long floats in the output.)
+There are 4 states in total: $0,1,2,3$. (The reason to import \pyv{numpy} here and convert the lists to arrays is to fix the output precision to 3, otherwise we get long floats in the output.)
 
 \begin{pyconsole}
 import numpy as np
@@ -823,8 +823,8 @@ accepted
 
 \begin{comment}
 \begin{exercise}[use=false]
-  The code is in \texttt{progs/mm1\_waiting\_time_distribution.py}. In
-  mm1\_waiting\_time_distribution.py we compute the waiting time
+  The code is in \pyv{progs/mm1\_waiting\_time_distribution.py}. In
+this program we compute the waiting time
   distribution. At this point in the text this distribution has not
   yet been derived.  This problem should be moved to another section.
 
@@ -1068,7 +1068,7 @@ Since both types of workers cost the same amount of money per unit
 time, it is best to divide the amount of waiting/idleness equally over
 both types of workers.  I am inclined to reason as follows. The
 average amount of waiting time done by the maintenance workers per
-hour is $\lambda \E{W_Q}$. To see this, note that maintenance workers arrive at rate $\lambda$, and each worker waits on average $\E{W_Q}$ minutes. Thus, worker time is wasted at rate $\lambda \E{W_Q}$. Intestingly, with Little's lawy, $\E{L_Q}=\lambda \E{W_Q}$, i.e., the rate at which workers waste capacity (i.e.  waiting in queue) is $\E{L_Q}$. On the other hand, the  rate of work capacity wasted by the tool crib employees being idle is $c-\lambda \E{S}$, as $\lambda \E S$ is the average number of servers busy, while $c$ crib servers are available.
+hour is $\lambda \E{W_Q}$. To see this, note that maintenance workers arrive at rate $\lambda$, and each worker waits on average $\E{W_Q}$ minutes. Thus, worker time is wasted at rate $\lambda \E{W_Q}$. Interestingly, with Little's law, $\E{L_Q}=\lambda \E{W_Q}$, i.e., the rate at which workers waste capacity (i.e.  waiting in queue) is $\E{L_Q}$. On the other hand, the  rate of work capacity wasted by the tool crib employees being idle is $c-\lambda \E{S}$, as $\lambda \E S$ is the average number of servers busy, while $c$ crib servers are available.
 
 As both types of
 employees are equally expensive, we need to choose $c$ such that

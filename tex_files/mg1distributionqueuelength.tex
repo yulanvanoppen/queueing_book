@@ -197,9 +197,9 @@ G(j) = \sum_{k=j+1}^\infty f(k) =  \left(\frac{\lambda}{\lambda+\mu}\right)^{j+1
     \end{solution}
 \end{exercise}
 
-Let us concentrate on a downcrossing of level $n$, see
+Let us concentrate on a down-crossing of level $n$, see
 Figure~\ref{fig:mg1_2}; recall that level $n$ lies between states $n$
-and $n+1$. For job $k$ to generate a downcrossing of level $n$, two events must take place: 
+and $n+1$. For job $k$ to generate a down-crossing of level $n$, two events must take place: 
  job `$k-1$' must leave $n+1$ jobs behind after its service completion, and  job $k$ must leave $n$ jobs behind. Thus, 
  \begin{equation*}
    \text{Downcrossing of level $n$} \iff \1{L(D_{k-1}) = n+1}\1{L(D_k)=n} = 1.
@@ -215,7 +215,7 @@ $L(D_k)\geq n+1$.  Thus, we see that
 % \begin{equation*}
 %   \1{L(D_{k-1}) = n+1}\1{L(D_k)=n} =  \1{L(D_{k-1}) = n+1}\1{Y_k=0}.
 % \end{equation*}
-Consequently, the number of downcrossings of level $n$ up to time $t$ is
+Consequently, the number of down-crossings of level $n$ up to time $t$ is
 \begin{equation*}
   \begin{split}
   D(n+1, 0, t) 
@@ -285,7 +285,7 @@ $L(D_{k-1})$,
 \label{fig:mg1_2}
 \end{figure}
 
-Before we deal with the upcrossing, it is important to do the next exercise.
+Before we deal with the up-crossing, it is important to do the next exercise.
 \begin{exercise} Suppose that $L(D_{k-1})>0$. Why is
   $S_k = D_k - D_{k-1}$?  However, if $L(D_{k-1}) = 0$, the time between
   $D_{k-1}$ and $D_k$ is \emph{not} equal to $S_k$. Why not? Can you find an expression for
@@ -309,26 +309,26 @@ Realize that if $L(D_{k-1})=0$, job $k-1$ leaves behind an empty
     right away after its arrival time at time $A_k$. Since the arrival
     process is Poisson by assumption, the time to the next arrival
     after $D_{k-1}$ is exponentially distributed with rate
-    $\lambda$. (Recall the memoryless property of the interarrival
+    $\lambda$. (Recall the memoryless property of the inter-arrival
     times.) Thus, $A_k - D_{k-1}$ has the same distribution as $X_k$,
     so that $\P{D_k - D_{k-1} \leq x} = \P{X_k + S_k\leq x}$. 
 \end{solution}
 \end{exercise}
 
-For the upcrossings, assume first that $L(D_{k-1})=n>0$.  Then an upcrossing of level $n>0$  must have occurred when $L(D_k)>n$, i.e, 
+For the up-crossings, assume first that $L(D_{k-1})=n>0$.  Then an up-crossing of level $n>0$  must have occurred when $L(D_k)>n$, i.e, 
  \begin{equation*}
  \1{L(D_{k-1}) = n}\1{L(D_k)>n} = 1 \implies   \text{Upcrossing of level $n$}.
  \end{equation*}
 Again, we can convert this into a statement about  the number of
 arrivals $Y_k$ that occurred during the service time $S_k$ of job $k$.  If $Y_k=0$, then
-job $k$ must leave $n-1$ jobs behind, so no upcrossing can
+job $k$ must leave $n-1$ jobs behind, so no up-crossing can
 happen. Next, if $Y_k=1$, then job $k$ leaves $n$ jobs behind, so
-still no upcrossing occurs. In fact, level $n$ can only be  upcrossed from level $n$ if
+still no up-crossing occurs. In fact, level $n$ can only be  up-crossed from level $n$ if
 more than one job arrives during the service of job $k$, i.e.,
 \begin{equation*}
 \1{L(D_{k-1})=n} \1{Y_{k}>1}  \implies   \text{Upcrossing of level $n$}.
 \end{equation*}
-More generally, level $n$ is upcrossed from level $m$, $0<m\leq n$ whenever
+More generally, level $n$ is up-crossed from level $m$, $0<m\leq n$ whenever
 \begin{equation*}
 \1{L(D_{k-1})=m} \1{Y_{k}>n-m+1}  \implies   \text{Upcrossing of level $n$}.
 \end{equation*}
@@ -337,7 +337,7 @@ However,  if $m=0$ (think about this),
 \1{L(D_{k})>n} = \1{L(D_{k-1})=0} \1{Y_{k}>n}   \implies   \text{Upcrossing of level $n$}.
 \end{equation*}
 
-Again we define proper counting functions,  divide by $t$, and take suitable limits to find for upcrossing rate
+Again we define proper counting functions,  divide by $t$, and take suitable limits to find for up-crossing rate
 \begin{equation}\label{eq:555}
 \delta \delta(0) G(n) + \delta \sum_{m=1}^n \delta(m) G(n-m+1).
 \end{equation}
@@ -375,7 +375,7 @@ With the definition of the hint,
 \end{solution}
 \end{exercise}
 
-Equating the downcrossing and upcrossing rates and dividing
+Equating the down-crossing and up-crossing rates and dividing
 by $\delta$ gives
 \begin{equation*}
   f(0) \delta(n+1) = \delta(0) G(n) + \sum_{m=1}^{n} \delta(m) G(n+1-m).
@@ -495,8 +495,8 @@ print(sum(term(i) for i in range(5000)))
 Since I don't know when to stop the integral I just try a few values;
 of course stopping the integration at $x=50$ is too small, since
 $50\d x=50/100=1/2$, but I include it for illustrative
-purposes. Stopping at $500$ seems ok, since the results of the last
-two integrals are nearly the same. This also suggestst that
+purposes. Stopping at $500$ seems OK, since the results of the last
+two integrals are nearly the same. This also suggests that
 $\d x=1/100$ is sufficiently small. In general, however, one must take
 care and try various values for $\d x$ and the integration limits.
 

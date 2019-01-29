@@ -546,14 +546,14 @@ Lc
 To compute the expected number of parties waiting we formally have to
 sum to infinity. Rather than doing the algebra, I chose to truncate
 the summation at an $i$ such that $\rho^i \ll 1$, i.e.,
-negligble.  Truncating at 30 seems reasonable enough:
+negligible.  Truncating at 30 seems reasonable enough:
 
 \begin{pyconsole}
 trunc = 30
 rho**trunc
 \end{pyconsole}
 
-Hm. At second thought this is not yet really small. 
+At second thought this is not yet really small. 
 
 \begin{pyconsole}
 trunc = 50

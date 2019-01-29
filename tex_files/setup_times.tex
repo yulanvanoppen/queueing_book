@@ -21,7 +21,7 @@ First we consider the time it takes to form a batch.
   \E{W_r} = \frac{B-1}{2\lambda_r}.
 \end{equation*}
 \begin{solution}
-  Suppose a batch is just finished. The first job of a new batch needs to wait, on average, $B-1$  interarrival times until the batch is complete, the second $B-2$ interarrival times, and so on. The last job does not have to wait at all. Thus, the total time to form a batch is $(B-1)/\lambda$. 
+  Suppose a batch is just finished. The first job of a new batch needs to wait, on average, $B-1$  inter-arrival times until the batch is complete, the second $B-2$ inter-arrival times, and so on. The last job does not have to wait at all. Thus, the total time to form a batch is $(B-1)/\lambda$. 
 
 An arbitrary job can be anywhere in the batch, hence the average time a job must wait until the batch is complete is half the total time. 
 \end{solution}
@@ -63,16 +63,16 @@ Show that the requirement $\rho < 1$ leads to the following constraint on the mi
   \end{equation*}
 \end{exercise}
 
-The next element is to find the SCVs. To obtain $C_{a,B}^2$, i.e., the SCV of the interarrival times of the batches, recall that jobs are first assembled into batches, and then these batches are sent to the queue.
+The next element is to find the SCVs. To obtain $C_{a,B}^2$, i.e., the SCV of the inter-arrival times of the batches, recall that jobs are first assembled into batches, and then these batches are sent to the queue.
 
 \begin{exercise}
  Show that 
  \begin{equation*}
 C_{a,B}^2 = \frac{C_{a}^2}B,
  \end{equation*}
-with $C_a^2$ the SCV of interarrival times of individual jobs.
+with $C_a^2$ the SCV of inter-arrival times of individual jobs.
   \begin{solution}
-The variance of the interarrival time of batches is $B$ times the variance of job interarrival times. The interarrival times of batches is also $B$ times the interarrival times of jobs. Thus, 
+The variance of the inter-arrival time of batches is $B$ times the variance of job inter-arrival times. The inter-arrival times of batches is also $B$ times the inter-arrival times of jobs. Thus, 
 \begin{equation*}
   C_{a,B}^2 = \frac{B \V{X}}{(B \E X)^2} = \frac{\V X}{(\E X)^2} \frac 1 B =  \frac{C_a^2}{B}.
 \end{equation*}
@@ -201,7 +201,7 @@ total
 \end{comment}
 
 
-In summary, to find the average  queueing time in the system, we need to find the arrival rate, the effective service times and the SCVs, so that we can fill in the $G/G/1$ waiting time formula. The main idea is to incorporate the setup times into the job service times. Observe also that the times to form and process batches are linear functions of the batch size $B$, while the load is, for small batch sizes, very sensitive to the batch size. Thus, batch sizes should not be too small.  Overall, batch sizes need to be tuned to minimize the total average xtime jobs spend in the system. When the batch sizes are small, the load $\rho$ is near to one (in other words, the server spends a relatively large fraction of its time on setups), so that the queueing times are long, but the times to form a batch are small. If, however, the batch sizes are large, the queueing times will be relatively short, but the times to form and unpack batches will be large. 
+In summary, to find the average  queueing time in the system, we need to find the arrival rate, the effective service times and the SCVs, so that we can fill in the $G/G/1$ waiting time formula. The main idea is to incorporate the setup times into the job service times. Observe also that the times to form and process batches are linear functions of the batch size $B$, while the load is, for small batch sizes, very sensitive to the batch size. Thus, batch sizes should not be too small.  Overall, batch sizes need to be tuned to minimize the total average time jobs spend in the system. When the batch sizes are small, the load $\rho$ is near to one (in other words, the server spends a relatively large fraction of its time on setups), so that the queueing times are long, but the times to form a batch are small. If, however, the batch sizes are large, the queueing times will be relatively short, but the times to form and unpack batches will be large. 
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}

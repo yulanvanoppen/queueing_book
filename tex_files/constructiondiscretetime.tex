@@ -198,12 +198,14 @@ I multiply with 100 to get a percentage. Clearly, many jobs see a long
 queue, the mean is already some 24 jobs. For this arrival rate a
 service capacity of $\mu=21$ is certainly too small. 
 
-You can try to implement some of the other cases of the exercises in
-this section and analyze them in the same way. Hopefully you
+
+Hopefully you
 understand from this discussion that once you have the recursions to
 construct/simulate the queueing process, you are `in business'. The
 rest is easy: make plots, do some counting, i.e., assemble statistics,
 vary parameters for sensitivity analysis, and so on.
+
+
 \end{solution}
 \end{exercise}
 
@@ -211,10 +213,8 @@ vary parameters for sensitivity analysis, and so on.
 \begin{exercise}
   Change the service process of the previous exercise from $c_k =\mu=21$ to $c_k\sim P(\mu)$ with $\mu=21$. What is the influence of the higher variability of the service process on the queue length. 
   \begin{solution}
-Next, an example with the same arrival pattern but with a Poisson
-distributed number of jobs served per day, so the service rate is
-still $21$, but the period capacity $c$ is random variable with
-Poisson distribution with $P(21)$
+In this  example the number of jobs served per day is $\sim P(21)$, so the service rate is
+still $21$, but the period capacity $c$ is a Poisson random variable. 
 
 \begin{pyconsole}
 c = np.random.poisson(mu, num)
@@ -232,157 +232,9 @@ Q.std()
 (Q > 30).sum()/num * 100
 \end{pyconsole}
 
-Compared to the case with constant service capacity, i.e., $c=21$ in
-each period, we see that the average waiting time increases, just as
-the number of periods in which the queue length exceeds 30. Clearly,
-variability in service capacity does not improve the performance of
-the queueing system, quite on the contrary. In later sections we will
-see why this is so.
-
-  \end{solution}
-\end{exercise}
-
-
-\begin{exercise}
-  Implement Eqs.~\ref{eq:31} in python and simulate a
-  simple single-server queueing system. Assume that the $a_k \sim P(\lambda)$ with $\lambda=20$, and $c_k =\mu=21$. %\sim P(\mu)$ with $\mu=21$. 
-  \begin{solution}
-    Below I fix the seed of the random number generator to ensure that
-    I always get the same results from the simulator.  The arrival
-    process is Poisson, and the number of services is fixed to 21 per
-    period. I use \pyv{Q = np.zeros\_like(a)} to make an array of the
-    same size as the number of arrival $a$ initially set to zeros. The
-    rest of the code is nearly identical to the formulas in the text.
-
-\begin{pyconsole}
-import numpy as np
-
-np.random.seed(3) # fix the seed
-
-labda = 20
-mu = 21
-\end{pyconsole}
-
-These are the number of arrivals in each period.
-
-\begin{pyconsole}
-a = np.random.poisson(labda, 10)
-a
-\end{pyconsole}
-
-The number of potential services
-\begin{pyconsole}
-c = mu * np.ones_like(a)
-c
-\end{pyconsole}
-
-Now for the queueing recursions:
-
-\begin{pyconsole}
-Q = np.zeros_like(a)
-d = np.zeros_like(a)
-Q[0] = 10  # initial queue length
-
-for k in range(1, len(a)):
-    d[k] = min(Q[k - 1], c[k])
-    Q[k] = Q[k - 1] - d[k] + a[k]
-
-\end{pyconsole}
-
-These are the departures and queue lengths for each period:
-\begin{pyconsole}
-d
-Q
-\end{pyconsole}
-
-
-Suppose we define loss as the number of periods in which the queue length exceeds
-20. Of course, any other threshold can by taken. Counting the number
-of such periods is very easy in python: \pyv{(Q>20)} gives all
-entries of $Q$ such $Q>20$, the function \pyv{sum()} just adds
-them. 
-
-\begin{pyconsole}
-loss = (Q > 20)
-loss
-loss.sum()
-\end{pyconsole}
-
-Now all statistics:
-
-\begin{pyconsole}
-d.mean()
-Q.mean()
-Q.std()
-(Q > 20).sum()
-\end{pyconsole}
-  
-
-Since this is a small example, the mean number of departures, i.e.,
-\pyv{d.mean()}, is not equal to the arrival rate $\lambda$.  
-Likewise for the computation of the mean, variance, and other
-statistical functions. 
-
-Now I am going to run the same code, but for a larger instance. 
-
-\begin{pyconsole}
-num = 1000
-a = np.random.poisson(labda, num)
-c = mu * np.ones_like(a)
-Q = np.zeros_like(a)
-d = np.zeros_like(a)
-Q[0] = 10  # initial queue length
-
-for k in range(1, len(a)):
-    d[k] = min(Q[k - 1], c[k])
-    Q[k] = Q[k - 1] - d[k] + a[k]
-
-d.mean()
-Q.mean()
-Q.std()
-(Q > 30).sum()/num * 100
-\end{pyconsole}
-
-
-I multiply with 100 to get a percentage. Clearly, many jobs see a long
-queue, the mean is already some 24 jobs. For this arrival rate a
-service capacity of $\mu=21$ is certainly too small. 
-
-Next, an example with the same arrival pattern but with a Poisson
-distributed number of jobs served per day, so the service rate is
-still $21$, but the period capacity $c$ is random variable with
-Poisson distribution with $P(21)$
-
-\begin{pyconsole}
-c = np.random.poisson(mu, num)
-Q = np.zeros_like(a)
-d = np.zeros_like(a)
-Q[0] = 10  # initial queue length
-
-for k in range(1, len(a)):
-    d[k] = min(Q[k - 1], c[k])
-    Q[k] = Q[k - 1] - d[k] + a[k]
-
-d.mean()
-Q.mean()
-Q.std()
-(Q > 30).sum()/num * 100
-\end{pyconsole}
-
-Compared to the case with constant service capacity, i.e., $c=21$ in
-each period, we see that the average waiting time increases, just as
-the number of periods in which the queue length exceeds 30. Clearly,
-variability in service capacity does not improve the performance of
-the queueing system, quite on the contrary. In later sections we will
-see why this is so.
-
-You can try to implement some of the other cases of the exercises in
-this section and analyze them in the same way. Hopefully you
-understand from this discussion that once you have the recursions to
-construct/simulate the queueing process, you are `in business'. The
-rest is easy: make plots, do some counting, i.e., assemble statistics,
-vary parameters for sensitivity analysis, and so on.
-
+Comparing this to the result of the previous exercise in which the service capacity in each period was constant $c=21$, we see that the average waiting time increases, just as the number of periods in which the queue length exceeds 30.
+Clearly, variability in service capacity does not improve the performance of the queueing system, quite on the contrary, it increases.
+In later sections we will see why this is so.
   \end{solution}
 \end{exercise}
 

@@ -30,7 +30,7 @@ arrive per unit time, i.e.,
   \lambda = \lim_{t\to\infty} \frac{A(t)}t.
 \end{equation}
 We remark in passing that this limit does not necessarily exist if
-$A(t)$ is some pathological function. If, however, the interarrival
+$A(t)$ is some pathological function. If, however, the inter-arrival
 times $\{X_k\}$ are the basic data, and $\{X_k\}$ are i.i.d.  and
 distributed as a generic random variable $X$ with finite mean $\E{X}$,
 we can construct $\{A_k\}$ and $\{A(t)\}$ as described in
@@ -80,19 +80,19 @@ $A(A_n) = n$. Thus,
   \frac{1}n\sum_{k=1}^n X_k = \frac{A_n}n = \frac{A_n}{A(A_n)}. 
 \end{equation*}
 But since $A_n\to\infty$ if $n\to\infty$, it follows from
-Eq.~(\ref{eq:3}) that the average interarrival time between two
+Eq.~(\ref{eq:3}) that the average inter-arrival time between two
 consecutive jobs is
 \begin{equation}\label{eq:54}
   \E X = \lim_{n\to\infty}  \frac{1}n\sum_{k=1}^n X_k = \lim_{n\to \infty} \frac{A_n}{A(A_n)} = \lim_{t\to\infty} \frac t{A(t)} = \frac 1 \lambda,
 \end{equation}
 where we take $t=A_n$ in the limit for $t\to\infty$.  In words, the
 above states that the arrival rate $\lambda$ is the inverse of the
-expected interarrival time.
+expected inter-arrival time.
 
 \begin{exercise}
 (This exercise is meant to provide some insight into what needs
   to be done to put everything on solid ground.  If you are not
-  interested in the maths, you can skip the problem.)
+  interested in the mathematics, you can skip the problem.)
    In  Eq. (\ref{eq:54}) we replaced the limit with respect to $n$ by a
     limit with respect to $t$.  Use
     the notation $A_{A(t)}$ to show that  this is allowed.

@@ -16,13 +16,13 @@
 In manufacturing settings it is quite often the case that the arrival
 process at a station is not Poisson. For instance, if processing times
 at a station are nearly constant, and the jobs of this station are
-sent to a second station for further processing, the interarrival
+sent to a second station for further processing, the inter-arrival
 times at the second station must be more or less equal. Hence, in this
 case, the SCV of the arrivals at the second station $C_{a,2}^2$ is
 most probably smaller than 1. As a consequence the
-Pollackzek-Khintchine formula for the $M/G/1$-queue can no longer be
+Pollaczek-Khinchine formula for the $M/G/1$-queue can no longer be
 reliably used to compute the average waiting times.  As a second,
-trivial case, if the interarrival times of jobs are 1 hour always and
+trivial case, if the inter-arrival times of jobs are 1 hour always and
 service times 59 minutes always, there simply cannot be queue. Thus,
 the $M/G/1$ waiting time formula cannot, and should not, be applied to
 approximate the average waiting time of the $G/G/1$ queue. 
@@ -43,7 +43,7 @@ result to the $M/G/1$ queue we get
 Thus, $1_b$ in the expression for the $M/M/1$ queue is replaced by
 $C_s^2$ in the expression for the $M/G/1$ queue. As a second
 generalization, Kingman proposed to replace $1_a$ in this formula by
-the SCV of the interarrival times
+the SCV of the inter-arrival times
 \begin{equation*}
 C_a^2 = \frac{\V X}{(\E X)^2}
 \end{equation*}
@@ -67,7 +67,7 @@ seen from the $G/G/1$ waiting time formula. Roughly:
   time increases \emph{very steeply} when~$\rho$ is large, hence is
   very sensitive to the actual value of $\rho$ when $\rho$ is large.
 \item $\E{W_Q} \sim C_a^2$ and $\E{W_Q} \sim C_s^2$. Hence, reductions
-  of the variation of the interarrival and service times do affect the
+  of the variation of the inter-arrival and service times do affect the
   waiting time, but only linearly.
 \item $\E{W_Q} \sim \E S$. Thus, working in smaller job sizes reduces
   the waiting time also. The average queue length does not decrease by
@@ -132,7 +132,7 @@ variability and service times.
 
 \begin{exercise}
   Consider a queue $n$ servers, with generally distributed
-  interarrival times, generally distributed service times, and the
+  inter-arrival times, generally distributed service times, and the
   system can contain at most $K$ customers, i.e, the $G/G/n/K$ queue.
   Let $\lambda$ be the arrival rate, $\mu$ the service rate, $\beta$
   the long-run fraction of customers lost, and $\rho$  the average
@@ -161,7 +161,7 @@ What are $\rho$,
       arrivals do not overlap any job service, the number of jobs in
       the system is 1 for $50$ seconds, then the server is idle for 10
       seconds, and so on. Thus $\E L = 1\cdot5/6 = 5/6$. There is no
-      variance in the interarrival times, and also not in the service
+      variance in the inter-arrival times, and also not in the service
       times, thus $C_a^2 = C_s^2 = 0$. Also $\E{W_Q}=0$ since
       $\E{L_Q}=0$. Interestingly, we get the same from Kingman's formula.
   \end{solution}
@@ -247,11 +247,11 @@ Thus, the waiting time in queue is approximately normally distributed with mean 
   (Hall 5.19) When a bus reaches the end of its line, it undergoes a
   series of inspections. The entire inspection takes 5 minutes on
   average, with a standard deviation of 2 minutes. Buses arrive with
-  interarrival times uniformly distributed on $[3,9]$ minutes.
+  inter-arrival times uniformly distributed on $[3,9]$ minutes.
 
 As a first case,  assuming a single server, estimate $\E{W_Q}$ with the $G/G/1$ waiting time formula. As a second case, compare this result to an $M/G/1$ system with arrival rate 10 per hour and the same service time distribution. Explain why your previous answer is smaller. 
   \begin{solution}
-First the $G/G/1$ case. Observe that in this case, the interarrival time $X\sim U[3,9]$, that is, never smaller than 3 minutes, and never longer than 9 minutes. 
+First the $G/G/1$ case. Observe that in this case, the inter-arrival time $X\sim U[3,9]$, that is, never smaller than 3 minutes, and never longer than 9 minutes. 
 
 \begin{pyconsole}
   
@@ -285,7 +285,7 @@ Wq = (1.+CS2)/2. * rho/(1.-rho) * ES
 Wq
 \end{pyconsole}
 
-The arrival process with uniform interarrival times is much more
+The arrival process with uniform inter-arrival times is much more
 regular than a Poisson process. In the first case, bus arrivals are
 spaced in time at least with 3 minutes.
     \end{solution}
@@ -294,7 +294,7 @@ spaced in time at least with 3 minutes.
 
 
 Clearly, Kingman's equation requires an estimate of the SCV $C_a^2$ of
-the interarrival times and the SCV $C_s^2$ of the service times. Now
+the inter-arrival times and the SCV $C_s^2$ of the service times. Now
 it is not always easy in practice to determine the actual service time
 distribution, one reason being that service times are often only
 estimated by a planner, but not actually measured. Similarly, the
@@ -304,11 +304,11 @@ often not possible to estimate $C_a^2$ and $C_s^2$ from information
 that is available.  However, when for instance the number of arrivals
 per day have been logged for some time so that we know
 $\{a_n, n=1,\ldots, N\}$ for some $N$, we can use this information
-instead of the the interarrival times $\{X_k\}$ to obtain insight into
+instead of the the inter-arrival times $\{X_k\}$ to obtain insight into
 $C_a^2$.  The relation we present here to compute $C_a^2$ from
 $\{a_n\}$ can of course also be applied to estimate $C_s^2$.
 
-\begin{theorem} The SCV of the interarrival times can be estimated
+\begin{theorem} The SCV of the inter-arrival times can be estimated
   with the following formula
 \begin{equation*}
 C_a^2 \approx \frac{\tilde \sigma^2}{\tilde \lambda},
@@ -329,7 +329,7 @@ number of arrivals per period.
   Section~\ref{sec:rate-stability}. Let $\{A(t), t\geq 0\}$ be the
   number of arrivals that occur up to (and including) time $t$. We
   assume that $\{A(t)\}$ is a renewal process such that the
-  interarrival times $\{X_k, k=1, 2, \ldots\}$ with
+  inter-arrival times $\{X_k, k=1, 2, \ldots\}$ with
   $X_k = A_{k}-A_{k-1}$, are i.i.d. with mean $1/\lambda$ and standard
   deviation~$\sigma$. (Observe that $\sigma$ is not the same as
   $\tilde \sigma$ above.) Note that $C_a^2$ is defined in terms of
@@ -346,7 +346,7 @@ of the Poisson process):
 \P{A(t) < k} = \P{A_k > t}
 \end{equation*}
 
-Since the interarrival times have finite mean and second moment by
+Since the inter-arrival times have finite mean and second moment by
 assumption, we can apply the central limit law to obtain that, as
 $k\to\infty$,
 \begin{equation*}
