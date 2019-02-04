@@ -9,32 +9,32 @@
 
 In this section we provide motivation for the use of the Poisson process as an arrival process of customers or jobs at a shop, service station, or machine, to receive service.  In the exercises we derive numerous  properties of  this exceedingly important distribution; in the rest of the book we will use these results time and again.
 
-Consider a stream of customers that enter a shop over time. Let us write $N(s, t)$ for
-the number of customers that entered during a time interval of $(s,t]$. Clearly, as we do not know in advance how many customers will enter, we model $N(s,t)$ as a random variable for all
+Consider a stream of customers that enter a shop over time. Let us write $N(s, t]$ for
+the number of customers that entered during a time interval of $(s,t]$, and $N(t)=N(0,t]$. Clearly, as we do not know in advance how many customers will enter, we model $N(s,t]$ as a random variable for all
 times $s$ and $t$.
 
 Our first assumption is that the rate at which customers enter does not
-significantly change over time. Then it is reasonable to assume that
+change significantly over time. Then it is reasonable to assume that
 the expected number of arrivals is proportional to the  length of
 the interval. Hence, it is reasonable to assume that there exists some
 constant~$\lambda$ such that
 \begin{equation}
   \label{eq:6}
- \E{N(s,t)} = \lambda (t-s).
+ \E{N(s,t]} = \lambda (t-s).
 \end{equation}
 The constant $\lambda$ is often called the \recall{arrival rate}.
 
 
-The second assumption is that $\{N(s,t), s\leq t\}$ has
+The second assumption is that the process $\{N(s,t], s\leq t\}$ has
 \recall{stationary} and \emph{independent increments}. Stationarity
 means that the distribution of the number of arrivals are the same for
-all intervals of equal length. Formally, $N(s_1,t_1)$ has the same
-distribution as $N(s_2, t_2)$ if $t_2-s_2 = t_1-s_1$. Independence
-means, roughly speaking, that knowing that $N(s_1,t_1)= n$, does not
-help to make any predictions about $N(s_2, t_2)$ if the intervals
-$(s_1,t_1)$ and $(s_2, t_2)$ have no overlap.
+all intervals of equal length. Formally, $N(s_1,t_1]$ has the same
+distribution as $N(s_2, t_2]$ if $t_2-s_2 = t_1-s_1$. Independence
+means, roughly speaking, that knowing that $N(s_1,t_1]= n$, does not
+help to make any predictions about $N(s_2, t_2]$ if the intervals
+$(s_1,t_1]$ and $(s_2, t_2]$ have no overlap.
 
-To find the distribution of $N(t) = N(0,t)$, let us split the interval
+To find the distribution of $N(t)$, let us split the interval
 $[0,t]$ into $n$ sub-intervals, all of equal length, and ask: `What is
 the probability that a customer arrives in some given
 sub-interval.'  By our second assumption, the arrival rate is
@@ -69,7 +69,7 @@ What is the difference between $N_n(t)$ and $N(t)$?
 \begin{solution}
   $N_n(t)$ is a binomially distributed random variable with parameters
   $n$ and $p$. The maximum value of $N_n(t)$ is $n$. The random
-  variable $N(t)$ models the number of failures that can occur during
+  variable $N(t)$ models the number of arrivals that can occur during
   $[0,t]$. As such it is not necessarily bounded by $n$. Thus, $N_n(t)$ and $N(t)$ cannot represent the same random variable. 
 \end{solution}
 \end{exercise}
@@ -100,13 +100,13 @@ First find $p$, $n$, $\lambda$ and $t$ such that the rate
 \begin{equation*}
   p = \frac{\lambda t}n.
 \end{equation*}
-Substituting this in this in the expression for $\P{N_n(t)=k}$ gives
+Substituting this in the expression for $\P{N_n(t)=k}$ gives
 \begin{equation*}
   \P{N_n(t) = k} = {n \choose k} \left(\frac{\lambda t}{n}\right)^k \left(1-\frac{\lambda t}n\right)^{n-k}.
 \end{equation*}
 To see that 
 \begin{equation*}\label{eq:52}
-  \lim_{n\to\infty} {n \choose k} \left(\frac{\lambda t}{n}\right)^k \left(1-\frac{\lambda t}n\right)^{n-k} = e^{-\lambda t} \frac{(\lambda t)^k}{k!}.
+  \lim_{n\to\infty} {n \choose k} \left(\frac{\lambda t}{n}\right)^k \left(1-\frac{\lambda t}n\right)^{n-k} = e^{-\lambda t} \frac{(\lambda t)^k}{k!},
 \end{equation*}
 use that
     \begin{align*}
@@ -127,11 +127,11 @@ is easy, so that, as $n\to\infty$,  the above converges to
   \end{solution}
 \end{exercise}
 
-Thus, if we assume that the arrival rate of customers is constant for some amount of time, e.g., an hour in a shop, and we assume that the probability of a customer arriving in some very small amount of time,  e.g., a millisecond, is small, the resulting number arrival of customers is Poisson distributed. 
+Thus, if we assume that the arrival rate of customers is constant for some amount of time, e.g., an hour, and we assume that the probability of a customer arriving in some very small amount of time,  e.g., a millisecond, is small, the resulting number arrival of customers is Poisson distributed. 
 
 
 \begin{exercise}\label{ex:2}
-  Show that if $N(t)\sim P(\lambda t)$, $\E{N(t)} = \lambda t$.
+  Show that if $N(t)\sim P(\lambda t)$, the expected number of arrivals during $[0,t]$ is $\E{N(t)} = \lambda t$.
   \begin{hint}
 Apply the definition of the expectation, and in the computations use that 
 \begin{equation*}
@@ -155,7 +155,7 @@ Apply the definition of the expectation, and in the computations use that
 
 
 \begin{exercise}
-  Show that if $N(t)\sim P(\lambda t)$, $\V{N(t)} = \lambda t$. 
+  Show that if $N(t)\sim P(\lambda t)$, the variance of the number of arrivals during $[0,t]$ is $\V{N(t)} = \lambda t$. 
   \begin{hint}
 Realize that $\V N = \E{N^2} - (\E N)^2$. Compute $\E{N^2}$, use Exercise~\ref{ex:2} for $(\E{N})^2$ and the hint of Exercise~\ref{ex:2} to simplify the calculations. 
   \end{hint}
@@ -174,15 +174,15 @@ Hence, $\V N = \E{N^2} - (\E N)^2 = \lambda^2 + \lambda - \lambda^2 = \lambda$.
 \end{solution}
 \end{exercise}
 
-With moment generating functions we compute the mean and variance of $N(t)$ with less effort. 
-Recall that the \recall{moment generating function}  of a random variable $X\geq 0$ and $t$ a real number is defined as
+Recall that the \recall{moment generating function}  of a random variable $X\geq 0$ and $s$ a real number is defined as
 \begin{equation*}
-  M_X(t) = \E{e^{t X}}.
+  M_X(s) = \E{e^{s X}}.
 \end{equation*}
+With the moment generating function we compute the mean and variance of $N(t)$ with less effort. 
 
 
 \begin{exercise}
-Show that the moment generating function of a Poisson distributed random variable~$N(t)$ is
+Show that the moment generating function of the random variable~$N(t)\sim P(\lambda t)$ is
 \begin{equation*}
 M_{N(t)}(s) 
 %=  \E{e^{sN(t)}}  
@@ -211,7 +211,7 @@ M_{N(t)}(s)
 \begin{exercise}
 Use  the moment generating function of $N(t)$ to compute $\E{N(t)}$ and $\V{N(t)}$. 
 \begin{hint}
-  Recall that $M_{N(t)}'(0) = \E{N(t)}$ and $M_{N(t)}''(s)= \E{(N(t))^2}$. 
+  Recall that $M_{N(t)}'(0) = \d M_{N(t)}(s)/\d s|_{s=0} = \E{N(t)}$ and $M_{N(t)}''(s)= \E{(N(t))^2}$. 
 \end{hint}
 \begin{solution}
 Using the expression for the moment generating function of the previous exercise,
@@ -249,19 +249,16 @@ SCV = \frac{\V{N(t)}}{(\E{N(t)})^2} = \frac{\lambda t}{(\lambda t)^2} = \frac1{\
 
 For the next couple of exercises, we need the concept of conditional probability. To help you recall this, consider the next question.
 
-\begin{exercise} 
-  We have to give one present to one of three children. As we cannot
-  divide the present into parts, we decide to let `fate decide'. That
+\begin{exercise} \label{ex:18}
+  We have  one gift to give to one of three children. As we cannot
+  divide the gift into parts, we decide to let `fate decide'. That
   is, we choose a random number in the set $\{1, 2, 3\}$. The first
-  child that guesses the number wins the present. Show that the
-  probability of winning the present is the same for each child.
+  child that guesses the number wins the gift. Show that the
+  probability of winning the gift is the same for each child.
   \begin{hint}
     For the second child, condition on the event that the first does not chose the right number.
     Use the definition of conditional probability:
-    \begin{equation*}
-    \P{A|B} = \frac{\P{AB}}{\P{B}}, 
-    \end{equation*}
-provided $\P{B}>0$.
+    $\P{A|B} = P{AB}/\P{B}$ provided $\P{B}>0$.
   \end{hint}
 \begin{solution}
     The probability that the first child to guess also wins is
@@ -284,9 +281,9 @@ provided $\P{B}>0$.
   \end{solution}
 \end{exercise}
 
-Below, and elsewhere, we use the following efficient notation:  the function $f=o(h)$ means that $f$ is such $f(h)/h \to 0$ as $h\to 0$.  The next exercise helps you practice with this. 
+Below, and elsewhere, we use the following efficient notation:  the function $f=o(h)$ means that $f$ is such $f(h)/h \to 0$ as $h\to 0$.  The next exercise helps you practice with this notation.
 \begin{exercise}
-  If $c$ is a constant (in $\R$) and the functions $f, g =o(h)$, then $c\cdot f = o(h)$, $f+g=o(h)$, $f(h) \to 0$ as $h\to 0$, and $f\cdot g=o(h)$. 
+  Let $c$ be a constant (in $\R$) and the functions $f$ and $g$ both of $o(h)$. Then $f(h) \to 0$ when $h\to 0$, $c\cdot f = o(h)$, $f+g=o(h)$, and $f\cdot g=o(h)$. 
  \begin{solution}
 First,
 \begin{align*}
@@ -309,7 +306,7 @@ Finally, by the Algebraic Limit Theorem,
 \P{N(t+h) = n \given N(t) = n} = 1-\lambda h + o(h).
   \end{equation*}
     \begin{hint}
-Recall the definition of the conditional probability $\P{A\given B} = \P{AB}/\P{B}$, where we write $AB = A\cap B$. This definition only holds when $\P{B} > 0$. 
+Use  the definition of the conditional probability of Exercise~\ref{ex:18}. 
 
     Think about the meaning of the formula
       $\P{N(t+h) = n \given N(t) = n}$. It is a conditional probability
@@ -393,12 +390,12 @@ We can also use the results of the previous parts to see that
 \end{exercise}
 
 We define the Poisson \emph{process} as the set $N=\{N(t), t\geq 0\}$. Observe that this process is a much more complicated object than the Poisson distributed random variable $N(t)$. The
-process is an uncountable set of random variables $N(t)$ for all $t\geq 0$, whereas $N(t)$ is just \emph{one} random variable.
+process is an uncountable set of random variables indexed by  $t\in \R^+$, whereas $N(t)$ is just \emph{one} random variable.
 
 \begin{exercise}
 Show that  for a Poisson process $N$, 
 \begin{equation*}
-\P{N(0,s] =1\given N(0,t]=1} = \frac s t,
+\P{N(s] =1\given N(t]=1} = \frac s t,
 \end{equation*}
 if $s\in[0,t]$. Thus, if you know that an arrival occurred during $[0,t]$, the arrival is distributed
 uniformly on the interval $[0,t]$.
@@ -421,9 +418,20 @@ From the hint,
 \end{solution}
 \end{exercise}
 
-\emph{Merging}, or the \emph{superposition}, of Poisson processes occurs often in practice.  We have two Poisson processes, for instance, the arrival processes $N_\lambda$ of men
-and $N_\mu$ women at a shop. In the figure below, each cross represents an arrival, in the upper line it corresponds to a man, in the middle to a woman, in lower line to an
-arrival of a general customer at the shop. Thus,  the shop `sees' the superposition $N_{\lambda+\mu}$ of these two arrival processes. 
+ 
+
+
+\recall{Merging}, or the \emph{superposition}, of Poisson processes
+occurs often in practice.  We have two Poisson processes, for
+instance, the arrival processes $N_\lambda$ of men and $N_\mu$ women
+at a shop. In the figure below, each cross represents an arrival, in
+the upper line it corresponds to a man, in the middle line to a woman, in
+lower line to an arrival of a general customer at the shop. Thus, the
+shop `sees' the superposition of these two arrival
+processes.
+
+
+
 
   \begin{center}
 \begin{tikzpicture}[scale=1]
@@ -450,7 +458,7 @@ arrival of a general customer at the shop. Thus,  the shop `sees' the superposit
 For the next set of exercises,  assume that $N_\lambda(t)\sim \text{P}(\lambda t)$, $N_\mu(t) \sim \text{P}(\mu t)$ and are independent.
 
 \begin{exercise} 
-Show that   $N_{\lambda+\mu}(t)=N_\lambda(t) + N_\mu(t) \sim \text{P}((\lambda + \mu)t)$. Thus, when we merge two independent Poisson processes, the merged process is also a Poisson process whose rate is the sum of the rates of the original Poisson processes.
+Show that  $N_\lambda(t) + N_\mu(t) \sim \text{P}((\lambda + \mu)t)$ for all $t\geq 0$. Thus, when we merge two independent Poisson processes, the merged process $\{N_{\lambda+\mu}(t)\}$ is also a Poisson process whose rate is the sum of the rates of the original Poisson processes.
   \begin{hint}
 Use a conditioning argument or use moment generating functions.
 
@@ -504,7 +512,7 @@ M_{N_\lambda(t)+N_\mu(t)}(s)
 &=\exp(\lambda t (e^s -1)) \exp(\mu t(e^s-1)) \\
 &= \exp((\lambda + \mu)t (e^s-1)).
 \end{align*}
-Finally, since  generating function uniquely characterizes
+Finally, since  the generating function uniquely characterizes
 the distribution, and since the above expression has the same form as a Poisson random variable  with parameter $(\lambda+\mu)t$, we can conclude that $N(t)\sim P((\lambda +\mu) t)$.
     \end{solution}
 \end{exercise}
@@ -521,10 +529,10 @@ There are two arrival processes, arrivals of the first type occur with rate $\la
 \end{exercise}
 \end{comment}
 
-Again, there are two Poisson arrival processes. Let arrivals of the first type occur with rate $\lambda$, arrivals of the second  type with rate $\mu$.  Given that an arrival occurred, the next question asks you to compute  the probability that the arrival was of the first type. 
 
 \begin{exercise} 
-Show that     \begin{equation*}
+Show that, given that an arrival occurred,  the probability that the arrival was of the first type is  
+ \begin{equation*}
     \P{N_\lambda(h) = 1 | N_\lambda(h) + N_\mu(h) = 1} =
 \frac{\lambda}{\lambda+\mu}.
     \end{equation*}
@@ -590,14 +598,6 @@ node[below, fill=white] {$B_6=0$};
 \end{tikzpicture}
   \end{center}
 
- 
-The concept of merging and thinning are also  useful to analyze queueing
-  networks. Suppose the departure stream of a machine splits into
-  two sub-streams, e.g., a fraction $p$ of the jobs moves to on another
-  machine and the rest ($1-p$) of the jobs leaves the system. Then we
-  can model the arrival stream at the second machine as a thinned
-  stream (with probability $p$) of the departures of the first
-  machine. Merging occurs where the output streams of various stations arrive at another station.
 
 \begin{exercise}\label{ex:1}
 Show that the Poisson process obtained by thinning the original
@@ -667,12 +667,18 @@ Then, using conditioning on $N$,
 \end{align*}
 Thus, $Y$ has the same moment generating function as a Poisson
 distributed random variable with parameter $\lambda p$. Since
-moment-generating functions specify the distribution uniquely,
+the moment-generating function specify the distribution uniquely,
 $Y\sim P(\lambda p)$.
 \end{solution}
 \end{exercise}    
 
-In fact, it can be proven that Poisson processes are the only arrival processes such that, when merged  or thinned, the resulting processes are again Poisson processes. Thus, if you believe that it is reasonable that a thinned  processes has similar statistical properties as the original process, except that the mean becomes smaller, than the Poisson process is the only process that can be consistent with your intuition.
+The concepts of merging and thinning are  useful to analyze queueing
+  networks. Suppose the departure stream of a machine splits into
+  two sub-streams, e.g., a fraction $p$ of the jobs moves to on another
+  machine and the rest ($1-p$) of the jobs leaves the system. Then we
+  can model the arrival stream at the second machine as a thinned
+  stream (with probability $p$) of the departures of the first
+  machine. Merging occurs where the output streams of various stations arrive at another station. 
 
 
 \Closesolutionfile{hint}
@@ -689,5 +695,5 @@ In fact, it can be proven that Poisson processes are the only arrival processes 
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../book"
+%%% TeX-master: "../queueing_book"
 %%% End:

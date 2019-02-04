@@ -7,7 +7,7 @@
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-In the previous section we introduced the Poisson process as a natural model of the number of jobs arriving in during intervals of time.  As we will see in the sections to come, the modeling and analysis of any queueing system is typically easier if we specify  the (probability)
+In the previous section we introduced the Poisson process as a natural model of the number of jobs arriving during intervals of time.  As we will see in the sections to come, the modeling and analysis of any queueing system is typically easier if we specify  the (probability)
 distribution of the inter-arrival times, i.e., the time between consecutive arrival epochs of jobs.
 A particular fruitful model for the distribution of the inter-arrival times is the exponential distribution. Here we show how this relates to the Poisson distribution,  and we also derive many useful general probability concepts and apply these to the exponential distribution.  Then we use simulation to provide yet further motivation for the use of the exponential distribution as a useful model for inter-arrival times of customers.
 
@@ -19,17 +19,16 @@ an \recall{exponentially distributed} random variable, i.e.,
 \begin{equation*}
   \P{X \leq t} = 1- e^{-\lambda t}
 \end{equation*}
-Moreover,  the exponential distribution  derives directly from the Poisson distribution. Observe that, if there are no arrivals in some interval $[0,t]$, then it
-must be that $N(t) = 0$. Hence, the first inter-arrival time $X$, i.e., the time until the first customer,  must be larger than $t$.  Therefore,
+In the sequel we often write $X\sim \exp(\lambda)$ to mean that~$X$ is
+exponentially distributed with rate~$\lambda$.  Recall that the
+constant $\lambda$ is called the \recall{arrival rate}.
+
+
+The exponential distribution  derives directly from the Poisson distribution. If there are no arrivals in some interval $[0,t]$, then it
+must be that $N(t) = 0$. Hence, for the first inter-arrival time $X_1$: %, i.e., the time until the first customer,  must be larger than $t$.  Therefore,
 \begin{equation*}
  \P{X_1> t} = \P{N(t) = 0} = e^{-\lambda t} \frac{(\lambda t)^0}{0!}= e^{-\lambda t}.
 \end{equation*}
-Recall that the constant $\lambda$ is called the 
-\recall{arrival rate}.  
-
-In the sequel we often write $X\sim \exp(\lambda)$ to
-mean that~$X$ is exponentially distributed with rate~$\lambda$.
-
 
 
 \begin{exercise} 
