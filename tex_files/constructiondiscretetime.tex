@@ -908,7 +908,7 @@ It is then sensible to set
   W_{k}^b &= \frac{W_{k,-}^b + W_{k,+}^b}2.
 \end{align*}
 
-\tbd I currently lack time to check whether the above does not contain
+\tbd \\Weird sign in pdf version? I currently lack time to check whether the above does not contain
 any off-by-one errors. For future work, implement it in a simulator\ldots
   \end{solution}
 \end{exercise}
@@ -976,7 +976,7 @@ Formulate the decision variables/controls, the
     objective and the constraints.    
   \end{hint}
   \begin{solution}
-    The decision variables are $X_k$, $Y_K$ and $S_k$ (note, it is not
+    The decision variables are $X_k$, $Y_k$ and $S_k$ (note, it is not
     necessary to meet all demand:  the production cost and profit
     may vary per period.)  The objective is 
     \begin{equation*}
@@ -988,7 +988,7 @@ The constraints are
   0&\leq X_k \leq M_k, \\
   0&\leq Y_k \leq N_k, \\
   I_k&=I_{k-1}+X_k+Y_k - S_k. \\
-I_k &>= 0.
+I_k &\geq 0.
 \end{align*}
   \end{solution}
 \end{exercise}

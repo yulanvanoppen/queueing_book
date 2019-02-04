@@ -467,7 +467,7 @@ Why don't we need separate notation for $D_s(t)$, the number
  Why is $L(t) = L_Q(t) + L_s(t)$?
 \begin{solution}
  $L_Q(t) = A(t) - \tilde A(t)$. $L_S(t) = \tilde A(t) - D(t)$. This is in
-    line with the fact that $L(t) = L_Q(t) + L_s(t) = A(t) - D(t)$.
+    line with the fact that $L(t) = L_Q(t) + L_s(t) = A(t) - D(t)$. \\this is the same answer 
 \end{solution}
 \end{exercise}
 
@@ -477,7 +477,7 @@ Why don't we need separate notation for $D_s(t)$, the number
  Express $L_Q(t)$ and $L_s(t)$ in terms of $A(t)$, $\tilde A(t)$ and $D(t)$.
 \begin{solution}
  $L_Q(t) = A(t) - \tilde A(t)$. $L_S(t) = \tilde A(t) - D(t)$. This is in
-    line with the fact that $L(t) = L_Q(t) + L_s(t) = A(t) - D(t)$.
+    line with the fact that $L(t) = L_Q(t) + L_s(t) = A(t) - D(t)$. \\this is the same answer
 \end{solution}
 \end{exercise}
 
@@ -617,7 +617,7 @@ waiting time.
 Observe that, just as in Section~\ref{sec:constr-discr-time}, we have
 obtained a set of recursions by which we can run a simulation of a
 queueing process of whatever length we need, provided we have a
-sequence of have inter-arrival times $\{X_k\}$ and service times
+sequence of inter-arrival times $\{X_k\}$ and service times
 $\{S_k\}$.  A bit of experimentation with computer programs such as
 $R$ or python will reveal that this is easy.
 
@@ -770,10 +770,10 @@ class Lifo(Queue):
     def __init__(self):
         self.queue = SortedSet(key = lambda job: -job.arrivalTime)
   
-\end{pyverbatim}
+\end{pyverbatim} \\this gives ??PythonTeX?? in pdf file
 
 Another interesting queueing rule is to sort in increasing job size;
-\begin{pyverbatim}
+\begin{pyverbatim} \\this gives ??PythonTeX?? in pdf file
   class SPTF(Queue): # shortest processing time first
     def __init__(self):
         self.queue = SortedSet(key = lambda job: job.serviceTime)
