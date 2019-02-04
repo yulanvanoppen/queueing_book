@@ -109,14 +109,14 @@ import numpy as np
 
 np.random.seed(3) # fix the seed
 
-labda = 20
+lambda = 20
 mu = 21
 \end{pyconsole}
 
 These are the number of arrivals in each period.
 
 \begin{pyconsole}
-a = np.random.poisson(labda, 10)
+a = np.random.poisson(lambda, 10)
 a
 \end{pyconsole}
 
@@ -177,7 +177,7 @@ Now I am going to run the same code, but for a larger instance.
 
 \begin{pyconsole}
 num = 1000
-a = np.random.poisson(labda, num)
+a = np.random.poisson(lambda, num)
 c = mu * np.ones_like(a)
 Q = np.zeros_like(a)
 d = np.zeros_like(a)
@@ -423,7 +423,7 @@ different queueing systems.
 A comment is required about the modeling exercises below. It may be
 that the recursions you find are not identical to the recursions in
 the solution; the reason is that the assumptions you make might not be
-equal the ones I make. I don't quite know how get out of this
+equal to the ones I make. I don't quite know how get out of this
 paradoxical situation.  In a sense, to completely specify the model,
 we need the recursions. However, if the problem statement would
 contain the recursions, there would be nothing left to practice
