@@ -187,7 +187,7 @@ What is the difference between $A(n,t)$ and $A(t)$?
 Find an expression for $A(n,t)$. 
   \begin{hint}
 For the acronym, observe that the service times and
-    inter-arrival are \emph{D}eterministic and there is one server. For
+    inter-arrival are deterministic and there is one server. For
     the computation of $Y(n,t)$, make a plot of $L(s)$ as a
     function of time for $n=1$.
 
@@ -196,7 +196,7 @@ Make a plot of $L(s)$ for $n=1$ as a function of time.
     \begin{solution}
       It is the $D/D/1$ queue, since there is one server and
       the inter-arrival times and service times are constant, i.e.,
-      \emph{D}eterministic.
+      deterministic.
 
 
 $A_k = 2k$ as jobs arrive at $t=0, 2, 4, \ldots$, hence,  $A(t) \approx t/2$ when $t\gg 0$. We also know that $L(s)=1$ if $s\in [2i, 2i+1)$ and $L(s)=0$ for $s\in[2i-1, 2i)$ for $i=0, 1, 2, \ldots$. Thus, $L(A_k-) = L(2k-)=0$. Hence, $A(0,t) \approx t/2$ for $t\gg 0$, and $A(n,t)=0$ for $n\geq 1$. 
@@ -698,7 +698,7 @@ concept to consider.
 For the second example, suppose there is a cost associated with
 keeping jobs in queue. Let $w$ be the cost per job in queue per unit
 time so that the cost rate is $n w$ when $n$ jobs are in queue. But
-then is $ wnY(n,t)$ the total cost up to time $t$ to have $n$ jobs in
+then is $ w n Y(n,t)$ the total cost up to time $t$ to have $n$ jobs in
 queue, hence the total cost up up to time $t$
   \begin{equation*}
 C(t) =     w \sum_{n=0}^\infty n Y(n,t),
