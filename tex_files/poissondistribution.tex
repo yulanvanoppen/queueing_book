@@ -564,7 +564,7 @@ Use the standard formula for conditional probability and that  $N_\lambda(t) + N
 
 
 Besides merging Poisson streams, we can also consider the concept of \emph{splitting}, or \emph{thinning}, a stream into sub-streams, as follows.  When a customer arrives, throw a coin that lands   heads with probability $p$ and tails with $q=1-p$. When the coin   lands heads, the customer is of type 1 (e.g., a woman), otherwise of type 2 (e.g., a child).  Another   way of thinning is by modeling the stream of people passing a shop   as a Poisson process with rate $\lambda$. With probability $p$ a   person decides, independent of anything else, to enter the shop,  c.f. the figure below. The crosses at the upper line are passersby  in the street. The crosses at the lower line are the customers that   enter the shop. The outcome of the $k$th throw of a coin is   indicated by $B_k$. In the figure below,  $B_1=1$ so that the first passerby turns into a
-  customer entering the shop; the second passerby does not enter as   $B_2=0$, and so on. Like this, the stream of passerby's is thinned   with Bernoulli distributed random variables.
+  customer entering the shop; the second passerby does not enter as   $B_2=0$, and so on. Like this, the stream of passersby is thinned   with Bernoulli distributed random variables.
 
   \begin{center}
 \begin{tikzpicture}[scale=1]
