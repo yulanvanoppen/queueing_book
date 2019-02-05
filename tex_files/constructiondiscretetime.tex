@@ -147,7 +147,7 @@ Q
 
 
 Suppose we define loss as the number of periods in which the queue length exceeds
-20. Of course, any other threshold can by taken. Counting the number
+20. Of course, any other threshold can be taken. Counting the number
 of such periods is very easy in python: \pyv{(Q>20)} gives all
 entries of $Q$ such $Q>20$, the function \pyv{sum()} just adds
 them. 
@@ -211,7 +211,7 @@ vary parameters for sensitivity analysis, and so on.
 
 
 \begin{exercise}
-  Change the service process of the previous exercise from $c_k =\mu=21$ to $c_k\sim P(\mu)$ with $\mu=21$. What is the influence of the higher variability of the service process on the queue length. 
+  Change the service process of the previous exercise from $c_k =\mu=21$ to $c_k\sim P(\mu)$ with $\mu=21$. What is the influence of the higher variability of the service process on the queue length? 
   \begin{solution}
 In this  example the number of jobs served per day is $\sim P(21)$, so the service rate is
 still $21$, but the period capacity $c$ is a Poisson random variable. 
@@ -250,7 +250,7 @@ To reduce the waiting times the five psychiatrists have various
 suggestions. 
 \begin{enumerate}
 \item Not all psychiatrists have the same amount of time available per
-  week to do intakes. This is not a problem during weeks that all psychiatrists are
+  week to do intakes. This is not a problem during weeks when all psychiatrists are
   present; however, psychiatrists tend to take holidays, visit
   conferences, and so on. So, if the psychiatrist with the most
   intakes per week would go on leave, this might affect the behavior
@@ -491,7 +491,7 @@ First $d_k = \min\{Q_{k-1}, c_k\}$. Then, $Q_k' = Q_{k-1}+a_k-d_k$ is the queue 
 
 \begin{exercise}
   (Yield loss) A machine produces items, but a fraction $p$ of the
-  items produced in a period turns out to be faulty, and have to be
+  items produced in a period turns out to be faulty, and has to be
   made anew. Develop a set of recursions to cover this case.
   \begin{solution}
     The amount produced in period $k$ is $d_k$. Thus, $p d_k$ is the
@@ -713,7 +713,7 @@ d_{k,B} &= \min\{Q_{k-1, B}, c_k-d_{k,A}\}.
 
     An example is the weekly capacity offered by a psychiatrist at a
     hospital. Part of the weekly capacity is
-    reserved/allocated/assigned to serve certain patients groups. For
+    reserved/allocated/assigned to serve certain patient groups. For
     instance, each week the psychiatrist does at most five intakes of
     new patients, provided there are any, and the rest of the capacity
     is used to treat other patients. The existing patients can also be
@@ -795,7 +795,7 @@ d_{k}^A$. Thus,
 
 \begin{exercise} (A tandem queue with blocking)
   Consider a production network with two production stations in tandem
-  with blocking: when intermediate queue, i.e., the queue front of
+  with blocking: when the intermediate queue, i.e., the queue in front of
   Station B, exceeds some level $M$, then station A has to stop
   producing, and when $Q^B_k < M$ station A is not allowed to produce
   more than the intermediate queue can contain. Extend the recursions
@@ -846,7 +846,7 @@ Realize that Stations A and B have their own arrivals.
 
 
 \begin{exercise} (Merging incoming streams) 
-Consider a   single-server queue that servers two customer `streams' in a FIFO
+Consider a   single-server queue that serves two customer `streams' in a FIFO
   discipline. Thus, both streams enter one queue that is served by the
   server. Let $\{a_k^a\}$ be the number of arrivals of stream $a$ in
   period $k$ and $\{a_k^b\}$ be the number of arrivals of stream
