@@ -147,7 +147,7 @@ Q
 
 
 Suppose we define loss as the number of periods in which the queue length exceeds
-20. Of course, any other threshold can by taken. Counting the number
+20. Of course, any other threshold can be taken. Counting the number
 of such periods is very easy in python: \pyv{(Q>20)} gives all
 entries of $Q$ such $Q>20$, the function \pyv{sum()} just adds
 them. 
@@ -211,7 +211,7 @@ vary parameters for sensitivity analysis, and so on.
 
 
 \begin{exercise}
-  Change the service process of the previous exercise from $c_k =\mu=21$ to $c_k\sim P(\mu)$ with $\mu=21$. What is the influence of the higher variability of the service process on the queue length. 
+  Change the service process of the previous exercise from $c_k =\mu=21$ to $c_k\sim P(\mu)$ with $\mu=21$. What is the influence of the higher variability of the service process on the queue length? 
   \begin{solution}
 In this  example the number of jobs served per day is $\sim P(21)$, so the service rate is
 still $21$, but the period capacity $c$ is a Poisson random variable. 
@@ -713,7 +713,7 @@ d_{k,B} &= \min\{Q_{k-1, B}, c_k-d_{k,A}\}.
 
     An example is the weekly capacity offered by a psychiatrist at a
     hospital. Part of the weekly capacity is
-    reserved/allocated/assigned to serve certain patients groups. For
+    reserved/allocated/assigned to serve certain patient groups. For
     instance, each week the psychiatrist does at most five intakes of
     new patients, provided there are any, and the rest of the capacity
     is used to treat other patients. The existing patients can also be
