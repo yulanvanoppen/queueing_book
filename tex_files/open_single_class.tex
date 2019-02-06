@@ -350,7 +350,7 @@ modulus smaller than 1.
     $\Pi_{k=1}^{n_i} \min\{k, c_i\} = \Pi_{k=1}^{n_i} k = n_i!$, and
     $(c_i\rho_i)^{n_i} = (\lambda_i/\mu_i)^{n_i}.$ If $n_i\geq c_i$,
     then $\Pi_{k=1}^{n_i} \min\{k, c_i\} = c_i! c_i^{n_i-c_i}$, and
-    $(c_i\rho_i)^{n_i} = (\lambda_i/\mu_i)^{n_i} c_i^{n_i}.$.
+    $(c_i\rho_i)^{n_i} = (\lambda_i/\mu_i)^{n_i} c_i^{n_i}$.
   \end{solution}
 \end{exercise}
 
@@ -490,7 +490,7 @@ From this figure, we see that
 (\lambda+\mu) p_{1,0} &= \mu p_{2,0} + \lambda p_{0,0}\\
 (\lambda+\mu) p_{2,0} &= \mu p_{3,0} + \lambda p_{1,0}\\
 \end{align*}
-And so on. Thus, it is left to compute $p_{ij}$. Observe from this
+and so on. Thus, it is left to compute $p_{ij}$. Observe from this
 scheme, or the above figure, that the situation with the taxi's
 correspond to an $M/M/1$ queue, only the states have a `different
 name'. Let $q$ be the number of jobs in an M/M/1 queue. Some thought
@@ -522,7 +522,7 @@ Second, the expected number of cabs waiting must be
 \begin{equation*}
 1p_{0,1} + 2 p_{0,2} + 3p_{0,3}
 \end{equation*}
-and the expected number of parties waiting must be $\sum_{j=1}^\infty j p_{j,0}$
+and the expected number of parties waiting must be $\sum_{j=1}^\infty j p_{j,0}$.
 
 \begin{pyconsole}
 labda = 12. # per hour
