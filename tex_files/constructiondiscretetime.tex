@@ -463,21 +463,21 @@ First $d_k = \min\{Q_{k-1}, c_k\}$. Then, $Q_k' = Q_{k-1}+a_k-d_k$ is the queue 
   \end{hint}
     \begin{solution}
       Let's tag the first customer that arrives in period $k$. This
-      tagged customer sees $Q_{k-1}$ customer in the system, hence the
+      tagged customer sees $Q_{k-1}$ customers in the system, hence the
       tagged customer's service can only start after all $Q_{k-1}$
-      customers have been served.  Now, if $Q_{k-1}-c_k >0$, there are
-      still people in front of the tagged customer. In fact, as long
-      as $c_k+c_{k+1}+\cdots +c_m < Q_{k-1}$ the number of customers in
-      front of the tagged customer are still in the system.
+      customers have been served (assuming FIFO scheduling of course).  Now, if $Q_{k-1}-c_k \geq 0$, there are
+      still people in front of the tagged customer, either in queue or in service. In fact, as long
+      as $c_k+c_{k+1}+\cdots +c_m \leq Q_{k-1}$, there are still customers in
+      front of the tagged customer. Therefore, when the tagged customer leaves the system, the inequality $c_k+c_{k+1}+\cdots +c_m > Q_{k-1}$ must hold.
 
       We can also tag the last customer that arrives in period
       $k$. This customer will certainly have left if $m$ is such that
-      $c_k+\cdot+c_m \geq Q_{k-1}+a_k$.
+      $c_k+\cdots+c_m \geq Q_{k-1}+a_k$.
 
       In formulas the above comes down to the following.  A job that
       arrives in period $k$ cannot be served before period
     \begin{equation*}
-    W_{-,k}:= \max\left\{m: \sum_{i=k}^{k+m} c_i < Q_{k-1}\right\},
+    W_{-,k}:= \min\left\{m: \sum_{i=k}^{k+m} c_i > Q_{k-1}\right\},
     \end{equation*}
     and it must have been served before period
     \begin{equation*}

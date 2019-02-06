@@ -209,7 +209,7 @@ Next, let
 \begin{equation} \label{eq:17} 
    Y(n,t) = \int_0^t  \1{L(s) = n} \d s
 \end{equation}
-be  the total time the system contains n jobs during $[0,t]$, and
+be  the total time the system contains $n$ jobs during $[0,t]$, and
 \begin{equation} \label{eq:18}
    p(n,t) = \frac 1 t \int_0^t  \1{L(s) = n} \d s = \frac{Y(n,t)}t,
 \end{equation}
@@ -753,9 +753,9 @@ First balance the rates across the levels. Then solve for $\pi(k)$.
   \begin{solution}
 With level crossing
   \begin{align*}
-    \lambda p(0)  &= \mu p(2) \quad\text{the level between 0 and 1}\\
-    \lambda p(1)  &= \mu p(2) +\mu p(3), \quad\text{see level 1}\\
-    \lambda p(2)  &= \mu p(3)\quad\text{the level between 2 and 3}\\
+    \lambda p(0)  &= \mu p(2), \quad\text{the level between 0 and 1,}\\
+    \lambda p(1)  &= \mu p(2) +\mu p(3), \quad\text{see level 1,}\\
+    \lambda p(2)  &= \mu p(3), \quad\text{the level between 2 and 3.}\\
   \end{align*}
   Solving this in terms of $p(0)$ gives $p(2) = \rho p(0)$, $p(3) = \rho p(2) = \rho^2p(0)$, and
   \begin{equation*}

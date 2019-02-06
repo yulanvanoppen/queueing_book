@@ -25,8 +25,14 @@ def makePlot(A, N, bins=50):
     plt.axis([0, 8, 0, 2])
 
     X = superposition(A)
-    yy, xx = np.histogram(X, bins=bins, normed=True)
+    yy, xx = np.histogram(X, bins=bins, density=True)
+    #print(yy)
+    #print(xx)
+    #print(np.dot(yy,xx[1:]-xx[:-1]))
+    #print(yy.sum())
     xx = (xx[1:] + xx[:-1])/2
+    #d = xx[1]-xx[0]
+    #print(9/100/d)
     #print(len(xx), len(yy))
     #quit()
     labda = N / A.mean()
