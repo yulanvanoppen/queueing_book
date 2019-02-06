@@ -465,10 +465,10 @@ First $d_k = \min\{Q_{k-1}, c_k\}$. Then, $Q_k' = Q_{k-1}+a_k-d_k$ is the queue 
       Let's tag the first customer that arrives in period $k$. This
       tagged customer sees $Q_{k-1}$ customers in the system, hence the
       tagged customer's service can only start after all $Q_{k-1}$
-      customers have been served.  Now, if $Q_{k-1}-c_k \geq 0$, there are
+      customers have been served (assuming FIFO scheduling of course).  Now, if $Q_{k-1}-c_k \geq 0$, there are
       still people in front of the tagged customer, either in queue or in service. In fact, as long
       as $c_k+c_{k+1}+\cdots +c_m \leq Q_{k-1}$, there are still customers in
-      front of the tagged customer are still in the system. Therefore, when the tagged customer leaves the system, the inequality $c_k+c_{k+1}+\cdots +c_m > Q_{k-1}$ must hold.
+      front of the tagged customer. Therefore, when the tagged customer leaves the system, the inequality $c_k+c_{k+1}+\cdots +c_m > Q_{k-1}$ must hold.
 
       We can also tag the last customer that arrives in period
       $k$. This customer will certainly have left if $m$ is such that
