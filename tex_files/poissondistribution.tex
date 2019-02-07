@@ -288,7 +288,7 @@ Below, and elsewhere, we use the following efficient notation:  the function $f=
 First,
 \begin{align*}
 \lim_{h\to 0} \frac{c f(h)}{h} &=  c \lim_{h\to 0} \frac{f(h)}{h} = 0, \; \text{as } f = o(h), \\
-\lim_{h\to 0} \frac{f(h) + g(h)} h &= \lim_{h\to 0} \frac{f(h)} h + \lim_h \frac{g(h)} h = 0.
+\lim_{h\to 0} \frac{f(h) + g(h)} h &= \lim_{h\to 0} \frac{f(h)} h + \lim_{h\to 0} \frac{g(h)} h = 0.
 \end{align*}
 Finally, by the Algebraic Limit Theorem,
 \begin{align*}
@@ -322,8 +322,8 @@ Use  the definition of the conditional probability of Exercise~\ref{ex:18}.
 Write $N(s, t]$ for the number of arrivals in the interval $(s,t]$. First we make a few simple observations: $N(t+h]= N(t) + N(t, t+h]$, hence
 \begin{equation*}
   \begin{split}
-  \1{N(t+h)=n, N(t]=n}
-&=  \1{N(t) + N(t, t+h] = n, N(t)=n}  \\
+  \1{N(t+h)=n, N(t)=n}
+&=  \1{N(t) + N(t, t+h] = n, N(t)=n} = \\
 &\1{N(t, t+h] = 0, N(t)=n}.
   \end{split}
 \end{equation*}
@@ -480,7 +480,7 @@ Choose the \emph{sets} $B_i$ as $\{N_\lambda(t) = i\}$. Then, the set $\{N_\lamb
 \begin{equation*}
 \{N_\lambda(t) + N_\mu(t) = n\} =  \cup_{i=0}^n \{N_\lambda(t) = i\}.
 \end{equation*}
-To see this, consider an example. Cats arrive at rate $\lambda$, dogs with rate $\mu$. Suppose that $5$ animals (cats plus dogs) arrived. Then  there are 6 possibilities to form a set with 5 animals in total: 0 cats + 5 dogs, 1 cat + 4 dogs, \ldots, 5 cats + 0 dogs. The right-hand side of the equality decomposes  the fact that $5$ animals arrive into sets in which we know that the number of cats is $0, 1, 2,\ldots, 5$. Also,  if we know the number of cats, we also know the number of dogs, as this is $5$ minus the number of cats. %Hence, the same set is created and the equality holds. 
+To see this, consider an example. Cats arrive at rate $\lambda$, dogs at rate $\mu$. Suppose that $5$ animals (cats plus dogs) arrived. Then  there are 6 possibilities to form a set with 5 animals in total: 0 cats + 5 dogs, 1 cat + 4 dogs, \ldots, 5 cats + 0 dogs. The right-hand side of the equality decomposes  the fact that $5$ animals arrive into sets in which we know that the number of cats is $0, 1, 2,\ldots, 5$. Also,  if we know the number of cats, we also know the number of dogs, as this is $5$ minus the number of cats. %Hence, the same set is created and the equality holds. 
 
 Now that we know how to conveniently split up the set $\{N_\lambda(t) + N_\mu(t) = n\}$,  we can use conditioning: 
   \begin{equation*}
