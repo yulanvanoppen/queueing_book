@@ -25,6 +25,9 @@
 \begin{document}
 \maketitle
 
+\tableofcontents
+
+
 
 \begin{itemize}
 \item You don't have to memorize all formulas in the book, for instance those of the various $M(n)/M(n)/1$ models (e.g., $M/M/1/K$). That is simply too much, hence unreasonable.
@@ -104,8 +107,12 @@
 \input{tex_files/formula_sheet}
 \end{comment}
 
-
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Index}
 \printindex
+
+%\printindex
 % \bibliographystyle{plainnat}
 % \bibliography{biblio_nicky}
 \end{document}
