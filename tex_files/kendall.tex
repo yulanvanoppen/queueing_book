@@ -24,11 +24,19 @@ mutually independent.
 To characterize the type of queueing process it is common to use 
 \recall{Kendall's abbreviation} $A/B/c/K$, where $A$ is the distribution of the
 inter-arrival times, $B$ the distribution of the service times, $c$ the
-number of servers, and $K$ system size, i.e., the total number of customers that can be simultaneously present, whether in queue or in service. In this notation it
-is assumed that jobs are served in first-in-first-out (FIFO) order;
-FIFO scheduling is also often called first-come-first-serve (FCFS). To specify the distributions $A$ and $B$ often two letters are used: $M$ to denote the exponential distribution as it is Memoryless, and $G$ to denote any General distribution. 
+number of servers, and $K$ the system size, i.e., the total number of customers that can be simultaneously present, whether in queue or in service.\footnote{The meaning of $K$ differs among authors. Sometimes it stands for
+  the capacity of the queue, not the entire system. In this book $K$ corresponds to the system's size.}
+In this notation it is assumed that jobs are served in
+first-in-first-out (FIFO) order; FIFO scheduling is also often called
+first-come-first-serve (FCFS). 
 
-In the sequel we will often use Kendall's notation  to distinguish between the different queueing models. Ensure that you familiarize yourself with this notation. Let us therefore illustrate this notation with some exercises. 
+Two inter-arrival and service
+distributions  are the most important in queueing theory: the
+exponential distribution denoted with the shorthand $M$, as it is
+memoryless, and a general distribution (with the implicit assumption
+that it's first moment is finite) denoted with $G$.
+
+Familiarize yourself with this notation as it is used continuously in the rest of the book. Here are some exercises to illustrate the notation.
 
 \begin{exercise}
   What is the meaning of $M/M/1$?
@@ -69,9 +77,6 @@ $M/M/c$: A \recall{multi-server} queue with $c$ servers in which
   and the \recall{system capacity} is $K$ jobs. Thus, the queue can
   contain at most $K-c$ jobs. 
 
-Note, sometimes, the $K$ stands for
-    the capacity in the queue, not the entire system. The notation differs among
-    authors.
   \end{solution}
 \end{exercise}
 
@@ -160,8 +165,7 @@ Look up the relevant
   \begin{solution}
   \begin{itemize}
   \item Advantage: SPTF minimizes the number of jobs in queue. Thus,
-    if you want to keep the shop floor free of jobs (Work In Progress,
-    WIP), then this is certainly a good rule. 
+    if you want to keep the shop floor free of jobs, then this is certainly a good rule. 
   \item Disadvantage: large jobs get near to terrible waiting times,
     and the variance of the waiting time increases. Thus, the $C_s^2$
     is larger than under FIFO. Also, SPTF does not take due-dates into
@@ -186,5 +190,5 @@ Look up the relevant
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../book"
+%%% TeX-master: "../queueing_book"
 %%% End:

@@ -3,7 +3,7 @@
   Processes}
 \label{sec:constr-discr-time}
 
-\subsection*{Theory and Exercises}
+\subsection*{Theory}
 
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
@@ -23,7 +23,7 @@ practical settings, e.g., production environments, it is easier to
 provide data in these terms than in terms of inter-arrival and service
 times. 
 
-Let us define
+Let us define:
 \begin{equation}
   \label{eq:30}
   \begin{split}
@@ -39,9 +39,8 @@ that the arriving jobs arrive either at the start or at the end of the
 period. In the first case, the jobs can be served in period $k$,
 in the latter case, they \emph{cannot} be served in period~$k$.
 
-Note that in this type of queueing system, there is not a job in service, we only count the jobs in the system at the start and end of a period. Thus, the number of jobs in the system and in queue coincide; in this section `queue length' henceforth means the number of jobs in the system.
 
-Since $Q_{k-1}$ is the queue length at the end of period $k-1$, it
+Let  $Q_{k-1}$ be the queue length at the end of period $k-1$, it
 must also be the queue length at the start of period $k$. Assuming
 that jobs arriving in period $k$ cannot be served in period~$k$,
 the number of customers that depart from the queue in period $k$
@@ -58,7 +57,9 @@ $k$ is given by
     Q_k = Q_{k-1} -d_k + a_k.
 \end{equation}
 \end{subequations}
+Like this, if we are given $Q_0$,  we can obtain $Q_1$, and from this  $Q_2$, and so on.
 
+Note that in this type of queueing system there is not a job in service, we only count the jobs in the system at the end of a period. Thus, the number of jobs in the system and in queue coincide; in this section `queue length' henceforth means the number of jobs in the system.
 
 \begin{exercise}
 Suppose that $c_k= 7$ for all $k$, and $a_1=5$, $a_2=4$
@@ -71,7 +72,7 @@ $Q_2=6-6+4=4$, $d_3 = 4$, $Q_3=4-4+9=9$, and so on.
 
 \begin{exercise}
  What is the interpretation of setting
-    $d_k = \min\{Q_{k-1}+a_k,  c_k\}$ rather than the definition~\eqref{eq:d_k}?
+    $d_k = \min\{Q_{k-1}+a_k,  c_k\}$ rather than definition~\eqref{eq:d_k}?
 \begin{solution}
  The assumption is that the jobs arrive at the start of period
     $k$, before service in period $k$ starts, rather than at the end
@@ -95,7 +96,7 @@ $n\gg 1000$, and so on.
 
 \begin{exercise}
   Implement Eqs.~\ref{eq:31} in python and simulate a
-  simple single-server queueing system. Assume that the $a_k \sim P(\lambda)$ with $\lambda=20$, and $c_k =\mu=21$. Make a plot of the queue length process $Q$, and compute the mean and standard variance of $Q$. Compute the fraction of periods in which the queue length exceeds some threshold, 20, say. 
+  simple single-server queueing system. Assume that the $a_k \sim P(20)$, i.e., Poisson distributed with $\lambda=20$, and $c_k =\mu=21$. Make a plot of the queue length process $Q$, and compute the mean and standard variance of $Q$. Compute the fraction of periods in which the queue length exceeds some threshold, 20, say. 
   \begin{solution}
     Below I fix the seed of the random number generator to ensure that
     I always get the same results from the simulator.  The arrival
@@ -237,6 +238,10 @@ Clearly, variability in service capacity does not improve the performance of the
 In later sections we will see why this is so.
   \end{solution}
 \end{exercise}
+
+\subsection*{Case}
+\label{sec:case}
+
 
 
 We now show how to apply~\eqref{eq:30} and~\eqref{eq:31} to a real case. At a mental health department five psychiatrists do intakes of future
@@ -412,6 +417,10 @@ assess the effect of this change.  For instance, if the average
 waiting time is too long, we might add service capacity. With simulation it is easy to study the effect of, hence
 evaluate, such decisions.
 
+\subsection*{Exercises}
+\label{sec:exercises-1}
+
+
 The reader should understand from the above case that, once we have
 the recursions, we can analyze the system and make plots to evaluate
 suggestions for improvement.  Thus, getting the recursions is crucial
@@ -419,7 +428,6 @@ to construct, i.e., model, queueing processes. For this reason, most
 of the exercises below focus on obtaining recursions for many
 different queueing systems. 
 
-\begin{remark}
 A comment is required about the modeling exercises below. It may be
 that the recursions you find are not identical to the recursions in
 the solution; the reason is that the assumptions you make might not be
@@ -432,7 +440,6 @@ long, but this is also undesirable. So, let's be pragmatic: the aim is
 that you practice with modeling, and that you learn from the
 solutions.  If you obtain \emph{reasonable} recursions, but they are
 different from mine, then your answer is just as good.
-\end{remark}
 
 \begin{exercise} (Queue with Blocking) Consider a queueing system
   under daily review, i.e., at the end of the day the queue length is

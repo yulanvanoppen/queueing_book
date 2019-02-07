@@ -8,7 +8,7 @@
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-In the previous section we considered time in discrete `chunks',
+In Section~\ref{sec:constr-discr-time} we considered time in discrete `chunks',
 minutes, hours, days, and so on. For given numbers of arrivals and
 capacity per period we use a set of recursions~\eqref{eq:31} to
 compute the departures and queue length per period. Another way to
@@ -343,23 +343,6 @@ Another set of recursions to compute the arrival and departure times for the sin
       confuse the earliest start $S_k'$ and the service time
       $S_k$---and $D_k = S_k' + S_k$.
     \end{solution}
-\end{exercise}
-
-\begin{exercise}
-  Implement the above recursions in excel or some other computer
-  program such as R, python, or julia, and check the results of the
-  previous exercise.
-    \begin{solution}
-      You can check the files on \pyv{github} in the \pyv{progs}
-      directory.
-\begin{itemize}
-\item \pyv{mm1.py} is the python implementation
-\item \pyv{mm1.R} is the R implementation
-\item \pyv{mm1.jl} is the julia implementation
-\end{itemize}
-Take your pick, and start playing with it. These examples are meant to
-be simple to understand, not necessarily super efficient.
-\end{solution}
 \end{exercise}
 
 Once we have the arrival and departure processes it is easy to compute
@@ -706,75 +689,6 @@ In an attempt to   extend the above to $m>2$ servers, I came up with this scheme
 
 
 
-\begin{exercise} Suppose one server serves two
-  queues, such that jobs in queue A are served with priority over jobs
-  in queue B. Assume that service is not-preemptive.  Can you develop
-  a similar set of recursions for each of the queues, or, otherwise,
-  an algorithm? Can you extend this to cover the LIFO (Last-In-First-Out) queue?
-(This is  a hard problem; only for the interested.)
-  \begin{solution}
-    This question came up in class. I don't think this can be
-    constructed as a straightforward recursion, and a search on the
-    web led to nothing. In case you can find a recursion, please let
-    me know.  
-
-    While a straightforward recursion may not exist, it is not really
-    difficult to code this queueing discipline. The key idea is to put
-    all jobs into one queue, but sort the elements in the queue in
-    order of priority. Every time the server becomes empty, it checks
-    the head of the queue. If the queue is empty, it wait until the
-    next arrival occurs. Otherwise, it starts the service of the first
-    job in line. When a new job arrives, then identify its priority
-    first, and then put it at the end of the jobs of the same
-    priority.
-
-    This type of sorting is known as lexicographic sorting, which is
-    what we do when we build a dictionary. First we sort words in
-    order of first letter, then the second letter, and so on. In case
-    of sorting the queue, we first have to sort in order of priority,
-    then, within the class of jobs with the same priority, sort in
-    ascending order of arrival time.
-
-    The python code is as follows, where I include the FIFO case for
-    comparison. You don't have to memorize the code, but you have to understand it. 
-
-\begin{pyverbatim}
-class Fifo(Queue):
-    def __init__(self):
-        self.queue = SortedSet(key = lambda job: job.arrivalTime)
-
-class Priority(Queue): # a priority queue
-    def __init__(self, numServers = 1):
-        self.queue = SortedSet(key = lambda job: job.p)
-\end{pyverbatim}
-
-Interestingly, once we have a proper environment to carry out
-simulations, changing the queueing discipline is a one-liner!
-
-With the above, an algorithm for the LIFO is
-    straightforward. Rather than sorting the jobs in queue in
-    ascending order of arrival time, just sort them in descending
-    order of arrival time. 
-
-\begin{pyverbatim}
-class Lifo(Queue):
-    def __init__(self):
-        self.queue = SortedSet(key = lambda job: -job.arrivalTime)
-  
-\end{pyverbatim}
-
-Another interesting queueing rule is to sort in increasing job size;
-\begin{pyverbatim}
-  class SPTF(Queue): # shortest processing time first
-    def __init__(self):
-        self.queue = SortedSet(key = lambda job: job.serviceTime)
-  
-\end{pyverbatim}
-
-Do you see how sort in descending order of job size (it just a matter
-of putting a minus sign at the right place)?
-  \end{solution}
-\end{exercise}
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}
@@ -790,5 +704,5 @@ of putting a minus sign at the right place)?
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../book"
+%%% TeX-master: "../queueing_book"
 %%% End:
