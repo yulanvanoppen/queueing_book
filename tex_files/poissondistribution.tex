@@ -283,14 +283,14 @@ For the next couple of exercises, we need the concept of conditional probability
 
 Below, and elsewhere, we use the following efficient notation:  the function $f=o(h)$ means that $f$ is such $f(h)/h \to 0$ as $h\to 0$.  The next exercise helps you practice with this notation.
 \begin{exercise}
-  Let $c$ be a constant (in $\R$) and the functions $f$ and $g$ both of $o(h)$. Then show that $f(h) \to 0$ when $h\to 0$, $c\cdot f = o(h)$, $f+g=o(h)$, and $f\cdot g=o(h)$. 
+  Let $c$ be a constant (in $\R$) and the functions $f$ and $g$ both of $o(h)$. Then show that (1) $f(h) \to 0$ when $h\to 0$, (2) $c\cdot f = o(h)$, (3) $f+g=o(h)$, and (4) $f\cdot g=o(h)$. 
  \begin{solution}
-First,
+In fact (1) is trivial: $|f(h)| \leq |f(h)/h|$ when $|h| < 1$. But it is given that the right hand side goes to zero.  For (2) and (3):
 \begin{align*}
 \lim_{h\to 0} \frac{c f(h)}{h} &=  c \lim_{h\to 0} \frac{f(h)}{h} = 0, \; \text{as } f = o(h), \\
 \lim_{h\to 0} \frac{f(h) + g(h)} h &= \lim_{h\to 0} \frac{f(h)} h + \lim_{h\to 0} \frac{g(h)} h = 0.
 \end{align*}
-Finally, by the Algebraic Limit Theorem,
+For (4), use  the Algebraic Limit Theorem,
 \begin{align*}
 \lim_{h\to 0} \frac{f(h)g(h)}{h} &= \lim_{h\to 0} h \frac{f(h)}{h} \frac{g(h)}{h} \\
 &= \lim_{h\to 0} h \lim_{h\to 0} \frac{f(h)}{h} \lim_{h\to 0} \frac{g(h)}{h} \\
