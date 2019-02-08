@@ -144,7 +144,7 @@ Why do we require that $t < \lambda$ in the definition of $M_X(t)$?
     \end{solution}
   \end{exercise}
 
-\begin{exercise}
+\begin{exercise}\label{ex:21}
     Use the moment generating function to show that 
     \begin{align*}
       \E{X} &=\frac1\lambda, & 
@@ -152,17 +152,17 @@ Why do we require that $t < \lambda$ in the definition of $M_X(t)$?
     \end{align*}
 \begin{hint}
     \begin{align*}
-      \E{X} &= M_X'(0) &  \E{X^2} &= M_X''(0).
+      \E{X} &= M_X'(0), &  \E{X^2} &= M_X''(0).
     \end{align*}
-where $M'(t) = \frac{\d}{\d t} M(t)$. 
+where $M_X'(t) = \frac{\d}{\d t} M_X(t)$. 
 \end{hint}
-\begin{solution}
-  $\E X = M_X'(t)=\lambda/(\lambda-t)^2$. Hence, $M_X'(0)=1/\lambda$. And, $\E{X^2} = M_X''(t)=2\lambda/(\lambda-t)^3$, hence $\E{X^2}=M_X''(0)=2\lambda/\lambda^3=2\lambda^{-2}$. 
+\begin{solution} By Ex.~\ref{ex:33}, 
+  $ M_X'(t)=\lambda/(\lambda-t)^2$. Hence, $M_X'(0)=1/\lambda$. And, $M_X''(t)=2\lambda/(\lambda-t)^3$, hence $\E{X^2}=M_X''(0)=2\lambda/\lambda^3=2\lambda^{-2}$. 
 \end{solution}
   \end{exercise}
 
 \begin{exercise}
-  Prove that the square coefficient of variation (SCV) of $X$ is $C^2 =1$.  
+Use~\eqref{eq:62} to   prove that the square coefficient of variation (SCV) of $X$ is $C^2 =1$.  
 \begin{solution}
   By the previous problems, $\V X = 1/\lambda^2$ and $\E X=1/\lambda$.
 \end{solution}
