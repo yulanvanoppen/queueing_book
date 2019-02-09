@@ -483,10 +483,10 @@ is  the density of $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$.
     and $i-1$, and $M_X(t)$ the associated moment generating
     function. Using the i.i.d. property of the $\{X_i\}$,
 \begin{align*}
-  M_{A_i}(t) &= \E{e^{t A_i}} = \E{\exp\left(t\sum_{j=1}^{i} X_j\right)} \\
-& = \prod_{j=1}^{i} \E{e^{tX_j}} = 
-\prod_{j=1}^{i} M_{X_j}(t) = 
-\prod_{j=1}^{i} \frac{\lambda}{\lambda -t }
+  M_{A_i}(t) &= \E{e^{t A_i}} = \E{\exp\left(t\sum_{k=1}^{i} X_k\right)} \\
+& = \prod_{k=1}^{i} \E{e^{tX_k}} = 
+\prod_{k=1}^{i} M_{X_k}(t) = 
+\prod_{k=1}^{i} \frac{\lambda}{\lambda -t }
  = \left(\frac{\lambda}{\lambda -t }\right)^i.
 \end{align*}
 From a table of moment generating functions it follows immediately that
