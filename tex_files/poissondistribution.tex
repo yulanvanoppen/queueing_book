@@ -503,7 +503,7 @@ With this,
   Now with the moment generating functions of $N_\lambda(t)$ and $N_\mu(t)$, and using that by the independence of $N_\lambda(t)$ and $N_\mu(t)$, the moment generating function of $N_\lambda + N_\mu$ is the product of the moment generating functions of $N_\lambda$ and $N_\mu$,
 \begin{align*}
 M_{N_\lambda(t)+N_\mu(t)}(s) 
-&= M_{N_\lambda(t)}(s) M_{N_\mu(t)}(s) \\
+&= M_{N_\lambda(t)}(s) M_{N_{\mu}(t)}(s) \\
 &=\exp(\lambda t (e^s -1)) \exp(\mu t(e^s-1)) \\
 &= \exp((\lambda + \mu)t (e^s-1)).
 \end{align*}
@@ -601,8 +601,8 @@ Show that the Poisson process obtained by thinning the original
 There are (at least) two ways to get this result. 
 
 Method 1:  Condition on the total number of arrivals $N(t)=n$ up to time
-      $t$. Then, realize that the probability that a job is of type 1 is $p$. Hence when you consider $n$ jobs in
-      total, the number $N_1(t)$ of type 1 jobs is binomially distributed. Thus, given that $n$ jobs arrived, the probability of $k$ `successes' (i.e., arrivals of type 1), is 
+      $t$. Then, realize that the probability that a person is of type 1 is $p$. Hence when you consider $n$ people in
+      total, the number $N_1(t)$ of type 1 people is binomially distributed. Thus, given that $n$ people arrived, the probability of $k$ `successes' (i.e., arrivals of type 1), is 
       \begin{equation*}
         \P{N_1=k \given N = n} = {n \choose k} p^k (1-p)^{n-k}.
       \end{equation*}
