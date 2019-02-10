@@ -301,22 +301,17 @@ For (4), use  the Algebraic Limit Theorem,
 
 
 \begin{exercise}
-  Show that if $N(t) \sim P(\lambda t)$, we have for small $h$,
+  Show that if $N(t) \sim P(\lambda t)$, we have for $0<h\ll 1$,
   \begin{equation*}
 \P{N(t+h) = n \given N(t) = n} = 1-\lambda h + o(h).
   \end{equation*}
     \begin{hint}
 Use  the definition of the conditional probability of Exercise~\ref{ex:18}. 
 
-    Think about the meaning of the formula
-      $\P{N(t+h) = n \given N(t) = n}$. It is a conditional probability
-      that should be read like this: given that up to time $t$ we have
-      seen $n$ arrivals (i.e., $N(t)=n$), what is the probability that
-      just a little later (at $t+h$) the number of arrivals is still $n$,
-      i.e., $N(t+h)=n$? Then use the definition of the Poisson
-      distribution to compute this probability. Finally, use Taylor's
-      expansion of $e^{x}$ to see that $e^{x} = 1 +x + o(x)$ for
-      $|x| \ll 1$.  
+Think about the meaning of the formula $\P{N(t+h) = n \given N(t) = n}$.
+It is a conditional probability that should be read like this: given that up to time $t$ we have seen $n$ arrivals (i.e., $N(t)=n$), what is the probability that just a little later (at $t+h$) the number of arrivals is still $n$, i.e., $N(t+h)=n$?
+Then use the definition of the Poisson distribution to compute this probability.
+Finally, use Taylor's expansion of $e^{x}$ to see that $e^{x} = 1 +x + o(x)$ for $|x| \ll 1$.
     \end{hint}
 \begin{solution}
 Write $N(s, t]$ for the number of arrivals in the interval $(s,t]$. First we make a few simple observations: $N(t+h]= N(t) + N(t, t+h]$, hence
