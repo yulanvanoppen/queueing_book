@@ -96,7 +96,7 @@ $\V X = \lambda^{-2}$.
   \end{equation*}
   \end{hint}
   \begin{solution}
-    By the previous problems, $\E{X^2}=2/\lambda^2$ and $\E X = 1/\lambda$. 
+    By the previous problems, $\E{X^2}=2/\lambda^2$ and $\E X = 1/\lambda$. Hence the variance $\V X = \E X^2 - (\E X)^2 = \frac{2}{\lambda^2} - (\frac{1}{\lambda})^2 = \lambda^{-2}.$
   \end{solution}
 \end{exercise}
 
@@ -144,7 +144,7 @@ Why do we require that $t < \lambda$ in the definition of $M_X(t)$?
     \end{solution}
   \end{exercise}
 
-\begin{exercise}
+\begin{exercise}\label{ex:21}
     Use the moment generating function to show that 
     \begin{align*}
       \E{X} &=\frac1\lambda, & 
@@ -152,17 +152,17 @@ Why do we require that $t < \lambda$ in the definition of $M_X(t)$?
     \end{align*}
 \begin{hint}
     \begin{align*}
-      \E{X} &= M_X'(0) &  \E{X^2} &= M_X''(0),
+      \E{X} &= M_X'(0), &  \E{X^2} &= M_X''(0),
     \end{align*}
-where $M'(t) = \frac{\d}{\d t} M(t)$. 
+where $M_X'(t) = \frac{\d}{\d t} M_X(t)$. 
 \end{hint}
-\begin{solution}
-  $\E X = M_X'(0)=\lambda/(\lambda-t)^2$. Hence, $M_X'(0)=1/\lambda$. And, $\E{X^2} = M_X''(t)=2\lambda/(\lambda-t)^3$, hence $\E{X^2}=M_X''(0)=2\lambda/\lambda^3=2\lambda^{-2}$. 
+\begin{solution} By Ex.~\ref{ex:33}, 
+  $ M_X'(t)=\lambda/(\lambda-t)^2$. Hence, $M_X'(0)=1/\lambda$. And, $M_X''(t)=2\lambda/(\lambda-t)^3$, hence $\E{X^2}=M_X''(0)=2\lambda/\lambda^3=2\lambda^{-2}$. 
 \end{solution}
   \end{exercise}
 
 \begin{exercise}
-  Prove that the square coefficient of variation (SCV) of $X$ is $C^2 =1$.  
+Use~\eqref{eq:62} to   prove that the square coefficient of variation (SCV) of $X$ is $C^2 =1$.  
 \begin{solution}
   By the previous problems, $\V X = 1/\lambda^2$ and $\E X=1/\lambda$.
 \end{solution}
@@ -374,8 +374,8 @@ With this,
 &= \lambda \mu \int_0^\infty e^{-\mu y} \int_0^y e^{-\lambda x}\, \d x \, \d y \\
 &= \mu \int_0^\infty e^{-\mu y} (1-e^{-\lambda y})\,\d y\\
 &= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
-&= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
 &= 1 - \frac{\mu}{\lambda + \mu} 
+&= \frac{\lambda}{\lambda + \mu}
 \end{align*}
 
 Method 2. You only have to study this if you (want to) know about conditioning with respect to a random variable with a density, otherwise, skip it.  Start with  the law of total probability in the discrete case: 
@@ -483,10 +483,10 @@ is  the density of $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$.
     and $i-1$, and $M_X(t)$ the associated moment generating
     function. Using the i.i.d. property of the $\{X_i\}$,
 \begin{align*}
-  M_{A_i}(t) &= \E{e^{t A_i}} = \E{\exp\left(t\sum_{j=1}^{i} X_j\right)} \\
-& = \prod_{j=1}^{i} \E{e^{tX_j}} = 
-\prod_{j=1}^{i} M_{X_j}(t) = 
-\prod_{j=1}^{i} \frac{\lambda}{\lambda -t }
+  M_{A_i}(t) &= \E{e^{t A_i}} = \E{\exp\left(t\sum_{k=1}^{i} X_k\right)} \\
+& = \prod_{k=1}^{i} \E{e^{tX_k}} = 
+\prod_{k=1}^{i} M_{X_k}(t) = 
+\prod_{k=1}^{i} \frac{\lambda}{\lambda -t }
  = \left(\frac{\lambda}{\lambda -t }\right)^i.
 \end{align*}
 From a table of moment generating functions it follows immediately that
@@ -673,7 +673,7 @@ If you fill this in at Wolfram, you'll get the results that we obtained above in
 \begin{exercise}
   A machine serves two types of jobs. The processing time of jobs of
   type $i$, $i=1,2$, is exponentially distributed with parameter
-  $\mu_i$. The type $T$ of job is random and independent of anything
+  $\mu_i$. The type $T$ of a job is random and independent of anything
   else, and such that $\P{T=1} = p = 1-q = 1-\P{T=2}$. (An example
   is a desk serving men and women, both requiring different average
   service times, and $p$ is the probability that the customer in
@@ -782,7 +782,7 @@ Observe first that $\sum_{k=0}^\infty \1{m>k} = m$, since $\1{m>k}=1$ if $k<m$ a
 = \sum_{k=0}^\infty \sum_{m=k+1}^\infty \P{B=m}  \\
 & = \sum_{k=0}^\infty \sum_{m=0}^\infty 1\{m>k\} \P{B=m} 
 = \sum_{m=0}^\infty \sum_{k=0}^\infty 1 \{m>k\} \P{B=m} \\
-&= \sum_{m=0}^\infty m\P{B=k} = \E B.
+&= \sum_{m=0}^\infty m\P{B=m} = \E B.
 \end{align*}
 In case you are interested in mathematical justifications: the
 interchange of the two summations is allowed by Tonelli's theorem because the summands are
@@ -823,13 +823,13 @@ for the expectation of $S$. Here $\d F(x)$ acts as a shorthand for $f(x) \d x$. 
 $   \E S = \int_0^\infty x \d F(x)  = \int_0^\infty G(y) \d y,$
 where $G(x) = 1 - F(x)$. 
 \begin{hint}
-$\E S = \int_0^\infty x \d F  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d F(x)$.
+$\E S = \int_0^\infty x \d F(x)  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d F(x)$.
 \end{hint}
 \begin{solution}
 \begin{equation*}
   \begin{split}
-    \E{S} &= \int_0^\infty x \d F  = \int_0^\infty \int_0^x \d y \d F(x) \\
-    & = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d F(x)   = \int_0^\infty \int_0^\infty 1_{y\leq x} \d F(x) \d y\\
+    \E{S} &= \int_0^\infty x \d F(x)  = \int_0^\infty \int_0^x \d y \d F(x) \\
+    & = \int_0^\infty \int_0^\infty \1{y\leq x} \d y \d F(x)   = \int_0^\infty \int_0^\infty \1{y\leq x} \d F(x) \d y\\
     & = \int_0^\infty \int_y^\infty \d F(x) \d y = \int_0^\infty G(y) \d y.
   \end{split}
 \end{equation*}
