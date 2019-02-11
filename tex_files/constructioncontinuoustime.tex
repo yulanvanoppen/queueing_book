@@ -80,15 +80,16 @@ memorize it may be helpful to write it like this:
   \end{solution}
 \end{exercise}
 
-\begin{exercise}
-  Would it make sense to define $A(t)$ as $\inf\{k : A_k \geq t\}$?
+\begin{exercise}\label{ex:22}
+  In view of the above, can  $A(t)$ be defined as $\min\{k : A_k \geq t\}$ or as $\min\{k: A_k > t\}$?
   \begin{hint}
 Compare this to the definition in (\ref{eq:2}).
   \end{hint}
   \begin{solution}
     Suppose $A_3 = 10$ and $A_4 = 20$. Take $t=15$. Then
     $\min\{k : A_k \geq 15\} = 4$ since $A_3 < t=15 < A_4$. On the
-    other hand $\max\{k : A_k \leq t\} = 3$. And, indeed, at time $t=15$, 3 jobs arrived, not 4. So defining $A(t)$ as $\min\{k : A_k \geq t\}$ is not OK. 
+    other hand $\max\{k : A_k \leq t\} = 3$. And, indeed, at time $t=15$, 3 jobs arrived, not 4. So defining $A(t)$ as $\min\{k : A_k \geq t\}$ is not OK.  This example also shows that in general $A(t) \neq \min\{k : A_k > t\}$. So, neither definition is correct. 
+
   \end{solution}
 \end{exercise}
 
@@ -210,7 +211,7 @@ A bit of similar reasoning gives another recursion for~$W_k$:
   W_{Q,k} &= [W_{k-1} - X_k]^+, &
   W_{k} &= W_{Q,k} + S_k = [W_{k-1} - X_k]^+ + S_k,
 \end{align}
-from which follows a recursion for $D_k$
+from which follows a recursion for $D_k$:
 \begin{equation}
   D_k = A_k + W_k.
 \end{equation}
