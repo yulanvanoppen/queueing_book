@@ -614,7 +614,7 @@ Method 1:  Condition on the total number of arrivals $N(t)=n$ up to time
     \end{equation*}
 Now choose practical sets $B_i$ and use $\sum_{k=0}^{\infty} \frac{x^k}{k!} = e^x$. 
 
-Method 2: Dropping the dependence of $N$ on $t$ for the moment, you might also consider the random variable 
+Method 2: Dropping the dependence of $N$ on $t$ for the moment for notational convenience, you might also consider the random variable 
   \begin{equation*}
     Y = \sum_{i=1}^N Z_i,
   \end{equation*}
@@ -623,7 +623,7 @@ Method 2: Dropping the dependence of $N$ on $t$ for the moment, you might also c
   function of a Poisson random variable with parameter $\lambda p$.
   \end{hint}
     \begin{solution}
-Method 1: Suppose that  $N_1$ is the  thinned stream, and $N$ the total stream. Then, dropping the dependence on $t$ for the moment,
+Method 1: Suppose that  $N_1$ is the  thinned stream, and $N$ the total stream. Then, 
 \begin{align*}
     \P{N_1 = k}
 &= \sum_{n=k}^\infty \P{N_1 =k, N = n} 
@@ -636,26 +636,33 @@ Method 1: Suppose that  $N_1$ is the  thinned stream, and $N$ the total stream. 
 = e^{-\lambda} \frac{(\lambda p)^k}{k!} e^{\lambda(1-p)} \\
 &= e^{-\lambda p} \frac{(\lambda p)^k}{k!}.
 \end{align*}
-We see that the thinned stream is Poisson with parameter $\lambda p$. (For notational ease, we left out the $t$, otherwise it is $P(\lambda t p)$.) 
+We see that the thinned stream is Poisson with parameter $\lambda p$. If we introduce the $t$ again, we obtain $P(\lambda t p)$.
 
 Method 2: Now consider $Y=\sum_{i=1}^N Z_i$. Suppose that $N=n$, so that $n$
-arrivals occurred. Then we throw $n$ coins with success probability
+arrivals occurred. Then we throw $n$ independent coins with success probability
 $p$. It is clear that $Y$ is indeed a thinned Poisson random variable.
 
-To obtain the distribution of $Y$, model the coin as a generic Bernoulli distributed random variable
+Model the coins as a generic Bernoulli distributed random variable
 $Z$.  We first need
 \begin{equation*}
   \E{e^{s Z}} = e^0 \P{Z=0} + e^{s} \P{Z=1} = (1-p) + e^s p.
 \end{equation*}
-Suppose that $N=n$, then since the $Z_i$ are i.i.d.,
+Suppose that $N=n$, then since the outcomes $Z_i$ of the coins are i.i.d.,
 \begin{equation*}
-\E{e^{s\sum_{i=1}^n Z_i}} = \left(\E{e^{s Z}}\right)^n = \left(1 + p (e^s - 1)\right)^n.
+\E{e^{s\sum_{i=1}^n Z_i}} = \left(\E{e^{s Z}}\right)^n = \left(1 + p (e^s - 1)\right)^n,
 \end{equation*}
-Then, using conditioning on $N$, 
+where we again use that the moment generating function of the sum of independent random variables is the product of the moment generating functions.
+
+Now for a random variable $X\in N$ observe that $X=\sum_{n=0}^\infty X\1{X=n} = \sum_{n=0}^\infty n \1{X=n}$. To see this, note first that $X\1{X=n} = n\1{X=n}$ because $X=n$ when $\1{X=n} =1$, and second that $\sum_{n=0}^\infty \1{X=n} =1$, since $X$ takes one of the values in $\N$, and events $\{X=n\}$ and $\{X=m\}$ are non-overlapping when $n\neq m$. 
+
+With this idea, 
 \begin{align*}
   \E{e^{s Y}}
-&= \E{\E{e^{s\sum_{i=1}^n Z_i} \given N=n }} 
- = \E{\E{\left(1+p(e^s-1)\right)^n \given N=n }} \\
+&= \E{\sum_{n=0}^\infty e^{s\sum_{i=1}^N Z_i} \1{N=n}} \\
+&= \E{\sum_{n=0}^\infty e^{s\sum_{i=1}^n Z_i} \1{N=n}} \\
+&= \sum_{n=0}^\infty \E{e^{s\sum_{i=1}^n Z_i} \1{N=n}} \\
+&= \sum_{n=0}^\infty \E{e^{s\sum_{i=1}^n Z_i}} \E{\1{N=n}}, \text{ by independence of $Z_i$ and $N$}, \\
+&= \sum_{n=0}^\infty \left(1+p(e^s-1)\right)^n \P{N=n} \\
 &= \sum_{n=0}^\infty \left(1+p(e^s-1)\right)^n e^{-\lambda} \frac{\lambda^n}{n!}
 = e^{-\lambda} \sum_{n=0}^\infty \frac{\left(1+p(e^s-1)\right)^n \lambda^n}{n!}\\
 &= e^{-\lambda} \exp(\lambda (1+p(e^s-1))) = \exp(\lambda p (e^s - 1)).
