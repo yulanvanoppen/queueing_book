@@ -196,7 +196,7 @@ Q.std()
 
 
 I multiply with 100 to get a percentage. Clearly, many jobs see a long
-queue, the mean is already some 24 jobs. For this arrival rate a
+queue, the mean is already some 28 jobs. For this arrival rate a
 service capacity of $\mu=21$ is certainly too small. 
 
 
@@ -568,7 +568,7 @@ There are of course many different policies to
   per job in the system. Make a cost model to analyze the long-run
   average cost for this case.
   \begin{solution}
-First consider the dynamics of the queue. Since the capacity is chosen at the start of the period:
+First consider the dynamics of the queue. Since the capacity is chosen at the start of the period (the machine is switched on for $c_k$ units even if there is less demand):
 \begin{align*}
   d_k &= \min\{Q_{k-1}+a_k, c_k\} \\
 Q_k &= Q_{k-1}+a_k - d_k.
@@ -666,10 +666,10 @@ and likewise for the other queue.
 
   \begin{exercise} (Priority queuing) Another interesting situation is
     a system with two queues served by one server, but such that one
-    queue, queue $A$ gets priority over the other
+    queue, queue $A$, gets priority over the other
     queue. Again find a set of recursions to describe this case.
     \begin{solution}
-      The rules below implement a strict priority rule for jobs type
+      The rules below implement a strict priority rule for jobs of type
       A, i.e., jobs sent into queue A.
 \begin{equation*}
   \begin{split}
@@ -724,8 +724,8 @@ d_{k,B} &= \min\{Q_{k-1, B}, c_k-d_{k,A}\}.
     instance, each week the psychiatrist does at most five intakes of
     new patients, provided there are any, and the rest of the capacity
     is used to treat other patients. The existing patients can also be
-    divided in different groups, each receiving a minimal capacity. It
-    there less patients of some group, then the capacity can be
+    divided in different groups, each receiving a minimal capacity. If
+    there are less patients of some group, then the capacity can be
     planned/given to other patient groups. 
   \end{solution}
 \end{exercise}
