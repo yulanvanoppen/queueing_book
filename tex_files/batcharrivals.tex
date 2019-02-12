@@ -367,7 +367,7 @@ Since $G(i) =0$ for $i\geq 3$ we rewrite this to
 \end{equation*}
 where $l=3$. 
 
-In python this reads:
+In Python this reads:
 
 \begin{pyverbatim}
 p[n] = labda / mu * sum(p[n - 1 - i] * G[i] for i in range(min(n, l)))
