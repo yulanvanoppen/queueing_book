@@ -375,7 +375,7 @@ With this,
 &= \mu \int_0^\infty e^{-\mu y} (1-e^{-\lambda y})\,\d y\\
 &= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
 &= 1 - \frac{\mu}{\lambda + \mu} 
-&= \frac{\lambda}{\lambda + \mu}
+&= \frac{\lambda}{\lambda + \mu}.
 \end{align*}
 
 Method 2. You only have to study this if you (want to) know about conditioning with respect to a random variable with a density, otherwise, skip it.  Start with  the law of total probability in the discrete case: 
@@ -408,7 +408,7 @@ where, as before, $f_{X, S}( x, s)$ is the joint density of $X$ and $S$. With th
 \end{equation*}
 Using the definition of $f_{X|S}(x|s)$ and the independence of $X$ and $S$ it follows that
 \begin{equation*}
-  f_{X|S}(x|s) = \frac{f_{X, S}( x, s)}{f_S(s)} = \frac{\lambda e^{-\lambda x} \mu e^{-\mu s}}{\mu e^{-\mu s}} = \lambda e^{-\lambda x}
+  f_{X|S}(x|s) = \frac{f_{X, S}( x, s)}{f_S(s)} = \frac{\lambda e^{-\lambda x} \mu e^{-\mu s}}{\mu e^{-\mu s}} = \lambda e^{-\lambda x},
 \end{equation*}
 from which we get that 
 \begin{align*}
