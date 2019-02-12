@@ -91,7 +91,7 @@ Compare this to the definition in (\ref{eq:2}).
 
 To compute the departure times $\{D_k\}$ we proceed in stages.
 The first stage is to construct the \recall{waiting time in queue} $\{W_{Q,k}\}$ as seen by the arrivals.
-In Observe in Figure~\ref{fig:waitingtimegg1} that the waiting time of the $k$th arrival must be equal to the waiting time of the $k-1$th customer plus the amount of \recall{service time} required by job $k-1$ minus the time that elapses between the arrival of job $k-1$ and job $k$, unless the server becomes idle between jobs $k-1$ and $k$.
+Observe in Figure~\ref{fig:waitingtimegg1} that the waiting time of the $k$th arrival must be equal to the waiting time of the $k-1$th customer plus the amount of \recall{service time} required by job $k-1$ minus the time that elapses between the arrival of job $k-1$ and job $k$, unless the server becomes idle between jobs $k-1$ and $k$.
 In other words,
 \begin{equation}\label{eq:56}
   W_{Q,k} = [W_{Q,k-1} + S_{k-1}-X_k]^+,
