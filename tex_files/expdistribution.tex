@@ -19,7 +19,7 @@ an \recall{exponentially distributed} random variable, i.e.,
 \begin{equation*}
   \P{X \leq t} = 1- e^{-\lambda t}.
 \end{equation*}
-In the sequel we often write $X\sim \exp(\lambda)$ to mean that~$X$ is
+In the sequel we often write $X\sim \Exp(\lambda)$ to mean that~$X$ is
 exponentially distributed with rate~$\lambda$.  Recall that the
 constant $\lambda$ is called the \recall{arrival rate}.
 
@@ -44,7 +44,7 @@ Suppose $\lambda=0$. Then $\P{X\leq t} = 1-e^{0} = 0$. In words, this would mean
 \end{exercise}
 
 \begin{exercise} \label{exer:lambda}
-  If the random variable $X\sim\exp(\lambda)$, show that its mean $\E X = \frac{1}\lambda$. Interpret this result.
+  If the random variable $X\sim\Exp(\lambda)$, show that its mean $\E X = \frac{1}\lambda$. Interpret this result.
   \begin{hint}
  \begin{equation*}
     \E X = \int_0^\infty t f(t)\, \d t =
@@ -67,7 +67,7 @@ For the interpretation, if jobs arrive at rate $\lambda$, the average time betwe
 
 
 \begin{exercise}\label{ex:15} 
-  If $X\sim\exp(\lambda)$, show that its second moment $\E{X^2} =  \frac{2}{\lambda^2}$.
+  If $X\sim\Exp(\lambda)$, show that its second moment $\E{X^2} =  \frac{2}{\lambda^2}$.
   \begin{hint}
   \begin{equation*}
   \E{X^2}= \int_0^\infty t^2 \lambda e^{-\lambda t}\, \d t =  \frac{2}{\lambda^2}.
@@ -88,7 +88,7 @@ For the interpretation, if jobs arrive at rate $\lambda$, the average time betwe
 
 
 \begin{exercise} 
-  If $X\sim\exp(\lambda)$, show that the \recall{variance}
+  If $X\sim\Exp(\lambda)$, show that the \recall{variance}
 $\V X = \lambda^{-2}$.
   \begin{hint} Use, and memorize, the very practical formula
   \begin{equation*}
@@ -315,10 +315,10 @@ e.g. \citet[Appendix 3]{yushkevich69:_markov_proces}.
 
 
 \begin{exercise}\label{ex:10}
-  If $X\sim\exp(\lambda)$ and $S\sim\exp(\mu)$, and $X$ and $S$ are
+  If $X\sim\Exp(\lambda)$ and $S\sim\Exp(\mu)$, and $X$ and $S$ are
   independent, show that 
   \begin{equation*}
-Z=\min\{X,S\}\sim\exp(\lambda+\mu),
+Z=\min\{X,S\}\sim\Exp(\lambda+\mu),
   \end{equation*}
 hence $\E Z = (\lambda+\mu)^{-1}$.
 \begin{hint}
@@ -338,7 +338,7 @@ Use that $X$ and $S$ are independent to get
 \end{exercise}
 
 \begin{exercise}\label{ex:3}
-   If $X\sim \exp(\lambda)$, $S\sim\exp(\mu)$, and $X$ and $S$ are independent, show that 
+   If $X\sim \Exp(\lambda)$, $S\sim\Exp(\mu)$, and $X$ and $S$ are independent, show that 
     \begin{equation*}
       \P{X\leq S} = \frac{\lambda}{\lambda+\mu}.
     \end{equation*}
@@ -427,7 +427,7 @@ Straightforward integration gives the final result.
 
 The Poisson process $N$ and exponentially distributed inter-arrival times are intimately related: A counting process $\{N(t)\}$ is a \recall{Poisson process} with rate $\lambda$ if and only if  the inter-arrival times $\{X_i\}$ are i.i.d. and exponentially distributed with mean $1/\lambda$,  in short, 
 \begin{equation*}
-X_i\sim \exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t).
+X_i\sim \Exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t).
 \end{equation*}
 
 
@@ -435,7 +435,7 @@ We next provide further relations between the Poisson distribution and the expon
 
   \begin{exercise}
     Assume that the inter-arrival times $\{X_i\}$ are i.i.d. and
-    $X_i\sim\exp(\lambda)$. Let
+    $X_i\sim\Exp(\lambda)$. Let
     $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$. Show that %We do not need the MGF here.
  \begin{equation*}
 \E{A_i} = \frac i\lambda,
