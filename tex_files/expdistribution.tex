@@ -367,7 +367,7 @@ With this,
 &= \lambda \mu \int_0^\infty e^{-\mu y} \int_0^y e^{-\lambda x}\, \d x \, \d y \\
 &= \mu \int_0^\infty e^{-\mu y} (1-e^{-\lambda y})\,\d y\\
 &= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
-&= 1 - \frac{\mu}{\lambda + \mu} 
+&= 1 - \frac{\mu}{\lambda + \mu} \\
 &= \frac{\lambda}{\lambda + \mu}.
 \end{align*}
 
@@ -685,7 +685,7 @@ service times of jobs.
     \begin{equation*}
       X = \1{T=1} X_1 + \1{T=2} X_2,
     \end{equation*}
-    where $\1{}$ is the indicator function, that is, $\1{A}=1$ if the
+    where $\1{\cdot}$ is the indicator function, that is, $\1{A}=1$ if the
     event $A$ is true, and $\1{A}=0$ if $A$ is not true.   
 \end{hint}
   \begin{solution}
@@ -765,7 +765,7 @@ Write
 $\sum_{k=0}^\infty G(k) = \sum_{k=0}^\infty \sum_{m=k+1}^\infty \P{B=m}$, reverse the summations. Then realize that $\sum_{k=0}^\infty \1{k<m} = m$. 
 You should be aware that this sort of problem is just a regular probability
   theory problem, nothing fancy. We use/adapt the tools you learned in
-  calculus to carry out 2D integrals (or in this case 2D summations.)
+  calculus to carry out 2D integrals (or in this case 2D summations).
     \end{hint}
 \begin{solution}
 Observe first that $\sum_{k=0}^\infty \1{m>k} = m$, since $\1{m>k}=1$ if $k<m$ and $\1{m>k} = 0$ if $k\geq m$. With this, 

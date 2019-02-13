@@ -46,8 +46,8 @@ turn, construct the arrival process $\{A(t)\}$ as
 \begin{equation}
   A(t) = \sum_{k=1}^\infty \1{A_k \leq t},
 \end{equation}
-where $\1{}$ is the indicator function. Thus, in the above we count
-all arrivals that occur up to time~$t$. Another, equivalent, way to
+where $\1{\cdot}$ is the indicator function. Thus, in the above we count
+all arrivals that occur up to and including time~$t$. Another, equivalent, way to
 define $A(t)$ is
 \begin{equation}
   A(t) = \sup\{k: A_k \leq t\}.
@@ -188,7 +188,7 @@ the job leaves the system. Hence, the \recall{departure time of the
   D_k = \tilde A_{k} + S_k.
 \end{equation*}
 
-The \recall{sojourn time}, or \emph{waiting time in the system}, is the
+The \recall{sojourn time}, or \emph{waiting time in the system}, $W_k$, is the
 time a job spends in the entire system. With the above relations we
 see that
 \begin{equation}
@@ -240,6 +240,12 @@ for i in range(1, len(X)):
     WQ[i] = max(WQ[i-1] + S[i-1] - X[i], 0)
 
 WQ
+
+ST = [0,0,0,0]
+for i in range(1, len(X)):
+    ST[i] = WQ[i] + S[i]
+
+ST
 
 D = [0, 0, 0, 0]
 for i in range(1, len(X)):
