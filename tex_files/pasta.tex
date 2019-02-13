@@ -449,7 +449,7 @@ if the server is idle after $D_{n-1}$.
       same as the density of $X_n + S_n$.  Since $\{X_n\}$ and $\{S_n\}$ are both i.i.d. sequences, the problem becomes to find the density of $X+S$.  We will use two ways of computing this. 
 
 \newpage
-Since $X\sim \exp(\lambda)$ and $S\sim\exp(\mu)$, and $X$ and $S$ are independent, their joint density is $f_{X,S}(x,y) = \lambda \mu e^{-\lambda x - \mu y}$. With this,
+Since $X\sim \Exp(\lambda)$ and $S\sim\Exp(\mu)$, and $X$ and $S$ are independent, their joint density is $f_{X,S}(x,y) = \lambda \mu e^{-\lambda x - \mu y}$. With this,
   \begin{align*}
 \P{X+S\leq t } 
 &= \lambda \mu \int_0^\infty \int_0^\infty e^{-\lambda x - \mu y} \1{x+y\leq t} \d x \d y \\
