@@ -561,7 +561,7 @@ Can you derive the following (algorithmic efficient) procedure to
     L(A_k-) = L(A_{k-1}-) + 1 - \sum_{i= k-1 - L(A_{k-1}-)}^{k-1} \1{D_i< A_k}.
   \end{equation*}
 
-    Suppose $L_{k-1}=0$, i.e., job $k-1$ finds an empty system at its
+    Suppose $L(A_{k-1})=0$, i.e., job $k-1$ finds an empty system at its
     arrival and $D_{k-1}>A_{k}$, i.e., job $k-1$ is still in the
     system when job $k$ arrives. In this case, $L(A_{k}-)=1$, which checks
     with the formula.  Also, if $L(A_{k-1}-)=0$ and $D_{k-1}< A_k$ then
