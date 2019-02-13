@@ -241,6 +241,12 @@ for i in range(1, len(X)):
 
 WQ
 
+ST = [0,0,0,0]
+for i in range(1, len(X)):
+    ST[i] = WQ[i] + S[i]
+
+ST
+
 D = [0, 0, 0, 0]
 for i in range(1, len(X)):
     D[i] = A[i] + WQ[i] + S[i]
