@@ -140,15 +140,15 @@ Apply the definition of the expectation, and in the computations use that
   \end{hint}
   \begin{solution} 
     When a random variable~$N$ is Poisson distributed with parameter
-    $\lambda$,
+    $\lambda t$,
     \begin{align*}
       \E N 
-&= \sum_{n=0}^\infty n e^{-\lambda}\frac{\lambda^n}{n!}  \\
-&= \sum_{n=1}^\infty n e^{-\lambda}\frac{\lambda^n}{n!}, \text{ since the term with $n=0$ cannot contribute} \\
-&= e^{-\lambda} \lambda \sum_{n=1}^\infty \frac{\lambda^{n-1}}{(n-1)!} \\
-&= e^{-\lambda} \lambda \sum_{n=0}^\infty \frac{\lambda^{n}}{n!}, \text{ by a change of variable}\\
-&= e^{-\lambda} \lambda e^{\lambda} \\
-&= \lambda.
+&= \sum_{n=0}^\infty n e^{-\lambda t}\frac{(\lambda t)^n}{n!}  \\
+&= \sum_{n=1}^\infty n e^{-\lambda t}\frac{(\lambda t)^n}{n!}, \text{ since the term with $n=0$ cannot contribute} \\
+&= e^{-\lambda t} \lambda t \sum_{n=1}^\infty \frac{(\lambda t)^{n-1}}{(n-1)!} \\
+&= e^{-\lambda t} \lambda t \sum_{n=0}^\infty \frac{(\lambda t)^{n}}{n!}, \text{ by a change of variable}\\
+&= e^{-\lambda t} \lambda t e^{\lambda t} \\
+&= \lambda t.
     \end{align*}
 \end{solution}
 \end{exercise}
@@ -163,14 +163,14 @@ Realize that $\V N = \E{N^2} - (\E N)^2$. Compute $\E{N^2}$, use Exercise~\ref{e
 
     \begin{align*}
       \E{N^2}
-&= \sum_{n=0}^\infty n^2 e^{-\lambda}\frac{\lambda^n}{n!}  \\
-&= e^{-\lambda} \sum_{n=1}^\infty n \frac{\lambda^n}{(n-1)!}  \\
-&= e^{-\lambda} \sum_{n=0}^\infty (n+1) \frac{\lambda^{n+1}}{n!}  \\
-&= e^{-\lambda} \lambda \sum_{n=0}^\infty n \frac{\lambda^{n}}{n!}  +e^{-\lambda}\lambda \sum_{n=0}^\infty\frac{\lambda^{n}}{n!}  \\
+&= \sum_{n=0}^\infty n^2 e^{-\lambda t}\frac{(\lambda t)^n}{n!}  \\
+&= e^{-\lambda t} \sum_{n=1}^\infty n \frac{(\lambda t)^n}{(n-1)!}  \\
+&= e^{-\lambda t} \sum_{n=0}^\infty (n+1) \frac{(\lambda t)^{n+1}}{n!}  \\
+&= e^{-\lambda t} \lambda t \sum_{n=0}^\infty n \frac{(\lambda t)^{n}}{n!}  +e^{-\lambda t}\lambda t \sum_{n=0}^\infty\frac{(\lambda t)^{n}}{n!}  \\
 &\quad\text{now use the hint to simplify the first summation} \\
-&= \lambda^2  + \lambda.
+&= (\lambda t)^2  + \lambda t.
 \end{align*}
-Hence, $\V N = \E{N^2} - (\E N)^2 = \lambda^2 + \lambda - \lambda^2 = \lambda$.
+Hence, $\V N = \E{N^2} - (\E N)^2 = (\lambda t)^2 + \lambda t - (\lambda t)^2 = \lambda t$.
 \end{solution}
 \end{exercise}
 
@@ -676,7 +676,7 @@ $Y\sim P(\lambda p)$.
 
 The concepts of merging and thinning are  useful to analyze queueing
   networks. Suppose the departure stream of a machine splits into
-  two sub-streams, e.g., a fraction $p$ of the jobs moves to on another
+  two sub-streams, e.g., a fraction $p$ of the jobs moves on to another
   machine and the rest ($1-p$) of the jobs leaves the system. Then we
   can model the arrival stream at the second machine as a thinned
   stream (with probability $p$) of the departures of the first
