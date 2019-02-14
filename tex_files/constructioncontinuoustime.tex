@@ -48,9 +48,9 @@ turn, construct the arrival process $\{A(t)\}$ as
 \end{equation}
 where $\1{\cdot}$ is the indicator function. Thus, in the above we count
 all arrivals that occur up to and including time~$t$. Another, equivalent, way to
-define $A(t)$ is
+define $A(t)$ is\footnote{For the mathematically inclined: formally we should use here $\sup$ rather than $\max$. However, in any practical setting such details are irrelevant. Hence we ignore them.}
 \begin{equation}
-  A(t) = \sup\{k: A_k \leq t\}.
+  A(t) = \max\{k: A_k \leq t\}.
 \end{equation}
 \end{subequations}
 
@@ -208,7 +208,7 @@ from which follows a recursion for $D_k$:
 \end{equation}
 This in turn specifies the departure process $\{D(t)\}$ as
 \begin{equation*}
-  D(t) = \sup\{k : D_k \leq t\} = \sum_{k=1}^\infty \1{D_k \leq t}.
+  D(t) = \max\{k : D_k \leq t\} = \sum_{k=1}^\infty \1{D_k \leq t}.
 \end{equation*}
 
 \begin{exercise}
