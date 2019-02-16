@@ -405,7 +405,7 @@ times, for instance,
 \item How to route post parcels in a post sorting center?
 \end{itemize}
 
-In general, the study of queueing system is focused on
+In general, the study of queueing systems is focused on
 studying the probabilistic properties of the queueing length process
 and related concepts such as waiting time, server occupancy, fraction
 of customers lost, and so on. Once we have constructed the queueing
@@ -459,8 +459,8 @@ First $d_k = \min\{Q_{k-1}, c_k\}$. Then, $Q_k' = Q_{k-1}+a_k-d_k$ is the queue 
 \begin{exercise}\label{ex:19} (Estimating the lead time distribution.)  Take
   $d_k = \min\{Q_{k-1}+a_k, c_k\}$, and assume that jobs are served in
   FIFO sequence. Find an expression for the shortest possible waiting
-  time $W_-(k)$ of a job that arrives at time $k$, and an expression
-  for the largest possible waiting time $W_+(k)$
+  time $W_{-,k}$ of a job that arrives at time $k$, and an expression
+  for the largest possible waiting time $W_{+,k}$.
   \begin{hint}
   Consider a numerical example. Suppose $Q_{k-1}=20$. Suppose
     that the capacity is $c_k=3$ for all $k$. Then a job that arrives
@@ -526,7 +526,7 @@ First $d_k = \min\{Q_{k-1}, c_k\}$. Then, $Q_k' = Q_{k-1}+a_k-d_k$ is the queue 
   job. Make a model to analyze this case. Compare this case with the
   yield loss problem above. 
 
-  Let's assume that the repair of a faulty requires half of the work
+  Let's assume that the repair of a faulty item requires half of the work
   of a new job, and that the faulty jobs are processed with priority
   over the new jobs.  Also assume that faulty items do not need more than one repair (hence, faulty items that are repaired cannot be faulty anymore).
 
@@ -608,7 +608,7 @@ long-run average cost is
         0 & \text{ if }  Q_{k} =0,\\
       \end{cases}
     \end{equation*}
-and assume that $I_0 =0$ at the start, i.e., the machine if off. Thus, we can write:
+and assume that $I_0 =0$ at the start, i.e., the machine is off. Thus, we can write:
 \begin{equation*}
   I_{k+1} = \1{Q_k\geq N} + I_k \1{0<Q_k<N} + 0\cdot \1{Q_k = 0}.
 \end{equation*}
@@ -934,7 +934,7 @@ It is then sensible to set
   queueing situation at the first machine provide us with the total
   number of departures $d_k$ during period $k$. However, it does not
   tell us about the type of these departures. Thus, to compute the
-  queue in front of station A, we need do know the number of
+  queue in front of station A, we need to know the number of
   departures of type A, rather than the total number of departures of
   the first station.
 \item It is reasonable that the number of jobs of type $A$ in queue at

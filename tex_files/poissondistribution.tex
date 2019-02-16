@@ -143,10 +143,10 @@ Apply the definition of the expectation, and in the computations use that
     $\lambda t$,
     \begin{align*}
       \E N 
-&= \sum_{n=0}^\infty n e^{-\lambda t}\frac{{\lambda t}^n}{n!}  \\
-&= \sum_{n=1}^\infty n e^{-\lambda t}\frac{{\lambda t}^n}{n!}, \text{ since the term with $n=0$ cannot contribute} \\
-&= e^{-\lambda t} \lambda t \sum_{n=1}^\infty \frac{{\lambda t}^{n-1}}{(n-1)!} \\
-&= e^{-\lambda t} \lambda t \sum_{n=0}^\infty \frac{{\lambda t}^{n}}{n!}, \text{ by a change of variable}\\
+&= \sum_{n=0}^\infty n e^{-\lambda t}\frac{(\lambda t)^n}{n!}  \\
+&= \sum_{n=1}^\infty n e^{-\lambda t}\frac{(\lambda t)^n}{n!}, \text{ since the term with $n=0$ cannot contribute} \\
+&= e^{-\lambda t} \lambda t \sum_{n=1}^\infty \frac{(\lambda t)^{n-1}}{(n-1)!} \\
+&= e^{-\lambda t} \lambda t \sum_{n=0}^\infty \frac{(\lambda t)^{n}}{n!}, \text{ by a change of variable}\\
 &= e^{-\lambda t} \lambda t e^{\lambda t} \\
 &= \lambda t.
     \end{align*}
@@ -163,14 +163,14 @@ Realize that $\V N = \E{N^2} - (\E N)^2$. Compute $\E{N^2}$, use Exercise~\ref{e
 
     \begin{align*}
       \E{N^2}
-&= \sum_{n=0}^\infty n^2 e^{-\lambda t}\frac{{\lambda t}^n}{n!}  \\
-&= e^{-\lambda t} \sum_{n=1}^\infty n \frac{{\lambda t}^n}{(n-1)!}  \\
-&= e^{-\lambda t} \sum_{n=0}^\infty (n+1) \frac{{\lambda t}^{n+1}}{n!}  \\
-&= e^{-\lambda t} \lambda t \sum_{n=0}^\infty n \frac{{\lambda t}^{n}}{n!}  +e^{-\lambda t}\lambda t \sum_{n=0}^\infty\frac{{\lambda t}^{n}}{n!}  \\
+&= \sum_{n=0}^\infty n^2 e^{-\lambda t}\frac{(\lambda t)^n}{n!}  \\
+&= e^{-\lambda t} \sum_{n=1}^\infty n \frac{(\lambda t)^n}{(n-1)!}  \\
+&= e^{-\lambda t} \sum_{n=0}^\infty (n+1) \frac{(\lambda t)^{n+1}}{n!}  \\
+&= e^{-\lambda t} \lambda t \sum_{n=0}^\infty n \frac{(\lambda t)^{n}}{n!}  +e^{-\lambda t}\lambda t \sum_{n=0}^\infty\frac{(\lambda t)^{n}}{n!}  \\
 &\quad\text{now use the hint to simplify the first summation} \\
-&= {\lambda t}^2  + \lambda t.
+&= (\lambda t)^2  + \lambda t.
 \end{align*}
-Hence, $\V N = \E{N^2} - (\E N)^2 = {\lambda t}^2 + \lambda t - {\lambda t}^2 = \lambda t$.
+Hence, $\V N = \E{N^2} - (\E N)^2 = (\lambda t)^2 + \lambda t - (\lambda t)^2 = \lambda t$.
 \end{solution}
 \end{exercise}
 
@@ -238,7 +238,7 @@ As  will become clear later, the SCV is a very important concept in
   variability}.
 
 \begin{exercise}
-Show that   the SCV of $N(t)$ is equal to $1/\lambda t$. 
+Show that   the SCV of $N(t)$ is equal to $1/(\lambda t)$. 
   \begin{solution}
     \begin{equation*}
 SCV = \frac{\V{N(t)}}{(\E{N(t)})^2} = \frac{\lambda t}{(\lambda t)^2} = \frac1{\lambda t}.
@@ -497,7 +497,7 @@ With this,
 &= \sum_{i=0}^n \frac{(\mu t)^{n-i}}{(n-i)!} \frac{(\lambda t)^i}{i!} e^{-(\mu+\lambda)t} \\
 &= e^{-(\mu+\lambda)t} \sum_{i=0}^n \frac{(\mu t)^{n-i}}{(n-i)!} \frac{(\lambda t)^i}{i!}  \\
 &= e^{-(\mu+\lambda)t}\frac 1{n!} \sum_{i=0}^n {n \choose i }(\mu t)^{n-i}(\lambda t)^i, \quad\text{ (binomial formula)}   \\
-&= \frac{((\mu+\lambda)t))^n}{n!}e^{-(\mu+\lambda)t}.
+&= \frac{((\mu+\lambda)t)^n}{n!}e^{-(\mu+\lambda)t}.
   \end{align*}
 
   Now with the moment generating functions of $N_\lambda(t)$ and $N_\mu(t)$, and using that by the independence of $N_\lambda(t)$ and $N_\mu(t)$, the moment generating function of $N_\lambda + N_\mu$ is the product of the moment generating functions of $N_\lambda$ and $N_\mu$,
@@ -559,7 +559,7 @@ Use the standard formula for conditional probability and that  $N_\lambda(t) + N
 
 
 Besides merging Poisson streams, we can also consider the concept of \emph{splitting}, or \emph{thinning}, a stream into sub-streams, as follows.  When a customer arrives, throw a coin that lands   heads with probability $p$ and tails with $q=1-p$. When the coin   lands heads, the customer is of type 1 (e.g., a woman), otherwise of type 2 (e.g., a child).  Another   way of thinning is by modeling the stream of people passing a shop   as a Poisson process with rate $\lambda$. With probability $p$ a   person decides, independent of anything else, to enter the shop,  c.f. the figure below. The crosses at the upper line are passersby  in the street. The crosses at the lower line are the customers that   enter the shop. The outcome of the $k$th throw of a coin is   indicated by $B_k$. In the figure below,  $B_1=1$ so that the first passerby turns into a
-  customer entering the shop; the second passerby does not enter as   $B_2=0$, and so on. Like this, the stream of passerbys is thinned   with Bernoulli distributed random variables.
+  customer entering the shop; the second passerby does not enter as   $B_2=0$, and so on. Like this, the stream of passersby is thinned   with Bernoulli distributed random variables.
 
   \begin{center}
 \begin{tikzpicture}[scale=1]
@@ -676,7 +676,7 @@ $Y\sim P(\lambda p)$.
 
 The concepts of merging and thinning are  useful to analyze queueing
   networks. Suppose the departure stream of a machine splits into
-  two sub-streams, e.g., a fraction $p$ of the jobs moves to on another
+  two sub-streams, e.g., a fraction $p$ of the jobs moves on to another
   machine and the rest ($1-p$) of the jobs leaves the system. Then we
   can model the arrival stream at the second machine as a thinned
   stream (with probability $p$) of the departures of the first

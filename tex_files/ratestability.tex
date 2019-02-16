@@ -192,7 +192,7 @@ Use the analogy with Eq.~\eqref{eq:27}.
   \end{hint}
 \begin{solution}
   \begin{equation*}
- D_{k} = \inf\{t; D(t) \geq k\}.
+ D_{k} = \inf\{t: D(t) \geq k\}.
   \end{equation*}
 \end{solution}
 \end{exercise}
@@ -205,7 +205,7 @@ U_n = \sum_{k=1}^n S_k
 as the total service time required by the first $n$ jobs. With this,
 let 
 \begin{equation*}
-  U(t) = \sup\{n: U_n \leq t\}
+  U(t) = \max\{n: U_n \leq t\}
 \end{equation*}
 and  define the \recall{service rate} or \recall{processing rate} as
 \begin{equation*}
