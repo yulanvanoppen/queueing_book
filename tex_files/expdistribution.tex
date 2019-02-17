@@ -776,8 +776,8 @@ Observe first that $\sum_{k=0}^\infty \1{m>k} = m$, since $\1{m>k}=1$ if $k<m$ a
 \sum_{k=0}^\infty G(k) 
 &= \sum_{k=0}^\infty \P{B>k} 
 = \sum_{k=0}^\infty \sum_{m=k+1}^\infty \P{B=m}  \\
-& = \sum_{k=0}^\infty \sum_{m=0}^\infty 1\{m>k\} \P{B=m} 
-= \sum_{m=0}^\infty \sum_{k=0}^\infty 1 \{m>k\} \P{B=m} \\
+& = \sum_{k=0}^\infty \sum_{m=0}^\infty \1{m>k} \P{B=m} 
+= \sum_{m=0}^\infty \sum_{k=0}^\infty \1{m>k} \P{B=m} \\
 &= \sum_{m=0}^\infty m\P{B=m} = \E B.
 \end{align*}
 In case you are interested in mathematical justifications: the
@@ -793,13 +793,13 @@ you are interested.)
  Use indicator functions to prove that
 $\sum_{i=0}^\infty i G(i) =  \E{B^2}/2 - \E{B}/2.$
     \begin{hint}
-$\sum_{i=0}^\infty i G(i) = \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^\infty i 1\{n\geq i+1\}$,
+$\sum_{i=0}^\infty i G(i) = \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^\infty i \1{n\geq i+1}$,
 and reverse the summations.
     \end{hint}
 \begin{solution}
 \begin{align*}
 \sum_{i=0}^\infty i G(i)
-&= \sum_{i=0}^\infty i \sum_{n=i+1}^\infty \P{B=n} = \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^\infty i 1\{n\geq i+1\} \\
+&= \sum_{i=0}^\infty i \sum_{n=i+1}^\infty \P{B=n} = \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^\infty i \1{n\geq i+1} \\
 &= \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^{n-1}i  = \sum_{n=0}^\infty \P{B=n} \frac{(n-1)n}{2} \\
 &= \sum_{n=0}^\infty  \frac{n^2}{2} \P{B=n} - \frac{\E B}{2}
 = \frac{\E{B^2}}{2} - \frac{\E B}{2}.
@@ -838,13 +838,13 @@ $\E S = \int_0^\infty x \d F(x)  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y 
 $    \E{S^2} = \int_0^\infty x^2 \d F(x)  = 2 \int_0^\infty y G(y) \d y,$
 where $G(x) = 1 - F(x)$. 
 \begin{hint}
-$\int_0^\infty y G(y) \d y = \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d x \d y$.
+$\int_0^\infty y G(y) \d y = \int_0^\infty y \int_0^\infty \1{y\leq x}f(x)\, \d x \d y$.
 \end{hint}
 \begin{solution}
   \begin{align*}
 \int_0^\infty y G(y) \d y 
-&=  \int_0^\infty y \int_y^\infty f(x)\, \d x \d y =  \int_0^\infty y \int_0^\infty 1\{y\leq x\}f(x)\, \d x \d y\\
-&=  \int_0^\infty f(x) \int_0^\infty y 1\{y \leq x\}\, \d y \d x
+&=  \int_0^\infty y \int_y^\infty f(x)\, \d x \d y =  \int_0^\infty y \int_0^\infty \1{y\leq x}f(x)\, \d x \d y\\
+&=  \int_0^\infty f(x) \int_0^\infty y \1{y \leq x}\, \d y \d x
 =  \int_0^\infty f(x) \int_0^x y\, \d y \d x\\
 &=  \int_0^\infty f(x) \frac{x^2}2 \d x =\frac{\E{S^2}}2.
   \end{align*}
