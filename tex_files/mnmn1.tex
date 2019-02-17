@@ -15,7 +15,7 @@ $ \lambda(n) p(n) = \mu(n+1)p(n+1)$. For these queueing systems we
 just present the results. In the exercises we ask you to derive the
 formulas---the main challenge is not to make computational errors. 
 
-It is important to realize that the interarrival times and service times need to be memoryless for the analysis below; the rates, however, may  depend on the number of the jobs in the system. Specifically, consider the departure time $D_k$ of the $k$th job, so that $A_{A(D_k)+1}$ is the arrival time of the next job. If $L(D_k)=n$, then we require that for every $k$ 
+It is important to realize that the inter-arrival times and service times need to be memoryless for the analysis below; the rates, however, may  depend on the number of the jobs in the system. Specifically, consider the departure time $D_k$ of the $k$th job, so that $A_{A(D_k)+1}$ is the arrival time of the next job. If $L(D_k)=n$, then we require that for every $k$ 
 \begin{equation*}
   \P{A_{A(D_k)+1} - D_k \leq x} = 1-e^{-f(n) \lambda x},
 \end{equation*}
@@ -224,10 +224,10 @@ Take $c=1$
 p(0) &= \frac{1}G \frac{(c\rho)^0}{0!}=\frac1 G, \quad n=0,\ldots, 1-1 \\
 p(n) &= \frac{1}G \frac{c^c\rho^n}{c!} = \frac{1}G \frac{1^1\rho^n}{1!} =\frac{\rho^n}G , \quad n=1,1+1, \ldots \\
 G &=\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{(1-\rho)c!}
-=\sum_{n=0}^{0} \frac{\rho^0}{0!} + \frac{\rho}{(1-\rho)} = 1 + \frac{\rho}{1-\rho} = \frac1{1-\rho}
+=\sum_{n=0}^{0} \frac{\rho^0}{0!} + \frac{\rho}{(1-\rho)} = 1 + \frac{\rho}{1-\rho} = \frac1{1-\rho},
 \\
 \E{L_Q} &= \frac{(c\rho)^c}{c! G}\frac{\rho}{(1-\rho)^2} = 
-= \frac{\rho}{1/(1-\rho)}\frac{\rho}{(1-\rho)^2} = \frac{\rho^2}{1-\rho} \\
+= \frac{\rho}{1/(1-\rho)}\frac{\rho}{(1-\rho)^2} = \frac{\rho^2}{1-\rho}, \\
 \E{L_S} &= \sum_{n=0}^{c}n p(n) + \sum_{n=c+1}^\infty c p(n) = p(1) + 1 \sum_{n=2}^\infty p(n) = 1- p(0) = \rho.
 \end{align}
 \end{subequations}
@@ -245,7 +245,7 @@ patients as jobs.
 \begin{exercise}($M/M/c/c$)
   Find $\lambda(n)$ and $\mu(n)$ for the $M/M/c/c$ queue, and determine the performance measures.
   \begin{solution} Take,
-    $\lambda(n) = \lambda$ if $n< c$, and $\lambda(n)=0$ for $n\geq c$. Also, let, $\mu(n) = n \mu$ for $n\leq c$. (And $n$ can never be larger than $c$, since $\lambda(n) = 0$ for $n\geq c$.) Define $\rho = \lambda/(c \mu) or \frac{\lambda}{c \mu}$. Then, we see that $p(n) = p(0)(c\rho)^n/n!$. For the normalization
+    $\lambda(n) = \lambda$ if $n< c$, and $\lambda(n)=0$ for $n\geq c$. Also, let, $\mu(n) = n \mu$ for $n\leq c$. (And $n$ can never be larger than $c$, since $\lambda(n) = 0$ for $n\geq c$.) Define $\rho = \lambda/(c \mu)$. Then, we see that $p(n) = p(0)(c\rho)^n/n!$. For the normalization
     \begin{equation*}
       1=\sum_{n=0}^c p(n) = p(0) \sum_{n=0}^c \frac{(c\rho)^n}{n!}.
     \end{equation*}
@@ -305,7 +305,7 @@ From this figure it follows right away that:
     \begin{align*}
    \lambda p(0) &= \mu p(1) \\
    \lambda p(1)  &= 2\mu p(2) \\
-   \lambda p(2)  &= 2\mu p(3)\\
+   \lambda p(2)  &= 2\mu p(3).\\
     \end{align*}
 
 Then,  from the above, with $\rho=\lambda/\mu$: 
@@ -543,7 +543,7 @@ Use $\lambda(n) p(n) = \mu(n+1)p(n+1)$, and realize that for
     so that the system can never contain more than $N$
     customers. Thus, we want $p(0)$ to be such that
 \begin{equation*}
-  1 = \sum_{n=0}^N p(n) = p(0) \sum_{n=0}^N \rho^n \frac{N!}{(N-n)!}
+  1 = \sum_{n=0}^N p(n) = p(0) \sum_{n=0}^N \rho^n \frac{N!}{(N-n)!}.
 \end{equation*}
 We see from this that $p(0)$ times some constant must be $1$. Hence, dividing by this constant, we get 
 \begin{equation*}
@@ -588,13 +588,13 @@ I asked WolframAlpha to simplify this, but the answer I got was not particularly
     queue with a fast server?
     \begin{hint}
 Implement the formulas for $\E{L_Q(M/M/3)}$ for the $M/M/3$ queue in
-  some computer program (R, excel, python, whatever) and compare this
+  some computer program (R, excel, Python, whatever) and compare this
   to $\E{L_Q(M/M/1)}$ for the fast $M/M/1$ case.  Make plots of
   $\E{L_Q(M/M/3)}$ and $\E{L(M/M/3)}$ as functions of $\rho$.
     \end{hint}
 
   \begin{solution}
-I am going to implement the formulas of Eq.~(\ref{eq:9}) in python. First the results for the $M/M/3$ queue.
+I am going to implement the formulas of Eq.~(\ref{eq:9}) in Python. First the results for the $M/M/3$ queue.
 
 \begin{pyconsole}
 from math import exp, factorial
@@ -641,7 +641,7 @@ rho/(1-rho) # this must also be EL, just a check
 Note the last check. As a rule, you should always compare your results
 with known results. BTW, that is one of the reasons I prefer to code
 the formulas instead of using a calculator. Testing with code is
-relatively easy, whereas with a calculator it is impossible (You
+relatively easy, whereas with a calculator it is impossible. (You
 simply can't check what you typed at the calculator.)
 
 So, returning to the results, as expected, the number of jobs in queue

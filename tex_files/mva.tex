@@ -41,9 +41,9 @@ Start with $n=1$, then consider $n=2$ and so on.
   \begin{align*}
 \E{ W_0(1)} &= \E{ L_0(0)+1}\E{ S_0} = \E{ S_0 }= 2,\\
  \E{ W_1(1)} &= \E{ L_1(0)+1}\E{ S_1} = \E{ S_1} = 3,\\
- \E{ W(1)} &= \sum_{i=0}^1 V_i \E{ W_i(1)} = V_0 2 + V_1  3 = 1\cdot 2 + 2 \cdot 3 = 8\\
+ \E{ W(1)} &= \sum_{i=0}^1 V_i \E{ W_i(1)} = V_0 2 + V_1  3 = 1\cdot 2 + 2 \cdot 3 = 8,\\
  \TH_0(1) &= \frac{1}{\E{ W(1)}} = \frac18, \\
- \E{ L_0(1)} &= \TH_0(1) \E{ W_0(1)} = \frac28=\frac14 \\
+ \E{ L_0(1)} &= \TH_0(1) \E{ W_0(1)} = \frac28=\frac14, \\
  \E{ L_1(1)} &= \TH_1(1) \E{ W_1(1)} = V_1 \TH_0(1) \E{ W_1(1)}= 2 \cdot \frac18 \cdot 3 = \frac34.\\
   \end{align*}
 Now take $n=2$.     
@@ -53,7 +53,7 @@ Now take $n=2$.
 \E{ W(2) }&= \sum_{i=0}^1 V_i \E{ W_i(2)} = \frac52 + 2 \cdot \frac{21}4=13\\
 \TH_0(2) &= \frac{2}{\E{ W(2)}} = \frac2{13}, \\
 \TH_1(2) &= V_1 \TH_0(2) = \frac4{13}, \\
-\E{ L_0(2)} &= \TH_0(2) \E{ W_0(2)} = \frac2{13}\cdot \frac52=\frac5{13} \\
+\E{ L_0(2)} &= \TH_0(2) \E{ W_0(2)} = \frac2{13}\cdot \frac52=\frac5{13}, \\
 \E{ L_1(2)} &= \TH_1(2) \E{ W_1(2)} = \frac{4}{13} \cdot \frac{21}{4} = \frac{21}{13}.\\
   \end{align*}
 And so on.

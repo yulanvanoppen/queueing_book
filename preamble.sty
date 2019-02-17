@@ -3,13 +3,15 @@
 \usepackage[english]{babel}
 
 \usepackage{graphicx}
-\usepackage{mathtools,amsthm,amssymb}
+\usepackage{mathtools,amsthm,amssymb,amsmath}
 \usepackage{changepage} % to change the width of the exercise environment
 \usepackage{mathrsfs}
 \usepackage{verbatim}
 \usepackage{enumitem}
 \usepackage{nicefrac}
 \usepackage[colorlinks=true]{hyperref}
+
+\DeclareMathOperator{\Exp}{Exp}
 
 \usepackage{makeidx}
 \makeindex
@@ -46,8 +48,8 @@
 \Newassociation{solution}{Solution}{ans}
 \Newassociation{sol}{Solution}{ans}
 \Newassociation{hint}{Hint}{hint}
-\renewcommand{\Hintlabel}[1]{\textbf{h.#1}}
-\renewcommand{\Solutionlabel}[1]{\textbf{s.#1}}
+\renewcommand{\Hintlabel}[1]{\textbf{h.#1.}}
+\renewcommand{\Solutionlabel}[1]{\textbf{s.#1.}}
 
 \theoremstyle{definition} % font type for theorems and related environments
 \newtheorem{theorem}{Theorem}[section]

@@ -24,17 +24,25 @@ mutually independent.
 To characterize the type of queueing process it is common to use 
 \recall{Kendall's abbreviation} $A/B/c/K$, where $A$ is the distribution of the
 inter-arrival times, $B$ the distribution of the service times, $c$ the
-number of servers, and $K$ system size, i.e., the total number of customers that can be simultaneously present, whether in queue or in service. In this notation it
-is assumed that jobs are served in first-in-first-out (FIFO) order;
-FIFO scheduling is also often called first-come-first-serve (FCFS). To specify the distributions $A$ and $B$ often two letters are used: $M$ to denote the exponential distribution as it is Memoryless, and $G$ to denote any General distribution. 
+number of servers, and $K$ the system size, i.e., the total number of customers that can be simultaneously present, whether in queue or in service.\footnote{The meaning of $K$ differs among authors. Sometimes it stands for
+  the capacity of the queue, not the entire system. In this book $K$ corresponds to the system's size.}
+In this notation it is assumed that jobs are served in
+first-in-first-out (FIFO) order; FIFO scheduling is also often called
+first-come-first-serve (FCFS). 
 
-In the sequel we will often use Kendall's notation  to distinguish between the different queueing models. Ensure that you familiarize yourself with this notation. Let us therefore illustrate this notation with some exercises. 
+Two inter-arrival and service
+distributions  are the most important in queueing theory: the
+exponential distribution denoted with the shorthand $M$, as it is
+memoryless, and a general distribution (with the implicit assumption
+that its first moment is finite) denoted with $G$.
+
+Familiarize yourself with this notation as it is used continuously in the rest of the book. Here are some exercises to illustrate the notation.
 
 \begin{exercise}
   What is the meaning of $M/M/1$?
   \begin{solution}
 $M/M/1$: the distribution of the inter-arrival times is
-  Memory-less, hence exponential, the service times are also
+  Memoryless, hence exponential, the service times are also
   Memoryless, and there is 1 server. As $K$ is unspecified, the system can contain any number of jobs.
   \end{solution}
 \end{exercise}
@@ -49,7 +57,7 @@ $M/M/1$: the distribution of the inter-arrival times is
 \begin{exercise}
 What is the $D/D/1$ queue?  
 \begin{solution}
-  A queueing process with deterministic inter-arrival times and deterministic service times and 1 server.
+  A queueing process with deterministic inter-arrival times, deterministic service times and 1 server.
 \end{solution}
 \end{exercise}
 
@@ -65,13 +73,10 @@ $M/M/c$: A \recall{multi-server} queue with $c$ servers in which
 \begin{exercise}
   What is the meaning of $M/M/c/K$?
   \begin{solution}
-\item $M/M/c/K$: inter-arrival times and process times are exponential,
+$M/M/c/K$: inter-arrival times and process times are exponential,
   and the \recall{system capacity} is $K$ jobs. Thus, the queue can
   contain at most $K-c$ jobs. 
 
-Note, sometimes, the $K$ stands for
-    the capacity in the queue, not the entire system. The notation differs among
-    authors.
   \end{solution}
 \end{exercise}
 
@@ -111,7 +116,7 @@ $M(n)/M(n)/1$: the inter-arrival times are exponential, just as
   What is the meaning of $M/G/1$?
   \begin{solution}
 $M/G/1$: the inter-arrival times are exponentially distributed,
-  the service times can have any General distribution (with
+  the service times can have any general distribution (with
   finite mean), and there is 1 server.
   \end{solution}
 \end{exercise}
@@ -138,7 +143,7 @@ $M/G/1$: the inter-arrival times are exponentially distributed,
 \begin{exercise}
   What is the meaning of $M/D/1-LIFO$?
   \begin{solution}
- $M/D/1-LIFO$.  Now job service times are Deterministic, and the service sequence is last-in-first-out (LIFO).
+ $M/D/1-LIFO$.  Now job service times are deterministic, and the service sequence is last-in-first-out (LIFO).
   \end{solution}
 \end{exercise}
 
@@ -155,18 +160,17 @@ $M/G/1$: the inter-arrival times are exponentially distributed,
   \begin{hint}
 Look up the relevant
   definitions on Wikipedia or
-  \citet{hall91:_queuein_method_servic_manuf}
+  \citet{hall91:_queuein_method_servic_manuf}.
   \end{hint}
   \begin{solution}
   \begin{itemize}
   \item Advantage: SPTF minimizes the number of jobs in queue. Thus,
-    if you want to keep the shop floor free of jobs (Work In Progress,
-    WIP), then this is certainly a good rule. 
+    if you want to keep the shop floor free of jobs, then this is certainly a good rule. 
   \item Disadvantage: large jobs get near to terrible waiting times,
     and the variance of the waiting time increases. Thus, the $C_s^2$
     is larger than under FIFO. Also, SPTF does not take due-dates into
     account, thus giving a reliable due-date quotation to a customer is
-    hard (near to impossible.)
+    hard (near to impossible).
   \end{itemize}
   \end{solution}
 \end{exercise}
@@ -186,5 +190,5 @@ Look up the relevant
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../book"
+%%% TeX-master: "../queueing_book"
 %%% End:

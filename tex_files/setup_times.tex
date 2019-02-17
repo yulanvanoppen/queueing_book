@@ -6,7 +6,7 @@
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-With the $G/G/1$ waiting time formula~\eqref{eq:7} we can compute, approximately,  the waiting time in queue for many non-trivial queueing situations. In this section we focus on the effect of change-overs, or setups. Consider, for instance, a  machine that paints red and blue bikes. When the machine requires a color change, a clean-up time is necessary. As we will see it is necessary in such situations to produce in batches.  Other examples are ovens that need  warm up or cool down times when different item types require different temperatures. In service settings, when servers have to move from part of a building to another,  they time spend moving cannot be spent on serving customers.  
+With the $G/G/1$ waiting time formula~\eqref{eq:7} we can compute, approximately,  the waiting time in queue for many non-trivial queueing situations. In this section we focus on the effect of change-overs, or setups. Consider, for instance, a  machine that paints red and blue bikes. When the machine requires a color change, a clean-up time is necessary. As we will see it is necessary in such situations to produce in batches.  Other examples are ovens that need  warm up or cool down times when different item types require different temperatures. In service settings, when servers have to move from a part of a building to another,  the time spend moving cannot be spent on serving customers.  
 
 Specifically, we analyze the following queueing situation. There are two job families, e.g., red and blue. Jobs arrive at rate $\lambda_r$ and $\lambda_b$, respectively, so that the arrival rate of jobs is $\lambda= \lambda_b+\lambda_r$. For ease we assume that a job service time $S_0$ have the same distribution for both colors. The change-over time is given by a random variable~$T$, which is independent of the normal job service times. 
 
@@ -54,7 +54,7 @@ Now that  the batch arrival rate and the service time per batch are known, the l
 \begin{equation*}
 \rho = \lambda_B (B \E{S_0} + \E T) = \lambda \left(\E{S_0} + \frac{\E{T}}B\right),
 \end{equation*}
-where the first equality has the interpretation of the batch arrival rate times times the work per batch, while the second is the job arrival rate times the effective work per job. 
+where the first equality has the interpretation of the batch arrival rate times the work per batch, while the second is the job arrival rate times the effective work per job. 
 
 \begin{exercise} 
 Show that the requirement $\rho < 1$ leads to the following constraint on the minimal batch size~$B$ 
@@ -107,7 +107,7 @@ In our model we assume that jobs can leave right after being served.  Show for t
 \end{solution}
 \end{exercise}
 
-Clearly, we now have all elements to compute the average time in the system. Lets illustrate this. 
+Clearly, we now have all elements to compute the average time in the system. Let's illustrate this. 
 
 \begin{exercise}
   Jobs arrive at $\lambda=3$ per hour at a machine with $C_a^2=1$; service times are exponential with average 15 minutes.  Assume $\lambda_r = 0.5$ per hour, hence $\lambda_b = 3-0.5=2.5$ per hour. Between any two batches, the machine requires a cleanup of 2 hours, with a standard deviation of $1$ hour, during which it is unavailable for service.  Suppose the batch size $B=30$ jobs. What is the minimal batch size?  What is the average time, a red job spends in the system? 
@@ -185,7 +185,7 @@ total
   with average $\mu_i^{-1}$ for family $i$. A setup of time $S$ is
   required if the machine switches from one family to another. If the
   machine works according to a cyclic schedule, i.e., produce family
-  1, then 2, then 3, and so on until family $n$, Can you find batch
+  1, then 2, then 3, and so on until family $n$, can you find batch
   sizes $B_i$ for family $i$ such that an average waiting time can be
   guaranteed?
   \begin{solution}

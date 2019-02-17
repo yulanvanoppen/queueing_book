@@ -62,7 +62,7 @@ As a start, the function $\sin(t)$ has not a limit as
     \end{equation*}
     for $k=0,1,2,\ldots$. Let $N(t) = \lambda(t) t$. Then $A(t)/t$
     does not have limit. Of course, these examples are quite
-    pathological, and are not representable for `real life cases'
+    pathological, and are not representable for `real life cases'.
     (Although this is also quite vague. What, then, is a real life
     case?)
 
@@ -110,7 +110,7 @@ expected inter-arrival time.
     first job after time $t$: 
   \begin{equation*}
     A_{A(t)}  \leq t  < A_{A(t)+1} \Leftrightarrow 
-    \frac{A_{A(t)}} {A(t)}  \leq \frac{t}{A(t)}  <\frac{A_{A(t)+1}}{A(t)} = \frac{A_{A(t)+1}}{A(t)+1}\frac{A(t)+1}{A(t)}
+    \frac{A_{A(t)}} {A(t)}  \leq \frac{t}{A(t)}  <\frac{A_{A(t)+1}}{A(t)} = \frac{A_{A(t)+1}}{A(t)+1}\frac{A(t)+1}{A(t)}.
   \end{equation*}
   Now $A(t)$ is a counting process such that $A(t)\to\infty$ as
   $t\to\infty$. Therefore, $\lim_t A_{A(t)}/A(t) = \lim_n
@@ -123,11 +123,9 @@ expected inter-arrival time.
 
 
 
-  For the right-continuity of $A(t)$, define $f(t) = 1\{A_1 \leq
-  t\}$.
-  Observe first that $f(t)$ is increasing, and $f(t)\in\{0,1\}$. Thus,
-  if $f(t)=1$ then $f(u)=1$ for all $u\geq t$, and if $f(t)=0$ then
-  $f(u) = 0$ for all $u\leq t$.
+  For the right-continuity of $A(t)$, define $f(t) = \1{A_1 \leq t}$.
+  Observe first that $f(t)$ is increasing, and $f(t)\in\{0,1\}$.
+  Thus, if $f(t)=1$ then $f(u)=1$ for all $u\geq t$, and if $f(t)=0$ then $f(u) = 0$ for all $u\leq t$.
 
     You may skip the rest of the prove below, but the above is
     essential to memorize; make a plot of $f(t)$, in particular the
@@ -171,7 +169,7 @@ expected inter-arrival time.
     % $F_N(t) = \sum_{n=1}^N f_n(x)$ is right-continuous if all $f_n$
     % are right-continuous, and also that $F_{N+1} = F_N + f_{N+1}$ is
     % right-continuous. As this applies for all $N$, it follows from
-    % induction that $\lim_N F_N$ is right-continous, provided this
+    % induction that $\lim_N F_N$ is right-continuous, provided this
     % limit exists. When $f_n$ are all increasing, which is the case for
     % our situation by taking $f_n(t) = 1\{A_n \leq t\}$, then this
     % limit certainly exists.
@@ -194,7 +192,7 @@ Use the analogy with Eq.~\eqref{eq:27}.
   \end{hint}
 \begin{solution}
   \begin{equation*}
- D_{k} = \inf\{t; D(t) \geq k\}.
+ D_{k} = \inf\{t: D(t) \geq k\}.
   \end{equation*}
 \end{solution}
 \end{exercise}
@@ -207,7 +205,7 @@ U_n = \sum_{k=1}^n S_k
 as the total service time required by the first $n$ jobs. With this,
 let 
 \begin{equation*}
-  U(t) = \sup\{n: U_n \leq t\}.
+  U(t) = \max\{n: U_n \leq t\}
 \end{equation*}
 and  define the \recall{service rate} or \recall{processing rate} as
 \begin{equation*}
@@ -415,7 +413,7 @@ What is the rate in, and what is the service capacity?
   of the cycle is $\E{B} + \E{I}$, since after the last job of the cycle
   left, the expected time until the next job is $\E{I}$.
 
-  Since $\rho$ is utilization of the server,
+  Since $\rho$ is the utilization of the server,
   \begin{equation*}
 \rho = \frac{\E B}{\E B + \E I}.
   \end{equation*}
@@ -488,5 +486,5 @@ Here are some questions to help you interpret this formulation.
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../book"
+%%% TeX-master: "../queueing_book"
 %%% End:

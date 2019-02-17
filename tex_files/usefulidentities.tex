@@ -12,7 +12,7 @@ useful and simple results for the $M/G/1$ queue by which we can analyze a large 
 
 The fraction of time the server is empty is $1-\rho = p(0)$. By PASTA,
 $\pi(0)=p(0)$, hence the fraction of customers that enter an empty
-system is also $1-\rho$. Similarly, the fraction of customers that find the server occupied at arrival is equal to the the utilization $\rho$. 
+system is also $1-\rho$. Similarly, the fraction of customers that find the server occupied at arrival is equal to the utilization $\rho$. 
 
 
 
@@ -241,7 +241,7 @@ Think about the consequences of memoryless service times.
 \begin{exercise}($M/M/1$)
 Show that 
 \begin{equation}\label{eq:wqes}
-  \E{W_Q} = \E L \E S = \frac{\rho^2}{1-\rho} \frac 1 \lambda,
+  \E{W_Q} = \E L \E S = \frac{\rho^2}{1-\rho} \frac 1 \lambda.
 \end{equation}
   \begin{solution}
 With Little's law:
@@ -392,7 +392,7 @@ With wolfram alpha we get
 \V L = \frac{\rho(1+\rho)}{(1-\rho)^2}-\frac{\rho^2}{(1-\rho)^2} = \frac{\rho}{(1-\rho)^2}.
 \end{equation*}
 
-Here are three methods to to  get the result for $\E{L^2}$.  
+Here are three methods to get the result for $\E{L^2}$.  
 
 One way is to use the standard formula for a geometric series with $\rho < 1$:
 \begin{equation*}
@@ -556,7 +556,7 @@ W
 W/60 # in hours
 \end{pyconsole}
 
-Lets us the standard definition of the variance, i.e., $\V X = \sum_{i} (x_i-\E X)^2 \P{X=x_i}$, for once.
+Let's use the standard definition of the variance, i.e., $\V X = \sum_{i} (x_i-\E X)^2 \P{X=x_i}$, for once.
 
 \begin{pyconsole}
 from math import sqrt
@@ -616,7 +616,7 @@ idle
 \begin{exercise}
   (Hall 5.5) An $M/M/1$ queue has an arrival rate of 100 per hour and
   a service rate of 140 per hour.
- What is $p(n)$?  What are $\E{L_Q}$, $\E L$ 
+ What is $p(n)$?  What are $\E{L_Q}$ and $\E L$?
 \begin{solution}
 First, $p(n) = (1-\rho)\rho^n$. Now,
 
@@ -740,7 +740,7 @@ Use the level-crossing equations of the $M(n)/M(n)/1$ queue.
 
 \begin{exercise}
   (Hall 5.14) An airline phone reservation line has one server and a
-  buffer for two customers. The arrival rate 6 customers per hour, and
+  buffer for two customers. The arrival rate is 6 customers per hour, and
   a service rate of just 5 customers per hour. Arrivals are Poisson and service times are exponential. 
  Estimate $\E{L_Q}$ and the average number of customers served per hour. Then, estimate $\E{L_Q}$ for a buffer of size 5. What is the impact of the increased buffer size on the number of customers served per hour?
   \begin{hint}
@@ -965,7 +965,7 @@ Ls
 \end{pyconsole}
 
 
-The average number in queue 
+The average number in queue: 
 \begin{pyconsole}
 c = 2
 Lq = sum((n-c)*P[n] for n in range(c,len(P)))
@@ -1072,7 +1072,7 @@ hour is $\lambda \E{W_Q}$. To see this, note that maintenance workers arrive at 
 
 As both types of
 employees are equally expensive, we need to choose $c$ such that
-the number of maintenance workers waiting (i.e., being idle because they are waiting in queue), is  equal to the number of crib workers being idle. In other words, we search for a $c$ such that $\E{L_Q} \approx c- \lambda \E S$ (where, of course, $\E{L_Q}$ depends on $c$.)
+the number of maintenance workers waiting (i.e., being idle because they are waiting in queue), is  equal to the number of crib workers being idle. In other words, we search for a $c$ such that $\E{L_Q} \approx c- \lambda \E S$ (where, of course, $\E{L_Q}$ depends on $c$).
 
 
 \begin{pyconsole}

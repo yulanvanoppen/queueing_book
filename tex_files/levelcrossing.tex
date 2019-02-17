@@ -23,14 +23,14 @@ at time $t$ is equal to $A(t) - D(t)$. To illustrate:
 \end{figure}
 
 \noindent What goes in the box (i.e., $A(t)$) and has not yet left
-  (i.e., $D(t)$) must be in the box, hence $L(t)=A(t)-D(t)$. 
+  (i.e., $D(t)$) must still be in the box, hence $L(t)=A(t)-D(t)$). 
 
 
 
 Let us denote an arrival as an `up-crossing' and a departure as a
 `down-crossing'.  Then, clearly $L(t)$ is the number of up-crossings
 up to time $t$ minus the number of down-crossings up to time $t$. If
-$L(t)$ remains finite, or more generally $L(t)/t \to 0$ as $t\to\infty$, then it
+$L(t)$ remains finite, or, more generally, $L(t)/t \to 0$ as $t\to\infty$, then it
 must be that
 \begin{equation*}
   \lambda =  \lim_{t \to \infty} \frac{A(t)}t  = \lim_{t \to \infty} \frac{D(t)+L(t)}t =  \lim_{t \to \infty} \frac{D(t)}t + \lim_{t \to \infty} \frac{L(t)}t 
@@ -136,7 +136,7 @@ Recall that $L(t)$ is \emph{right-continuous}.
     such the function $t\to L(t)$ is \textsl{right-continuous}. The
     definition of $L(A_k-) = \lim_{t\uparrow A_k} L(t)$ is the
     limit from the left.  The customer therefore `sees' $L(A_k-)$ just
-    before he arrives. 
+    before he/she arrives. 
 \end{solution}  
 \end{exercise}
 
@@ -187,7 +187,7 @@ What is the difference between $A(n,t)$ and $A(t)$?
 Find an expression for $A(n,t)$. 
   \begin{hint}
 For the acronym, observe that the service times and
-    interarrival are \emph{D}eterministic and there is one server. For
+    inter-arrival are deterministic and there is one server. For
     the computation of $Y(n,t)$, make a plot of $L(s)$ as a
     function of time for $n=1$.
 
@@ -195,8 +195,8 @@ Make a plot of $L(s)$ for $n=1$ as a function of time.
   \end{hint}
     \begin{solution}
       It is the $D/D/1$ queue, since there is one server and
-      the interarrival times and service times are constant, i.e.,
-      \emph{D}eterministic.
+      the inter-arrival times and service times are constant, i.e.,
+      deterministic.
 
 
 $A_k = 2k$ as jobs arrive at $t=0, 2, 4, \ldots$, hence,  $A(t) \approx t/2$ when $t\gg 0$. We also know that $L(s)=1$ if $s\in [2i, 2i+1)$ and $L(s)=0$ for $s\in[2i-1, 2i)$ for $i=0, 1, 2, \ldots$. Thus, $L(A_k-) = L(2k-)=0$. Hence, $A(0,t) \approx t/2$ for $t\gg 0$, and $A(n,t)=0$ for $n\geq 1$. 
@@ -209,7 +209,7 @@ Next, let
 \begin{equation} \label{eq:17} 
    Y(n,t) = \int_0^t  \1{L(s) = n} \d s
 \end{equation}
-be  the total time the system contains n jobs during $[0,t]$, and
+be  the total time the system contains $n$ jobs during $[0,t]$, and
 \begin{equation} \label{eq:18}
    p(n,t) = \frac 1 t \int_0^t  \1{L(s) = n} \d s = \frac{Y(n,t)}t,
 \end{equation}
@@ -443,7 +443,7 @@ To determine $p(0)$ we can use the fact that the numbers $p(n)$ represent probab
 \begin{align*}
 1 
 &= \sum_{n=0}^\infty p(n) \\
-&= p(0) \sum_{n=0}^\infty \frac{\lambda(n)\lambda(n-1)\cdots\lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)}
+&= p(0) \sum_{n=0}^\infty \frac{\lambda(n)\lambda(n-1)\cdots\lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)},
 \end{align*}
 we obtain  
 \begin{equation*}
@@ -573,7 +573,6 @@ along any sensible sample path we obtain very useful statistical and
 probabilistic results.
 
 
-%\nvf{What is valid for ggg1, and what not?, make the assumption explicit for each result.}
 
 
 \begin{figure}[p]
@@ -687,19 +686,19 @@ small.
 Suppose a chute can contain at most 20 parcels, say. Then, each parcel
 on the belt that `sees' 20 parcels in its chute will be blocked. Let
 $L(t)$ be the number of parcels in the chute at time $t$. Then,
-$A(20,t)$ as defined in Eq.~(\ref{eq:19}) is number of\emph{ blocked
+$A(20,t)$ as defined in Eq.~(\ref{eq:19}) is the number of\emph{ blocked
   parcels} up to time $t$, and $A(20,t)/A(t)$ is the fraction of
 rejected parcels. In fact, $A(20,t)$ and $A(t)$ are continuously
 tracked by the sorting center and used to adapt employee capacity to
 control the fraction of rejected parcels. Thus, in simulations, if one
-want to estimate loss fractions, $A(n,t)/A(t)$ is the most natural
+wants to estimate loss fractions, $A(n,t)/A(t)$ is the most natural
 concept to consider.
 
 For the second example, suppose there is a cost associated with
 keeping jobs in queue. Let $w$ be the cost per job in queue per unit
 time so that the cost rate is $n w$ when $n$ jobs are in queue. But
-then is $ wnY(n,t)$ the total cost up to time $t$ to have $n$ jobs in
-queue, hence the total cost up up to time $t$
+then is $ w n Y(n,t)$ the total cost up to time $t$ to have $n$ jobs in
+queue, hence the total cost up to time $t$
   \begin{equation*}
 C(t) =     w \sum_{n=0}^\infty n Y(n,t),
   \end{equation*}
@@ -718,7 +717,7 @@ Finally, the following two exercises show that level-crossing arguments extend w
   Consider a single server that serves one queue and serves only in
   batches of 2 jobs at a time (so never 1 job or more than 2 jobs),
   i.e., the $M/M^2/1/3$ queue.  Single jobs arrive at rate $\lambda$
-  and the interarrival times are exponentially distributed so that we can assume that $\lambda(n) = \lambda$. The batch service times are exponentially distributed with mean $1/\mu$. Then, by the memoryless property, $\mu(n) = \mu$. At most 3 jobs fit in the system.   Make a graph of the state-space and show, with arrows, the
+  and the inter-arrival times are exponentially distributed so that we can assume that $\lambda(n) = \lambda$. The batch service times are exponentially distributed with mean $1/\mu$. Then, by the memoryless property, $\mu(n) = \mu$. At most 3 jobs fit in the system.   Make a graph of the state-space and show, with arrows, the
   transitions that can occur.
 
   \begin{solution}
@@ -748,14 +747,14 @@ See the figure below.
   to express the steady-state probabilities $p(n),n=0,\ldots, 3$ in
   terms of $\lambda$ and $\mu$.
   \begin{hint}
-First balance the rates accross the levels. Then solve for $\pi(k)$.
+First balance the rates across the levels. Then solve for $\pi(k)$.
   \end{hint}
   \begin{solution}
 With level crossing
   \begin{align*}
-    \lambda p(0)  &= \mu p(2) \quad\text{the level between 0 and 1}\\
-    \lambda p(1)  &= \mu p(2) +\mu p(3), \quad\text{see level 1}\\
-    \lambda p(2)  &= \mu p(3)\quad\text{the level between 2 and 3}\\
+    \lambda p(0)  &= \mu p(2), \quad\text{the level between 0 and 1,}\\
+    \lambda p(1)  &= \mu p(2) +\mu p(3), \quad\text{see level 1,}\\
+    \lambda p(2)  &= \mu p(3), \quad\text{the level between 2 and 3.}\\
   \end{align*}
   Solving this in terms of $p(0)$ gives $p(2) = \rho p(0)$, $p(3) = \rho p(2) = \rho^2p(0)$, and
   \begin{equation*}

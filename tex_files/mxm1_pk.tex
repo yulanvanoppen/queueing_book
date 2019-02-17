@@ -65,7 +65,7 @@ arrive.  Hence,
 \end{solution}
 \end{exercise}
 
-Let us next find expressions for the waiting time and queue lengths. For this, we need to describe the queueing process is somewhat more detail. A batch joins the end of the queue (if present), and once the queue in front of it is cleared, the entire batch moves from the queue to the server. Then the server starts serving the batch. As the service of the first item of the batch starts right away, this item does not have to wait. The last item, however, must wait for all the other items of the batch to be served before its service can start. Consequently, all items of a batch, except the first, also have to wait at the server before service starts. 
+Let us next find expressions for the waiting time and queue lengths. For this, we need to describe the queueing process in somewhat more detail. A batch joins the end of the queue (if present), and once the queue in front of it is cleared, the entire batch moves from the queue to the server. Then the server starts serving the batch. As the service of the first item of the batch starts right away, this item does not have to wait. The last item, however, must wait for all the other items of the batch to be served before its service can start. Consequently, all items of a batch, except the first, also have to wait at the server before service starts. 
 
 
 For the average waiting time, we use the derivation of $\E{W_Q}=\E{S_r}/(1-\rho)$, i.e., \eqref{eq:35}, as guidance. Suppose a batch finds $\E{L}$ items in the system upon
@@ -178,7 +178,7 @@ Use Eq.~\ref{eq:43}. What are $\E{B^2}$, $\E B$ and $\V B$ for this case?
 \begin{exercise}
   If the batch size is $p$ geometrically distributed, what is $\E L$?
   \begin{hint}
-$f_k=q^{k-1}p$ with $q=1-p$. Use generating functions to compute $\E B$ and $\E{B^2}$
+$f_k=q^{k-1}p$ with $q=1-p$. Use generating functions to compute $\E B$ and $\E{B^2}$.
   \end{hint}
 \begin{solution}
   We need $\V B$ and $\E B$. Consider
@@ -209,7 +209,7 @@ and
 \end{equation*}
 and
 \begin{equation*}
-  C_s^2= \frac{\V B}{(\E B)^2} = p^2 \left(\frac1{p^2}-\frac1p\right)=1-p
+  C_s^2= \frac{\V B}{(\E B)^2} = p^2 \left(\frac1{p^2}-\frac1p\right)=1-p.
 \end{equation*}
 Then,
 \begin{equation*}
@@ -241,7 +241,7 @@ queue. The result is at least consistent with earlier work.
   batch sizes are constant and equal to~$2$ (observe that in both cases $\E B =2$).
   \begin{solution}
     Start with the simple case, $B\equiv 2$. Then $\V{B}=0$ and
-    $\E B = 2$. The load is $\rho=\lambda \E B \E S = 1\cdot 2 \cdot 25/60 = 5/6$.  hence,
+    $\E B = 2$. The load is $\rho=\lambda \E B \E S = 1\cdot 2 \cdot 25/60 = 5/6$.  Hence,
     \begin{equation*}
       \E{L} = \frac 12 \frac{5/6}{1/6} 2 + \frac 12 \frac{5/6}{1/6} = 5 + \frac52.
     \end{equation*}
@@ -333,12 +333,12 @@ Realize that the inventory process $I(t)$ behaves as     $I(t)=S-L(t)$ where $L(
 Consider a queueing system with job
 arrival rate $\lambda=6$ per hour and the jobs have batch sizes as
 indicated in the problem. The average number of items in the system
-follows like this
+follows like this:
     \begin{align*}
-      \E B &= \frac{1+2+3+4}{4} = \frac 52 \\
-      \E{B^2} &= \frac{1+4+9+16}{4} = \frac{30}4\\
-      \V{B^2} &= \frac{30}4 - \frac{25}4 = \frac 5 4\\
-      C_s^2 &= \frac{5/4}{25/4} = \frac 15\\
+      \E B &= \frac{1+2+3+4}{4} = \frac 52, \\
+      \E{B^2} &= \frac{1+4+9+16}{4} = \frac{30}4,\\
+      \V{B^2} &= \frac{30}4 - \frac{25}4 = \frac 5 4,\\
+      C_s^2 &= \frac{5/4}{25/4} = \frac 15,\\
       \rho &= \lambda \E B \E S = 6 \frac 52 \frac 1{20} = \frac 34.
     \end{align*}
 Hence, 
@@ -362,7 +362,7 @@ Section~\ref{sec:batch-arrivals}.
 
 
 We now turn to proving~\eqref{eq:br} with sample-path arguments and
-counting; it is an elegant line of reasoning. Moreover, this derivation of the distribution of  the \emph{remaining lifetime   distribution} or the \emph{residual life} is useful in its own right and and used in, for instance, maintenance planning. 
+counting; it is an elegant line of reasoning. Moreover, this derivation of the distribution of  the \emph{remaining lifetime   distribution} or the \emph{residual life} is useful in its own right and used in, for instance, maintenance planning. 
 
 
 For this purpose, consider  the start and finish times of the batches in service.  Then, remove all idle periods of the server, so that we paste together the times during which the server is busy, and plot the remaining job size as a function of time, 
@@ -486,7 +486,7 @@ is the total time up to time $t$ that there are $i$ items at the server.
 \begin{exercise}
 Let $\tilde A_k$ be the moment the $k$th batch moves to the server and $D_k$ its departure time. Show that, when $S_{k,i}$ is the service time of the $i$th item of batch~$k$,  
 \begin{equation*}
-  \int_{\tilde A_k}^{D_k} \1{L_S(s)=i} \d s = S_{k,i} \1{B_k \geq i}, 
+  \int_{\tilde A_k}^{D_k} \1{L_S(s)=i} \d s = S_{k,i} \1{B_k \geq i}. 
 \end{equation*}
 \begin{solution}
 Only if $B_k \geq i$ there can be an $i$th item of the batch, and the time this $i$th item spends at the server is its service time $S_{k,i}$.   
@@ -522,7 +522,7 @@ We are given two i.i.d. sequences $A_1, A_2, \ldots $ and $H_1, H_2, \ldots$, wh
 \frac{  \sum_{k=1}^n \1{A_k\leq 15, H_k \leq 1.8}}{\sum_{k=1}^n \1{A_k \leq 15}} 
 = \P{H\leq 1.8 \given A \leq 15},
 \end{equation*}
-where $H$ and $A$ are the limiting r.v.s associated with $\{H_k\}$ and $\{A_k\}$, respectively. With this, show that
+where $H$ and $A$ are the limiting r.v.s. associated with $\{H_k\}$ and $\{A_k\}$, respectively. With this, show that
 \begin{equation*}
   \lim_{n\to\infty} \frac{ \sum_{k=1}^n H_k \1{A_k\leq 15}}{\sum_{k=1}^n \1{A_k \leq 15}} = \E{H \given A\leq 15}.
 \end{equation*}

@@ -17,9 +17,9 @@ systems, measurements of the inter-arrival times between consecutive
 arrivals show that it is reasonable to model an inter-arrival $X$ as
 an \recall{exponentially distributed} random variable, i.e.,
 \begin{equation*}
-  \P{X \leq t} = 1- e^{-\lambda t}
+  \P{X \leq t} = 1- e^{-\lambda t}.
 \end{equation*}
-In the sequel we often write $X\sim \exp(\lambda)$ to mean that~$X$ is
+In the sequel we often write $X\sim \Exp(\lambda)$ to mean that~$X$ is
 exponentially distributed with rate~$\lambda$.  Recall that the
 constant $\lambda$ is called the \recall{arrival rate}.
 
@@ -44,11 +44,11 @@ Suppose $\lambda=0$. Then $\P{X\leq t} = 1-e^{0} = 0$. In words, this would mean
 \end{exercise}
 
 \begin{exercise} \label{exer:lambda}
-  If the random variable $X\sim\exp(\lambda)$, show that its mean $\E X = \frac{1}\lambda$. Interpret this result.
+  If the random variable $X\sim\Exp(\lambda)$, show that its mean $\E X = \frac{1}\lambda$. Interpret this result.
   \begin{hint}
  \begin{equation*}
     \E X = \int_0^\infty t f(t)\, \d t =
-    \int_0^\infty t \lambda e^{-\lambda t}\, \d t 
+    \int_0^\infty t \lambda e^{-\lambda t}\, \d t,
   \end{equation*}
   where~$f(t)=\lambda e^{-\lambda t}$ is the density function of the distribution function $F$ of $X$. Now solve the integral.
   \end{hint}
@@ -67,7 +67,7 @@ For the interpretation, if jobs arrive at rate $\lambda$, the average time betwe
 
 
 \begin{exercise}\label{ex:15} 
-  If $X\sim\exp(\lambda)$, show that its second moment $\E{X^2} =  \frac{2}{\lambda^2}$.
+  If $X\sim\Exp(\lambda)$, show that its second moment $\E{X^2} =  \frac{2}{\lambda^2}$.
   \begin{hint}
   \begin{equation*}
   \E{X^2}= \int_0^\infty t^2 \lambda e^{-\lambda t}\, \d t =  \frac{2}{\lambda^2}.
@@ -88,7 +88,7 @@ For the interpretation, if jobs arrive at rate $\lambda$, the average time betwe
 
 
 \begin{exercise} 
-  If $X\sim\exp(\lambda)$, show that the \recall{variance}
+  If $X\sim\Exp(\lambda)$, show that the \recall{variance}
 $\V X = \lambda^{-2}$.
   \begin{hint} Use, and memorize, the very practical formula
   \begin{equation*}
@@ -96,29 +96,29 @@ $\V X = \lambda^{-2}$.
   \end{equation*}
   \end{hint}
   \begin{solution}
-    By the previous problems, $\E{X^2}=2/\lambda^2$ and $\E X = 1/\lambda$. 
+    By the previous problems, $\E{X^2}=2/\lambda^2$ and $\E X = 1/\lambda$. Hence the variance $\V X = \E X^2 - (\E X)^2 = \frac{2}{\lambda^2} - (\frac{1}{\lambda})^2 = \lambda^{-2}.$
   \end{solution}
 \end{exercise}
 
-The  above exercises can also be easily solved with the moment generating function of $X\geq 0$
-\begin{equation*}
+The  above exercises can also be easily solved with the moment generating function of $X$:
+\begin{equation}\label{eq:60}
   M_X(t) = \E{e^{t X}} = \int_0^\infty e^{t x} \lambda e^{-\lambda x} \d x.
-\end{equation*}
+\end{equation}
 
 \begin{exercise}
-Why do we require that $t \in [0, \lambda)$ in the definition of $M_X(t)$?
+Why do we require that $t < \lambda$ in the definition of $M_X(t)$?
 \begin{solution}
 \begin{equation*}
   M_X(t) = \E{e^{t X}} = \lambda \int_0^\infty e^{-(\lambda-t) x}\d x.
 \end{equation*}
-  If $t - \lambda>0$, then this integral becomes $\infty$. 
+  If $t - \lambda \geq 0$, then this integral becomes $\infty$. 
 \end{solution}
 \end{exercise}
 
 \begin{exercise}
   What is $M_X(0)?$
   \begin{solution}
-    $M_X(0) = \E{e^{0 X}} = \E{e^0} = \E{1} = 1$
+    $M_X(0) = \E{e^{0 X}} = \E{e^0} = \E{1} = 1.$
   \end{solution}
 \end{exercise}
 
@@ -144,7 +144,7 @@ Why do we require that $t \in [0, \lambda)$ in the definition of $M_X(t)$?
     \end{solution}
   \end{exercise}
 
-\begin{exercise}
+\begin{exercise}\label{ex:21}
     Use the moment generating function to show that 
     \begin{align*}
       \E{X} &=\frac1\lambda, & 
@@ -152,19 +152,22 @@ Why do we require that $t \in [0, \lambda)$ in the definition of $M_X(t)$?
     \end{align*}
 \begin{hint}
     \begin{align*}
-      \E{X} &= M_X'(0) &  \E{X^2} &= M_X''(0).
+      \E{X} &= M_X'(0), &  \E{X^2} &= M_X''(0),
     \end{align*}
-where $M'(t) = \frac{\d}{\d t} M(t)$. 
+where $M_X'(t) = \frac{\d}{\d t} M_X(t)$. 
 \end{hint}
-\begin{solution}
-  $\E X = M_X'(0)=\lambda/(\lambda-t)^2$. Hence, $M_X'(0)=1/\lambda$. And, $\E{X^2} = M_X''(t)=2\lambda/(\lambda-t)^3$, hence $\E{X^2}=M_X''(0)=2\lambda/\lambda^3=2\lambda^{-2}$. 
+\begin{solution} By Ex.~\ref{ex:33}, 
+  $ M_X'(t)=\lambda/(\lambda-t)^2$. Hence, $M_X'(0)=1/\lambda$. Next, $M_X''(t)=2\lambda/(\lambda-t)^3$, hence $\E{X^2}=M_X''(0)=2\lambda/\lambda^3=2\lambda^{-2}$. 
 \end{solution}
   \end{exercise}
 
 \begin{exercise}
-  Prove that the square coefficient of variation (SCV) of $X$ is $C^2 =1$.  
+Use~\eqref{eq:62} to   prove that the square coefficient of variation (SCV) of $X$ is $C^2 =1$.  
 \begin{solution}
-  By the previous problems, $\V X = 1/\lambda^2$ and $\E X=1/\lambda$.
+  By the previous problems, $\V X = 1/\lambda^2$ and $\E X=1/\lambda$, hence
+  \begin{equation*}
+    C^2= \frac{\V X}{(\E X)^2} = \frac{1/\lambda^2}{1/\lambda^2} = 1
+  \end{equation*}
 \end{solution}
 \end{exercise}
 
@@ -215,7 +218,7 @@ customers.
 Approximations of the probability density functions, based on the empirical distributions, are shown, from left to right,
 in the three panels in Figure~\ref{fig:uniformfew}. The continuous
 curve is the graph of $\lambda e^{-\lambda x}$ where
-$\lambda = N/\E X = N/5$. (Recall from Exercise~(\ref{exer:lambda}) that when $1$
+$\lambda = N/\E X = N/5$. (Recall from Exercise~(\ref{exer:lambda}) that when one
 person visits the shop  with an average inter-arrival time of $5$
 hours,  the arrival rate is $1/5$. Hence, when $N$ customers visit the shop, each with an average inter-arrival time of 5 hours, the total arrival rate as seen by the shop must be $N/5$.)
 
@@ -230,8 +233,8 @@ hours,  the arrival rate is $1/5$. Hence, when $N$ customers visit the shop, eac
     that the density $\lambda e^{-\lambda x}$ intersects the $y$-axis
     at level $N/5$, which is equal to the arrival rate when $N$
     persons visit the shop. The parameter $n=100$ is the simulation
-    length, i.e., the number of visits per customer, and $b=10$ is
-    number of bins to collect the data.}
+    length, i.e., the number of visits per customer, and $b=10$ is the
+    number of bins to collect the data. The height of a point corresponds to a density, but its computation is a bit subtle. Let $a=(X_1, \ldots, X_n)$ denote the simulated inter-arrival times. Define the width of a bin as $\delta = (\max\{a\} - \min\{a\})/b$. Then the height of the $i$th bin is computed as $h_i = n_i/(n \delta)$. With this: $\sum_{i=1}^b h_i \delta = 1$.}
   \label{fig:uniformfew}
 \end{figure}
 
@@ -247,18 +250,11 @@ $\sigma=1$, see Figure~\ref{fig:normal}.
 % see progs/convergence_to_exp.py
  \input{progs/uniform_to_exponential_many.tex}\\
   \end{tabular}
-  \caption{Each of the $N$ customer visits the shop at uniformly 
+  \caption{Each of the $N$ customers visits the shop at uniformly 
     distributed inter-arrival times, but now the number of visits is
     $n=1000$.}  
   \label{fig:uniformmany}
 \end{figure}
-
-\begin{exercise}
-  Try to make Figure~\ref{fig:uniformmany} with simulation. (This is a very important exercise.)
-  \begin{solution}
-    The source code can be found in \texttt{progs/converge\_to\_exp.py}.
-\end{solution}
-\end{exercise}
 
 \begin{figure}[ht]
   \centering
@@ -266,7 +262,7 @@ $\sigma=1$, see Figure~\ref{fig:normal}.
 % see progs/convergence_to_exp.py
  \input{progs/normal_to_exponential.tex}
   \end{tabular}
-  \caption{Each of the $N$ customer visits the shop with normally
+  \caption{Each of the $N$ customers visits the shop with normally
     distributed inter-arrival times with $\mu=5$ and
     $\sigma=1$.}  \label{fig:normal}
 \end{figure}
@@ -309,23 +305,23 @@ By  the definition of conditional probability
 
 As an aside,  it can be shown that only exponential random variables have the
 memoryless property. The proof of this fact requires quite some work;
-we refer the reader to the literature if s/he want to check this, see
+we refer the reader to the literature if s/he wants to check this, see
 e.g. \citet[Appendix 3]{yushkevich69:_markov_proces}.
   \end{solution}
 \end{exercise}
 
 
-% Then reader should realize that it is simple, by means of
-% computers, to generate exponentially distributed interarrival
+% The reader should realize that it is simple, by means of
+% computers, to generate exponentially distributed inter-arrival
 % times. Thus, it is easy to use such exponentially distributed random
 % variables to simulate queueing systems. 
 
 
 \begin{exercise}\label{ex:10}
-  If $X\sim\exp(\lambda)$ and $S\sim\exp(\mu)$, and $X$ and $S$ are
+  If $X\sim\Exp(\lambda)$ and $S\sim\Exp(\mu)$, and $X$ and $S$ are
   independent, show that 
   \begin{equation*}
-Z=\min\{X,S\}\sim\exp(\lambda+\mu),
+Z=\min\{X,S\}\sim\Exp(\lambda+\mu),
   \end{equation*}
 hence $\E Z = (\lambda+\mu)^{-1}$.
 \begin{hint}
@@ -345,7 +341,7 @@ Use that $X$ and $S$ are independent to get
 \end{exercise}
 
 \begin{exercise}\label{ex:3}
-   If $X\sim \exp(\lambda)$, $S\sim\exp(\mu)$, and $X$ and $S$ are independent, show that 
+   If $X\sim \Exp(\lambda)$, $S\sim\Exp(\mu)$, and $X$ and $S$ are independent, show that 
     \begin{equation*}
       \P{X\leq S} = \frac{\lambda}{\lambda+\mu}.
     \end{equation*}
@@ -374,8 +370,8 @@ With this,
 &= \lambda \mu \int_0^\infty e^{-\mu y} \int_0^y e^{-\lambda x}\, \d x \, \d y \\
 &= \mu \int_0^\infty e^{-\mu y} (1-e^{-\lambda y})\,\d y\\
 &= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
-&= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
-&= 1 - \frac{\mu}{\lambda + \mu} 
+&= 1 - \frac{\mu}{\lambda + \mu} \\
+&= \frac{\lambda}{\lambda + \mu}.
 \end{align*}
 
 Method 2. You only have to study this if you (want to) know about conditioning with respect to a random variable with a density, otherwise, skip it.  Start with  the law of total probability in the discrete case: 
@@ -408,7 +404,7 @@ where, as before, $f_{X, S}( x, s)$ is the joint density of $X$ and $S$. With th
 \end{equation*}
 Using the definition of $f_{X|S}(x|s)$ and the independence of $X$ and $S$ it follows that
 \begin{equation*}
-  f_{X|S}(x|s) = \frac{f_{X, S}( x, s)}{f_S(s)} = \frac{\lambda e^{-\lambda x} \mu e^{-\mu s}}{\mu e^{-\mu s}} = \lambda e^{-\lambda x}
+  f_{X|S}(x|s) = \frac{f_{X, S}( x, s)}{f_S(s)} = \frac{\lambda e^{-\lambda x} \mu e^{-\mu s}}{\mu e^{-\mu s}} = \lambda e^{-\lambda x},
 \end{equation*}
 from which we get that 
 \begin{align*}
@@ -434,7 +430,7 @@ Straightforward integration gives the final result.
 
 The Poisson process $N$ and exponentially distributed inter-arrival times are intimately related: A counting process $\{N(t)\}$ is a \recall{Poisson process} with rate $\lambda$ if and only if  the inter-arrival times $\{X_i\}$ are i.i.d. and exponentially distributed with mean $1/\lambda$,  in short, 
 \begin{equation*}
-X_i\sim \exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t).
+X_i\sim \Exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t).
 \end{equation*}
 
 
@@ -442,7 +438,7 @@ We next provide further relations between the Poisson distribution and the expon
 
   \begin{exercise}
     Assume that the inter-arrival times $\{X_i\}$ are i.i.d. and
-    $X_i\sim\exp(\lambda)$. Let
+    $X_i\sim\Exp(\lambda)$. Let
     $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$. Show that %We do not need the MGF here.
  \begin{equation*}
 \E{A_i} = \frac i\lambda,
@@ -483,13 +479,13 @@ is  the density of $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$.
     and $i-1$, and $M_X(t)$ the associated moment generating
     function. Using the i.i.d. property of the $\{X_i\}$,
 \begin{align*}
-  M_{A_i}(t) &= \E{e^{t A_i}} = \E{\exp\left(t\sum_{j=1}^{i} X_j\right)} \\
-& = \prod_{j=1}^{i} \E{e^{tX_j}} = 
-\prod_{j=1}^{i} M_{X_j}(t) = 
-\prod_{j=1}^{i} \frac{\lambda}{\lambda -t }
+  M_{A_i}(t) &= \E{e^{t A_i}} = \E{\exp\left(t\sum_{k=1}^{i} X_k\right)} \\
+& = \prod_{k=1}^{i} \E{e^{tX_k}} = 
+\prod_{k=1}^{i} M_{X_k}(t) = 
+\prod_{k=1}^{i} \frac{\lambda}{\lambda -t }
  = \left(\frac{\lambda}{\lambda -t }\right)^i.
 \end{align*}
-From a table of moment generation functions it follows immediately that
+From a table of moment generating functions it follows immediately that
 $A_i \sim \Gamma(i,\lambda)$, i.e., $A_i$ is Gamma distributed.
 \end{solution}
 \end{exercise}
@@ -562,7 +558,7 @@ $N(t) \sim \text{P}(\lambda t)$.
 \P{A_{k+1} \leq t} 
 &= \lambda \int_0^t \frac{(\lambda s)^{k}}{k!}e^{-\lambda s}\, \d s \\
 &= \lambda \frac{(\lambda s)^{k}}{k!}\frac{e^{-\lambda s}}{-\lambda} \Big|_{0}^t + \lambda \int_0^t \frac{(\lambda s)^{k-1}}{(k-1)!}e^{-\lambda s}\, \d s \\
-&= - \frac{(\lambda t)^{k}}{k!} e^{-\lambda t} + \P{A_k \leq t}
+&= - \frac{(\lambda t)^{k}}{k!} e^{-\lambda t} + \P{A_k \leq t}.
 \end{align*}
 We are done.
     \end{solution}
@@ -582,7 +578,7 @@ In the sequel of this section we  develop numerous important probability concept
   \begin{solution}
 The joint density of $S$ and $X$ is given by
 \begin{equation*}
-  f_{XS}(x,y) = f_X(x) \cdot f_S(s) = \frac{1}{10} \1{0\leq x \leq 10}\cdot \frac 17 \1{0\leq s \leq 7},
+  f_{XS}(x, s) = f_X(x) \cdot f_S(s) = \frac{1}{10} \1{0\leq x \leq 10}\cdot \frac 17 \1{0\leq s \leq 7},
 \end{equation*}
 since $X$ and $S$ are independent. 
 Thus, 
@@ -673,7 +669,7 @@ If you fill this in at Wolfram, you'll get the results that we obtained above in
 \begin{exercise}
   A machine serves two types of jobs. The processing time of jobs of
   type $i$, $i=1,2$, is exponentially distributed with parameter
-  $\mu_i$. The type $T$ of job is random and independent of anything
+  $\mu_i$. The type $T$ of a job is random and independent of anything
   else, and such that $\P{T=1} = p = 1-q = 1-\P{T=2}$. (An example
   is a desk serving men and women, both requiring different average
   service times, and $p$ is the probability that the customer in
@@ -692,7 +688,7 @@ service times of jobs.
     \begin{equation*}
       X = \1{T=1} X_1 + \1{T=2} X_2,
     \end{equation*}
-    where $\1{}$ is the indicator function, that is, $\1{A}=1$ if the
+    where $\1{\cdot}$ is the indicator function, that is, $\1{A}=1$ if the
     event $A$ is true, and $\1{A}=0$ if $A$ is not true.   
 \end{hint}
   \begin{solution}
@@ -772,7 +768,7 @@ Write
 $\sum_{k=0}^\infty G(k) = \sum_{k=0}^\infty \sum_{m=k+1}^\infty \P{B=m}$, reverse the summations. Then realize that $\sum_{k=0}^\infty \1{k<m} = m$. 
 You should be aware that this sort of problem is just a regular probability
   theory problem, nothing fancy. We use/adapt the tools you learned in
-  calculus to carry out 2D integrals (or in this case 2D summations.)
+  calculus to carry out 2D integrals (or in this case 2D summations).
     \end{hint}
 \begin{solution}
 Observe first that $\sum_{k=0}^\infty \1{m>k} = m$, since $\1{m>k}=1$ if $k<m$ and $\1{m>k} = 0$ if $k\geq m$. With this, 
@@ -782,10 +778,10 @@ Observe first that $\sum_{k=0}^\infty \1{m>k} = m$, since $\1{m>k}=1$ if $k<m$ a
 = \sum_{k=0}^\infty \sum_{m=k+1}^\infty \P{B=m}  \\
 & = \sum_{k=0}^\infty \sum_{m=0}^\infty 1\{m>k\} \P{B=m} 
 = \sum_{m=0}^\infty \sum_{k=0}^\infty 1 \{m>k\} \P{B=m} \\
-&= \sum_{m=0}^\infty m\P{B=k} = \E B.
+&= \sum_{m=0}^\infty m\P{B=m} = \E B.
 \end{align*}
 In case you are interested in mathematical justifications: the
-interchange of the two summations is allowed because the summands are
+interchange of the two summations is allowed by Tonelli's theorem because the summands are
 all positive. (Interchanging the order of summations or integration is
 not always allowed because the results can be different when part of
 the integrand is negative. Check Fubini's theorem for more on this if
@@ -823,14 +819,14 @@ for the expectation of $S$. Here $\d F(x)$ acts as a shorthand for $f(x) \d x$. 
 $   \E S = \int_0^\infty x \d F(x)  = \int_0^\infty G(y) \d y,$
 where $G(x) = 1 - F(x)$. 
 \begin{hint}
-$\E S = \int_0^\infty x \d F  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d F(x)$.
+$\E S = \int_0^\infty x \d F(x)  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d F(x)$.
 \end{hint}
 \begin{solution}
 \begin{equation*}
   \begin{split}
-    \E{S} &= \int_0^\infty x \d F  = \int_0^\infty \int_0^x \d y \d F(x) \\
-    & = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d F(x)   = \int_0^\infty \int_0^\infty 1_{y\leq x} \d F(x) \d y\\
-    & = \int_0^\infty \int_y^\infty \d F(x) \d y = \int_0^\infty G(y) \d y
+    \E{S} &= \int_0^\infty x \d F(x)  = \int_0^\infty \int_0^x \d y \d F(x) \\
+    & = \int_0^\infty \int_0^\infty \1{y\leq x} \d y \d F(x)   = \int_0^\infty \int_0^\infty \1{y\leq x} \d F(x) \d y\\
+    & = \int_0^\infty \int_y^\infty \d F(x) \d y = \int_0^\infty G(y) \d y.
   \end{split}
 \end{equation*}
 \end{solution}

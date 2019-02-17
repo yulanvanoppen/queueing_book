@@ -21,7 +21,7 @@ this result by means of sample path arguments.
 
 Recall that Eq.~\eqref{eq:35} states that
 \begin{equation*}
-  \E{W_Q} = \frac{\E{S_r}}{1-\rho}
+  \E{W_Q} = \frac{\E{S_r}}{1-\rho}.
 \end{equation*}
 This equation is valid for the $M/G/1$ queue, as in the derivation we
 used the PASTA property but did not need that the
@@ -160,7 +160,7 @@ Show that $\E{S_r\given S_r>0} = 2/(3\mu)$ when  $S \sim U[0,2/\mu]$.
 \end{exercise}
 
 \begin{exercise}
- Show that $\E{S_r\given S_r>0} = \mu^{-1}$ when $S\sim \exp(\mu)$.
+ Show that $\E{S_r\given S_r>0} = \mu^{-1}$ when $S\sim \Exp(\mu)$.
 \begin{solution}
     \begin{align*}
 \E S &= \mu \int_0^\infty x e^{-\mu x}\,\d x = 1/\mu, \\
@@ -246,7 +246,7 @@ L
 
 \begin{exercise}
   Consider a workstation with just one machine. Jobs arrive, roughly,
-  in accordance to Poisson process, with rate $\lambda=3$ per day. The
+  in accordance with a Poisson process, with rate $\lambda=3$ per day. The
   average service time $\E S = 2$ hours, $C^2_s = 1/2$, and the shop
   is open for 8 hours. What is $\E{W_Q}$?
 
@@ -359,9 +359,9 @@ Hence $\V S = \E{S^2} - (\E S)^2 = 0$, hence $C_s^2 = 0$.
 
 From the Pollaczek-Khinchine formula, the first term is $1+C_s^2=1$ for the $M/D/1$ queue, and $1+C_s^2=2$ for the $M/M/1$ queue. Hence, 
   \begin{equation*}
-\E{W_Q(M/D/1)} = \frac{\E{W_Q(M/M/1)}}2
+\E{W_Q(M/D/1)} = \frac{\E{W_Q(M/M/1)}}2.
   \end{equation*}
-thus, 
+Thus, 
 \begin{equation*}
  \E{L_Q(M/D/1)} = \frac{\E{L_Q(M/M/1)}}2.    
 \end{equation*}
@@ -452,7 +452,7 @@ The job in
   \begin{hint}
 The rate of
     accepted jobs is $\lambda \pi(0)$. What is the load of these jobs?
-    Equate this to $1-\pi(0$ as this must also be the load. Then solve for $\pi(0)$.
+    Equate this to $1-\pi(0)$ as this must also be the load. Then solve for $\pi(0)$.
   \end{hint}
   \begin{solution}
     Let $p(0)$ be the fraction of time the server is idle. By PASTA,
@@ -468,7 +468,7 @@ The rate of
       \lambda\pi(0) \E S = 1 - \pi(0) \iff \pi(0)=\frac1{1+\lambda\E S} 
 \iff 1-\pi(0) = \frac{\lambda \E S}{1+\lambda \E S},
     \end{equation*}
-which is the same an in the previous problem.
+which is the same as in the previous problem.
 
 Note that  $\delta < \lambda$, as it should be the case. 
   \end{solution}

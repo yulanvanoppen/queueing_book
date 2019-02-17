@@ -25,13 +25,16 @@
 \begin{document}
 \maketitle
 
+\tableofcontents
+
+
 
 \begin{itemize}
 \item You don't have to memorize all formulas in the book, for instance those of the various $M(n)/M(n)/1$ models (e.g., $M/M/1/K$). That is simply too much, hence unreasonable.
 \item For the multiple choice part you have to be able to check the derivations, whether the derivation contains one or more errors or not.
 \item For the open questions part you have to able to derive the formulas based on, e.g., level-crossing arguments.
 \item For the open questions: you have to show that you understand what you are doing. If you make small numerical errors (if there are numerical questions), I still give full points if you can make clear that you can get the correct result with some more time (such as in real life), or that you can implement your ideas in a computer program. However, I will not give points for really silly results, e.g., negative probabilities. 
-\item I expect you to be familiar with the most important \emph{notation} used in the book. For instance, you should what is meant with $M^X/M/1$, or with $A(t)$ or $A(n,t)$, or $\pi(n)$.  Definitions that are used only once, such  $A(m,n,t)$, will defined in the exam. 
+\item I expect you to be familiar with the most important \emph{notation} used in the book. For instance, you should know what is meant with $M^X/M/1$, or with $A(t)$ or $A(n,t)$, or $\pi(n)$.  Definitions that are used only once, such  $A(m,n,t)$, will defined in the exam. 
 \item For the MVA you need to memorize the formulas. They are not hard, and simple to derive. 
 \item The formulasheet below will be attached to the exam. You should know which formula applies when; you don't have to memorize these formulas.
 \end{itemize}
@@ -44,8 +47,8 @@
 %\input{tex_files/failures.tex}
 %\input{tex_files/adjustments.tex}
 %\input{tex_files/setup_times.tex}
-\input{tex_files/poissondistribution.tex}
-%\input{tex_files/expdistribution.tex}
+%\input{tex_files/poissondistribution.tex}
+\input{tex_files/expdistribution.tex}
 %\input{tex_files/random_walk.tex}
 %\input{tex_files/ratestability.tex}
 %\input{tex_files/constructiondiscretetime.tex}
@@ -104,8 +107,12 @@
 \input{tex_files/formula_sheet}
 \end{comment}
 
-
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Index}
 \printindex
+
+%\printindex
 % \bibliographystyle{plainnat}
 % \bibliography{biblio_nicky}
 \end{document}

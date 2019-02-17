@@ -106,8 +106,7 @@ from which  follows our final result:
   \lambda(n) = \lambda \iff \pi(n) = p(n), 
 \end{equation*}
 
-\begin{exercise}\label{ex:8} Show that for the case of Exercises~\ref{ex:111} and~\ref{ex:112}.  
-$\pi(0)=1$, $\pi(n)=0$, for $n>0$.
+\begin{exercise}\label{ex:8} Show that for the case of Exercises~\ref{ex:111} and~\ref{ex:112} $\pi(0)=1$ and $\pi(n)=0$, for $n>0$.
 
 \begin{solution}
   All arrivals see an empty system. Hence $A(0,t)/A(t) \approx (t/2)/(t/2) = 1$, and $A(n,t)=0$ for $n>0$. Thus, $\pi(0) = \lim_t A(0,t)/A(t) = 1$ and $\pi(n)=0$ for $n>0$. Recall from the other exercises that $p(0)=1/2$. Hence, time average statistics are not the same as statistics at arrival moments. 
@@ -116,7 +115,7 @@ $\pi(0)=1$, $\pi(n)=0$, for $n>0$.
 \end{exercise}
 
 \begin{exercise}
-  Check that~(\ref{eq:13})  holds for the system of Exercise~\ref{ex:8}
+  Check that~(\ref{eq:13})  holds for the system of Exercise~\ref{ex:8}.
   \begin{solution}
 From the relevant previous exercises, $\lambda = \lim_t A(t)/t = 1/2$. $\lambda(0)=1$, $p(0)=1/2$, and $\pi(0)=1$. Hence,
 \begin{equation*}
@@ -185,7 +184,7 @@ the same as what jobs leave behind, i.e., $\delta(n)$.
   When $\lambda\neq \delta$, is $\pi(n)\geq \delta(n)$?  
   \begin{hint}
 Use that
-    $\lambda \geq \delta$ always, and $\lambda=\delta$ when the system
+    $\lambda \geq \delta$ always holds, and $\lambda=\delta$ when the system
     is rate-stable.
   \end{hint}
   \begin{solution}
@@ -208,13 +207,13 @@ Check all definitions of $Y(n,t)/t$ and so on.
 \begin{solution}
   The important condition is that transitions occur as single
   steps. In other words, the relation is true for processes with
-  \recall{one-step transitions}, i.e, when $|A(n,t) - D(n,t)|\leq 1$.
+  \recall{one-step transitions}, i.e., when $|A(n,t) - D(n,t)|\leq 1$.
   In  that case, 
 \begin{align*}
   \frac{A(n,t)}{t} &=   \frac{A(n,t)}{A(t)} \frac{A(t)}{t} \to \pi(n) \lambda\\
   \frac{A(n,t)}{t} &=   \frac{A(n,t)}{Y(n,t)} \frac{Y(n,t)}{t} \to \lambda(n)p(n)\\
   \frac{D(n,t)}{t} &=   \frac{D(n,t)}{Y(n+1,t)} \frac{Y(n+1,t)}{t} \to \mu(n+1)p(n+1)\\
-  \frac{D(n,t)}{t} &=   \frac{D(n,t)}{D(t)} \frac{D(t)}{t} \to \delta(n)\delta \\
+  \frac{D(n,t)}{t} &=   \frac{D(n,t)}{D(t)} \frac{D(t)}{t} \to \delta(n)\delta. \\
 \end{align*}
 \end{solution}
 \end{exercise}
@@ -247,7 +246,7 @@ Think about the
 \begin{exercise}
   Use the PASTA property and the ideas of Section~\ref{sec:level-cross-balance}
  to derive for the $M/M/1$ queue that
-$(\lambda + \mu) \pi(n) = \lambda \pi(n-1) + \mu \pi(n+1)$
+$(\lambda + \mu) \pi(n) = \lambda \pi(n-1) + \mu \pi(n+1)$.
   \begin{hint}
     Consider some state $n$ (not a level) and count all transitions that `go in and
     out of' this state. Specifically, $A(n,t) + D(n-1,t)$ counts all
@@ -450,7 +449,7 @@ if the server is idle after $D_{n-1}$.
       same as the density of $X_n + S_n$.  Since $\{X_n\}$ and $\{S_n\}$ are both i.i.d. sequences, the problem becomes to find the density of $X+S$.  We will use two ways of computing this. 
 
 \newpage
-Since $X\sim \exp(\lambda)$ and $S\sim\exp(\mu)$, and $X$ and $S$ are independent, their joint density is $f_{X,S}(x,y) = \lambda \mu e^{-\lambda x - \mu y}$. With this,
+Since $X\sim \Exp(\lambda)$ and $S\sim\Exp(\mu)$, and $X$ and $S$ are independent, their joint density is $f_{X,S}(x,y) = \lambda \mu e^{-\lambda x - \mu y}$. With this,
   \begin{align*}
 \P{X+S\leq t } 
 &= \lambda \mu \int_0^\infty \int_0^\infty e^{-\lambda x - \mu y} \1{x+y\leq t} \d x \d y \\
@@ -460,13 +459,13 @@ Since $X\sim \exp(\lambda)$ and $S\sim\exp(\mu)$, and $X$ and $S$ are independen
 &= \lambda \int_0^t e^{-\lambda x}  \d x - \lambda e^{-\mu t} \int_0^t e^{(\mu-\lambda) x} \d x \\
 &= 1- e^{-\lambda x} - \frac{\lambda}{\mu-\lambda} e^{-\mu t} ( e^{(\mu-\lambda) t} -1) \\
 &= 1- e^{-\lambda x} - \frac{\lambda}{\mu-\lambda} e^{-\lambda t} + \frac{\lambda}{\mu-\lambda} e^{-\mu t} \\ 
-&= 1 - \frac{\mu}{\mu-\lambda} e^{-\lambda t} + \frac{\lambda}{\mu-\lambda} e^{-\mu t} \\
+&= 1 - \frac{\mu}{\mu-\lambda} e^{-\lambda t} + \frac{\lambda}{\mu-\lambda} e^{-\mu t}. \\
   \end{align*}
 The density $f_{X+S}(t)$ is the derivative of this expression with respect to~$t$, hence,
 \begin{align*}
   f_{X+S}(t) 
 &= \frac{\lambda\mu}{\mu-\lambda} e^{-\lambda t}  - \frac{\mu \lambda}{\mu-\lambda} e^{-\mu s} \\
-&= \frac{\lambda\mu}{\lambda -\mu}(e^{-\mu t} - e^{-\lambda t}) \\
+&= \frac{\lambda\mu}{\lambda -\mu}(e^{-\mu t} - e^{-\lambda t}). \\
 \end{align*}
 
 Conditioning is much faster, but requires the concept of conditional density. You can skip the rest if you are not interested. 

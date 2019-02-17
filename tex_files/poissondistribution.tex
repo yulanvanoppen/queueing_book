@@ -27,7 +27,7 @@ The constant $\lambda$ is often called the \recall{arrival rate}.
 
 The second assumption is that the process $\{N(s,t], s\leq t\}$ has
 \recall{stationary} and \emph{independent increments}. Stationarity
-means that the distribution of the number of arrivals are the same for
+means that the distributions of the number of arrivals are the same for
 all intervals of equal length. Formally, $N(s_1,t_1]$ has the same
 distribution as $N(s_2, t_2]$ if $t_2-s_2 = t_1-s_1$. Independence
 means, roughly speaking, that knowing that $N(s_1,t_1]= n$, does not
@@ -37,7 +37,7 @@ $(s_1,t_1]$ and $(s_2, t_2]$ have no overlap.
 To find the distribution of $N(t)$, let us split the interval
 $[0,t]$ into $n$ sub-intervals, all of equal length, and ask: `What is
 the probability that a customer arrives in some given
-sub-interval.'  By our second assumption, the arrival rate is
+sub-interval?'  By our second assumption, the arrival rate is
 constant over time. Therefore, the probability $p$ of an arrival in each
 interval should be constant. Moreover,
 if the time intervals are very small, we can safely neglect the
@@ -90,7 +90,7 @@ $\lambda$, and write $N(t)\sim P(\lambda t)$.
   that $n p=\lambda t$. 
   \begin{hint}
 First find $p$, $n$, $\lambda$ and $t$ such that the rate
-    at which event occur in both processes are the same. Then consider
+    at which an event occurs in both processes are the same. Then consider
     the binomial distribution and use the standard limit
     $(1-x/n)^n \to e^{-x}$ as $n\to \infty$. 
   \end{hint}
@@ -127,7 +127,7 @@ is easy, so that, as $n\to\infty$,  the above converges to
   \end{solution}
 \end{exercise}
 
-Thus, if we assume that the arrival rate of customers is constant for some amount of time, e.g., an hour, and we assume that the probability of a customer arriving in some very small amount of time,  e.g., a millisecond, is small, the resulting number arrival of customers is Poisson distributed. 
+Thus, if we assume that the arrival rate of customers is constant for some amount of time, e.g., an hour, and we assume that the probability of a customer arriving in some very small amount of time,  e.g., a millisecond, is small, the resulting number of arrivals of customers is Poisson distributed. 
 
 
 \begin{exercise}\label{ex:2}
@@ -140,15 +140,15 @@ Apply the definition of the expectation, and in the computations use that
   \end{hint}
   \begin{solution} 
     When a random variable~$N$ is Poisson distributed with parameter
-    $\lambda$,
+    $\lambda t$,
     \begin{align*}
       \E N 
-&= \sum_{n=0}^\infty n e^{-\lambda}\frac{\lambda^n}{n!}  \\
-&= \sum_{n=1}^\infty n e^{-\lambda}\frac{\lambda^n}{n!}, \text{ since the term with $n=0$ cannot contribute} \\
-&= e^{-\lambda} \lambda \sum_{n=1}^\infty \frac{\lambda^{n-1}}{(n-1)!} \\
-&= e^{-\lambda} \lambda \sum_{n=0}^\infty \frac{\lambda^{n}}{n!}, \text{ by a change of variable}\\
-&= e^{-\lambda} \lambda e^{\lambda} \\
-&= \lambda.
+&= \sum_{n=0}^\infty n e^{-\lambda t}\frac{(\lambda t)^n}{n!}  \\
+&= \sum_{n=1}^\infty n e^{-\lambda t}\frac{(\lambda t)^n}{n!}, \text{ since the term with $n=0$ cannot contribute} \\
+&= e^{-\lambda t} \lambda t \sum_{n=1}^\infty \frac{(\lambda t)^{n-1}}{(n-1)!} \\
+&= e^{-\lambda t} \lambda t \sum_{n=0}^\infty \frac{(\lambda t)^{n}}{n!}, \text{ by a change of variable}\\
+&= e^{-\lambda t} \lambda t e^{\lambda t} \\
+&= \lambda t.
     \end{align*}
 \end{solution}
 \end{exercise}
@@ -163,14 +163,14 @@ Realize that $\V N = \E{N^2} - (\E N)^2$. Compute $\E{N^2}$, use Exercise~\ref{e
 
     \begin{align*}
       \E{N^2}
-&= \sum_{n=0}^\infty n^2 e^{-\lambda}\frac{\lambda^n}{n!}  \\
-&= e^{-\lambda} \sum_{n=1}^\infty n \frac{\lambda^n}{(n-1)!}  \\
-&= e^{-\lambda} \sum_{n=0}^\infty (n+1) \frac{\lambda^{n+1}}{n!}  \\
-&= e^{-\lambda} \lambda \sum_{n=0}^\infty n \frac{\lambda^{n}}{n!}  +e^{-\lambda}\lambda \sum_{n=0}^\infty\frac{\lambda^{n}}{n!}  \\
+&= \sum_{n=0}^\infty n^2 e^{-\lambda t}\frac{(\lambda t)^n}{n!}  \\
+&= e^{-\lambda t} \sum_{n=1}^\infty n \frac{(\lambda t)^n}{(n-1)!}  \\
+&= e^{-\lambda t} \sum_{n=0}^\infty (n+1) \frac{(\lambda t)^{n+1}}{n!}  \\
+&= e^{-\lambda t} \lambda t \sum_{n=0}^\infty n \frac{(\lambda t)^{n}}{n!}  +e^{-\lambda t}\lambda t \sum_{n=0}^\infty\frac{(\lambda t)^{n}}{n!}  \\
 &\quad\text{now use the hint to simplify the first summation} \\
-&= \lambda^2  + \lambda.
+&= (\lambda t)^2  + \lambda t.
 \end{align*}
-Hence, $\V N = \E{N^2} - (\E N)^2 = \lambda^2 + \lambda - \lambda^2 = \lambda$.
+Hence, $\V N = \E{N^2} - (\E N)^2 = (\lambda t)^2 + \lambda t - (\lambda t)^2 = \lambda t$.
 \end{solution}
 \end{exercise}
 
@@ -178,21 +178,21 @@ Recall that the \recall{moment generating function}  of a random variable $X\geq
 \begin{equation*}
   M_X(s) = \E{e^{s X}}.
 \end{equation*}
-With the moment generating function we compute the mean and variance of $N(t)$ with less effort. 
+With the moment-generating function we compute the mean and variance of $N(t)$ with less effort. 
 
 
 \begin{exercise}
-Show that the moment generating function of the random variable~$N(t)\sim P(\lambda t)$ is
+Show that the moment-generating function of the random variable~$N(t)\sim P(\lambda t)$ is
 \begin{equation*}
 M_{N(t)}(s) 
 %=  \E{e^{sN(t)}}  
-= \exp{\lambda t(e^s-1)}.
+= \exp{(\lambda t(e^s-1))}.
 \end{equation*}
   \begin{hint}Observe first that for a random variable $X\in\N$ and some function $f$, we have that
     \begin{equation*}
 \E{f(X)}=\sum_{n=0}^\infty f(n) \P{X=n}.      
     \end{equation*}
-Then take the function $f(x)=e^{s x}$. Finally, use that $\P{N(t)=k}=e^{-\lambda t}(\lambda t)^k/k!$
+Then take the function $f(x)=e^{s x}$. Finally, use that $\P{N(t)=k}=e^{-\lambda t}(\lambda t)^k/k!$.
   \end{hint}
 \begin{solution}
 Since $N(t)$ is Poisson distributed with parameter $\lambda t$, 
@@ -209,12 +209,12 @@ M_{N(t)}(s)
 \end{exercise}
 
 \begin{exercise}
-Use  the moment generating function of $N(t)$ to compute $\E{N(t)}$ and $\V{N(t)}$. 
+Use  the moment-generating function of $N(t)$ to compute $\E{N(t)}$ and $\V{N(t)}$. 
 \begin{hint}
-  Recall that $M_{N(t)}'(0) = \d M_{N(t)}(s)/\d s|_{s=0} = \E{N(t)}$ and $M_{N(t)}''(s)= \E{(N(t))^2}$. 
+  Recall that $M_{N(t)}'(0) = \d M_{N(t)}(s)/\d s|_{s=0} = \E{N(t)}$ and $M_{N(t)}''(0)= \E{(N(t))^2}$. 
 \end{hint}
 \begin{solution}
-Using the expression for the moment generating function of the previous exercise,
+Using the expression for the moment-generating function of the previous exercise,
   \begin{equation*}
     M_{N(t)}'(s) = \lambda t e^s \exp(\lambda t(e^s - 1)).
   \end{equation*}
@@ -230,15 +230,15 @@ hence $\E{(N(t))^2} = M''(0) = \lambda t + (\lambda t)^2$. And thus,
 \end{exercise}
 
 Define the \emph{square coefficient  of variation (SCV)} of a random variable~$X$ as 
-\begin{equation*}
+\begin{equation}\label{eq:62}
   C^2= \frac{\V X}{(\E X)^2}.
-\end{equation*}
+\end{equation}
 As  will become clear later, the SCV is a very important concept in
   queueing theory. Memorize it as a measure of \emph{relative
   variability}.
 
 \begin{exercise}
-Show that   the SCV of $N(t)$ is equal to $1/\lambda t$. 
+Show that   the SCV of $N(t)$ is equal to $1/(\lambda t)$. 
   \begin{solution}
     \begin{equation*}
 SCV = \frac{\V{N(t)}}{(\E{N(t)})^2} = \frac{\lambda t}{(\lambda t)^2} = \frac1{\lambda t}.
@@ -256,9 +256,9 @@ For the next couple of exercises, we need the concept of conditional probability
   child that guesses the number wins the gift. Show that the
   probability of winning the gift is the same for each child.
   \begin{hint}
-    For the second child, condition on the event that the first does not chose the right number.
+    For the second child, condition on the event that the first does not choose the right number.
     Use the definition of conditional probability:
-    $\P{A|B} = P{AB}/\P{B}$ provided $\P{B}>0$.
+    $\P{A|B} = \P{AB}/\P{B}$ provided $\P{B}>0$.
   \end{hint}
 \begin{solution}
     The probability that the first child to guess also wins is
@@ -283,14 +283,14 @@ For the next couple of exercises, we need the concept of conditional probability
 
 Below, and elsewhere, we use the following efficient notation:  the function $f=o(h)$ means that $f$ is such $f(h)/h \to 0$ as $h\to 0$.  The next exercise helps you practice with this notation.
 \begin{exercise}
-  Let $c$ be a constant (in $\R$) and the functions $f$ and $g$ both of $o(h)$. Then $f(h) \to 0$ when $h\to 0$, $c\cdot f = o(h)$, $f+g=o(h)$, and $f\cdot g=o(h)$. 
+  Let $c$ be a constant (in $\R$) and the functions $f$ and $g$ both of $o(h)$. Then show that (1) $f(h) \to 0$ when $h\to 0$, (2) $c\cdot f = o(h)$, (3) $f+g=o(h)$, and (4) $f\cdot g=o(h)$. 
  \begin{solution}
-First,
+In fact (1) is trivial: $|f(h)| \leq |f(h)/h|$ when $|h| < 1$. But it is given that the right hand side goes to zero.  For (2) and (3):
 \begin{align*}
 \lim_{h\to 0} \frac{c f(h)}{h} &=  c \lim_{h\to 0} \frac{f(h)}{h} = 0, \; \text{as } f = o(h), \\
-\lim_{h\to 0} \frac{f(h) + g(h)} h &= \lim_{h\to 0} \frac{f(h)} h + \lim_h \frac{g(h)} h = 0.
+\lim_{h\to 0} \frac{f(h) + g(h)} h &= \lim_{h\to 0} \frac{f(h)} h + \lim_{h\to 0} \frac{g(h)} h = 0.
 \end{align*}
-Finally, by the Algebraic Limit Theorem,
+For (4), use  the Algebraic Limit Theorem,
 \begin{align*}
 \lim_{h\to 0} \frac{f(h)g(h)}{h} &= \lim_{h\to 0} h \frac{f(h)}{h} \frac{g(h)}{h} \\
 &= \lim_{h\to 0} h \lim_{h\to 0} \frac{f(h)}{h} \lim_{h\to 0} \frac{g(h)}{h} \\
@@ -301,29 +301,24 @@ Finally, by the Algebraic Limit Theorem,
 
 
 \begin{exercise}
-  Show that if $N(t) \sim P(\lambda t)$, we have for small $h$,
+  Show that if $N(t) \sim P(\lambda t)$, we have for $0<h\ll 1$,
   \begin{equation*}
 \P{N(t+h) = n \given N(t) = n} = 1-\lambda h + o(h).
   \end{equation*}
     \begin{hint}
 Use  the definition of the conditional probability of Exercise~\ref{ex:18}. 
 
-    Think about the meaning of the formula
-      $\P{N(t+h) = n \given N(t) = n}$. It is a conditional probability
-      that should be read like this: given that up to time $t$ we have
-      seen $n$ arrivals (i.e, $N(t)=n$), what is the probability that
-      just a little later (at $t+h$) the number of arrivals is still $n$,
-      i.e, $N(t+h)=n$? Then use the definition of the Poisson
-      distribution to compute this probability. Finally, use Taylor's
-      expansion of $e^{x}$ to see that $e^{x} = 1 +x + o(x)$ for
-      $|x| \ll 1$.  
+Think about the meaning of the formula $\P{N(t+h) = n \given N(t) = n}$.
+It is a conditional probability that should be read like this: given that up to time $t$ we have seen $n$ arrivals (i.e., $N(t)=n$), what is the probability that just a little later (at $t+h$) the number of arrivals is still $n$, i.e., $N(t+h)=n$?
+Then use the definition of the Poisson distribution to compute this probability.
+Finally, use Taylor's expansion of $e^{x}$ to see that $e^{x} = 1 +x + o(x)$ for $|x| \ll 1$.
     \end{hint}
 \begin{solution}
 Write $N(s, t]$ for the number of arrivals in the interval $(s,t]$. First we make a few simple observations: $N(t+h]= N(t) + N(t, t+h]$, hence
 \begin{equation*}
   \begin{split}
-  \1{N(t+h)=n, N(t]=n}
-&=  \1{N(t) + N(t, t+h] = n, N(t)=n}  \\
+  \1{N(t+h)=n, N(t)=n}
+&=  \1{N(t) + N(t, t+h] = n, N(t)=n} = \\
 &\1{N(t, t+h] = 0, N(t)=n}.
   \end{split}
 \end{equation*}
@@ -351,7 +346,7 @@ Thus,
 \begin{solution}
   \begin{align*}
   \P{N(t+h) = n +1 | N(t) = n} 
-&=  \P{N(t+h) = n +1 \& N(t) =n}/\P{N(t) = n}\\
+&=  \P{N(t+h) = n +1 , N(t) =n}/\P{N(t) = n}\\
 &= \P{N(t, t+h] = 1} = e^{-\lambda h} (\lambda h)^1/1! \\
 &= (1-\lambda h + o(h))\lambda h  = \lambda h - \lambda^2 h^2 + o(h) \\
 &= \lambda h + o(h). 
@@ -395,7 +390,7 @@ process is an uncountable set of random variables indexed by  $t\in \R^+$, where
 \begin{exercise}
 Show that  for a Poisson process $N$, 
 \begin{equation*}
-\P{N(s] =1\given N(t]=1} = \frac s t,
+\P{N(s) =1\given N(t)=1} = \frac s t,
 \end{equation*}
 if $s\in[0,t]$. Thus, if you know that an arrival occurred during $[0,t]$, the arrival is distributed
 uniformly on the interval $[0,t]$.
@@ -425,8 +420,8 @@ From the hint,
 occurs often in practice.  We have two Poisson processes, for
 instance, the arrival processes $N_\lambda$ of men and $N_\mu$ women
 at a shop. In the figure below, each cross represents an arrival, in
-the upper line it corresponds to a man, in the middle line to a woman, in
-lower line to an arrival of a general customer at the shop. Thus, the
+the upper line it corresponds to a man, in the middle line to a woman and in
+the lower line to an arrival of a general customer at the shop. Thus, the
 shop `sees' the superposition of these two arrival
 processes.
 
@@ -465,7 +460,7 @@ Use a conditioning argument or use moment generating functions.
 In particular, for
     conditioning, use that $\P{AB} = \P{A\given B}\P{B}$. More
     generally, if the set $A$ can be split into disjoint sets $B_i$,
-    i.e, $A=\bigcup_{i=1}^n B_i$, then
+    i.e., $A=\bigcup_{i=1}^n B_i$, then
     \begin{equation*}
       \P{A} = \sum_{i=1}^n \P{A B_i} = \sum_{i=1}^n \P{A\given B_i} \P{B_i},
     \end{equation*}
@@ -473,14 +468,14 @@ In particular, for
     $\P{A B_i} = \P{A \given B_i} \P{B_i}$.  Now choose practical sets
     $B_i$.  
 
-In the computations, use the standard binomial formula $(a+b)^n = \sum_{i=0}^b {n \choose i} a^{n-i} b^i$. 
+In the computations, use the standard binomial formula $(a+b)^n = \sum_{i=0}^n {n \choose i} a^{n-i} b^i$. 
   \end{hint}
     \begin{solution}
 Choose the \emph{sets} $B_i$ as $\{N_\lambda(t) = i\}$. Then, the set $\{N_\lambda(t) + N_\mu(t) = n\}$ can be decomposed into the subsets $B_i$, i.e., 
 \begin{equation*}
 \{N_\lambda(t) + N_\mu(t) = n\} =  \cup_{i=0}^n \{N_\lambda(t) = i\}.
 \end{equation*}
-To see this, consider an example. Cats arrive at rate $\lambda$, dogs with rate $\mu$. Suppose that $5$ animals (cats plus dogs) arrived. Then  there are 6 possibilities to form a set with 5 animals in total: 0 cats + 5 dogs, 1 cat + 4 dogs, \ldots, 5 cats + 0 dogs. The right-hand side of the equality decomposes  the fact that $5$ animals arrive into sets in which we know that the number of cats is $0, 1, 2,\ldots, 5$. Also,  if we know the number of cats, we also know the number of dogs, as this is $5$ minus the number of cats. %Hence, the same set is created and the equality holds. 
+To see this, consider an example. Cats arrive at rate $\lambda$, dogs at rate $\mu$. Suppose that $5$ animals (cats plus dogs) arrived. Then  there are 6 possibilities to form a set with 5 animals in total: 0 cats + 5 dogs, 1 cat + 4 dogs, \ldots, 5 cats + 0 dogs. The right-hand side of the equality decomposes  the fact that $5$ animals arrive into sets in which we know that the number of cats is $0, 1, 2,\ldots, 5$. Also,  if we know the number of cats, we also know the number of dogs, as this is $5$ minus the number of cats. %Hence, the same set is created and the equality holds. 
 
 Now that we know how to conveniently split up the set $\{N_\lambda(t) + N_\mu(t) = n\}$,  we can use conditioning: 
   \begin{equation*}
@@ -502,17 +497,17 @@ With this,
 &= \sum_{i=0}^n \frac{(\mu t)^{n-i}}{(n-i)!} \frac{(\lambda t)^i}{i!} e^{-(\mu+\lambda)t} \\
 &= e^{-(\mu+\lambda)t} \sum_{i=0}^n \frac{(\mu t)^{n-i}}{(n-i)!} \frac{(\lambda t)^i}{i!}  \\
 &= e^{-(\mu+\lambda)t}\frac 1{n!} \sum_{i=0}^n {n \choose i }(\mu t)^{n-i}(\lambda t)^i, \quad\text{ (binomial formula)}   \\
-&= \frac{((\mu+\lambda)t))^n}{n!}e^{-(\mu+\lambda)t}.
+&= \frac{((\mu+\lambda)t)^n}{n!}e^{-(\mu+\lambda)t}.
   \end{align*}
 
-Now with the moment generating functions of $N_\lambda(t)$ and $N_\mu(t)$, and using that by the independence of  $N_\lambda(t)$ and $N_\mu(t)$, the moment generating function of $N_\lambda + N_\mu$ is the product of the moment generating functions of $N_\lambda$ and $N_\mu$, 
+  Now with the moment generating functions of $N_\lambda(t)$ and $N_\mu(t)$, and using that by the independence of $N_\lambda(t)$ and $N_\mu(t)$, the moment generating function of $N_\lambda + N_\mu$ is the product of the moment generating functions of $N_\lambda$ and $N_\mu$,
 \begin{align*}
 M_{N_\lambda(t)+N_\mu(t)}(s) 
-&= M_{N_\lambda(t)}(s) M_{N_\mu(s)} \\
+&= M_{N_\lambda(t)}(s) M_{N_{\mu}(t)}(s) \\
 &=\exp(\lambda t (e^s -1)) \exp(\mu t(e^s-1)) \\
 &= \exp((\lambda + \mu)t (e^s-1)).
 \end{align*}
-Finally, since  the generating function uniquely characterizes
+Finally, since  the moment generating function uniquely characterizes
 the distribution, and since the above expression has the same form as a Poisson random variable  with parameter $(\lambda+\mu)t$, we can conclude that $N(t)\sim P((\lambda +\mu) t)$.
     \end{solution}
 \end{exercise}
@@ -546,7 +541,7 @@ Use the standard formula for conditional probability and that  $N_\lambda(t) + N
 %       \P{N_\lambda(h) = 1| N(h) = 1}
 %       \end{equation*}
 %       is the probability that $N_\lambda(h)=1$ and $N_\mu(h)=0$ \emph{given}
-%       that $N(t)=1$. Use the standard formula for condtional probabiliy. 
+%       that $N(t)=1$. Use the standard formula for conditional probability. 
     \end{hint}
     \begin{solution}
   With the above:
@@ -564,7 +559,7 @@ Use the standard formula for conditional probability and that  $N_\lambda(t) + N
 
 
 Besides merging Poisson streams, we can also consider the concept of \emph{splitting}, or \emph{thinning}, a stream into sub-streams, as follows.  When a customer arrives, throw a coin that lands   heads with probability $p$ and tails with $q=1-p$. When the coin   lands heads, the customer is of type 1 (e.g., a woman), otherwise of type 2 (e.g., a child).  Another   way of thinning is by modeling the stream of people passing a shop   as a Poisson process with rate $\lambda$. With probability $p$ a   person decides, independent of anything else, to enter the shop,  c.f. the figure below. The crosses at the upper line are passersby  in the street. The crosses at the lower line are the customers that   enter the shop. The outcome of the $k$th throw of a coin is   indicated by $B_k$. In the figure below,  $B_1=1$ so that the first passerby turns into a
-  customer entering the shop; the second passerby does not enter as   $B_2=0$, and so on. Like this, the stream of passerby's is thinned   with Bernoulli distributed random variables.
+  customer entering the shop; the second passerby does not enter as   $B_2=0$, and so on. Like this, the stream of passersby is thinned   with Bernoulli distributed random variables.
 
   \begin{center}
 \begin{tikzpicture}[scale=1]
@@ -606,20 +601,20 @@ Show that the Poisson process obtained by thinning the original
 There are (at least) two ways to get this result. 
 
 Method 1:  Condition on the total number of arrivals $N(t)=n$ up to time
-      $t$. Then, realize that the probability that a job is of type 1 is $p$. Hence when you consider $n$ jobs in
-      total, the number $N_1(t)$ of type 1 jobs is binomially distributed. Thus, given that $n$ jobs arrived, the probability of $k$ `successes' (i.e., arrivals of type 1), is 
+      $t$. Then, realize that the probability that a person is of type 1 is $p$. Hence when you consider $n$ people in
+      total, the number $N_1(t)$ of type 1 people is binomially distributed. Thus, given that $n$ people arrived, the probability of $k$ `successes' (i.e., arrivals of type 1), is 
       \begin{equation*}
         \P{N_1=k \given N = n} = {n \choose k} p^k (1-p)^{n-k}.
       \end{equation*}
 
       Again use that if the set $A$ can be split into disjoint sets
-      $B_i$, i.e, $A=\bigcup_{i=1}^n B_i$, then
+      $B_i$, i.e., $A=\bigcup_{i=1}^n B_i$, then
     \begin{equation*}
       \P{A} = \sum_{i=1}^n \P{A\given B_i} \P{B_i}.
     \end{equation*}
 Now choose practical sets $B_i$ and use $\sum_{k=0}^{\infty} \frac{x^k}{k!} = e^x$. 
 
-Method 2: You might also consider the random variable 
+Method 2: Dropping the dependence of $N$ on $t$ for the moment for notational convenience, you might also consider the random variable 
   \begin{equation*}
     Y = \sum_{i=1}^N Z_i,
   \end{equation*}
@@ -628,7 +623,7 @@ Method 2: You might also consider the random variable
   function of a Poisson random variable with parameter $\lambda p$.
   \end{hint}
     \begin{solution}
-Method 1: Suppose that  $N_1$ is the  thinned stream, and $N$ the total stream. Then, dropping the dependence on $t$ for the moment,
+Method 1: Suppose that  $N_1$ is the  thinned stream, and $N$ the total stream. Then, 
 \begin{align*}
     \P{N_1 = k}
 &= \sum_{n=k}^\infty \P{N_1 =k, N = n} 
@@ -641,40 +636,47 @@ Method 1: Suppose that  $N_1$ is the  thinned stream, and $N$ the total stream. 
 = e^{-\lambda} \frac{(\lambda p)^k}{k!} e^{\lambda(1-p)} \\
 &= e^{-\lambda p} \frac{(\lambda p)^k}{k!}.
 \end{align*}
-We see that the thinned stream is Poisson with parameter $\lambda p$. (For notational ease, we left out the $t$, otherwise it is $P(\lambda t p)$. 
+We see that the thinned stream is Poisson with parameter $\lambda p$. If we introduce the $t$ again, we obtain $P(\lambda t p)$.
 
 Method 2: Now consider $Y=\sum_{i=1}^N Z_i$. Suppose that $N=n$, so that $n$
-arrivals occurred. Then we throw $n$ coins with success probability
+arrivals occurred. Then we throw $n$ independent coins with success probability
 $p$. It is clear that $Y$ is indeed a thinned Poisson random variable.
 
-To obtain the distribution of $Y$, model the coin as a generic Bernoulli distributed random variable
+Model the coins as a generic Bernoulli distributed random variable
 $Z$.  We first need
 \begin{equation*}
   \E{e^{s Z}} = e^0 \P{Z=0} + e^{s} \P{Z=1} = (1-p) + e^s p.
 \end{equation*}
-Suppose that $N=n$, then since the $Z_i$ are i.i.d.,
+Suppose that $N=n$, then since the outcomes $Z_i$ of the coins are i.i.d.,
 \begin{equation*}
-\E{e^{s\sum_{i=1}^n Z_i}} = \left(\E{e^{s Z}}\right)^n = \left(1 + p (e^s - 1)\right)^n
+\E{e^{s\sum_{i=1}^n Z_i}} = \left(\E{e^{s Z}}\right)^n = \left(1 + p (e^s - 1)\right)^n,
 \end{equation*}
-Then, using conditioning on $N$, 
+where we again use that the moment generating function of the sum of independent random variables is the product of the moment generating functions.
+
+Now for a random variable $X\in N$ observe that $X=\sum_{n=0}^\infty X\1{X=n} = \sum_{n=0}^\infty n \1{X=n}$. To see this, note first that $X\1{X=n} = n\1{X=n}$ because $X=n$ when $\1{X=n} =1$, and second that $\sum_{n=0}^\infty \1{X=n} =1$, since $X$ takes one of the values in $\N$, and events $\{X=n\}$ and $\{X=m\}$ are non-overlapping when $n\neq m$. 
+
+With this idea, 
 \begin{align*}
   \E{e^{s Y}}
-&= \E{\E{e^{s\sum_{i=1}^n Z_i} \given N=n }} 
- = \E{\E{\left(1+p(e^s-1)\right)^n \given N=n }} \\
+&= \E{\sum_{n=0}^\infty e^{s\sum_{i=1}^N Z_i} \1{N=n}} \\
+&= \E{\sum_{n=0}^\infty e^{s\sum_{i=1}^n Z_i} \1{N=n}} \\
+&= \sum_{n=0}^\infty \E{e^{s\sum_{i=1}^n Z_i} \1{N=n}} \\
+&= \sum_{n=0}^\infty \E{e^{s\sum_{i=1}^n Z_i}} \E{\1{N=n}}, \text{ by independence of $Z_i$ and $N$}, \\
+&= \sum_{n=0}^\infty \left(1+p(e^s-1)\right)^n \P{N=n} \\
 &= \sum_{n=0}^\infty \left(1+p(e^s-1)\right)^n e^{-\lambda} \frac{\lambda^n}{n!}
 = e^{-\lambda} \sum_{n=0}^\infty \frac{\left(1+p(e^s-1)\right)^n \lambda^n}{n!}\\
 &= e^{-\lambda} \exp(\lambda (1+p(e^s-1))) = \exp(\lambda p (e^s - 1)).
 \end{align*}
-Thus, $Y$ has the same moment generating function as a Poisson
+Thus, $Y$ has the same moment-generating function as a Poisson
 distributed random variable with parameter $\lambda p$. Since
-the moment-generating function specify the distribution uniquely,
+the moment-generating function specifies the distribution uniquely,
 $Y\sim P(\lambda p)$.
 \end{solution}
 \end{exercise}    
 
 The concepts of merging and thinning are  useful to analyze queueing
   networks. Suppose the departure stream of a machine splits into
-  two sub-streams, e.g., a fraction $p$ of the jobs moves to on another
+  two sub-streams, e.g., a fraction $p$ of the jobs moves on to another
   machine and the rest ($1-p$) of the jobs leaves the system. Then we
   can model the arrival stream at the second machine as a thinned
   stream (with probability $p$) of the departures of the first

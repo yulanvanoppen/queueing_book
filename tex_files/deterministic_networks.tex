@@ -68,7 +68,7 @@ Thus, for given $w$  the largest arrival rate the network  can handle is  $\lamb
   \E W = 
 \begin{cases}
   T_0=n S, & \text{ if } w\leq n, \\
-  \frac{w}{n} T_0 = w S, & \text{ if } w\geq n,
+  \frac{w}{n} T_0 = w S, & \text{ if } w\geq n.
 \end{cases}
 \end{equation*}
 \begin{hint}
@@ -112,7 +112,7 @@ T_0&= n S, & r_b&= 1/S, & W_0 = r_b T_0 = n.
 The problems below are generalizations to networks with multi-server
 stations, servers with different processing rates, and multiple
 routings. They are meant to help you become acquainted with networking
-behavior, and also with Little's law, which we we use time and again
+behavior, and also with Little's law, which we use time and again
 here\footnote{Warning, these problems are quite challenging, despite their apparent simplicity; I had much less trouble making the problems than solving them. In fact, to ensure that
 I got the answer right, I often tried to find at least two different ways to
 solve the same problem.}.
@@ -214,7 +214,7 @@ Is the new machine placed in parallel or in series?
     series. Thus, when we add capacity to station 2, we don't add an
     extra processing step to station 2, we increase capacity. 
 
-    Now 
+    Now, 
     \begin{equation*}
       r_2 = \frac13 + \frac13 = \frac 23,
     \end{equation*}
@@ -287,7 +287,7 @@ Now, finally,
     case, suppose that the fast machine processes jobs at rate $r_1$
     and the slow at rate $r_2$. Then, since jobs arrive with rate
     $r_a$, the fast machine processes a fraction of $r_1/r_a$ of the
-    jobs, and the slow machine processes the left overs, i.e., a
+    jobs, and the slow machine processes the leftovers, i.e., a
     fraction of $(r_a-r_1)/r_a$ of the jobs. The raw processing time then becomes
     \begin{equation*}
       \begin{split}
@@ -302,7 +302,7 @@ and then,
 \begin{equation*}
   T_0 = 2 + t_2 + 2 = 7\frac13,
 \end{equation*}
-and this is a tiny bit less then the previous way of organizing things. 
+and this is a tiny bit less than the previous way of organizing things. 
 
 So, why are the above answers different? One reason is that the
 objective is not explicitly stated. It might be that, to minimize time
@@ -311,7 +311,7 @@ and wait until the next job comes in. If we were to assign this next
 job to a slow machine, the time in the system may be longer.  In
 general, it might be that schedules that minimize $T_0$ (on average)
 are not work-conserving (i.e., such that when jobs are waiting, not
-all machines are idle.)
+all machines are idle).
 \end{solution}
 \end{exercise}
 
@@ -374,7 +374,7 @@ Taking  $T_2=(1+3)/2=2$ is plainly silly.
   time $t=7$ hours.  What are $W_0$, $r_b$ and $T_0$?
 \begin{solution}
   \begin{align*}
-  r_2 &= \frac13 + \frac17 = \frac{10}{21} < \frac12\\
+  r_2 &= \frac13 + \frac17 = \frac{10}{21} < \frac12,\\
 \intertext{hence station 2 is still the bottleneck}
 T_2 &= \frac{3}{10}7 + \frac{7}{10}3 = \frac{42}{10}=\frac{21}{5}\text{hour}\\
 T_0&=2+\frac{21}{5} +2\\

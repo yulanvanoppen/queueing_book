@@ -28,7 +28,7 @@ An important role below is played by  the number of  arrivals $Y_k$ during the s
   \P{Y_k = j\given S=s} = e^{-\lambda s}\frac{(\lambda s)^j}{j!}.
 \end{equation}
 \begin{hint}
-If $s$ is deterministic, the number of arrival during a fixed
+If $s$ is deterministic, the number of arrivals during a fixed
     period of time with length $s$ must be Poisson distributed.
 \end{hint}
   \begin{solution}
@@ -115,7 +115,7 @@ single point $s$ (rather than at the point $10$), then
     puts all mass on the point $s$. Therefore,
     \begin{equation*}
     \P{Y_k=j} = \int_0^\infty \P{Y_k =j\given S=x} \d F(x) = 
-\int_0^\infty g(x) \d F(x) = g(s) \qquad \star
+\int_0^\infty g(x) \d F(x) = g(s). \qquad \star
     \end{equation*}
 
     Now we also know that if the service time takes precisely $x$ time
@@ -138,7 +138,7 @@ Hence,
 \end{exercise}
 
 \begin{exercise}
- If $S\sim \exp(\mu)$, show that 
+ If $S\sim \Exp(\mu)$, show that 
   \begin{equation} \label{eq:41}
 f(j) = \P{Y_k = j} = \frac{\mu}{\lambda+\mu}\left(\frac{\lambda}{\lambda+\mu}\right)^j.
   \end{equation}
@@ -180,7 +180,7 @@ $\mu/(\lambda+\mu) = 1-p$ takes the value $j$.
 \end{exercise}
 
 \begin{exercise}
- If $S\sim \exp(\mu)$, show that 
+ If $S\sim \Exp(\mu)$, show that 
   \begin{equation}
 G(j) = \sum_{k=j+1}^\infty f(k) =  \left(\frac{\lambda}{\lambda+\mu}\right)^{j+1}.
   \end{equation}
@@ -241,7 +241,7 @@ Sections~\ref{sec:rate-stability} and~\ref{sec:poisson-arrivals-see},
 & = \delta \delta(n+1) f(0),
 \end{align*}
 where the last limit follows from the independence of $Y_k$ and
-$L(D_{k-1})$, 
+$L(D_{k-1})$. 
 \end{solution}
 \end{exercise}
 
@@ -315,7 +315,7 @@ Realize that if $L(D_{k-1})=0$, job $k-1$ leaves behind an empty
 \end{solution}
 \end{exercise}
 
-For the up-crossings, assume first that $L(D_{k-1})=n>0$.  Then an up-crossing of level $n>0$  must have occurred when $L(D_k)>n$, i.e, 
+For the up-crossings, assume first that $L(D_{k-1})=n>0$.  Then an up-crossing of level $n>0$  must have occurred when $L(D_k)>n$, i.e., 
  \begin{equation*}
  \1{L(D_{k-1}) = n}\1{L(D_k)>n} = 1 \implies   \text{Upcrossing of level $n$}.
  \end{equation*}
@@ -399,9 +399,9 @@ state probabilities, and follow the approach sketched below Exercise~\ref{ex:13}
  Define shorthands
     such as $\alpha=\lambda/(\lambda+\mu)$, so that
     $1-\alpha = \mu/(\lambda+\mu)$, and
-    $\alpha/(1-\alpha) = \lambda /\mu = \rho$.  Then, with Eq.~\ref{eq:41}, $f(n) = \alpha^n(1-\alpha)$ and $G(n) = \alpha^{n+1}$.  (These results do not `come for
-    `free'. Of course, it's just algebra, but please try to derive this
-    yourself. Its good to hone your computational skills.)
+    $\alpha/(1-\alpha) = \lambda /\mu = \rho$.  Then, with Eq.~\ref{eq:41}, $f(n) = \alpha^n(1-\alpha)$ and $G(n) = \alpha^{n+1}$.  (These results do not 'come for
+    free'. Of course, it's just algebra, but please try to derive this
+    yourself. It's good to hone your computational skills.)
   \end{hint}
     \begin{solution}
       Take $n=0$. Then $f(0) \pi(1) = (1-\alpha)\pi(1)$, and
@@ -418,7 +418,7 @@ For $n=1$,
 \end{equation*}
 Dividing by $1-\alpha$, we get
 \begin{equation*}
-  \pi(2) = \pi(0)\rho^2
+  \pi(2) = \pi(0)\rho^2.
 \end{equation*}
 
 Finally, now that we suspect that $\pi(n) = \rho^n \pi(0)$, let's fill
@@ -455,11 +455,11 @@ Discretize time to  a grid of points, and   approximate the integral by a summat
     \begin{split}
   \P{Y_k = j} 
 &= \int_0^\infty e^{-\lambda s}\frac{(\lambda x)^j}{j!} \d F(x) 
-\approx \sum_{i=1}^\infty e^{-\lambda i \d x}\frac{(\lambda i\d x)^j}{j!} f_i \d x
+\approx \sum_{i=1}^\infty e^{-\lambda i \d x}\frac{(\lambda i\d x)^j}{j!} f_i \d x.
     \end{split}
 \end{equation*}
 
-Lets try a numerical experiment. 
+Let's try a numerical experiment. 
 
 \begin{pyconsole}
 import numpy as np

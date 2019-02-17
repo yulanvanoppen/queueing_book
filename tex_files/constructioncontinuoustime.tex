@@ -8,21 +8,17 @@
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-In the previous section we considered time in discrete `chunks',
+In Section~\ref{sec:constr-discr-time} we considered time in discrete `chunks',
 minutes, hours, days, and so on. For given numbers of arrivals and
-capacity per period we use a set of recursions~\eqref{eq:31} to
-compute the departures and queue length per period. Another way to
-construct a queueing system is to consider inter-arrival times between
-consecutive customers and the service times each of these customers
-require. With this we obtain a description of the queueing system in
-continuous time.  The goal of this section is to develop a set of
-recursions for the $G/G/1$ single-server queue.
+capacity per period we use the recursions~\eqref{eq:31} to
+compute the departures and queue length per period.  However, we can also model time in a continuous way, and assume that jobs can come in at any moment.
+In this section we consider a single server FIFO queueing process in continuous time. 
 
 Assume we are given, as basic data, the \recall{arrival process}
 $\{A(t); t\geq 0\}$: the number of jobs that arrived during $[0,t]$.
 Thus, $\{A(t); t\geq 0\}$ is a \emph{counting process}.
 
-From this arrival process we can obtain various other interesting
+From this arrival process we can derive various other interesting
 concepts, such as the arrival times of individual jobs. Specially, if
 we know that $A(s) = k-1$ and $A(t) = k$, then the arrival time $A_k$
 of the $k$th job must lie somewhere in $(s,t]$. Thus, from $\{A(t)\}$, we can define
@@ -50,11 +46,11 @@ turn, construct the arrival process $\{A(t)\}$ as
 \begin{equation}
   A(t) = \sum_{k=1}^\infty \1{A_k \leq t},
 \end{equation}
-where $\1{}$ is the indicator function. Thus, in the above we count
-all arrivals that occur up to time~$t$. Another, equivalent, way to
-define $A(t)$ is
+where $\1{\cdot}$ is the indicator function. Thus, in the above we count
+all arrivals that occur up to and including time~$t$. Another, equivalent, way to
+define $A(t)$ is\footnote{For the mathematically inclined: formally we should use here $\sup$ rather than $\max$. However, in any practical setting such details are irrelevant. Hence we ignore them.}
 \begin{equation}
-  A(t) = \sup\{k: A_k \leq t\}.
+  A(t) = \max\{k: A_k \leq t\}.
 \end{equation}
 \end{subequations}
 
@@ -62,7 +58,7 @@ Clearly, we see that from the inter-arrival times $\{X_k\}$ it is
 possible to construct $\{A_k\}$ and $\{A(t)\}$, and the other way
 around, from $\{A(t)\}$ we can find $\{A_k\}$ and $\{X_k\}$.
 Figure~\ref{fig:waitingtimegg1} shows these relations graphically. To
-memorize it may be helpful to write it like this:
+memorize this, it may be helpful to write it like this:
 \begin{align*}
   A_k : \N \to \R, \quad{\text{job id (integer) to arrival time (real number)}}, \\
   A(t) : \R\to \N, \quad{\text{time (real number) to number of jobs (integer)}}.
@@ -80,26 +76,22 @@ memorize it may be helpful to write it like this:
   \end{solution}
 \end{exercise}
 
-\begin{exercise}
-  Would it make sense to define $A(t)$ as $\inf\{k : A_k \geq t\}$?
+\begin{exercise}\label{ex:22}
+  In view of the above, can  $A(t)$ be defined as $\min\{k : A_k \geq t\}$ or as $\min\{k: A_k > t\}$?
   \begin{hint}
 Compare this to the definition in (\ref{eq:2}).
   \end{hint}
   \begin{solution}
     Suppose $A_3 = 10$ and $A_4 = 20$. Take $t=15$. Then
     $\min\{k : A_k \geq 15\} = 4$ since $A_3 < t=15 < A_4$. On the
-    other hand $\max\{k : A_k \leq t\} = 3$. And, indeed, at time $t=15$, 3 jobs arrived, not 4. So defining $A(t)$ as $\min\{k : A_k \geq t\}$ is not OK. 
+    other hand $\max\{k : A_k \leq t\} = 3$. And, indeed, at time $t=15$, 3 jobs arrived, not 4. So defining $A(t)$ as $\min\{k : A_k \geq t\}$ is not OK.  This example also shows that in general $A(t) \neq \min\{k : A_k > t\}$. So, neither definition is correct. 
+
   \end{solution}
 \end{exercise}
 
-To compute the departure times $\{D_k\}$ we proceed in stages. The
-first stage is to construct the \recall{waiting time in queue}
-$\{W_{Q,k}\}$ as seen by the arrivals. In
-Figure~\ref{fig:waitingtimegg1} observe that the waiting time of the
-$k$th arrival must be equal to the waiting time of the $k-1$th
-customer plus the amount of \recall{service time} required by job
-$k-1$ minus the time that elapses between the arrival of job $k-1$ and
-job $k$, unless the server becomes idle between jobs $k-1$ and $k$.
+To compute the departure times $\{D_k\}$ we proceed in stages.
+The first stage is to construct the \recall{waiting time in queue} $\{W_{Q,k}\}$ as seen by the arrivals.
+Observe in Figure~\ref{fig:waitingtimegg1} that the waiting time of the $k$th arrival must be equal to the waiting time of the $k-1$th customer plus the amount of \recall{service time} required by job $k-1$ minus the time that elapses between the arrival of job $k-1$ and job $k$, unless the server becomes idle between jobs $k-1$ and $k$.
 In other words,
 \begin{equation}\label{eq:56}
   W_{Q,k} = [W_{Q,k-1} + S_{k-1}-X_k]^+,
@@ -172,7 +164,7 @@ node[right] (c2) at (5,-1.5) {$A_{k}$}
 node[midway, fill=white] {$X_{k}$};
 \end{tikzpicture}
 \caption{Construction of the $G/G/1$ queue in continuous time. The
-  sojourn time~$W_{k}$ of the~$k$th job is sum of the work in queue~$W_{Q,k}$ at its arrival epoch~$A_k$ and its service time~$S_k$;
+  sojourn time~$W_{k}$ of the~$k$th job is the sum of the work in queue~$W_{Q,k}$ at its arrival epoch~$A_k$ and its service time~$S_k$;
   its departure time is then $D_k=A_k + W_k$. The waiting time of job
   $k$ is clearly equal to $W_{k-1}-X_{k}$. We also see that job~$k+1$
   arrives at an empty system, hence its sojourn time
@@ -181,7 +173,7 @@ node[midway, fill=white] {$X_{k}$};
   \label{fig:waitingtimegg1}
 \end{figure}
 
-The time job $k$ \emph{leaves the queue and moves on to the server} is
+The time job $k$ \emph{leaves the queue and moves to the server} is
 \begin{equation*}
  \tilde A_k = A_k + W_{Q,k},
 \end{equation*}
@@ -196,7 +188,7 @@ the job leaves the system. Hence, the \recall{departure time of the
   D_k = \tilde A_{k} + S_k.
 \end{equation*}
 
-The \recall{sojourn time}, or \emph{waiting time in the system}, is the
+The \recall{sojourn time}, or \emph{waiting time in the system}, $W_k$, is the
 time a job spends in the entire system. With the above relations we
 see that
 \begin{equation}
@@ -210,13 +202,13 @@ A bit of similar reasoning gives another recursion for~$W_k$:
   W_{Q,k} &= [W_{k-1} - X_k]^+, &
   W_{k} &= W_{Q,k} + S_k = [W_{k-1} - X_k]^+ + S_k,
 \end{align}
-from which follows a recursion for $D_k$
+from which follows a recursion for $D_k$:
 \begin{equation}
   D_k = A_k + W_k.
 \end{equation}
 This in turn specifies the departure process $\{D(t)\}$ as
 \begin{equation*}
-  D(t) = \max\{k; D_k \leq t\} = \sum_{k=1}^\infty \1{D_k \leq t}.
+  D(t) = \max\{k : D_k \leq t\} = \sum_{k=1}^\infty \1{D_k \leq t}.
 \end{equation*}
 
 \begin{exercise}
@@ -233,7 +225,7 @@ This in turn specifies the departure process $\{D(t)\}$ as
       case. You can check the results by hand; if the results of the
       simulator are different, there is a problem.
     \end{hint}
-    \begin{solution} Lets feed it to the computer. Mind that in python (just like in C, and so on), arrays start at index 0, not at index 1. 
+    \begin{solution} Let's feed it to the computer. Mind that in Python (just like in C, and so on), arrays start at index 0, not at index 1. 
 \begin{pyconsole}
 X = [0, 10, 5, 6] 
 S = [0, 17, 20, 5]
@@ -248,6 +240,12 @@ for i in range(1, len(X)):
     WQ[i] = max(WQ[i-1] + S[i-1] - X[i], 0)
 
 WQ
+
+ST = [0,0,0,0]
+for i in range(1, len(X)):
+    ST[i] = WQ[i] + S[i]
+
+ST
 
 D = [0, 0, 0, 0]
 for i in range(1, len(X)):
@@ -273,16 +271,16 @@ Use Eq.~(\ref{eq:59}).
 \end{align*}
 Dropping the dependence on $k$ for ease, we get
 \begin{align*}
-  \P{Y=-2} &=\P{S-X=-2} = \P{S=1, X=3} = \P{S=1}\P{X=3} = \frac14\\
-  \P{Y=-1} &=\P{S=2}\P{X=3} = \frac14\\
-  \P{Y=0} &=\P{S=1}\P{X=1} = \frac14\\
+  \P{Y=-2} &=\P{S-X=-2} = \P{S=1, X=3} = \P{S=1}\P{X=3} = \frac14,\\
+  \P{Y=-1} &=\P{S=2}\P{X=3} = \frac14,\\
+  \P{Y=0} &=\P{S=1}\P{X=1} = \frac14,\\
   \P{Y=1} &=\P{S=2}\P{X=1} = \frac14.
 \end{align*}
 With this
   \begin{align*}
-    \P{W_{Q,1} = 1} &=\P{W_{Q,0} + Y_0= 1} = \P{3 + Y_0 =1} = \P{Y_0=-2} =\frac14\\
-    \P{W_{Q,1} = 2} &= \P{3 + Y =2} = \P{Y=-1}  =\frac14\\
-    \P{W_{Q,1} = 3} &= \P{3 + Y = 3} = \P{Y=0}  =\frac14\\
+    \P{W_{Q,1} = 1} &=\P{W_{Q,0} + Y= 1} = \P{3 + Y =1} = \P{Y=-2} =\frac14,\\
+    \P{W_{Q,1} = 2} &= \P{3 + Y =2} = \P{Y=-1}  =\frac14,\\
+    \P{W_{Q,1} = 3} &= \P{3 + Y = 3} = \P{Y=0}  =\frac14,\\
     \P{W_{Q,1} = 4} &= \P{3 + Y = 4} = \P{Y=1}  =\frac14.\\
   \end{align*}
 And, then
@@ -331,7 +329,7 @@ Another set of recursions to compute the arrival and departure times for the sin
   \end{split}
 \end{equation}
 
-\begin{exercise}  Why do the recursions Eq.~(\ref{eq:45}) work? 
+\begin{exercise}  Why do the recursions of Eq.~(\ref{eq:45}) work? 
   \begin{solution}
  Of course, the service of job $k$ cannot start before it
       arrives. Hence, it cannot leave before $A_k + S_k$. Therefore it
@@ -343,23 +341,6 @@ Another set of recursions to compute the arrival and departure times for the sin
       confuse the earliest start $S_k'$ and the service time
       $S_k$---and $D_k = S_k' + S_k$.
     \end{solution}
-\end{exercise}
-
-\begin{exercise}
-  Implement the above recursions in excel or some other computer
-  program such as R, python, or julia, and check the results of the
-  previous exercise.
-    \begin{solution}
-      You can check the files on \pyv{github} in the \pyv{progs}
-      directory.
-\begin{itemize}
-\item \pyv{mm1.py} is the python implementation
-\item \pyv{mm1.R} is the R implementation
-\item \pyv{mm1.jl} is the julia implementation
-\end{itemize}
-Take your pick, and start playing with it. These examples are meant to
-be simple to understand, not necessarily super efficient.
-\end{solution}
 \end{exercise}
 
 Once we have the arrival and departure processes it is easy to compute
@@ -463,28 +444,12 @@ Why don't we need separate notation for $D_s(t)$, the number
 
 
 
-\begin{exercise}
- Why is $L(t) = L_Q(t) + L_s(t)$?
-\begin{solution}
- $L_Q(t) = A(t) - \tilde A(t)$. $L_S(t) = \tilde A(t) - D(t)$. This is in
-    line with the fact that $L(t) = L_Q(t) + L_s(t) = A(t) - D(t)$. \\this is the same answer 
-\end{solution}
-\end{exercise}
 
-
-
-\begin{exercise}
- Express $L_Q(t)$ and $L_s(t)$ in terms of $A(t)$, $\tilde A(t)$ and $D(t)$.
-\begin{solution}
- $L_Q(t) = A(t) - \tilde A(t)$. $L_S(t) = \tilde A(t) - D(t)$. This is in
-    line with the fact that $L(t) = L_Q(t) + L_s(t) = A(t) - D(t)$. \\this is the same answer
-\end{solution}
-\end{exercise} \\I would actually leave this question out since it is already stated exactly above the question.
 
 \begin{exercise}
  Consider a multi-server queue with $m$ servers. Suppose that
-    at some time~$t$ it happens that $\tilde A(t) - D_s(t) < m$ even though
-    $A(t) - D_s(t) > m$. How can this occur? 
+    at some time~$t$ it happens that $\tilde A(t) - D(t) < m$ even though
+    $A(t) - D(t) > m$. How can this occur? 
 \begin{solution}
  In this case, there are servers idling while there are still
     customers in queue. If such events occur, we say that the server
@@ -493,7 +458,7 @@ Why don't we need separate notation for $D_s(t)$, the number
 \end{exercise}
 
 
-\begin{exercise} Show that $L(t) = A(t)-D(t)$ and the system starts empty, implies that 
+\begin{exercise} It is clear  that $L(t) = A(t)-D(t)$. Show that, when the system starts empty, this implies that
 $L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}$.
   \begin{hint}
   Use Boolean algebra.  Write, for notational ease,
@@ -559,7 +524,7 @@ $L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}$.
 
 
 \begin{exercise} 
-Define the number in the system as seen by the $k$th arrival  as
+Define the number of jobs in the system as seen by the $k$th arrival  as
 \begin{equation}
   \label{eq:Lk}
   L(A_k-),
@@ -589,7 +554,7 @@ Can you derive the following (algorithmic efficient) procedure to
     L(A_k-) = L(A_{k-1}-) + 1 - \sum_{i= k-1 - L(A_{k-1}-)}^{k-1} \1{D_i< A_k}.
   \end{equation*}
 
-    Suppose $L_{k-1}=0$, i.e., job $k-1$ finds an empty system at its
+    Suppose $L(A_{k-1})=0$, i.e., job $k-1$ finds an empty system at its
     arrival and $D_{k-1}>A_{k}$, i.e., job $k-1$ is still in the
     system when job $k$ arrives. In this case, $L(A_{k}-)=1$, which checks
     with the formula.  Also, if $L(A_{k-1}-)=0$ and $D_{k-1}< A_k$ then
@@ -619,7 +584,7 @@ obtained a set of recursions by which we can run a simulation of a
 queueing process of whatever length we need, provided we have a
 sequence of inter-arrival times $\{X_k\}$ and service times
 $\{S_k\}$.  A bit of experimentation with computer programs such as
-$R$ or python will reveal that this is easy.
+$R$ or Python will reveal that this is easy.
 
 
 
@@ -629,7 +594,7 @@ $R$ or python will reveal that this is easy.
   Provide a specification of the virtual waiting time process $\{V(t)\}$ for
     all $t$.
     \begin{hint}Make a plot of the function $A_{A(t)}-t$. What is the meaning of $V(A_{A(t)})?$ What is
-$V(A_{A(t)} + A_{A(t)}-t$?
+$V(A_{A(t)}) + A_{A(t)}-t$?
     \end{hint}
     \begin{solution}
       There is a funny way to do this. Recall from a previous exercise
@@ -643,7 +608,7 @@ $V(A_{A(t)} + A_{A(t)}-t$?
       time decreases with slope $1$, until it hits 0.  Thus,
       \begin{equation*}
         V(t) 
-= [V(A_{A(t)}) - (t-A_{A(t)})]^+= [W_{A(t)} + (A_{A(t)}-t)]^+
+= [V(A_{A(t)}) - (t-A_{A(t)})]^+= [W_{A(t)} + (A_{A(t)}-t)]^+.
       \end{equation*}
       The notation may be a bit confusing, but it is in fact very
       simple. Take some $t$, look back at the last arrival time before
@@ -709,81 +674,12 @@ In an attempt to   extend the above to $m>2$ servers, I came up with this scheme
           D_{k-m+1} &= \min\{M_{k-m+1}, C_k\},
         \end{split}
       \end{equation*}
-      but it is not correct. Can you find a counter example?
+      but it is not correct. Can you find a counterexample?
   \end{solution}
 \end{exercise}
 
 
 
-\begin{exercise} Suppose one server serves two
-  queues, such that jobs in queue A are served with priority over jobs
-  in queue B. Assume that service is not-preemptive.  Can you develop
-  a similar set of recursions for each of the queues, or, otherwise,
-  an algorithm? Can you extend this to cover the LIFO (Last-In-First-Out) queue?
-(This is  a hard problem; only for the interested.)
-  \begin{solution}
-    This question came up in class. I don't think this can be
-    constructed as a straightforward recursion, and a search on the
-    web led to nothing. In case you can find a recursion, please let
-    me know.  
-
-    While a straightforward recursion may not exist, it is not really
-    difficult to code this queueing discipline. The key idea is to put
-    all jobs into one queue, but sort the elements in the queue in
-    order of priority. Every time the server becomes empty, it checks
-    the head of the queue. If the queue is empty, it wait until the
-    next arrival occurs. Otherwise, it starts the service of the first
-    job in line. When a new job arrives, then identify its priority
-    first, and then put it at the end of the jobs of the same
-    priority.
-
-    This type of sorting is known as lexicographic sorting, which is
-    what we do when we build a dictionary. First we sort words in
-    order of first letter, then the second letter, and so on. In case
-    of sorting the queue, we first have to sort in order of priority,
-    then, within the class of jobs with the same priority, sort in
-    ascending order of arrival time.
-
-    The python code is as follows, where I include the FIFO case for
-    comparison. You don't have to memorize the code, but you have to understand it. 
-
-\begin{pyverbatim}
-class Fifo(Queue):
-    def __init__(self):
-        self.queue = SortedSet(key = lambda job: job.arrivalTime)
-
-class Priority(Queue): # a priority queue
-    def __init__(self, numServers = 1):
-        self.queue = SortedSet(key = lambda job: job.p)
-\end{pyverbatim}
-
-Interestingly, once we have a proper environment to carry out
-simulations, changing the queueing discipline is a one-liner!.
-
-With the above, an algorithm for the LIFO is
-    straightforward. Rather then sorting the jobs in queue in
-    ascending order of arrival time, just sort them in descending
-    order of arrival time. 
-
-\begin{pyverbatim}
-class Lifo(Queue):
-    def __init__(self):
-        self.queue = SortedSet(key = lambda job: -job.arrivalTime)
-  
-\end{pyverbatim} \\this gives ??PythonTeX?? in pdf file
-
-Another interesting queueing rule is to sort in increasing job size;
-\begin{pyverbatim} \\this gives ??PythonTeX?? in pdf file
-  class SPTF(Queue): # shortest processing time first
-    def __init__(self):
-        self.queue = SortedSet(key = lambda job: job.serviceTime)
-  
-\end{pyverbatim}
-
-Do you see how sort in descending order of job size (it just a matter
-of putting a minus sign at the right place)?
-  \end{solution}
-\end{exercise}
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}
@@ -799,5 +695,5 @@ of putting a minus sign at the right place)?
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../book"
+%%% TeX-master: "../queueing_book"
 %%% End:

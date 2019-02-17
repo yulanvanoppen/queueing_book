@@ -116,8 +116,8 @@ until $T$. Use this to  provide a graphical interpretation of the proof of Littl
   \end{hint}
   \begin{solution}
     The area enclosed between the graphs of $A(t)$ and $D(t)$ until
-    $T$ can be `chopped up' in two ways: in the horizontal direction
-    and the vertical direction. (Please make the drawing as you go
+    $T$ can be `chopped up' in two ways: in the horizontal
+    and in the vertical direction. (Please make the drawing as you go
     along\ldots) A horizontal line between $A(t)$ and $D(t)$
     corresponds to the waiting time of a job, while a vertical line
     corresponds to the number of jobs in the system at time $t$. Now
@@ -137,7 +137,7 @@ until $T$. Use this to  provide a graphical interpretation of the proof of Littl
 
     Finally, observe that this equality holds between any two times
     $T_i, T_{i+1}$, where times $\{T_i\}$ are such that
-    $A(T_i)=D(T_i)$. Then, as $T_i\to \infty$ which we assumed from
+    $A(T_i)=D(T_i)$. Then, as $T_i\to \infty$, which we assumed from
     the on-set, $\frac{1}{A(T_i)} \sum_{k=1}^{A(T_i)} W_k\to \E W$,
     and
     \begin{equation*}
@@ -169,7 +169,7 @@ As a useful first application, consider the server of a $G/G/1$ queue
 as a system by itself. Show that the average number of jobs in service~$\E{L_S}$ is equal to the utilization~$\rho$. 
 \begin{solution}
  Assume the system is rate-stable, for otherwise
-all relevant limits do not exists.  The arrival rate at the server is
+all relevant limits do not exist.  The arrival rate at the server is
 $\lambda$ and the time a job remains in at the server is $\E S$. Thus, the average time a job remains in the `box' that identifies the server is $\E S$, and then the average number of jobs at the server is $\E{L_S} = \lambda \E S$, by Little's law. As $\lambda \E{S} = \rho$, we get
 $\E{L_S} = \rho$.
 \end{solution}
@@ -218,10 +218,10 @@ Thus, Little's law need  not hold at all moments in time; it is a statement abou
 
 Here is a summary of the most useful results and concepts of this and the previous sections
 \begin{itemize}
-\item Arrival rate,  departure  rate, rate stability:  $\lambda = \delta$
+\item Arrival rate,  departure  rate, rate stability:  $\lambda = \delta$,
 \item PASTA: $\lambda \pi(n) = \lambda(n) p(n)$,
 \item Recursions $\lambda(n)p(n) = \mu(n+1) p(n+1)$,
-\item Renewal reward: $Y=\lambda X$
+\item Renewal reward: $Y=\lambda X$,
 \item Little's law: $\E L =\lambda \E W$.
 \end{itemize}
 We will use these results time and again in the sequel.
@@ -242,5 +242,5 @@ We will use these results time and again in the sequel.
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../book"
+%%% TeX-master: "../queueing_book"
 %%% End:
