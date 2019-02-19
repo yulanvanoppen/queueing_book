@@ -174,7 +174,7 @@ Hence, $\V N = \E{N^2} - (\E N)^2 = (\lambda t)^2 + \lambda t - (\lambda t)^2 = 
 \end{solution}
 \end{exercise}
 
-Recall that the \recall{moment generating function}  of a random variable $X\geq 0$ and $s$ a real number is defined as
+Recall that the \recall{moment-generating function}  of a random variable $X\geq 0$ and $s$ a real number is defined as
 \begin{equation*}
   M_X(s) = \E{e^{s X}}.
 \end{equation*}
@@ -455,7 +455,7 @@ For the next set of exercises,  assume that $N_\lambda(t)\sim \text{P}(\lambda t
 \begin{exercise} 
 Show that  $N_\lambda(t) + N_\mu(t) \sim \text{P}((\lambda + \mu)t)$ for all $t\geq 0$. Thus, when we merge two independent Poisson processes, the merged process $\{N_{\lambda+\mu}(t)\}$ is also a Poisson process whose rate is the sum of the rates of the original Poisson processes.
   \begin{hint}
-Use a conditioning argument or use moment generating functions.
+Use a conditioning argument or use moment-generating functions.
 
 In particular, for
     conditioning, use that $\P{AB} = \P{A\given B}\P{B}$. More
@@ -500,14 +500,14 @@ With this,
 &= \frac{((\mu+\lambda)t)^n}{n!}e^{-(\mu+\lambda)t}.
   \end{align*}
 
-  Now with the moment generating functions of $N_\lambda(t)$ and $N_\mu(t)$, and using that by the independence of $N_\lambda(t)$ and $N_\mu(t)$, the moment generating function of $N_\lambda + N_\mu$ is the product of the moment generating functions of $N_\lambda$ and $N_\mu$,
+  Now with the moment-generating functions of $N_\lambda(t)$ and $N_\mu(t)$, and using that by the independence of $N_\lambda(t)$ and $N_\mu(t)$, the moment generating function of $N_\lambda + N_\mu$ is the product of the moment-generating functions of $N_\lambda$ and $N_\mu$,
 \begin{align*}
 M_{N_\lambda(t)+N_\mu(t)}(s) 
 &= M_{N_\lambda(t)}(s) M_{N_{\mu}(t)}(s) \\
 &=\exp(\lambda t (e^s -1)) \exp(\mu t(e^s-1)) \\
 &= \exp((\lambda + \mu)t (e^s-1)).
 \end{align*}
-Finally, since  the moment generating function uniquely characterizes
+Finally, since  the moment-generating function uniquely characterizes
 the distribution, and since the above expression has the same form as a Poisson random variable  with parameter $(\lambda+\mu)t$, we can conclude that $N(t)\sim P((\lambda +\mu) t)$.
     \end{solution}
 \end{exercise}
@@ -618,8 +618,7 @@ Method 2: Dropping the dependence of $N$ on $t$ for the moment for notational co
   \begin{equation*}
     Y = \sum_{i=1}^N Z_i,
   \end{equation*}
-  with $N\sim P(\lambda)$ and $Z_i\sim B(p)$. Show that the moment
-  generating function of $Y$ is equal to the moment generating
+  with $N\sim P(\lambda)$ and $Z_i\sim B(p)$. Show that the moment-generating function of $Y$ is equal to the moment generating
   function of a Poisson random variable with parameter $\lambda p$.
   \end{hint}
     \begin{solution}
@@ -651,7 +650,7 @@ Suppose that $N=n$, then since the outcomes $Z_i$ of the coins are i.i.d.,
 \begin{equation*}
 \E{e^{s\sum_{i=1}^n Z_i}} = \left(\E{e^{s Z}}\right)^n = \left(1 + p (e^s - 1)\right)^n,
 \end{equation*}
-where we again use that the moment generating function of the sum of independent random variables is the product of the moment generating functions.
+where we again use that the moment-generating function of the sum of independent random variables is the product of the moment-generating functions.
 
 Now for a random variable $X\in N$ observe that $X=\sum_{n=0}^\infty X\1{X=n} = \sum_{n=0}^\infty n \1{X=n}$. To see this, note first that $X\1{X=n} = n\1{X=n}$ because $X=n$ when $\1{X=n} =1$, and second that $\sum_{n=0}^\infty \1{X=n} =1$, since $X$ takes one of the values in $\N$, and events $\{X=n\}$ and $\{X=m\}$ are non-overlapping when $n\neq m$. 
 
