@@ -115,7 +115,7 @@ $\P{L\geq n} = \sum_{k\geq n} p(k)$.
       \begin{split}
  \P{L\geq n} 
  &= \sum_{k=n}^\infty p(k) = \sum_{k=n}^\infty p(0)\rho^k = (1-\rho)\sum_{k=n}^\infty \rho^k \\
- &= (1-\rho)\rho^n \sum_{k=0}^\infty\rho^k = (1-\rho) \rho^n \frac1{1-\rho}.
+ &= (1-\rho)\rho^n \sum_{k=0}^\infty\rho^k = (1-\rho) \rho^n \frac1{1-\rho} = \rho^n.
 \end{split}
 \end{equation*}
 \end{solution}
@@ -205,7 +205,7 @@ The next step is to find the \emph{relevant data}: the arrival process and the s
 payments. Thus, we know the number of customers that left the shop,
 hence entered the shop. (We neglect the time customers spend in the
 shop.) Based on these data we make a \emph{demand profile}: the
-average number of customers arriving per hour, c.f. Figure~\ref{fig:loadprofile}. Then we model the arrival process as Poisson with an arrival rate that is constant during a certain hour and is specified by the demand profile, 
+average number of customers arriving per hour, c.f. Figure~\ref{fig:loadprofile}. Then we model the arrival process as Poisson with an arrival rate that is constant during a certain hour and is specified by the demand profile. 
 
 \begin{figure}[t]
   \centering
