@@ -183,7 +183,7 @@ Use Figure~\ref{fig:inv_queue} to realize that the inventory level $I(t)$ (here 
   $M/M/1$ queue. Note that the number of jobs in queue corresponds to the number of items to be produced. A customer of an item, i.e., a demand of the inventory system, turns into  job at the queueing system, i.e., the demand becomes a job for the cook to replenish the item.
 \end{hint}
   \begin{solution}
-In the $M/M/1$ queue, $p(n)$ corresponds to the fraction of time there are $n$ jobs in the system. In the inventory system, it means that the cook has $n$ jobs to satisfy, hence the inventory is $n$ jobs short relative to the order up to level $S$.  Hence, the average on-hand inventory is $S$ minus the average number of jobs at the cook. i.e., $\E{I} = \sum_{i=0}^{S} (S-i) p(i)$. The average number of customers in backlog is the fraction of time there are more than $S$ replenishment jobs at the cook, i.e., $\E B = \sum_{i=S+1}^\infty (i-S) p(i)$. 
+In the $M/M/1$ queue, $p(n)$ corresponds to the fraction of time there are $n$ jobs in the system. In the inventory system, it means that the cook has $n$ jobs to satisfy, hence the inventory is $n$ jobs short relative to the order up to level $S$.  Hence, the average on-hand inventory is $S$ minus the average number of jobs at the cook, i.e., $\E{I} = \sum_{i=0}^{S} (S-i) p(i)$. The average number of customers in backlog is the fraction of time there are more than $S$ replenishment jobs at the cook, i.e., $\E B = \sum_{i=S+1}^\infty (i-S) p(i)$. 
   \end{solution}
 \end{exercise}
 
