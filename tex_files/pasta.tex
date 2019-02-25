@@ -180,18 +180,13 @@ This means that the system as seen by arrivals, i.e., $\pi(n)$, is
 the same as what jobs leave behind, i.e., $\delta(n)$.
 
 
-\begin{exercise}
-  When $\lambda\neq \delta$, is $\pi(n)\geq \delta(n)$?  
+\begin{exercise}\label{ex:26}
+  When $\lambda\neq \delta$, is $\pi(n)\geq \delta(n)$ or $\pi(n) < \delta(n)$ true?  (This is a tricky exercise!) 
   \begin{hint}
-Use that
-    $\lambda \geq \delta$ always holds, and $\lambda=\delta$ when the system
-    is rate-stable.
+    Use that    $\lambda \geq \delta$ always holds. Thus, when $\lambda \neq \delta$, it must be that $\lambda > \delta$. What are the consequences of this inequality; how does the queue length behave as a function of time?
   \end{hint}
   \begin{solution}
-    We have shown for one-step transition processes that
-    $\lambda \pi(n) = \delta \delta(n)$. Thus,
-    $\pi(n) = \delta(n)\delta /\lambda$. Since $\lambda\geq \delta$,
-    we have that $\pi(n) \leq \delta(n)$.
+    The assumptions lead us to conclude that $\lambda > \delta$. As a consequence, the queue length must increase on the long run (jobs come in faster than they leave). Therefore, $A(n,t)/t \to 0$ for all $n$, and also $D(n,t)/t\to 0$. Consequenly, $\pi(n) = \delta(n) = 0$, which is the only sensible reconciliation with~\eqref{eq:36}. 
   \end{solution}
 \end{exercise}
 
