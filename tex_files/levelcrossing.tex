@@ -443,7 +443,7 @@ To determine $p(0)$ we can use the fact that the numbers $p(n)$ represent probab
 \begin{align*}
 1 
 &= \sum_{n=0}^\infty p(n) \\
-&= p(0) \sum_{n=0}^\infty \frac{\lambda(n)\lambda(n-1)\cdots\lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)},
+&= p(0) \left(1+\sum_{n=0}^\infty \frac{\lambda(n)\lambda(n-1)\cdots\lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)}\right),
 \end{align*}
 we obtain  
 \begin{equation*}
@@ -452,7 +452,7 @@ we obtain
 where $G$ is the \recall{normalization constant}
 \begin{equation}
   \label{eq:20}
-G = \sum_{n=0}^\infty \frac{\lambda(n)\lambda(n-1)\cdots\lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)}.
+G = 1+\sum_{n=0}^\infty \frac{\lambda(n)\lambda(n-1)\cdots\lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)}.
 \end{equation}
 Now that we know $p(0)$,  $p(n)$ follows from Eq.~\eqref{eq:38}. 
 
