@@ -156,7 +156,7 @@ Formulate a definition  for the  time-average of the waiting time.
     \node [block, fill=red!50] (X_k) {$\{X_k\}$};
     \node [block, right=2.5cm of  X_k,fill=red!50] (A_k) {$\{A_k\}$}
     edge[pil,bend left=45] node[below] {$X_k := A_k - A_{k-1}$} (X_k)
-    edge[pil,<-, bend right=45] node[above] {$A_k := A_{k-1} + X_{k-1}$} (X_k); 
+    edge[pil,<-, bend right=45] node[above] {$A_k := A_{k-1} + X_{k}$} (X_k); 
     \node [block, right=2.5cm of  A_k ] (A_t) {$\{A(t)\}$}
     edge[pil,bend left=45] node[below] {$A_k := \inf\{t: A(t)\geq k\}$} (A_k)
     edge[pil,<-, bend right=45] node[above] {$A(t) := \max\{k: A_k\leq t\}$} (A_k); 
