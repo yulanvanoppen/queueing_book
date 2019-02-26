@@ -156,7 +156,7 @@ form:
 \frac{A(t)}t \frac{A(n,t)}{A(t)} = \frac{A(n,t)}t \approx \frac{D(n,t)}t 
 = \frac{D(t)}t \frac{D(n,t)}{D(t)}.
 \end{equation*}
-Taking limits at the left and right, we see again that the left hand
+Taking limits at the left and right, we see again that the left hand side
 becomes $\lambda \pi(n)$. For the right hand side, we use
 Eq.~\eqref{eq:28} and define, analogous to \eqref{eq:132}, 
 \begin{equation}
@@ -257,7 +257,7 @@ $(\lambda + \mu) \pi(n) = \lambda \pi(n-1) + \mu \pi(n+1)$.
   \end{hint}
   \begin{solution}
 By  the hint,  the difference between the `out
-    transitions and the `in transitions is at most 1 for all $t$. Thus,  we can write
+    transitions' and the `in transitions' is at most 1 for all $t$. Thus,  we can write
     \begin{align*}
 \text{transitions out } &\approx \text{transitions in } \iff \\
       A(n,t) + D(n-1,t) &\approx A(n-1,t) + D(n,t)  \iff \\
@@ -452,14 +452,14 @@ Since $X\sim \Exp(\lambda)$ and $S\sim\Exp(\mu)$, and $X$ and $S$ are independen
 &= \lambda \mu \int_0^t e^{-\lambda x} \int_0^{t-x} e^{- \mu y} \d y \d x \\
 &= \lambda \int_0^t e^{-\lambda x} (1-e^{- \mu (t-x)} ) \d x  \\
 &= \lambda \int_0^t e^{-\lambda x}  \d x - \lambda e^{-\mu t} \int_0^t e^{(\mu-\lambda) x} \d x \\
-&= 1- e^{-\lambda x} - \frac{\lambda}{\mu-\lambda} e^{-\mu t} ( e^{(\mu-\lambda) t} -1) \\
-&= 1- e^{-\lambda x} - \frac{\lambda}{\mu-\lambda} e^{-\lambda t} + \frac{\lambda}{\mu-\lambda} e^{-\mu t} \\ 
+&= 1- e^{-\lambda t} - \frac{\lambda}{\mu-\lambda} e^{-\mu t} ( e^{(\mu-\lambda) t} -1) \\
+&= 1- e^{-\lambda t} - \frac{\lambda}{\mu-\lambda} e^{-\lambda t} + \frac{\lambda}{\mu-\lambda} e^{-\mu t} \\ 
 &= 1 - \frac{\mu}{\mu-\lambda} e^{-\lambda t} + \frac{\lambda}{\mu-\lambda} e^{-\mu t}. \\
   \end{align*}
 The density $f_{X+S}(t)$ is the derivative of this expression with respect to~$t$, hence,
 \begin{align*}
   f_{X+S}(t) 
-&= \frac{\lambda\mu}{\mu-\lambda} e^{-\lambda t}  - \frac{\mu \lambda}{\mu-\lambda} e^{-\mu s} \\
+&= \frac{\lambda\mu}{\mu-\lambda} e^{-\lambda t}  - \frac{\mu \lambda}{\mu-\lambda} e^{-\mu t} \\
 &= \frac{\lambda\mu}{\lambda -\mu}(e^{-\mu t} - e^{-\lambda t}). \\
 \end{align*}
 
@@ -477,7 +477,7 @@ Conditioning is much faster, but requires the concept of conditional density. Yo
 \end{exercise}
 
 \begin{exercise}
-Show with  probability $\rho$ that a job leaves behind a busy station.
+Show that the probability that a job leaves behind a busy station is $\rho$.
     \begin{solution}
 For the time average, 
         $\P B = \sum_{n=1}^\infty p(n) = \rho$.
@@ -486,7 +486,7 @@ From PASTA $\pi(n) = p(n)$, hence the fraction of jobs that see a busy server mu
 \end{exercise}
 
 \begin{exercise}
-Show  that when the server is busy at $D_{n-1}$, the density of the inter-departure time  $f_D(t) = \mu e^{-\mu t}$.
+Show  that when the server is busy at $D_{n-1}$, the density of the inter-departure time is $f_D(t) = \mu e^{-\mu t}$.
     \begin{solution}
 The server can start right away with a new job. The departure times are exponentially distributed. 
     \end{solution}

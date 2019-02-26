@@ -102,7 +102,7 @@ Define the load as
 \end{equation}
   Then, derive
  \begin{align}
-p(n) &= \frac{1}G \frac{(c\rho)^n}{n!}, \quad n=0,\ldots, c, \label{eq:502}\\
+p(n) &= \frac{1}G \frac{(c\rho)^n}{n!}, \quad n=0,\ldots, c-1, \label{eq:502}\\
 p(n) &= \frac{1}G \frac{c^c\rho^n}{c!}, \quad n=c,c+1, \ldots\label{eq:58} \\
 G &=\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{(1-\rho)c!}, \label{eq:501}\\
 \E{L_Q} &= \sum_{n=c}^\infty (n-c) p(n) = \frac{(c\rho)^c}{c! G}\frac{\rho}{(1-\rho)^2}, \\ 
@@ -254,7 +254,7 @@ Since there are as many servers as places available in the system, $\E{L_Q}=0$. 
 &= \sum_{n=0}^{c} n p(n) =  \sum_{n=1}^c n p(n)  \\
 &= G^{-1} \sum_{n=1}^c n \frac{(\lambda/\mu)^n}{n!} 
 = G^{-1} \sum_{n=1}^{c} \frac{(\lambda/\mu)^{n}}{(n-1)!} \\
-&= \frac{\lambda}{\mu G} \sum_{n=0}^{c-1} \frac{(\lambda/\mu)^{n}}{(n)!} 
+&= \frac{\lambda}{\mu G} \sum_{n=0}^{c-1} \frac{(\lambda/\mu)^{n}}{n!} 
 = \frac{\lambda}{G\mu} \left(G- \frac{(\lambda/\mu)^c}{c!}\right) \\
 &= \frac{\lambda}{\mu} \left(1- \frac{1}G\frac{(\lambda/\mu)^c}{c!}\right) \\
 &= \frac{\lambda}{\mu} \left(1- p(c)\right).
@@ -706,7 +706,7 @@ time-average versus observer-average, we need a new concept,
     balk at a level $b$. Thus, whether only $b$ customers are admitted
     to the system (i.e., blocked), or balk at level $b$, the effect is
     the same: the number of people in the system remains at or below
-    $b$. However, a fraction of customer may already balk at lower
+    $b$. However, a fraction of the customers may already balk at lower
     levels, like in the example above, so that the arrival stream is
     `thinned' due to balking customers. In that respect, a queueing
     system with balking behaves differently.
