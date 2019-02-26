@@ -8,12 +8,9 @@
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-As it turns out, many more single-server queueing situations can be
-modeled and analyzed by making a judicious choice of $\lambda(n)$ and
-$\mu(n)$ in~\eqref{eq:25}, to wit,
-$ \lambda(n) p(n) = \mu(n+1)p(n+1)$. For these queueing systems we
-just present the results. In the exercises we ask you to derive the
-formulas---the main challenge is not to make computational errors. 
+As it turns out, many more single server queueing situations than the $M/M/1$ queue can be modeled and analyzed by making a judicious choice of $\lambda(n)$ and $\mu(n)$ in the level crossing equations~\eqref{eq:25}.
+For these queueing systems we just present the results.
+In the exercises we ask you to derive the formulas---the main challenge is not to make computational errors.
 
 It is important to realize that the inter-arrival times and service times need to be memoryless for the analysis below; the rates, however, may  depend on the number of the jobs in the system. Specifically, consider the departure time $D_k$ of the $k$th job, so that $A_{A(D_k)+1}$ is the arrival time of the next job. If $L(D_k)=n$, then we require that for every $k$ 
 \begin{equation*}
@@ -262,8 +259,8 @@ Since there are as many servers as places available in the system, $\E{L_Q}=0$. 
 &= \frac{\lambda}{\mu} \left(1- \frac{1}G\frac{(\lambda/\mu)^c}{c!}\right) \\
 &= \frac{\lambda}{\mu} \left(1- p(c)\right).
     \end{align*}
-  \end{solution}
 This can be explained as follows: $\lambda(1-p(c))$ is the rate of accepted jobs (since a fraction $p(c)$ is lost). Thus, the load is $\lambda(1-p(c))/\mu$, and the load is the fraction of time the servers are busy. 
+  \end{solution}
 \end{exercise}
 
 \begin{exercise}
@@ -576,7 +573,7 @@ I asked WolframAlpha to simplify this, but the answer I got was not particularly
 \end{exercise}
 
 
-\begin{exercise}
+\begin{exercise}\label{ex:27}
   What would be the difference between a multi-server queue and a
   single-server queue with a fast server? We can use the formulas for
   the $M/M/1$ queue and the $M/M/c$ queue to obtain some basic

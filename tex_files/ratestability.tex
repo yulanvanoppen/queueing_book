@@ -362,7 +362,8 @@ recall that for a system to be rate-stable, it is necessary that
 $\mu> \lambda$, implying in turn that $\rho < 1$. The relation
 $\rho=\E S/ \E X < 1$ then tells us that the average time it takes to
 serve a job must be less than the average time between two consecutive
-arrivals, i.e., $\E S < \E X$.
+arrivals, i.e., $\E S < \E X$. In fact, when $\mu < \lambda$, it is easy to check with simulation that the queue length
+grows roughly linearly with slope $\lambda - \mu$.
 
 
 \begin{exercise}
@@ -391,14 +392,6 @@ What is the rate in, and what is the service capacity?
   \end{solution}
 \end{exercise}
 
-\begin{exercise}
-  Check with simulation that when $\lambda > \mu$ the queue length
-  grows roughly linearly with slope $\lambda - \mu$.  Thus, if
-  $\rho>1$, `we are in trouble'.
-  \begin{solution}
-    See my website. 
-  \end{solution}
-\end{exercise}
 
 
 \begin{exercise}\label{ex:11}

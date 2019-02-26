@@ -559,15 +559,19 @@ $L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}$.
 \end{solution}
 \end{exercise}
 
+For the next exercise we need an important definition.
+Write $f(x+) = \lim_{h\downarrow0} f(x+h)$ for the right limit of a function $f$ at $x$ and $f(x-) = \lim_{h\downarrow0} f(x-h)$ for the left limit.
+Note that $f$ is continuous at $x$ when $f(x-)=f(x+)$.
+Since in queueing systems we are concerned with processes with jumps, we need to be quite particular about left and right limits at jump epochs.
 
 
 \begin{exercise} 
 Define the number of jobs in the system as seen by the $k$th arrival  as
 \begin{equation}
   \label{eq:Lk}
-  L(A_k-),
+  L(A_k-).
 \end{equation}
-where $L(A_k-) = \lim_{h\downarrow 0} L(A_k - h)$. (Observe that the $k$th job arrives at time $A_k$ and $\{L(s)\}$ is right-continuous.)
+(Observe that the $k$th job arrives at time $A_k$ and $\{L(s)\}$ is right-continuous.)
 
 Can you derive the following (algorithmic efficient) procedure to
     compute the number of jobs in the system as seen by arrivals,
