@@ -248,7 +248,6 @@ With Little's law:
 \begin{equation}
   \E{W_Q} = \E L \E S = \lambda \E W \E S= \rho \E W = \frac{\rho}{1-\rho} \E S = \frac{\rho^2}{1-\rho} \frac 1 \lambda.
 \end{equation}
-Another way: $\E{W_Q} = \E S \E L = \E S \rho/(1-\rho) = \rho/\lambda \rho/(1-\rho)$.
   \end{solution}
 \end{exercise}
 
@@ -457,33 +456,20 @@ $\sum_n n^2 \rho^n$ leads to
 \end{split}
 \end{equation*}
 
-A third method is based on $z$-transforms, which is the same thing as moment generating functions. Writing $z=e^s$, we have $\E{e^{s L}} = \E{z^L}$. Hence
+A third method is based on using the moment-generating functions: 
 \begin{equation*}
-  \phi(z) = \E{z^L} = \sum_{n=0}^\infty z^n p(n) = (1-\rho) \sum_{n=0}^\infty (\rho z)^n = \frac{1-\rho}{1-\rho z}.
+  M(s) = \E{e^{sL}} = \sum_{n=0}^\infty e^{sn} p(n) = (1-\rho) \sum_{n=0}^\infty (e^s \rho)^n = \frac{1-\rho}{1-\rho e^s};
 \end{equation*}
+we assume that $s$ such that the summation converges.
 Then 
 \begin{equation*}
-  \E L = \left.\frac d {dz} \phi(z)\right|_{z=1} = \frac{\rho}{1-\rho},
+  \E L = \left.\frac d {ds} M(s) \right|_{s=0} = \left.\frac{1-\rho}{(1-\rho e^s)^2} \rho e^s \right|_{s=0} = \frac{\rho}{1-\rho}, 
 \end{equation*}
 and 
 \begin{equation*}
-  \E{L(L-1)}= \left.\phi''(z)\right|_{z=1} = \frac{2\rho^2}{(1-\rho)^2}.
+  \E{L^2}= \left.M(s)''\right|_{s=0} = \frac{2\rho^2}{(1-\rho)^2} + \frac{\rho}{1-\rho}.
 \end{equation*}
-Thus,
-\begin{equation*}
-\E L^2 =   \E{L(L-1)} + \E L.
-\end{equation*}
-Hence,
-\begin{equation*}
-  \begin{split}
-\E L^2 
-&=   \frac{2\rho^2}{(1-\rho)^2} + \frac\rho{1-\rho} \\
-&=   \frac{2\rho^2}{(1-\rho)^2} + \frac\rho(1-\rho){(1-\rho)2} \\
-&=   \frac{\rho^2+\rho}{(1-\rho)^2} = \rho \frac{1+\rho}{(1-\rho)^2}.
-  \end{split}
-\end{equation*}
-
-A bit of algebra gives the previous results.
+With a a bit of algebra  the previous results follows.
   \end{solution}
 \end{exercise}
 
@@ -614,9 +600,9 @@ idle
 \end{exercise}
 
 \begin{exercise}
-  (Hall 5.5) An $M/M/1$ queue has an arrival rate of 100 per hour and
-  a service rate of 140 per hour.
- What is $p(n)$?  What are $\E{L_Q}$ and $\E L$?
+  (Hall 5.5) An $M/M/1$ queue has an arrival rate of 100 per hour and a service rate of 140 per hour.
+  What is $p(n)$?
+  What are $\E{L_Q}$ and $\E L$?
 \begin{solution}
 First, $p(n) = (1-\rho)\rho^n$. Now,
 
@@ -739,10 +725,12 @@ Use the level-crossing equations of the $M(n)/M(n)/1$ queue.
 \end{exercise}
 
 \begin{exercise}
-  (Hall 5.14) An airline phone reservation line has one server and a
-  buffer for two customers. The arrival rate is 6 customers per hour, and
-  a service rate of just 5 customers per hour. Arrivals are Poisson and service times are exponential. 
- Estimate $\E{L_Q}$ and the average number of customers served per hour. Then, estimate $\E{L_Q}$ for a buffer of size 5. What is the impact of the increased buffer size on the number of customers served per hour?
+  (Hall 5.14) An airline phone reservation line has one server and a buffer for two customers.
+  The arrival rate is 6 customers per hour, and a service rate of just 5 customers per hour.
+  Arrivals are Poisson and service times are exponential.
+  Estimate $\E{L_Q}$ and the average number of customers served per hour.
+  Then, estimate $\E{L_Q}$ for a buffer of size~5.
+  What is the impact of the increased buffer size on the number of customers served per hour?
   \begin{hint}
 This is a queueing system with loss, in particular the $M/M/1/1+2$ queue.
   \end{hint}
@@ -909,13 +897,15 @@ sqrt(var_q)
 \end{exercise}  
 
 \begin{exercise}
-  (Hall 5.8) The queueing system at a fast-food stand behaves in a
-  peculiar fashion. When there is no one in the queue, people are
-  reluctant to use the stand, fearing that the food is
-  unsavory. People are also reluctant to use the stand when the queue
-  is long. This yields the following arrival rates (in numbers per hour): $\lambda(0) = 10$, $\lambda(1)=15$, $\lambda(2)=15$, $\lambda(3)=10$, $\lambda(4)=5$, $\lambda(n)=0, n\geq 5$. The stand has two servers, each of which can operate at 5 per hour. Service times are exponential, and the arrival process is Poisson.
- Calculate the steady state probabilities. Next,  what is the average arrival rate? Finally,
- Determine $\E L$, $\E{L_Q}$, $\E W$ and $\E{W_Q}$.
+  (Hall 5.8) The queueing system at a fast-food stand behaves in a peculiar fashion.
+  When there is no one in the queue, people are reluctant to use the stand, fearing that the food is unsavory.
+  People are also reluctant to use the stand when the queue is long.
+  This yields the following arrival rates (in numbers per hour): $\lambda(0) = 10$, $\lambda(1)=15$, $\lambda(2)=15$, $\lambda(3)=10$, $\lambda(4)=5$, $\lambda(n)=0, n\geq 5$.
+  The stand has two servers, each of which can operate at 5 per hour.
+  Service times are exponential, and the arrival process is Poisson.
+  Calculate the steady state probabilities.
+  Next, what is the average arrival rate?
+  Finally, determine $\E L$, $\E{L_Q}$, $\E W$ and $\E{W_Q}$.
   \begin{solution}
 First the service rates.
 \begin{pyconsole}
