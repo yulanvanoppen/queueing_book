@@ -8,7 +8,7 @@
 \Opensolutionfile{ans}
 
 A relatively easy way to obtain insight into the procedure is by
-comparing this case to the single-server single station case.  Recall that, for the latter case, 
+comparing this case to the single-server single-station case.  Recall that, for the latter case, 
 \begin{equation*}
   \E{W_Q} = \rho \E{S_r\given S_r>0} + \E{L_Q} \E S.
 \end{equation*}
@@ -243,7 +243,7 @@ import numpy as np
 from numpy.linalg import eig
 
 
-c = np.array([1, 1, 1, 1, 1])  # single server stations
+c = np.array([1, 1, 1, 1, 1])  # single-server stations
 P = np.matrix([
     [0, 1, 0, 0, 0],
     [0, 0, 1, 0, 0],

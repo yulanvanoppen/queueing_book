@@ -52,7 +52,7 @@ occur in $n$ intervals is then binomially distributed
   \P{N_n(t) = k} = {n \choose k} p^k (1-p)^{n-k}.
 \end{equation}
 
-\begin{exercise}
+\begin{exercise}{\faFlask}
 Show that $\E{N_n(t)} = \sum_{i=1}^n \E{B_i} = n p$.
 \begin{hint}
 Use that $\E{X+Y} = \E X + \E Y$. 
@@ -64,7 +64,7 @@ Use that $\E{X+Y} = \E X + \E Y$.
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faFlask}
 What is the difference between $N_n(t)$ and $N(t)$?
 \begin{solution}
   $N_n(t)$ is a binomially distributed random variable with parameters
@@ -84,7 +84,7 @@ e^{-\lambda t} \frac{(\lambda t)^k}{k!}.
 We say that $N(t)$ is \recall{Poisson distributed} with rate
 $\lambda$, and write $N(t)\sim P(\lambda t)$. 
 
-\begin{exercise}
+\begin{exercise}{\faCalculator}
   Show how the binomial distribution~\eqref{eq:bin} converges to the
   Poisson distribution~\eqref{eq:pois} if $n\to\infty$, $p\to0$ such
   that $n p=\lambda t$. 
@@ -130,7 +130,7 @@ is easy, so that, as $n\to\infty$,  the above converges to
 Thus, if we assume that the arrival rate of customers is constant for some amount of time, e.g., an hour, and we assume that the probability of a customer arriving in some very small amount of time,  e.g., a millisecond, is small, the resulting number of arrivals of customers is Poisson distributed. 
 
 
-\begin{exercise}\label{ex:2}
+\begin{exercise}{\faCalculator}\label{ex:2}
   Show that if $N(t)\sim P(\lambda t)$, the expected number of arrivals during $[0,t]$ is $\E{N(t)} = \lambda t$.
   \begin{hint}
 Apply the definition of the expectation, and in the computations use that 
@@ -154,7 +154,7 @@ Apply the definition of the expectation, and in the computations use that
 \end{exercise}
 
 
-\begin{exercise}
+\begin{exercise}{\faCalculator}
   Show that if $N(t)\sim P(\lambda t)$, the variance of the number of arrivals during $[0,t]$ is $\V{N(t)} = \lambda t$. 
   \begin{hint}
 Realize that $\V N = \E{N^2} - (\E N)^2$. Compute $\E{N^2}$, use Exercise~\ref{ex:2} for $(\E{N})^2$ and the hint of Exercise~\ref{ex:2} to simplify the calculations. 
@@ -181,7 +181,7 @@ Recall that the \recall{moment-generating function}  of a random variable $X\geq
 With the moment-generating function we compute the mean and variance of $N(t)$ with less effort. 
 
 
-\begin{exercise}
+\begin{exercise}{\faCalculator}
 Show that the moment-generating function of the random variable~$N(t)\sim P(\lambda t)$ is
 \begin{equation*}
 M_{N(t)}(s) 
@@ -208,7 +208,7 @@ M_{N(t)}(s)
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faCalculator}
 Use  the moment-generating function of $N(t)$ to compute $\E{N(t)}$ and $\V{N(t)}$. 
 \begin{hint}
   Recall that $M_{N(t)}'(0) = \d M_{N(t)}(s)/\d s|_{s=0} = \E{N(t)}$ and $M_{N(t)}''(0)= \E{(N(t))^2}$. 
@@ -237,7 +237,7 @@ As  will become clear later, the SCV is a very important concept in
   queueing theory. Memorize it as a measure of \emph{relative
   variability}.
 
-\begin{exercise}
+\begin{exercise}{\faFlask}
 Show that   the SCV of $N(t)$ is equal to $1/(\lambda t)$. 
   \begin{solution}
     \begin{equation*}
@@ -249,7 +249,7 @@ SCV = \frac{\V{N(t)}}{(\E{N(t)})^2} = \frac{\lambda t}{(\lambda t)^2} = \frac1{\
 
 For the next couple of exercises, we need the concept of conditional probability. To help you recall this, consider the next question.
 
-\begin{exercise} \label{ex:18}
+\begin{exercise}{\faPhoto} \label{ex:18}
   We have  one gift to give to one of three children. As we cannot
   divide the gift into parts, we decide to let `fate decide'. That
   is, we choose a random number in the set $\{1, 2, 3\}$. The first
@@ -282,7 +282,7 @@ For the next couple of exercises, we need the concept of conditional probability
 \end{exercise}
 
 Below, and elsewhere, we use the following efficient notation:  the function $f=o(h)$ means that $f$ is such $f(h)/h \to 0$ as $h\to 0$.  The next exercise helps you practice with this notation.
-\begin{exercise}
+\begin{exercise}{\faCalculator}
   Let $c$ be a constant (in $\R$) and the functions $f$ and $g$ both of $o(h)$. Then show that (1) $f(h) \to 0$ when $h\to 0$, (2) $c\cdot f = o(h)$, (3) $f+g=o(h)$, and (4) $f\cdot g=o(h)$. 
  \begin{solution}
 In fact (1) is trivial: $|f(h)| \leq |f(h)/h|$ when $|h| < 1$. But it is given that the right hand side goes to zero.  For (2) and (3):
@@ -300,7 +300,7 @@ For (4), use  the Algebraic Limit Theorem,
 \end{exercise}
 
 
-\begin{exercise}
+\begin{exercise}{\faFlask}
   Show that if $N(t) \sim P(\lambda t)$, we have for $0<h\ll 1$,
   \begin{equation*}
 \P{N(t+h) = n \given N(t) = n} = 1-\lambda h + o(h).
@@ -338,7 +338,7 @@ Thus,
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faFlask}
   Show that if $N(t) \sim P(\lambda t)$, we have for small $h$,
  $\P{N(t+h) = n+1 \given N(t) = n} = \lambda h + o(h)$. 
     \begin{hint} Use the previous exercise.
@@ -354,7 +354,7 @@ Thus,
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faCalculator}
   Show that if $N(t) \sim P(\lambda t)$, we have for small $h$,
  $\P{N(t+h) \geq n+2 \given N(t) = n} = o(h)$.
     \begin{hint}
@@ -387,7 +387,7 @@ We can also use the results of the previous parts to see that
 We define the Poisson \emph{process} as the set $N=\{N(t), t\geq 0\}$. Observe that this process is a much more complicated object than the Poisson distributed random variable $N(t)$. The
 process is an uncountable set of random variables indexed by  $t\in \R^+$, whereas $N(t)$ is just \emph{one} random variable.
 
-\begin{exercise}
+\begin{exercise}{\faCalculator}
 Show that  for a Poisson process $N$, 
 \begin{equation*}
 \P{N(s) =1\given N(t)=1} = \frac s t,
@@ -452,7 +452,7 @@ processes.
 
 For the next set of exercises,  assume that $N_\lambda(t)\sim \text{P}(\lambda t)$, $N_\mu(t) \sim \text{P}(\mu t)$ and are independent.
 
-\begin{exercise} 
+\begin{exercise} {\faCalculator}
 Show that  $N_\lambda(t) + N_\mu(t) \sim \text{P}((\lambda + \mu)t)$ for all $t\geq 0$. Thus, when we merge two independent Poisson processes, the merged process $\{N_{\lambda+\mu}(t)\}$ is also a Poisson process whose rate is the sum of the rates of the original Poisson processes.
   \begin{hint}
 Use a conditioning argument or use moment-generating functions.
@@ -514,7 +514,7 @@ the distribution, and since the above expression has the same form as a Poisson 
 
 \begin{comment}
   
-\begin{exercise}
+\begin{exercise}{\faFlask}
 What is the
   meaning of the event
   $\{N_\lambda(h) = 1, N_\mu(h) = 0\}\cap\{N_\lambda(h) + N_\mu(h) = 1\}$?
@@ -525,7 +525,7 @@ There are two arrival processes, arrivals of the first type occur with rate $\la
 \end{comment}
 
 
-\begin{exercise} 
+\begin{exercise}{\faCalculator}
 Show that, given that an arrival occurred,  the probability that the arrival was of the first type is  
  \begin{equation*}
     \P{N_\lambda(h) = 1 | N_\lambda(h) + N_\mu(h) = 1} =
@@ -594,7 +594,7 @@ node[below, fill=white] {$B_6=0$};
   \end{center}
 
 
-\begin{exercise}\label{ex:1}
+\begin{exercise}{\faCalculator}\label{ex:1}
 Show that the Poisson process obtained by thinning the original
   process is $\sim P(\lambda t p)$ for any~$t$.
   \begin{hint}

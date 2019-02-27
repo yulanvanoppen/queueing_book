@@ -31,7 +31,7 @@ must be that $N(t) = 0$. Hence, for the first inter-arrival time $X_1$: %, i.e.,
 \end{equation*}
 
 
-\begin{exercise} 
+\begin{exercise}{\faFlask}
 In the above expression for $\P{X\leq t}$ we require that $\lambda>0$. What would happen if you would allow $\lambda$ to be zero or negative?
 \begin{hint}
   The interpretation of the function $1-e^{-\lambda t}$ is a probability. What are the consequences of this? What happens if $\lambda=0$?
@@ -43,7 +43,7 @@ Suppose $\lambda=0$. Then $\P{X\leq t} = 1-e^{0} = 0$. In words, this would mean
 \end{solution}
 \end{exercise}
 
-\begin{exercise} \label{exer:lambda}
+\begin{exercise}{\faCalculator} \label{exer:lambda}
   If the random variable $X\sim\Exp(\lambda)$, show that its mean $\E X = \frac{1}\lambda$. Interpret this result.
   \begin{hint}
  \begin{equation*}
@@ -66,7 +66,7 @@ For the interpretation, if jobs arrive at rate $\lambda$, the average time betwe
 \end{exercise}
 
 
-\begin{exercise}\label{ex:15} 
+\begin{exercise}{\faCalculator}\label{ex:15} 
   If $X\sim\Exp(\lambda)$, show that its second moment $\E{X^2} =  \frac{2}{\lambda^2}$.
   \begin{hint}
   \begin{equation*}
@@ -87,7 +87,7 @@ For the interpretation, if jobs arrive at rate $\lambda$, the average time betwe
 \end{exercise}
 
 
-\begin{exercise} 
+\begin{exercise}{\faCalculator}
   If $X\sim\Exp(\lambda)$, show that the \recall{variance}
 $\V X = \lambda^{-2}$.
   \begin{hint} Use, and memorize, the very practical formula
@@ -105,7 +105,7 @@ The  above exercises can also be easily solved with the moment-generating functi
   M_X(t) = \E{e^{t X}} = \int_0^\infty e^{t x} \lambda e^{-\lambda x} \d x.
 \end{equation}
 
-\begin{exercise}
+\begin{exercise}{\faFlask}
 Why do we require that $t < \lambda$ in the definition of $M_X(t)$?
 \begin{solution}
 \begin{equation*}
@@ -115,14 +115,14 @@ Why do we require that $t < \lambda$ in the definition of $M_X(t)$?
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faFlask}
   What is $M_X(0)?$
   \begin{solution}
     $M_X(0) = \E{e^{0 X}} = \E{e^0} = \E{1} = 1.$
   \end{solution}
 \end{exercise}
 
-\begin{exercise}\label{ex:33}
+\begin{exercise}{\faCalculator}\label{ex:33}
  If $X$ is an exponentially distributed random variable with
     parameter $\lambda$, show that its moment-generating function
     \begin{equation*}
@@ -144,7 +144,7 @@ Why do we require that $t < \lambda$ in the definition of $M_X(t)$?
     \end{solution}
   \end{exercise}
 
-\begin{exercise}\label{ex:21}
+\begin{exercise}{\faCalculator}\label{ex:21}
     Use the moment-generating function to show that 
     \begin{align*}
       \E{X} &=\frac1\lambda, & 
@@ -161,7 +161,7 @@ where $M_X'(t) = \frac{\d}{\d t} M_X(t)$.
 \end{solution}
   \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faCalculator}
 Use~\eqref{eq:62} to   prove that the square coefficient of variation (SCV) of $X$ is $C^2 =1$.  
 \begin{solution}
   By the previous problems, $\V X = 1/\lambda^2$ and $\E X=1/\lambda$, hence
@@ -291,7 +291,7 @@ that tell us about the time the next patient will be brought in? Not
 much, as most of us will agree.
 
 
-\begin{exercise}
+\begin{exercise}{\faCalculator}
   Show that an exponentially distributed random variable is
   memoryless.  
   \begin{hint}
@@ -317,7 +317,7 @@ e.g. \citet[Appendix 3]{yushkevich69:_markov_proces}.
 % variables to simulate queueing systems. 
 
 
-\begin{exercise}\label{ex:10}
+\begin{exercise}{\faCalculator}\label{ex:10}
   If $X\sim\Exp(\lambda)$ and $S\sim\Exp(\mu)$, and $X$ and $S$ are
   independent, show that 
   \begin{equation*}
@@ -340,7 +340,7 @@ Use that $X$ and $S$ are independent to get
   \end{solution}
 \end{exercise}
 
-\begin{exercise}\label{ex:3}
+\begin{exercise}{\faCalculator}\label{ex:3}
    If $X\sim \Exp(\lambda)$, $S\sim\Exp(\mu)$, and $X$ and $S$ are independent, show that 
     \begin{equation*}
       \P{X\leq S} = \frac{\lambda}{\lambda+\mu}.
@@ -436,7 +436,7 @@ X_i\sim \Exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t).
 
 We next provide further relations between the Poisson distribution and the exponential distribution. 
 
-  \begin{exercise}
+  \begin{exercise}{\faCalculator}
     Assume that the inter-arrival times $\{X_i\}$ are i.i.d. and
     $X_i\sim\Exp(\lambda)$. Let
     $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$. Show that %We do not need the MGF here.
@@ -456,7 +456,7 @@ The simplest way to obtain the answer is to use that the expectation is a linear
   \end{solution}
 \end{exercise}
 
-  \begin{exercise}
+  \begin{exercise}{\faCalculator}
  Let $A_i$ be the arrival time of customer $i$ and set $A_0=0$.
     Assume that the inter-arrival times $\{X_i\}$ are i.i.d.  with
     exponential distribution with mean $1/\lambda$ for some
@@ -490,7 +490,7 @@ $A_i \sim \Gamma(i,\lambda)$, i.e., $A_i$ is Gamma distributed.
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faCalculator}
   Use the density $f_{A_i}$ of the previous exercise to show that $\E{A_i}=i/\lambda$. 
   \begin{hint}
 Use the standard integral 
@@ -537,7 +537,7 @@ $N(t) \sim \text{P}(\lambda t)$.
 \end{exercise}
 \end{comment}
   
-\begin{exercise}
+\begin{exercise}{\faCalculator}
   If the inter-arrival times $\{X_i\}$ are i.i.d. and exponentially
   distributed with mean $1/\lambda$, prove that the number $N(t)$ of
   arrivals during interval $[0,t]$ is Poisson distributed.
@@ -568,7 +568,7 @@ We are done.
 
 In the sequel of this section we  develop numerous important probability concepts, which we will also use many times in the rest of the course.
 
-\begin{exercise}
+\begin{exercise}{\faFlask}
   If $S\sim U[0,7]$ and $X\sim U[0,10]$, where $U[I]$ stands for the
   uniform distribution concentrated on the interval $I$, compute
   $\P{S-X\leq u}$, for  $S$ and $X$ independent.
@@ -666,7 +666,7 @@ If you fill this in at Wolfram, you'll get the results that we obtained above in
 
 
 
-\begin{exercise}
+\begin{exercise}{\faCalculator}
   A machine serves two types of jobs. The processing time of jobs of
   type $i$, $i=1,2$, is exponentially distributed with parameter
   $\mu_i$. The type $T$ of a job is random and independent of anything
@@ -742,7 +742,7 @@ for the \emph{survivor function} of $B$.  We can write this with an indicator fu
 \end{equation*}
 which makes the computation of certain expressions quite a bit easier. 
 
-\begin{exercise}\label{ex:5}
+\begin{exercise}{\faCalculator}\label{ex:5}
   Express the probability mass  $f(k)$ and the survivor function $G(k)$ in terms of the distribution $F(k)$ of the batch size $B$. Which of the following is true:
   $G(k) = 1-F(k)$, $G(k) = 1-F(k-1)$, or $G(k) = 1-F(k+1)$?
   \begin{hint}
@@ -761,7 +761,7 @@ This exercise is just meant to become familiar with the notation.
 \end{exercise}
 
 
-\begin{exercise}\label{ex:6}
+\begin{exercise}{\faCalculator}\label{ex:6}
  Use indicator functions to prove that $ \sum_{k=0}^\infty G(k) = \E B$.
     \begin{hint}
 Write 
@@ -789,7 +789,7 @@ you are interested.)
 \end{solution}
 \end{exercise}
 
-\begin{exercise}\label{ex:66}
+\begin{exercise}{\faCalculator}\label{ex:66}
  Use indicator functions to prove that
 $\sum_{i=0}^\infty i G(i) =  \E{B^2}/2 - \E{B}/2.$
     \begin{hint}
@@ -814,7 +814,7 @@ Let $S$ be a continuous non-negative random variable with distribution function 
 \end{equation*}
 for the expectation of $S$. Here $\d F(x)$ acts as a shorthand for $f(x) \d x$. \footnote{For the interested reader, $\int x \d F(x)$ is a Lebesgue-Stieltjes integral with respect to the distribution function $F$.}
 
-\begin{exercise}
+\begin{exercise}{\faCalculator}
  Use indicator functions to prove that 
 $   \E S = \int_0^\infty x \d F(x)  = \int_0^\infty G(y) \d y,$
 where $G(x) = 1 - F(x)$. 
@@ -832,7 +832,7 @@ $\E S = \int_0^\infty x \d F(x)  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y 
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faCalculator}
  Use indicator functions to prove that for a continuous non-negative random
     variable $S$ with distribution function $F$, 
 $    \E{S^2} = \int_0^\infty x^2 \d F(x)  = 2 \int_0^\infty y G(y) \d y,$
@@ -851,7 +851,7 @@ $\int_0^\infty y G(y) \d y = \int_0^\infty y \int_0^\infty \1{y\leq x}f(x)\, \d 
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faCalculator}
  Use integration by parts to show that for a continuous non-negative random
     variable $S$ with distribution function $F$ and survivor function $G=1-F$, 
 $\int_0^\infty y G(y) \d y = \E{S^2}/2,$
@@ -865,7 +865,7 @@ if the latter expected value exists.
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faCalculator}
   Use that $\E S = \int_0^\infty x \d F(x) = \int_0^\infty G(y) \d y$ to
   check that  $\E S = \mu^{-1}$ if $F(x) = 1 - e^{-\mu x}$.
 \begin{solution}
@@ -876,41 +876,6 @@ If $F(x) = 1 - e^{-\mu x}$, we obtain that
 \end{equation*}
 \end{solution}
 \end{exercise}
-
-
-\begin{comment}
-\begin{exercise}
-  Assume that the time $X$ to fail of a machine is uniformly
-  distributed on the interval $[0,10]$. If the machine fails at time
-  $t$, the cost to repair it is $h(t)$. What is the expected repair
-  cost? 
-  \begin{solution}
-    Write for $F(x) = \P{X\leq x}$ and $f(x) = \d F(x)/\d x$ for the
-    density of $F$.
-    \begin{equation*}
-      \begin{split}
-\E{h(X)}
-&= \int_0^{10} \E{h(X) \given X = x} \P{X\in \d x} \\
-&= \int_0^{10} \E{h(x) \given X = x} \d F(x) \\
-&= \int_0^{10} \E{h(x) \given X = x} F(\d x) \\
-&= \int_0^{10} \E{h(x) \given X = x} f(x) \d x \\
-&= \int_0^{10} h(x)\frac{\d x}{10}.
-      \end{split}
-    \end{equation*}
-    Here we introduce some notation that is commonly used in the
-    probability literature to indicate the same conceptual idea, i.e,
-    $\P{X\in \d x} = \d F(x) = F(\d x) = f(x) \d x$, where the last
-    equality follows from the fact that $F$ has a density $f$
-    everywhere on $[0,10]$. 
-
-    The concept of conditional expectation is of fundamental
-    importance in probability theory. Any \emph{good} probability book
-    defines this concept as a random variable measurable with respect
-    to some $\sigma$-algebra. In this course we will not deal with
-    this elegant idea, due to lack of time. 
-  \end{solution}
-\end{exercise}
-\end{comment}
 
 
 \Closesolutionfile{hint}
