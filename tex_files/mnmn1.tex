@@ -209,7 +209,7 @@ Observe that the right hand side is precisely equal to $\rho c G$, and hence,
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faFlask}
   Check that  Eq.\eqref{eq:9} for the $M/M/c$ queue reduces to the $M/M/1$ queue if $c=1$.
   \begin{hint}
 Fill in $c=1$. Realize that this is a check on the formulas.
@@ -239,7 +239,7 @@ is also known as the Erlang $B$-formula and is often used to determine
 the number of beds at hospitals, where the beds act as servers and the
 patients as jobs.
 
-\begin{exercise}($M/M/c/c$)
+\begin{exercise}{\faCalculator}($M/M/c/c$)
   Find $\lambda(n)$ and $\mu(n)$ for the $M/M/c/c$ queue, and determine the performance measures.
   \begin{solution} Take,
     $\lambda(n) = \lambda$ if $n< c$, and $\lambda(n)=0$ for $n\geq c$. Also, let, $\mu(n) = n \mu$ for $n\leq c$. (And $n$ can never be larger than $c$, since $\lambda(n) = 0$ for $n\geq c$.) Define $\rho = \lambda/(c \mu)$. Then, we see that $p(n) = p(0)(c\rho)^n/n!$. For the normalization
