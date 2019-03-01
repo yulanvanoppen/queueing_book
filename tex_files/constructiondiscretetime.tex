@@ -101,7 +101,7 @@ $n\gg 1000$, and so on.
     Below I fix the seed of the random number generator to ensure that
     I always get the same results from the simulator.  The arrival
     process is Poisson, and the number of services is fixed to 21 per
-    period. I use \pyv{Q = np.zeros\_like(a)} to make an array of the
+    period. I use \pyv{Q = np.zeros_like(a)} to make an array of the
     same size as the number of arrival $a$ initially set to zeros. The
     rest of the code is nearly identical to the formulas in the text.
 
@@ -998,10 +998,10 @@ I_k &\geq 0.
   \end{solution}
 \end{exercise}
 
-\begin{exercise}(Queue with setups)
+\begin{exercise}{\faRocket}(Queue with setups)
   One server serves two parallel queues, one at a time. After serving
    one queue until it is empty,  the server moves to the other
-  queue. The change of queue requires one period setup time. (This is a tough problem; you can skip it if you don't have the time to really think about it.)
+  queue. The change of queue requires one period setup time. 
   \begin{solution}
 We need an extra variable $p_k$ that specifies  which queue is being served. If $p_k=0$, the server is moving from one queue to the other, if $p_k=1$, the server is at queue 1, and if $p_k=2$ it is at queue $2$. Then, with
 \begin{align*}
