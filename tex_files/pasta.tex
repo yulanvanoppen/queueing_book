@@ -291,7 +291,7 @@ gives  a (simple) proof.
   $\{Y(t), t\geq 0\}$ be a non-decreasing right-continuous
   (deterministic) process. Define $X_k = Y(T_k)-Y(T_{k-1})$,
   $k\geq 1$, where $T_k$ are the epochs at which $N$ increases, i.e.,
-  $N(t) = \{k : T_k \leq t\}$. Then $Y(t)/t$ has a limit iff
+  $N(t) = max\{k : T_k \leq t\}$. Then $Y(t)/t$ has a limit iff
   $n^{-1}\sum_k^n X_k$ has a limit in which case $Y=\lambda X$, i.e.,
   \begin{equation*}
   \lim_{t \to \infty} \frac{Y(t)}t=Y \iff \lim_{n \to \infty} \frac 1n\sum_{k=1}^n X_k =X \implies Y=\lambda X.
