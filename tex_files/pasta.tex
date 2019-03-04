@@ -448,7 +448,7 @@ Since $X\sim \Exp(\lambda)$ and $S\sim\Exp(\mu)$, and $X$ and $S$ are independen
   \begin{align*}
 \P{X+S\leq t } 
 &= \lambda \mu \int_0^\infty \int_0^\infty e^{-\lambda x - \mu y} \1{x+y\leq t} \d x \d y \\
-&= \lambda \mu \int_0^t \int_0^{t-x} e^{-\lambda x - \mu y} \d x \d y \\
+&= \lambda \mu \int_0^t \int_0^{t-x} e^{-\lambda x - \mu y} \d y \d x \\
 &= \lambda \mu \int_0^t e^{-\lambda x} \int_0^{t-x} e^{- \mu y} \d y \d x \\
 &= \lambda \int_0^t e^{-\lambda x} (1-e^{- \mu (t-x)} ) \d x  \\
 &= \lambda \int_0^t e^{-\lambda x}  \d x - \lambda e^{-\mu t} \int_0^t e^{(\mu-\lambda) x} \d x \\
@@ -471,7 +471,7 @@ Conditioning is much faster, but requires the concept of conditional density. Yo
 &=\int_0^t f_S(t-x) f_X(x) \d{x} \\
      &= \int_0^t \mu e^{-\mu(t-x)} \lambda e^{-\lambda x} \d{x} \\
      &= \lambda \mu e^{-\mu t} \int_0^t  e^{x(\mu-\lambda)} \d{x} \\
-& \frac{\lambda \mu}{\lambda - \mu} (e^{-\mu t} - e^{-\lambda t}).
+&= \frac{\lambda \mu}{\lambda - \mu} (e^{-\mu t} - e^{-\lambda t}).
     \end{align*}
     \end{solution}
 \end{exercise}
@@ -489,7 +489,7 @@ Use conditioning on the server being idle or busy at a departure to show that  t
   \begin{hint}
 Conditioning leads to 
 \begin{equation*}
-    f_D(t) = f_{X+S}(t) \P{I} + f_S \P B = (1-\rho) f_{X+S}(t) +
+    f_D(t) = f_{X+S}(t) \P{I} + f_S(t) \P B = (1-\rho) f_{X+S}(t) +
     \rho \mu e^{-\mu t}.
 \end{equation*}
     Now use the above exercises to simplify.
