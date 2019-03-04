@@ -886,13 +886,31 @@ from math import sqrt
 var_L = sum((n-L)**2*P[n] for n in range(len(P)))
 var_L
 sqrt(var_L)
-\end{pyconsole} 
 
-Determine the service time and the utilization.
-\begin{pyconsole}
 var_q = sum((max(n-c,0)-Lq)**2*P[n] for n in range(len(P)))
 var_q
 sqrt(var_q)
+\end{pyconsole}
+
+Determine the service time and the utilization.
+\begin{pyconsole}
+mu = 1./(W-Wq)
+1./mu # in minutes
+
+rho = labda/mu
+rho
+\end{pyconsole}
+
+\begin{pyconsole}
+rho = EL-ELq
+rho
+\end{pyconsole}
+This checks the previous line.
+
+The utilization must also by equal to the fraction of time the server is busy. 
+\begin{pyconsole}
+u = 1 - P[0]
+u
 \end{pyconsole}
     \end{solution}
 \end{exercise}  
