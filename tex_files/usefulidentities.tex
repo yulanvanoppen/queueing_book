@@ -890,8 +890,8 @@ sqrt(var_L)
 
 Determine the service time and the utilization.
 \begin{pyconsole}
-var_q = sum((max(n-c,0)-Lq)**2*P[n] for n in range(len(P)))
-var_q
+var_Lq = sum((max(n-c,0)-Lq)**2*P[n] for n in range(len(P)))
+var_Lq
 sqrt(var_q)
 \end{pyconsole}
     \end{solution}
