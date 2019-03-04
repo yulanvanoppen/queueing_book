@@ -471,7 +471,7 @@ Conditioning is much faster, but requires the concept of conditional density. Yo
 &=\int_0^t f_S(t-x) f_X(x) \d{x} \\
      &= \int_0^t \mu e^{-\mu(t-x)} \lambda e^{-\lambda x} \d{x} \\
      &= \lambda \mu e^{-\mu t} \int_0^t  e^{x(\mu-\lambda)} \d{x} \\
-&= \frac{\lambda \mu}{\lambda - \mu} (e^{-\mu t} - e^{-\lambda t}).
+&= \frac{\lambda \mu}{\lambda - \mu}\left(e^{-\mu t} - e^{-\lambda t}\right).
     \end{align*}
     \end{solution}
 \end{exercise}
@@ -489,7 +489,7 @@ Use conditioning on the server being idle or busy at a departure to show that  t
   \begin{hint}
 Conditioning leads to 
 \begin{equation*}
-    f_D(t) = f_{X+S}(t) \P{I} + f_S(t) \P B = (1-\rho) f_{X+S}(t) +
+    f_D(t) = f_{X+S}(t) \P{\text{server is idle}} + f_S(t) \P{\text{ server is busy }}= (1-\rho) f_{X+S}(t) +
     \rho \mu e^{-\mu t}.
 \end{equation*}
     Now use the above exercises to simplify.
@@ -497,7 +497,6 @@ Conditioning leads to
   \begin{solution}
        \begin{align*}
     f_D(t) 
-&= f_{X+S}(t) \P I + f_S(t) \P B \\
 &= (1-\rho) f_{X+S}(t) +    \rho \mu e^{-\mu t} \\
 &= (1-\rho) \frac{\mu\lambda}{\lambda-\mu} \left(e^{-\mu t}-e^{-\lambda t}\right) +    \rho \mu e^{-\mu t} \\
 &= \left(1-\frac{\lambda}\mu\right) \frac{\mu\lambda}{\lambda-\mu}\left(e^{-\mu t}-e^{-\lambda t}\right)  +    \rho \mu e^{-\mu t} \\
