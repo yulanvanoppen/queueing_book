@@ -448,7 +448,7 @@ Since $X\sim \Exp(\lambda)$ and $S\sim\Exp(\mu)$, and $X$ and $S$ are independen
   \begin{align*}
 \P{X+S\leq t } 
 &= \lambda \mu \int_0^\infty \int_0^\infty e^{-\lambda x - \mu y} \1{x+y\leq t} \d x \d y \\
-&= \lambda \mu \int_0^t \int_0^{t-x} e^{-\lambda x - \mu y} \d x \d y \\
+&= \lambda \mu \int_0^t \int_0^{t-x} e^{-\lambda x - \mu y} \d y \d x \\
 &= \lambda \mu \int_0^t e^{-\lambda x} \int_0^{t-x} e^{- \mu y} \d y \d x \\
 &= \lambda \int_0^t e^{-\lambda x} (1-e^{- \mu (t-x)} ) \d x  \\
 &= \lambda \int_0^t e^{-\lambda x}  \d x - \lambda e^{-\mu t} \int_0^t e^{(\mu-\lambda) x} \d x \\
