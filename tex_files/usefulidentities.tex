@@ -52,8 +52,9 @@ By the PASTA property, a fraction~$\rho$ of the arrivals sees the server occupie
 a free server.  
 \end{hint}
 \begin{solution}
+By the PASTA property we know that the probability of a busy server is defined by $P(B) = \rho$ and the probability of an idle server by $P(I)=1-\rho$. Then,
 \begin{equation*}
-\E{S_r} =   \rho \E{S_r\given S_r >0} + (1-\rho)\cdot \E{S_r\given S_r = 0} = \rho \E{S_r\given S_r>0},
+\E{S_r} =   P(B) \cdot \E{S_r\given S_r >0} + P(I) \cdot \E{S_r\given S_r = 0} = \rho \E{S_r\given S_r >0} + (1-\rho)\cdot \E{S_r\given S_r = 0} = \rho \E{S_r\given S_r>0},
 \end{equation*}
 since, evidently, $\E{S_r\given S_r=0}=0$.  
 \end{solution}
