@@ -30,7 +30,7 @@ service time distribution is exponential. Thus, we need to compute the average r
 Consider the $k$th job of some sample path the $M/G/1$ queueing
 process. This job requires $S_k$ units of service, let its service
 time start at time $\tilde A_k$ so that it departs the server at time
-$D_k=\tilde A_k + S_k$, c.f. Figure~\ref{fig:mg1remainingservicetime}. Define
+$D_k=\tilde A_k + S_k$, cf. Figure~\ref{fig:mg1remainingservicetime}. Define
 \begin{equation*}
 R_k(s) = (D_k-s)\1{\tilde A_k \leq s < D_k}
 \end{equation*}
@@ -273,7 +273,7 @@ L
   is somewhat inconsistent. The other is a bit slower, but very
   consistent. The first has a mean service time of $2$ minutes, with a
   standard deviation of 1 minute. The second has a mean service time
-  of $2.1$ minute, with a standard deviation of $0.1$ minute. If the arrival rate is Poisson with rate 20 per hour, which employee would minimize $\E{L_Q}$? Which would minimize $\E L$? 
+  of $2.1$ minutes, with a standard deviation of $0.1$ minutes. If the arrival rate is Poisson with rate 20 per hour, which employee would minimize $\E{L_Q}$? Which would minimize $\E L$? 
   \begin{solution}
     The arrival process is assumed to be Poisson. There is also
     just one server. Hence, we can use the PK formula to compute the average queue length.
@@ -339,7 +339,7 @@ which we also found in a previous section.
   thus, it is also impossible that the service time is smaller than
   $T$.  (If you are into mathematics, then you should be aware of the fact
   that `impossible' and `almost surely' are not the same. Thus, my
-  using of the word `impossible' is not completely correct. )
+  using of the word `impossible' is not completely correct.)
 
   To compute the SCV, I first compute $\E S$, then $\E{S^2}$ and then
   $\V S = \E{S^2} - \left(\E S\right)^2$, and use the definition of
@@ -368,7 +368,7 @@ Thus,
 In both cases the expected service times are equal to $T$ so that the loads are the same. Thus, 
 \begin{equation*}
   \begin{split}
- \E{L(M/D/1} &= \E{L_Q(M/D/1)} +\rho = \frac{\E{L_Q(M/M/1)}}2 + \rho \\
+ \E{L(M/D/1)} &= \E{L_Q(M/D/1)} +\rho = \frac{\E{L_Q(M/M/1)}}2 + \rho \\
 &= \frac{\rho^2}{2(1-\rho)} + \rho=\frac{\rho(2-\rho)} {2(1-\rho)}.
   \end{split}
 \end{equation*}
@@ -439,7 +439,7 @@ The job in
       words, rejected.  Just after a departure, the average time until
       the next arrival is $1/\lambda$, then a service starts with an
       average duration of $\E S$. After this departure, a new cycle
-      start. Thus, the utilization is
+      starts. Thus, the utilization is
       $\E S/(1/\lambda + \E S) = \lambda \E S/ (1 + \lambda \E S)$.
       Since not all jobs are accepted, the utilization $\rho$ cannot
       be equal to $\lambda \E S$.
@@ -484,7 +484,7 @@ Provide an  example.
   \begin{solution}
  Typically, in the $G/G/1$ queue, the arrivals do not see  time-averages. Consequently, the fraction of arrivals that are blocked is not necessarily equal to the utilization~$\rho$.
 
-  Again, take jobs with duration 59 minutes and inter-arrival times of
+  Again, take jobs with a duration 59 minutes and inter-arrival times of
   1 hour. The load is $59/60$, but no job is lost, also not in the
   $G/G/1/1$ case. Thus, $\delta=\lambda$ in this case.
   \end{solution}

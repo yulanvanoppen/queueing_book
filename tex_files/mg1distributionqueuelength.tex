@@ -10,19 +10,20 @@
 \Opensolutionfile{ans}
 
 
-In Section~\ref{sec:batch-arrivals} we used level-crossing arguments 
-to find a recursive method to compute  the stationary distribution $p(n)$ of the number of items in an $M^X/M/1$ queue. Here we apply similar arguments to find $p(n)=\P{L=n}$ for the $M/G/1$ queue.
-However, we cannot simply copy the derivation of the $M^X/M/1$ queue to the $M/G/1$ queue, because in the $M^X/M/1$ queue the service times of the items are exponential,
-hence memoryless, while in the $M/G/1$ this is not the case. When job service times are 
-not memoryless, hence do not restart at arrival times, we cannot choose any moment we like to apply level-crossing. Thus, for the $M/G/1$ queue
-we need to focus on moments in time in which the system `restarts', which as we will see are job departure epochs.  All in all, the argumentation to find the recursion for $\{p(n)\}$ is quite subtle, as it uses an interplay of the PASTA property and relation~\eqref{eq:39}
-between $\pi(n)$, $p(n)$ and $\delta(n)$.  
+In Section~\ref{sec:batch-arrivals} we used level-crossing arguments to find a recursive method to compute the stationary distribution $p(n)$ of the number of items in an $M^X/M/1$ queue.
+Here we apply similar arguments to find $p(n)=\P{L=n}$ for the $M/G/1$ queue.
+However, we cannot simply copy the derivation of the $M^X/M/1$ queue to the $M/G/1$ queue, because in the $M^X/M/1$ queue the service times of the items are exponential, hence memoryless, while in the $M/G/1$ this is not the case.
 
-An important role below is played by  the number of  arrivals $Y_k$ during the service time of the $k$th job.  Since the service times of the jobs for an i.i.d. sequence of random variables, the sequence $\{Y_k\}$ is also i.i.d. Let $Y$ be the common random variable with probability mass
+
+When job service times are not memoryless, hence do not restart at arrival times, we cannot choose any moment we like to apply level-crossing.
+Thus, for the $M/G/1$ queue we need to focus on moments in time in which the system `restarts', which  are job departure epochs as we will see below.
+All in all, the argumentation to find the recursion for $\{p(n)\}$ is quite subtle, as it uses an interplay of the PASTA property and relation~\eqref{eq:39} between $\pi(n)$, $p(n)$ and $\delta(n)$.
+
+An important role below is played by  the number of  arrivals $Y_k$ during the service time of the $k$th job.  Since the service times of the jobs form an i.i.d. sequence of random variables, the sequence $\{Y_k\}$ is also i.i.d. Let $Y$ be the common random variable with probability mass
  $f(j) = \P{Y = j}$; write $G(j) = \P{Y_k > j}$ for the survivor function.
 
 
-\begin{exercise}
+\begin{exercise}{\faPhoto}
  Explain that if the service time is constant and equal to $s$, then
 \begin{equation}\label{eq:4}
   \P{Y_k = j\given S=s} = e^{-\lambda s}\frac{(\lambda s)^j}{j!}.
@@ -36,10 +37,10 @@ See the hint.  The period during which the arrivals occur is $s$.
   \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faFlask}
  Explain that 
 \begin{equation}\label{eq:10}
-  \P{Y_k = j} = \int_0^\infty e^{-\lambda x}\frac{(\lambda x)^j}{j!}\, \d F(x).
+  \P{Y_k = j} = \int_0^\infty e^{-\lambda x}\frac{(\lambda x)^j}{j!}\, \d F(x),
 \end{equation}
 where $F$ is the distribution of the service times.
 \begin{solution}
@@ -59,7 +60,7 @@ where $F$ is the distribution of the service times.
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faFlask}
   If $S$ is deterministic and equal to $s$, show that
   Eq.~\eqref{eq:10} reduces to Eq.~\eqref{eq:4}.  
   \begin{hint}
@@ -137,7 +138,7 @@ Hence,
   \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faCalculator}
  If $S\sim \Exp(\mu)$, show that 
   \begin{equation} \label{eq:41}
 f(j) = \P{Y_k = j} = \frac{\mu}{\lambda+\mu}\left(\frac{\lambda}{\lambda+\mu}\right)^j.
@@ -179,7 +180,7 @@ $\mu/(\lambda+\mu) = 1-p$ takes the value $j$.
   \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise} {\faFlask}
  If $S\sim \Exp(\mu)$, show that 
   \begin{equation}
 G(j) = \sum_{k=j+1}^\infty f(k) =  \left(\frac{\lambda}{\lambda+\mu}\right)^{j+1}.
@@ -196,6 +197,85 @@ G(j) = \sum_{k=j+1}^\infty f(k) =  \left(\frac{\lambda}{\lambda+\mu}\right)^{j+1
 \end{align*}
     \end{solution}
 \end{exercise}
+
+\begin{exercise}{\faPhoto} \label{ex:30} Design a suitable numerical method to evaluate   Eq.~\eqref{eq:10} for more 
+  general distribution functions $F$.
+\begin{hint}
+Discretize time to  a grid of points, and   approximate the integral by a summation over the grid.
+\end{hint}
+  \begin{solution}
+  A simple numerical method is as follows. Make a grid of
+  size $\d x$, for some small number $\d x$, e.g. $\d x=1/100$, and write
+  $f_i = \P{S\in(i\d x, (i+1)\d x]} = F((i+1)\d x) - F(i\d x)$. Then 
+  \begin{equation*}
+    \begin{split}
+  \P{Y_k = j} 
+&= \int_0^\infty e^{-\lambda s}\frac{(\lambda x)^j}{j!} \d F(x) 
+\approx \sum_{i=1}^\infty e^{-\lambda i \d x}\frac{(\lambda i\d x)^j}{j!} f_i \d x.
+    \end{split}
+\end{equation*}
+
+Let's try a numerical experiment. 
+
+\begin{pyconsole}
+import numpy as np
+
+labda = 3
+mu = 4
+j = 5
+dx = 1 / 100
+
+
+def F(x):
+    return 1 - np.exp(-mu * x)
+
+
+def f(x):
+    return F(x + dx) - F(x)
+
+
+def term(i):
+    res = np.exp(-labda * i * dx)
+    res *= (labda * i * dx)**j / np.math.factorial(j)
+    res *= f(i*dx) * dx
+    return res
+
+\end{pyconsole}
+
+\begin{pyconsole}
+print(sum(term(i) for i in range(50)))
+print(sum(term(i) for i in range(500)))
+print(sum(term(i) for i in range(5000)))
+\end{pyconsole}
+
+Since I don't know when to stop the integral I just try a few values;
+of course stopping the integration at $x=50$ is too small, since
+$50\d x=50/100=1/2$, but I include it for illustrative
+purposes. Stopping at $500$ seems OK, since the results of the last
+two integrals are nearly the same. This also suggests that
+$\d x=1/100$ is sufficiently small. In general, however, one must take
+care and try various values for $\d x$ and the integration limits.
+
+
+For more complicated situations it is best to use a
+numerical library to compute the above integral. These methods have been
+designed to produce good and reliable results, and, typically, it is
+very hard to improve these methods. Thus, let's try a real number
+cruncher.
+
+\begin{pyconsole}
+from scipy.integrate import quad
+
+def g(x):
+    return np.exp(-labda*x) * (labda*x)**j/np.math.factorial(j) * f(x)
+
+print(quad(g, 0, np.inf))
+\end{pyconsole}
+
+This is the same as our earlier answer.
+\end{solution}
+\end{exercise}
+
 
 Let us concentrate on a down-crossing of level $n$, see
 Figure~\ref{fig:mg1_2}; recall that level $n$ lies between states $n$
@@ -286,16 +366,18 @@ $L(D_{k-1})$.
 \end{figure}
 
 Before we deal with the up-crossing, it is important to do the next exercise.
-\begin{exercise} Suppose that $L(D_{k-1})>0$. Why is
-  $S_k = D_k - D_{k-1}$?  However, if $L(D_{k-1}) = 0$, the time between
-  $D_{k-1}$ and $D_k$ is \emph{not} equal to $S_k$. Why not? Can you find an expression for
-  distribution of $D_k-D_{k-1}$ in case $L(D_{k-1})=0$? (You might find some inspiration in Exercise~\ref{ex:17}.)
+\begin{exercise}{\faFlask}Suppose that $L(D_{k-1})>0$.
+  Why is $D_k = D_{k-1} + S_{k}$?
+  However, if $L(D_{k-1}) = 0$, the time between $D_{k-1}$ and $D_k$ is \emph{not} equal to $S_k$.
+  Why not?
+  Can you find an expression for the distribution of $D_k-D_{k-1}$ in case $L(D_{k-1})=0$?
   \begin{hint}
-Realize that if $L(D_{k-1})=0$, job $k-1$ leaves behind an empty
-  system. Thus, before job $k$ can leave, it has to arrive. In other
-  words, $D_{k-1}<A_k$.  Since job $k$ arrives to an empty system,
-  his service starts right away, to that the time between $A_k$ and
-  $D_k$ is equal to the service time of job $k$.
+    You might find some inspiration in Exercise~\ref{ex:17}.
+
+    Realize that if $L(D_{k-1})=0$, job $k-1$ leaves behind an empty system.
+    Thus, before job $k$ can leave, it has to arrive.
+    In other words, $D_{k-1}<A_k$.
+    Since job $k$ arrives to an empty system, his service starts right away, to that the time between $A_k$ and $D_k$ is equal to the service time of job $k$.
   \end{hint}
 \begin{solution}
   When $L(D_{k-1})>0$, job $k$ is already in the system when job $k-1$
@@ -343,7 +425,7 @@ Again we define proper counting functions,  divide by $t$, and take suitable lim
 \end{equation}
 
 \begin{exercise}
-Provide the details behind the derivation of Eq.~\ref{eq:555}.
+Provide the details behind the derivation of Eq.~\eqref{eq:555}.
 \begin{hint}
 Define for $m=1,\ldots, n$
 \begin{equation*}
@@ -399,7 +481,7 @@ state probabilities, and follow the approach sketched below Exercise~\ref{ex:13}
  Define shorthands
     such as $\alpha=\lambda/(\lambda+\mu)$, so that
     $1-\alpha = \mu/(\lambda+\mu)$, and
-    $\alpha/(1-\alpha) = \lambda /\mu = \rho$.  Then, with Eq.~\ref{eq:41}, $f(n) = \alpha^n(1-\alpha)$ and $G(n) = \alpha^{n+1}$.  (These results do not 'come for
+    $\alpha/(1-\alpha) = \lambda /\mu = \rho$.  Then, with Eq.~\eqref{eq:41}, $f(n) = \alpha^n(1-\alpha)$ and $G(n) = \alpha^{n+1}$.  (These results do not 'come for
     free'. Of course, it's just algebra, but please try to derive this
     yourself. It's good to hone your computational skills.)
   \end{hint}
@@ -433,7 +515,7 @@ that we are left with checking that
 &= \alpha^{n+1} - \alpha^{n+1}(1-(\rho/\alpha)^n), \quad\text{as } \rho/\alpha = 1+\rho,\\
 &= \alpha^{n+1}(\rho/\alpha)^n = \alpha \rho^n.\\
 \end{align*}
-Since $\rho=\alpha/(1-\alpha)$ we see that the left and right hand sides are the same. 
+Since $\rho=\alpha/(1-\alpha)$ we see that the left and right-hand sides are the same. 
 
 Thus we get that $\pi(n) = \delta(n) = (1-\rho) \pi(0)$; a result we
 obtained earlier for the $M/M/1$ queue.
@@ -441,84 +523,6 @@ obtained earlier for the $M/M/1$ queue.
 \end{exercise}
 
 
-\begin{exercise}
-  Can you design a suitable numerical method to evaluate   Eq.~\eqref{eq:10} for more 
-  general distribution functions $F$? (This topic is not strictly necessary for this course, but I hope that you study it nonetheless.)
-\begin{hint}
-Discretize time to  a grid of points, and   approximate the integral by a summation over the grid.
-\end{hint}
-  \begin{solution}
-  A simple numerical method is as follows. Make a grid of
-  size $\d x$, for some small number $\d x$, e.g. $\d x=1/100$, and write
-  $f_i = \P{S\in(i\d x, (i+1)\d x]} = F((i+1)\d x) - F(i\d x)$. Then 
-  \begin{equation*}
-    \begin{split}
-  \P{Y_k = j} 
-&= \int_0^\infty e^{-\lambda s}\frac{(\lambda x)^j}{j!} \d F(x) 
-\approx \sum_{i=1}^\infty e^{-\lambda i \d x}\frac{(\lambda i\d x)^j}{j!} f_i \d x.
-    \end{split}
-\end{equation*}
-
-Let's try a numerical experiment. 
-
-\begin{pyconsole}
-import numpy as np
-
-labda = 3
-mu = 4
-j = 5
-dx = 1 / 100
-
-
-def F(x):
-    return 1 - np.exp(-mu * x)
-
-
-def f(x):
-    return F(x + dx) - F(x)
-
-
-def term(i):
-    res = np.exp(-labda * i * dx)
-    res *= (labda * i * dx)**j / np.math.factorial(j)
-    res *= f(i*dx) * dx
-    return res
-
-\end{pyconsole}
-
-\begin{pyconsole}
-print(sum(term(i) for i in range(50)))
-print(sum(term(i) for i in range(500)))
-print(sum(term(i) for i in range(5000)))
-\end{pyconsole}
-
-Since I don't know when to stop the integral I just try a few values;
-of course stopping the integration at $x=50$ is too small, since
-$50\d x=50/100=1/2$, but I include it for illustrative
-purposes. Stopping at $500$ seems OK, since the results of the last
-two integrals are nearly the same. This also suggests that
-$\d x=1/100$ is sufficiently small. In general, however, one must take
-care and try various values for $\d x$ and the integration limits.
-
-
-For more complicated situations it is best to use a
-numerical library to compute the above integral. These methods have been
-designed to produce good and reliable results, and, typically, it is
-very hard to improve these methods. Thus, let's try a real number
-cruncher.
-
-\begin{pyconsole}
-from scipy.integrate import quad
-
-def g(x):
-    return np.exp(-labda*x) * (labda*x)**j/np.math.factorial(j) * f(x)
-
-print(quad(g, 0, np.inf))
-\end{pyconsole}
-
-This is the same as our earlier answer.
-\end{solution}
-\end{exercise}
 
 
 \begin{comment}

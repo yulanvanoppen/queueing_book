@@ -48,12 +48,13 @@ Use  the PASTA property to show that
 \E{S_r} =  \rho \E{S_r\given S_r>0}.
 \end{equation}
 \begin{hint}
-By the PASTA property, a fraction~$\rho$ of the arrivals sees the server occupied, while a fraction $1-\rho$ sees
+Use Exercise~\ref{ex:28}.
 a free server.  
 \end{hint}
 \begin{solution}
+By the PASTA property we know that $\rho$ is  the probability to find the server busy upon arrival; hence $1- \rho$ is the probability that the server is idle upon arrival. Then,
 \begin{equation*}
-\E{S_r} =   \rho \E{S_r\given S_r >0} + (1-\rho)\cdot \E{S_r\given S_r = 0} = \rho \E{S_r\given S_r>0},
+\E{S_r} =   \rho \E{S_r\given S_r >0} + (1-\rho) \E{S_r\given S_r = 0} = \rho \E{S_r\given S_r>0},
 \end{equation*}
 since, evidently, $\E{S_r\given S_r=0}=0$.  
 \end{solution}
@@ -206,7 +207,7 @@ and apply Little's law to find~(\ref{eq:ew}).
 Another way to derive the above result is to conclude from PASTA that
 the expected number of jobs in the system at an arrival is $\E{L}$.
 Since all these jobs require an expected service time $\E S$,
-including the job in service by the memory-less property, the time in
+including the job in service by the memoryless property, the time in
 queue is $\E L \E S$. The time in the system is then the waiting time
 plus the service time. Next, use Little's law $\E L = \lambda \E W$.
 \end{hint}
@@ -248,7 +249,6 @@ With Little's law:
 \begin{equation}
   \E{W_Q} = \E L \E S = \lambda \E W \E S= \rho \E W = \frac{\rho}{1-\rho} \E S = \frac{\rho^2}{1-\rho} \frac 1 \lambda.
 \end{equation}
-Another way: $\E{W_Q} = \E S \E L = \E S \rho/(1-\rho) = \rho/\lambda \rho/(1-\rho)$.
   \end{solution}
 \end{exercise}
 
@@ -270,7 +270,7 @@ With Little's law,
   \E{L_s} &= \E L - \E{L_Q} = \frac{\rho}{1-\rho} - \frac{\rho^2}{1-\rho} = \rho, 
       \end{split}
 \end{equation*}
-since, the expected number of jobs in service $\E{L_s}$ is
+since the expected number of jobs in service $\E{L_s}$ is
 equal to the expected number of busy servers.
   \end{solution}
 \end{exercise}
@@ -379,7 +379,7 @@ You might use the moment-generating trick of Exercise~\ref{ex:12}.
   \begin{solution}
 The starting point is  $\V{L} = \E{L^2} - (\E L)^2$. 
 
-With wolfram alpha we get
+With Wolfram Alpha we get
     \begin{equation*}
       \begin{split}
       \E{L^2 }
@@ -398,7 +398,7 @@ One way is to use the standard formula for a geometric series with $\rho < 1$:
 \begin{equation*}
 \dfrac{1}{1-\rho} = \sum_{n=0}^{\infty}\rho^n.
 \end{equation*}
-If we differentiate the left and right hand side with respect to
+If we differentiate the left and right-hand side with respect to
 $\rho$  and then  multiply with $\rho$ we obtain
 \begin{equation*}
 \dfrac{\rho}{(1-\rho)^2}=\sum_{n=0}^{\infty}n\rho^n.
@@ -410,12 +410,12 @@ Again, differentiating and multiplying with $\rho$ yields,
 &= \rho \frac{1-2\rho+\rho^2 + 2\rho-2\rho^2}{(1-\rho)^4} \\
 &= \rho \frac{(1-\rho)^2}{(1-\rho)^4} \\
 &=\rho \dfrac{1+\rho}{(1-\rho)^3}\\
-&=\sum_{n=0}^{\infty}n^2\rho^n
+&=\sum_{n=0}^{\infty}n^2\rho^n,
   \end{split}
 \end{equation*}
 and hence
 \begin{equation*}
-(1-\rho)\sum_{n=0}^{\infty}n^2\rho^n = \rho\dfrac{1+\rho}{(1-\rho)^2}
+(1-\rho)\sum_{n=0}^{\infty}n^2\rho^n = \rho\dfrac{1+\rho}{(1-\rho)^2}.
 \end{equation*}
 % Write
 % $\partial_\rho$ as a shorthand for the derivative with respect to
@@ -457,33 +457,20 @@ $\sum_n n^2 \rho^n$ leads to
 \end{split}
 \end{equation*}
 
-A third method is based on $z$-transforms, which is the same thing as moment generating functions. Writing $z=e^s$, we have $\E{e^{s L}} = \E{z^L}$. Hence
+A third method is based on using the moment-generating functions: 
 \begin{equation*}
-  \phi(z) = \E{z^L} = \sum_{n=0}^\infty z^n p(n) = (1-\rho) \sum_{n=0}^\infty (\rho z)^n = \frac{1-\rho}{1-\rho z}.
+  M(s) = \E{e^{sL}} = \sum_{n=0}^\infty e^{sn} p(n) = (1-\rho) \sum_{n=0}^\infty (e^s \rho)^n = \frac{1-\rho}{1-\rho e^s};
 \end{equation*}
+we assume that $s$ such that the summation converges.
 Then 
 \begin{equation*}
-  \E L = \left.\frac d {dz} \phi(z)\right|_{z=1} = \frac{\rho}{1-\rho},
+  \E L = \left.\frac d {ds} M(s) \right|_{s=0} = \left.\frac{1-\rho}{(1-\rho e^s)^2} \rho e^s \right|_{s=0} = \frac{\rho}{1-\rho}, 
 \end{equation*}
 and 
 \begin{equation*}
-  \E{L(L-1)}= \left.\phi''(z)\right|_{z=1} = \frac{2\rho^2}{(1-\rho)^2}.
+  \E{L^2}= \left.M(s)''\right|_{s=0} = \frac{2\rho^2}{(1-\rho)^2} + \frac{\rho}{1-\rho}.
 \end{equation*}
-Thus,
-\begin{equation*}
-\E L^2 =   \E{L(L-1)} + \E L.
-\end{equation*}
-Hence,
-\begin{equation*}
-  \begin{split}
-\E L^2 
-&=   \frac{2\rho^2}{(1-\rho)^2} + \frac\rho{1-\rho} \\
-&=   \frac{2\rho^2}{(1-\rho)^2} + \frac\rho(1-\rho){(1-\rho)2} \\
-&=   \frac{\rho^2+\rho}{(1-\rho)^2} = \rho \frac{1+\rho}{(1-\rho)^2}.
-  \end{split}
-\end{equation*}
-
-A bit of algebra gives the previous results.
+With a a bit of algebra  the previous results follows.
   \end{solution}
 \end{exercise}
 
@@ -514,7 +501,7 @@ When a problem is mainly of a computational type, I coded the solutions and show
 understanding the code. (In the computations below I typically use the simplest, but often
 not the most efficient, code.)
 
-\begin{exercise}(Hall 5.2) \label{exer: Hall} After observing a single server queue for
+\begin{exercise}{\faPhoto}(Hall 5.2) \label{exer: Hall} After observing a single-server queue for
   several days, the following steady-state probabilities have been
   determined: $p(0)=0.4$, $p(1) = 0.3$, $p(2)=0.2$, $p(3)=0.05$ and
   $p(4)=0.05$. The arrival rate is 10 customers per hour. 
@@ -585,7 +572,7 @@ rho
 rho = EL-ELq
 rho
 \end{pyconsole}
-This checks the previous line.
+This checks with  the previous line.
 
 The utilization must also by equal to the fraction of time the server is busy. 
 \begin{pyconsole}
@@ -614,9 +601,9 @@ idle
 \end{exercise}
 
 \begin{exercise}
-  (Hall 5.5) An $M/M/1$ queue has an arrival rate of 100 per hour and
-  a service rate of 140 per hour.
- What is $p(n)$?  What are $\E{L_Q}$ and $\E L$?
+  (Hall 5.5) An $M/M/1$ queue has an arrival rate of 100 per hour and a service rate of 140 per hour.
+  What is $p(n)$?
+  What are $\E{L_Q}$ and $\E L$?
 \begin{solution}
 First, $p(n) = (1-\rho)\rho^n$. Now,
 
@@ -654,7 +641,7 @@ $\E{L_Q}$ follows right away from an application of Little's law. For the other 
 \end{equation*}
 
 
-Now $\lambda$ and $\E{W_Q}=1$ are given, and $\E{L_Q}$ has just been computed. Hence, $\E{S}$ (which is the unknown here) can computed with the abc-formula.
+Now $\lambda$ and $\E{W_Q}=1$ are given, and $\E{L_Q}$ has just been computed. Hence, $\E{S}$ (which is the unknown here) can computed with the quadratic formula.
 
 Another way is to realize that, for the $M/M/1$-queue,  $\E{W_Q} = \frac{1}{\lambda}\frac{\rho^2}{1-\rho}$. Then solve for $\rho$, and since $\lambda$ is known, $\E S$ follows. 
  \end{hint}
@@ -663,7 +650,7 @@ Another way is to realize that, for the $M/M/1$-queue,  $\E{W_Q} = \frac{1}{\lam
 
  $\E{W_Q} = \frac{1}{\lambda}\frac{\rho^2}{1-\rho}$. Since
         $\E{W_Q}$ and $\lambda$ is given we can use this formula to
-        solve for $\rho$ with the abc-formula (and using that
+        solve for $\rho$ with the quadratic formula (and using that
         $\rho > 0$):
 
 \begin{pyconsole}
@@ -722,14 +709,14 @@ And indeed, we found the right $n$.
 \end{exercise}
 
 \begin{exercise}
-  (Hall 5.7). A single server queueing system is known to have Poisson
+  (Hall 5.7). A single-server queueing system is known to have Poisson
   arrivals and exponential service times. However, the arrival rate
   and service time are state dependent. As the queue becomes longer,
   servers work faster, and the arrival rate declines, yielding the
   following functions (all in units of number per hour):
   $\lambda(0) = 5$, $\lambda(1)=3$, $\lambda(2)=2$,
   $\lambda(n)=0, n\geq 3$, $\mu(0) = 0$, $\mu(1)=2$, $\mu(2)=3$, $\mu(n)=4, n\geq 3$. 
-Calculate the state probabilities, i.e., $p(n)$ for $n=0,\ldots$. 
+Calculate the state probabilities, i.e., $p(n)$ for $n=0,\ldots$
 \begin{hint}
 Use the level-crossing equations of the $M(n)/M(n)/1$ queue.
 \end{hint}
@@ -739,10 +726,12 @@ Use the level-crossing equations of the $M(n)/M(n)/1$ queue.
 \end{exercise}
 
 \begin{exercise}
-  (Hall 5.14) An airline phone reservation line has one server and a
-  buffer for two customers. The arrival rate is 6 customers per hour, and
-  a service rate of just 5 customers per hour. Arrivals are Poisson and service times are exponential. 
- Estimate $\E{L_Q}$ and the average number of customers served per hour. Then, estimate $\E{L_Q}$ for a buffer of size 5. What is the impact of the increased buffer size on the number of customers served per hour?
+  (Hall 5.14) An airline phone reservation line has one server and a buffer for two customers.
+  The arrival rate is 6 customers per hour, and a service rate of just 5 customers per hour.
+  Arrivals are Poisson and service times are exponential.
+  Estimate $\E{L_Q}$ and the average number of customers served per hour.
+  Then, estimate $\E{L_Q}$ for a buffer of size~5.
+  What is the impact of the increased buffer size on the number of customers served per hour?
   \begin{hint}
 This is a queueing system with loss, in particular the $M/M/1/1+2$ queue.
   \end{hint}
@@ -856,7 +845,7 @@ for various values of $\lambda$.
 \end{comment}
 
 
-\begin{exercise}(Hall 5.3) After observing a queue with two servers
+\begin{exercise}{\faPhoto}(Hall 5.3) After observing a queue with two servers
   for several days, the following steady-state probabilities have been
   determined: $p(0)=0.4$, $p(1) = 0.3$, $p(2)=0.2$, $p(3)=0.05$ and
   $p(4)=0.05$. The arrival rate is 10 customers per hour.
@@ -897,25 +886,45 @@ from math import sqrt
 var_L = sum((n-L)**2*P[n] for n in range(len(P)))
 var_L
 sqrt(var_L)
-\end{pyconsole} 
+
+\begin{pyconsole}
+var_Lq = sum((max(n-c,0)-Lq)**2*P[n] for n in range(len(P)))
+var_Lq
+\end{pyconsole}
 
 Determine the service time and the utilization.
 \begin{pyconsole}
-var_q = sum((max(n-c,0)-Lq)**2*P[n] for n in range(len(P)))
-var_q
-sqrt(var_q)
+mu = 1./(W-Wq)
+1./mu # in minutes
+
+rho = labda/mu
+rho
+\end{pyconsole}
+
+\begin{pyconsole}
+rho = EL-ELq
+rho
+\end{pyconsole}
+This checks the previous line.
+
+The utilization must also by equal to the fraction of time the server is busy. 
+\begin{pyconsole}
+u = 1 - P[0]
+u
 \end{pyconsole}
     \end{solution}
 \end{exercise}  
 
 \begin{exercise}
-  (Hall 5.8) The queueing system at a fast-food stand behaves in a
-  peculiar fashion. When there is no one in the queue, people are
-  reluctant to use the stand, fearing that the food is
-  unsavory. People are also reluctant to use the stand when the queue
-  is long. This yields the following arrival rates (in numbers per hour): $\lambda(0) = 10$, $\lambda(1)=15$, $\lambda(2)=15$, $\lambda(3)=10$, $\lambda(4)=5$, $\lambda(n)=0, n\geq 5$. The stand has two servers, each of which can operate at 5 per hour. Service times are exponential, and the arrival process is Poisson.
- Calculate the steady state probabilities. Next,  what is the average arrival rate? Finally,
- Determine $\E L$, $\E{L_Q}$, $\E W$ and $\E{W_Q}$.
+  (Hall 5.8) The queueing system at a fast-food stand behaves in a peculiar fashion.
+  When there is no one in the queue, people are reluctant to use the stand, fearing that the food is unsavory.
+  People are also reluctant to use the stand when the queue is long.
+  This yields the following arrival rates (in numbers per hour): $\lambda(0) = 10$, $\lambda(1)=15$, $\lambda(2)=15$, $\lambda(3)=10$, $\lambda(4)=5$, $\lambda(n)=0, n\geq 5$.
+  The stand has two servers, each of which can operate at 5 per hour.
+  Service times are exponential, and the arrival process is Poisson.
+  Calculate the steady state probabilities.
+  Next, what is the average arrival rate?
+  Finally, determine $\E L$, $\E{L_Q}$, $\E W$ and $\E{W_Q}$.
   \begin{solution}
 First the service rates.
 \begin{pyconsole}
@@ -1019,12 +1028,12 @@ labda*ES
 If $c=1$, the load $\rho=\lambda \E S/c >1$ is clearly undesirable for one server.  We need at
 least two servers.
 
-It is not relevant to focus on the time in the system , as time
+It is not relevant to focus on the time in the system, as time
   in service needs to be spent anyway. Hence, we focus on the waiting
   time in queue.
 
 
-I just convert the formulas of~\eqref{eq:9} to python code. This saves
+I just convert the formulas of~\eqref{eq:9} to Python code. This saves
 me time during the computations.
 
 \begin{pyconsole}

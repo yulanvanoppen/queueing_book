@@ -41,14 +41,14 @@ guarantees that the above limit exists.
   Can you make an arrival process such that $A(t)/t$ does not have a
   limit?  
   \begin{hint}
-As a start, the function $\sin(t)$ has not a limit as
+As a start, the function $\sin(t)$ does not have a limit as
     $t\to\infty$. However, the time-average $\sin(t)/t \to 0$.  Now
     you need to make some function whose time-average does not
     converge, hence it should grow fast, or fluctuate wilder and
     wilder.
   \end{hint}
   \begin{solution}
- If $N(t) = 3 t^2$, then clearly $N(t)/t = 3t$. This does not
+ If $A(t) = 3 t^2$, then clearly $A(t)/t = 3t$. This does not
     converge to a limit. 
 
   Another example, let the arrival rate $\lambda(t)$ be given as
@@ -60,7 +60,7 @@ As a start, the function $\sin(t)$ has not a limit as
       0 & \text{if } 2^{2k+1} \leq t < 2^{2(k+1)},
     \end{cases}
     \end{equation*}
-    for $k=0,1,2,\ldots$. Let $N(t) = \lambda(t) t$. Then $A(t)/t$
+    for $k=0,1,2,\ldots$. Let $A(t) = \lambda(t) t$. Then $A(t)/t$
     does not have limit. Of course, these examples are quite
     pathological, and are not representable for `real life cases'.
     (Although this is also quite vague. What, then, is a real life
@@ -163,7 +163,7 @@ expected inter-arrival time.
     % \begin{equation*}
     %   |f(u) + g(u) - f(t) - g(t)| \leq |f(u)-f(t)|+|g(u)-g(t)|.
     % \end{equation*}
-    % Since both terms at the right hand side can be made arbitrarily
+    % Since both terms at the right-hand side can be made arbitrarily
     % small, the left hand side can also be made as small as we
     % like. With this we can see that the function
     % $F_N(t) = \sum_{n=1}^N f_n(x)$ is right-continuous if all $f_n$
@@ -219,10 +219,10 @@ job
 \end{equation*}
 
 Now observe that, if the system is empty at time $0$, it must be that
-at any time the number of departures must be smaller than the number
+at any time the number of departures must be smaller than or equal to the number
 of arrivals, i.e., $D(t) \leq A(t)$ for all $t$. Therefore,
 \begin{equation}\label{eq:26}
-\delta :=   \lim_t \frac{D(t)}t \leq \lim_t \frac{A(t)}t = \lambda.
+\delta =   \lim_t \frac{D(t)}t \leq \lim_t \frac{A(t)}t = \lambda.
 \end{equation}
 We call a system \recall{rate stable} if
 \begin{equation*}
@@ -242,7 +242,7 @@ fact that $\delta \leq \lambda$, we get
 When $\mu \geq \lambda$ the above inequality reduces to
 $\delta = \lambda$ for rate-stable systems. (It is interesting to
 prove this.) As it turns out, when $\mu = \lambda$ and the variance of
-the service times $\V{S} > 0$ or $\V{X} >0$ then $\lim_t L(t)/t$
+the service time $\V{S} > 0$ or $\V{X} >0$ then $\lim_t L(t)/t$
 does not necessarily exist. From the simulations we also learn that in such cases, the queueing process behaves very peculiar. For this reason we henceforth require that $\mu > \lambda$.
 
 
@@ -276,7 +276,7 @@ Remember that $\{X_k\}$ and $\{S_k\}$ are sequences of i.i.d. random variables. 
 \end{exercise}
 
 
-\begin{exercise}
+\begin{exercise}{\faCalculator}\label{ex:29}
   Show that $\E{S}/\E{X}$ is the fraction of time the server is busy.
   \begin{hint}
 Suppose that the $n+1$th job is the first job after time $A_1$ that sees an empty system.  Thus, job $n$ leaves an empty system behind. The very first job that arrives,  at time $A_1=X_1$, also sees an empty system. The total amount of service that arrived during $[A_1, A_{n+1})$ is $\sum_{i=1}^n S_i$.
@@ -301,23 +301,18 @@ Suppose that the $n+1$th job is the first job after time $A_1$ that sees an empt
  \frac{ \E S }{ \E X}.
         \end{equation*}
 
-We call periods like $[A_1, A_{n+1})$ `busy cycles', as they start with the moment the server start working, until the next arrival after the server has been idle. 
+We call periods like $[A_1, A_{n+1})$ \recall{busy cycles}, as they start with the moment the server start working, until the next arrival after the server has been idle. 
 
-Such  busy cycles occur over and over again. Thus, the
-        long-run average fraction of time the server is busy must also
-        be $\E S/\E X$. (For the serious student, there is a subtle point
-        here: the arrival epochs of the $G/G/1$ queue are not real
-        renewal moments, hence the epochs at which the busy times
-        start also do not form a sequence of renewal times. But then
-        it is not true, in general, that the busy times $\{B_i\}$ have
-        the same distribution, neither do the idles times
-        $\{I_n\}$. Showing that in the limit all is OK requires a
-        substantial amount of mathematics. The above claim is still
-        true however.)
+Such busy cycles occur over and over again.
+Thus, the long-run average fraction of time the server is busy must also be $\E S/\E X$.
+(For the serious student, there is a subtle point here: the arrival epochs of the $G/G/1$ queue are not real renewal moments, hence the epochs at which the busy times start also do not form a sequence of renewal times.
+But then it is not true, in general, that the busy times $\{B_i\}$ have the same distribution, neither do the idles times $\{I_n\}$.
+Showing that in the limit all is OK requires a substantial amount of mathematics.
+The above claim is still true however.)
   \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faFlask}
  Show that $\E{X - S}/\E{X}$ is the fraction of time
   the server is idle.
   \begin{solution}
@@ -362,10 +357,11 @@ recall that for a system to be rate-stable, it is necessary that
 $\mu> \lambda$, implying in turn that $\rho < 1$. The relation
 $\rho=\E S/ \E X < 1$ then tells us that the average time it takes to
 serve a job must be less than the average time between two consecutive
-arrivals, i.e., $\E S < \E X$.
+arrivals, i.e., $\E S < \E X$. In fact, when $\mu < \lambda$, it is easy to check with simulation that the queue length
+grows roughly linearly with slope $\lambda - \mu$.
 
 
-\begin{exercise}
+\begin{exercise}{\faFlask}
   Consider a queueing system with $c$ identical servers (identical in
   the sense that each server has the same production rate $\mu$). What would be a reasonable stability criterion for this system? 
   \begin{hint}
@@ -401,12 +397,14 @@ What is the rate in, and what is the service capacity?
 \end{exercise}
 
 
-\begin{exercise}\label{ex:11}
-  If $\E{B}$ is the expected busy time and $\E{I}$ is the expected idle
-  time, show that $\E{B} = \E{I} \rho/(1-\rho) $
- is the fraction of time the  server is busy.
+\begin{exercise}{\faPhoto}\label{ex:11}
+  Define a \recall{busy time} as the moment a job arrives at an empty system and the server starts serving until the server becomes idle again.
+  Let $\E{B}$ be the expected busy time and $\E{I}$  the expected idle time. Show that $\E{B} = \E{I} \rho/(1-\rho) $ is the fraction of time the server is busy. Interpret the result.
+  \begin{hint}
+    Use the concept of busy cycle developed in Exercise~\ref{ex:29}. 
+  \end{hint}
 \begin{solution}
-  Consider a busy cycle, that is, a cycle that starts with the first
+  Consider again a busy cycle, that is, a cycle that starts with the first
   job that sees an empty system at upon arrival up to the time another
   job sees an empty system upon arrival. In such one cycle, the server
   is busy for an expected duration $\E{B}$. The total expected length
@@ -418,6 +416,8 @@ What is the rate in, and what is the service capacity?
 \rho = \frac{\E B}{\E B + \E I}.
   \end{equation*}
   With a bit of algebra the result follows.
+
+  The interpretation is that once we know $\rho$, the ratio between $\E B$ and $\E I$ is fixed. 
 \end{solution}
 \end{exercise}
 

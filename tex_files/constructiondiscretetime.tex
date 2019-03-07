@@ -101,7 +101,7 @@ $n\gg 1000$, and so on.
     Below I fix the seed of the random number generator to ensure that
     I always get the same results from the simulator.  The arrival
     process is Poisson, and the number of services is fixed to 21 per
-    period. I use \pyv{Q = np.zeros\_like(a)} to make an array of the
+    period. I use \pyv{Q = np.zeros_like(a)} to make an array of the
     same size as the number of arrival $a$ initially set to zeros. The
     rest of the code is nearly identical to the formulas in the text.
 
@@ -279,7 +279,7 @@ suggestions.
 To evaluate the effect of these suggestions on reducing the queueing
 dynamics we develop a simple simulator with which we can make a number of plots. 
 As a first step we model the arrival process of patients as a Poisson
-process, c.f., Section~\ref{sec:poisson-distribution}. The duration of
+process, cf., Section~\ref{sec:poisson-distribution}. The duration of
 a period is taken to be a week. The average number of arrivals per
 period, based on data of the company, was slightly less than~12 per
 week; in the simulation we set it to $\lambda= 11.8$ per week. We
@@ -318,7 +318,7 @@ easily done by setting the capacity of a certain psychiatrist to 0 in
 a certain week. Let's assume that just one psychiatrist is on leave in
 a week, each psychiatrist has one week per five weeks off, and the
 psychiatrists' holiday schemes rotate. To model this, we set
-$C_{1,1,}=C_{2,2}=\cdots=C_{1,6}=C_{2,7} =\cdots = 0$, i.e.,
+$C_{1,1}=C_{2,2}=\cdots=C_{1,6}=C_{2,7} =\cdots = 0$, i.e.,
 \begin{equation*}
 C = 
   \begin{pmatrix}
@@ -397,7 +397,7 @@ should try to develop other mathematical methods to analyze
 multi-server queueing systems with vacations, of which this case is an
 example.) As a matter of fact, with such simple recursions we can analyze many practical queueing
 situations. Together with students the author applied it numerous
-times, for instance,
+times, for instance:
 \begin{itemize}
 \item Should a certain hospital invest in a new MRI scanner to reduce
   waiting times?
@@ -664,7 +664,7 @@ and likewise for the other queue.
   \end{solution}
   \end{exercise}
 
-  \begin{exercise} (Priority queuing) Another interesting situation is
+  \begin{exercise} (Priority queueing) Another interesting situation is
     a system with two queues served by one server, but such that one
     queue, queue $A$, gets priority over the other
     queue. Again find a set of recursions to describe this case.
@@ -930,7 +930,7 @@ It is then sensible to set
   simulate this system.
   \begin{solution}
 \begin{enumerate}
-\item Realize that the recursions of Eq~\eqref{eq:31} applied to the
+\item Realize that the recursions of Eq.~\eqref{eq:31} applied to the
   queueing situation at the first machine provide us with the total
   number of departures $d_k$ during period $k$. However, it does not
   tell us about the type of these departures. Thus, to compute the
@@ -969,7 +969,7 @@ It is then sensible to set
     Y_k &= \text{Number of items produced in week $k$ during extra  hours}, \\
     c_k &= \text{Production cost per item during normal  hours}, \\
     d_k &= \text{Production cost per item during extra  hours}, \\
-    h_k &= \text{holding cost per  item, due at the end of week $k$}, \\
+    h_k &= \text{Holding cost per  item, due at the end of week $k$}, \\
     I_k &= \text{On hand inventory level at the end of week $k$}. \\
   \end{align*}
   Management needs a production plan that specifies for the next $T$
@@ -998,10 +998,10 @@ I_k &\geq 0.
   \end{solution}
 \end{exercise}
 
-\begin{exercise}(Queue with setups)
+\begin{exercise}{\faRocket}(Queue with setups)
   One server serves two parallel queues, one at a time. After serving
    one queue until it is empty,  the server moves to the other
-  queue. The change of queue requires one period setup time. (This is a tough problem; you can skip it if you don't have the time to really think about it.)
+  queue. The change of queue requires one period setup time. 
   \begin{solution}
 We need an extra variable $p_k$ that specifies  which queue is being served. If $p_k=0$, the server is moving from one queue to the other, if $p_k=1$, the server is at queue 1, and if $p_k=2$ it is at queue $2$. Then, with
 \begin{align*}
