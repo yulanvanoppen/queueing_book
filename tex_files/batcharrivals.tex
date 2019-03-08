@@ -16,7 +16,8 @@ Here we present a numerical, recursive, scheme to compute these probabilities.
 To find $\pi(n)$, $n=0, 1, \ldots$, we turn again to level-crossing arguments.
 However, the reasoning that lead to the level-crossing equation~\eqref{eq:15} need to be generalized.
 To see this, we consider an example.
-If $L(t)=3$, the system contains $3$ items. (This is not necessarily the same as 3 batches.)
+If $L(t)=3$, the system contains $3$ items.
+(This is not necessarily the same as 3 batches.)
 Since the server serves single items, down-crossings of level $n=3$ occur in single units.
 However, due to the batch arrivals, when a job arrives it typically brings multiple items to the queue.
 For instance, suppose that $L(A_k-) = 3$, i.e., job $k$ sees 3 items in the system at its arrival epoch.
@@ -380,7 +381,7 @@ for n in range(1, num):
     print(n, p[n])
 
 \end{pyconsole}
-Stopping at 30 seems ok. The last step is normalize.
+Stopping at 30 seems OK. The last step is normalize.
 \begin{pyconsole}
 p /= p.sum()  # normalize
 for n in range(1, num):  # print normalized results
@@ -408,7 +409,7 @@ EL=RHS/(1-rho)
 EL
 \end{pyconsole}
 
-So, after all, stopping at 30 seems not quite ok: there is a slight
+So, after all, stopping at 30 seems not quite OK: there is a slight
 difference between the two expectations. Let's run the recursion up to
 100, and see what we get then.
 
