@@ -114,19 +114,18 @@ Below we prove that  the expected number of items at the server is given by
 \begin{exercise}\label{q:batch}
 To simplify this expression for $\E{B_r}$, show that 
 \begin{equation*}
-  \frac{\E{B^2}}{\E{B}} = (1+C_s^2)\E B, \quad\text{where }
+  \frac{\E{B^2}}{\E{B}} = (1+C_s^2)\E B, 
 C_s^2 = \frac{\V B}{(\E B)^2},
 \end{equation*}
-is the square coefficient of variation of the batch sizes.  
+where  $C_s^2 = \V B / (\E B)^2$ is the square coefficient of variation of the batch sizes.  
   \begin{solution}
 We have
-\begin{equation*}
-  \begin{split}
+\begin{align*}
   \frac{\E{B^2}}{\E{B}}
-=    \frac{\E{B^2}}{(\E B)^2} \E B 
-= \frac{(\E B)^2+\V B}{(\E B)^2}\E B = (1+C_s^2)\E B.
-  \end{split}
-\end{equation*}
+&=    \frac{\E{B^2}}{(\E B)^2} \E B 
+=    \frac{\E{B^2} - (\E B)^2 + (\E B)^2}{(\E B)^2} \E B  \\
+&= \frac{\V B + (\E B)^2}{(\E B)^2}\E B = (C_s^2+1)\E B.
+\end{align*}
   \end{solution}
 \end{exercise}
 
