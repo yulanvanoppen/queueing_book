@@ -41,7 +41,7 @@ guarantees that the above limit exists.
   Can you make an arrival process such that $A(t)/t$ does not have a
   limit?  
   \begin{hint}
-As a start, the function $\sin(t)$ has not a limit as
+As a start, the function $\sin(t)$ does not have a limit as
     $t\to\infty$. However, the time-average $\sin(t)/t \to 0$.  Now
     you need to make some function whose time-average does not
     converge, hence it should grow fast, or fluctuate wilder and
@@ -163,7 +163,7 @@ expected inter-arrival time.
     % \begin{equation*}
     %   |f(u) + g(u) - f(t) - g(t)| \leq |f(u)-f(t)|+|g(u)-g(t)|.
     % \end{equation*}
-    % Since both terms at the right hand side can be made arbitrarily
+    % Since both terms at the right-hand side can be made arbitrarily
     % small, the left hand side can also be made as small as we
     % like. With this we can see that the function
     % $F_N(t) = \sum_{n=1}^N f_n(x)$ is right-continuous if all $f_n$
@@ -242,7 +242,7 @@ fact that $\delta \leq \lambda$, we get
 When $\mu \geq \lambda$ the above inequality reduces to
 $\delta = \lambda$ for rate-stable systems. (It is interesting to
 prove this.) As it turns out, when $\mu = \lambda$ and the variance of
-the service times $\V{S} > 0$ or $\V{X} >0$ then $\lim_t L(t)/t$
+the service time $\V{S} > 0$ or $\V{X} >0$ then $\lim_t L(t)/t$
 does not necessarily exist. From the simulations we also learn that in such cases, the queueing process behaves very peculiar. For this reason we henceforth require that $\mu > \lambda$.
 
 
@@ -387,6 +387,14 @@ What is the rate in, and what is the service capacity?
   \end{solution}
 \end{exercise}
 
+\begin{exercise}
+  Check with simulation that when $\lambda > \mu$ the queue length
+  grows roughly linearly with slope $\lambda - \mu$.  Thus, if
+  $\rho>1$, `we are in trouble'.
+  \begin{solution}
+    See tutorial exercise 2.8. 
+  \end{solution}
+\end{exercise}
 
 
 \begin{exercise}{\faPhoto}\label{ex:11}

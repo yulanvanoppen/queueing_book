@@ -67,7 +67,7 @@ edge[loop below, thick]  node[midway, fill=white] {$\lambda f(0)$} (n-1);
 \node[above=of n+1] (inf) {}
    edge[pil, <-, bend right=45] node[midway, fill=white] {$\lambda G(0)$} (n.north east)
    edge[pil, <-, bend right=45] node[midway, fill=white] {$\lambda G(1)$} (n-1.north east)
-   edge[pil, <-, bend right=45] node[midway, fill=white] {$\lambda G(2$} (n-2.north east)
+   edge[pil, <-, bend right=45] node[midway, fill=white] {$\lambda G(2)$} (n-2.north east)
 ;
 \end{tikzpicture}
 %  \begin{tabular}
@@ -140,7 +140,7 @@ as the number of jobs up to time $t$ that see $m$ in the system upon
 arrival and have batch size larger than $n-m$. 
 
 \begin{exercise}{\faFlask}
-   Show that $A(n, n,t) = A(n,t)$, where $A(n,t)$ is defined by Eq.~\ref{eq:19}.
+   Show that $A(n, n,t) = A(n,t)$, where $A(n,t)$ is defined by Eq.~\eqref{eq:19}.
 \begin{solution}
  $A(n,n,t)$ counts all jobs up to time $t$ that see $n$ items
     and bring at least $n-n+1=1$ unit of work. As each job brings at
@@ -163,10 +163,10 @@ where the random variable $L(A-)$   denotes the number in the system seen by an 
 
 \begin{exercise}{\faFlask}
 Show that $\P{B>n-m\given L(A-)=m}=\P{B>n-m}$.
-\begin{solution}
   \begin{hint}
     Realize that $B$ and $L(A-)$ are assumed to be independent.
   \end{hint}
+\begin{solution}
 \begin{equation*}
   \begin{split}
 \P{B>n-m\given L(A-)=m} &=
@@ -191,7 +191,7 @@ existence of all limits involved we find
 Provide an interpretation of the above result in terms of a thinned Poisson arrival process.
 \begin{solution}
 Eq.~(\ref{eq:16}) has the interpretation that the rate at which
-level $n$ is crossed from below from state $m$ is equal the rate at
+level $n$ is crossed from below from state $m$ is equal to the rate at
 which jobs arrive times the fraction of jobs that see $m$ jobs in the
 system times the fraction of jobs with batch size larger than $n-m$.
 Observe that the stream of jobs with batch size larger than $n-m$
@@ -214,7 +214,7 @@ where we use  PASTA in~\eqref{eq:22} to see that $\mu(n+1)p(n+1) = \mu \pi(n+1)$
   Show that Eq.~(\ref{eq:42}) reduces to $\mu \pi(n+1)=\lambda \pi(n)$ for the $M/M/1$ case.
   \begin{solution}
     The left hand side of Eq.~(\ref{eq:42}) is identical, so we only
-    have to concentrate on the right hand side. In the $M/M/1$ queue,
+    have to concentrate on the right-hand side. In the $M/M/1$ queue,
     all batches have size $1$. Thus, $\P{B=1} = f(1)=1$ and $f(k)=0$
     for $k\neq 1$. Thus, $G(0)=1$ and $G(1)=G(2)=\cdots = 0$. Thus,
     $\sum_{m=0}^n G(n-m) \pi(m) = G(0)\pi(n)=\pi(n)$.
@@ -227,7 +227,7 @@ With $\alpha = \lambda/\mu$,  show that \emph{unnormalized} state probabilities 
 \pi(0) & = 1 &
   \pi(1) &= \alpha \\
   \pi(2) &= \alpha^2 + \alpha G(1), &
-  \pi(3) &= \alpha[ \alpha^2 + 2 \alpha G(1)) + G(2)].
+  \pi(3) &= \alpha[ \alpha^2 + 2 \alpha G(1) + G(2)].
 \end{align*}
 We leave the rest to the computer to continue with this.
 \begin{hint}
@@ -252,7 +252,7 @@ Finding general conditions when to stop is not directly easy, but a pragmatic ap
 Then take $G=\sum_{i=0}^N \pi(i)$ as the normalization constant, so that $\pi(0)=1/G$, $\pi(1)=\alpha/G$, and so on.
 While this is a practical approach, getting formal bounds on a proper size of $N$ requires more work than we can do here.
 
-Once again with $\pi(n0$ we can compute all performance measures we need, and study the influence on the batch size distribution and $\lambda$ and $\mu$ on the system's performance.
+Once again with $\pi(n)$ we can compute all performance measures we need, and study the influence on the batch size distribution and $\lambda$ and $\mu$ on the system's performance.
 
 \begin{exercise}{\faFlask}
   Why is Eq.~\eqref{eq:39}, i.e., $\pi(n)=\delta(n)$, not true for the
@@ -333,7 +333,7 @@ The recursion for $n$ becomes
 \end{equation*}
 Since $G(i) =0$ for $i\geq 3$ we rewrite this to 
 \begin{equation*}
-  \pi(n) = \frac\lambda \mu \sum_{i=0}^{\min(\{n-1,l\}} \pi(n-1-i)G(i),
+  \pi(n) = \frac\lambda \mu \sum_{i=0}^{\min\{n-1,l\}} \pi(n-1-i)G(i),
 \end{equation*}
 where $l=3$. 
 
@@ -507,12 +507,12 @@ where we use that
   commonly, made, so we need to test the above on simple cases. 
   \begin{itemize}
   \item  If $K\to \infty$, then $G(K-m)=\P{B>K-m}\to 0$, so we get our earlier result. 
-  \item Take $n=K$. Then $G(n-m)-G(K-m)=0$ for all $m$. Then the right hand side is 0, as it should.
+  \item Take $n=K$. Then $G(n-m)-G(K-m)=0$ for all $m$. Then the right-hand side is 0, as it should.
   \item Taken $n=0$ and $K=1$, then $\mu \pi(1)= \lambda \pi(0)$. This also makes sense. 
   \item Take $n$ much smaller than $K$. If the batch size is maximally
     $2$, then for small $n$ the entire batch must fit. Let's see if
     this holds in the above formula. If $n$ much smaller than $K$,
-    then also $m$ is much smaller than $K$ (since in the right hand
+    then also $m$ is much smaller than $K$ (since in the right-hand
     size, $m\leq n$). But then $G(K-m) \leq G(2) = 0$, as it
     should. (Observe that $G$ is a decreasing function of its argument;
     its a survival function.)
