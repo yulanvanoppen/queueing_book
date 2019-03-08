@@ -121,7 +121,7 @@ From the relevant previous exercises, $\lambda = \lim_t A(t)/t = 1/2$. $\lambda(
 \begin{equation*}
   \lambda \pi(0) = \lambda(0) p(0) \implies  \frac 1 2 \times 1 = 1\times \frac 1 2.
 \end{equation*}
-For $n>0$ its easy, everything is 0.
+For $n>0$ it's easy, everything is 0.
   \end{solution}
 \end{exercise}
 
@@ -156,15 +156,15 @@ form:
 \frac{A(t)}t \frac{A(n,t)}{A(t)} = \frac{A(n,t)}t \approx \frac{D(n,t)}t 
 = \frac{D(t)}t \frac{D(n,t)}{D(t)}.
 \end{equation*}
-Taking limits at the left and right, we see again that the left hand
-becomes $\lambda \pi(n)$. For the right hand side, we use
+Taking limits at the left and right, we see again that the left-hand side
+becomes $\lambda \pi(n)$. For the right-hand side, we use
 Eq.~\eqref{eq:28} and define, analogous to \eqref{eq:132}, 
 \begin{equation}
   \label{eq:33}
   \delta(n) = \lim_{t\to\infty} \frac{D(n,t)}{D(t)}.
 \end{equation}
 Thus, $\delta(n)$ is the long-run fraction of jobs that leave $n$ jobs
-\emph{behind}. Clearly, then, if the limits exist, the right hand side
+\emph{behind}. Clearly, then, if the limits exist, the right-hand side
 tends to $\delta \delta(n)$ as $t\to\infty$. Hence, for (queueing)
 systems in which customers arrive and leave as single units, we have
 \begin{equation}
@@ -180,18 +180,13 @@ This means that the system as seen by arrivals, i.e., $\pi(n)$, is
 the same as what jobs leave behind, i.e., $\delta(n)$.
 
 
-\begin{exercise}
-  When $\lambda\neq \delta$, is $\pi(n)\geq \delta(n)$?  
+\begin{exercise}{\faFlask}\label{ex:26}
+  When $\lambda\neq \delta$, is $\pi(n)\geq \delta(n)$ or $\pi(n) < \delta(n)$ true?  (This is a tricky exercise!) 
   \begin{hint}
-Use that
-    $\lambda \geq \delta$ always holds, and $\lambda=\delta$ when the system
-    is rate-stable.
+    Use that    $\lambda \geq \delta$ always holds. Thus, when $\lambda \neq \delta$, it must be that $\lambda > \delta$. What are the consequences of this inequality; how does the queue length behave as a function of time?
   \end{hint}
   \begin{solution}
-    We have shown for one-step transition processes that
-    $\lambda \pi(n) = \delta \delta(n)$. Thus,
-    $\pi(n) = \delta(n)\delta /\lambda$. Since $\lambda\geq \delta$,
-    we have that $\pi(n) \leq \delta(n)$.
+    The assumptions lead us to conclude that $\lambda > \delta$. As a consequence, the queue length must increase on the long run (jobs come in faster than they leave). Therefore, $A(n,t)/t \to 0$ for all $n$, and also $D(n,t)/t\to 0$. Consequenly, $\pi(n) = \delta(n) = 0$, which is the only sensible reconciliation with~\eqref{eq:36}. 
   \end{solution}
 \end{exercise}
 
@@ -262,7 +257,7 @@ $(\lambda + \mu) \pi(n) = \lambda \pi(n-1) + \mu \pi(n+1)$.
   \end{hint}
   \begin{solution}
 By  the hint,  the difference between the `out
-    transitions and the `in transitions is at most 1 for all $t$. Thus,  we can write
+    transitions' and the `in transitions' is at most 1 for all $t$. Thus,  we can write
     \begin{align*}
 \text{transitions out } &\approx \text{transitions in } \iff \\
       A(n,t) + D(n-1,t) &\approx A(n-1,t) + D(n,t)  \iff \\
@@ -296,10 +291,10 @@ gives  a (simple) proof.
   $\{Y(t), t\geq 0\}$ be a non-decreasing right-continuous
   (deterministic) process. Define $X_k = Y(T_k)-Y(T_{k-1})$,
   $k\geq 1$, where $T_k$ are the epochs at which $N$ increases, i.e.,
-  $N(t) = \{k : T_k \leq t\}$. Then $Y(t)/t$ has a limit iff
+  $N(t) = \max\{k : T_k \leq t\}$. Then $Y(t)/t$ has a limit iff
   $n^{-1}\sum_k^n X_k$ has a limit in which case $Y=\lambda X$, i.e.,
   \begin{equation*}
-  \lim_{t \to \infty} \frac{Y(t)}t=Y \iff \lim_{n \to \infty} \frac 1n\sum_k^n X_k =X \implies Y=\lambda X.
+  \lim_{t \to \infty} \frac{Y(t)}t=Y \iff \lim_{n \to \infty} \frac 1n\sum_{k=1}^n X_k =X \implies Y=\lambda X.
   \end{equation*}
 \end{theorem}
 
@@ -397,7 +392,7 @@ at another station. We chop up this problem into small steps to help you
 find the answer mostly by yourself.
 
 
-\begin{exercise}\label{ex:dep}
+\begin{exercise}{\faFlask}\label{ex:dep}
 Why is the output rate of the (stable) $M/M/1$ queue equal to~$\lambda$ and not~$\mu$?
 \begin{solution}
 Jobs arrive at rate $\lambda$. For a stable queue, $\mu>\lambda$. Moreover,  jobs can never leave faster than they arrive.
@@ -405,7 +400,7 @@ Jobs arrive at rate $\lambda$. For a stable queue, $\mu>\lambda$. Moreover,  job
 \end{exercise}
 
 
-\begin{exercise}
+\begin{exercise}{\faFlask}
 Why is $\mu e^{-\mu t}$ not a reasonable density for the
     inter-departure times?
     \begin{solution}
@@ -418,15 +413,16 @@ The simplest guess for the inter-departure density might be $\lambda e^{-\lambda
 We will focus on departure moments and use~\eqref{eq:39}, in particular that departures `see' what arrivals `see', i.e., $\delta(n)= \pi(n)$, and PASTA.
 
 
-\begin{exercise}
- Observe that when a customer departs, the server can be either
-    idle $I$ or busy $B$.   Show that $\P{I} = 1-\rho$.
+\begin{exercise}{\faFlask}\label{ex:28}
+Show that the probability that a job leaves behind a busy station is $\rho$, hence $1-\rho$ is the probability to leave an idle server behind.
     \begin{solution}
- $\P I = p(0) =\pi(0)=\delta(0)$.  Recall now that $p(0) = 1-\rho$.
+Observe that $\rho$ is the fraction of time the server is busy. Then, from  PASTA, the fraction of jobs that see a busy server is also $\rho$.  This fraction of jobs is $\sum_{n=1}^\infty \pi(n)$. Finally, $\delta(n) = \pi(n)$ , a fraction $\rho$ of the departures leaves a busy system behind.
+
     \end{solution}
 \end{exercise}
 
-\begin{exercise}\label{ex:17}
+
+\begin{exercise}{\faCalculator}\label{ex:17}
  If job $n-1$, say, leaves behind an empty system, show that the expected time until the next departure is $\E{D_n - D_{n-1}} = 1/\lambda + 1/\mu$. 
     \begin{hint}
       After job $n-1$ left, job $n$ has to arrive, so we need to wait first for this inter-arrival time. Then job $n$ must be served. This adds up to $1/\lambda + 1/\mu$. 
@@ -438,7 +434,7 @@ With the hint, we first have to wait for an inter-arrival
     \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faCalculator}
 Show that the density of $D_{n} - D_{n-1}$ is
     \begin{equation*}
     f_{X+S}(t) = \frac{\lambda \mu}{\lambda - \mu} (e^{-\mu t} - e^{-\lambda t})
@@ -448,23 +444,22 @@ if the server is idle after $D_{n-1}$.
       By the previous point, the density of $D_{n} - D_{n-1}$ is the
       same as the density of $X_n + S_n$.  Since $\{X_n\}$ and $\{S_n\}$ are both i.i.d. sequences, the problem becomes to find the density of $X+S$.  We will use two ways of computing this. 
 
-\newpage
 Since $X\sim \Exp(\lambda)$ and $S\sim\Exp(\mu)$, and $X$ and $S$ are independent, their joint density is $f_{X,S}(x,y) = \lambda \mu e^{-\lambda x - \mu y}$. With this,
   \begin{align*}
 \P{X+S\leq t } 
 &= \lambda \mu \int_0^\infty \int_0^\infty e^{-\lambda x - \mu y} \1{x+y\leq t} \d x \d y \\
-&= \lambda \mu \int_0^t \int_0^{t-x} e^{-\lambda x - \mu y} \d x \d y \\
+&= \lambda \mu \int_0^t \int_0^{t-x} e^{-\lambda x - \mu y} \d y \d x \\
 &= \lambda \mu \int_0^t e^{-\lambda x} \int_0^{t-x} e^{- \mu y} \d y \d x \\
 &= \lambda \int_0^t e^{-\lambda x} (1-e^{- \mu (t-x)} ) \d x  \\
 &= \lambda \int_0^t e^{-\lambda x}  \d x - \lambda e^{-\mu t} \int_0^t e^{(\mu-\lambda) x} \d x \\
-&= 1- e^{-\lambda x} - \frac{\lambda}{\mu-\lambda} e^{-\mu t} ( e^{(\mu-\lambda) t} -1) \\
-&= 1- e^{-\lambda x} - \frac{\lambda}{\mu-\lambda} e^{-\lambda t} + \frac{\lambda}{\mu-\lambda} e^{-\mu t} \\ 
+&= 1- e^{-\lambda t} - \frac{\lambda}{\mu-\lambda} e^{-\mu t} ( e^{(\mu-\lambda) t} -1) \\
+&= 1- e^{-\lambda t} - \frac{\lambda}{\mu-\lambda} e^{-\lambda t} + \frac{\lambda}{\mu-\lambda} e^{-\mu t} \\ 
 &= 1 - \frac{\mu}{\mu-\lambda} e^{-\lambda t} + \frac{\lambda}{\mu-\lambda} e^{-\mu t}. \\
   \end{align*}
 The density $f_{X+S}(t)$ is the derivative of this expression with respect to~$t$, hence,
 \begin{align*}
   f_{X+S}(t) 
-&= \frac{\lambda\mu}{\mu-\lambda} e^{-\lambda t}  - \frac{\mu \lambda}{\mu-\lambda} e^{-\mu s} \\
+&= \frac{\lambda\mu}{\mu-\lambda} e^{-\lambda t}  - \frac{\mu \lambda}{\mu-\lambda} e^{-\mu t} \\
 &= \frac{\lambda\mu}{\lambda -\mu}(e^{-\mu t} - e^{-\lambda t}). \\
 \end{align*}
 
@@ -476,33 +471,25 @@ Conditioning is much faster, but requires the concept of conditional density. Yo
 &=\int_0^t f_S(t-x) f_X(x) \d{x} \\
      &= \int_0^t \mu e^{-\mu(t-x)} \lambda e^{-\lambda x} \d{x} \\
      &= \lambda \mu e^{-\mu t} \int_0^t  e^{x(\mu-\lambda)} \d{x} \\
-& \frac{\lambda \mu}{\lambda - \mu} (e^{-\mu t} - e^{-\lambda t}).
+&= \frac{\lambda \mu}{\lambda - \mu}\left(e^{-\mu t} - e^{-\lambda t}\right).
     \end{align*}
     \end{solution}
 \end{exercise}
 
-\begin{exercise}
-Show with  probability $\rho$ that a job leaves behind a busy station.
-    \begin{solution}
-For the time average, 
-        $\P B = \sum_{n=1}^\infty p(n) = \rho$.
-    \end{solution}
-From PASTA $\pi(n) = p(n)$, hence the fraction of jobs that see a busy server must be $\rho$. Finally, as $\delta(n) = \pi(n)$, a fraction $\rho$ of the departures leaves a busy system behind.
-\end{exercise}
 
-\begin{exercise}
-Show  that when the server is busy at $D_{n-1}$, the density of the inter-departure time  $f_D(t) = \mu e^{-\mu t}$.
+\begin{exercise}{\faFlask}
+Show  that when the queue is not empty at a departure time, the density of the next inter-departure time is $f_D(t) = \mu e^{-\mu t}$.
     \begin{solution}
-The server can start right away with a new job. The departure times are exponentially distributed. 
+After the departure, the server can start right away with the job at the head of the queue. The inter-departure time of this job is $\Exp(\mu)$.
     \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faCalculator}
 Use conditioning on the server being idle or busy at a departure to show that  the density of  the inter-departure time is $\lambda e^{-\lambda t}$.
   \begin{hint}
 Conditioning leads to 
 \begin{equation*}
-    f_D(t) = f_{X+S}(t) \P{I} + f_S \P B = (1-\rho) f_{X+S}(t) +
+    f_D(t) = f_{X+S}(t) \P{\text{server is idle}} + f_S(t) \P{\text{ server is busy }}= (1-\rho) f_{X+S}(t) +
     \rho \mu e^{-\mu t}.
 \end{equation*}
     Now use the above exercises to simplify.
@@ -510,7 +497,6 @@ Conditioning leads to
   \begin{solution}
        \begin{align*}
     f_D(t) 
-&= f_{X+S}(t) \P I + f_S \P B \\
 &= (1-\rho) f_{X+S}(t) +    \rho \mu e^{-\mu t} \\
 &= (1-\rho) \frac{\mu\lambda}{\lambda-\mu} \left(e^{-\mu t}-e^{-\lambda t}\right) +    \rho \mu e^{-\mu t} \\
 &= \left(1-\frac{\lambda}\mu\right) \frac{\mu\lambda}{\lambda-\mu}\left(e^{-\mu t}-e^{-\lambda t}\right)  +    \rho \mu e^{-\mu t} \\
@@ -524,7 +510,7 @@ Conditioning leads to
 
 It can also be shown that the inter-departure times are independent. 
 
-\begin{exercise}\label{ex:burke}
+\begin{exercise}{\faFlask}\label{ex:burke}
 Explain that the above leads to \recall{Burke's law}  which states that the departure process of the $M/M/1$ queue is a Poisson  process with rate $\lambda$. 
 \begin{solution}
 The above exercises show that inter-departures times have the same density, i.e., $\lambda e^{-\lambda t}$. The remark above states these times are independent. Thus,  the inter-departures times form a set of i.i.d. exponentially distributed random variables with mean $1/\lambda$. Consequently, the departures times form a Poisson process with rate $\lambda$.

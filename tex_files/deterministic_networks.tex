@@ -14,7 +14,7 @@ systems in the simplest setting possible.  This is, arguably, a network in which
 
 A queueing network can be represented as a
 \emph{graph}. \emph{Stations} form the \emph{nodes} in the graph, and
-\emph{edges} between nodes represents the routing, which is the
+\emph{edges} between nodes represent the routing, which is the
 possibility that jobs can move from one station to another. A simple
 example is a network of $n$ stations in tandem. Jobs arrive at
 station~1, and after service they move to station~2. Then they move to
@@ -395,7 +395,7 @@ W_0 &= r_b T_0.
   station, i.e., between station 1 and 2.  What are $W_0$, $r_b$ and
   $T_0$? 
 \begin{solution}
-  Now there are two loops. One third of the jobs pass all three
+  Now there are two loops. One-third of the jobs pass all three
   stations. Station 1 can process these job at rate 
   \begin{equation*}
 \frac13 r_1 = \frac 13 \frac 12=\frac 16
@@ -467,7 +467,7 @@ W_0 = r_b T_0 = \frac 12 \frac{23}5 = \frac{23}{10}.
 
 
 Production situations can be pretty  complicated. Jobs can enter the network at different places, not  just at station 1 as we considered here. Jobs may also need rework  at one or more stations. One consequence of these aspects is that   the slowest machines or stations need not be the bottlenecks. If you like, you can try to find or develop a general algorithm to compute
- $T_0$, $W_0$ and $r_b$ for any network of reasonable size.  One way to approach this problem might be to  place (imaginary) huge  amounts of work in front of each station and just see how the network drains, another is to try to find an analogy with an electrical network. All in all, its an elegant  problem.
+ $T_0$, $W_0$ and $r_b$ for any network of reasonable size.  One way to approach this problem might be to  place (imaginary) huge  amounts of work in front of each station and just see how the network drains, another is to try to find an analogy with an electrical network. All in all, it's an elegant  problem.
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}

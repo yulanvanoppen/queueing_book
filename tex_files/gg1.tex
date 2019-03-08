@@ -20,10 +20,10 @@ sent to a second station for further processing, the inter-arrival
 times at the second station must be more or less equal. Hence, in this
 case, the SCV of the arrivals at the second station $C_{a,2}^2$ is
 most probably smaller than 1. As a consequence the
-Pollaczek-Khinchine formula for the $M/G/1$-queue can no longer be
+Pollaczek-Khinchine formula for the $M/G/1$ queue can no longer be
 reliably used to compute the average waiting times.  As a second,
 trivial case, if the inter-arrival times of jobs are 1 hour always and
-service times 59 minutes always, there simply cannot be queue. Thus,
+service times 59 minutes always, there simply cannot be a queue. Thus,
 the $M/G/1$ waiting time formula cannot, and should not, be applied to
 approximate the average waiting time of the $G/G/1$ queue. 
 
@@ -56,7 +56,7 @@ This formula is reasonably accurate; for related expressions we refer
 to \citet{bolch06:_queuein_networ_markov_chain} and
 \citet{hall91:_queuein_method_servic_manuf}. With Little's law we can
 compute $\E{L_Q}$ from the above. Moreover, $\E W = \E{W_Q} + \E S$,
-and so on, c.f., Section~\ref{sec:some-usef-ident}
+and so on, cf., Section~\ref{sec:some-usef-ident}.
 
 
 
@@ -64,13 +64,13 @@ It is crucial to memorize the \emph{scaling} relations that can be
 seen from the $G/G/1$ waiting time formula. Roughly:
 \begin{enumerate}
 \item $\E{W_Q} \sim (1-\rho)^{-1}$. The consequence is that the waiting
-  time increases \emph{very steeply} when~$\rho$ is large, hence is
+  time increases \emph{very steeply} when~$\rho$ is large. Hence, the waiting time is
   very sensitive to the actual value of $\rho$ when $\rho$ is large.
 \item $\E{W_Q} \sim C_a^2$ and $\E{W_Q} \sim C_s^2$. Hence, reductions
   of the variation of the inter-arrival and service times do affect the
   waiting time, but only linearly.
 \item $\E{W_Q} \sim \E S$. Thus, working in smaller job sizes reduces
-  the waiting time also. The average queue length does not decrease by
+  the waiting time as well. The average queue length does not decrease by
   working with smaller batches, but jobs are more `uniformly spread'
   over the queue. This effect lies behind the idea of
   `lot-splitting', i.e., rather than process large jobs, split jobs
@@ -197,13 +197,13 @@ It is crucial to remember from the above exercises that knowledge of the   utili
   \begin{solution}
     All follows straightaway from the definitions in the main text. In
     the $G/G/1$ queue jobs arrive and depart in single units. Hence,
-    $|A(n,t)-D(n,t)|\leq 1$, c.f., Eq.~(\ref{eq:19}). Then, 
+    $|A(n,t)-D(n,t)|\leq 1$, cf., Eq.~(\ref{eq:19}). Then, 
     \begin{equation*}
       \frac{A(t)}{t}\frac{A(n,t)}{A(t)} \approx 
       \frac{D(t)}{t}\frac{D(n,t)}{D(t)}. 
     \end{equation*}
-    The left hand side goes to $\lambda \pi(n)$ as $t\to\infty$, and
-    the right hand side to $\delta \delta(n)$. Use the fact that we
+    The left-hand side goes to $\lambda \pi(n)$ as $t\to\infty$, and
+    the right-hand side to $\delta \delta(n)$. Use the fact that we
     always assume, implicitly, that the system is stable, so that
     $\lambda = \delta$. As a consequence $\delta(n) = \pi(n)$.
   \end{solution}
@@ -243,7 +243,7 @@ Thus, the waiting time in queue is approximately normally distributed with mean 
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faPhoto}
   (Hall 5.19) When a bus reaches the end of its line, it undergoes a
   series of inspections. The entire inspection takes 5 minutes on
   average, with a standard deviation of 2 minutes. Buses arrive with
@@ -340,7 +340,7 @@ C_a^2 = \frac{\V{X_i}}{(\E{X_i})^2} = \frac{\sigma^2}{1/\lambda^2} = \lambda^2 \
 
 Next, let $A_k$ be the arrival time of the $k$th arrival. The
 following useful relation between $A(t)$ and $A_k$ enables us to prove
-our result (recall that we uses a similar relation in the derivation
+our result (recall that we used a similar relation in the derivation
 of the Poisson process):
 \begin{equation*}
 \P{A(t) < k} = \P{A_k > t}.

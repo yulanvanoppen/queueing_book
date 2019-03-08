@@ -9,7 +9,7 @@
 \Opensolutionfile{ans}
 
 It is not always the case that jobs arrive in single units, they can
-also arrive as batches. For instance, when a car and or bus arrives at a fast
+also arrive in batches. For instance, when a car and or bus arrives at a fast
 food restaurant, a batch consists of the number of people in the vehicle.  In this section we derive for such queueing processes, denoted by the shorthand $M^X/M/1$, expressions for the load and the expected waiting time and queue length. 
 
 
@@ -45,7 +45,7 @@ The (stochastic) process $\{N(t)\}$ is known as the \recall{compound
   Poisson process}. Clearly, the rate at which items arrive is
 approximately
 \begin{equation*}
-  \frac{N(t)}t = \frac{A(t)}t \frac1{A(t)}\sum_{i=k}^{A(t)} B_k.
+  \frac{N(t)}t = \frac{A(t)}t \frac1{A(t)}\sum_{k=1}^{A(t)} B_k.
 \end{equation*}
 As in  the limit $A(t)/t \to \lambda$ and $(A(t))^{-1}\sum_{k=1}^{A(t)} B_k \to \E{B}$, we see that
 \begin{align*}
@@ -76,7 +76,7 @@ spends in queue is
 \begin{equation*}
   \E{W_{Q,b}} = \E{L} \E S;
 \end{equation*}
-compare Eq.~\ref{eq:wqes}. 
+compare Eq.~\eqref{eq:wqes}. 
 %Note that this is not the same as $\E{W_Q}$, which is the expected time an \emph{item} spends in queue.
 Next, if $B_r$ is the number of items of the batch currently at the server
 ($B_r=0$ if the server is idle), and $L_{Q,b}$ the number of batches
@@ -114,19 +114,18 @@ Below we prove that  the expected number of items at the server is given by
 \begin{exercise}\label{q:batch}
 To simplify this expression for $\E{B_r}$, show that 
 \begin{equation*}
-  \frac{\E{B^2}}{\E{B}} = (1+C_s^2)\E B, \quad\text{where }
+  \frac{\E{B^2}}{\E{B}} = (1+C_s^2)\E B, 
 C_s^2 = \frac{\V B}{(\E B)^2},
 \end{equation*}
-is the square coefficient of variation of the batch sizes.  
+where  $C_s^2 = \V B / (\E B)^2$ is the square coefficient of variation of the batch sizes.  
   \begin{solution}
 We have
-\begin{equation*}
-  \begin{split}
+\begin{align*}
   \frac{\E{B^2}}{\E{B}}
-=    \frac{\E{B^2}}{(\E B)^2} \E B 
-= \frac{(\E B)^2+\V B}{(\E B)^2}\E B = (1+C_s^2)\E B.
-  \end{split}
-\end{equation*}
+&=    \frac{\E{B^2}}{(\E B)^2} \E B 
+=    \frac{\E{B^2} - (\E B)^2 + (\E B)^2}{(\E B)^2} \E B  \\
+&= \frac{\V B + (\E B)^2}{(\E B)^2}\E B = (C_s^2+1)\E B.
+\end{align*}
   \end{solution}
 \end{exercise}
 
@@ -135,7 +134,7 @@ With the results of the above exercises we can establish two cornerstones of que
 \E{W_{Q,b}} = \frac{\E{B_r}}{1-\rho} \E{S} = 
 \frac{1+C_s^2}2 \frac{\rho}{1-\rho} \E B \E S + \frac12\frac\rho{1-\rho}\E S.
 \end{equation}
-Second, for the number of items in the system we find
+Second, for the expected number of items in the system we find
 \begin{equation}\label{eq:43}
 \E{L}  =\frac{\E{W_{Q,b}}}{\E S} =  
 \frac{1+C_s^2}2 \frac{\rho}{1-\rho} \E B + \frac12\frac\rho{1-\rho}.
@@ -164,11 +163,11 @@ What is the    distribution of the batch size $B$ for the $M/M/1$ queue?
 \begin{exercise}
   What is $\E L$ in case $B_k=3$ always, and $\lambda=1$, $\mu=6$?  
   \begin{hint}
-Use Eq.~\ref{eq:43}. What are $\E{B^2}$, $\E B$ and $\V B$ for this case?
+Use Eq.~\eqref{eq:43}. What are $\E{B^2}$, $\E B$ and $\V B$ for this case?
   \end{hint}
 \begin{solution}
-  As $B$ is constant and equal to 3, $\E{B^2}=9$, hence $\V B=0$,
-  hence $C_s^2=0$.  Also, $\rho=\lambda\E B/\mu=1\cdot 3/6=1/2$. Hence
+  As $B$ is constant and equal to 3, $\E{B^2}=9$. Hence, $\V B=0$, which implies
+ $C_s^2=0$.  Also, $\rho=\lambda\E B/\mu=1\cdot 3/6=1/2$. Hence,
   \begin{equation*}
     \E L = \frac 1 2 \frac{1/2}{1-1/2}\cdot 3 + \frac12\frac{1/2}{1-1/2}.
   \end{equation*}
@@ -236,8 +235,8 @@ queue. The result is at least consistent with earlier work.
   \begin{equation*}
     \P{B=1} = \P{B=2} = \P{B=3} = \frac 13.
   \end{equation*}
-  Batches arrive at rate 1 per hour. The average processing for an
-  item is $25$ minutes.  By how much would the waiting time decrease if
+  Batches arrive at rate 1 per hour. The average processing time for an
+  item is $25$ minutes.  By how much would the number of items in de system decrease if
   batch sizes are constant and equal to~$2$ (observe that in both cases $\E B =2$).
   \begin{solution}
     Start with the simple case, $B\equiv 2$. Then $\V{B}=0$ and
@@ -263,7 +262,7 @@ And thus,
 
 Observe how easy it is with these models to get insight into the order
 of magnitude of queue length reductions or waiting times that can be
-achieved with changing work habits, such making batch sizes constant
+achieved with changing work habits, such as making batch sizes constant
 rather than allowing them to vary. Observe also that it is up to
 management to decide whether such reductions outweigh any efforts to
 reduce the variation in batch sizes. 
@@ -313,7 +312,7 @@ Clearly, this is the inequality we tried to show. As a result,
 for all $B$. 
 
 In conclusion, if work arrives in batches, the average number of jobs
-in the system, increases, hence the average waiting time increases.
+in the system increases, hence the average waiting time increases.
   \end{solution}
 \end{exercise}
 
@@ -337,7 +336,7 @@ follows like this:
     \begin{align*}
       \E B &= \frac{1+2+3+4}{4} = \frac 52, \\
       \E{B^2} &= \frac{1+4+9+16}{4} = \frac{30}4,\\
-      \V{B^2} &= \frac{30}4 - \frac{25}4 = \frac 5 4,\\
+      \V{B} &= \frac{30}4 - \frac{25}4 = \frac 5 4,\\
       C_s^2 &= \frac{5/4}{25/4} = \frac 15,\\
       \rho &= \lambda \E B \E S = 6 \frac 52 \frac 1{20} = \frac 34.
     \end{align*}
@@ -366,7 +365,7 @@ counting; it is an elegant line of reasoning. Moreover, this derivation of the d
 
 
 For this purpose, consider  the start and finish times of the batches in service.  Then, remove all idle periods of the server, so that we paste together the times during which the server is busy, and plot the remaining job size as a function of time, 
-c.f., Figure~\ref{fig:remainingservicetime}.  Define $R$ as the
+cf., Figure~\ref{fig:remainingservicetime}.  Define $R$ as the
 remaining number of items to be served of the batch in service at some
 arbitrary point in time. Let us show with Figure~\ref{fig:remainingservicetime} that
 \begin{equation*}
@@ -389,8 +388,8 @@ By PASTA this is also the fraction of jobs that see~$i$ items at the server.  Fi
 \P{R=i} = \lim_{n\to\infty} \frac{\sum_{k=1}^n \1{B_k \geq i}}{\sum_{k=1}^n B_k} 
 = \lim_{n\to\infty}  \frac{n^{-1}\sum_{k=1}^n \1{B_k \geq i}}{n^{-1}\sum_{k=1}^n B_k} = \frac{G(i-1)}{\E B},
 \end{equation*}
-where  the limits exist by the strong law. With  Exercise~\ref{ex:ER} 
-the expected remaining time can be simplified to
+where  the limits exist by the strong law of large numbers. With  Exercise~\ref{ex:ER} 
+the expected remaining number of items to be served of the batch in service can be simplified to
 \begin{equation*}
   \E{R} 
 = \sum_{i=1}^\infty i \P{R=i} = \frac1{\E B}\sum_{i=1}^\infty i G(i-1) 
@@ -456,7 +455,7 @@ being busy, we get that $\E{B_r} = \rho \E R$, thereby yielding~\eqref{eq:br}.
 
 
 \begin{exercise}\label{ex:ER}
-  Show that $2 \sum_{i=i}^\infty i G(i-1)= \E{B^2} + \E B.$
+  Show that $2 \sum_{i=1}^\infty i G(i-1)= \E{B^2} + \E B.$
   \begin{hint}
     Use Exercises~\ref{ex:6} and \ref{ex:66}.
   \end{hint}
@@ -494,7 +493,7 @@ Only if $B_k \geq i$ there can be an $i$th item of the batch, and the time this 
 \end{exercise}
 
 
-\begin{exercise}\label{ex:14}
+\begin{exercise}
 Use the previous exercise to show that 
 \begin{equation*}
   Y_S(i, D_n) = \sum_{k=1}^n \1{B_k\geq i} S_{k,i}.
@@ -543,7 +542,7 @@ The next equation is more subtle. Take some $\delta>0$. It is simple to see that
 \delta \sum_{m=0}^\infty m \1{H_k \in [m\delta, (m+1)\delta)}
 \leq H_k \leq \delta \sum_{m=0}^\infty (m+1) \1{H_k \in [m\delta, (m+1)\delta)}.
 \end{equation*}
-Moreover, if $\delta\to 0$, the left and right hand side converge. Let us use the left hand side as an approximation for $H_k$. 
+Moreover, if $\delta\to 0$, the left- and right-hand side converge. Let us use the left-hand side as an approximation for $H_k$. 
 
 \begin{align*}
 \frac{ \sum_{k=1}^n H_k \1{A_k\leq 15}}{\sum_{k=1}^n \1{A_k \leq 15}} 
@@ -559,7 +558,7 @@ Finally, if $H$ and $A$ would be independent (which they are not), then it is ea
 \end{exercise}
 
 
-\begin{exercise}
+\begin{exercise}\label{ex:14}
 By taking the time average, show that
 \begin{equation*}
 \P{Y_S=i} =\lim_n  \frac{Y_S(i, D_n)}{D_n} = \rho \frac{G(i-1)}{\E B}.

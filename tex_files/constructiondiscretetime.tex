@@ -27,7 +27,7 @@ Let us define:
 \begin{equation}
   \label{eq:30}
   \begin{split}
-    a_k &= \text{number of jobs that arrive at period $k$},\\
+    a_k &= \text{number of jobs that arrive \textit{in} period $k$},\\
     c_k &= \text{the capacity, i.e., the maximal number of jobs that can be served, during period $k$},\\
     d_k &= \text{number of jobs that depart the queue  \textit{in} period $k$},\\
     Q_k &= \text{number of jobs in queue  at the \textit{end} of period $k$}.\\
@@ -95,13 +95,13 @@ $n\gg 1000$, and so on.
 
 
 \begin{exercise}
-  Implement Eqs.~\ref{eq:31} in Python and simulate a
+  Implement Eqs.~\eqref{eq:31} in Python and simulate a
   simple single-server queueing system. Assume that the $a_k \sim P(20)$, i.e., Poisson distributed with $\lambda=20$, and $c_k =\mu=21$. Make a plot of the queue length process $Q$, and compute the mean and standard variance of $Q$. Compute the fraction of periods in which the queue length exceeds some threshold, 20, say. 
   \begin{solution}
     Below I fix the seed of the random number generator to ensure that
     I always get the same results from the simulator.  The arrival
     process is Poisson, and the number of services is fixed to 21 per
-    period. I use \pyv{Q = np.zeros\_like(a)} to make an array of the
+    period. I use \pyv{Q = np.zeros_like(a)} to make an array of the
     same size as the number of arrival $a$ initially set to zeros. The
     rest of the code is nearly identical to the formulas in the text.
 
@@ -249,7 +249,7 @@ patients to determine the best treatment process for the patients.
 There are complaints about the time patients have to wait for their
 first intake; the desired waiting time is around two weeks, but the
 realized waiting time is sometimes more than three months. The
-organization considers this is to be unacceptably long, but\ldots what to do about it?
+organization considers this to be unacceptably long, but\ldots what to do about it?
 
 To reduce the waiting times the five psychiatrists have various
 suggestions. 
@@ -279,7 +279,7 @@ suggestions.
 To evaluate the effect of these suggestions on reducing the queueing
 dynamics we develop a simple simulator with which we can make a number of plots. 
 As a first step we model the arrival process of patients as a Poisson
-process, c.f., Section~\ref{sec:poisson-distribution}. The duration of
+process, cf., Section~\ref{sec:poisson-distribution}. The duration of
 a period is taken to be a week. The average number of arrivals per
 period, based on data of the company, was slightly less than~12 per
 week; in the simulation we set it to $\lambda= 11.8$ per week. We
@@ -313,12 +313,12 @@ C =
   \end{pmatrix}.
 \end{equation*}
 
-We next include the effects of holidays on the capacity. This is
+Next, we include the effects of holidays on the capacity. This is
 easily done by setting the capacity of a certain psychiatrist to 0 in
 a certain week. Let's assume that just one psychiatrist is on leave in
 a week, each psychiatrist has one week per five weeks off, and the
 psychiatrists' holiday schemes rotate. To model this, we set
-$C_{1,1,}=C_{2,2}=\cdots=C_{1,6}=C_{2,7} =\cdots = 0$, i.e.,
+$C_{1,1}=C_{2,2}=\cdots=C_{1,6}=C_{2,7} =\cdots = 0$, i.e.,
 \begin{equation*}
 C = 
   \begin{pmatrix}
@@ -366,7 +366,7 @@ intakes less. Here, $e=1$ or $2$, or perhaps a larger number; it
 corresponds to the amount of control we want to exercise. When
 $Q_{n-1}>24$, i.e., larger than two weeks of intakes, do $e$ intakes
 more. Let's consider three different control levels, $e=1$, $e=2$, and
-$e=5$; thus in the last case all psychiatrists do five extra intakes.
+$e=5$; thus in the last case all psychiatrists do five extra intakes
 The previous simulation shows that it is safe to disregard the holiday
 plans, so just assume a flat service capacity of 12 intakes a week.
 
@@ -397,7 +397,7 @@ should try to develop other mathematical methods to analyze
 multi-server queueing systems with vacations, of which this case is an
 example.) As a matter of fact, with such simple recursions we can analyze many practical queueing
 situations. Together with students the author applied it numerous
-times, for instance,
+times, for instance:
 \begin{itemize}
 \item Should a certain hospital invest in a new MRI scanner to reduce
   waiting times?
@@ -460,7 +460,7 @@ First $d_k = \min\{Q_{k-1}, c_k\}$. Then, $Q_k' = Q_{k-1}+a_k-d_k$ is the queue 
   $d_k = \min\{Q_{k-1}+a_k, c_k\}$, and assume that jobs are served in
   FIFO sequence. Find an expression for the shortest possible waiting
   time $W_{-,k}$ of a job that arrives at time $k$, and an expression
-  for the largest possible waiting time $W_{+,k}$
+  for the largest possible waiting time $W_{+,k}$.
   \begin{hint}
   Consider a numerical example. Suppose $Q_{k-1}=20$. Suppose
     that the capacity is $c_k=3$ for all $k$. Then a job that arrives
@@ -526,7 +526,7 @@ First $d_k = \min\{Q_{k-1}, c_k\}$. Then, $Q_k' = Q_{k-1}+a_k-d_k$ is the queue 
   job. Make a model to analyze this case. Compare this case with the
   yield loss problem above. 
 
-  Let's assume that the repair of a faulty requires half of the work
+  Let's assume that the repair of a faulty item requires half of the work
   of a new job, and that the faulty jobs are processed with priority
   over the new jobs.  Also assume that faulty items do not need more than one repair (hence, faulty items that are repaired cannot be faulty anymore).
 
@@ -608,7 +608,7 @@ long-run average cost is
         0 & \text{ if }  Q_{k} =0,\\
       \end{cases}
     \end{equation*}
-and assume that $I_0 =0$ at the start, i.e., the machine if off. Thus, we can write:
+and assume that $I_0 =0$ at the start, i.e., the machine is off. Thus, we can write:
 \begin{equation*}
   I_{k+1} = \1{Q_k\geq N} + I_k \1{0<Q_k<N} + 0\cdot \1{Q_k = 0}.
 \end{equation*}
@@ -664,7 +664,7 @@ and likewise for the other queue.
   \end{solution}
   \end{exercise}
 
-  \begin{exercise} (Priority queuing) Another interesting situation is
+  \begin{exercise} (Priority queueing) Another interesting situation is
     a system with two queues served by one server, but such that one
     queue, queue $A$, gets priority over the other
     queue. Again find a set of recursions to describe this case.
@@ -812,14 +812,14 @@ d_{k}^A$. Thus,
   \begin{split}
     d^A_k &= \min\{Q_{k-1}^A, c_k^A, M-Q^B_{k-1}\}, \\
     Q_k^A &= Q_{k-1}^A -d_k^A + a_k, \\
-    a_k^B &= d_{k}^A,\\
+    a_k^B &= d_{k}^A, \text{ (ensures all jobs first pass station A and then station B)}\\
     d^B_k &= \min\{Q_{k-1}^B, c_k^B\}, \\
     Q_k^B &= Q_{k-1}^B -d_k^B + a_k^B.
   \end{split}
 \end{equation}
 This is a bit subtle: since there is room $M-Q^B_{k-1}$ at the
 intermediate buffer and $d_k^A \leq M-Q^B_{k-1}$, we know that in the
-worst case, i.e., when $c_k^B=0$, still $Q^B_k = Q_{k_1}^B +
+worst case, i.e., when $c_k^B=0$, still $Q^B_k = Q_{k-1}^B +
 d_k^A$.
 Thus, we are sure that the queue length of the intermediate queue will
 not exceed $M$.
@@ -930,11 +930,11 @@ It is then sensible to set
   simulate this system.
   \begin{solution}
 \begin{enumerate}
-\item Realize that the recursions of Eq~\eqref{eq:31} applied to the
+\item Realize that the recursions of Eq.~\eqref{eq:31} applied to the
   queueing situation at the first machine provide us with the total
   number of departures $d_k$ during period $k$. However, it does not
   tell us about the type of these departures. Thus, to compute the
-  queue in front of station A, we need do know the number of
+  queue in front of station A, we need to know the number of
   departures of type A, rather than the total number of departures of
   the first station.
 \item It is reasonable that the number of jobs of type $A$ in queue at
@@ -969,7 +969,7 @@ It is then sensible to set
     Y_k &= \text{Number of items produced in week $k$ during extra  hours}, \\
     c_k &= \text{Production cost per item during normal  hours}, \\
     d_k &= \text{Production cost per item during extra  hours}, \\
-    h_k &= \text{holding cost per  item, due at the end of week $k$}, \\
+    h_k &= \text{Holding cost per  item, due at the end of week $k$}, \\
     I_k &= \text{On hand inventory level at the end of week $k$}. \\
   \end{align*}
   Management needs a production plan that specifies for the next $T$
@@ -998,10 +998,10 @@ I_k &\geq 0.
   \end{solution}
 \end{exercise}
 
-\begin{exercise}(Queue with setups)
+\begin{exercise}{\faRocket}(Queue with setups)
   One server serves two parallel queues, one at a time. After serving
    one queue until it is empty,  the server moves to the other
-  queue. The change of queue requires one period setup time. (This is a tough problem; you can skip it if you don't have the time to really think about it.)
+  queue. The change of queue requires one period setup time. 
   \begin{solution}
 We need an extra variable $p_k$ that specifies  which queue is being served. If $p_k=0$, the server is moving from one queue to the other, if $p_k=1$, the server is at queue 1, and if $p_k=2$ it is at queue $2$. Then, with
 \begin{align*}
