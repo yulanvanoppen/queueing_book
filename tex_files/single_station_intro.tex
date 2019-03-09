@@ -1,19 +1,16 @@
-In this chapter, we start with a discussion of the Poisson process and
-the related exponential distribution, as these concepts are perhaps
-the most important building blocks of queueing theory. With these
-concepts we can specify the arrival and service processes of
-customers, with which in turn we can construct queueing processes and
-define performance measures to provide insight into the (transient and
-average) behavior of queueing processes. As it turns out, these
-queueing processes can often be easily implemented as computer
-programs, thereby allowing us to use simulation to analyze queueing
-systems. We then continue with developing models for various
-single-station queueing systems in steady-state. In the analysis we
-use sample-path and level-crossing arguments to count how often
-certain events occur as a function of time. Then we define
-probabilities in terms of limits of fractions of these counting
-processes. Like this the performance measures can be explicitly
-computed for the statistical analysis of (simulations of) queueing
-systems.
+In this chapter we start with a discussion of the Poisson process.
+We then construct queueing processes in discrete time and apply the Poisson process to model the number of arrivals in periods of fixed length.
+In Section~\ref{sec:expon-distr} we relate the exponential distribution to the Poisson distribution.
+The exponential distribution often serves as a good model for inter-arrival times of individual jobs.
+As such this is a key component of the construction of queueing processes in continuous time.
+As it turns out, both ways to construct queueing processes are easily implemented as computer programs, thereby allowing us to use simulation to analyze queueing systems.
+In passing we develop a number of performance measures to provide insight into the (transient and average) behavior of queueing processes.
+
+We assume that you  \emph{know all} results of Appendix~\ref{cha:appendix}. 
 
 
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../queueing_book"
+%%% End:

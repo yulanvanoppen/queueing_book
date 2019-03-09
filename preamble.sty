@@ -57,16 +57,29 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}{}[section]
 
 
-\usepackage{xcolor}
-\definecolor{light-gray}{gray}{0.9}
-\usepackage{mdframed}
+% \usepackage{xcolor}
+% \definecolor{light-gray}{gray}{0.9}
+% \usepackage{mdframed}
 
-\newtheorem{mdexercise}{}[section]
-\newenvironment{exercise}%
-  {\begin{mdframed}[backgroundcolor=light-gray, hidealllines=true]\begin{mdexercise}}%
-  {\end{mdexercise}\end{mdframed}}
+%\newtheorem{exercise}[section][1]{e.#1}
+
+%\usepackage{xparse}
+%\newtheorem{mdexercise}{}[section]
+
+% \NewDocumentEnvironment{exercise}{m}{%
+%   \begin{mdexercise}%
+% }{
+% #1\end{mdexercise}
+% }
+
+%\newtheorem{mdexercise}[section]
+% \newenvironment{exercise}%
+%   {\begin{mdframed}[backgroundcolor=light-gray, hidealllines=true]\begin{mdexercise}}%
+%   {\end{mdexercise}\end{mdframed}}
+
 
 
 

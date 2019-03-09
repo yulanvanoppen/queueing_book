@@ -129,9 +129,13 @@ if the limit exists, we can \emph{define}
   \end{solution}
 \end{exercise}
 
-Next, consider the waiting time in queue.  
-\begin{exercise}($M/G/1$)
-Show  that the expected time in queue is
+The average waiting time $\E W$ in the entire system is of course the expected time in queue plus the expected time in service, i.e., 
+\begin{equation*}
+  \E W = \E{W_Q}+ \E S.
+\end{equation*}
+
+\begin{exercise}
+Show for the $M/G/1$ queue  that the expected time in queue is
 \begin{equation}\label{eq:24}
   \E{W_Q} = \E{S_r} + \E{L_Q} \E S.
 \end{equation}
@@ -149,11 +153,11 @@ jobs in queue perceived by arriving customers is also the
 \emph{time-average} number of jobs in queue~$\E{L_Q}$.  
 \end{solution}
 \end{exercise}
- 
-\begin{exercise}($M/G/1$)
-  Use the previous problem and Little's law to derive that 
+
+\begin{exercise}{\faCalculator}
+  Use the previous problem and Little's law to derive for the $M/G/1$ queue that 
 \begin{equation}\label{eq:35}
-  \E{W_Q} = \frac{\E{S_r}}{1-\rho} = \frac{\rho}{1-\rho} \E{S_r\given S_r>0}.
+  \E{W_Q} = \frac{\E{S_r}}{1-\rho}.% = \frac{\rho}{1-\rho} \E{S_r\given S_r>0}.
 \end{equation}
 \begin{hint}
 Use Little's law to see that $\E{L_Q} = \lambda \E{W_Q}$. Substitute this in~(\ref{eq:24}) and simplify.
@@ -171,90 +175,46 @@ where we use~(\ref{eq:37}) in the last equation.
 \end{solution}
 \end{exercise}
 
-The average waiting time $\E W$ in the entire system, i.e., in queue
-plus in service, becomes
-\begin{equation*}
-  \E W = \E{W_Q}+ \E S = \frac{\E{S_r}}{1-\rho} + \E S.
-\end{equation*}
+The situation can be significantly simplified for the $M/M/1$ queue as then the service times are also exponential, hence memoryless, implying that $\E{S_r\given S_r>0} = \E S$.
 
-The situation can be significantly simplified for the $M/M/1$ queue as
-then the service times are also exponential, hence memoryless,
-implying that $\E{S_r\given S_r>0} = \E S$. 
-
-\begin{exercise}($M/M/1$) Derive that
-\begin{equation}\label{eq:ew}
-  \E W = \frac{\E S}{1-\rho}.
+\begin{exercise}{\faFlask}
+Explain for the $M/M/1$ queue that 
+\begin{equation}\label{eq:wqes}
+  \E{W_Q} = \E L \E S.
 \end{equation}
-\begin{solution}
-Using~(\ref{eq:37}),
-\begin{equation*}
-  \begin{split}
-  \E W 
-&= \E{W_Q}+ \E S = 
-\frac{\E{S_r}}{1-\rho} + \E S \\
-&= \frac{\rho \E S}{1-\rho} + \E S = \frac{\E S}{1-\rho}.
-  \end{split}
-\end{equation*}
-\end{solution}
+Why is this \emph{not} true in general for the $M/G/1$ queue? 
+\begin{hint}
+  Depart from~\eqref{eq:24}.
+\end{hint}
+  \begin{solution}
+    By the memory-less property of the (exponential) distributed service times of the $M/M/1$ queue, the duration of a job in service, if any, is $\Exp(\mu)$ also at an arrival moment.
+    Therefore, at an arrival moment, all jobs in the system (whether in service or not) have the same expected duration.
+    Hence, the expected time to spend in queue is the expected number of jobs in the system times the expected service time of each job, i.e., $\E{W_q} = \E L \E S$.
+    Note that we use PASTA to see that the expected number of jobs in the system at an arrival is $\E{L}$.
+
+For the $M/G/1$ queue, the job in service (if any) does not have the same distribution as a job in queue. Hence, the expected time in queue is not $\E L \E S$. 
+  \end{solution}
 \end{exercise}
 
-\begin{exercise}($M/M/1$) Use the PASTA property to conclude that
-\begin{equation}\label{eq:61}
-  \E W = \E L  \E S + \E S,
+\begin{exercise}{\faFlask}
+Use Little's law to show for the $M/M/1$ queue that 
+\begin{equation}\label{eq:ew}
+  \E W = \frac{\E S}{1-\rho},
 \end{equation}
-and apply Little's law to find~(\ref{eq:ew}). 
 \begin{hint}
-Another way to derive the above result is to conclude from PASTA that
-the expected number of jobs in the system at an arrival is $\E{L}$.
-Since all these jobs require an expected service time $\E S$,
-including the job in service by the memoryless property, the time in
-queue is $\E L \E S$. The time in the system is then the waiting time
-plus the service time. Next, use Little's law $\E L = \lambda \E W$.
+  Apply Little's law to $\E W = \E L \E S + \E S$. 
 \end{hint}
 \begin{solution}
-From the hint
-\begin{equation}
-  \E W = \E L  \E S + \E S = \lambda \E W \E S + \E S = \rho \E W  + \E S.
-\end{equation}
-Substituting Little's law $\E L = \lambda \E W$ and simplifying,
-\begin{equation*}
-\E W = \frac{\E S}{1-\rho}.
-\end{equation*}
+\begin{align*}
+  \E W &= \E L \E S + \E S = \lambda \E W \E S + \E S= \rho \E W + \E S. 
+\end{align*}
 \end{solution}
 \end{exercise}
 
 
-\begin{exercise}
-  Why is Eq.~(\ref{eq:61}) not true in general for the $M/G/1$ queue?
-  \begin{hint}
-Think about the consequences of memoryless service times.
-  \end{hint}
-  \begin{solution}
-    Because the remaining service time of the job in service, provided
-    there is a job in the system upon arrival, is not exponentially
-    distributed in general. Only for the $M/M/1$ queue the service
-    times are exponentially distributed, hence memoryless. And only
-    when the service time is memoryless, the service time after an
-    interruption is still exponential.
-  \end{solution}
-\end{exercise}
 
-\begin{exercise}($M/M/1$)
-Show that 
-\begin{equation}\label{eq:wqes}
-  \E{W_Q} = \E L \E S = \frac{\rho^2}{1-\rho} \frac 1 \lambda.
-\end{equation}
-  \begin{solution}
-With Little's law:
-\begin{equation}
-  \E{W_Q} = \E L \E S = \lambda \E W \E S= \rho \E W = \frac{\rho}{1-\rho} \E S = \frac{\rho^2}{1-\rho} \frac 1 \lambda.
-\end{equation}
-  \end{solution}
-\end{exercise}
-
-Finally, we find expressions for  the average lengths.
-\begin{exercise}($M/M/1$)
-  Show that
+\begin{exercise}{\faCalculator}
+  Show for the $M/M/1$ queue that
   \begin{align*}
 \E L &= \frac\rho{1-\rho}, & \E{L_Q} &= \frac{\rho^2}{1-\rho}, & \E{L_s} &= \rho.
   \end{align*}
@@ -265,7 +225,8 @@ Finally, we find expressions for  the average lengths.
 With Little's law, 
 \begin{equation*}
   \begin{split}
-\E L &= \lambda \E W = \frac{\lambda \E S}{1-\rho} = \frac\rho{1-\rho}, \\
+    \E L &= \lambda \E W = \frac{\lambda \E S}{1-\rho} = \frac\rho{1-\rho}, \\
+    \E{W_q} &= \E W - \E S = \frac{\E S}{1-\rho} - \E S = \frac{\rho}{1-\rho} \E S,\\
   \E{L_Q} &= \lambda \E{W_Q} = \frac{\rho^2}{1-\rho}, \\
   \E{L_s} &= \E L - \E{L_Q} = \frac{\rho}{1-\rho} - \frac{\rho^2}{1-\rho} = \rho, 
       \end{split}
@@ -275,8 +236,9 @@ equal to the expected number of busy servers.
   \end{solution}
 \end{exercise}
 
-\begin{exercise}($M/M/1$) Explain that
-$\E{L_Q} = \sum_{n=1}^\infty (n-1)\pi(n)$, and  use this to find that $\E{L_Q}=\rho^2/(1-\rho)$.
+
+\begin{exercise}{\faFlask}  Explain that for the $M/M/1$ queue 
+$\E{L_Q} = \sum_{n=1}^\infty (n-1)\pi(n)$ and  use this to find that $\E{L_Q}=\rho^2/(1-\rho)$.
   \begin{solution}
     The fraction of time the system contains $n$ jobs is $\pi(n)$ (by
     PASTA). When the system contains $n>0$ jobs, the number in queue
@@ -306,200 +268,9 @@ Another way to get the same result is by splitting:
   \end{solution}
 \end{exercise}
 
-\begin{comment}
-\begin{exercise}[use=false]
-  As a challenge you can try to derive \eqref{eq:24} by means of sample path arguments.
-  \begin{solution}
-    \TBD
-  \end{solution}
-\end{exercise}
-\end{comment}
-
-
-
-
-\begin{exercise}($M/M/1$)
-  Use the PASTA property to see that the expected waiting time in the
-  system must also be equal to
-  $\E W = \sum_{n=0}^\infty \E{W_Q \given N=n} \pi(n) + \E S$, 
-where $\E{W_Q \given N=n}$ is the waiting time in queue given that an
-arrival sees $N=n$ customers upon arrival. Then, 
- motivate that $\E{W_Q \given N=1} = \E S$. Finally, combine the above to see that 
-$\E W = \E S \sum_{n=0}^\infty n \pi(n) + \E S = \E S \E L + \E S$.
-  \begin{solution}
- The time in the system $\E W$ is the sum of the time in
-      queue plus the service time of the job itself.  Conditioning on
-      the number of jobs $N$ in the system at arrival moments, i.e.,
-      conditioning on $\pi(n)$, gives the result.  
-
- $\E{W_Q\given N=0}=0$, of course. If $N=1$, there must be a job
-      in service.  Because of the memoryless property of the service
-      times, the remaining service time of the customer in service is
-      still exponentially distributed with mean $\E S$. Thus,
-      $\E{W_Q\given N=1}=\E S$. 
-
- The expected service time for a customer still in queue is
-      $\E S$.  Therefore, for each $n$ we have that, when service
-      times are exponential, $\E{W_Q\given N=n}= n \E S$. The probability
-      to see $n$ jobs in the system by an arrival is $\pi(n)$ which,
-      by PASTA, is equal to $p(n)$. Since $\E L = \sum_n n p(n)$, the
-      result follows.
-  \end{solution}
-\end{exercise}
-
-\begin{comment}
-  
-\begin{exercise}[use=false] Note: the question is unclear, and needs more explanation. 
-
-  There is distinction between $\E{L_Q}$, i.e., the time-average queue
-  length, and the expected number of jobs in the system given that the
-  server is busy, i.e., $\E{L\given B}$.  is $\E{L_Q} \neq \E{L\given B}$?
-\begin{solution}
-  $\E{L_Q}$ is the time average of the queue length process (in steady
-  state). Hence, $\E{L_Q}$ contains also the time the queue is
-  empty. $\E{L\given B}$ the other hand, is the time average of the
-  queue length process, provided the server is busy. Even though the
-  queue may be empty while the server is busy, the fraction of time
-  the queue length is zero given that the server is busy, is smaller
-  than the fraction of time the queue length is zero.  Hence,
-  $\E{L\given B} > \E{L_Q}$.
-\end{solution}
-\end{exercise}
-\end{comment}
-
-\begin{exercise}($M/M/1$)
-Show that the variance of the number of jobs in the system $L$ is
-$\V L = \rho/(1-\rho)^2.$
-  \begin{hint}
-    $\V{L} = \E{L^2} - (\E L)^2$. We already know $\E L$ so it remains
-    to compute $\E{L^2}$. Then, $\E{L^2 }= \sum_{n=0}^\infty n^2 \pi(n)$. Use that $\pi(n)=\rho^n(1-\rho)$ is the probability to see $n$ jobs in the system. Now simplify.    
-
-You might use the moment-generating trick of Exercise~\ref{ex:12}.
-  \end{hint}
-  \begin{solution}
-The starting point is  $\V{L} = \E{L^2} - (\E L)^2$. 
-
-With Wolfram Alpha we get
-    \begin{equation*}
-      \begin{split}
-      \E{L^2 }
-&= \sum_{n=0}^\infty n^2 \pi(n) \\
-&= \rho \frac{1+\rho}{(1-\rho)^2}.
-      \end{split}
-    \end{equation*}
-    Thus,
-\begin{equation*}
-\V L = \frac{\rho(1+\rho)}{(1-\rho)^2}-\frac{\rho^2}{(1-\rho)^2} = \frac{\rho}{(1-\rho)^2}.
-\end{equation*}
-
-Here are three methods to get the result for $\E{L^2}$.  
-
-One way is to use the standard formula for a geometric series with $\rho < 1$:
-\begin{equation*}
-\dfrac{1}{1-\rho} = \sum_{n=0}^{\infty}\rho^n.
-\end{equation*}
-If we differentiate the left and right-hand side with respect to
-$\rho$  and then  multiply with $\rho$ we obtain
-\begin{equation*}
-\dfrac{\rho}{(1-\rho)^2}=\sum_{n=0}^{\infty}n\rho^n.
-\end{equation*}
-Again, differentiating and multiplying with $\rho$ yields, 
-\begin{equation*}
-  \begin{split}
-\rho \frac{(1-\rho)^2 + \rho2(1-\rho)}{(1-\rho)^4} 
-&= \rho \frac{1-2\rho+\rho^2 + 2\rho-2\rho^2}{(1-\rho)^4} \\
-&= \rho \frac{(1-\rho)^2}{(1-\rho)^4} \\
-&=\rho \dfrac{1+\rho}{(1-\rho)^3}\\
-&=\sum_{n=0}^{\infty}n^2\rho^n,
-  \end{split}
-\end{equation*}
-and hence
-\begin{equation*}
-(1-\rho)\sum_{n=0}^{\infty}n^2\rho^n = \rho\dfrac{1+\rho}{(1-\rho)^2}.
-\end{equation*}
-% Write
-% $\partial_\rho$ as a shorthand for the derivative with respect to
-% $\rho$. Then observe that
-% $(\rho \partial_\rho) \rho^n = \rho n \rho^{n-1} = n\rho^n$, hence
-% $(\rho \partial_\rho)^2 \rho^n =
-% (\rho \partial_\rho)(\rho\partial_\rho) \rho^n = (\rho \partial
-% \rho) n \rho^n = n^2\rho^n$. With this,
-% \begin{equation*}
-%   \begin{split}
-% (1-\rho)  \sum_{n=0}^\infty n^2 \rho^n 
-% &=  (1-\rho)(\rho \partial_\rho)^2   \sum_{n=0}^\infty \rho^n\\
-% &=  (1-\rho)(\rho \partial_\rho)^2   \frac1{1-\rho}\\
-% &=  (1-\rho)\rho \partial_\rho   \frac\rho{(1-\rho)^2}\\
-% &=  (1-\rho) \rho  \frac{1+\rho}{(1-\rho)^3} \\
-% &=  \rho  \frac{1+\rho}{(1-\rho)^2}.
-%   \end{split}
-% \end{equation*}
-Observe that here we just compute the second moment of a geometric
-random variable.
-
-
-Another way to derive the result is by noting that
-$\sum_{i=1}^n i= n(n+1)/2$ from which we get that
-$n^2 = -n + 2\sum_{i=1}^n i$. Substituting this relation into
-$\sum_n n^2 \rho^n$ leads to
-\begin{equation*}
-  \begin{split}
-    \sum_{n=0}^\infty n^2 \rho^n 
-&=    \sum_{n=0}^\infty \left(\sum_{i=1}^\infty 2i \1{i\leq n}  - n\right)\rho^n 
-=    \sum_{n=0}^\infty \sum_{i=0}^\infty 2i\1{i\leq n}\rho^n  - \sum_{n=0}^\infty n\rho^n \\
-&=    \sum_{i=0}^\infty 2i \sum_{n=i}^\infty \rho^n  - \frac{\E L}{1-\rho} 
-=    \sum_{i=0}^\infty 2i \rho^i \sum_{n=0}^\infty \rho^n  - \frac{\E L}{1-\rho} \\
-&=    \frac2{1-\rho} \sum_{i=0}^\infty i \rho^i   - \frac{\E L}{1-\rho} 
-=    \frac2{(1-\rho)^2} \E L - \frac{\E L}{1-\rho} \\
-&=    \frac{\E L}{1-\rho}  \left(\frac2{1-\rho}  - 1\right) 
-=    \frac{\E L}{1-\rho}  \frac{1+\rho}{1-\rho} \\
-&=    \frac{\rho}{1-\rho}  \frac{1+\rho}{(1-\rho)^2}.
-\end{split}
-\end{equation*}
-
-A third method is based on using the moment-generating functions: 
-\begin{equation*}
-  M(s) = \E{e^{sL}} = \sum_{n=0}^\infty e^{sn} p(n) = (1-\rho) \sum_{n=0}^\infty (e^s \rho)^n = \frac{1-\rho}{1-\rho e^s};
-\end{equation*}
-we assume that $s$ such that the summation converges.
-Then 
-\begin{equation*}
-  \E L = \left.\frac d {ds} M(s) \right|_{s=0} = \left.\frac{1-\rho}{(1-\rho e^s)^2} \rho e^s \right|_{s=0} = \frac{\rho}{1-\rho}, 
-\end{equation*}
-and 
-\begin{equation*}
-  \E{L^2}= \left.M(s)''\right|_{s=0} = \frac{2\rho^2}{(1-\rho)^2} + \frac{\rho}{1-\rho}.
-\end{equation*}
-With a a bit of algebra  the previous results follows.
-  \end{solution}
-\end{exercise}
-
-
-\begin{exercise}$(M/M/1$) 
-To see how large the variance of $L$ is, relative to the mean number of jobs
-in the system, we typically consider the square coefficient of
-variation (SCV). Show that the square coefficient of variation of $L$ is $1/\rho$. What do you conclude from this?
-\begin{hint}
-  SCV  $=\V X/(\E X)^2$. 
-\end{hint}
-  \begin{solution}
-To see how large this variance is, relative to the mean number of jobs
-in the system, we typically consider the square coefficient of
-variation (SCV). As $\E L = \rho/(1-\rho)$,
-\begin{equation*}
-  \frac{\V L}{(\E{L})^2} = \frac 1 \rho.
-\end{equation*}
-Thus, the SCV becomes smaller as $\rho$ increases, but does not become
-lower than $1$. So, realizing that the SCV of the exponential
-distribution is 1, the distribution of the number of jobs in the
-system has larger relative variability than the exponential
-distribution.
-  \end{solution}
-\end{exercise}
-
-When a problem is mainly of a computational type, I coded the solutions and show you all the steps in between so that you can check each step in your computations. As the code is typically nearly identical to the mathematical formulas, you should not have any difficulty
-understanding the code. (In the computations below I typically use the simplest, but often
-not the most efficient, code.)
+The problems below illustrate how to use Little's law and PASTA to analyze numerous queueing situations\footnote{When a problem is mainly of a computational type, I coded the solutions and show you all the steps in between so that you can check each step in your computations.
+As the code is typically nearly identical to the mathematical formulas, you should not have any difficulty understanding the code.
+(In the computations below I typically use the simplest, but often not the most efficient, code.)}.
 
 \begin{exercise}{\faPhoto}(Hall 5.2) \label{exer: Hall} After observing a single-server queue for
   several days, the following steady-state probabilities have been

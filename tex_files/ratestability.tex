@@ -6,36 +6,23 @@
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-In the analysis of any queueing process the first step should be to
-check the relations between the arrival, service and departure
-rates. The concept of rate is crucial because it captures our
-intuition that when, on the long run, jobs arrive faster than they can
-leave, the system must `explode'. Thus, the first performance measures
-we need to estimate when analyzing a queueing system are the arrival
-and departure rate, and then we need to check that the arrival rate is
-smaller than the departure rate. In particular, the load, defined as
-the ratio of the arrival rate and service rate is of importance. In
-this section we define and relate these concepts.  As a reminder, we
-keep the discussion in these notes mostly at an intuitive level, and
-refer to \cite{el-taha98:_sampl_path_analy_queuein_system} for proofs
-and further background.
+In the analysis of any queueing process the first step should be to check the relations between the arrival, service and departure rates.
+The concept of rate is crucial because it captures our intuition that when, on the long run, jobs arrive faster than they can leave, the system must `explode'.
+Thus, the first performance measures we need to estimate when analyzing a queueing system are the arrival and departure rate, and then we need to check that the arrival rate is smaller than the departure rate.
+In particular, the load, defined as the ratio of the arrival rate and service rate is of importance.
+In this section we define and relate these concepts.
+As a reminder, we keep the discussion in these notes mostly at an intuitive level, and refer to \cite{el-taha98:_sampl_path_analy_queuein_system} for proofs and further background.
 
 
-We first formalize the \emph{arrival rate} and \emph{departure rate}
-in terms of the \emph{counting processes} $\{A(t)\}$ and $\{D(t)\}$.
-The \recall{arrival rate} is the long-run average number of jobs that
-arrive per unit time, i.e.,
+We first formalize the \emph{arrival rate} and \emph{departure rate} in terms of the \emph{counting processes} $\{A(t)\}$ and $\{D(t)\}$.
+The \recall{arrival rate} is the long-run average number of jobs that arrive per unit time, i.e.,
 \begin{equation}
   \label{eq:3}
   \lambda = \lim_{t\to\infty} \frac{A(t)}t.
 \end{equation}
-We remark in passing that this limit does not necessarily exist if
-$A(t)$ is some pathological function. If, however, the inter-arrival
-times $\{X_k\}$ are the basic data, and $\{X_k\}$ are i.i.d.  and
-distributed as a generic random variable $X$ with finite mean $\E{X}$,
-we can construct $\{A_k\}$ and $\{A(t)\}$ as described in
-Section~\ref{sec:constr-gg1-queu}; the strong law of large numbers
-guarantees that the above limit exists.
+We remark in passing that this limit does not necessarily exist if $A(t)$ is some pathological function.
+If, however, the inter-arrival times $\{X_k\}$ are the basic data, and $\{X_k\}$ are \recall{independent and identically distributed (i.i.d.)}
+and distributed as a generic random variable $X$ with finite mean $\E{X}$, we can construct $\{A_k\}$ and $\{A(t)\}$ as described in Section~\ref{sec:constr-gg1-queu}; the strong law of large numbers guarantees that the above limit exists.
 
 \begin{exercise}
   Can you make an arrival process such that $A(t)/t$ does not have a

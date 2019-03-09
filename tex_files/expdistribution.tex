@@ -7,34 +7,17 @@
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-In the previous section we introduced the Poisson process as a natural model of the number of jobs arriving during intervals of time.  As we will see in the sections to come, the modeling and analysis of any queueing system is typically easier if we specify  the (probability)
-distribution of the inter-arrival times, i.e., the time between consecutive arrival epochs of jobs.
-A particularly fruitful model for the distribution of the inter-arrival times is the exponential distribution. Here we show how this relates to the Poisson distribution,  and we also derive many useful general probability concepts and apply these to the exponential distribution.  Then we use simulation to provide yet further motivation for the use of the exponential distribution as a useful model for inter-arrival times of customers.
+In Section~\ref{sec:poisson-distribution} we introduced the Poisson process as a natural model of the (random) number of jobs arriving during intervals of time.
+As we will see in the sections to come, we can model single-server queueing system in continuous time if we specify the (probability) distribution of the inter-arrival times, i.e., the time between consecutive arrival epochs of jobs.
+A particularly fruitful model for the distribution of the inter-arrival times is the exponential distribution because, as it turns out, it is intimately related to the Poisson distribution.
+Besides explaining this relation, we derive many useful properties of the exponential distribution, in particular that it is \emph{memory-less}.
 
-Let us assume that the inter-arrival times at a hospital, for instance, form a sequence $\{X_i\}$ of \recall{independent and identically distributed (i.i.d.)}
-random variables, and let us write $X$ for the generic random time between two successive arrivals.
-For many queueing systems, measurements of the inter-arrival times between consecutive arrivals show that it is reasonable to model an inter-arrival $X$ as an \recall{exponentially distributed} random variable, i.e.,
+We say that $X$ is an \recall{exponentially distributed} random variable with mean $1/\mu$ if 
 \begin{equation*}
-  \P{X \leq t} = 1- e^{-\lambda t}.
+  \P{X \leq t} = 1- e^{-\lambda t},
 \end{equation*}
-In the sequel we often write $X\sim \Exp(\lambda)$ to mean that~$X$ is
-exponentially distributed with rate~$\lambda$.  Recall that the
-constant $\lambda$ is called the \recall{arrival rate}.
+and then  we write $X\sim \Exp(\lambda)$.
 
-
-The exponential distribution  derives directly from the Poisson distribution. If there are no arrivals in some interval $[0,t]$, then it
-must be that $N(t) = 0$. Hence, for the first inter-arrival time $X_1$: %, i.e., the time until the first customer,  must be larger than $t$.  Therefore,
-\begin{equation*}
- \P{X_1> t} = \P{N(t) = 0} = e^{-\lambda t} \frac{(\lambda t)^0}{0!}= e^{-\lambda t}.
-\end{equation*}
-
-The Poisson process $N$ and exponentially distributed inter-arrival times are intimately related: A counting process $\{N(t)\}$ is a \recall{Poisson process} with rate $\lambda$ if and only if  the inter-arrival times $\{X_i\}$ are i.i.d. and exponentially distributed with mean $1/\lambda$,  in short, 
-\begin{equation*}
-X_i\sim \Exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t).
-\end{equation*}
-
-
-We next provide further relations between the Poisson distribution and the exponential distribution. 
 
 
 \begin{exercise}{\faFlask}
@@ -49,8 +32,9 @@ Suppose $\lambda=0$. Then $\P{X\leq t} = 1-e^{0} = 0$. In words, this would mean
 \end{solution}
 \end{exercise}
 
+
 \begin{exercise}{\faCalculator} \label{exer:lambda}
-  If the random variable $X\sim\Exp(\lambda)$, show that its mean $\E X = \frac{1}\lambda$. Interpret this result.
+  If the random variable $X\sim\Exp(\lambda)$, show that its mean $\E X = \frac{1}\lambda$. 
   \begin{hint}
  \begin{equation*}
     \E X = \int_0^\infty t f(t)\, \d t =
@@ -66,8 +50,6 @@ Suppose $\lambda=0$. Then $\P{X\leq t} = 1-e^{0} = 0$. In words, this would mean
 &=  -\lambda^{-1}\left. t e^{- t}\right|_0^\infty + \lambda^{-1} \int_0^\infty e^{- t} \d t\\
 &=  - \lambda^{-1} \left. e^{- t} \right|_0^\infty =  \frac1\lambda.
     \end{align*}
-
-For the interpretation, if jobs arrive at rate $\lambda$, the average time between two arrivals is $\lambda^{-1}$.
   \end{solution}
 \end{exercise}
 
@@ -122,16 +104,9 @@ Why do we require that $t < \lambda$ in the definition of $M_X(t)$?
 \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faFlask}
-  What is $M_X(0)?$
-  \begin{solution}
-    $M_X(0) = \E{e^{0 X}} = \E{e^0} = \E{1} = 1.$
-  \end{solution}
-\end{exercise}
 
 \begin{exercise}{\faCalculator}\label{ex:33}
- If $X$ is an exponentially distributed random variable with
-    parameter $\lambda$, show that its moment-generating function
+ If $X\sim\Exp(\lambda)$, show that its moment-generating function
     \begin{equation*}
     M_X(t) = \frac{\lambda}{\lambda-t}.
     \end{equation*}
@@ -152,7 +127,7 @@ Why do we require that $t < \lambda$ in the definition of $M_X(t)$?
   \end{exercise}
 
 \begin{exercise}{\faCalculator}\label{ex:21}
-    Use the moment-generating function to show that 
+Use the moment-generating function  of $X\sim\Exp(\lambda)$  to show that
     \begin{align*}
       \E{X} &=\frac1\lambda, & 
       \E{X^2} &=\frac2{\lambda^2}.
@@ -166,47 +141,13 @@ Use~\eqref{eq:69} and \eqref{eq:64}.
   \end{exercise}
 
 \begin{exercise}{\faCalculator}
-Use~\eqref{eq:62} to   prove that the square coefficient of variation (SCV) of $X$ is $C^2 =1$.  
+Use~\eqref{eq:62} to   prove that SCV $1$ for $X\sim\Exp(\lambda)$. 
 \begin{solution}
   By the previous problems, $\V X = 1/\lambda^2$ and $\E X=1/\lambda$, hence
   \begin{equation*}
     C^2= \frac{\V X}{(\E X)^2} = \frac{1/\lambda^2}{1/\lambda^2} = 1.
   \end{equation*}
 \end{solution}
-\end{exercise}
-
-A random variable $X$ is called \recall{memoryless} when it satisfies
-\begin{equation*}
-  \P{X > t+h | X>t} = \P{X>h}.
-\end{equation*}
-In words, the probability that $X$ is larger than some time $t+h$, conditional on it being larger than a time~$t$, is equal to the probability that $X$ is larger than $h$.
-
-\begin{exercise}{\faCalculator}
-  Show that $X\sim \Exp(\lambda)$ is  memoryless.  
-  \begin{hint}
-Condition on the event ${X>t}$. 
-  \end{hint}
-  \begin{solution}
-By  the definition of conditional probability
-\begin{equation*}
-  \P{X>t+h|X>t} = \frac{\P{X>t+h, X>t}}{\P{X>t}} = \frac{\P{X>t+h}}{\P{X>t}} = \frac{e^{-\lambda(t+h)}}{e^{-\lambda t}} = e^{-\lambda h} = \P{X>h}.
-\end{equation*}
-
-Thus, no matter how long we have been waiting for the next arrival to occur, the probability that it will occur in the next $h$ seconds remains the same.
-
-
-This property
-seems to be vindicated also in practice: suppose that a patient with a
-broken arm just arrived at the emergency room of a hospital, what does
-that tell us about the time the next patient will be brought in? Not
-much, as most of us will agree.
-
-
-As an aside,  it can be shown that only exponential random variables have the
-memoryless property. The proof of this fact requires quite some work;
-we refer the reader to the literature if s/he wants to check this, see
-e.g. \citet[Appendix 3]{yushkevich69:_markov_proces}.
-  \end{solution}
 \end{exercise}
 
 
@@ -217,127 +158,29 @@ e.g. \citet[Appendix 3]{yushkevich69:_markov_proces}.
 % variables to simulate queueing systems. 
 
 
-\begin{exercise}{\faCalculator}\label{ex:10}
-  If $X\sim\Exp(\lambda)$ and $S\sim\Exp(\mu)$, and $X$ and $S$ are
-  independent, show that 
-  \begin{equation*}
-Z=\min\{X,S\}\sim\Exp(\lambda+\mu),
-  \end{equation*}
-hence $\E Z = (\lambda+\mu)^{-1}$.
-\begin{hint}
-Use that if $Z=\min\{X, S\}>x$,  it then must be that $X>x$
-  and $S>x$. Then use independence of $X$ and $S$.
-\end{hint}
+We now provide a number of relations between the Poisson distribution and the exponential distribution  to conclude that a process $N_\lambda$ is a Poisson process with rate $\lambda$ iff the inter-arrival times $\{X_i\}$ between individual jobs are i.i.d. $\sim\Exp(\lambda)$. 
+
+
+\begin{exercise}{\faPhoto}
+  If $N_\lambda$ is a Poisson process with rate $\lambda$, show that the time $X_1$ to the first arriving job is $\Exp(\lambda$).
+  \begin{hint}
+    What is the meaning of $\P{N(t)=0}$?
+  \end{hint}
   \begin{solution}
-Use that $X$ and $S$ are independent to get
-    \begin{equation*}
-      \begin{split}
-      \P{Z>x} 
-&= \P{\min\{X,S\}>x} = \P{X>x\text{ and } S>x} = \P{X>x}\P{S>x} \\
-&= e^{-\lambda x} e^{-\mu x} = e^{-(\lambda+\mu)x}.
-      \end{split}
-    \end{equation*}
+If there are no arrivals in some interval $[0,t]$, then it
+must be that $N(t) = 0$. Hence, for the first inter-arrival time $X_1$: 
+\begin{equation*}
+ \P{X_1> t} = \P{N(t) = 0} = e^{-\lambda t} \frac{(\lambda t)^0}{0!}= e^{-\lambda t}.
+\end{equation*}
   \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faCalculator}\label{ex:3}
-   If $X\sim \Exp(\lambda)$, $S\sim\Exp(\mu)$, and $X$ and $S$ are independent, show that 
-    \begin{equation*}
-      \P{X\leq S} = \frac{\lambda}{\lambda+\mu}.
-    \end{equation*}
-    \begin{hint}
-     Define the joint distribution of $X$ and $S$ and carry out
-      the computations, or use conditioning, or use the result of the
-      previous exercise.
-    \end{hint}
-\begin{solution}
-There is more than one way to show that $\P{X\leq S} = \lambda/(\lambda+\mu)$.  
-
-Observe first that $X$ and $S$, being
-exponentially distributed, have a density. Moreover, as they are
-independent,  the joint density takes the form
-\begin{equation*}
-f_{X,S}(x,y) = f_X(x)f_S(y) = \lambda \mu e^{-\lambda x} e^{-\mu
-  y}.
-\end{equation*}
-With this,
-\begin{align*}
-    \P{X\leq S} 
-&= \E{\1{X\leq S}} \\
-&= \int_0^\infty \int_0^\infty \1{x\leq y} f_{X,S}(x,y)\, \d y\,\d x\\
-&= \lambda \mu \int_0^\infty \int_0^\infty \1{x\leq y} e^{-\lambda x} e^{-\mu y} \, \d y\,\d x\\
-&= \lambda \mu \int_0^\infty e^{-\mu y} \int_0^y e^{-\lambda x}\, \d x \, \d y \\
-&= \mu \int_0^\infty e^{-\mu y} (1-e^{-\lambda y})\,\d y\\
-&= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
-&= 1 - \frac{\mu}{\lambda + \mu} \\
-&= \frac{\lambda}{\lambda + \mu}.
-\end{align*}
-
-\begin{comment}
-Method 2. You only have to study this if you (want to) know about conditioning with respect to a random variable with a density, otherwise, skip it.  Start with  the law of total probability in the discrete case: 
-\begin{equation*}
-  \E{A} = \sum_{i=1}^k \E{A\given B_i} \P{B_i},
-\end{equation*}
-where $B_1,\ldots, B_k$ forms a set of events such that $\cup_{i=1}^k B_i$ is equal to the sample space, $B_i\cap B_j = \varnothing$ and $\P{B_i}>0$. Now in \cite{capinski03:_probab_probl} it is shown that this can be extended to random variables $X$ and $Y$ with densities $f_X, f_Y$. The result is
-\begin{equation*}
-  \E{Y} = \int_0^\infty \E{Y\given X=x} f_X(x)\d x.
-\end{equation*}
-Here, conceptually, $f_X(x)\d x \approx \P{X\in \d x}$ plays the role of $\P{B_i}$ in the discrete case above. With this notion, and observing that $f_S(s) = \mu e^{-\mu s} \d s$,
-\begin{equation*}
-\P{X\leq S} = \E{\1{X\leq S}} = \int_0^\infty \E{\1{X\leq S}| S=s} \mu e^{-\mu s} \,  \d s.
-\end{equation*}
-
-Now, $\E{\1{X\leq S}| S=s}$ is a tricky object, as $\P{S=s} = 0$, so that 
-$\E{\1{X\leq S}\given S=s}$ \emph{cannot} be defined as 
-\begin{equation*}
-\frac{\E{\1{X\leq s}}}{\P{S=s}}.
-\end{equation*}
-The way to proceed is to consider the conditional probability density function of $X$ given that $S=s$, which is defined as
-\begin{equation*}
-  f_{X|S}(x|s) = \frac{f_{X, S}( x, s)}{f_S(s)},
-\end{equation*}
-where, as before, $f_{X, S}( x, s)$ is the joint density of $X$ and $S$. With this, we can properly define
-\begin{equation*}
-  \begin{split}
-  \P{X\leq S| S=s } = \E{\1{X \leq S}| S=s } = \int_0^\infty \1{x \leq s}   f_{X|S}(x|s)\, \d x.
-  \end{split}
-\end{equation*}
-Using the definition of $f_{X|S}(x|s)$ and the independence of $X$ and $S$ it follows that
-\begin{equation*}
-  f_{X|S}(x|s) = \frac{f_{X, S}( x, s)}{f_S(s)} = \frac{\lambda e^{-\lambda x} \mu e^{-\mu s}}{\mu e^{-\mu s}} = \lambda e^{-\lambda x},
-\end{equation*}
-from which we get that 
-\begin{align*}
-  \E{\1{X \leq S}| S=s } 
-&= \int_0^\infty \1{x \leq s}   f_{X|S}(x|s)\, \d x \\
-&= \int_0^\infty \1{x \leq s} \lambda e^{-\lambda x}\, \d x \\
-&= \int_0^s \lambda e^{-\lambda x}\, \d x \\
-&= 1 - e^{-\lambda s}.
-\end{align*}
-
-And then,  
-\begin{equation*}
-  \begin{split}
-  \P{X\leq S} &= \int \P{X\leq S| S=s} \mu e^{-\mu s}\d s \\
-&= \mu \int_0^\infty \E{\1{X \leq S}| S=s } e^{-\mu s} \d s= \mu \int_0^\infty (1 - e^{-\lambda s})e^{-\mu s} \d s.
-  \end{split}
-\end{equation*}
-Straightforward integration gives the final result.
-\end{comment}
-\end{solution}
-\end{exercise}
-
-
-
-
   \begin{exercise}{\faCalculator}
-    Assume that the inter-arrival times $\{X_i\}$ are i.i.d. and
-    $X_i\sim\Exp(\lambda)$. Let
-    $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$. Show that %We do not need the MGF here.
+    Assume that inter-arrival times $\{X_i\}$ are i.i.d. and $\sim\Exp(\lambda)$. Let
+the arrival time of the $i$th job be  $A_i=\sum_{k=1}^i X_k$. Show that %We do not need the MGF here.
  \begin{equation*}
-\E{A_i} = \frac i\lambda,
+\E{A_i} = \frac i\lambda.
  \end{equation*}
- that is, the expected time to see $i$ jobs is $i/\lambda$.
  \begin{hint} What is $\E{X+Y}$ for some general random variables (each with finite mean)?
  \end{hint}
   \begin{solution}
@@ -354,11 +197,10 @@ The simplest way to obtain the answer is to use that the expectation is a linear
  Let $A_i$ be the arrival time of customer $i$ and set $A_0=0$.
     Assume that the inter-arrival times $\{X_i\}$ are i.i.d.  with
     exponential distribution with mean $1/\lambda$ for some
-    $\lambda>0$.  Prove that
+    $\lambda>0$.  Prove that $A_i$ has density
 \begin{equation*}
-f_{A_i}(t) = \lambda e^{-\lambda t} \frac{(\lambda t)^{i-1}}{(i-1)!}
+f_{A_i}(t) = \lambda e^{-\lambda t} \frac{(\lambda t)^{i-1}}{(i-1)!}.
 \end{equation*}
-is  the density of $A_i=X_1+X_2+\cdots+X_i=\sum_{k=1}^i X_k$ with $i\geq 1$. 
 \begin{hint}
  Check the result for $i=1$ by filling in $i=1$ (just to be
      sure that you have read the formula right), and compare the result
@@ -419,9 +261,8 @@ What if we would use the moment-generating function, as derived by the previous 
 \end{exercise}
 
 \begin{exercise}{\faCalculator}
-  If the inter-arrival times $\{X_i\}$ are i.i.d. and exponentially
-  distributed with mean $1/\lambda$, prove that the number $N(t)$ of
-  arrivals during interval $[0,t]$ is Poisson distributed.
+  If the inter-arrival times $\{X_i\}$ are i.i.d.
+  $\sim \Exp(\lambda)$, prove that the number $N(t)$ of arrivals during interval $[0,t]$ is Poisson distributed.
   \begin{hint}
   Realize that
     $\P{N(t)=k} = \P{A_k \leq t} - \P{A_{k+1} \leq t}$.
@@ -445,102 +286,149 @@ We are done.
     \end{solution}
 \end{exercise}
 
+We now introduce another fundamental concept.
+A random variable $X$ is called \recall{memoryless} when it satisfies
+\begin{equation*}
+  \P{X > t+h | X>t} = \P{X>h}.
+\end{equation*}
+In words, the probability that $X$ is larger than some time $t+h$, conditional on it being larger than a time~$t$, is equal to the probability that $X$ is larger than $h$.
 
-
-
-\begin{exercise}{\faFlask}
-  If $S\sim U[0,7]$ and $X\sim U[0,10]$, where $U[I]$ stands for the
-  uniform distribution concentrated on the interval $I$, compute
-  $\P{S-X\leq u}$, for  $S$ and $X$ independent.
+\begin{exercise}{\faCalculator}
+  Show that $X\sim \Exp(\lambda)$ is  memoryless.  
   \begin{hint}
-  This is elementary, hence it might appear trivial, but it's not\ldots In fact, I had a hard time finding a simple way to get the answer.  It is good practice to try yourself before looking at the answer. Check also the previous problem, and make a drawing of the region over which you have to integrate.
+Condition on the event ${X>t}$. 
   \end{hint}
   \begin{solution}
-The joint density of $S$ and $X$ is given by
+By  the definition of conditional probability
 \begin{equation*}
-  f_{XS}(x, s) = f_X(x) \cdot f_S(s) = \frac{1}{10} \1{0\leq x \leq 10}\cdot \frac 17 \1{0\leq s \leq 7},
+  \P{X>t+h|X>t} = \frac{\P{X>t+h, X>t}}{\P{X>t}} = \frac{\P{X>t+h}}{\P{X>t}} = \frac{e^{-\lambda(t+h)}}{e^{-\lambda t}} = e^{-\lambda h} = \P{X>h}.
 \end{equation*}
-since $X$ and $S$ are independent. 
-Thus, 
+
+Thus, no matter how long we have been waiting for the next arrival to occur, the probability that it will occur in the next $h$ seconds remains the same.
+
+
+This property
+seems to be vindicated also in practice: suppose that a patient with a
+broken arm just arrived at the emergency room of a hospital, what does
+that tell us about the time the next patient will be brought in? Not
+much, as most of us will agree.
+
+
+As an aside,  it can be shown that only exponential random variables have the
+memoryless property. The proof of this fact requires quite some work;
+we refer the reader to the literature if s/he wants to check this, see
+e.g. \citet[Appendix 3]{yushkevich69:_markov_proces}.
+  \end{solution}
+\end{exercise}
+
+
+\begin{exercise}{\faCalculator}\label{ex:10}
+  If $X\sim\Exp(\lambda)$ and $S\sim\Exp(\mu)$, and $X$ and $S$ are
+  independent, show that 
+  \begin{equation*}
+Z=\min\{X,S\}\sim\Exp(\lambda+\mu),
+  \end{equation*}
+hence $\E Z = (\lambda+\mu)^{-1}$.
+\begin{hint}
+Use that if $Z=\min\{X, S\}>x$,  it then must be that $X>x$
+  and $S>x$. Then use independence of $X$ and $S$.
+\end{hint}
+  \begin{solution}
+Use that $X$ and $S$ are independent to get
+    \begin{equation*}
+      \begin{split}
+      \P{Z>x} 
+&= \P{\min\{X,S\}>x} = \P{X>x\text{ and } S>x} = \P{X>x}\P{S>x} \\
+&= e^{-\lambda x} e^{-\mu x} = e^{-(\lambda+\mu)x}.
+      \end{split}
+    \end{equation*}
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}{\faCalculator}\label{ex:3}
+   If $X\sim \Exp(\lambda)$, $S\sim\Exp(\mu)$, and $X$ and $S$ are independent, show that 
+    \begin{equation*}
+      \P{X\leq S} = \frac{\lambda}{\lambda+\mu}.
+    \end{equation*}
+    \begin{hint}
+     Define the joint distribution of $X$ and $S$ and carry out
+      the computations, or use conditioning, or use the result of the
+      previous exercise.
+    \end{hint}
+\begin{solution}
+There is more than one way to show that $\P{X\leq S} = \lambda/(\lambda+\mu)$.  
+
+Observe first that $X$ and $S$, being
+exponentially distributed, have a density. Moreover, as they are
+independent,  the joint density takes the form
+\begin{equation*}
+f_{X,S}(x,y) = f_X(x)f_S(y) = \lambda \mu e^{-\lambda x} e^{-\mu
+  y}.
+\end{equation*}
+With this,
+\begin{align*}
+    \P{X\leq S} 
+&= \E{\1{X\leq S}} \\
+&= \int_0^\infty \int_0^\infty \1{x\leq y} f_{X,S}(x,y)\, \d y\,\d x\\
+&= \lambda \mu \int_0^\infty \int_0^\infty \1{x\leq y} e^{-\lambda x} e^{-\mu y} \, \d y\,\d x\\
+&= \lambda \mu \int_0^\infty e^{-\mu y} \int_0^y e^{-\lambda x}\, \d x \, \d y \\
+&= \mu \int_0^\infty e^{-\mu y} (1-e^{-\lambda y})\,\d y\\
+&= \mu \int_0^\infty (e^{-\mu y} - e^{-(\lambda +\mu)y} ) \,\d y\\
+&= 1 - \frac{\mu}{\lambda + \mu} \\
+&= \frac{\lambda}{\lambda + \mu}.
+\end{align*}
+
+\begin{comment}
+Method 2. You only have to study this if you (want to) knowpnnn about conditioning with respect to a random variable with a density, otherwise, skip it.  Start with  the law of total probability in the discrete case: 
+\begin{equation*}
+  \E{A} = \sum_{i=1}^k \E{A\given B_i} \P{B_i},
+\end{equation*}
+where $B_1,\ldots, B_k$ forms a set of events such that $\cup_{i=1}^k B_i$ is equal to the sample space, $B_i\cap B_j = \varnothing$ and $\P{B_i}>0$. Now in \cite{capinski03:_probab_probl} it is shown that this can be extended to random variables $X$ and $Y$ with densities $f_X, f_Y$. The result is
+\begin{equation*}
+  \E{Y} = \int_0^\infty \E{Y\given X=x} f_X(x)\d x.
+\end{equation*}
+Here, conceptually, $f_X(x)\d x \approx \P{X\in \d x}$ plays the role of $\P{B_i}$ in the discrete case above. With this notion, and observing that $f_S(s) = \mu e^{-\mu s} \d s$,
+\begin{equation*}
+\P{X\leq S} = \E{\1{X\leq S}} = \int_0^\infty \E{\1{X\leq S}| S=s} \mu e^{-\mu s} \,  \d s.
+\end{equation*}
+
+Now, $\E{\1{X\leq S}| S=s}$ is a tricky object, as $\P{S=s} = 0$, so that 
+$\E{\1{X\leq S}\given S=s}$ \emph{cannot} be defined as 
+\begin{equation*}
+\frac{\E{\1{X\leq s}}}{\P{S=s}}.
+\end{equation*}
+The way to proceed is to consider the conditional probability density function of $X$ given that $S=s$, which is defined as
+\begin{equation*}
+  f_{X|S}(x|s) = \frac{f_{X, S}( x, s)}{f_S(s)},
+\end{equation*}
+where, as before, $f_{X, S}( x, s)$ is the joint density of $X$ and $S$. With this, we can properly define
 \begin{equation*}
   \begin{split}
-  \P{S-X\leq u} &= \E{\1{S-X\leq u}} = \frac{1}{70}\int_0^{10} \int_0^7 \1{s-x\leq u} \d s \d x \\
-&= \frac{1}{70}\int_0^{10} \int_0^7 \1{s\leq x+u} \d s \d x.
+  \P{X\leq S| S=s } = \E{\1{X \leq S}| S=s } = \int_0^\infty \1{x \leq s}   f_{X|S}(x|s)\, \d x.
   \end{split}
 \end{equation*}
-
-Now we need to chop up the domain of $\P{S-X\leq u}$, for which we use the figure below.
-
-%\begin{figure}[ht]
-\begin{center}
-\begin{tikzpicture}[scale=0.7]
-%\draw[[-{Triangle[open]},dotted] (0,10)--(8.5,10);
-\draw (0,-8)--(0,8);
-\node[right] at (11,0) {$x$};
-\draw (-0.1,0)--(11,0);
-\node[above] at (0,8) {$s$};
-\draw[line width=0.7mm] (0,7)--(10,7);
-\draw[line width=0.7mm] (10,0)--(10,7);
-\draw[line width=0.7mm] (0,0)--(10,0);
-\draw[line width=0.7mm] (0,0)--(0,7);
-\node[below] at (10,0) {10};
-\node[below] at (7,0) {7};
-\node[below] at (3,0) {3};
-\node[left] at (0,7) {7};
-\draw (0,-7)--(11,4);
-\node[left] at (0,-7) {$u=-7$};
-\node at (9,0.5) {$s\leq x - 7$};
-\draw (0,-3)--(11,8);
-\node[left] at (0,-3) {$u=-3$};
-\node at (6,0.5) {$s\leq x - 3$};
-\draw (0,0)--(8,8);
-\node[left] at (0,0) {$u=0$};
-\node at (2,0.5) {$s\leq x$};
-\draw (0,3)--(5,8);
-\node[left] at (0,3) {$u=3$};
-\node at (1.5,3) {$s\leq x+3$};
-\end{tikzpicture}
-\end{center}
-%\caption{Computing the probability that $S-X\leq u$.}
-%\label{fig:P_S_X}
-%\end{figure}
-
-
-It is clear that  the indicated rectangle has no overlap with the set of points $(x,s)$ such that $s\leq u + x$ for $u<-10$. (To see this, draw the line $s=x-10$ in the figure.) At $u=-10$, the overlap is a single point, at $(10,0)$. Thus, 
+Using the definition of $f_{X|S}(x|s)$ and the independence of $X$ and $S$ it follows that
 \begin{equation*}
-\P{S-X \leq u}=0, \quad \text{for } u\leq -10.
+  f_{X|S}(x|s) = \frac{f_{X, S}( x, s)}{f_S(s)} = \frac{\lambda e^{-\lambda x} \mu e^{-\mu s}}{\mu e^{-\mu s}} = \lambda e^{-\lambda x},
 \end{equation*}
+from which we get that 
+\begin{align*}
+  \E{\1{X \leq S}| S=s } 
+&= \int_0^\infty \1{x \leq s}   f_{X|S}(x|s)\, \d x \\
+&= \int_0^\infty \1{x \leq s} \lambda e^{-\lambda x}\, \d x \\
+&= \int_0^s \lambda e^{-\lambda x}\, \d x \\
+&= 1 - e^{-\lambda s}.
+\end{align*}
 
-When $u\in[-10, -3]$ we need to integrate over the triangle that results from cutting the line $s=x+u$ with the rectangle. The area is 
+And then,  
 \begin{equation*}
-70\, \P{S-X \leq u}= \frac{(10+u)^2}2, \quad \text{for } -10 \leq u\leq -3,
+  \begin{split}
+  \P{X\leq S} &= \int \P{X\leq S| S=s} \mu e^{-\mu s}\d s \\
+&= \mu \int_0^\infty \E{\1{X \leq S}| S=s } e^{-\mu s} \d s= \mu \int_0^\infty (1 - e^{-\lambda s})e^{-\mu s} \d s.
+  \end{split}
 \end{equation*}
-where we multiply with $70$ to get the normalization right. 
-
-When $u\in[-3, 0]$, we integrate over a parallelogram with base $3+u$ and height $7$ plus the triangle below the line $s=x-3$. The area is 
-\begin{equation*}
-70\, \P{S-X \leq u}= (3+u)7 + \frac{(10-3)^2}2=7u + \frac{91}2, \quad \text{for } -3 \leq u\leq 0.
-\end{equation*}
-
-For $u\in[0, 7]$, we integrate over the trapezoid that results from intersecting the set $\{(x,s) : x \leq s \leq s + u\}$ and the rectangle plus the parallelogram plus the triangle below the line $s=x-3$. The area is 
-\begin{equation*}
-70\, \P{S-X \leq u}=  \frac{7^2}2 - \frac{(7-u)^2}{2} + 3\cdot 7 + \frac{49}2 = 7 u - \frac{u^2}2 + \frac{91}2, \quad \text{for } 0\leq u\leq 7.
-\end{equation*}
-
-Finally, for $u\geq 7$, the set $s\leq x+u$ covers the entire rectangle. Hence, 
-\begin{equation*}
-70\, \P{S-X \leq u}=  70, \quad \text{for } 7\leq u.
-\end{equation*}
-
-Given the amount of effort I had to put into getting this answer, I wanted to check it. So I went to  Wolfram Alpha (which is a great site for symbolic computations), and typed this: 
-\begin{verbatim}
-\int_{0}^{10} \int_0^7 Boole[s<= x + u]  ds dx,
-\end{verbatim}
-so, once you know \LaTeX\/ you can use Wolfram Alpha.  Wolfram Alpha turned it to 
-\begin{verbatim}
-Integrate[Boole[s <= u + x], {x, 0, 10}, {s, 0, 7}]
-\end{verbatim}
-If you fill this in at Wolfram, you'll get the results that we obtained above in seconds, rather than in one hour or so (depending on your proficiency with carrying out integrals).
+Straightforward integration gives the final result.
+\end{comment}
 \end{solution}
 \end{exercise}
 

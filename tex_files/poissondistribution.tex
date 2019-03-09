@@ -122,9 +122,9 @@ We say that the random variable $N(t)$ is \recall{Poisson distributed} when
 e^{-\lambda t} \frac{(\lambda t)^k}{k!}, 
 \end{equation}
 and then we write $N(t)\sim P(\lambda t)$.
-Moreover, we call the process $N_\lambda=\{N(t)\}$ a Poisson process when $N_\lambda$ is stationary, has independent increments, and its elements $N(t)\sim P(\lambda t)$ for all $t$.
-Observe that the process $N_\lambda$  is a much more complicated object than a Poisson distributed random variable.
-The process is an uncountable set of random variables indexed by $t\in \R^+$ not just \emph{one} random variable.
+Moreover, we call the process $N_\lambda=\{N(t)\}$ a \recall{Poisson process} with rate $\lambda$ when $N_\lambda$ is stationary, has independent increments, and its elements $N(t)\sim P(\lambda t)$ for all $t$.
+Observe that the process $N_\lambda$ is a much more complicated object than a Poisson distributed random variable.
+The process is an uncountable set of random variables indexed by $t\in \R^+$, not just \emph{one} random variable.
 
 
 In the remainder of this section we derive a number of  properties of the Poisson process that we will use time and again.
@@ -224,7 +224,7 @@ hence $\E{(N(t))^2} = M''(0) = \lambda t + (\lambda t)^2$. And thus,
 \end{solution}
 \end{exercise}
 
-Define the \emph{square coefficient  of variation (SCV)} of a random variable~$X$ as 
+Define the \recall{square coefficient  of variation} (\recall{SCV}) of a random variable~$X$ as 
 \begin{equation}\label{eq:62}
   C^2= \frac{\V X}{(\E X)^2}.
 \end{equation}
