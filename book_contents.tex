@@ -6,27 +6,7 @@
 
 Changes:
 \begin{itemize}
-\item Many dots and commas. 
-\item Eq. ~(\ref{eq:60}), changed to $t<\lambda$. 
-\item Ex.~\ref{ex:21}, notation repaired.
-\item Caption of Figure~\ref{fig:uniformfew} now clarifies the meaning of the height of a point. 
-\item Bounds in Ex.~\ref{ex:19}.
-\item Ex. 1.5.6 and 1.5.17 removed as they are  addressed in the tutorials. 
-\item (20190208) Limiting value in Ex.~\ref{ex:20}. 
-\item (20190211) Ex.~\ref{ex:1} replaced the conditioning argument by a more direct reasoning.
-\item (20190212) Ex.~\ref{ex:22}: clearer formulation.
-\item (20190212) Ex.~\ref{ex:22} replaced by a more relevant question.
-\item (20190213) Former exercise 1.2.10 removed. This overlapped with the tutorial, hence is no longer relevant in the book. Note that the new exercise 1.2.10 (after renumbering by latex) is still relevant. 
-\item (20190213) Former exercise 1.5.8 removed.
-\item 20190225: Eq.~(\ref{eq:20}), added a 1.
-\item 20190225: Moved Exercise \ref{ex:25} from Section~\ref{sec:limits-of-emperical} to Section~\ref{sec:constr-gg1-queu} and completed its answer.
-\item 20190225:  Exercise \ref{ex:26}, answer improved.
-\item 20190226:  Updated the organization of Section~\ref{sec:level-cross-balance}, contents remain unchanged (up to some simple rewording of sentences).
-\item 20190227:  Made a start with classifying exercises, see the intro for the meaning of the symbols.
-\item 20190304: Changed the wording of Exercise~\ref{ex:11}. 
-\item 20190304: Removed a double (hence superfluous) exercise in Section~\ref{sec:poisson-arrivals-see}. 
-\item 20190304: Exercise~\ref{ex:30} is now also obligatory reading.
-\item 20190304: Exercise~\ref{exer: Hall} completed.
+\item
 \end{itemize}
 
 \tableofcontents
@@ -34,22 +14,23 @@ Changes:
 
 \input{tex_files/intro}
 
-\chapter{Single-Station Queueing Systems}
-%next year
-%\chapter{Construction and simulation of queueing system}
+
+\chapter{Construction and Simulation of Queueing Systems}
 
 \label{cha:single-stat-queu}
+
 \input{tex_files/single_station_intro.tex}
+
+\input{tex_files/preliminaries.tex}
 \input{tex_files/poissondistribution.tex}
-\input{tex_files/expdistribution.tex}
-\input{tex_files/kendall.tex}
 \input{tex_files/constructiondiscretetime.tex}
+\input{tex_files/expdistribution.tex}
 \input{tex_files/constructioncontinuoustime.tex}
+
+\chapter{Analytical Models}
+\input{tex_files/analytic_intro.tex}
+\input{tex_files/kendall.tex}
 \input{tex_files/random_walk.tex}
-
-%next year
-%\chapter{Analytical models}
-
 \input{tex_files/ratestability.tex}
 \input{tex_files/empiricalperfmeasures.tex}
 \input{tex_files/levelcrossing.tex}
@@ -66,8 +47,7 @@ Changes:
 %\input{tex_files/mg1density.tex}
 
 
-%next year
-%\chapter{Approximate models}
+\chapter{Approximate Models}
  \input{tex_files/gg1.tex}
 \input{tex_files/setup_times.tex}
 \input{tex_files/adjustments.tex}
@@ -75,7 +55,7 @@ Changes:
 %\input{tex_files/process_batches.tex}
 
 
-\chapter{Open Queueing Networks}
+\chapter{Queueing Networks}
 \label{sec:notes-relat-chapt2}
 
 %\input{tex_files/deterministic_networks.tex}
@@ -83,19 +63,21 @@ Changes:
 \input{tex_files/tandem.tex}
 %\input{tex_files/open_general.tex}
 
-
-\chapter{Closed Queueing Networks}
-\label{ch3}
-
-
 \input{tex_files/gordon_newell.tex}
 %\input{tex_files/convolution.tex}
 \input{tex_files/mva.tex}
 %\input{tex_files/mda.tex}
 
+
+\appendix
+\chapter{Appendix}
+\label{cha:appendix-2}
+\input{tex_files/preliminaries.tex}
+
 \bibliographystyle{plainnat}
 \bibliography{biblio_nicky}
 \addcontentsline{toc}{chapter}{Bibliography}
+
 
 \chapter*{Notation}
 \label{sec:notation}
@@ -105,6 +87,8 @@ Changes:
 \chapter*{Formula Sheet}
 \addcontentsline{toc}{chapter}{Formula Sheet}
 \input{tex_files/formula_sheet}
+
+
 
 \cleardoublepage
 \phantomsection

@@ -13,3 +13,4 @@ chunks/*
 *.pytxcode
 pythontex-files*
 progs/testing_ground.pdf
+*.pdf
