@@ -3,25 +3,49 @@
   Processes}
 \label{sec:constr-discr-time}
 
-\subsection*{Theory}
-
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
+We start with a description of a case to provide motivation to study queueing systems.
+Then we develop a set of recursions of fundamental importance to construct and simulate queueing systems.
+With these recursions we analyze the efficacy of several suggestions to improve the case system.
+We close the section with a large number of exercises to develop recursions for a large number of different queueing systems, and illustrate how powerful this approach is.
 
-To provide real-life motivation to analyze queueing systems we discuss a case.  As this case is too hard to analyze by mathematical means,  we need to develop a model to simulate the queueing system in discrete time.  Interestingly, the structure of the simulation is very simple so that  it is also  an exceedingly convincing tool to communicate the results of an analysis of a queueing system to managers (and the like).  
+\subsection*{Case}
+\label{sec:case}
 
-Let us start with discussing the essentials of the simulation of a queueing system. The easiest way  to construct queueing processes is to `chop up' time in periods and develop recursions for the behavior of the queue from period to period. Note that the length of such a period depends on the
-case for which the model is developed.  For instance, to study queueing processes at a supermarket, a period can consist of $5$ minutes, while for a production environment, e.g., a job shop, it can
-be a day, or even a week.
+At a mental health department five psychiatrists do intakes of future patients to determine the best treatment process for the patients.
+There are complaints about the time patients have to wait for their first intake; the desired waiting time is around two weeks, but the realized waiting time is sometimes more than three months.
+The organization considers this to be unacceptably long, but\ldots what to do about it?
 
-Using fixed sized periods has the advantage that we do not have to
-specify specific inter-arrival times or service times of individual
-customers. Only the number of arrivals in a period and the number of
-potential services are relevant, which is useful since in many
-practical settings, e.g., production environments, it is easier to
-provide data in these terms than in terms of inter-arrival and service
-times. 
+To reduce the waiting times the five psychiatrists have various
+suggestions. 
+\begin{enumerate}
+\item Not all psychiatrists have the same amount of time available per week to do intakes.
+  This is not a problem during weeks when all psychiatrists are present; however, psychiatrists tend to take holidays, visit conferences, and so on.
+  So, if the psychiatrist with the most intakes per week would go on leave, this might affect the behavior of the queue length considerably.
+  This raises the question about the difference in allocation of capacity allotted to the psychiatrists.
+  What are the consequences on the distribution and average of the waiting times if they would all have the same weekly capacity?
+\item The psychiatrists tend to plan their holidays after each other, to reduce the variation in the service capacity.
+  What if they would synchronize their holidays, to the extent possible, rather than spread their holidays?
+\item Finally, suppose the psychiatrists would do 2 more intakes per week in busy times and 2 fewer in quiet weeks.
+  Assuming that the system is stable, i.e., the average service capacity is larger than the average demand, then on average the psychiatrists would not do more intakes, i.e., their workload would not increase, but the queue length may be controlled better.
+\end{enumerate}
+
+As this case is too hard to analyze by mathematical means,  we need to develop a model to simulate the queueing system in discrete time. 
+With this simulator we can evaluate the effect of these suggestions on reducing the queueing dynamics.
+%we need to develop a simple simulator with which we can make a number of plots.
+Interestingly, the structure of the simulation is very simple, so simple that it is also an exceedingly convincing tool to communicate the results of an analysis of a queueing system to managers (and the like).
+
+\subsection*{Recursions}
+
+Let us start with discussing the essentials of the simulation of a queueing system.
+The easiest way to construct queueing processes is to `chop up' time in periods and develop recursions for the behavior of the queue from period to period.
+Using fixed sized periods has the advantage that we do not have to specify specific inter-arrival times or service times of individual customers; only the number of arrivals in a period and the number of potential services are relevant.
+Note that the length of such a period depends on the context for which the model is developed.
+For instance, to study queueing processes at a supermarket, a period can consist of $5$ minutes, while for a production environment, e.g., a job shop, it can be a day, or even a week.
+
+%, which is useful since in many practical settings, e.g., production environments, it is easier to provide data in these terms than in terms of inter-arrival and service times.
 
 Let us define:
 \begin{equation}
@@ -61,7 +85,7 @@ Like this, if we are given $Q_0$,  we can obtain $Q_1$, and from this  $Q_2$, an
 
 Note that in this type of queueing system there is not a job in service, we only count the jobs in the system at the end of a period. Thus, the number of jobs in the system and in queue coincide; in this section `queue length' henceforth means the number of jobs in the system.
 
-\begin{exercise}
+\begin{exercise}{\faFlask}
 Suppose that $c_k= 7$ for all $k$, and $a_1=5$, $a_2=4$
 and $a_3=9$; also $Q_0=8$. What are $d_k$ and $Q_k$ for $k\geq 1$? 
 \begin{solution}
@@ -70,7 +94,7 @@ $Q_2=6-6+4=4$, $d_3 = 4$, $Q_3=4-4+9=9$, and so on.
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faFlask}
  What is the interpretation of setting
     $d_k = \min\{Q_{k-1}+a_k,  c_k\}$ rather than definition~\eqref{eq:d_k}?
 \begin{solution}
@@ -82,209 +106,21 @@ $Q_2=6-6+4=4$, $d_3 = 4$, $Q_3=4-4+9=9$, and so on.
 \end{exercise}
 
 
-Of course we are not going to carry out these computations by
-hand. Typically we use company data about the sequence of arrivals
-$\{a_k\}_{k=1,2,\ldots}$ and the capacity $\{c_k\}_{k=1,\ldots}$ and
-feed this data into a computer to carry out the
-recursions~\eqref{eq:31}. If we do not have sufficient data we make a
-probability model for these data and use the computer to generate
-random numbers with, hopefully, similar characteristics as the real
-data. At any rate, from this point on we assume that it is easy, by
-means of computers, to obtain numbers $a_1,\ldots, a_n$ for
-$n\gg 1000$, and so on.
+Of course we are not going to carry out these computations by hand.
+Typically we use company data to model the arrival process $\{a_k\}_{k=1,2,\ldots}$ and the capacity $\{c_k\}_{k=1,\ldots}$ and feed this data into a computer to carry out the recursions~\eqref{eq:31}.
+If we do not have sufficient data we make a probability model for these data and use the computer to generate random numbers with, hopefully, similar characteristics as the real data.
+At any rate, from this point on we assume that it is easy, by means of computers, to obtain numbers $a_1,\ldots, a_n$ for $n\gg 1000$, and so on.
 
 
-\begin{exercise}
-  Implement Eqs.~\eqref{eq:31} in Python and simulate a
-  simple single-server queueing system. Assume that the $a_k \sim P(20)$, i.e., Poisson distributed with $\lambda=20$, and $c_k =\mu=21$. Make a plot of the queue length process $Q$, and compute the mean and standard variance of $Q$. Compute the fraction of periods in which the queue length exceeds some threshold, 20, say. 
-  \begin{solution}
-    Below I fix the seed of the random number generator to ensure that
-    I always get the same results from the simulator.  The arrival
-    process is Poisson, and the number of services is fixed to 21 per
-    period. I use \pyv{Q = np.zeros_like(a)} to make an array of the
-    same size as the number of arrival $a$ initially set to zeros. The
-    rest of the code is nearly identical to the formulas in the text.
+\subsection*{Case analysis}
+\label{sec:case-analysis}
 
-\begin{pyconsole}
-import numpy as np
+We now show how to apply~\eqref{eq:30} and~\eqref{eq:31} to a the mental health department.
 
-np.random.seed(3) # fix the seed
-
-labda = 20
-mu = 21
-\end{pyconsole}
-
-These are the number of arrivals in each period.
-
-\begin{pyconsole}
-a = np.random.poisson(labda, 10)
-a
-\end{pyconsole}
-
-The number of potential services
-\begin{pyconsole}
-c = mu * np.ones_like(a)
-c
-\end{pyconsole}
-
-Now for the queueing recursions:
-
-\begin{pyconsole}
-Q = np.zeros_like(a)
-d = np.zeros_like(a)
-Q[0] = 10  # initial queue length
-
-for k in range(1, len(a)):
-    d[k] = min(Q[k - 1], c[k])
-    Q[k] = Q[k - 1] - d[k] + a[k]
-
-\end{pyconsole}
-
-Here are the departures and queue lengths for each period:
-\begin{pyconsole}
-d
-Q
-\end{pyconsole}
-
-
-Suppose we define loss as the number of periods in which the queue length exceeds
-20. Of course, any other threshold can be taken. Counting the number
-of such periods is very easy in Python: \pyv{(Q>20)} gives all
-entries of $Q$ such $Q>20$, the function \pyv{sum()} just adds
-them. 
-
-\begin{pyconsole}
-loss = (Q > 20)
-loss
-loss.sum()
-\end{pyconsole}
-
-Now all statistics:
-
-\begin{pyconsole}
-d.mean()
-Q.mean()
-Q.std()
-(Q > 20).sum()
-\end{pyconsole}
-  
-
-Since this is a small example, the mean number of departures, i.e.,
-\pyv{d.mean()}, is not equal to the arrival rate $\lambda$.  
-Likewise for the computation of the mean, variance, and other
-statistical functions. 
-
-Now I am going to run the same code, but for a larger instance. 
-
-\begin{pyconsole}
-num = 1000
-a = np.random.poisson(labda, num)
-c = mu * np.ones_like(a)
-Q = np.zeros_like(a)
-d = np.zeros_like(a)
-Q[0] = 10  # initial queue length
-
-for k in range(1, len(a)):
-    d[k] = min(Q[k - 1], c[k])
-    Q[k] = Q[k - 1] - d[k] + a[k]
-
-d.mean()
-Q.mean()
-Q.std()
-(Q > 30).sum()/num * 100
-\end{pyconsole}
-
-
-I multiply with 100 to get a percentage. Clearly, many jobs see a long
-queue, the mean is already some 28 jobs. For this arrival rate a
-service capacity of $\mu=21$ is certainly too small. 
-
-
-Hopefully you
-understand from this discussion that once you have the recursions to
-construct/simulate the queueing process, you are `in business'. The
-rest is easy: make plots, do some counting, i.e., assemble statistics,
-vary parameters for sensitivity analysis, and so on.
-
-
-\end{solution}
-\end{exercise}
-
-
-\begin{exercise}
-  Change the service process of the previous exercise from $c_k =\mu=21$ to $c_k\sim P(\mu)$ with $\mu=21$. What is the influence of the higher variability of the service process on the queue length? 
-  \begin{solution}
-In this  example the number of jobs served per day is $\sim P(21)$, so the service rate is
-still $21$, but the period capacity $c$ is a Poisson random variable. 
-
-\begin{pyconsole}
-c = np.random.poisson(mu, num)
-Q = np.zeros_like(a)
-d = np.zeros_like(a)
-Q[0] = 10  # initial queue length
-
-for k in range(1, len(a)):
-    d[k] = min(Q[k - 1], c[k])
-    Q[k] = Q[k - 1] - d[k] + a[k]
-
-d.mean()
-Q.mean()
-Q.std()
-(Q > 30).sum()/num * 100
-\end{pyconsole}
-
-Comparing this to the result of the previous exercise in which the service capacity in each period was constant $c=21$, we see that the average waiting time increases, just as the number of periods in which the queue length exceeds 30.
-Clearly, variability in service capacity does not improve the performance of the queueing system, quite on the contrary, it increases.
-In later sections we will see why this is so.
-  \end{solution}
-\end{exercise}
-
-\subsection*{Case}
-\label{sec:case}
-
-
-
-We now show how to apply~\eqref{eq:30} and~\eqref{eq:31} to a real case. At a mental health department five psychiatrists do intakes of future
-patients to determine the best treatment process for the patients.
-There are complaints about the time patients have to wait for their
-first intake; the desired waiting time is around two weeks, but the
-realized waiting time is sometimes more than three months. The
-organization considers this to be unacceptably long, but\ldots what to do about it?
-
-To reduce the waiting times the five psychiatrists have various
-suggestions. 
-\begin{enumerate}
-\item Not all psychiatrists have the same amount of time available per
-  week to do intakes. This is not a problem during weeks when all psychiatrists are
-  present; however, psychiatrists tend to take holidays, visit
-  conferences, and so on. So, if the psychiatrist with the most
-  intakes per week would go on leave, this might affect the behavior
-  of the queue length considerably. This raises the question about the difference
-  in allocation of capacity allotted to the psychiatrists. What are
-  the consequences on the distribution and average of the waiting
-  times if they would all have the same weekly capacity?
-\item The psychiatrists tend to plan their holidays after each
-  other, to reduce the variation in the service capacity. What if they
-  would synchronize their holidays, to the extent possible, rather
-  than spread their holidays? 
-\item Finally, suppose the psychiatrists would do 2 more intakes per
-  week in busy times and 2 fewer in quiet weeks. Assuming that the
-  system is stable, i.e., the average service capacity is larger than the average demand,
-  then on average the psychiatrists would not do more intakes, i.e.,
-  their workload would not increase, but the queue length may be
-  controlled better.
-\end{enumerate}
-
-
-To evaluate the effect of these suggestions on reducing the queueing
-dynamics we develop a simple simulator with which we can make a number of plots. 
-As a first step we model the arrival process of patients as a Poisson
-process, cf., Section~\ref{sec:poisson-distribution}. The duration of
-a period is taken to be a week. The average number of arrivals per
-period, based on data of the company, was slightly less than~12 per
-week; in the simulation we set it to $\lambda= 11.8$ per week. We
-model the capacity in the form of a matrix such that row $i$
-corresponds to the weekly capacity of psychiatrist $i$:
+As a first step we model the arrival process of patients as a Poisson process, cf., Section~\ref{sec:poisson-distribution}.
+The duration of a period is taken to be a week.
+The average number of arrivals per period, based on data of the company, was slightly less than~12 per week; in the simulation we set it to $\lambda= 11.8$ per week.
+We model the capacity in the form of a matrix such that row $i$ corresponds to the weekly capacity of psychiatrist $i$:
 \begin{equation*}
 C = 
   \begin{pmatrix}
@@ -336,13 +172,10 @@ zero, i.e., $C_{i,5}=C_{i,10}=\cdots=0$ for week $5$, $10$, and so
 on. Note that all these variations in holiday schemes result in the
 same average capacity.
 
-Now that we have modeled the arrivals and the capacities, we can use
-the recursions~\eqref{eq:31} to simulate the queue length process for
-the four different scenarios proposed by the psychiatrists, unbalanced
-versus balanced capacity, and spread out holidays versus simultaneous
-holidays.  The results are shown in Figure~\ref{fig:balanced}. It is
-apparent that suggestions 1 and 2 above do not significantly affect
-the behavior of the queue length process.  
+Now that we have modeled the arrivals and the capacities, we can use the recursions~\eqref{eq:31} to simulate the queue length process for the four different scenarios proposed by the psychiatrists, unbalanced versus balanced capacity, and spread out holidays versus simultaneous holidays.
+
+The results are shown in Figure~\ref{fig:balanced}.
+It is apparent that Suggestions 1 and 2 above do not significantly affect the behavior of the queue length process.
 
 
 
@@ -358,17 +191,12 @@ the behavior of the queue length process.
 \end{figure}
 
 
-Now we consider suggestion 3, which comes down to doing more intakes
-when it is busy, and fewer when it is quiet. A simple rule to
-implement this is by considering last week's queue $Q_{n-1}$: if
-$Q_{n-1}<12$, i.e., the service capacity of one week, then do $e$
-intakes less. Here, $e=1$ or $2$, or perhaps a larger number; it
-corresponds to the amount of control we want to exercise. When
-$Q_{n-1}>24$, i.e., larger than two weeks of intakes, do $e$ intakes
-more. Let's consider three different control levels, $e=1$, $e=2$, and
-$e=5$; thus in the last case all psychiatrists do five extra intakes
-The previous simulation shows that it is safe to disregard the holiday
-plans, so just assume a flat service capacity of 12 intakes a week.
+Now we consider Suggestion 3, which comes down to doing more intakes when it is busy, and fewer when it is quiet.
+A simple rule to implement this is by considering last week's queue $Q_{n-1}$: if $Q_{n-1}<12$, i.e., the service capacity of one week, then do $e$ intakes less.
+When $Q_{n-1}>24$, i.e., larger than two weeks of intakes, do $e$ intakes more.
+Here, $e=1$ or $2$, or perhaps a larger number; it corresponds to the amount of control we want to exercise.
+
+Let's consider three different control levels, $e=1$, $e=2$, and $e=5$; thus in the last case all psychiatrists do five extra intakes The previous simulation shows that it is safe to disregard the holiday plans, so just assume a flat service capacity of 12 intakes a week.
 
 Figure~\ref{fig:intakes} shows a striking difference indeed. The queue
 does not explode any more, and already taking $e=1$ has a large
@@ -383,21 +211,16 @@ influence.
 \label{fig:intakes}
 \end{figure}
 
-From this simulation experiment we learn that changing holiday plans or
-spreading the work over multiple servers, i.e., psychiatrists, does
-not significantly affect the queueing behavior.  However, controlling
-the service rate as a function of the queue length improves the
-situation quite dramatically. 
+From this simulation experiment we learn that changing holiday plans or spreading the work over multiple servers, i.e., psychiatrists, does not significantly affect the queueing behavior.
+However, controlling the service rate as a function of the queue length improves the situation quite dramatically.
 
 
-Observe that, even with these (deceitfully) simple recursions, we can obtain
-considerable insight into this, otherwise, very complicated controlled
-queueing process. (If the reader doubts the value of simulation, s/he
-should try to develop other mathematical methods to analyze
-multi-server queueing systems with vacations, of which this case is an
-example.) As a matter of fact, with such simple recursions we can analyze many practical queueing
-situations. Together with students the author applied it numerous
-times, for instance:
+\subsection*{Conclusion}
+\label{sec:conclusion}
+
+Observe that, even with these (deceitfully) simple recursions, we can obtain considerable insight into this, otherwise, very complicated controlled queueing process\footnote{If the reader doubts the value of simulation, s/he should try to develop a mathematical method to analyze multi-server queueing systems with vacations, of which this case is an example.}.
+As a matter of fact, with such simple recursions we can analyze many practical queueing situations.
+Together with students the author applied it numerous times, for instance:
 \begin{itemize}
 \item Should a certain hospital invest in a new MRI scanner to reduce
   waiting times?
@@ -405,17 +228,11 @@ times, for instance:
 \item How to route post parcels in a post sorting center?
 \end{itemize}
 
-In general, the study of queueing systems is focused on
-studying the probabilistic properties of the queueing length process
-and related concepts such as waiting time, server occupancy, fraction
-of customers lost, and so on. Once we have constructed the queueing
-process we can compute all performance measures of relevance, such as
-the average waiting time. If it turns out that the
-performance of the system is not according to what we desire, we can
-change parts of the system with the aim to improve the situation and
-assess the effect of this change.  For instance, if the average
-waiting time is too long, we might add service capacity. With simulation it is easy to study the effect of, hence
-evaluate, such decisions.
+In general, the study of queueing systems is focused on studying the probabilistic properties of the queueing length process and related concepts such as waiting time, server occupancy, fraction of customers lost, and so on.
+Once we have constructed the queueing process we can compute all performance measures of relevance, such as the average waiting time.
+If it turns out that the performance of the system is not according to what we desire, we can change parts of the system with the aim to improve the situation and assess the effect of this change.
+For instance, if the average waiting time is too long, we might add service capacity.
+With simulation it is easy to study the effect of, hence evaluate, such decisions.
 
 \subsection*{Exercises}
 \label{sec:exercises-1}

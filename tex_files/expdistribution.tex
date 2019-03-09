@@ -9,13 +9,11 @@
 
 In the previous section we introduced the Poisson process as a natural model of the number of jobs arriving during intervals of time.  As we will see in the sections to come, the modeling and analysis of any queueing system is typically easier if we specify  the (probability)
 distribution of the inter-arrival times, i.e., the time between consecutive arrival epochs of jobs.
-A particular fruitful model for the distribution of the inter-arrival times is the exponential distribution. Here we show how this relates to the Poisson distribution,  and we also derive many useful general probability concepts and apply these to the exponential distribution.  Then we use simulation to provide yet further motivation for the use of the exponential distribution as a useful model for inter-arrival times of customers.
+A particularly fruitful model for the distribution of the inter-arrival times is the exponential distribution. Here we show how this relates to the Poisson distribution,  and we also derive many useful general probability concepts and apply these to the exponential distribution.  Then we use simulation to provide yet further motivation for the use of the exponential distribution as a useful model for inter-arrival times of customers.
 
-Let us assume that the inter-arrival times form a sequence $\{X_i\}$ of \recall{independent and identically distributed  (i.i.d.)}  random variables, and let us write $X$ for the generic
-random time between two successive arrivals. For many queueing
-systems, measurements of the inter-arrival times between consecutive
-arrivals show that it is reasonable to model an inter-arrival $X$ as
-an \recall{exponentially distributed} random variable, i.e.,
+Let us assume that the inter-arrival times at a hospital, for instance, form a sequence $\{X_i\}$ of \recall{independent and identically distributed (i.i.d.)}
+random variables, and let us write $X$ for the generic random time between two successive arrivals.
+For many queueing systems, measurements of the inter-arrival times between consecutive arrivals show that it is reasonable to model an inter-arrival $X$ as an \recall{exponentially distributed} random variable, i.e.,
 \begin{equation*}
   \P{X \leq t} = 1- e^{-\lambda t}.
 \end{equation*}
@@ -29,6 +27,14 @@ must be that $N(t) = 0$. Hence, for the first inter-arrival time $X_1$: %, i.e.,
 \begin{equation*}
  \P{X_1> t} = \P{N(t) = 0} = e^{-\lambda t} \frac{(\lambda t)^0}{0!}= e^{-\lambda t}.
 \end{equation*}
+
+The Poisson process $N$ and exponentially distributed inter-arrival times are intimately related: A counting process $\{N(t)\}$ is a \recall{Poisson process} with rate $\lambda$ if and only if  the inter-arrival times $\{X_i\}$ are i.i.d. and exponentially distributed with mean $1/\lambda$,  in short, 
+\begin{equation*}
+X_i\sim \Exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t).
+\end{equation*}
+
+
+We next provide further relations between the Poisson distribution and the exponential distribution. 
 
 
 \begin{exercise}{\faFlask}
@@ -90,10 +96,11 @@ For the interpretation, if jobs arrive at rate $\lambda$, the average time betwe
 \begin{exercise}{\faCalculator}
   If $X\sim\Exp(\lambda)$, show that the \recall{variance}
 $\V X = \lambda^{-2}$.
-  \begin{hint} Use, and memorize, the very practical formula
-  \begin{equation*}
-  \V X = \E{X^2} - (\E X)^2.
-  \end{equation*}
+\begin{hint} Use~\eqref{eq:68}. 
+  % , and memorize, the very practical formula
+  % \begin{equation*}
+  % \V X = \E{X^2} - (\E X)^2.
+  % \end{equation*}
   \end{hint}
   \begin{solution}
     By the previous problems, $\E{X^2}=2/\lambda^2$ and $\E X = 1/\lambda$. Hence the variance $\V X = \E{X^2} - (\E X)^2 = \frac{2}{\lambda^2} - (\frac{1}{\lambda})^2 = \lambda^{-2}.$
@@ -151,10 +158,7 @@ Why do we require that $t < \lambda$ in the definition of $M_X(t)$?
       \E{X^2} &=\frac2{\lambda^2}.
     \end{align*}
 \begin{hint}
-    \begin{align*}
-      \E{X} &= M_X'(0), &  \E{X^2} &= M_X''(0),
-    \end{align*}
-where $M_X'(t) = \frac{\d}{\d t} M_X(t)$. 
+Use~\eqref{eq:69} and \eqref{eq:64}.
 \end{hint}
 \begin{solution} By Ex.~\ref{ex:33}, 
   $ M_X'(t)=\lambda/(\lambda-t)^2$. Hence, $M_X'(0)=1/\lambda$. Next, $M_X''(t)=2\lambda/(\lambda-t)^3$, hence $\E{X^2}=M_X''(0)=2\lambda/\lambda^3=2\lambda^{-2}$. 
@@ -171,129 +175,14 @@ Use~\eqref{eq:62} to   prove that the square coefficient of variation (SCV) of $
 \end{solution}
 \end{exercise}
 
-
-Let us now show with simulation how the exponential distribution
-originates. Consider $N$ people that regularly visit a shop. We assume
-that we can characterize the inter-arrival times
-$\{X_k^i, k=1,2, \ldots\}$ of customer $i$ by some distribution
-function, for instance the uniform distribution. Then, with
-$A_{0}^i=0$ for all~$i$, define 
-\begin{equation}\label{eq:A_kk}
-A_k^i = A_{k-1}^i + X_k^i = \sum_{j=1}^k X_j^i,
-\end{equation}
-as the arrival moment of the $k$th visit of customer $i$.  Now the
-shop owner `sees' the superposition of the arrivals of all
-customers. One way to compute the arrival moments of all customers
-together is to put all the arrival times
-$\{A_k^i, k=1,\ldots,n, i=1,\ldots,N\}$ into one set, and sort these
-numbers in increasing order. This results in the (sorted) set of
-arrival times $\{A_k, k=1,2,\ldots\}$ at the shop of all customers together. Taking $A_0=0$,  then
-\begin{equation}\label{eq:X_kk}
-X_k = A_k - A_{k-1},
-\end{equation}
-must be the inter-arrival time between the $k-1$th and
-$k$th customer at the shop.  Thus, with this procedure, starting from inter-arrival times of
-individual customers, we can construct inter-arrival times as seen by
-the shop.
-
-
-Suppose that we  generate, by means of simulation, many inter-arrival times for a set of individual customers, compute the arrival times by~(\ref{eq:A_kk}), sort these, and compute with~(\ref{eq:X_kk}) the inter-arrival times $\{X_k\}$ of customers as seen by the shop.  To plot the \recall{empirical distribution function}, or the \emph{histogram}, of $\{X_k\}$, we just  count the
-number of inter-arrival times smaller than time $t$ for any $t$.  Then the empirical distribution of $\{X_k\}$ is defined as
-\begin{equation*}
-  \P{X \leq t}_{n} = \frac1{n}\sum_{k=1}^{n} \1{X_k\leq t},
-\end{equation*}
-where the \emph{indicator function} is $\1{X_k\leq t}=1$ if $X_k\leq t$ and $\1{X_k\leq t}=0$
-if $X_k> t$.  
-
-Let us now compare the probability density as
-obtained for several simulation scenarios to the density of the
-exponential distribution, i.e., to $\lambda e^{-\lambda t}$.  As a
-first example, take $N=1$ customer and let the computer generate
-$n=100$ uniformly distributed numbers on the set $[4, 6]$.  Thus, the
-time between two visits of this customer is somewhere between $4$ and
-$6$ hours, and the average inter-arrival times $\E X = 5$. In a second
-simulation we take $N=3$ customers, and in the third, $N=10$
-customers. 
-
-Approximations of the probability density functions, based on the empirical distributions, are shown, from left to right,
-in the three panels in Figure~\ref{fig:uniformfew}. The continuous
-curve is the graph of $\lambda e^{-\lambda x}$ where
-$\lambda = N/\E X = N/5$. (Recall from Exercise~(\ref{exer:lambda}) that when one
-person visits the shop  with an average inter-arrival time of $5$
-hours,  the arrival rate is $1/5$. Hence, when $N$ customers visit the shop, each with an average inter-arrival time of 5 hours, the total arrival rate as seen by the shop must be $N/5$.)
-
-
-\begin{figure}[ht]
-  \centering
-  \begin{tabular}[h]{c}
-% see progs/convergence_to_exp.py
- \input{progs/uniform_to_exponential_few.tex}\\
-  \end{tabular}
-  \caption{The inter-arrival process as seen by the shop owner. Observe
-    that the density $\lambda e^{-\lambda x}$ intersects the $y$-axis
-    at level $N/5$, which is equal to the arrival rate when $N$
-    persons visit the shop. The parameter $n=100$ is the simulation
-    length, i.e., the number of visits per customer, and $b=10$ is the
-    number of bins to collect the data. The height of a point corresponds to a density, but its computation is a bit subtle. Let $a=(X_1, \ldots, X_n)$ denote the simulated inter-arrival times. Define the width of a bin as $\delta = (\max\{a\} - \min\{a\})/b$. Then the height of the $i$th bin is computed as $h_i = n_i/(n \delta)$. With this: $\sum_{i=1}^b h_i \delta = 1$.}
-  \label{fig:uniformfew}
-\end{figure}
-
-As a second
-example, we extend the simulation to $n=1000$ visits to the shop, see
-Figure~\ref{fig:uniformmany}. In the third example we take the
-inter-arrival times to be normally distributed times with mean $5$ and
-$\sigma=1$, see Figure~\ref{fig:normal}.
-
-\begin{figure}[ht]
-  \centering
-  \begin{tabular}[h]{c}
-% see progs/convergence_to_exp.py
- \input{progs/uniform_to_exponential_many.tex}\\
-  \end{tabular}
-  \caption{Each of the $N$ customers visits the shop at uniformly 
-    distributed inter-arrival times, but now the number of visits is
-    $n=1000$.}  
-  \label{fig:uniformmany}
-\end{figure}
-
-\begin{figure}[ht]
-  \centering
-  \begin{tabular}[h]{c}
-% see progs/convergence_to_exp.py
- \input{progs/normal_to_exponential.tex}
-  \end{tabular}
-  \caption{Each of the $N$ customers visits the shop with normally
-    distributed inter-arrival times with $\mu=5$ and
-    $\sigma=1$.}  \label{fig:normal}
-\end{figure}
-
-As the graphs show, even when the customer population consists of 10
-members, each visiting the shop with an inter-arrival time that is
-quite `far' from exponential, the distribution of the inter-arrival
-times as observed by the shop is very well approximated by an
-exponential distribution. Thus, it appears reasonable to use the
-exponential distribution to model inter-arrival times of customers for systems (such as a shop, or a hospital or a call center) that handle many (thousands of)
-customers each of which  deciding independently to visit the system.
-
-
-A very important concept, related to the exponential distribution, is the following. A random variable $X$ is called \recall{memoryless} when it satisfies
+A random variable $X$ is called \recall{memoryless} when it satisfies
 \begin{equation*}
   \P{X > t+h | X>t} = \P{X>h}.
 \end{equation*}
-In words, the probability that $X$ is larger than some time $t+h$,
-conditional on it being larger than a time~$t$, is equal to the
-probability that $X$ is larger than $h$. Thus, no matter how long we
-have been waiting for the next arrival to occur, the probability that
-it will occur in the next $h$ seconds remains the same.  This property
-seems to be vindicated also in practice: suppose that a patient with a
-broken arm just arrived at the emergency room of a hospital, what does
-that tell us about the time the next patient will be brought in? Not
-much, as most of us will agree.
-
+In words, the probability that $X$ is larger than some time $t+h$, conditional on it being larger than a time~$t$, is equal to the probability that $X$ is larger than $h$.
 
 \begin{exercise}{\faCalculator}
-  Show that an exponentially distributed random variable is
-  memoryless.  
+  Show that $X\sim \Exp(\lambda)$ is  memoryless.  
   \begin{hint}
 Condition on the event ${X>t}$. 
   \end{hint}
@@ -303,12 +192,23 @@ By  the definition of conditional probability
   \P{X>t+h|X>t} = \frac{\P{X>t+h, X>t}}{\P{X>t}} = \frac{\P{X>t+h}}{\P{X>t}} = \frac{e^{-\lambda(t+h)}}{e^{-\lambda t}} = e^{-\lambda h} = \P{X>h}.
 \end{equation*}
 
+Thus, no matter how long we have been waiting for the next arrival to occur, the probability that it will occur in the next $h$ seconds remains the same.
+
+
+This property
+seems to be vindicated also in practice: suppose that a patient with a
+broken arm just arrived at the emergency room of a hospital, what does
+that tell us about the time the next patient will be brought in? Not
+much, as most of us will agree.
+
+
 As an aside,  it can be shown that only exponential random variables have the
 memoryless property. The proof of this fact requires quite some work;
 we refer the reader to the literature if s/he wants to check this, see
 e.g. \citet[Appendix 3]{yushkevich69:_markov_proces}.
   \end{solution}
 \end{exercise}
+
 
 
 % The reader should realize that it is simple, by means of
@@ -353,7 +253,6 @@ Use that $X$ and $S$ are independent to get
 \begin{solution}
 There is more than one way to show that $\P{X\leq S} = \lambda/(\lambda+\mu)$.  
 
-Method 1. 
 Observe first that $X$ and $S$, being
 exponentially distributed, have a density. Moreover, as they are
 independent,  the joint density takes the form
@@ -374,6 +273,7 @@ With this,
 &= \frac{\lambda}{\lambda + \mu}.
 \end{align*}
 
+\begin{comment}
 Method 2. You only have to study this if you (want to) know about conditioning with respect to a random variable with a density, otherwise, skip it.  Start with  the law of total probability in the discrete case: 
 \begin{equation*}
   \E{A} = \sum_{i=1}^k \E{A\given B_i} \P{B_i},
@@ -423,18 +323,12 @@ And then,
   \end{split}
 \end{equation*}
 Straightforward integration gives the final result.
+\end{comment}
 \end{solution}
 \end{exercise}
 
 
 
-The Poisson process $N$ and exponentially distributed inter-arrival times are intimately related: A counting process $\{N(t)\}$ is a \recall{Poisson process} with rate $\lambda$ if and only if  the inter-arrival times $\{X_i\}$ are i.i.d. and exponentially distributed with mean $1/\lambda$,  in short, 
-\begin{equation*}
-X_i\sim \Exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t).
-\end{equation*}
-
-
-We next provide further relations between the Poisson distribution and the exponential distribution. 
 
   \begin{exercise}{\faCalculator}
     Assume that the inter-arrival times $\{X_i\}$ are i.i.d. and
@@ -553,7 +447,6 @@ We are done.
 
 
 
-In the sequel of this section we  develop numerous important probability concepts, which we will also use many times in the rest of the course.
 
 \begin{exercise}{\faFlask}
   If $S\sim U[0,7]$ and $X\sim U[0,10]$, where $U[I]$ stands for the
@@ -718,151 +611,6 @@ we get
 \end{solution}
 \end{exercise}
 
-
-Let $B$ be a discrete random variable such that $\P{B = k} = f(k)$, where $f$ is the probability mass function of $B$. We write
-\begin{equation*}
-  G(k) = \P{B>k} = \sum_{m=k+1}^\infty f(m),
-\end{equation*}
-for the \emph{survivor function} of $B$.  We can write this with an indicator function as
-\begin{equation*}
-  G(k) = \sum_{m=0}^\infty \1{m>k} f(m),
-\end{equation*}
-which makes the computation of certain expressions quite a bit easier. 
-
-\begin{exercise}{\faCalculator}\label{ex:5}
-  Express the probability mass  $f(k)$ and the survivor function $G(k)$ in terms of the distribution $F(k)$ of the batch size $B$. Which of the following is true:
-  $G(k) = 1-F(k)$, $G(k) = 1-F(k-1)$, or $G(k) = 1-F(k+1)$?
-  \begin{hint}
-This exercise is just meant to become familiar with the notation.
-  \end{hint}
-  \begin{solution}
-    \begin{align*}
-    f(k) &= \P{B=k} = \P{B\leq k} - \P{B\leq k-1} = F(k)-F(k-1), \\
-    G(k) &= \P{B>k} = 1 - \P{B\leq k} = 1-F(k).        
-    \end{align*}
-    It is all too easy to make, so called, off-by-one errors, such as
-    in the three alternatives above.  I nearly always check simple
-    cases to prevent such simple mistakes. I advise you to acquire the
-    same habit.
-  \end{solution}
-\end{exercise}
-
-
-\begin{exercise}{\faCalculator}\label{ex:6}
- Use indicator functions to prove that $ \sum_{k=0}^\infty G(k) = \E B$.
-    \begin{hint}
-Write 
-$\sum_{k=0}^\infty G(k) = \sum_{k=0}^\infty \sum_{m=k+1}^\infty \P{B=m}$, reverse the summations. Then realize that $\sum_{k=0}^\infty \1{k<m} = m$. 
-You should be aware that this sort of problem is just a regular probability
-  theory problem, nothing fancy. We use/adapt the tools you learned in
-  calculus to carry out 2D integrals (or in this case 2D summations).
-    \end{hint}
-\begin{solution}
-Observe first that $\sum_{k=0}^\infty \1{m>k} = m$, since $\1{m>k}=1$ if $k<m$ and $\1{m>k} = 0$ if $k\geq m$. With this, 
-\begin{align*}
-\sum_{k=0}^\infty G(k) 
-&= \sum_{k=0}^\infty \P{B>k} 
-= \sum_{k=0}^\infty \sum_{m=k+1}^\infty \P{B=m}  \\
-& = \sum_{k=0}^\infty \sum_{m=0}^\infty \1{m>k} \P{B=m} 
-= \sum_{m=0}^\infty \sum_{k=0}^\infty \1{m>k} \P{B=m} \\
-&= \sum_{m=0}^\infty m\P{B=m} = \E B.
-\end{align*}
-In case you are interested in mathematical justifications: the
-interchange of the two summations is allowed by Tonelli's theorem because the summands are
-all positive. (Interchanging the order of summations or integration is
-not always allowed because the results can be different when part of
-the integrand is negative. Check Fubini's theorem for more on this if
-you are interested.)
-\end{solution}
-\end{exercise}
-
-\begin{exercise}{\faCalculator}\label{ex:66}
- Use indicator functions to prove that
-$\sum_{i=0}^\infty i G(i) =  \E{B^2}/2 - \E{B}/2.$
-    \begin{hint}
-$\sum_{i=0}^\infty i G(i) = \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^\infty i \1{n\geq i+1}$,
-and reverse the summations.
-    \end{hint}
-\begin{solution}
-\begin{align*}
-\sum_{i=0}^\infty i G(i)
-&= \sum_{i=0}^\infty i \sum_{n=i+1}^\infty \P{B=n} = \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^\infty i \1{n\geq i+1} \\
-&= \sum_{n=0}^\infty \P{B=n} \sum_{i=0}^{n-1}i  = \sum_{n=0}^\infty \P{B=n} \frac{(n-1)n}{2} \\
-&= \sum_{n=0}^\infty  \frac{n^2}{2} \P{B=n} - \frac{\E B}{2}
-= \frac{\E{B^2}}{2} - \frac{\E B}{2}.
-\end{align*}
-\end{solution}
-\end{exercise}
-
-
-Let $S$ be a continuous non-negative random variable with distribution function $F$.  We write 
-\begin{equation*}
-  \E{S} = \int_0^\infty x \d F(x)
-\end{equation*}
-for the expectation of $S$. Here $\d F(x)$ acts as a shorthand for $f(x) \d x$. \footnote{For the interested reader, $\int x \d F(x)$ is a Lebesgue-Stieltjes integral with respect to the distribution function $F$.}
-
-\begin{exercise}{\faCalculator}
- Use indicator functions to prove that 
-$   \E S = \int_0^\infty x \d F(x)  = \int_0^\infty G(y) \d y,$
-where $G(x) = 1 - F(x)$. 
-\begin{hint}
-$\E S = \int_0^\infty x \d F(x)  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y \d F(x)$.
-\end{hint}
-\begin{solution}
-\begin{equation*}
-  \begin{split}
-    \E{S} &= \int_0^\infty x \d F(x)  = \int_0^\infty \int_0^x \d y \d F(x) \\
-    & = \int_0^\infty \int_0^\infty \1{y\leq x} \d y \d F(x)   = \int_0^\infty \int_0^\infty \1{y\leq x} \d F(x) \d y\\
-    & = \int_0^\infty \int_y^\infty \d F(x) \d y = \int_0^\infty G(y) \d y.
-  \end{split}
-\end{equation*}
-\end{solution}
-\end{exercise}
-
-\begin{exercise}{\faCalculator}
- Use indicator functions to prove that for a continuous non-negative random
-    variable $S$ with distribution function $F$, 
-$    \E{S^2} = \int_0^\infty x^2 \d F(x)  = 2 \int_0^\infty y G(y) \d y,$
-where $G(x) = 1 - F(x)$. 
-\begin{hint}
-$\int_0^\infty y G(y) \d y = \int_0^\infty y \int_0^\infty \1{y\leq x}f(x)\, \d x \d y$.
-\end{hint}
-\begin{solution}
-  \begin{align*}
-\int_0^\infty y G(y) \d y 
-&=  \int_0^\infty y \int_y^\infty f(x)\, \d x \d y =  \int_0^\infty y \int_0^\infty \1{y\leq x}f(x)\, \d x \d y\\
-&=  \int_0^\infty f(x) \int_0^\infty y \1{y \leq x}\, \d y \d x
-=  \int_0^\infty f(x) \int_0^x y\, \d y \d x\\
-&=  \int_0^\infty f(x) \frac{x^2}2 \d x =\frac{\E{S^2}}2.
-  \end{align*}
-\end{solution}
-\end{exercise}
-
-\begin{exercise}{\faCalculator}
- Use integration by parts to show that for a continuous non-negative random
-    variable $S$ with distribution function $F$ and survivor function $G=1-F$, 
-$\int_0^\infty y G(y) \d y = \E{S^2}/2,$
-if the latter expected value exists.
-\begin{solution}
-  \begin{equation}
-      \int_0^\infty y G(y) \d y 
-= \frac{y^2}2 G(y) \bigg|_0^\infty  - \int_0^\infty \frac{y^2}2 g(y)\d y = \int_0^\infty \frac{y^2}2 f(y)\d y = \frac{\E{S^2}}2,
-  \end{equation}
-  since $g(y) = G'(y) = - F'(y) = - f(y)$. Note that we used $\frac{y^2}2 G(y) \bigg|_0^\infty = 0 - 0 = 0$, which follows from our assumption that $\E{S^2}$ exists, implying that $\lim_{y \to \infty} y^2G(y) = 0$.
-\end{solution}
-\end{exercise}
-
-\begin{exercise}{\faCalculator}
-  Use that $\E S = \int_0^\infty x \d F(x) = \int_0^\infty G(y) \d y$ to
-  check that  $\E S = \mu^{-1}$ if $F(x) = 1 - e^{-\mu x}$.
-\begin{solution}
-If $F(x) = 1 - e^{-\mu x}$, we obtain that 
-\begin{equation*}
-  \E S = \int_0^\infty e^{-\mu x} \d x =
-  \mu^{-1}\int_0^\infty e^{-x} \d x = \mu^{-1}.
-\end{equation*}
-\end{solution}
-\end{exercise}
 
 
 \Closesolutionfile{hint}

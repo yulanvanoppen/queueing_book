@@ -2,42 +2,26 @@
 \addcontentsline{toc}{chapter}{Introduction}
 
 \paragraph{Motivation and Examples}
-Queueing systems abound, and the analysis and control of queueing
-systems are major topics in the control, performance evaluation and
-optimization of production and service systems. 
+Queueing systems abound, and the analysis and control of queueing systems are major topics in the control, performance evaluation and optimization of production and service systems.
 
 
-At my local supermarket, for instance, any customer that joins a queue
-of 4 or more customers gets his/her groceries for free. Of course, there
-are some constraints: at least one of the cashier facilities has to be
-unoccupied by a server and the customers in queue should be equally
-divided over the cashiers that are open (and perhaps there are some
-further rules, of which I am unaware). The manager that controls the
-occupation of the cashier positions is focused on keeping
-$\pi(4)+\pi(5)+\cdots$, i.e., the fraction of customers that see upon
-arrival a queue length exceeding~3, very small. In a sense,
-this is easy enough: just hire many cashiers. However, the cost of
-personnel may then outweigh the yearly average cost of paying the
-customer penalties. Thus, the manager's problem becomes to plan and
-control the service capacity  in such a way that both
-the penalties and the personnel cost are small.
+At my local supermarket, for instance, any customer that joins a queue of 4 or more customers gets his/her groceries for free.
+Of course, there are some constraints: at least one of the cashier facilities has to be unoccupied by a server and the customers in queue should be equally divided over the cashiers that are open (and perhaps there are some further rules, of which I am unaware).
+The manager that controls the occupation of the cashier positions is focused on keeping $\pi(4)+\pi(5)+\cdots$, i.e., the fraction of customers that see upon arrival a queue length exceeding~3, very small.
+In a sense, this is easy enough: just hire many cashiers.
+However, the cost of personnel may then outweigh the yearly average cost of paying the customer penalties.
+Thus, the manager's problem becomes to plan and control the service capacity in such a way that both the penalties and the personnel cost are small.
 
-Fast food restaurants also deal with many interesting queueing
-situations. Consider, for instance, the preparation of
-hamburgers. Typically, hamburgers are made-to-stock, in other words,
-they are prepared before the actual demand has arrived. Thus, hamburgers
-in stock can be interpreted as customers in queue waiting for service,
-where the service time is the time between the arrival of two
-customers that buy hamburgers. The hamburgers have a typical lifetime,
-and they have to be scrapped if they remain on the shelf longer than
-some amount of time. Thus, the waiting time of hamburgers has to be
-closely monitored. Of course, it is easy to achieve zero scrap cost,
-simply by keeping no stock at all.  However, to prevent lost-sales it
-is very important to maintain a certain amount of hamburgers in
-stock. Thus, the manager has to balance the scrap cost against the
-cost of lost sales. In more formal terms, the problem is to choose a
-policy to prepare hamburgers such that the cost of excess waiting time
-(scrap) is balanced against the cost of an empty queue (lost sales).
+Fast food restaurants also deal with many interesting queueing situations.
+Consider, for instance, the preparation of hamburgers.
+Typically, hamburgers are made-to-stock, in other words, they are prepared before the actual demand has arrived.
+Thus, hamburgers in stock can be interpreted as customers in queue waiting for service, where the service time is the time between the arrival of two customers that buy hamburgers.
+The hamburgers have a typical lifetime, and they have to be scrapped if they remain on the shelf longer than some amount of time.
+Thus, the waiting time of hamburgers has to be closely monitored.
+Of course, it is easy to achieve zero scrap cost, simply by keeping no stock at all.
+However, to prevent lost-sales it is very important to maintain a certain amount of hamburgers in stock.
+Thus, the manager has to balance the scrap cost against the cost of lost sales.
+In more formal terms, the problem is to choose a policy to prepare hamburgers such that the cost of excess waiting time (scrap) is balanced against the cost of an empty queue (lost sales).
 
 Service systems, such as hospitals, call centers, courts, and so on,
 have a certain capacity available to serve customers. The performance
@@ -80,35 +64,23 @@ the system, i.e., the \emph{sojourn time}.
 \paragraph{Organization}
 
 
-In these notes we will be primarily concerned with making models of
-queueing systems such that we can compute or estimate the above
-performance measures.  Part of our work is to derive analytic
-models. The benefit of such models is that they offer structural
-insights into the behavior of the system and scaling laws, such as
-that the average waiting time scales (more or less) linearly in the
-variance of the service times of individual customers. However, these
-models have severe shortcomings when it comes to analyzing real
-queueing systems, in particular when particular control rules have to
-be assessed.  Consider, for example, the service process at a check-in
-desk of KLM. Business customers and economy customers are served by
-two separate queueing systems. The business customers are served by
-one server, server A say, while the economy class customers by three
-servers, say. What would happen to the sojourn time of the business
-customers if server A would be allowed to serve economy class
-customers when the business queue is empty? For the analysis of such complicated
-cases simulation is a very useful and natural approach.
+In these notes we will be primarily concerned with making models of queueing systems such that we can compute or estimate the above performance measures.
+Part of our work is to derive analytic models.
+The benefit of such models is that they offer structural insights into the behavior of the system and scaling laws, such as that the average waiting time scales (more or less) linearly in the variance of the service times of individual customers.
+However, these models have severe shortcomings when it comes to analyzing real queueing systems, in particular when particular control rules have to be assessed.
+Consider, for example, the service process at a check-in desk of KLM.
+Business customers and economy customers are served by two separate queueing systems.
+The business customers are served by one server, server A say, while the economy class customers by three servers, say.
+What would happen to the sojourn time of the business customers if server A would be allowed to serve economy class customers when the business queue is empty?
+For the analysis of such complicated cases simulation is a very useful and natural approach.
 
-In the first part of these notes we concentrate on the analysis of
-\emph{sample paths of a queueing process}. We assume that a typical
-sample path captures the `normal' stochastic behavior of the
-system. This sample-path approach has two advantages. In the first
-place, most of the theoretical results follow from very concrete
-aspects of these sample paths. Second, the analysis of sample-paths
-carries over right away to simulation. In fact, simulation of a
-queueing system offers us one (or more) sample path(s), and based on
-such sample paths we derive behavioral and statistical properties of
-the system. Thus, the performance measures defined for sample paths
-are precisely those used for simulation.  
+In the first part of these notes we concentrate on the analysis of \emph{sample paths of a queueing process}.
+We assume that a typical sample path captures the `normal' stochastic behavior of the system.
+This sample-path approach has two advantages.
+In the first place, most of the theoretical results follow from very concrete aspects of these sample paths.
+Second, the analysis of sample-paths carries over right away to simulation.
+In fact, simulation of a queueing system offers us one (or more) sample path(s), and based on such sample paths we derive behavioral and statistical properties of the system.
+Thus, the performance measures defined for sample paths are precisely those used for simulation.
 
 Our aim is not to provide rigorous proofs for all results derived below; for this we refer to
 \cite{el-taha98:_sampl_path_analy_queuein_system}. As a consequence we tacitly
@@ -209,6 +181,8 @@ The following books are very useful to extend one's knowledge of probability the
 \item \citet{bolch06:_queuein_networ_markov_chain}
 \end{enumerate}
 
+
+
 \paragraph{Acknowledgments}
 
 I would like to acknowledge dr.
@@ -218,7 +192,11 @@ dr.
 W.H.M.
 Zijm for allowing me to use the first few chapters of his book, and my students for finding and correcting errors and typos, and improving explanations.
 
+
 %\clearpage
 
-%Finally, we use the terms `jobs' and `customers' interchangeably.
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../queueing_book"
+%%% End:
 

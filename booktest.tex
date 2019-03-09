@@ -2,9 +2,9 @@
 %\documentclass[a4paper,11pt]{book}
 \documentclass[a4paper,11pt]{scrbook}
 
-\newif\ifFilterExercises
+%^\newif\ifFilterExercises
 
-\FilterExercisestrue
+%\FilterExercisestrue
 %\FilterExercisesfalse
 
 
@@ -16,11 +16,13 @@
 % \fi
 
 \usepackage[solutionfiles]{optional}
-%\opt{nosolutionfiles}{\usepackage[nosolutionfiles]{answers}}
+%\usepackage[nosolutionfiles]{optional}
+
+\opt{nosolutionfiles}{\usepackage[nosolutionfiles]{answers}}
 \opt{solutionfiles}{\usepackage{answers}}
 
 
-\usepackage{preamble_tmp}
+\usepackage{preamble}
 
 % handle indentation below figure captions
 %\setcapwidth[c]{.8\textwidth}
@@ -40,9 +42,9 @@
 
 \tableofcontents
 
-\ifFilterExercises
-\Opensolutionfile{exercises}
-\fi
+% \ifFilterExercises
+% \Opensolutionfile{exercises}
+% \fi
 
 
 %\include{organization}
@@ -50,15 +52,16 @@
 
 %\chapter{Single-Station Queueing Systems}
 
+% \input{tex_files/poissondistribution.tex}
+% \input{tex_files/constructiondiscretetime.tex}
+\input{tex_files/expdistribution.tex}
+\input{tex_files/constructioncontinuoustime.tex}
 %\input{tex_files/failures.tex}
 %\input{tex_files/adjustments.tex}
 %\input{tex_files/setup_times.tex}
-%\input{tex_files/poissondistribution.tex}
-\input{tex_files/expdistribution.tex}
+% \input{tex_files/preliminaries.tex}
 %\input{tex_files/random_walk.tex}
 %\input{tex_files/ratestability.tex}
-%\input{tex_files/constructiondiscretetime.tex}
-%\input{tex_files/constructioncontinuoustime.tex}
 % \input{tex_files/empericalperfmeasures.tex}
 %\input{tex_files/levelcrossing.tex}
 %\input{tex_files/mm1.tex}
@@ -113,9 +116,9 @@
 \input{tex_files/formula_sheet}
 \end{comment}
 
-\ifFilterExercises
-\Closesolutionfile{exercises}
-\fi
+% \ifFilterExercises
+% \Closesolutionfile{exercises}
+% \fi
 
 
 \cleardoublepage
