@@ -19,6 +19,14 @@ We say that $X$ is an \recall{exponentially distributed} random variable with me
 and then  we write $X\sim \Exp(\lambda)$.
 
 
+The Poisson process $N$ and exponentially distributed inter-arrival times are intimately related: A counting process $\{N(t)\}$ is a \recall{Poisson process} with rate $\lambda$ if and only if  the inter-arrival times $\{X_i\}$ are i.i.d. and exponentially distributed with mean $1/\lambda$,  in short, 
+\begin{equation*}
+X_i\sim \Exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t).
+\end{equation*}
+
+
+We next provide further relations between the Poisson distribution and the exponential distribution. 
+
 
 \begin{exercise}{\faFlask}
 In the above expression for $\P{X\leq t}$ we require that $\lambda>0$. What would happen if you would allow $\lambda$ to be zero or negative?
@@ -149,14 +157,6 @@ Use~\eqref{eq:62} to   prove that SCV $1$ for $X\sim\Exp(\lambda)$.
   \end{equation*}
 \end{solution}
 \end{exercise}
-
-
-
-% The reader should realize that it is simple, by means of
-% computers, to generate exponentially distributed inter-arrival
-% times. Thus, it is easy to use such exponentially distributed random
-% variables to simulate queueing systems. 
-
 
 We now provide a number of relations between the Poisson distribution and the exponential distribution  to conclude that a process $N_\lambda$ is a Poisson process with rate $\lambda$ iff the inter-arrival times $\{X_i\}$ between individual jobs are i.i.d. $\sim\Exp(\lambda)$. 
 
@@ -295,6 +295,7 @@ In words, the probability that $X$ is larger than some time $t+h$, conditional o
 
 \begin{exercise}{\faCalculator}
   Show that $X\sim \Exp(\lambda)$ is  memoryless.  
+
   \begin{hint}
 Condition on the event ${X>t}$. 
   \end{hint}
