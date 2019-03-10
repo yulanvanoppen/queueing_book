@@ -85,7 +85,7 @@ The average waiting time $\E W$ in the entire system is of course the expected t
 To find an expression for $\E{W_Q}$ we need the concept of expected \recall{remaining service time} $\E{S_r}$ which is defined as the expected time it takes to complete the job in service at the time a job arrives.
 In Section~\ref{sec:mg1} we give a precise meaning to this idea.
 
-\begin{exercise}{\faFlask}\label{ex:32}
+\begin{exercise}[\faFlask]\label{ex:32}
 Show for the $M/G/1$ queue  that the expected time in queue is
 \begin{equation}\label{eq:24}
   \E{W_Q} = \E{S_r} + \E{L_Q} \E S.
@@ -152,7 +152,7 @@ Realize again that $\E{S_r}$ includes the jobs that arrive at an empty system.
 \end{exercise}
 
 
-\begin{exercise}{\faCalculator}
+\begin{exercise}[\faCalculator]
   Use Exercise~\ref{ex:32} and Little's law to derive for the $M/G/1$ queue that 
 \begin{equation}\label{eq:35}
   \E{W_Q} = \frac{\E{S_r}}{1-\rho}.% = \frac{\rho}{1-\rho} \E{S_r\given S_r>0}.
@@ -174,7 +174,7 @@ since $\rho=\lambda \E S$. But this gives for the $M/G/1$ queue that
 
 For the $M/M/1$ queue the situation becomes significantly simpler as then the service times are exponential, hence memoryless, which implies that $\E{S_r\given S_r>0} = \E S$.
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
 Explain for the $M/M/1$ queue that 
 \begin{equation}\label{eq:wqes}
   \E{W_Q} = \E L \E S.
@@ -193,7 +193,7 @@ For the $M/G/1$ queue, the job in service (if any) does not have the same distri
   \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
 Use Little's law to show for the $M/M/1$ queue that 
 \begin{equation}\label{eq:ew}
   \E W = \frac{\E S}{1-\rho}.
@@ -210,7 +210,7 @@ Use Little's law to show for the $M/M/1$ queue that
 
 
 
-\begin{exercise}{\faCalculator}
+\begin{exercise}[\faCalculator]
   Show for the $M/M/1$ queue that
   \begin{align*}
 \E L &= \frac\rho{1-\rho}, & \E{L_Q} &= \frac{\rho^2}{1-\rho}, & \E{L_s} &= \rho.
@@ -234,7 +234,7 @@ equal to the expected number of busy servers.
 \end{exercise}
 
 
-\begin{exercise}{\faFlask}  Explain that for the $M/M/1$ queue 
+\begin{exercise}[\faFlask]  Explain that for the $M/M/1$ queue 
 $\E{L_Q} = \sum_{n=1}^\infty (n-1)\pi(n)$ and  use this to find that $\E{L_Q}=\rho^2/(1-\rho)$.
   \begin{solution}
     The fraction of time the system contains $n$ jobs is $\pi(n)$ (by
@@ -269,7 +269,7 @@ The problems below illustrate how to use Little's law and PASTA to analyze numer
 As the code is typically nearly identical to the mathematical formulas, you should not have any difficulty understanding the code.
 (In the computations below I typically use the simplest, but often not the most efficient, code.)}.
 
-\begin{exercise}{\faPhoto}(Hall 5.2) \label{exer: Hall} After observing a single-server queue for
+\begin{exercise}[\faPhoto](Hall 5.2) \label{exer: Hall} After observing a single-server queue for
   several days, the following steady-state probabilities have been
   determined: $p(0)=0.4$, $p(1) = 0.3$, $p(2)=0.2$, $p(3)=0.05$ and
   $p(4)=0.05$. The arrival rate is 10 customers per hour. 
@@ -368,7 +368,7 @@ idle
  
 \end{exercise}
 
-\begin{exercise} {\faPhoto}
+\begin{exercise} [\faPhoto]
   (Hall 5.5) An $M/M/1$ queue has an arrival rate of 100 per hour and a service rate of 140 per hour.
   What is $p(n)$?
   What are $\E{L_Q}$ and $\E L$?
@@ -397,7 +397,7 @@ Wq
   \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faPhoto}(Hall, 5.6)
+\begin{exercise}[\faPhoto](Hall, 5.6)
   An $M/M/1$ queue has been found to have an average waiting time in queue of 1 minute. The arrival rate is known to be 5 customers per minute.
  What are the service rate and utilization? Calculate $\E{L_Q}$,  $\E L$ and $\E W$. Finally, 
  the queue operator would like to provide chairs for waiting customers. He would like to have a sufficient number so that all customers can sit down at least 90 percent of the time. How many chairs should he provide?
@@ -476,7 +476,7 @@ And indeed, we found the right $n$.
     \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faPhoto}
+\begin{exercise}[\faPhoto]
   (Hall 5.7). A single-server queueing system is known to have Poisson
   arrivals and exponential service times. However, the arrival rate
   and service time are state dependent. As the queue becomes longer,
@@ -493,7 +493,7 @@ Use the level-crossing equations of the $M(n)/M(n)/1$ queue.
     \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faPhoto}
+\begin{exercise}[\faPhoto]
   (Hall 5.14) An airline phone reservation line has one server and a buffer for two customers.
   The arrival rate is 6 customers per hour, and a service rate of just 5 customers per hour.
   Arrivals are Poisson and service times are exponential.
@@ -613,7 +613,7 @@ for various values of $\lambda$.
 \end{comment}
 
 
-\begin{exercise}{\faPhoto}(Hall 5.3) After observing a queue with two servers
+\begin{exercise}[\faPhoto](Hall 5.3) After observing a queue with two servers
   for several days, the following steady-state probabilities have been
   determined: $p(0)=0.4$, $p(1) = 0.3$, $p(2)=0.2$, $p(3)=0.05$ and
   $p(4)=0.05$. The arrival rate is 10 customers per hour.
@@ -684,7 +684,7 @@ u
     \end{solution}
 \end{exercise}  
 
-\begin{exercise}{\faPhoto}
+\begin{exercise}[\faPhoto]
   (Hall 5.8) The queueing system at a fast-food stand behaves in a peculiar fashion.
   When there is no one in the queue, people are reluctant to use the stand, fearing that the food is unsavory.
   People are also reluctant to use the stand when the queue is long.
@@ -763,7 +763,7 @@ Wq # time in queue
     \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faPhoto}
+\begin{exercise}[\faPhoto]
   (Hall 5.10) A repair/maintenance facility would like to determine
   how many employees should be working in its tool crib. The service
   time is exponential, with mean 4 minutes, and customers arrive by a

@@ -180,7 +180,7 @@ This means that the system as seen by arrivals, i.e., $\pi(n)$, is
 the same as what jobs leave behind, i.e., $\delta(n)$.
 
 
-\begin{exercise}{\faFlask}\label{ex:26}
+\begin{exercise}[\faFlask]\label{ex:26}
   When $\lambda\neq \delta$, is $\pi(n)\geq \delta(n)$ or $\pi(n) < \delta(n)$ true?  (This is a tricky exercise!) 
   \begin{hint}
     Use that    $\lambda \geq \delta$ always holds. Thus, when $\lambda \neq \delta$, it must be that $\lambda > \delta$. What are the consequences of this inequality; how does the queue length behave as a function of time?
@@ -323,7 +323,7 @@ at another station. We chop up this problem into small steps to help you
 find the answer mostly by yourself.
 
 
-\begin{exercise}{\faFlask}\label{ex:dep}
+\begin{exercise}[\faFlask]\label{ex:dep}
 Why is the output rate of the (stable) $M/M/1$ queue equal to~$\lambda$ and not~$\mu$?
 \begin{solution}
 Jobs arrive at rate $\lambda$. For a stable queue, $\mu>\lambda$. Moreover,  jobs can never leave faster than they arrive.
@@ -331,7 +331,7 @@ Jobs arrive at rate $\lambda$. For a stable queue, $\mu>\lambda$. Moreover,  job
 \end{exercise}
 
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
 Why is $\mu e^{-\mu t}$ not a reasonable density for the
     inter-departure times?
     \begin{solution}
@@ -344,7 +344,7 @@ The simplest guess for the inter-departure density might be $\lambda e^{-\lambda
 We will focus on departure moments and use~\eqref{eq:39}, in particular that departures `see' what arrivals `see', i.e., $\delta(n)= \pi(n)$, and PASTA.
 
 
-\begin{exercise}{\faFlask}\label{ex:28}
+\begin{exercise}[\faFlask]\label{ex:28}
 Show that the probability that a job leaves behind a busy station is $\rho$, hence $1-\rho$ is the probability to leave an idle server behind.
     \begin{solution}
 Observe that $\rho$ is the fraction of time the server is busy. Then, from  PASTA, the fraction of jobs that see a busy server is also $\rho$.  This fraction of jobs is $\sum_{n=1}^\infty \pi(n)$. Finally, $\delta(n) = \pi(n)$ , a fraction $\rho$ of the departures leaves a busy system behind.
@@ -353,7 +353,7 @@ Observe that $\rho$ is the fraction of time the server is busy. Then, from  PAST
 \end{exercise}
 
 
-\begin{exercise}{\faCalculator}\label{ex:17}
+\begin{exercise}[\faCalculator]\label{ex:17}
  If job $n-1$, say, leaves behind an empty system, show that the expected time until the next departure is $\E{D_n - D_{n-1}} = 1/\lambda + 1/\mu$. 
     \begin{hint}
       After job $n-1$ left, job $n$ has to arrive, so we need to wait first for this inter-arrival time. Then job $n$ must be served. This adds up to $1/\lambda + 1/\mu$. 
@@ -365,7 +365,7 @@ With the hint, we first have to wait for an inter-arrival
     \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faCalculator}
+\begin{exercise}[\faCalculator]
 Show that the density of $D_{n} - D_{n-1}$ is
     \begin{equation*}
     f_{X+S}(t) = \frac{\lambda \mu}{\lambda - \mu} (e^{-\mu t} - e^{-\lambda t})
@@ -408,14 +408,14 @@ Conditioning is much faster, but requires the concept of conditional density. Yo
 \end{exercise}
 
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
 Show  that when the queue is not empty at a departure time, the density of the next inter-departure time is $f_D(t) = \mu e^{-\mu t}$.
     \begin{solution}
 After the departure, the server can start right away with the job at the head of the queue. The inter-departure time of this job is $\Exp(\mu)$.
     \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faCalculator}
+\begin{exercise}[\faCalculator]
 Use conditioning on the server being idle or busy at a departure to show that  the density of  the inter-departure time is $\lambda e^{-\lambda t}$.
   \begin{hint}
 Conditioning leads to 
@@ -441,7 +441,7 @@ Conditioning leads to
 
 It can also be shown that the inter-departure times are independent. 
 
-\begin{exercise}{\faFlask}\label{ex:burke}
+\begin{exercise}[\faFlask]\label{ex:burke}
 Explain that the above leads to \recall{Burke's law}  which states that the departure process of the $M/M/1$ queue is a Poisson  process with rate $\lambda$. 
 \begin{solution}
 The above exercises show that inter-departures times have the same density, i.e., $\lambda e^{-\lambda t}$. The remark above states these times are independent. Thus,  the inter-departures times form a set of i.i.d. exponentially distributed random variables with mean $1/\lambda$. Consequently, the departures times form a Poisson process with rate $\lambda$.

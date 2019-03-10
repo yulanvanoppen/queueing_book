@@ -20,7 +20,7 @@ We remark in passing that this limit does not necessarily exist if $A(t)$ is som
 If, however, the inter-arrival times $\{X_k\}$ are the basic data, and $\{X_k\}$ are \recall{independent and identically distributed (i.i.d.)}
 and distributed as a generic random variable $X$ with finite mean $\E{X}$, we can construct $\{A_k\}$ and $\{A(t)\}$ as described in Section~\ref{sec:constr-gg1-queu}; the strong law of large numbers guarantees that the above limit exists.
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
   Can you make an arrival process such that $A(t)/t$ does not have a
   limit?  
   \begin{hint}
@@ -72,7 +72,7 @@ where we take $t=A_n$ in the limit for $t\to\infty$.  In words, the
 above states that the arrival rate $\lambda$ is the inverse of the
 expected inter-arrival time.
 
-\begin{exercise}{\faRocket}
+\begin{exercise}[\faRocket]
    In  Eq. (\ref{eq:54}) we replaced the limit with respect to $n$ by a
     limit with respect to $t$.  Use
     the notation $A_{A(t)}$ to show that  this is allowed.
@@ -168,7 +168,7 @@ details. As a result we can define the \recall{departure rate} as
 \end{equation}
 
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
   Define the departure time $D_{k}$ of the $k$th job in terms of
   $\{D(t)\}$. 
   \begin{hint}
@@ -230,7 +230,7 @@ For this reason we henceforth (and implicitly) require that $\mu > \lambda$.
 
 
 
-\begin{exercise} {\faFlask}
+\begin{exercise} [\faFlask]
 Define the random variables $\{\tilde X_k,k=1,\ldots\}$ as $\tilde X_k = S_{k-1}-X_k$.
   For stability of the queueing process it is essential that
   $\tilde X_k$ has negative expectation, i.e.,
@@ -243,7 +243,7 @@ Define the random variables $\{\tilde X_k,k=1,\ldots\}$ as $\tilde X_k = S_{k-1}
   \end{solution}
 \end{exercise}
 
-\begin{exercise} {\faFlask}
+\begin{exercise} [\faFlask]
 Define $\tilde X_k = S_{k-1}-X_k$.
  Show that $\E{\tilde X_k} <0$ implies that $\lambda<\mu$. 
  \begin{hint}
@@ -259,7 +259,7 @@ Remember that $\{X_k\}$ and $\{S_k\}$ are sequences of i.i.d. random variables. 
 \end{exercise}
 
 
-\begin{exercise}{\faPhoto}\label{ex:29}
+\begin{exercise}[\faPhoto]\label{ex:29}
   Show that $\E{S}/\E{X}$ is the fraction of time the server is busy.
   \begin{hint}
 Suppose that the $n+1$th job is the first job after time $A_1$ that sees an empty system.  Thus, job $n$ leaves an empty system behind. The very first job that arrives,  at time $A_1=X_1$, also sees an empty system. The total amount of service that arrived during $[A_1, A_{n+1})$ is $\sum_{i=1}^n S_i$.
@@ -295,7 +295,7 @@ The above claim is still true however.)
   \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
  Show that $\E{X - S}/\E{X}$ is the fraction of time
   the server is idle.
   \begin{solution}
@@ -306,7 +306,7 @@ The above claim is still true however.)
 \end{exercise}
 
 
-\begin{exercise}{\faPhoto}
+\begin{exercise}[\faPhoto]
   Consider a paint factory which contains a paint mixing machine that
   serves two classes of jobs, A and B. The processing times of jobs of
   types A and B are constant and require $t_A$ and $t_B$ hours. The

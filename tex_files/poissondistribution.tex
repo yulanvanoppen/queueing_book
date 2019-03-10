@@ -45,7 +45,7 @@ occur in $n$ intervals is then binomially distributed
   \P{N_n(t) = k} = {n \choose k} p^k (1-p)^{n-k}.
 \end{equation}
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
 Show that $\E{N_n(t)} = \sum_{i=1}^n \E{B_i} = n p$. Conclude that we need to choose $p = \lambda t/n$ if we want that $\E{N_n(t)} = \E{N(t)}$.
 \begin{hint}
 Use that $\E{X+Y} = \E X + \E Y$. 
@@ -59,7 +59,7 @@ Use that $\E{X+Y} = \E X + \E Y$.
 \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
 What is the difference between $N_n(t)$ and $N(t)$?
 \begin{solution}
   $N_n(t)$ is a binomially distributed random variable with parameters
@@ -72,7 +72,7 @@ What is the difference between $N_n(t)$ and $N(t)$?
 
 
 
-\begin{exercise}{\faCalculator}\label{ex:31}
+\begin{exercise}[\faCalculator]\label{ex:31}
   Show that the binomial distribution in~\eqref{eq:bin} converges to the \recall{Poisson distribution}, i.e., 
 %\begin{equation}\label{eq:pois}
  \begin{equation*}\label{eq:52}
@@ -129,7 +129,7 @@ The process is an uncountable set of random variables indexed by $t\in \R^+$, no
 
 In the remainder of this section we derive a number of  properties of the Poisson process that we will use time and again.
 
-\begin{exercise}{\faCalculator}\label{ex:2}
+\begin{exercise}[\faCalculator]\label{ex:2}
   Show that if $N(t)\sim P(\lambda t)$, the expected number of arrivals during $[0,t]$ is
   \begin{equation*}
   \E{N(t)} = \lambda t.
@@ -157,7 +157,7 @@ where we apply a change of notation in the second to last step.
 \end{exercise}
 
 
-\begin{exercise}{\faCalculator}
+\begin{exercise}[\faCalculator]
   Show that if $N(t)\sim P(\lambda t)$, the variance of the number of arrivals during $[0,t]$ is
   \begin{equation*}
 \V{N(t)} = \lambda t.
@@ -180,7 +180,7 @@ Hence, $\V N = \E{N^2} - (\E N)^2 = (\lambda t)^2 + \lambda t - (\lambda t)^2 = 
 \end{exercise}
 
 With moment-generating functions we can compute the mean and variance of $N(t)$ with less effort. 
-\begin{exercise}{\faCalculator}
+\begin{exercise}[\faCalculator]
 Show that the moment-generating function of the random variable~$N(t)\sim P(\lambda t)$ is
 \begin{equation*}
 M_{N(t)}(s) 
@@ -203,7 +203,7 @@ M_{N(t)}(s)
 \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faCalculator}
+\begin{exercise}[\faCalculator]
 Use  the moment-generating function of $N(t)\sim P(\lambda t)$ to compute $\E{N(t)}$ and $\V{N(t)}$. 
 \begin{hint}
 Use~\eqref{eq:69} and~\eqref{eq:64}. 
@@ -232,7 +232,7 @@ As  will become clear later, the SCV is a very important concept in
   queueing theory. Memorize it as a measure of \emph{relative
   variability}.
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
 Show that   the SCV of $N(t)\sim P(\lambda t)$ is equal to $1/(\lambda t)$.  What does this mean for $t$ large?
   \begin{solution}
     \begin{equation*}
@@ -243,7 +243,7 @@ The relative variability of the Poisson process goes down as $t\to\infty$.
 \end{exercise}
 
 
-\begin{exercise}{\faFlask}\label{ex:35}
+\begin{exercise}[\faFlask]\label{ex:35}
   Show that 
   \begin{equation*}
 \P{N(t+h) = n \given N(t) = n} = 1-\lambda h + o(h).
@@ -280,7 +280,7 @@ Thus,
 \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
   Show that
   \begin{equation*}
 \P{N(t+h) = n+1 \given N(t) = n} = \lambda h + o(h)
@@ -299,7 +299,7 @@ when $N(t) \sim P(\lambda t)$ and $h$ is small.
 \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faCalculator}
+\begin{exercise}[\faCalculator]
   Show that if $N(t) \sim P(\lambda t)$, we have for small $h$,
   \begin{equation*}
  \P{N(t+h) \geq n+2 \given N(t) = n} = o(h).
@@ -332,7 +332,7 @@ We can also use the results of the previous parts to see that
 \end{exercise}
 
 
-\begin{exercise}{\faCalculator}
+\begin{exercise}[\faCalculator]
 Show that  for a Poisson process $N_\lambda$, 
 \begin{equation*}
 \P{N(s) =1\given N(t)=1} = \frac s t,
@@ -393,7 +393,7 @@ In fact, this merged process $N_{\lambda+\mu}$ is also a Poisson process whose r
 
 
 
-\begin{exercise} {\faCalculator}
+\begin{exercise} [\faCalculator]
 If the Poisson arrival processes $N_\lambda$ and $N_\mu$  are independent, show with a conditioning argument that
 $N_\lambda + N_\mu$ is  a Poisson process with rate $(\lambda + \mu)t$. 
   \begin{hint}
@@ -416,7 +416,7 @@ Take expectations left and right, use~\eqref{eq:74}, and  independence of $N_\la
     \end{solution}
 \end{exercise}
 
-\begin{exercise} {\faCalculator}
+\begin{exercise} [\faCalculator]
   If the Poisson arrival processes $N_\lambda$ and $N_\mu$  are independent,
 use moment-generating functions to show that
 $N_\lambda + N_\mu$ is  a Poisson process with rate $(\lambda + \mu)t$. 
@@ -437,7 +437,7 @@ The last expression is the moment-generating function of a Poisson random variab
 
 
 
-\begin{exercise}{\faCalculator}
+\begin{exercise}[\faCalculator]
 If the Poisson arrival processes $N_\lambda$ and $N_\mu$  are independent, show 
 that 
  \begin{equation*}
@@ -513,7 +513,7 @@ node[below, fill=white] {$B_6=0$};
   \end{center}
 
 
-\begin{exercise}{\faCalculator}\label{ex:1}
+\begin{exercise}[\faCalculator]\label{ex:1}
   Show with conditioning that thinning the Poisson process $N_\lambda$ by means of Bernoulli random variables with success probability $p$ results in a Poisson process $N_{\lambda p}$.
   \begin{hint}
 Suppose that  $N_1$ is the  thinned stream, and $N$ the original stream.  Condition on the total number of arrivals $N(t)=n$ up to time
@@ -541,7 +541,7 @@ Use~\eqref{eq:70} to decompose the $\{N_1=k\}$, and \eqref{eq:76} at the end.
 \end{exercise}    
 
 
-\begin{exercise}{\faCalculator}\label{ex:18888}
+\begin{exercise}[\faCalculator]\label{ex:18888}
 Show with moment-generation functions 
 that thinning the Poisson process $N_\lambda$ by means of Bernoulli random variables with success probability $p$ results in a Poisson process $N_{\lambda p}$.
   \begin{hint}

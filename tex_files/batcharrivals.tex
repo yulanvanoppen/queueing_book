@@ -141,7 +141,7 @@ In view of the above, define
 as the number of jobs up to time $t$ that see $m$ in the system upon
 arrival and have batch size larger than $n-m$. 
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
    Show that $A(n, n,t) = A(n,t)$, where $A(n,t)$ is defined by Eq.~\eqref{eq:19}.
 \begin{solution}
  $A(n,n,t)$ counts all jobs up to time $t$ that see $n$ items
@@ -163,7 +163,7 @@ By the assumptions of Section~\ref{sec:poisson-arrivals-see},  $A(t)/t\to\lambda
 \end{equation}
 where the random variable $L(A-)$   denotes the number in the system seen by an arbitrary arrival.
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
 Show that $\P{B>n-m\given L(A-)=m}=\P{B>n-m}$.
   \begin{hint}
     Realize that $B$ and $L(A-)$ are assumed to be independent.
@@ -189,7 +189,7 @@ existence of all limits involved we find
 \lim_{t\to\infty}   \frac{A(m,n,t)}t = \lambda \pi(m) G(n-m).
 \end{equation*}
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
 Provide an interpretation of the above result in terms of a thinned Poisson arrival process.
 \begin{solution}
 Eq.~(\ref{eq:16}) has the interpretation that the rate at which
@@ -212,7 +212,7 @@ Thus, taking the limit $t\to\infty$ in this equation, we conclude that
 \end{equation}
 where we use  PASTA in~\eqref{eq:22} to see that $\mu(n+1)p(n+1) = \mu \pi(n+1)$. 
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
   Show that Eq.~(\ref{eq:42}) reduces to $\mu \pi(n+1)=\lambda \pi(n)$ for the $M/M/1$ case.
   \begin{solution}
     The left-hand side of Eq.~(\ref{eq:42}) is identical, so we only
@@ -223,7 +223,7 @@ where we use  PASTA in~\eqref{eq:22} to see that $\mu(n+1)p(n+1) = \mu \pi(n+1)$
   \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faCalculator}\label{ex:13}
+\begin{exercise}[\faCalculator]\label{ex:13}
 With $\alpha = \lambda/\mu$,  show that \emph{unnormalized} state probabilities are given by
 \begin{align*}
 \pi(0) & = 1 &
@@ -256,7 +256,7 @@ While this is a practical approach, getting formal bounds on a proper size of $N
 
 Once again with $\pi(n)$ we can compute all performance measures we need, and study the influence on the batch size distribution and $\lambda$ and $\mu$ on the system's performance.
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
   Why is Eq.~\eqref{eq:39}, i.e., $\pi(n)=\delta(n)$, not true for the
   $M^X/M/1$ batch queue?
 \begin{solution}
@@ -267,7 +267,7 @@ Once again with $\pi(n)$ we can compute all performance measures we need, and st
 Let us use  recursion Eq.~(\ref{eq:42}) for $\pi(n)$ to
  derive an expression for the expected number of units of work $\E L$
  in the system.
-\begin{exercise}{\faCalculator}
+\begin{exercise}[\faCalculator]
  Show that
 \begin{equation}\label{eq:67}
   \mu \E L =\mu \sum_{n=0}^\infty n \pi(n) = \lambda \frac{\E{B^2}}2  + \lambda \E B \E L +\lambda \frac{\E B}2.
@@ -300,7 +300,7 @@ Substitute the
 \end{exercise}
 
 With this we can check a result of Section~\ref{sec:mxm1-queue:-expected}.  
-\begin{exercise}{\faCalculator}
+\begin{exercise}[\faCalculator]
   Use Eq.~(\ref{eq:67}) and the definition  $\rho=\lambda \E B/\mu$ to show that
 \begin{equation*}
 (1- \rho) \E L = \frac{\lambda}\mu \frac{\E{B^2}}2 + \frac\rho2.
@@ -318,7 +318,7 @@ Dividing both sides by $\mu$ and using that $\lambda \E B/\mu = \rho$,
 
 
 
-\begin{exercise}{\faCalculator}
+\begin{exercise}[\faCalculator]
   Implement the recursion~(\ref{eq:42}) in a computer program for the
   case $f(1)=f(2)=f(3)=1/3$ (recall $\P{B=k} =f_k$). Take $\lambda =1$
   and $\mu = 3$.  
@@ -440,7 +440,7 @@ The results agree.
 \end{exercise}
 
 
-\begin{exercise}{\faPhoto}(Finite queueing systems) We consider the $M^X/M/1/K$
+\begin{exercise}[\faPhoto](Finite queueing systems) We consider the $M^X/M/1/K$
 queue, i.e., a batch queue in which at most $K$ jobs fit into the
 system. When customers can be blocked, it is necessary to specify an
 acceptance, or equivalently a rejection, policy. Three common rules are
@@ -546,7 +546,7 @@ where we use that
 \end{exercise}
 
 
-\begin{exercise}{\faRocket}
+\begin{exercise}[\faRocket]
 An interesting extension is to consider a queueing process with batch
 services, i.e., the $M/M^Y/1$ queue. Construction a recursion for the
 steady-state probabilities $\pi(n)$ for this case is not hard, in fact,
