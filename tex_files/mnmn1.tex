@@ -1,6 +1,6 @@
 \section
-[$M(n)/M(n)/1$ Queue]
-{$\mathbf{M(n)/M(n)/1}$ Queue}
+{$M(n)/M(n)/1$ Queue}
+%{$\mathbf{M(n)/M(n)/1}$ Queue}
 \label{sec:mnmn1}
 
 \subsection*{Theory and Exercises}
@@ -8,12 +8,9 @@
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-As it turns out, many more single-server queueing situations can be
-modeled and analyzed by making a judicious choice of $\lambda(n)$ and
-$\mu(n)$ in~\eqref{eq:25}, to wit,
-$ \lambda(n) p(n) = \mu(n+1)p(n+1)$. For these queueing systems we
-just present the results. In the exercises we ask you to derive the
-formulas---the main challenge is not to make computational errors. 
+As it turns out, many more single-server queueing situations than the $M/M/1$ queue can be modeled and analyzed by making a judicious choice of $\lambda(n)$ and $\mu(n)$ in the level crossing equations~\eqref{eq:25}.
+For these queueing systems we just present the results.
+In the exercises we ask you to derive the formulas---the main challenge is not to make computational errors.
 
 It is important to realize that the inter-arrival times and service times need to be memoryless for the analysis below; the rates, however, may  depend on the number of the jobs in the system. Specifically, consider the departure time $D_k$ of the $k$th job, so that $A_{A(D_k)+1}$ is the arrival time of the next job. If $L(D_k)=n$, then we require that for every $k$ 
 \begin{equation*}
@@ -80,7 +77,7 @@ G \to \frac{1}{1-\rho},
 \end{equation*}
 as $K\to\infty$.  Therefore $p(n)=\rho^n/G \to \rho^n(1-\rho)$, and
 the latter are the steady-state probabilities of the $M/M/1$
-queue. Finally, if the steady state probabilities are the same, the
+queue. Finally, if the steady-state probabilities are the same, the
 performance measures (which are derived from $p(n)$) must be the same.
   \end{solution}
 \end{exercise}
@@ -91,7 +88,7 @@ For the $M/M/c$ queue we can take
 \lambda(n) &= \lambda, \\
     \mu(n) &= 
   \begin{cases}
-    n\mu, &\text{ if } n \leq c, \\
+    n\mu, &\text{ if } n < c, \\
     c\mu, &\text{ if } n \geq c.
   \end{cases}
   \end{align*}
@@ -105,7 +102,7 @@ Define the load as
 \end{equation}
   Then, derive
  \begin{align}
-p(n) &= \frac{1}G \frac{(c\rho)^n}{n!}, \quad n=0,\ldots, c, \label{eq:502}\\
+p(n) &= \frac{1}G \frac{(c\rho)^n}{n!}, \quad n=0,\ldots, c-1, \label{eq:502}\\
 p(n) &= \frac{1}G \frac{c^c\rho^n}{c!}, \quad n=c,c+1, \ldots\label{eq:58} \\
 G &=\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{(1-\rho)c!}, \label{eq:501}\\
 \E{L_Q} &= \sum_{n=c}^\infty (n-c) p(n) = \frac{(c\rho)^c}{c! G}\frac{\rho}{(1-\rho)^2}, \\ 
@@ -196,7 +193,7 @@ by
       \E{L_S} = \sum_{n=0}^{c} n p(n) + \sum_{n=c+1}^{\infty} c p(n).
     \end{equation*}
     This expression is not the easiest to start with. With a slight
-    modification the entire derivation becomes easier. I also pre-multiply by the normalization constant $G$ to get rid of it on the right hand side. 
+    modification the entire derivation becomes easier. I also pre-multiply by the normalization constant $G$ to get rid of it on the right-hand side. 
     \begin{align*}
       G \E{L_S}
 &= G \left( \sum_{n=0}^{c} n p(n) + \sum_{n=c+1}^{\infty} c p(n) \right) \\
@@ -205,14 +202,14 @@ by
 &= \sum_{n=0}^{c-1} \frac{(c\rho)^{n+1}}{n!}  + \frac{(c\rho)^{c+1}}{c!}\sum_{n=0}^{\infty} \rho^n
 = c\rho \left(\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!}  + \frac{(c\rho)^{c}}{c!(1-\rho)}\right).
     \end{align*}
-Observe that the right hand side is precisely equal to $\rho c G$, and hence,
+Observe that the right-hand side is precisely equal to $\rho c G$, and hence,
 \begin{equation*}
   \E{L_S} = c\rho = \frac\lambda\mu.
 \end{equation*}
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
   Check that  Eq.\eqref{eq:9} for the $M/M/c$ queue reduces to the $M/M/1$ queue if $c=1$.
   \begin{hint}
 Fill in $c=1$. Realize that this is a check on the formulas.
@@ -221,13 +218,12 @@ Fill in $c=1$. Realize that this is a check on the formulas.
 Take $c=1$
 \begin{subequations}
  \begin{align}
-p(0) &= \frac{1}G \frac{(c\rho)^0}{0!}=\frac1 G, \quad n=0,\ldots, 1-1 \\
+p(n) &= \frac{1}G \frac{(c\rho)^0}{0!}=\frac1 G, \quad n=0,\ldots, 1-1 \\
 p(n) &= \frac{1}G \frac{c^c\rho^n}{c!} = \frac{1}G \frac{1^1\rho^n}{1!} =\frac{\rho^n}G , \quad n=1,1+1, \ldots \\
 G &=\sum_{n=0}^{c-1} \frac{(c\rho)^n}{n!} + \frac{(c\rho)^c}{(1-\rho)c!}
 =\sum_{n=0}^{0} \frac{\rho^0}{0!} + \frac{\rho}{(1-\rho)} = 1 + \frac{\rho}{1-\rho} = \frac1{1-\rho},
 \\
-\E{L_Q} &= \frac{(c\rho)^c}{c! G}\frac{\rho}{(1-\rho)^2} = 
-= \frac{\rho}{1/(1-\rho)}\frac{\rho}{(1-\rho)^2} = \frac{\rho^2}{1-\rho}, \\
+\E{L_Q} &= \frac{(c\rho)^c}{c! G}\frac{\rho}{(1-\rho)^2} = \frac{\rho}{1/(1-\rho)}\frac{\rho}{(1-\rho)^2} = \frac{\rho^2}{1-\rho}, \\
 \E{L_S} &= \sum_{n=0}^{c}n p(n) + \sum_{n=c+1}^\infty c p(n) = p(1) + 1 \sum_{n=2}^\infty p(n) = 1- p(0) = \rho.
 \end{align}
 \end{subequations}
@@ -242,7 +238,7 @@ is also known as the Erlang $B$-formula and is often used to determine
 the number of beds at hospitals, where the beds act as servers and the
 patients as jobs.
 
-\begin{exercise}($M/M/c/c$)
+\begin{exercise}\faCalculator ($M/M/c/c$)
   Find $\lambda(n)$ and $\mu(n)$ for the $M/M/c/c$ queue, and determine the performance measures.
   \begin{solution} Take,
     $\lambda(n) = \lambda$ if $n< c$, and $\lambda(n)=0$ for $n\geq c$. Also, let, $\mu(n) = n \mu$ for $n\leq c$. (And $n$ can never be larger than $c$, since $\lambda(n) = 0$ for $n\geq c$.) Define $\rho = \lambda/(c \mu)$. Then, we see that $p(n) = p(0)(c\rho)^n/n!$. For the normalization
@@ -257,19 +253,19 @@ Since there are as many servers as places available in the system, $\E{L_Q}=0$. 
 &= \sum_{n=0}^{c} n p(n) =  \sum_{n=1}^c n p(n)  \\
 &= G^{-1} \sum_{n=1}^c n \frac{(\lambda/\mu)^n}{n!} 
 = G^{-1} \sum_{n=1}^{c} \frac{(\lambda/\mu)^{n}}{(n-1)!} \\
-&= \frac{\lambda}{\mu G} \sum_{n=0}^{c-1} \frac{(\lambda/\mu)^{n}}{(n)!} 
+&= \frac{\lambda}{\mu G} \sum_{n=0}^{c-1} \frac{(\lambda/\mu)^{n}}{n!} 
 = \frac{\lambda}{G\mu} \left(G- \frac{(\lambda/\mu)^c}{c!}\right) \\
 &= \frac{\lambda}{\mu} \left(1- \frac{1}G\frac{(\lambda/\mu)^c}{c!}\right) \\
 &= \frac{\lambda}{\mu} \left(1- p(c)\right).
     \end{align*}
-  \end{solution}
 This can be explained as follows: $\lambda(1-p(c))$ is the rate of accepted jobs (since a fraction $p(c)$ is lost). Thus, the load is $\lambda(1-p(c))/\mu$, and the load is the fraction of time the servers are busy. 
+  \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
 Consider the $M/M/2/3$ queue with arrival rate $\lambda$ and
 service rate $\mu$ (thus, at most 2 jobs can be in service and 1 in queue.)
- Derive first the level-crossing equations for this queueing system, then  derive a simple and closed form expressions for the state    probabilities in steady state. 
+ Derive first the level-crossing equations for this queueing system, then  derive closed form expressions for the state    probabilities in steady state. 
   \begin{hint}
  Think about what would be the appropriate model choices for
    $\lambda(n)$ and $\mu(n)$ and use the level-crossing equations
@@ -326,7 +322,7 @@ p(0) = (1+\rho + \rho^2/2 + \rho^3/4)^{-1}.
 \end{exercise}
 
 
-\begin{exercise}(Multi-server queue with blocking) Consider the
+\begin{exercise}[\faFlask](Multi-server queue with blocking) Consider the
   $M/M/c/c+K$ queue in which at most $c$ jobs can be in service and $K$ in queue. Try to derive the steady state probabilities
   $p(0)$, $p(1), \ldots$. You do not have to compute the normalization
   constant $G$. 
@@ -386,7 +382,7 @@ prove it---that the same results also hold for the $M/G/\infty$ queue
 with $\lambda \E S$ rather than $\lambda/\mu$.
 
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
  Show that the $M/M/c$ queue converges to the $M/M/\infty$ queue as $c\to\infty$. 
   \begin{hint}
 Use that for any $x$, $x^n/n!\to 0$ as $n\to\infty$.
@@ -398,8 +394,8 @@ Use that for any $x$, $x^n/n!\to 0$ as $n\to\infty$.
 \end{exercise}
 
 
-\begin{exercise}
- Show that the $M/M\infty$ queue is stable for any finite $\lambda$. 
+\begin{exercise}[\faFlask]
+ Show that the $M/M/\infty$ queue is stable for any finite $\lambda$. 
  \begin{solution}
     No matter how many jobs are in service, there is always another
    free server available when a new job arrives. Thus, jobs never have
@@ -409,7 +405,7 @@ Use that for any $x$, $x^n/n!\to 0$ as $n\to\infty$.
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
  Why is $\E L=\rho$ for the $M/M/\infty$ queue? 
  \begin{solution}
  Write $\rho = \lambda /\mu$. Then, from the formulas for the
@@ -429,7 +425,7 @@ Use that for any $x$, $x^n/n!\to 0$ as $n\to\infty$.
 \end{exercise}
 
 
-\begin{exercise}(Hall 5.1) Give two examples of systems that
+\begin{exercise}[\faPhoto](Hall 5.1) Give two examples of systems that
   ordinarily have a finite buffer size. Give two examples of systems
   that have a finite calling population (i.e. a finite number of potential customers).
   \begin{solution}
@@ -448,72 +444,6 @@ Hence, when 2, say, machines are in repair, the number of `customers'
 that can arrive to the queueing system is only 8. 
   \end{solution}
 \end{exercise}
-
-
-\begin{comment}
-\begin{exercise}[use=false]
-  (Hall 5.21) The queueing operator of the previous problem has
-  decided to institute a policy whereby employees are removed from
-  service, to perform cleanup work, whenever they complete service and
-  no one is in queue. Employees are brought back into service when the
-  number of customers in queue, per server, exceed two. Estimate
-  $\E W_Q$, the interruption rate, the expected time between
-  interruption, and the expected number of busy servers. 
-  \begin{solution}
-
-\TBD. 
-
-    This is an interesting exercise. This policy is a so-called
-$N$-policy: as soon as the server becomes idle, remove the
-server from the queue and let him/her do something useful, when the
-queue hits/crosses some threshold (in this case, 2) call it back to
-start serving customers. This policy is one in a class of so-called
-threshold policies. One of the challenges for such policies is compute
-optimal threshold levels.
-
-In Chapter 8 of Ross, Introduction to Probability Models, this problem
-is also analyzed. With a bit of effort you can study this analysis.
-
-First copy some data from the previous problem.
-\begin{pyconsole}
-labda = 11. # per hour
-mu = 6. # per hour
-
-rho = labda/mu
-rho
-\end{pyconsole}
-
-To estimate $\E L_Q$ I use Figure 5.10. Using the line $rho =
-2$, as here $\rho = 11/6 \approx 2$, and $K=2$, we see
-that $L_q \approx 3$. Hence $W_q = 3/11 \approx 3/12 =
-1/4$ hour (note that all units are in hours here).
-
-The interruption rate $I$ follows from Figure 5.11. Reading
-$K=2$ we see that $I\approx 0.1$. The interruption rate
-must then be (by PASTA) the arrival rate times the steady state
-interruption probability, i.e., $\lambda I = 11\cdot 0.1 = 1.1$
-per hour.
-
-Finally, $B \approx 2$, as follows from Figure 5.12.
-
-To find out whether this is a good policy, in particular from the
-customers point of view, we have to compare $W_q$ under this
-policy to the queueing time as computed in Problem 11. This tell us
-that, in Problem 11, $L_q = 9.6$ and $W_q = 0.9$ hours.
-This is unexpected, at least at first. Why is the difference so large?
-
-It must be because the model of Problem 21 assumes that the number of
-available servers is unlimited. Hence, any time the queue up-crosses the
-threshold $K=2$, an extra server is called. Thus, even though in
-both cases the number of busy servers is 2, (i.e., $B\approx 2$
-here, and two servers (the M/M/2 queue ) in Problem 11), more server
-capacity can be added during busy times under the threshold policy
-than under the policy with a fixed number of servers (i.e., the M/M/2
-queue).
-
-  \end{solution}
-\end{exercise}
-\end{comment}
 
 
 \begin{exercise}(Systems with finite calling population)
@@ -539,7 +469,7 @@ Use $\lambda(n) p(n) = \mu(n+1)p(n+1)$, and realize that for
 &= \rho^{n+1} \frac{N!}{(N-(n+1))!}p(0). 
     \end{align*}
     Next, we need to normalize this. Observe that
-    $p(N+1)=P(N+2) = \ldots = 0$ since there are just $N$ customers,
+    $p(N+1)=p(N+2) = \ldots = 0$ since there are just $N$ customers,
     so that the system can never contain more than $N$
     customers. Thus, we want $p(0)$ to be such that
 \begin{equation*}
@@ -576,7 +506,7 @@ I asked WolframAlpha to simplify this, but the answer I got was not particularly
 \end{exercise}
 
 
-\begin{exercise}
+\begin{exercise}\label{ex:27}
   What would be the difference between a multi-server queue and a
   single-server queue with a fast server? We can use the formulas for
   the $M/M/1$ queue and the $M/M/c$ queue to obtain some basic
@@ -588,7 +518,7 @@ I asked WolframAlpha to simplify this, but the answer I got was not particularly
     queue with a fast server?
     \begin{hint}
 Implement the formulas for $\E{L_Q(M/M/3)}$ for the $M/M/3$ queue in
-  some computer program (R, excel, Python, whatever) and compare this
+  some computer program (R, Excel, Python, and so on) and compare this
   to $\E{L_Q(M/M/1)}$ for the fast $M/M/1$ case.  Make plots of
   $\E{L_Q(M/M/3)}$ and $\E{L(M/M/3)}$ as functions of $\rho$.
     \end{hint}
@@ -709,7 +639,7 @@ time-average versus observer-average, we need a new concept,
     balk at a level $b$. Thus, whether only $b$ customers are admitted
     to the system (i.e., blocked), or balk at level $b$, the effect is
     the same: the number of people in the system remains at or below
-    $b$. However, a fraction of customer may already balk at lower
+    $b$. However, a fraction of the customers may already balk at lower
     levels, like in the example above, so that the arrival stream is
     `thinned' due to balking customers. In that respect, a queueing
     system with balking behaves differently.

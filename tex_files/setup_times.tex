@@ -6,9 +6,9 @@
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-With the $G/G/1$ waiting time formula~\eqref{eq:7} we can compute, approximately,  the waiting time in queue for many non-trivial queueing situations. In this section we focus on the effect of change-overs, or setups. Consider, for instance, a  machine that paints red and blue bikes. When the machine requires a color change, a clean-up time is necessary. As we will see it is necessary in such situations to produce in batches.  Other examples are ovens that need  warm up or cool down times when different item types require different temperatures. In service settings, when servers have to move from part of a building to another,  the time spend moving cannot be spent on serving customers.  
+With the $G/G/1$ waiting time formula~\eqref{eq:7} we can compute, approximately,  the waiting time in queue for many non-trivial queueing situations. In this section we focus on the effect of change-overs, or setups. Consider, for instance, a  machine that paints red and blue bikes. When the machine requires a color change, a clean-up time is necessary. As we will see it is necessary in such situations to produce in batches.  Other examples are ovens that need  warm up or cool down times when different item types require different temperatures. In service settings, when servers have to move from a part of a building to another,  the time spend moving cannot be spent on serving customers.  
 
-Specifically, we analyze the following queueing situation. There are two job families, e.g., red and blue. Jobs arrive at rate $\lambda_r$ and $\lambda_b$, respectively, so that the arrival rate of jobs is $\lambda= \lambda_b+\lambda_r$. For ease we assume that a job service time $S_0$ have the same distribution for both colors. The change-over time is given by a random variable~$T$, which is independent of the normal job service times. 
+Specifically, we analyze the following queueing situation. There are two job families, e.g., red and blue. Jobs arrive at rate $\lambda_r$ and $\lambda_b$, respectively, so that the arrival rate of jobs is $\lambda= \lambda_b+\lambda_r$. For ease we assume that the job's service time, $S_0$, has the same distribution for both colors. The change-over time is given by a random variable~$T$, which is independent of the normal job service times. 
 
 Jobs of each color are assembled into batches of size $B$. Once a batch is complete, the batch enters a queue (of batches). Once a batch reaches the head of the queue, the machine performs a setup, and then starts processing each job individually until the batch is complete. If there is another batch in queue, a new setup time is required. Otherwise the machine just switches off. Finally, once a job is finished, it can leave the system; as a consequence, it does not have to wait for other jobs in the same batch to finish.  
 
@@ -177,31 +177,13 @@ total
   \end{solution}
 \end{exercise}
 
-\begin{comment}
-\begin{exercise}
-  Suppose a single machine workstation has to process $n$ different
-  product families. Jobs of family $i$ arrive as a Poisson process
-  with rate $\lambda_i$.  Service times are exponentially distributed
-  with average $\mu_i^{-1}$ for family $i$. A setup of time $S$ is
-  required if the machine switches from one family to another. If the
-  machine works according to a cyclic schedule, i.e., produce family
-  1, then 2, then 3, and so on until family $n$, can you find batch
-  sizes $B_i$ for family $i$ such that an average waiting time can be
-  guaranteed?
-  \begin{solution}
-    \TBD. 
-
-    This problem can be generalized and has been widely studied as one
-    of the core problems in stochastic machine scheduling. For
-    instance, what to do if the setup times are family-dependent, or
-    even more general, dependent on the sequence in which the families
-    are planned? This is a very hard problem. 
-  \end{solution}
-\end{exercise}
-\end{comment}
-
-
-In summary, to find the average  queueing time in the system, we need to find the arrival rate, the effective service times and the SCVs, so that we can fill in the $G/G/1$ waiting time formula. The main idea is to incorporate the setup times into the job service times. Observe also that the times to form and process batches are linear functions of the batch size $B$, while the load is, for small batch sizes, very sensitive to the batch size. Thus, batch sizes should not be too small.  Overall, batch sizes need to be tuned to minimize the total average time jobs spend in the system. When the batch sizes are small, the load $\rho$ is near to one (in other words, the server spends a relatively large fraction of its time on setups), so that the queueing times are long, but the times to form a batch are small. If, however, the batch sizes are large, the queueing times will be relatively short, but the times to form and unpack batches will be large. 
+In summary, to find the average queueing time in the system, we need to find the arrival rate, the effective service times and the SCVs, so that we can fill in the $G/G/1$ waiting time formula.
+The main idea is to incorporate the setup times into the job service times.
+Observe also that the times to form and process batches are linear functions of the batch size $B$, while the load is, for small batch sizes, very sensitive to the batch size.
+Thus, batch sizes should not be too small.
+Overall, batch sizes need to be tuned to minimize the total average time jobs spend in the system.
+When the batch sizes are small, the load $\rho$ is near to one (in other words, the server spends a relatively large fraction of its time on setups), so that the queueing times are long, but the times to form a batch are small.
+If, however, the batch sizes are large, the queueing times will be relatively short, but the times to form and unpack batches will be large.
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}

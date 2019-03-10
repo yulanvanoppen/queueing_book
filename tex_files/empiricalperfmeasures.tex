@@ -42,7 +42,7 @@ arrivals is given by
 \begin{equation}\label{eq:EQ}
 \E L =  \lim_{n\to\infty}\frac 1 n \sum_{k=1}^n L(A_k-),
 \end{equation}
-where $L(A_k-)$, i.e., the number in system at the arrival epoch
+where $L(A_k-)$ is the number of jobs in the system at the arrival epoch
 of the $k$th job.  The \recall{distribution of $\{L(t)\}$ as seen by
   customers upon arrival}, is
 \begin{equation}\label{eq:Qm}
@@ -50,30 +50,10 @@ of the $k$th job.  The \recall{distribution of $\{L(t)\}$ as seen by
 \end{equation}
 
 
-\begin{exercise}
- Assume that $X_k = 10$ minutes and $S_k = 11$ minutes for all
-    $k$, i.e., $X_k$ and $S_k$ are deterministic and constant. What
-    are $\lambda$ and $\mu$?  Compute $A_k$, $W_k$, $D_k$ and
-    $L(A_k-)$. How do these numbers behave as a function of $k$?
-  \begin{solution}
- $\lambda=6$ per hour, and $\mu=60/11$ per hour. Note that
-      $\mu < \lambda$. $A_0 = 0$, $A_1=10$, $A_2=20$, etc., hence
-      $A_k = 10k$. $W_{Q,0} = 0$, $W_{Q,1} = \max\{0 + 0-10,0\} = 0$.
-      $W_{Q,2} = \max\{0+11-10,0\} =1$.
-      $W_{Q,3} = \max\{1+11-10,0\} =2$. Hence, $W_{Q,k} = k-1$ for
-      $k\geq1$. Thus, $W_k = k-1+11 = k + 10$ for $k\geq1$, and
-      $D_k = 10k + k+10 = 11k+10$. Note that $W_k$ increases linearly
-      as a function of $k$.  You can infer that, for the queue length
-      to remain bounded, it is necessary that the service rate
-      $\mu > \lambda$.
-  \end{solution}
-\end{exercise}
-
 
 \begin{exercise}
  Yet another simple case is to take $X_k=10$ minutes and
-    $S_k=9$ minutes for all $k$. Answer the same questions as in the
-    previous exercise.
+    $S_k=9$ minutes for all $k$. Answer the same questions as in Ex. \ref{ex:25}.
   \begin{solution}
  Trivial.
   \end{solution}
@@ -89,7 +69,7 @@ jobs in the system} is given by
 \frac 1 t\int_0^t L(s)\d s =  \frac 1 t\int_0^t (A(s)-D(s)) \d s,
 \end{equation}
 where we use that $L(s)=A(s) - D(s) + L(0)$ is the total number of jobs in
-the system at time $s$ and $L(0)=0$, c.f. Figure~\ref{fig:atltdt}.  Observe from the second equation that $\int_0^t L(s)\d s$ is the area enclosed between the graphs of $\{A(t)\}$
+the system at time $s$ and $L(0)=0$, cf. Figure~\ref{fig:atltdt}.  Observe from the second equation that $\int_0^t L(s)\d s$ is the area enclosed between the graphs of $\{A(t)\}$
 and $\{D(t)\}$. Assuming the limit exists for $t\to\infty$, we define
 \begin{equation}
   \label{eq:46}
@@ -156,7 +136,7 @@ Formulate a definition  for the  time-average of the waiting time.
     \node [block, fill=red!50] (X_k) {$\{X_k\}$};
     \node [block, right=2.5cm of  X_k,fill=red!50] (A_k) {$\{A_k\}$}
     edge[pil,bend left=45] node[below] {$X_k := A_k - A_{k-1}$} (X_k)
-    edge[pil,<-, bend right=45] node[above] {$A_k := A_{k-1} + X_{k-1}$} (X_k); 
+    edge[pil,<-, bend right=45] node[above] {$A_k := A_{k-1} + X_{k}$} (X_k); 
     \node [block, right=2.5cm of  A_k ] (A_t) {$\{A(t)\}$}
     edge[pil,bend left=45] node[below] {$A_k := \inf\{t: A(t)\geq k\}$} (A_k)
     edge[pil,<-, bend right=45] node[above] {$A(t) := \max\{k: A_k\leq t\}$} (A_k); 
@@ -240,7 +220,7 @@ edge[pil,bend left=25, <-] (mu.east);
   \caption{Here we sketch the relations between the construction of
     the $G/G/1$ queue from the primary data, i.e., the inter-arrival
     times $\{X_k; k\geq 0\}$ and the service times $\{S_k; k\geq 0\}$,
-    and different performance measure. 
+    and different performance measures. 
 % The performance measures are
 %     shown in \protect\tikz \protect\node[fill=blue!40] {blue};, the
 %     essential components for the construction of the $G/G/1$ are shown

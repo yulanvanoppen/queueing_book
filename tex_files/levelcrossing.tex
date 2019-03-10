@@ -1,4 +1,4 @@
-\section{Level-Crossing and Balance Equations}
+\section{Level Crossing and Balance Equations}
 \label{sec:level-cross-balance}
 
 
@@ -10,7 +10,7 @@
 
 Consider a system at which customers arrive and depart in single
 entities, such as customers in a shop or jobs at some machine.  If the
-system starts empty, then we know that the number $L(t)$ is the system
+system starts empty, then we know that the number $L(t)$ in the system
 at time $t$ is equal to $A(t) - D(t)$. To illustrate:
 
 \begin{figure}[h]
@@ -22,7 +22,7 @@ at time $t$ is equal to $A(t) - D(t)$. To illustrate:
 \end{tikzpicture}
 \end{figure}
 
-\noindent What goes in the box (i.e., $A(t)$) and has not yet left
+\noindent What goes in the box (i.e., $A(t)$) minus what has already gone out
   (i.e., $D(t)$) must still be in the box, hence $L(t)=A(t)-D(t)$). 
 
 
@@ -53,12 +53,10 @@ If $L(t)=1$ for all $t$, $\E{L} =1 $, but $L(t)/t \to 0$.
 \end{exercise}
 
 
-Let us say that the system is in \emph{state $n$ when it contains $n$
-  jobs}, c.f. Figure~\ref{fig:A_n_t}, and the system \emph{crosses}
-level $n$ when the state changes from $n$ to $n+1$, either `from
-below' when an arrival occurs, or `from above' when a departure
-occurs.  
-
+Let us say that the system is in \emph{state $n$} at time $t$ when it contains $n$
+  jobs at that moment, i.e., when $L(t) = n$.  The system \emph{crosses}
+level $n$ at time $t$ when its state changes from $n$ to $n+1$, either `from
+below' due to an  arrival, or `from above' due to  a departure, cf. Figure~\ref{fig:A_n_t}.
 
 \begin{figure}[th]
   \centering
@@ -86,40 +84,29 @@ occurs.
 
 \end{tikzpicture}
 \caption{ $A(1,t)$ counts the number of jobs up to time $t$ that saw 1
-  job in the system; thus, right after the arrival of such a job the
-  system contains 2 jobs. Similarly, $D(1,t)$ counts the number of
-  departures that leave 1 job behind.  Each time $A(1,t)$ increases by
-  one or $D(1,t)$ decreases by one, level $1$ (the dotted line
-  separating states 1 and 2) is crossed.  The number of times this
+  job in the system upon arrival, and right after such arrivals the
+  system contains 2 jobs.  Thus, each time $A(1,t)$ increases by
+  one, level $1$ (the dotted line  separating states 1 and 2) is crossed from below.  Similarly, $D(1,t)$ counts the number of
+  departures that leave 1 job behind, and just before such departures the system contains 2 jobs. Hence, level $1$ is crossed from above. 
+It is evident that the number of times this
   level is crossed from below must be the same (plus or minus 1) the
-  number of times it is crossed from above. }
+  number of times it is crossed from above. (We introduce $\lambda(n)$, $\mu(n)$ and $p(n)$ below.) }
 \label{fig:A_n_t}
 \end{figure}
 
 
-
-The main result we derive in this section is that the rate at
-which level $n$ is crossed from below must match the rate at which it is crossed from above, i.e.,
-\begin{equation*}
-  \lambda(n) p(n) = \mu(n+1) p(n+1),
-\end{equation*}
-where $\lambda(n)$ is the arrival rate in state $n$, $p(n)$ the
-fraction of time the system is in state $n$ and $\mu(n+1)$ the
-departure rate from $n+1$. 
-
-To establish this we need a few definitions
+To establish the section's main result Eq.~\eqref{eq:12}  we need a few definitions
 that are quite subtle and might seem a bit abstract, but below we will
 provide intuitive interpretations in terms of system KPIs. Once we
 have the proper definitions, the above result will follow
-straightaway.
+straightaway. Figure~\ref{fig:summaries} at the end of the section summarizes all concepts we  develop here.
+
+\paragraph{Level crossing}
 
 
-Define\footnote{It is common to write
-  $f(x+) = \lim_{h\downarrow0} f(x+h)$ for the right limit of a
-  function $f$ at $x$ and $f(x-) = \lim_{h\downarrow0} f(x-h)$ for the
-  left limit. When $f(x-)=f(x+)$, $f$ is continuous at $x$. Since in
-  queueing systems we are concerned with processes with jumps, we need
-  to be quite particular about left and right limits at jump epochs.}
+
+
+Define
 \begin{subequations}\label{eq:rates_}
 \begin{equation}\label{eq:19} 
   A(n,t) = \sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = n}
@@ -127,7 +114,7 @@ Define\footnote{It is common to write
 as the number of arrivals up to time $t$ that saw $n$ customers in the system at their arrival.
 
 \begin{exercise}
-  Should we  take $L(A_k-)=n$ or $L(A_k)$ in the definition of $A(n,t)$?
+  Why do we  take $L(A_k-)=n$ rather than $L(A_k)$ in the definition of $A(n,t)$?
   \begin{hint}
 Recall that $L(t)$ is \emph{right-continuous}.
   \end{hint}
@@ -174,7 +161,7 @@ What is the difference between $A(n,t)$ and $A(t)$?
  If $\lambda > \delta$, then $L(t)\to\infty$. But then there
       must be a last time, $s$ say, that $L(s) = n+1$, and $L(t) > n+1$
       for all $t>s$. Hence, after time $s$ no job will see the system
-      with $n$ jobs. Thus $A(t,n) = A(s,n)$ for all $t>s$.  This is a
+      with $n$ jobs. Thus $A(n,t) = A(n,s)$ for all $t>s$.  This is a
       finite number, while $t\to\infty$, so that $A(n,t)/t \to 0$.
   \end{solution}
  \end{exercise}
@@ -183,8 +170,8 @@ What is the difference between $A(n,t)$ and $A(t)$?
 \begin{exercise}\label{ex:111}
   Consider the following (silly) queueing process. At times
   $0, 2,4, \ldots$ customers arrive, each customer requires $1$ unit
-  of service, and there is one server. What acronym would describe this queueing situation? 
-Find an expression for $A(n,t)$. 
+  of service, and there is one server. 
+Find an expression for $A(n,t)$. (What acronym would describe this queueing situation?)
   \begin{hint}
 For the acronym, observe that the service times and
     inter-arrival are deterministic and there is one server. For
@@ -225,7 +212,7 @@ Find an expression for $Y(n,t)$.
       more than 1 job. Hence, $Y(n,t)=0$ for all $n\geq 2$.  Then we see that
       $Y(1,t) = \int_0^t \1{L(s) = 1}\d s.$ Now observe that for our
       queueing system $L(s)=1$ for $s\in[0,1)$, $L(s)=0$ for
-      $s\in[1,2)$, $L(s)=1$ for $s\in[2,3)$, and so on, Thus, when
+      $s\in[1,2)$, $L(s)=1$ for $s\in[2,3)$, and so on. Thus, when
       $t<1$, $Y(1,t)=\int_0^t \1{L(s)=1} \d s = \int_0^t 1\d s = t$.
       When $t\in[1,2)$, 
       \begin{equation*}
@@ -235,11 +222,11 @@ Continuing to $[2,3)$ and so on gives
     \begin{equation*}
       Y(1,t) =
       \begin{cases}
-        t &\leq t\in[0,1), \\
-        1 &\leq t\in[1,2), \\
-        1+(t-2) &\leq t\in[2,3), \\
-        2 &\leq t\in[3,4), \\
-        2+(t-4) &\leq t\in[4,5), \\
+        t & t\in[0,1), \\
+        1 & t\in[1,2), \\
+        1+(t-2) & t\in[2,3), \\
+        2 & t\in[3,4), \\
+        2+(t-4) & t\in[4,5), \\
       \end{cases}
     \end{equation*}
     and so on.  Since $Y(n,t)=0$ for all $n\geq 2$, $L(s) = 1$ or
@@ -314,7 +301,7 @@ node (c3) at (6.3,2)  {};
 \node[right] at (6.3, 1.5) {$A(1,t)$};
 
 \end{tikzpicture}
-  \caption{Plots of $Y(1,t)$ and $A(1,t)$. (For visual clarity, we subtracted $\nicefrac12$ from $A(1,t)$, for otherwise its graph would partly overlap with the graph of $L$.)}
+  \caption{Plots of $Y(1,t)$ and $A(1,t)$. (For visual clarity, we subtracted $1/2$ from $A(1,t)$, for otherwise its graph would partly overlap with the graph of $L$.)}
   \label{fig:Y_1_t}
 \end{figure}
 
@@ -348,11 +335,11 @@ For the rest $\lambda(n) = 0$, and $p(n)=0$, for $n\geq 2$.
   \end{solution}
 \end{exercise}
 
-Similar as the definition for $A(n,t)$, denote by
+Similar as the definition for $A(n,t)$, let
 \begin{equation*}
-    D(n,t) = \sum_{k} \1{D_k \leq t} \1{L(D_k) = n}
+    D(n,t) = \sum_{k=1}^\infty \1{D_k \leq t} \1{L(D_k) = n}
   \end{equation*}
-  the number of departures up to time $t$ that\emph{ leave $n$
+  denote the number of departures up to time $t$ that\emph{ leave $n$
     customers behind}. Then,  define
 \begin{equation*}
   \mu(n+1) = \lim_{t\to\infty} \frac{D(n,t)}{Y(n+1,t)},
@@ -378,7 +365,7 @@ $D(n,t)$ and $\mu(n+1)$ for $n\geq 0$.
 \begin{solution}
   $D(0,t) = \sum_{k=1}^\infty\1{D_k\leq t, L(D_k)=0}$. From the graph of $\{L(s)\}$ we see that all jobs leave an empty system behind. Thus, $D(0,t) \approx t/2$, and $D(n,t)=0$ for $n\geq 1$. With this, $D(0,t)/Y(1,t) \sim (t/2)/(t/2) = 1$, and so,
   \begin{equation*}
-    \mu(1) = \lim_t \frac{D(0,t)}{Y(1, t)} = 1,
+    \mu(1) = \lim_{t\to\infty} \frac{D(0,t)}{Y(1, t)} = 1,
   \end{equation*}
 and $\mu(n) = 0$ for $n\geq2$. 
 \end{solution}
@@ -401,16 +388,16 @@ $A(n,t)/t$. Taking limits we get
 \begin{subequations}
 \label{eq:21}
 \begin{equation}\label{eq:63}
-  \frac{A(n,t)}t =   \frac{A(n,t)}{Y(n,t)}\frac{Y(n,t)}t \to \lambda(n) p(n),
+\lim_{t\to\infty}  \frac{A(n,t)}t =  \lim_{t\to\infty} \frac{A(n,t)}{Y(n,t)}\frac{Y(n,t)}t = \lambda(n) p(n),
 \end{equation}
 where we use the above definitions for $\lambda(n)$ and $p(n)$.
 Similarly, the departure rate of jobs that leave $n$ jobs behind is
 \begin{equation}\label{eq:22}
-  \frac{D(n,t)}t =   \frac{D(n,t)}{Y(n+1,t)}\frac{Y(n+1,t)}t \to \mu(n+1) p(n+1).
+\lim_{t\to\infty}  \frac{D(n,t)}t =  \lim_{t\to\infty} \frac{D(n,t)}{Y(n+1,t)}\frac{Y(n+1,t)}t = \mu(n+1) p(n+1).
 \end{equation}
 \end{subequations}
 Combining this with~\eqref{eq:15} we arrive at \recall{the
-  level-crossing equations}
+  level crossing equations}
 \begin{equation}\label{eq:12}
   \lambda(n) p(n) = \mu(n+1)p(n+1).
 \end{equation}
@@ -427,13 +414,13 @@ Clearly, for all $n$ we have $\lambda(n)p(n)= \mu(n+1)p(n+1)$.
 \end{solution}
 \end{exercise}
 
-The result~\ref{eq:12} turns out to be exceedingly useful, as will become evident from Section~\ref{sec:mm1} onward. More specifically, by specifying (i.e., modeling) $\lambda(n)$ and $\mu(n)$, we can compute the long-run fraction of
+Result~\eqref{eq:12} turns out to be exceedingly useful, as will become evident from Section~\ref{sec:mm1} onward. More specifically, by specifying (i.e., modeling) $\lambda(n)$ and $\mu(n)$, we can compute the long-run fraction of
 time $p(n)$ that the system contains $n$ jobs. To see this, rewrite
 the above into
 \begin{equation}\label{eq:25}
   p(n+1) = \frac{\lambda(n)}{\mu(n+1)}p(n). 
 \end{equation}
-Thus, this equation fixes the ratios between the probabilities. In other words, if we know $p(n)$ we can compute $p(n+1)$, and so on. Hence, if $p(0)$ is known, than $p(1)$ follows, from which $p(2)$
+Thus, this equation fixes the ratios between the probabilities. In other words, if we know $p(n)$ we can compute $p(n+1)$, and so on. Hence, if $p(0)$ is known, then $p(1)$ follows, from which $p(2)$
 follows, and so on. A straightaway iteration then leads to
 \begin{equation}\label{eq:38}
   p(n+1) = \frac{\lambda(n)\lambda(n-1)\cdots \lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)}p(0).
@@ -443,7 +430,7 @@ To determine $p(0)$ we can use the fact that the numbers $p(n)$ represent probab
 \begin{align*}
 1 
 &= \sum_{n=0}^\infty p(n) \\
-&= p(0) \sum_{n=0}^\infty \frac{\lambda(n)\lambda(n-1)\cdots\lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)},
+&= p(0) \left(1+\sum_{n=0}^\infty \frac{\lambda(n)\lambda(n-1)\cdots\lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)}\right),
 \end{align*}
 we obtain  
 \begin{equation*}
@@ -452,13 +439,13 @@ we obtain
 where $G$ is the \recall{normalization constant}
 \begin{equation}
   \label{eq:20}
-G = \sum_{n=0}^\infty \frac{\lambda(n)\lambda(n-1)\cdots\lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)}.
+G = 1+\sum_{n=0}^\infty \frac{\lambda(n)\lambda(n-1)\cdots\lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)}.
 \end{equation}
 Now that we know $p(0)$,  $p(n)$ follows from Eq.~\eqref{eq:38}. 
 
 Let us now express a few important performance measures in terms of
 $p(n)$: the average number of items $\E L$ in the system and the
-fraction of time $\P{L\leq n}$ the system contains at least $n$ jobs.
+fraction of time $\P{L\geq n}$ the system contains at least $n$ jobs.
 As $L(s)$ counts the number of jobs in the system at time $s$ (thus
 $L(s)$ is an integer),
 \begin{equation*}
@@ -480,7 +467,7 @@ Finally, assuming that the limit $p(n,t) \to p(n)$ exists as
 $t\to\infty$ (and that the summation and limit can be interchanged in
 the above), it follows that 
 \begin{equation*}
-\frac 1 t \int_0^t L(s) \d s \to  \sum_{n=0}^\infty n p(n) = \E L, \text{ as } t \to \infty.
+\E L = \lim_{t\to\infty} \frac 1 t \int_0^t L(s) \d s = \sum_{n=0}^\infty n p(n).
 \end{equation*}
 In a loose sense we can say that
 $\E L$ is the average number in the system as perceived by the
@@ -488,21 +475,126 @@ $\E L$ is the average number in the system as perceived by the
 \emph{arriving} jobs `see').  Similarly, the probability that the
 system contains at least $n$ jobs is 
 \begin{equation*}
-  \P{ L \geq n} := \sum_{i=n}^\infty p(i).
+  \P{ L \geq n} = \sum_{i=n}^\infty p(i).
 \end{equation*}
 
-From the above we conclude that from the probabilities $p(n)$, more
-specifically, from a specification of $\lambda(n)$ and $\mu(n)$, we
-can compute numerous performance measures. Thus, determining $p(n)$
-from Eqs.~\eqref{eq:25} and~\eqref{eq:20} for concrete queueing
-examples is the task of the next sections.
+From the above we conclude that with the probabilities $p(n)$ we can compute numerous performance measures.
+In the next few sections we will make suitable choices for $\lambda(n)$ and $\mu(n)$ to model many different queueing situations so that, based on \eqref{eq:12}, we can analyze the performance of these models.
 
-Before we embark on this task, we note that the level-crossing cannot
-always be used as we do here. The reason is that it is not always
-natural, or easy, to decompose the state space into two disjoint
+
+
+
+Finally, the following two exercises show that level crossing arguments extend well beyond the queueing systems modeled by Figure~\ref{fig:A_n_t}.
+
+\begin{exercise}
+  Consider a single server that serves one queue and serves only in
+  batches of 2 jobs at a time (so never 1 job or more than 2 jobs),
+  i.e., the $M/M^2/1/3$ queue.  Single jobs arrive at rate $\lambda$
+  and the inter-arrival times are exponentially distributed so that we can assume that $\lambda(n) = \lambda$. The batch service times are exponentially distributed with mean $1/\mu$. Then, by the memoryless property, $\mu(n) = \mu$. At most 3 jobs fit in the system.   Make a graph of the state-space and show, with arrows, the
+  transitions that can occur.
+
+  \begin{solution}
+See the figure below.
+
+\begin{tikzpicture}[scale=1,->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+\node[state] (0) {$0$}; 
+\node[state] (1) [right of=0] {$1$}; 
+\node[state] (2) [right of=1] {$2$}; 
+\node[state] (3) [right of=2] {$3$}; 
+
+\path 
+(0) edge [bend left] node[above] {$\lambda$} (1)
+(1) edge [bend left] node[above] {$\lambda$} (2)
+(2) edge [bend left] node[above] {$\lambda$} (3)
+(3) edge [bend left] node[below] {$\mu$} (1)
+(2) edge [bend left] node[below] {$\mu$} (0);
+
+\draw[-, dotted, gray] (4,-2.)--(4,2.0) node[above, black] {level $1$};
+\end{tikzpicture}
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}
+  Use the graph of the previous question and a level crossing argument
+  to express the steady-state probabilities $p(n), n=0,\ldots, 3$ in
+  terms of $\lambda$ and $\mu$.
+  \begin{hint}
+First balance the rates across the levels. Then solve this in terms of $p(0)$.
+  \end{hint}
+  \begin{solution}
+With level crossing
+  \begin{align*}
+    \lambda p(0)  &= \mu p(2), \quad\text{the level between 0 and 1,}\\
+    \lambda p(1)  &= \mu p(2) +\mu p(3), \quad\text{see level 1,}\\
+    \lambda p(2)  &= \mu p(3), \quad\text{the level between 2 and 3.}\\
+  \end{align*}
+  Solving this in terms of $p(0)$ gives $p(2) = \rho p(0)$, $p(3) = \rho p(2) = \rho^2p(0)$, and
+  \begin{equation*}
+    \lambda p(1) = \mu(p(2) + p(3)) = \mu (\rho + \rho^2) p(0) = (\lambda + \lambda^2/\mu) p(0),
+  \end{equation*}
+hence $p(1) = p(0)(\mu + \lambda)/\mu$. 
+  \end{solution}
+\end{exercise}
+
+\paragraph{Interpretation}
+
+The definitions in~(\ref{eq:rates_}) may seem a bit abstract, but they
+obtain an immediate interpretation when relating them to
+applications. To see this, we discuss two examples.
+
+Consider the sorting process of post parcels at a distribution center
+of a post delivery company.  Each day tens of thousands of incoming
+parcels have to be sorted to their final destination. In the first
+stage of the process, parcels are sorted to a region in the
+Netherlands. Incoming parcels are deposited on a conveyor belt. From
+the belt they are carried to outlets (chutes), each chute
+corresponding to a specific region. Employees take out the parcels
+from the chutes and put the parcels in containers.  The arrival rate
+of parcels for a certain chute may temporarily exceed the working
+capacity of the employees, as such the chute serves as a queue.  When
+the chute overflows, parcels are directed to an overflow container and
+are sorted the next day. The target of the sorting center is to
+deliver at least a certain percentage of the parcels within one
+day. Thus, the fraction of parcels rejected at the chute should remain
+small.
+
+Suppose a chute can contain at most 20 parcels, say. Then, each parcel
+on the belt that `sees' 20 parcels in its chute will be blocked. Let
+$L(t)$ be the number of parcels in the chute at time $t$. Then,
+$A(20,t)$ as defined in Eq.~(\ref{eq:19}) is the number of\emph{ blocked
+  parcels} up to time $t$, and $A(20,t)/A(t)$ is the fraction of
+rejected parcels. In fact, $A(20,t)$ and $A(t)$ are continuously
+tracked by the sorting center and used to adapt employee capacity to
+control the fraction of rejected parcels. Thus, in simulations, if one
+wants to estimate loss fractions, $A(n,t)/A(t)$ is the most natural
+concept to consider.
+
+For the second example, suppose there is a cost associated with
+keeping jobs in queue. Let $w$ be the cost per job in queue per unit
+time so that the cost rate is $n w$ when $n$ jobs are in queue. But
+then $ w n Y(n,t)$ is the total cost up to time $t$ to have $n$ jobs in
+queue, hence the total cost up to time $t$ is
+  \begin{equation*}
+C(t) =     w \sum_{n=0}^\infty n Y(n,t),
+  \end{equation*}
+and the average cost is
+\begin{equation*}
+\frac{C(t)}t =    w \sum_{n=0}^\infty n \frac{Y(n,t)}t = w \sum_{n=0}^\infty n p(n,t).
+\end{equation*}
+All in all, the concepts developed above have natural interpretations
+in practical queueing situations; they are useful in theory and in
+simulation, as they relate the theoretical concepts to actual measurements.
+
+
+
+\paragraph{Balance equations}
+
+It is important to realize that  that the level crossing argument cannot
+always be used as we do here. The reason is that not always  line exists between two states such that the state space splits  into two disjoint
 parts. For a more general approach, we focus on a single state and
 count how often this state is entered and left,
-c.f. Figure~\ref{fig:balance}. Specifically, define
+cf. Figure~\ref{fig:balance}. Specifically, define
 \begin{align*}
   I(n,t) &= A(n-1,t) + D(n,t),
 %  O(n,t) &= A(n,t) + D(n-1,t),
@@ -513,17 +605,16 @@ jobs behind. Similarly,
 \begin{align*}
  O(n,t) &= A(n,t) + D(n-1,t),
 \end{align*}
-counts how often state $n$ is left either by an arrival or a departure
-to state $n-1$.
+counts how often state $n$ is left either by an arrival (to state $n+1$) or a departure (to state $n-1$).
 
 Of course, $|I(n,t)-O(n,t)|\leq 1$. Thus, from the fact that
 \begin{equation*}
-  \frac{I(n,t)}t = \frac{A(n-1,t)}t + \frac{D(n,t)}t \to \lambda(n-1) p(n-1) + 
+\lim_{t\to\infty}  \frac{I(n,t)}t = \lim_{t\to\infty} \frac{A(n-1,t)}t + \lim_{t\to\infty} \frac{D(n,t)}t = \lambda(n-1) p(n-1) + 
 \mu(n+1) p(n+1)
 \end{equation*}
 and 
 \begin{equation*}
-  \frac{O(n,t)}t = \frac{A(n,t)}t + \frac{D(n-1,t)}t \to \lambda(n) p(n) + 
+\lim_{t\to\infty}   \frac{O(n,t)}t = \lim_{t\to\infty} \frac{A(n,t)}t + \lim_{t\to\infty} \frac{D(n-1,t)}t = \lambda(n) p(n) + 
 \mu(n) p(n)
 \end{equation*}
 we get that
@@ -616,7 +707,7 @@ edge[pil,<-] (An);
 \node[block, below=1.5cm of AnDn] (AnDn2) {$\frac{A(n,t)}{Y(n,t)}\frac{Y(n,t)}t\approx\frac{D(n,t)}{Y(n+1)}\frac{Y(n+1)}t$}
 edge[pil,<-] (AnDn); 
 
-\node[block, below=1.5cm of AnDn2, text width=4cm] (lp) {Recursion: \\
+\node[block, below=1.5cm of AnDn2, text width=4cm] (lp) {Level Crossing: \\
 $\lambda(n)p(n) = \mu(n+1)p(n+1)$}
 edge[pil,<-] node[fill=white] {$t\to\infty$} (AnDn2); 
 
@@ -656,115 +747,11 @@ edge[pil,<-] (pasta2)
 edge[pil,->] (perf);
 
 \end{tikzpicture}
-  \caption{With level-crossing arguments we can derive a number of
+  \caption{With level crossing arguments we can derive a number of
     useful relations. This figure presents an overview of these
     relations that we derive in this and the next sections.}
+\label{fig:summaries}
 \end{figure}
-
-\paragraph{Interpretation}
-
-The definitions in~(\ref{eq:rates_}) may seem a bit abstract, but they
-obtain an immediate interpretation when relating them to
-applications. To see this, we discuss two examples.
-
-Consider the sorting process of post parcels at a distribution center
-of a post delivery company.  Each day tens of thousands of incoming
-parcels have to be sorted to their final destination. In the first
-stage of the process, parcels are sorted to a region in the
-Netherlands. Incoming parcels are deposited on a conveyor belt. From
-the belt they are carried to outlets (chutes), each chute
-corresponding to a specific region. Employees take out the parcels
-from the chutes and put the parcels in containers.  The arrival rate
-of parcels for a certain chute may temporarily exceed the working
-capacity of the employees, as such the chute serves as a queue.  When
-the chute overflows, parcels are directed to an overflow container and
-are sorted the next day. The target of the sorting center is to
-deliver at least a certain percentage of the parcels within one
-day. Thus, the fraction of parcels rejected at the chute should remain
-small.
-
-Suppose a chute can contain at most 20 parcels, say. Then, each parcel
-on the belt that `sees' 20 parcels in its chute will be blocked. Let
-$L(t)$ be the number of parcels in the chute at time $t$. Then,
-$A(20,t)$ as defined in Eq.~(\ref{eq:19}) is the number of\emph{ blocked
-  parcels} up to time $t$, and $A(20,t)/A(t)$ is the fraction of
-rejected parcels. In fact, $A(20,t)$ and $A(t)$ are continuously
-tracked by the sorting center and used to adapt employee capacity to
-control the fraction of rejected parcels. Thus, in simulations, if one
-wants to estimate loss fractions, $A(n,t)/A(t)$ is the most natural
-concept to consider.
-
-For the second example, suppose there is a cost associated with
-keeping jobs in queue. Let $w$ be the cost per job in queue per unit
-time so that the cost rate is $n w$ when $n$ jobs are in queue. But
-then is $ w n Y(n,t)$ the total cost up to time $t$ to have $n$ jobs in
-queue, hence the total cost up to time $t$
-  \begin{equation*}
-C(t) =     w \sum_{n=0}^\infty n Y(n,t),
-  \end{equation*}
-and the average cost is
-\begin{equation*}
-\frac{C(t)}t =    w \sum_{n=0}^\infty n \frac{Y(n,t)}t = w \sum_{n=0}^\infty n p(n,t).
-\end{equation*}
-All in all, the concepts developed above have natural interpretations
-in practical queueing situations; they are useful in theory and in
-simulation, as they relate the theoretical concepts to actual measurements.
-
-
-Finally, the following two exercises show that level-crossing arguments extend well beyond the queueing systems modeled by Figure~\ref{fig:A_n_t}.
-
-\begin{exercise}
-  Consider a single server that serves one queue and serves only in
-  batches of 2 jobs at a time (so never 1 job or more than 2 jobs),
-  i.e., the $M/M^2/1/3$ queue.  Single jobs arrive at rate $\lambda$
-  and the inter-arrival times are exponentially distributed so that we can assume that $\lambda(n) = \lambda$. The batch service times are exponentially distributed with mean $1/\mu$. Then, by the memoryless property, $\mu(n) = \mu$. At most 3 jobs fit in the system.   Make a graph of the state-space and show, with arrows, the
-  transitions that can occur.
-
-  \begin{solution}
-See the figure below.
-
-\begin{tikzpicture}[scale=1,->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
-                    semithick]
-\node[state] (0) {$0$}; 
-\node[state] (1) [right of=0] {$1$}; 
-\node[state] (2) [right of=1] {$2$}; 
-\node[state] (3) [right of=2] {$3$}; 
-
-\path 
-(0) edge [bend left] node[above] {$\lambda$} (1)
-(1) edge [bend left] node[above] {$\lambda$} (2)
-(2) edge [bend left] node[above] {$\lambda$} (3)
-(3) edge [bend left] node[below] {$\mu$} (1)
-(2) edge [bend left] node[below] {$\mu$} (0);
-
-\draw[-, dotted, gray] (4,-2.)--(4,2.0) node[above, black] {level $1$};
-\end{tikzpicture}
-  \end{solution}
-\end{exercise}
-
-\begin{exercise}
-  Use the graph of the previous question and a level-crossing argument
-  to express the steady-state probabilities $p(n),n=0,\ldots, 3$ in
-  terms of $\lambda$ and $\mu$.
-  \begin{hint}
-First balance the rates across the levels. Then solve for $\pi(k)$.
-  \end{hint}
-  \begin{solution}
-With level crossing
-  \begin{align*}
-    \lambda p(0)  &= \mu p(2), \quad\text{the level between 0 and 1,}\\
-    \lambda p(1)  &= \mu p(2) +\mu p(3), \quad\text{see level 1,}\\
-    \lambda p(2)  &= \mu p(3), \quad\text{the level between 2 and 3.}\\
-  \end{align*}
-  Solving this in terms of $p(0)$ gives $p(2) = \rho p(0)$, $p(3) = \rho p(2) = \rho^2p(0)$, and
-  \begin{equation*}
-    \lambda p(1) = \mu(p(2) + p(3)) = \mu (\rho + \rho^2) p(0) = (\lambda + \lambda^2/\mu) p(0),
-  \end{equation*}
-hence $p(1) = p(0)(\mu + \lambda)/\mu$. 
-  \end{solution}
-\end{exercise}
-
-
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}

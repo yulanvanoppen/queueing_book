@@ -56,7 +56,7 @@ L(s) = \sum_{k=1}^\infty \1{A_k \leq s < D_k} = \sum_{k=1}^{A(T)}\1{A_k \leq s <
   \int_0^T L(s)\, \d s  =  \sum_{k=1}^{A(T)} W_k.
 \end{equation*}
 \begin{hint}
-  Substitute the definition of $L(s)$ in the left hand side, then reverse the integral and summation.
+  Substitute the definition of $L(s)$ in the left-hand side, then reverse the integral and summation.
 \end{hint}
 \begin{solution}
 \begin{equation*}
@@ -72,7 +72,7 @@ L(s) = \sum_{k=1}^\infty \1{A_k \leq s < D_k} = \sum_{k=1}^{A(T)}\1{A_k \leq s <
 \begin{exercise}
   Use the result of the previous exercise to show~\eqref{eq:53}. 
 \begin{hint}
-  Divide both sides by $T$. At the right hand side use that $1/T =  A(T)/T \cdot 1/A(T)$. Take limits.
+  Divide both sides by $T$. At the right-hand side use that $1/T =  A(T)/T \cdot 1/A(T)$. Take limits.
 \end{hint}
 \begin{solution}
 From the previous exercise:
@@ -169,15 +169,15 @@ As a useful first application, consider the server of a $G/G/1$ queue
 as a system by itself. Show that the average number of jobs in service~$\E{L_S}$ is equal to the utilization~$\rho$. 
 \begin{solution}
  Assume the system is rate-stable, for otherwise
-all relevant limits do not exists.  The arrival rate at the server is
-$\lambda$ and the time a job remains in at the server is $\E S$. Thus, the average time a job remains in the `box' that identifies the server is $\E S$, and then the average number of jobs at the server is $\E{L_S} = \lambda \E S$, by Little's law. As $\lambda \E{S} = \rho$, we get
+all relevant limits do not exist.  The arrival rate at the server is
+$\lambda$ and the time a job remains at the server is $\E S$. Thus, the average time a job remains in the `box' that identifies the server is $\E S$, and then the average number of jobs at the server is $\E{L_S} = \lambda \E S$, by Little's law. As $\lambda \E{S} = \rho$, we get
 $\E{L_S} = \rho$.
 \end{solution}
 \end{exercise}
 
 
 \begin{exercise}
-  For a given single server queueing system the average number of
+  For a given single-server queueing system the average number of
   customers in the system is $\E L = 10$, customers arrive at rate
   $\lambda=5$ per hour and are served at rate $\mu=6$ per hour.
  What is the average time customers spend in the system?
@@ -198,7 +198,7 @@ Start with checking the units when applying Little's law.
 \end{exercise}
 
 \begin{exercise}
-  For the  single server queueing system of the previous exercise, 
+  For the  single-server queueing system of the previous exercise, 
  suppose that at the moment you join the system, the number of
     customers in the system is 10. What is your expected time in the
     system? 
@@ -216,15 +216,6 @@ Thus, Little's law need  not hold at all moments in time; it is a statement abou
 
 \end{exercise}
 
-Here is a summary of the most useful results and concepts of this and the previous sections
-\begin{itemize}
-\item Arrival rate,  departure  rate, rate stability:  $\lambda = \delta$,
-\item PASTA: $\lambda \pi(n) = \lambda(n) p(n)$,
-\item Recursions $\lambda(n)p(n) = \mu(n+1) p(n+1)$,
-\item Renewal reward: $Y=\lambda X$,
-\item Little's law: $\E L =\lambda \E W$.
-\end{itemize}
-We will use these results time and again in the sequel.
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}

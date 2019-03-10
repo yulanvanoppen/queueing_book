@@ -9,7 +9,7 @@
 
 %See section 1.11 of Zijm's book for the theory.
 
-Up to now we assumed that servers are never interrupted while serving a job. In many situations this is not true, a person  might be receive short phone calls while working on a job, a machine may fail in the midst of processing, and so on. In this section we develop a model to account for such \emph{preemptive interruptions}, i.e., interruptions that occur \emph{during} a service, and compute the influence on the mean waiting time. 
+Up to now we assumed that servers are never interrupted while serving a job. In many situations this is not true, a person might receive a short phone calls while working on a job, a machine may fail in the midst of processing, and so on. In this section we develop a model to account for such \emph{preemptive interruptions}, i.e., interruptions that occur \emph{during} a service, and compute the influence on the mean waiting time. 
 
 Let us assume that a job's normal service, without interruptions, is given by $S_0$. The durations of the interruptions are given by the i.i.d. random variables $\{D_i\}$ and have common mean $\E D$ and variance $\V D$. If $N$ interruptions occur, the effective service time will then be
 \begin{equation*}
@@ -24,7 +24,7 @@ We first aim to find an expression for $\E S$.  Write  $S_N = \sum_{i=1}^N D_i$ 
   Suppose that $N=n$, show that $\E{S_n}=n\E D$.
 
 \begin{hint}
-    Is it relevant that for the expection of $S_n$ that $D_1,\ldots, D_n$ are mutually independent?
+    Is it relevant that for the expectation of $S_n$ that $D_1,\ldots, D_n$ are mutually independent?
   \end{hint}
 \begin{solution}
 The expectation of the sum of random variables is the same as the sum of the expectations; independence is irrelevant. Hence,
@@ -66,7 +66,7 @@ Define the \emph{availability} as
 \begin{equation*}
   A=\frac{m_f}{m_f + m_r},
 \end{equation*}
-where $m_f$ is the mean time to fail  and $m_r$ the mean to time to repair. 
+where $m_f$ is the mean time to fail and $m_r$ the mean time to repair. 
 \begin{exercise}
   Show that 
   \begin{equation*}
@@ -198,7 +198,7 @@ Next, show that
 \begin{exercise}
   Finally, show that
   \begin{equation*}
-    C_s^2 = \frac{\V{S}}{(\E S)^2} = C_0^2 + \frac{\lambda_f \E{D^2} A^2}{\E{S_0}}.
+    C_s^2 = \frac{\V{S}}{(\E S)^2} = C_0^2 + \frac{\lambda_f \E{D^2} A^2}{\E{S_0}},
   \end{equation*}
 where $C_0^2$ is the SCV of $S_0$, i.e., the service time without interruptions. 
 \begin{hint} Just realize that $\E{S} = \E{S_0}/A$, and use the above.
@@ -289,197 +289,6 @@ EW + ES # sojourn time
 The average time in queue reduces for $\approx 0.6$ to $\approx 0.17$ hours, a reduction by about a factor 3. 
 \end{solution}
 \end{exercise}
-
-\begin{comment}
-  
-Consider the compound Poisson process such that $S(t) = \sum_{i=1}^{N(t)} D_i$, where $N(t)$ is the number of customers arrived up to time $t$, and $D_i$ is the service demand of the $i$th customer. The demands $\{D_i\}$ are i.i.d. with mean $\E D$ and variance $\V D$, and $N(t)$ is Poisson distributed with rate $\lambda$. 
-
-\begin{exercise}
-First assume that $N$ is some general random variable. Use the tools you learned above to show that
-\begin{equation*}
-\V{S(t)} = \E{N(t)} \V D + \V{N(t)} (\E D)^2.
-\end{equation*}
-\begin{solution}
-The mean is $\E{S(t)}= \E{N(t)} \E D$.
-
-It remains to compute $\E{S^2(t)}$.  If $N=n$, 
-\begin{equation*}
-  \begin{split}
-  \E{ S_n^2 } 
-&=  \E{\left(\sum_{i=1}^n D_i\right)^2}  
-=  \E{\sum_i D_i^2 + \sum_i \sum_{j\neq i}^n D_i D_j}  \\
-&= \sum_i \E{D^2_i} + \sum_i \sum_{j \neq i} \E{D_i} \E{D_j},
-  \end{split}
-\end{equation*}
-since $\E{D_iD_j} = \E{D_i} \E{D_j}$ by independence. Therefore, using
-that the $\{D_i\}$ are i.i.d. as $D$,
-\begin{equation*}
-  \E{ S_n^2} = n \E{D^2} + n(n-1) (\E D)^2. 
-\end{equation*}
-
-Now take $N$ as a random variable, with $p_n=\P{N=n}$,
-\begin{equation*}
-  \begin{split}
-\E{ S_N^2}  &= 
-\sum_n p_n(n\E{D^2} + n(n-1)(\E D)^2 \\
-&=\E N \E{D^2} + (\E{N^2} - \E N)(\E D)^2 \\
-%& = \E N \E{ D^2} + \E{N^2} (\E D)^2 - \E N (\E D)^2 \\
-& = \E N (\E{ D^2}  - (\E D)^2) + \E{N^2} (\E D)^2 \\
-& = \E N \V D + \E{N^2} (\E D)^2.
-  \end{split}
-\end{equation*}
-
-Hence, 
-\begin{equation}
-  \begin{split}
-  \V{S_N} 
-&= \E{S_N^2}  - (\E{S_N})^2 \\
-&= \E N \V D + \E{N^2} (\E D)^2   - (\E N)^2 (\E D)^2 \\
-&= \E N \V D + \V N (\E D)^2.
-  \end{split}
-\end{equation}
-
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-  Now assume that $N(t)$ is Poisson with rate $\lambda$. Then, show that 
-\begin{equation}
-  \V{S_{N(t)}} = \lambda t \E{D^2}.
-\end{equation}
-\begin{solution}
-\begin{equation}
-  \begin{split}
-  \V{S_{N(t)}}  = \E N \V D + \V N (\E D)^2 =\lambda t \V D + \lambda t (\E D)^2 = \lambda t \E{D^2}.
-  \end{split}
-\end{equation}
-  
-\end{solution}
-\end{exercise}
-\end{comment}
-
-\begin{comment}
-\begin{exercise}
-Zijm.Ex.1.11.1
- \begin{solution}
-Yes. The availability is $93\%$. Since $\E{S} = \E{S_0}/A$, and if $\E{S_0} $ is known, $\E{S_e}$ follows.
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-Zijm.Ex.1.11.2
- \begin{solution}
-   No, from Zijm.Eq.1.51, the average repair time has to be known. The
-   repair time here is of course the time it takes for a mechanic to
-   show up at work again.
-\end{solution}
-\end{exercise}
-\begin{exercise}
-Zijm.Ex.1.11.3
- \begin{solution}
-   It might, but perhaps a normal distribution would be better. It
-   makes sense to make a histogram of the recover times to see whether
-   some clear pattern is present. 
-
-   Besides this, I don't know how sensitive the result for $C_s^2$ is
-   on the distribution of the repair times. Perhaps it is not that
-   sensitive, so in that case it would be ok to simply use the
-   exponential distribution. 
-
-The sensitivity study would be an interesting topic for simulation. 
-\end{solution}
-\end{exercise}
-\begin{exercise}
-Zijm.Ex.1.11.4 and 1.11.5
- \begin{solution}
-   We need to make an assumption about the distribution of the repair
-   times. Inferring from the text, the repair time is always $2$
-   days. Lets also assume that all jobs accumulate in front of the
-   broken machine, in other words, the broken machine is part of the
-   job routing of each job. Then
-   \begin{equation*}
-     \P{N(2) > 20} = 
-\sum_{n=21}^\infty e^{-5\cdot 2} \frac{10^n}{n!}.
-1  - \sum_{n=0}^{20} e^{-5\cdot 2} \frac{10^n}{n!} = 1-0.9984,
-   \end{equation*}
-i.e., very small.  This is the code I used: 
-
-\begin{pyconsole}
-from math import exp, factorial
-exp(-10) * sum((10)**n / factorial(n) for n in range(21))
-\end{pyconsole}
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-Zijm.Ex.1.11.4
-
- \begin{solution}
-If the shop already contains 10 jobs, somewhere upstream of the broken machine, then 
-   \begin{equation*}
-     \P{N(2) > 10} = 1- 0.58.
-   \end{equation*}
-where  I used
-\begin{pyconsole}
-exp(-10) * sum((10)**n / factorial(n) for n in range(11))
-\end{pyconsole}
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-Zijm.Ex.1.11.6
- \begin{solution}
-   Cleaning times will be pretty constant. Changing dies, or other
-   machine parts, is also typically quite predictable, although it can
-   take a lot of time, in particular in case a crane or other heavy
-   machinery is needed to replace parts. If the machine require
-   temporary adjustments, then the variation in setup times may be
-   quite a bit higher.
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-Zijm.Ex.1.11.7
- \begin{solution}
-   Then the effective service times, and in particular, $C_s^2$ will
-   be quite a bit bigger. It is preferable to avoid such a situation. 
-
-   Mathematically, it is only given that $N_s$ is a random
-   variable. As, however, this does not state anything about its
-   distribution, we cannot make any general claim. The intent of the
-   problem is to have you check the relevant formulas and notice that
-   the variance of $N_s$ appears in the formulas.
-\end{solution}
-\end{exercise}
-
-\end{comment}
-
-\begin{comment}
-  
-\begin{exercise}
-  Suppose a single machine workstation has to process $n$ different
-  product families. Jobs of family $i$ arrive as a Poisson process
-  with rate $\lambda_i$.  Service times are exponentially distributed
-  with average $\mu_i^{-1}$ for family $i$. A setup of time $S$ is
-  required if the machine switches from one family to another. If the
-  machine works according to a cyclic schedule, i.e., produce family
-  1, then 2, then 3, and so on until family $n$, can you find batch
-  sizes $B_i$ for family $i$ such that an average waiting time can be
-  guaranteed?
-  \begin{solution}
-    \TBD. 
-
-    This problem can be generalized and has been widely studied as one
-    of the core problems in stochastic machine scheduling. For
-    instance, what to do if the setup times are family-dependent, or
-    even more general, dependent on the sequence in which the families
-    are planned? This is a very hard problem. 
-  \end{solution}
-\end{exercise}
-\end{comment}
-
-
-
 
 
 \Closesolutionfile{hint}

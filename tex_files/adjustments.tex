@@ -8,7 +8,7 @@
 
 %See section 1.11 of Zijm's book for the theory.
 
-Besides setups, other types of interruptions can occur, for example, small adjustments required by a machine after serving a few jobs.  Interruptions, or outages, occuring \emph{between} two jobs are called \emph{non-preemptive} as they do not preempt the processing of a job.  In this section we develop a simple model to incorporate the effects of such non-preemptive outages in the service times of jobs, so that we can use the $G/G/1$ waiting time formula. 
+Besides setups, other types of interruptions can occur, for example, small adjustments required by a machine after serving a few jobs.  Interruptions, or outages, occurring \emph{between} two jobs are called \emph{non-preemptive} as they do not preempt the processing of a job.  In this section we develop a simple model to incorporate the effects of such non-preemptive outages in the service times of jobs, so that we can use the $G/G/1$ waiting time formula. 
 
 
 \begin{exercise}
@@ -18,60 +18,6 @@ Setups are planned, in the model of Section~\ref{sec:setups-batch-proc}, between
   \end{solution}
 \end{exercise}
 
-
-\begin{comment}
-  
-Suppose that an interruption occurs on average between $B$ jobs and the adjustment time is a random variable $T$. Let the average net service time of a job be $\E{S_0}$. 
-\begin{exercise}
-  Show that the average \recall{effective processing time} $S$, i.e., the time the service is occupied with processing jobs including adjustments, is 
-  \begin{equation*}
-    \E{S} = \E{S_0} + \frac{\E{T}} B.
-  \end{equation*}
-  \begin{hint}
-    What fraction of the repair time $\E T$ `belongs' to one job?
-  \end{hint}
-  \begin{solution}
-    The total service time spent on a batch of size $B$ is $B \E{S_0} + \E T$. The expected effective time per job is then the average time per job, i.e.,  $(B \E{S_0}+\E T)/B$. 
-  \end{solution}
-\end{exercise}
-
-\begin{exercise} 
-Show that the minimal number~$B$ of jobs between adjustments must satisfy the constraint
-  \begin{equation*}
- B>\frac{\lambda \E T}{1-\lambda \E{S_0}}.
-  \end{equation*}
-
-\begin{hint}
- If the batch sizes $B$ are small, relatively much time is
-  spent on repairs. 2: If the repair time $T$ is constant, then the
-  number of orders that arrive is Poisson distributed. 3: Given a
-  batch size $B$, find the time to produce such a batch, then include
-  a repair time $T$ to compute the length of one production cycle. The
-  expected number of jobs that arrive during such a cycle should not exceed the number of jobs that are served during the cycle.
-\end{hint}
-\begin{solution}
-The expected number of arrivals during a repair is
-\begin{equation*}
-    \lambda \E T.
-  \end{equation*}
-To see this, note that  the number of arrivals $N$ during a constant time is Poisson. Thus,
-\begin{equation*}
-  \E{N} = \E{ \E{N\given T}} = \E{ \E{\lambda T\given T}} = \lambda \E{\E{T \given T}} = \lambda \E{T}.
-\end{equation*}
-
-The number of jobs that arrive, on average, during one
-  production cycle must be smaller than the total amount of jobs that
-  can be served, on average, during one cycle.   The number of arrivals during the repair is $\lambda \E{T}$. The number of arrivals during serving the batch is $\lambda B \E{S}$. Thus, 
-  \begin{equation*}
-    \lambda ( B \E S + \E{T}) \leq B.
-  \end{equation*}
-  When equality holds here, the system is critically loaded. As we
-  discussed before, that it not a good idea.
-
-Finally, bring $B$ to one side.
-\end{solution}
-\end{exercise}
-\end{comment}
 
 Let us assume that adjustments occur geometrically distributed, i.e., have the memoryless property in discrete time, between any two jobs with a mean of $B$ jobs between any two repairs.  Thus, the probability of a repair between two jobs is $p=1/B$. 
 
@@ -173,37 +119,6 @@ Observe that with these formulas we can obtain quantitative insights into the ef
 
 
 
-\begin{comment}
-
-\begin{exercise}
-Zijm.Ex.1.11.6
- \begin{solution}
-   Cleaning times will be pretty constant. Changing dies, or other
-   machine parts, is also typically quite predictable, although it can
-   take a lot of time, in particular in case a crane or other heavy
-   machinery is needed to replace parts. If the machine require
-   temporary adjustments, then the variation in setup times may be
-   quite a bit higher.
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-Zijm.Ex.1.11.7
- \begin{solution}
-   Then the effective service times, and in particular, $C_s^2$ will
-   be quite a bit bigger. It is preferable to avoid such a situation. 
-
-   Mathematically, it is only given that $N_s$ is a random
-   variable. As, however, this does not state anything about its
-   distribution, we cannot make any general claim. The intent of the
-   problem is to have you check the relevant formulas and notice that
-   the variance of $N_s$ appears in the formulas.
-\end{solution}
-\end{exercise}
-
-
-  
-\end{comment}
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}

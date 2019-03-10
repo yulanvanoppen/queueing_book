@@ -22,7 +22,7 @@ density $f_Q$ is the solution:
 where $G(x) = 1 - F(x)$ is the survivor function of the service time
 $S$, and $p(0)$ is the long-run fraction of time the system is empty. 
 Once we have established the above, we show how this equation can be
-used to obtain the Pollaczek-Khintchine equation. In the last section
+used to obtain the Pollaczek-Khinchine equation. In the last section
 we use it to find an explicit expression for the density of the
 waiting time of the M/M/1 queue.
 
@@ -61,7 +61,7 @@ Subtracting $G_Q(x+h,t)$ from both sides gives
 G_Q(x, t+h) -  G_Q(x+h, t) =  \lambda h \int_0^x G(x-y) f_Q(y,t) \,\d y  + \lambda h F_Q(0,t) G(x) + o(h).
 \end{equation*}
 Assuming that all required derivatives exist, and writing $\partial_t = \partial/\partial t$ and
-$\partial_x = \partial/\partial x$, we can expand the left hand as
+$\partial_x = \partial/\partial x$, we can expand the left-hand side as
 %
 \begin{align*}
 G_Q(x, t+h) -  G_Q(x+h, t)
@@ -116,7 +116,7 @@ satisfy~\eqref{eq:51} we see that
   \end{split}
 \end{equation*}
 where we apply the above lemma to the service time $S$.  Next,
-focussing on the middle term, we find that
+focusing on the middle term, we find that
 \begin{align*}
 & \int_0^\infty x \int_0^\infty 1\{y\leq x\} f_Q(y) G(x-y) \,\d y\, \d x \\
 &= \int_0^\infty f_Q(y) \int_0^\infty x 1\{y\leq x\}  G(x-y) \, \d x\, \d y \\
@@ -162,7 +162,7 @@ e^{\mu x} f_Q(x)$ this can be rewritten to
 \begin{equation*}
 g(x) = \lambda p(0)  + \lambda \int_0^x g(y) \,\d y.
 \end{equation*}
-Differentiating left and right leads to the differential equation $g'(x) = \lambda g(x)$. Hence, $g(x) = A e^{\lambda x}$, hence,
+Differentiating left- and right-hand side leads to the differential equation $g'(x) = \lambda g(x)$. Hence, $g(x) = A e^{\lambda x}$, hence,
 \begin{equation*}
 f_Q(x) = A e^{-(\mu-\lambda)x} = A e^{- \mu(1-\rho)x}.
 \end{equation*}

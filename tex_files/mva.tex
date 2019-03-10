@@ -7,20 +7,6 @@
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-\begin{comment}
-\begin{exercise}[use=false]
-  Assume that there are $M$ stations, each with one server. The
-  service time at station $i$, $i=0,\ldots,M$ is deterministic and
-  equal to $1/\mu_i$. Suppose that the routing is such that station
-  $i$ sends all its output to station $i+1$, and station $M$ sends the
-  jobs (cards) to station 0. Thus, the stations in this network are in
-  tandem. Sketch the cycle time (also called lead time or sojourn
-  time), throughput and number of jobs in queue as a function of the total number of jobs $N$ in the network.
-  \begin{solution}
-    TBD. See Factory Physics.
-  \end{solution}
-\end{exercise}
-\end{comment}
 
 \begin{exercise}\label{ex:mva_numerical}
   Consider two stations in tandem, stations 0 and 1. The service times
@@ -50,7 +36,7 @@ Now take $n=2$.
   \begin{align*}
 \E{ W_0(2) }&= (\E{ L_0(1)+1}\E{ S_0}= (1/4+1)\E{ S_0} = \frac54\cdot2=\frac52,\\
 \E{ W_1(2) }&= (\E{ L_1(1)+1}\E{ S_1} = (3/4+1)\E{ S_1} = \frac74\cdot3=\frac{21}4,\\
-\E{ W(2) }&= \sum_{i=0}^1 V_i \E{ W_i(2)} = \frac52 + 2 \cdot \frac{21}4=13\\
+\E{ W(2) }&= \sum_{i=0}^1 V_i \E{ W_i(2)} = \frac52 + 2 \cdot \frac{21}4=13,\\
 \TH_0(2) &= \frac{2}{\E{ W(2)}} = \frac2{13}, \\
 \TH_1(2) &= V_1 \TH_0(2) = \frac4{13}, \\
 \E{ L_0(2)} &= \TH_0(2) \E{ W_0(2)} = \frac2{13}\cdot \frac52=\frac5{13}, \\
@@ -97,7 +83,7 @@ import numpy as np
 from numpy.linalg import eig
 
 mu = np.array([2, 2.5, 3, 3, 3])
-c = np.array([1, 1, 1, 1, 1])  # single server stations
+c = np.array([1, 1, 1, 1, 1])  # single-server stations
 P = np.matrix([
     [0, 1, 0, 0, 0],
     [0, 0, 1, 0, 0],

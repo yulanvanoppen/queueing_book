@@ -6,49 +6,32 @@
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-In the analysis of any queueing process the first step should be to
-check the relations between the arrival, service and departure
-rates. The concept of rate is crucial because it captures our
-intuition that when, on the long run, jobs arrive faster than they can
-leave, the system must `explode'. Thus, the first performance measures
-we need to estimate when analyzing a queueing system are the arrival
-and departure rate, and then we need to check that the arrival rate is
-smaller than the departure rate. In particular, the load, defined as
-the ratio of the arrival rate and service rate is of importance. In
-this section we define and relate these concepts.  As a reminder, we
-keep the discussion in these notes mostly at an intuitive level, and
-refer to \cite{el-taha98:_sampl_path_analy_queuein_system} for proofs
-and further background.
+In the analysis of any queueing process the first step should be to check the relations between the arrival, service and departure rates.
+The concept of rate is crucial because it captures our intuition that when, on the long run, jobs arrive faster than they can leave, the system must `explode'.
+Thus, the first performance measures we need to estimate when analyzing a queueing system are the arrival and departure rate, and then we need to check that the arrival rate is smaller than the departure rate.
 
-
-We first formalize the \emph{arrival rate} and \emph{departure rate}
-in terms of the \emph{counting processes} $\{A(t)\}$ and $\{D(t)\}$.
-The \recall{arrival rate} is the long-run average number of jobs that
-arrive per unit time, i.e.,
+We first formalize the \emph{arrival rate} and \emph{departure rate} in terms of the \emph{counting processes} $\{A(t)\}$ and $\{D(t)\}$.
+The \recall{arrival rate} is the long-run average number of jobs that arrive per unit time, i.e.,
 \begin{equation}
   \label{eq:3}
   \lambda = \lim_{t\to\infty} \frac{A(t)}t.
 \end{equation}
-We remark in passing that this limit does not necessarily exist if
-$A(t)$ is some pathological function. If, however, the inter-arrival
-times $\{X_k\}$ are the basic data, and $\{X_k\}$ are i.i.d.  and
-distributed as a generic random variable $X$ with finite mean $\E{X}$,
-we can construct $\{A_k\}$ and $\{A(t)\}$ as described in
-Section~\ref{sec:constr-gg1-queu}; the strong law of large numbers
-guarantees that the above limit exists.
+We remark in passing that this limit does not necessarily exist if $A(t)$ is some pathological function.
+If, however, the inter-arrival times $\{X_k\}$ are the basic data, and $\{X_k\}$ are \recall{independent and identically distributed (i.i.d.)}
+and distributed as a generic random variable $X$ with finite mean $\E{X}$, we can construct $\{A_k\}$ and $\{A(t)\}$ as described in Section~\ref{sec:constr-gg1-queu}; the strong law of large numbers guarantees that the above limit exists.
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
   Can you make an arrival process such that $A(t)/t$ does not have a
   limit?  
   \begin{hint}
-As a start, the function $\sin(t)$ has not a limit as
+As a start, the function $\sin(t)$ does not have a limit as
     $t\to\infty$. However, the time-average $\sin(t)/t \to 0$.  Now
     you need to make some function whose time-average does not
     converge, hence it should grow fast, or fluctuate wilder and
     wilder.
   \end{hint}
   \begin{solution}
- If $N(t) = 3 t^2$, then clearly $N(t)/t = 3t$. This does not
+ If $A(t) = 3 t^2$, then clearly $A(t)/t = 3t$. This does not
     converge to a limit. 
 
   Another example, let the arrival rate $\lambda(t)$ be given as
@@ -60,7 +43,7 @@ As a start, the function $\sin(t)$ has not a limit as
       0 & \text{if } 2^{2k+1} \leq t < 2^{2(k+1)},
     \end{cases}
     \end{equation*}
-    for $k=0,1,2,\ldots$. Let $N(t) = \lambda(t) t$. Then $A(t)/t$
+    for $k=0,1,2,\ldots$. Let $A(t) = \lambda(t) t$. Then $A(t)/t$
     does not have limit. Of course, these examples are quite
     pathological, and are not representable for `real life cases'.
     (Although this is also quite vague. What, then, is a real life
@@ -89,10 +72,7 @@ where we take $t=A_n$ in the limit for $t\to\infty$.  In words, the
 above states that the arrival rate $\lambda$ is the inverse of the
 expected inter-arrival time.
 
-\begin{exercise}
-(This exercise is meant to provide some insight into what needs
-  to be done to put everything on solid ground.  If you are not
-  interested in the mathematics, you can skip the problem.)
+\begin{exercise}[\faRocket]
    In  Eq. (\ref{eq:54}) we replaced the limit with respect to $n$ by a
     limit with respect to $t$.  Use
     the notation $A_{A(t)}$ to show that  this is allowed.
@@ -105,6 +85,10 @@ expected inter-arrival time.
       implied by, the existence of another type of limit.  
     \end{hint}
  \begin{solution}
+This exercise is meant to provide some insight into what needs
+to be done to put everything on solid ground.
+
+
  Observing that $A_{A(t)}$ is the arrival time of the last job
     before time $t$ and that $A_{A(t)+1}$ is the arrival time of the
     first job after time $t$: 
@@ -163,8 +147,8 @@ expected inter-arrival time.
     % \begin{equation*}
     %   |f(u) + g(u) - f(t) - g(t)| \leq |f(u)-f(t)|+|g(u)-g(t)|.
     % \end{equation*}
-    % Since both terms at the right hand side can be made arbitrarily
-    % small, the left hand side can also be made as small as we
+    % Since both terms at the right-hand side can be made arbitrarily
+    % small, the left-hand side can also be made as small as we
     % like. With this we can see that the function
     % $F_N(t) = \sum_{n=1}^N f_n(x)$ is right-continuous if all $f_n$
     % are right-continuous, and also that $F_{N+1} = F_N + f_{N+1}$ is
@@ -184,7 +168,7 @@ details. As a result we can define the \recall{departure rate} as
 \end{equation}
 
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
   Define the departure time $D_{k}$ of the $k$th job in terms of
   $\{D(t)\}$. 
   \begin{hint}
@@ -212,17 +196,17 @@ and  define the \recall{service rate} or \recall{processing rate} as
   \mu = \lim_{t\to\infty} \frac{U(t)}t.
 \end{equation*}
 In the same way as we derived that $\E X= 1/\lambda$, we obtain for
-the expected (or average) amount of service required by an individual
+the expected (or average) amount of service time required by an individual
 job
 \begin{equation*}
   \E S = \lim_{n\to\infty} \frac 1 n \sum_{k=1}^n S_k = \lim_{n\to\infty} \frac{U_n}{n} = \lim_{n\to\infty} \frac{U_n}{U(U_n)} = \lim_{t\to\infty} \frac t{U(t)} = \frac 1 \mu.
 \end{equation*}
 
 Now observe that, if the system is empty at time $0$, it must be that
-at any time the number of departures must be smaller than the number
+at any time the number of departures must be smaller than or equal to the number
 of arrivals, i.e., $D(t) \leq A(t)$ for all $t$. Therefore,
 \begin{equation}\label{eq:26}
-\delta :=   \lim_t \frac{D(t)}t \leq \lim_t \frac{A(t)}t = \lambda.
+\delta =   \lim_t \frac{D(t)}t \leq \lim_t \frac{A(t)}t = \lambda.
 \end{equation}
 We call a system \recall{rate stable} if
 \begin{equation*}
@@ -239,15 +223,14 @@ fact that $\delta \leq \lambda$, we get
 \begin{equation*}
   \delta \leq \min\{\lambda, \mu\}.
 \end{equation*}
-When $\mu \geq \lambda$ the above inequality reduces to
-$\delta = \lambda$ for rate-stable systems. (It is interesting to
-prove this.) As it turns out, when $\mu = \lambda$ and the variance of
-the service times $\V{S} > 0$ or $\V{X} >0$ then $\lim_t L(t)/t$
-does not necessarily exist. From the simulations we also learn that in such cases, the queueing process behaves very peculiar. For this reason we henceforth require that $\mu > \lambda$.
+When $\mu \geq \lambda$ the above inequality reduces to $\delta = \lambda$ for rate-stable systems.
+(It is interesting to prove this.)
+As it turns out, when $\mu = \lambda$ and the variance of the service time $\V{S} > 0$ or $\V{X} >0$ the queue length process behaves in a very peculiar way.
+For this reason we henceforth (and implicitly) require that $\mu > \lambda$.
 
 
 
-\begin{exercise} 
+\begin{exercise} [\faFlask]
 Define the random variables $\{\tilde X_k,k=1,\ldots\}$ as $\tilde X_k = S_{k-1}-X_k$.
   For stability of the queueing process it is essential that
   $\tilde X_k$ has negative expectation, i.e.,
@@ -260,7 +243,7 @@ Define the random variables $\{\tilde X_k,k=1,\ldots\}$ as $\tilde X_k = S_{k-1}
   \end{solution}
 \end{exercise}
 
-\begin{exercise} 
+\begin{exercise} [\faFlask]
 Define $\tilde X_k = S_{k-1}-X_k$.
  Show that $\E{\tilde X_k} <0$ implies that $\lambda<\mu$. 
  \begin{hint}
@@ -276,7 +259,7 @@ Remember that $\{X_k\}$ and $\{S_k\}$ are sequences of i.i.d. random variables. 
 \end{exercise}
 
 
-\begin{exercise}
+\begin{exercise}[\faPhoto]\label{ex:29}
   Show that $\E{S}/\E{X}$ is the fraction of time the server is busy.
   \begin{hint}
 Suppose that the $n+1$th job is the first job after time $A_1$ that sees an empty system.  Thus, job $n$ leaves an empty system behind. The very first job that arrives,  at time $A_1=X_1$, also sees an empty system. The total amount of service that arrived during $[A_1, A_{n+1})$ is $\sum_{i=1}^n S_i$.
@@ -301,23 +284,18 @@ Suppose that the $n+1$th job is the first job after time $A_1$ that sees an empt
  \frac{ \E S }{ \E X}.
         \end{equation*}
 
-We call periods like $[A_1, A_{n+1})$ `busy cycles', as they start with the moment the server start working, until the next arrival after the server has been idle. 
+We call periods like $[A_1, A_{n+1})$ \recall{busy cycles}, as they start with the moment the server start working, until the next arrival after the server has been idle. 
 
-Such  busy cycles occur over and over again. Thus, the
-        long-run average fraction of time the server is busy must also
-        be $\E S/\E X$. (For the serious student, there is a subtle point
-        here: the arrival epochs of the $G/G/1$ queue are not real
-        renewal moments, hence the epochs at which the busy times
-        start also do not form a sequence of renewal times. But then
-        it is not true, in general, that the busy times $\{B_i\}$ have
-        the same distribution, neither do the idles times
-        $\{I_n\}$. Showing that in the limit all is OK requires a
-        substantial amount of mathematics. The above claim is still
-        true however.)
+Such busy cycles occur over and over again.
+Thus, the long-run average fraction of time the server is busy must also be $\E S/\E X$.
+(For the serious student, there is a subtle point here: the arrival epochs of the $G/G/1$ queue are not real renewal moments, hence the epochs at which the busy times start also do not form a sequence of renewal times.
+But then it is not true, in general, that the busy times $\{B_i\}$ have the same distribution, neither do the idles times $\{I_n\}$.
+Showing that in the limit all is OK requires a substantial amount of mathematics.
+The above claim is still true however.)
   \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
  Show that $\E{X - S}/\E{X}$ is the fraction of time
   the server is idle.
   \begin{solution}
@@ -327,101 +305,8 @@ Such  busy cycles occur over and over again. Thus, the
   \end{solution}
 \end{exercise}
 
-The concept of \recall{load} or \recall{utilization}, denoted by the
-symbol $\rho$, is fundamental. One way to define this is  as the limiting
-fraction of time the server is busy, i.e.,
-\begin{equation*}
-  \rho = \lim_{t\to\infty} \frac 1 t \int_0^t \1{L(s)>0} \d s.
-\end{equation*}
-Interestingly, we can express this in terms of the arrival rate
-$\lambda$ and service rate $\mu$. Observe that
-\begin{equation*}
-  \sum_{k=1}^{A(t)} S_k \geq \int_0^t \1{L(s)>0} \d s \geq   \sum_{k=1}^{D(t)} S_k,
-\end{equation*}
-since $t$ can lie half way a service interval and $A(t) \geq D(t)$. As
-$A(t)\to \infty$ as $t\to\infty$,
-\begin{equation*}
-  \lim_{t\to\infty} \frac 1 t\sum_{k=1}^{A(t)} S_k = 
-  \lim_{t\to\infty} \frac{A(t)}t \frac{1}{A(t)} \sum_{k=1}^{A(t)} S_k = 
-  \lim_{t\to\infty} \frac{A(t)}t \cdot \lim_{t\to\infty}\frac{1}{A(t)} \sum_{k=1}^{A(t)} S_k = \lambda \E S.
-\end{equation*}
-Applying similar limits to the other inequality gives
-\begin{equation*}
-\lambda \E S \geq \rho \geq \delta \E S.
-\end{equation*}
-Hence, if $\delta=\lambda$, $\rho = \lambda \E S$.  
 
-From the identities $\lambda^{-1} = \E X$ and $\mu^{-1} = \E S$, we get
-a further set of relations:
-\begin{equation*}
-  \rho = \lambda \E S = \frac{\lambda}{\mu} = \frac{\E S}{\E X}.
-\end{equation*}
-Thus, the load has also the interpretation as the rate at which jobs
-arrive times the average amount of work per job.  Finally,
-recall that for a system to be rate-stable, it is necessary that
-$\mu> \lambda$, implying in turn that $\rho < 1$. The relation
-$\rho=\E S/ \E X < 1$ then tells us that the average time it takes to
-serve a job must be less than the average time between two consecutive
-arrivals, i.e., $\E S < \E X$.
-
-
-\begin{exercise}
-  Consider a queueing system with $c$ identical servers (identical in
-  the sense that each server has the same production rate $\mu$). What would be a reasonable stability criterion for this system? 
-  \begin{hint}
-What is the rate in, and what is the service capacity?
-  \end{hint}
-  \begin{solution}
-    The criterion is that $c$ must be such that $\lambda <
-    c\mu$.
-    (Thus, we interpret the number of servers as a \emph{control},
-    i.e., a `thing' we can change, while we assume that $\lambda$ and
-    $\mu$ cannot be easily changed.) To see this, we can take two
-  different points of view.  Imagine that the $c$ servers are replaced
-  by one server that works $c$ times as fast. The service capacity of
-  these two systems (i.e., the system with $c$ servers and the system
-  with one fast server) is the same, i.e., $c\mu$, where $\mu$ is the
-  rate of one server. For the system with the fast server the load is
-  defined as $\rho =\lambda/c\mu$, and for stability we require
-  $\rho<1$.  Another way to see it is to assume that the stream of
-  jobs is split into $c$ smaller streams, each with arrival rate
-  $\lambda/c$.  In this case, applying the condition that
-  $(\lambda/c )/\mu<1$ per server leads to the same condition that
-  $\lambda/(c\mu) < 1$.
-  \end{solution}
-\end{exercise}
-
-\begin{exercise}
-  Check with simulation that when $\lambda > \mu$ the queue length
-  grows roughly linearly with slope $\lambda - \mu$.  Thus, if
-  $\rho>1$, `we are in trouble'.
-  \begin{solution}
-    See my website. 
-  \end{solution}
-\end{exercise}
-
-
-\begin{exercise}\label{ex:11}
-  If $\E{B}$ is the expected busy time and $\E{I}$ is the expected idle
-  time, show that $\E{B} = \E{I} \rho/(1-\rho) $
- is the fraction of time the  server is busy.
-\begin{solution}
-  Consider a busy cycle, that is, a cycle that starts with the first
-  job that sees an empty system at upon arrival up to the time another
-  job sees an empty system upon arrival. In such one cycle, the server
-  is busy for an expected duration $\E{B}$. The total expected length
-  of the cycle is $\E{B} + \E{I}$, since after the last job of the cycle
-  left, the expected time until the next job is $\E{I}$.
-
-  Since $\rho$ is the utilization of the server,
-  \begin{equation*}
-\rho = \frac{\E B}{\E B + \E I}.
-  \end{equation*}
-  With a bit of algebra the result follows.
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
+\begin{exercise}[\faPhoto]
   Consider a paint factory which contains a paint mixing machine that
   serves two classes of jobs, A and B. The processing times of jobs of
   types A and B are constant and require $t_A$ and $t_B$ hours. The
