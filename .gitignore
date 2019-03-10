@@ -1,5 +1,9 @@
 auto/
 *.blg
+*.idx
+*.idl
+*.ilg
+*.ind
 *.out
 *.rel
 *.aux
@@ -9,7 +13,6 @@ auto/
 booktest*.*
 ans.tex
 hint.tex
-chunks/*
 *.pytxcode
 pythontex-files*
 progs/testing_ground.pdf
