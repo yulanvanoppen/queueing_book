@@ -1,7 +1,4 @@
-\chapter*{Introduction}\label{sec:introduction}
-\addcontentsline{toc}{chapter}{Introduction}
-
-\paragraph{Motivation and Examples}
+\section{Motivation and Examples}
 Queueing systems abound, and the analysis and control of queueing systems are major topics in the control, performance evaluation and optimization of production and service systems.
 
 
@@ -61,32 +58,47 @@ waiting in queue, i.e., \emph{queueing time}, waiting while being in
 service, i.e., the \emph{service time}, and the total waiting time in
 the system, i.e., the \emph{sojourn time}.
 
-\paragraph{Organization}
+\section{Organization}
 
 
-In these notes we will be primarily concerned with making models of queueing systems such that we can compute or estimate the above performance measures.
-Part of our work is to derive analytic models.
-The benefit of such models is that they offer structural insights into the behavior of the system and scaling laws, such as that the average waiting time scales (more or less) linearly in the variance of the service times of individual customers.
-However, these models have severe shortcomings when it comes to analyzing real queueing systems, in particular when particular control rules have to be assessed.
+In these notes we will be primarily concerned with making models of queueing systems such that we can compute or estimate the above mentioned performance measures.
+
+In Chapter~\ref{cha:single-stat-queu} we construct queueing systems in discrete time and continuous time.
+By implementing these constructions in Python code we can then simulate and analyze such systems.
+Besides that simulation provides ample motivation of why and how we deal with queueing systems, simulation is useful to analyzing realistic systems, as mathematical models have severe shortcomings in such cases.
 Consider, for example, the service process at a check-in desk of KLM.
 Business customers and economy customers are served by two separate queueing systems.
 The business customers are served by one server, server A say, while the economy class customers by three servers, say.
 What would happen to the sojourn time of the business customers if server A would be allowed to serve economy class customers when the business queue is empty?
-For the analysis of such complicated cases simulation is a very useful and natural approach.
+For the analysis of such complicated control policies, simulation is the most natural approach.
 
-In the first part of these notes we concentrate on the analysis of \emph{sample paths of a queueing process}.
-We assume that a typical sample path captures the `normal' stochastic behavior of the system.
+In Chapter~\ref{cha:analytical-models} and Chapter~\ref{cha:approximate-models} we derive exact and approximate models, respectively, for single-station queueing systems.
+The benefit of such models is that they offer structural insights into the behavior of the system and scaling laws, such as that the average waiting time scales (more or less) linearly in the variance of the service times of individual customers.
+The main analytical tool is the analyze the \emph{sample paths of a queueing process}, and assume that a typical sample path captures the `normal' stochastic behavior of the system.
 This sample-path approach has two advantages.
 In the first place, most of the theoretical results follow from very concrete aspects of these sample paths.
 Second, the analysis of sample-paths carries over right away to simulation.
 In fact, simulation of a queueing system offers us one (or more) sample path(s), and based on such sample paths we derive behavioral and statistical properties of the system.
-Thus, the performance measures defined for sample paths are precisely those used for simulation.
+In fact, the performance measures defined for sample paths are precisely those we compute with simulation.
 
-Our aim is not to provide rigorous proofs for all results derived below; for this we refer to
-\cite{el-taha98:_sampl_path_analy_queuein_system}. As a consequence we tacitly
-assume in the remainder that results derived from the (long-run)
-analysis of a particular sample path are equal to their `probabilistic
-counterpart'. 
+
+In Chapter~\ref{sec:notes-relat-chapt2}  we construct algorithms to analyze open and closed queueing networks.
+Many of the sample path results developed for the single-station case can be applied to these networks.
+Thus, with sample-path methods we relate the theory, algorithms and simulation of queueing systems.
+For this part we refer to the book of Prof.
+Zijm; the present set of notes augments the discussion there.
+
+
+
+Our aim is not to provide rigorous proofs for all results derived in the book. For this we refer to following books. 
+%As a consequence we tacitly assume in the remainder that results derived from the (long-run) analysis of a particular sample path are equal to their `probabilistic counterpart'.
+\begin{enumerate}
+\item \citet{bolch06:_queuein_networ_markov_chain}
+\item \citet{capinski03:_probab_probl}
+\item \citet{el-taha98:_sampl_path_analy_queuein_system}
+\item \citet{tijms94:_stoch_model_algor_approac} and/or \citet{tijms03:_first_cours_stoch_model}
+\end{enumerate}
+
 % For instance, assume that the sequence of service times
 % $S_1, S_2, \ldots$ for jobs $1, 2, \ldots$, are i.i.d., i.e.,
 % independent and identically distributed. It then follows from the
@@ -107,17 +119,20 @@ counterpart'.
 % freely use that $k^{-1}\sum_{i=1}^k W_i \to \E W$ as $k\to\infty$, and
 % so on.
 
-In the second part of these notes we construct algorithms to analyze open and closed
-queueing networks. Many of the sample path results developed for the
-single-station case can be applied to these networks. As such, theory,
-simulation and algorithms form a nicely rounded out part of work.  For
-this part we refer to the book of Prof. Zijm; the present set of notes
-augments the discussion there.
+I would like to acknowledge dr.
+J.W.
+Nieuwenhuis for our many discussions on queueing theory.
+To convince him about the more formal aspects, sample-path arguments proved very useful.
+Prof.
+dr.
+W.H.M.
+Zijm allowed me to use the first few chapters of his book.
+Finally, I thank my students for submitting many improvements via github.
+It's very motivating to see a book like this turn into a joint piece of work.
 
+\section{Exercises}
 
-\paragraph{Exercises}
-
-I urge you to try to make \emph{all} exercises in this set of notes.
+I urge you to try to make as many exercises as possible.
 The main text contains hardly any examples or derivations: the exercises \emph{illustrate} the material and force you to \textit{think} about the technical parts.
 The exercises require many of the tools you learned previously in courses on calculus, probability, and linear algebra.
 Here you can see them applied.
@@ -128,7 +143,7 @@ Thus, the investments made here will pay off for the rest of your (student) care
 As a guideline to making the exercises I recommend the following approach.
 First read the notes.
 Then attempt to make an exercise for a few minutes  by yourself.
-If by that time you have not obtained a good idea on how to approach the problem, check the solution manual.
+If by that time you have not obtained a good idea on how to approach the problem, check the hints and then the solution.
 Once you have understood the solution, try to repeat the arguments \emph{with the solution manual closed}.
 
 You'll notice that some of these problems are quite difficult, often not because the problem itself is difficult, but because you need to combine a substantial amount of knowledge all at the same time.
@@ -137,62 +152,23 @@ Realize that the exercises are not intended to be easy (otherwise we could have 
 The problems should be doable, but hard.
 
 The book is, admittedly, pretty big.
-One reason is that the hints and solutions are very explicit, and spell out nearly every intermediate steps.
+The main reason is that the hints and solutions are very explicit, and spell out nearly every intermediate steps.
 For most of you all this detail is not necessary, but over the years I got many questions like: "how do you go from `here' to `there'?"
 As service I then added such intermediate steps.
-A second reason is for a number of questions I included different ways to obtain the answer.
-Thirdly, the numerical calculations show each intermediate numerical result and the code.
+I also included exercises to show to obtain some result in several different ways. %A second reason is for a number of questions I included different ways to obtain the answer.
+Thirdly, the numerical calculations show each intermediate numerical result along with the Python code.
 Like this, if you get stuck somewhere in the computations you can precisely check where you go wrong.
-Finally, I believe that to understand a topic, it is necessary to study many examples, which in this case are covered in the form of exercises.
+%Finally, I believe that to understand a topic, it is necessary to study many examples, which in this case are covered in the form of exercises.
 
-The solution manual is meant to prevent you from getting stuck and to help you increase your knowledge of probability, linear algebra, programming (analysis with computer support), and queueing in particular.
-Thus, read the solutions very carefully.
-Here and there I also included hints.
 
 The following symbols are used to classify the type of exercise:
 \begin{itemize}
-\item \faCalculator: computation
-\item \faFlask:  test some (simple) technical aspect
-\item \faPhoto: illustration
+\item \faCalculator: computation.
+\item \faFlask:  test some (simple) technical aspect.
+\item \faPhoto: illustration.
 \item \faRocket: hard, you can skip this if you run short of time. 
 \end{itemize}
 
-
-% \paragraph{Symbols}
-
-% The meaning of the symbols in the margin of pages are as follows:
-% \begin{itemize}
-% \item The symbol \recall{} in the margin means that you have to
-%   memorize the \emph{emphasized concepts}.
-% \item The symbol \hintsymbol in the margin means that this question
-%   has a \emph{hint}.
-% \item The symbol \tbd in the margin means that this question or its
-%   solution requires still some \emph{work on my part}; you can skip
-%   it.
-% \end{itemize}
-
-\paragraph{Further reading}
-
-The following books are very useful to extend one's knowledge of probability theory and queueing systems:
-\begin{enumerate}
-\item \citet{capinski03:_probab_probl}
-\item \citet{tijms94:_stoch_model_algor_approac} and/or \citet{tijms03:_first_cours_stoch_model}
-\item \citet{el-taha98:_sampl_path_analy_queuein_system}
-\item \citet{bolch06:_queuein_networ_markov_chain}
-\end{enumerate}
-
-
-
-\paragraph{Acknowledgments}
-
-I would like to acknowledge dr.
-J.W.
-Nieuwenhuis for our many discussions on the formal aspects of queueing theory, prof.
-dr.
-W.H.M.
-Zijm for allowing me to use the first few chapters of his book, and my students for finding and correcting errors and typos, and improving explanations.
-
-Finally, I thank  my students for submitting many improvements via github. It's very motivating  to see a book like this turn into a joint piece of work. 
 
 %\clearpage
 

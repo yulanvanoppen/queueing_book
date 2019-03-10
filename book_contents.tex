@@ -11,8 +11,11 @@ Changes:
 
 \tableofcontents
 
+\chapter*{Introduction}\label{sec:introduction}
+\addcontentsline{toc}{chapter}{Introduction}
 
-\input{tex_files/intro}
+\input{tex_files/intro.tex}
+\input{tex_files/preliminaries.tex}
 
 
 \chapter{Construction and Simulation of Queueing Systems}
@@ -27,6 +30,7 @@ Changes:
 \input{tex_files/constructioncontinuoustime.tex}
 
 \chapter{Analytical Models}
+\label{cha:analytical-models}
 \input{tex_files/analytic_intro.tex}
 \input{tex_files/kendall.tex}
 \input{tex_files/random_walk.tex}
@@ -48,7 +52,8 @@ Changes:
 
 
 \chapter{Approximate Models}
- \input{tex_files/gg1.tex}
+\label{cha:approximate-models}
+\input{tex_files/gg1.tex}
 \input{tex_files/setup_times.tex}
 \input{tex_files/adjustments.tex}
 \input{tex_files/failures.tex}
@@ -69,10 +74,9 @@ Changes:
 %\input{tex_files/mda.tex}
 
 
-\appendix
-\chapter{Appendix}
-\label{cha:appendix-2}
-\input{tex_files/preliminaries.tex}
+% \appendix
+% \chapter{Appendix}
+% \label{cha:appendix-2}
 
 \bibliographystyle{plainnat}
 \bibliography{biblio_nicky}
@@ -82,11 +86,11 @@ Changes:
 \chapter*{Notation}
 \label{sec:notation}
 \addcontentsline{toc}{chapter}{Notation}
-\input{tex_files/notation}
+\input{tex_files/notation.tex}
 
 \chapter*{Formula Sheet}
 \addcontentsline{toc}{chapter}{Formula Sheet}
-\input{tex_files/formula_sheet}
+\input{tex_files/formula_sheet.tex}
 
 
 
