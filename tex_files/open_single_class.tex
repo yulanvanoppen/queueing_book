@@ -13,7 +13,7 @@ constant'.
 
 
 I don't like the derivation of Zijm.Eq.2.20. The appearance of the
-visit ratios $\lambda_i/\gamma$ seem to come out of thin air. The
+visit ratios $\lambda_i/\gamma$ seems to come out of thin air. The
 argument should be like this. Consider the entire queueing network as
 one `box' in which jobs enter at rate $\gamma=\sum_{i=1}^M
 \gamma_i$.
@@ -34,28 +34,6 @@ $\E{L_i} = \lambda_i\E{W_i}$. Filling this into the above,
 \end{equation*}
 where we recognize the visit ratios.
 
-
-
-
-\begin{comment}
-\begin{exercise}[use=false]
-  Use the ideas of Zijm.Eq.2.2 to set up a set of balance equations
-  for a single-server queueing station with two queues such that queue
-  1 is served with strict priority over queue 2, and service of a job
-  of type 2 is preemptive. Assume that type i jobs arrive at rate
-  $\lambda_i$ and require average service time
-  $\mu_i^{-1}$. Inter-arrival times of jobs each type are exponentially distributed,
-  just as the service times.
-
-  Can you find similar equations for the case with multiple servers at
-  the station, all serving type 1 jobs with strict priority over type
-  2 jobs?
-  \begin{solution}
-    TBD.
-  \end{solution}
-\end{exercise}
-  
-\end{comment}
 
 \begin{exercise}(Linear algebra refresher) Can you find an example to
   show for two matrices $A$ and $B$ that $AB\neq BA$, hence
@@ -113,7 +91,7 @@ ones are to the left of a matrix, and the vertical ones to the right.
     ordered in a grid. This is, in my opinion, the most unproductive
     way to think about matrices. A much more useful way is to see a
     matrix as an \emph{operator}. For instance, take $A$ to be a
-    $3\times3$ matrix. Then it can be seen as \emph{mapping} from
+    $3\times3$ matrix. Then it can be seen as a \emph{mapping} from
     $\R^3$ to $\R^3$; it takes a vector $x\in\R^3$ and changes $x$
     into a new vector $Ax\in \R^3$. Thus, a square matrix $A$ typically changes the
  direction of a vector $x$. 
@@ -141,7 +119,7 @@ y\\
 0
     \end{pmatrix}.
   \end{equation*}
-  We see that $A$ removes any information about the $z$ direction from
+  We see that $A$ removes any information about the $z$-direction from
   the vector $v$. (It projects $v$ on the $x-y$ plane, and throws away
   the $z$ component of $v$.) But then, for a given vector $w=(x,y,0)$
   in the $x-y$ plane, it is impossible to use $A$ to retrieve the
@@ -176,7 +154,7 @@ Zijm.Ex.2.2.2
   process at the second station is the departure process of the first
   station, it must be that arrival process at the second station is
   also Poisson with rate $\lambda$.  Interestingly, from the
-  perspective of the second station it is as if there is not first
+  perspective of the second station it is as if there is no first
   station.
 \end{solution}
 \end{exercise}
@@ -224,7 +202,7 @@ more jobs enter node $i$ from the network than that node $i$ sends
   probability that a job that starts at node $k$, moves to node $i$
   and then leaves the network is equal to $P_{ki}P{i0}$. Thus, since
   $P_{ki}>0$ and $P_{i0}>0$, the probability that a job leaves the
-  network from note $k$ in two steps is positive.  More specifically,
+  network from node $k$ in two steps is positive.  More specifically,
   $P^2_{k0} = \sum_{j=0}^M P_{kj}P_{j0} \geq P_{ki}P_{i0} > 0$. 
 
   The irreducibility assumption implies that in at most $M$ steps it
@@ -417,7 +395,7 @@ Zijm.Ex.2.2.8
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}{\faPhoto}
   (Hall 5.22). At a large hotel, taxi cabs arrive at a rate of 15 per
   hour, and parties of riders arrive at the rate of 12 per
   hour. Whenever taxicabs are waiting, riders are served immediately
@@ -445,7 +423,7 @@ are $3$ taxi cabs. When a group arrives (at rate $\lambda$), there is
 one taxi less, and so on, until there are no more taxis
 left. Finally, if yet more groups arrive, they have to wait. When a
 new taxi arrives, the number of groups is reduced by one, and so on,
-until there are $3$ taxi's waiting and no groups of people.
+until there are $3$ taxis waiting and no groups of people.
 
 
     \begin{center}
@@ -601,33 +579,6 @@ Lp
     \end{solution}
 \end{exercise}
 
-
-
-\begin{comment}
-  
-\begin{exercise}[use=false]
-  Include an question that shows that it is necessary to check the
-  guess for the product form solution everywhere on the state space,
-  that is, in the interior, but also on the boundaries.
-  \begin{solution}
-    TBD
-  \end{solution}
-\end{exercise}
-
-\begin{exercise}[use=false]
-  Apply the formula's of Zijm.Section 2.4 to a tandem queueing network.
-  \begin{solution}
-    TBD.
-  \end{solution}
-\end{exercise}
-
-\begin{exercise}[use=false]
-  Include a case for Section 2.4.
-  \begin{solution}
-    TBD.
-  \end{solution}
-\end{exercise}
-\end{comment}
 
 
 \Closesolutionfile{hint}

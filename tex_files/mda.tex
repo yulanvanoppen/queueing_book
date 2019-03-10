@@ -8,7 +8,7 @@
 \Opensolutionfile{ans}
 
 A relatively easy way to obtain insight into the procedure is by
-comparing this case to the single-server single station case.  Recall that, for the latter case, 
+comparing this case to the single-server single-station case.  Recall that, for the latter case, 
 \begin{equation*}
   \E{W_Q} = \rho \E{S_r\given S_r>0} + \E{L_Q} \E S.
 \end{equation*}
@@ -29,7 +29,7 @@ performance measures for the analysis of closed-queueing network.
   $\E{W_Q} = \rho \E{S_r\given S_r>0} + \E{L_Q} \E S$ to the $M/M/c$
   multi-server queue. 
 \begin{hint}
-Interpret each component at the right hand side of the equation
+Interpret each component at the right-hand side of the equation
     and generalize it to a multi-server queueing system. 
 \end{hint}
   \begin{solution}
@@ -185,32 +185,6 @@ p_1(0|2) &= 1 - p_1(1|2) - p_1(2|2).
 \end{exercise}
 
 
-\begin{comment}
-\begin{exercise}[use=false]
-  \begin{enumerate}
-  \item 
-  Provide an interpretation of a single-server queueing server with a
-  finite calling population in terms of a closed network.
-\item Apply the MDA algorithm to this situation and show that the
-  results of Exercise~\ref{ex:calling} come out.
-\end{enumerate}
-\begin{solution}
-  \begin{enumerate}
-  \item 
-    Consider a closed-queueing network with two stations. Station 1 is
-    a single-server station with exponentially distributed service
-    times with mean $\mu$; station 2 has $N$ parallel exponential
-    servers, each working at rate $\lambda$. If station 1 contains $n$
-    jobs, then Station 2 contains $N-n$ jobs.  The rate at which jobs
-    move from Station 2 to Station 1 is $(N-n)\lambda$, since $N-n$ of
-    the $N$ servers of Station 2 are occupied. Jobs move from Station
-    1 to Station 2 at rate $\mu$, provided $n\geq1$.
-  \item     TBD.
-  \end{enumerate}
-  \end{solution}
-\end{exercise}
-\end{comment}
-
 
 \begin{exercise}
 Zijm.Ex.3.1.15
@@ -243,7 +217,7 @@ import numpy as np
 from numpy.linalg import eig
 
 
-c = np.array([1, 1, 1, 1, 1])  # single server stations
+c = np.array([1, 1, 1, 1, 1])  # single-server stations
 P = np.matrix([
     [0, 1, 0, 0, 0],
     [0, 0, 1, 0, 0],

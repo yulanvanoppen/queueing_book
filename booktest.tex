@@ -1,18 +1,35 @@
+\documentclass{book}
+\usepackage{classicthesis}
 %\documentclass[a4paper,12pt]{report}
 %\documentclass[a4paper,11pt]{book}
-\documentclass[a4paper,11pt]{scrbook}
+%\documentclass[a4paper,11pt]{scrbook}
 
-%\usepackage[solutionfiles]{optional}
-\usepackage[nosolutionfiles]{optional}
+%^\newif\ifFilterExercises
+
+%\FilterExercisestrue
+%\FilterExercisesfalse
+
+
+% \ifFilterExercises
+% \usepackage[solutionfiles]{optional}
+% \else
+% %\usepackage[solutionfiles]{optional}
+% \usepackage[nosolutionfiles]{optional}
+% \fi
+
+\usepackage[solutionfiles]{optional}
+%\usepackage[nosolutionfiles]{optional}
+
 \opt{nosolutionfiles}{\usepackage[nosolutionfiles]{answers}}
 \opt{solutionfiles}{\usepackage{answers}}
+
 
 \usepackage{preamble}
 
 % handle indentation below figure captions
 %\setcapwidth[c]{.8\textwidth}
-\setcapwidth{0.95\textwidth}
-\setcapindent{0pt}
+% \setcapwidth{0.95\textwidth}
+% \setcapindent{0pt}
 %\addtokomafont{caption}{\centering}
 
 % include  book references
@@ -27,32 +44,28 @@
 
 \tableofcontents
 
+% \ifFilterExercises
+% \Opensolutionfile{exercises}
+% \fi
 
-
-\begin{itemize}
-\item You don't have to memorize all formulas in the book, for instance those of the various $M(n)/M(n)/1$ models (e.g., $M/M/1/K$). That is simply too much, hence unreasonable.
-\item For the multiple choice part you have to be able to check the derivations, whether the derivation contains one or more errors or not.
-\item For the open questions part you have to able to derive the formulas based on, e.g., level-crossing arguments.
-\item For the open questions: you have to show that you understand what you are doing. If you make small numerical errors (if there are numerical questions), I still give full points if you can make clear that you can get the correct result with some more time (such as in real life), or that you can implement your ideas in a computer program. However, I will not give points for really silly results, e.g., negative probabilities. 
-\item I expect you to be familiar with the most important \emph{notation} used in the book. For instance, you should know what is meant with $M^X/M/1$, or with $A(t)$ or $A(n,t)$, or $\pi(n)$.  Definitions that are used only once, such  $A(m,n,t)$, will defined in the exam. 
-\item For the MVA you need to memorize the formulas. They are not hard, and simple to derive. 
-\item The formulasheet below will be attached to the exam. You should know which formula applies when; you don't have to memorize these formulas.
-\end{itemize}
+\chapter{Introduction}\label{sec:introduction}
 
 %\include{organization}
-%\include{tex_files/intro}
+%\input{tex_files/intro.tex}
+%\input{tex_files/preliminaries.tex}
 
-%\chapter{Single-Station Queueing Systems}
+\chapter{Single-Station Queueing Systems}
 
+%\input{tex_files/poissondistribution.tex}
+ \input{tex_files/constructiondiscretetime.tex}
+%\input{tex_files/expdistribution.tex}
+%\input{tex_files/constructioncontinuoustime.tex}
 %\input{tex_files/failures.tex}
 %\input{tex_files/adjustments.tex}
 %\input{tex_files/setup_times.tex}
-%\input{tex_files/poissondistribution.tex}
-\input{tex_files/expdistribution.tex}
 %\input{tex_files/random_walk.tex}
 %\input{tex_files/ratestability.tex}
-%\input{tex_files/constructiondiscretetime.tex}
-%\input{tex_files/constructioncontinuoustime.tex}
+%\input{tex_files/renewal_reward.tex}
 % \input{tex_files/empericalperfmeasures.tex}
 %\input{tex_files/levelcrossing.tex}
 %\input{tex_files/mm1.tex}
@@ -71,41 +84,11 @@
 %\input{tex_files/formula_sheet}
 %\input{tex_files/open_single_class.tex}
 
-\begin{comment}
-\input{tex_files/single_station_intro.tex}
-\input{tex_files/expdistribution.tex}
-\input{tex_files/poissondistribution.tex}
-\input{tex_files/kendall.tex}
-\input{tex_files/constructiondiscretetime.tex}
-\input{tex_files/constructioncontinuoustime.tex}
-\input{tex_files/random_walk.tex}
-\input{tex_files/ratestability.tex}
-\input{tex_files/empericalperfmeasures.tex}
-\input{tex_files/levelcrossing.tex}
-\input{tex_files/mm1.tex}
-\input{tex_files/mnmn1.tex}
-\input{tex_files/pasta.tex}
-\input{tex_files/little.tex}
-\input{tex_files/usefulidentities.tex}
-\input{tex_files/mxm1_pk.tex}
-\input{tex_files/mg1.tex}
-\input{tex_files/batcharrivals.tex}
-\input{tex_files/mg1distributionqueuelength.tex}
-%\input{tex_files/relationmxm1andmg1.tex}
- \input{tex_files/gg1.tex}
-\input{tex_files/failures.tex}
- \input{tex_files/process_batches.tex}
-\input{tex_files/deterministic_networks.tex}
-\input{tex_files/open_single_class.tex}
-\input{tex_files/tandem.tex}
-\input{tex_files/open_general.tex}
-\input{tex_files/gordon_newell.tex}
-\input{tex_files/convolution.tex}
-\input{tex_files/mva.tex}
-\input{tex_files/mda.tex}
-\input{tex_files/notation}
-\input{tex_files/formula_sheet}
-\end{comment}
+
+% \ifFilterExercises
+% \Closesolutionfile{exercises}
+% \fi
+
 
 \cleardoublepage
 \phantomsection

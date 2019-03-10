@@ -1,6 +1,6 @@
 \section
-[Construction of the $G/G/1$ Queueing Process in Continuous Time]
-{Construction of the $\mathbf{G/G/1}$ Queueing Process in Continuous Time}
+[Single-server Queueing Process in Continuous Time]
+{Construction of the Single-server Queueing Process in Continuous Time}
 \label{sec:constr-gg1-queu}
 
 \subsection*{Theory and Exercises}
@@ -8,11 +8,11 @@
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 
-In Section~\ref{sec:constr-discr-time} we considered time in discrete `chunks',
+In Section~\ref{sec:constr-discr-time} we considered time in discrete `chunks':
 minutes, hours, days, and so on. For given numbers of arrivals and
 capacity per period we use the recursions~\eqref{eq:31} to
 compute the departures and queue length per period.  However, we can also model time in a continuous way, and assume that jobs can come in at any moment.
-In this section we consider a single server FIFO queueing process in continuous time. 
+In this section we consider a single-server FIFO queueing process in continuous time. 
 
 Assume we are given, as basic data, the \recall{arrival process}
 $\{A(t); t\geq 0\}$: the number of jobs that arrived during $[0,t]$.
@@ -64,19 +64,19 @@ memorize this, it may be helpful to write it like this:
   A(t) : \R\to \N, \quad{\text{time (real number) to number of jobs (integer)}}.
 \end{align*}
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
  What are  the meanings of $A_{A(t)}$ and $A(A_n)$?
  \begin{solution}
   $A(t)$ is the number of arrivals during $[0,t]$. Suppose that
     $A(t) = n$. This $n$th job arrived at time $A_n$. Thus, $A_{A(t)}$
     is the arrival time of the last job that arrived before or at time
     $t$. In a similar vein, $A_n$ is the arrival time of the $n$th
-    job. Thus, the number of arrivals up to time $n$, i.e., $A(A_n)$,
+    job. Thus, the number of arrivals up to time $A_n$, i.e., $A(A_n)$,
     must be $n$.
   \end{solution}
 \end{exercise}
 
-\begin{exercise}\label{ex:22}
+\begin{exercise}[\faFlask]\label{ex:22}
   In view of the above, can  $A(t)$ be defined as $\min\{k : A_k \geq t\}$ or as $\min\{k: A_k > t\}$?
   \begin{hint}
 Compare this to the definition in (\ref{eq:2}).
@@ -163,8 +163,8 @@ node[right] (c2) at (5,-1.5) {$A_{k}$}
 (c1) -- (c2)
 node[midway, fill=white] {$X_{k}$};
 \end{tikzpicture}
-\caption{Construction of the $G/G/1$ queue in continuous time. The
-  sojourn time~$W_{k}$ of the~$k$th job is sum of the work in queue~$W_{Q,k}$ at its arrival epoch~$A_k$ and its service time~$S_k$;
+\caption{Construction of the single-server queue in continuous time. The
+  sojourn time~$W_{k}$ of the~$k$th job is the sum of the work in queue~$W_{Q,k}$ at its arrival epoch~$A_k$ and its service time~$S_k$;
   its departure time is then $D_k=A_k + W_k$. The waiting time of job
   $k$ is clearly equal to $W_{k-1}-X_{k}$. We also see that job~$k+1$
   arrives at an empty system, hence its sojourn time
@@ -211,7 +211,7 @@ This in turn specifies the departure process $\{D(t)\}$ as
   D(t) = \max\{k : D_k \leq t\} = \sum_{k=1}^\infty \1{D_k \leq t}.
 \end{equation*}
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
  Assume that $X_1=10$, $X_2=5$, $X_3=6$ and $S_1 = 17$,
     $S_2=20$ and $S_3=5$, compute the arrival times, waiting times in
     queue, the sojourn times and the departure times for these three
@@ -257,7 +257,143 @@ D
     \end{solution}
   \end{exercise}
 
-\begin{exercise}
+
+
+\begin{exercise}[\faFlask]
+  If $S\sim U[0,7]$ and $X\sim U[0,10]$, where $U[I]$ stands for the
+  uniform distribution concentrated on the interval $I$, compute
+  $\P{S-X\leq u}$, for  $S$ and $X$ independent.
+  \begin{hint}
+  This is elementary, hence it might appear trivial, but it's not\ldots In fact, I had a hard time finding a simple way to get the answer.  It is good practice to try yourself before looking at the answer. Check also the previous problem, and make a drawing of the region over which you have to integrate.
+  \end{hint}
+  \begin{solution}
+The joint density of $S$ and $X$ is given by
+\begin{equation*}
+  f_{XS}(x, s) = f_X(x) \cdot f_S(s) = \frac{1}{10} \1{0\leq x \leq 10}\cdot \frac 17 \1{0\leq s \leq 7},
+\end{equation*}
+since $X$ and $S$ are independent. 
+Thus, 
+\begin{equation*}
+  \begin{split}
+  \P{S-X\leq u} &= \E{\1{S-X\leq u}} = \frac{1}{70}\int_0^{10} \int_0^7 \1{s-x\leq u} \d s \d x \\
+&= \frac{1}{70}\int_0^{10} \int_0^7 \1{s\leq x+u} \d s \d x.
+  \end{split}
+\end{equation*}
+
+Now we need to chop up the domain of $\P{S-X\leq u}$, for which we use the figure below.
+
+%\begin{figure}[ht]
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+%\draw[[-{Triangle[open]},dotted] (0,10)--(8.5,10);
+\draw (0,-8)--(0,8);
+\node[right] at (11,0) {$x$};
+\draw (-0.1,0)--(11,0);
+\node[above] at (0,8) {$s$};
+\draw[line width=0.7mm] (0,7)--(10,7);
+\draw[line width=0.7mm] (10,0)--(10,7);
+\draw[line width=0.7mm] (0,0)--(10,0);
+\draw[line width=0.7mm] (0,0)--(0,7);
+\node[below] at (10,0) {10};
+\node[below] at (7,0) {7};
+\node[below] at (3,0) {3};
+\node[left] at (0,7) {7};
+\draw (0,-7)--(11,4);
+\node[left] at (0,-7) {$u=-7$};
+\node at (9,0.5) {$s\leq x - 7$};
+\draw (0,-3)--(11,8);
+\node[left] at (0,-3) {$u=-3$};
+\node at (6,0.5) {$s\leq x - 3$};
+\draw (0,0)--(8,8);
+\node[left] at (0,0) {$u=0$};
+\node at (2,0.5) {$s\leq x$};
+\draw (0,3)--(5,8);
+\node[left] at (0,3) {$u=3$};
+\node at (1.5,3) {$s\leq x+3$};
+\end{tikzpicture}
+\end{center}
+%\caption{Computing the probability that $S-X\leq u$.}
+%\label{fig:P_S_X}
+%\end{figure}
+
+
+It is clear that  the indicated rectangle has no overlap with the set of points $(x,s)$ such that $s\leq u + x$ for $u<-10$. (To see this, draw the line $s=x-10$ in the figure.) At $u=-10$, the overlap is a single point, at $(10,0)$. Thus, 
+\begin{equation*}
+\P{S-X \leq u}=0, \quad \text{for } u\leq -10.
+\end{equation*}
+
+When $u\in[-10, -3]$ we need to integrate over the triangle that results from cutting the line $s=x+u$ with the rectangle. The area is 
+\begin{equation*}
+70\, \P{S-X \leq u}= \frac{(10+u)^2}2, \quad \text{for } -10 \leq u\leq -3,
+\end{equation*}
+where we multiply with $70$ to get the normalization right. 
+
+When $u\in[-3, 0]$, we integrate over a parallelogram with base $3+u$ and height $7$ plus the triangle below the line $s=x-3$. The area is 
+\begin{equation*}
+70\, \P{S-X \leq u}= (3+u)7 + \frac{(10-3)^2}2=7u + \frac{91}2, \quad \text{for } -3 \leq u\leq 0.
+\end{equation*}
+
+For $u\in[0, 7]$, we integrate over the trapezoid that results from intersecting the set $\{(x,s) : x \leq s \leq s + u\}$ and the rectangle plus the parallelogram plus the triangle below the line $s=x-3$. The area is 
+\begin{equation*}
+70\, \P{S-X \leq u}=  \frac{7^2}2 - \frac{(7-u)^2}{2} + 3\cdot 7 + \frac{49}2 = 7 u - \frac{u^2}2 + \frac{91}2, \quad \text{for } 0\leq u\leq 7.
+\end{equation*}
+
+Finally, for $u\geq 7$, the set $s\leq x+u$ covers the entire rectangle. Hence, 
+\begin{equation*}
+70\, \P{S-X \leq u}=  70, \quad \text{for } 7\leq u.
+\end{equation*}
+
+Given the amount of effort I had to put into getting this answer, I wanted to check it. So I went to  Wolfram Alpha (which is a great site for symbolic computations), and typed this: 
+\begin{verbatim}
+\int_{0}^{10} \int_0^7 Boole[s<= x + u]  ds dx,
+\end{verbatim}
+so, once you know \LaTeX\/ you can use Wolfram Alpha.  Wolfram Alpha turned it to 
+\begin{verbatim}
+Integrate[Boole[s <= u + x], {x, 0, 10}, {s, 0, 7}]
+\end{verbatim}
+If you fill this in at Wolfram, you'll get the results that we obtained above in seconds, rather than in one hour or so (depending on your proficiency with carrying out integrals).
+\end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}[\faFlask]\label{ex:25}
+ Assume that $X_k = 10$ minutes and $S_k = 11$ minutes for all
+    $k$, i.e., $X_k$ and $S_k$ are deterministic and constant. What
+    are $\lambda$ and $\mu$?  Compute $A_k$, $W_k$, $D_k$ as functions of $k$. Then find expressions for $A(t)$, $D(t)$, and  $L(A_k-)$. 
+  \begin{solution}
+ $\lambda=6$ per hour, and $\mu=60/11$ per hour. Note that
+      $\mu < \lambda$. $A_0 = 0$, $A_1=10$, $A_2=20$, etc., hence
+      $A_k = 10k$. $W_{Q,0} = 0$, $W_{Q,1} = \max\{0 + 0-10,0\} = 0$.
+      $W_{Q,2} = \max\{0+11-10,0\} =1$.
+      $W_{Q,3} = \max\{1+11-10,0\} =2$. Hence, $W_{Q,k} = k-1$ for
+      $k\geq1$. Thus, $W_k = k-1+11 = k + 10$ for $k\geq1$, and
+      $D_k = 10k + k+10 = 11k+10$. Note that $W_k$ increases linearly
+      as a function of $k$.
+
+      Now, $A(t) = \lfloor t/10\rfloor$, and $D(t) = \lfloor (t-10)/11 \rfloor$. Hence,
+      \begin{equation*}
+      L(A_k-) = k-1 - D(A_k-) = k- 1 - D(10k-) = k- 1 - \left \lfloor \frac{(10k-)-10}{11} \right \rfloor.
+      \end{equation*}
+      The computation is a bit tricky since sometimes  arrivals  and  departures coincide. (Consider for instance $t=120$.)
+
+From this example you can infer that it is necessary that the service rate is greater than the arrival rate, i.e.,  $\mu > \lambda$,  for otherwise the queue length keeps on increasing (on the long run).
+  \end{solution}
+\end{exercise}
+
+
+\begin{exercise}[\faFlask]
+ Yet another simple case is to take $X_k=10$ minutes and
+    $S_k=9$ minutes for all $k$. Answer the same questions as in the
+    previous exercise.
+  \begin{solution}
+ Trivial.
+  \end{solution}
+\end{exercise}
+
+
+
+\begin{exercise}[\faCalculator]
   Suppose that $X_k\in\{1,3\}$ such that $\P{X_k=1}=\P{X_k=3}$ and
   $S_k\in\{1,2\}$ with $\P{S_k=1}=\P{S_k=2}$. If $W_{Q,0}=3$, what are
   the distributions of $W_{Q,1}$ and $W_{Q,2}$?  
@@ -278,7 +414,7 @@ Dropping the dependence on $k$ for ease, we get
 \end{align*}
 With this
   \begin{align*}
-    \P{W_{Q,1} = 1} &=\P{W_{Q,0} + Y_0= 1} = \P{3 + Y_0 =1} = \P{Y_0=-2} =\frac14,\\
+    \P{W_{Q,1} = 1} &=\P{W_{Q,0} + Y= 1} = \P{3 + Y =1} = \P{Y=-2} =\frac14,\\
     \P{W_{Q,1} = 2} &= \P{3 + Y =2} = \P{Y=-1}  =\frac14,\\
     \P{W_{Q,1} = 3} &= \P{3 + Y = 3} = \P{Y=0}  =\frac14,\\
     \P{W_{Q,1} = 4} &= \P{3 + Y = 4} = \P{Y=1}  =\frac14.\\
@@ -294,7 +430,7 @@ And, then
     \end{split}
   \end{equation*}
 
-Typing the solution becomes  boring\ldots, let's use the computer.
+Typing the solution becomes  boring\ldots, let's use the computer\footnote{To run this code, you need to install the lea package. This is a very useful package to help you with all kinds of probability experiments.}.
 
 \begin{pyconsole}
 import lea
@@ -319,7 +455,7 @@ Great! Our handiwork matches with the computer's results.
 \end{exercise}
 
 
-Another set of recursions to compute the arrival and departure times for the single server queue is the following:
+Another set of recursions to compute the arrival and departure times for the single-server queue is the following:
 \begin{equation}
   \label{eq:45}
   \begin{split}
@@ -329,7 +465,7 @@ Another set of recursions to compute the arrival and departure times for the sin
   \end{split}
 \end{equation}
 
-\begin{exercise}  Why do the recursions of Eq.~(\ref{eq:45}) work? 
+\begin{exercise} [\faFlask] Why do the recursions of Eq.~(\ref{eq:45}) work? 
   \begin{solution}
  Of course, the service of job $k$ cannot start before it
       arrives. Hence, it cannot leave before $A_k + S_k$. Therefore it
@@ -423,7 +559,7 @@ L_s(t) = \tilde A(t) - D(t) = L(t) - L_Q(t).
 
 
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
 Why don't we need separate notation for $D_s(t)$, the number
     of jobs that departed from the server? 
 \begin{solution}
@@ -434,7 +570,7 @@ Why don't we need separate notation for $D_s(t)$, the number
 
 
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
  Is $\tilde A(t) \leq D(t)$ or $\tilde A(t) \geq D(t)$?
 \begin{solution}
  All customers that left the system must have left the
@@ -446,11 +582,10 @@ Why don't we need separate notation for $D_s(t)$, the number
 
 
 
-
-\begin{exercise}
+\begin{exercise}[\faFlask]
  Consider a multi-server queue with $m$ servers. Suppose that
-    at some time~$t$ it happens that $\tilde A(t) - D_s(t) < m$ even though
-    $A(t) - D_s(t) > m$. How can this occur? 
+    at some time~$t$ it happens that $\tilde A(t) - D(t) < m$ even though
+    $A(t) - D(t) > m$. How can this occur? 
 \begin{solution}
  In this case, there are servers idling while there are still
     customers in queue. If such events occur, we say that the server
@@ -459,7 +594,7 @@ Why don't we need separate notation for $D_s(t)$, the number
 \end{exercise}
 
 
-\begin{exercise} It is clear  that $L(t) = A(t)-D(t)$. Show that, when the system starts empty, this implies that
+\begin{exercise}[\faCalculator] It is clear  that $L(t) = A(t)-D(t)$. Show that, when the system starts empty, this implies that
 $L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}$.
   \begin{hint}
   Use Boolean algebra.  Write, for notational ease,
@@ -502,7 +637,7 @@ $L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}$.
 
 \end{exercise}
 
-\begin{exercise} Show  that $L(A_k)>0 \implies A_k \leq D_{k-1}$.
+\begin{exercise}[\faFlask] Show  that $L(A_k)>0 \implies A_k \leq D_{k-1}$.
   \begin{hint} Use that $L(A_k)>0$ means that the system contains at least one
   job at the time of the $k$th arrival, and that $A_k \leq D_{k-1}$ means that
   job $k$ arrives before job $k-1$ departs.
@@ -522,16 +657,19 @@ $L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}$.
 \end{solution}
 \end{exercise}
 
+For the next exercise we need an important definition.
+Write $f(x+) = \lim_{h\downarrow0} f(x+h)$ for the right limit of a function $f$ at $x$ and $f(x-) = \lim_{h\downarrow0} f(x-h)$ for the left limit.
+Note that $f$ is continuous at $x$ when $f(x-)=f(x+)$.
+Since in queueing systems we are concerned with processes with jumps, we need to be quite particular about left and right limits at jump epochs.
 
 
-\begin{exercise} 
+\begin{exercise} [\faPhoto]
 Define the number of jobs in the system as seen by the $k$th arrival  as
 \begin{equation}
   \label{eq:Lk}
-  L(A_k-),
+  L(A_k-).
 \end{equation}
-where $L(A_k-) = \lim_{h\downarrow 0} L(A_k - h)$. (Observe that the $k$th job arrives at time $A_k$ and $\{L(s)\}$ is right-continuous.)
-
+(Observe that the $k$th job arrives at time $A_k$ and $\{L(s)\}$ is right-continuous.)
 Can you derive the following (algorithmic efficient) procedure to
     compute the number of jobs in the system as seen by arrivals,
   \begin{equation*}
@@ -591,7 +729,7 @@ $R$ or Python will reveal that this is easy.
 
 
 
-\begin{exercise}
+\begin{exercise}[\faPhoto]
   Provide a specification of the virtual waiting time process $\{V(t)\}$ for
     all $t$.
     \begin{hint}Make a plot of the function $A_{A(t)}-t$. What is the meaning of $V(A_{A(t)})?$ What is
@@ -603,7 +741,7 @@ $V(A_{A(t)}) + A_{A(t)}-t$?
       job. Thus, the function $A_{A(t)}$ provides us with arrival
       times as a function of $t$. When $t=A_{A(t)}$, i.e., when $t$ is
       the arrival time of the $A(t)$th job, we set
-      $V(t) = V(A_{A(t)}) = W_{A(t)}$ i.e., the virtual waiting time
+      $V(t) = V(A_{A(t)}) = W_{A(t)}$, i.e., the virtual waiting time
       at the arrival time $t=A_{A(t)}$ is equal to the waiting time of
       the $A(t)$th job. Between arrival moments, the virtual waiting
       time decreases with slope $1$, until it hits 0.  Thus,
@@ -622,8 +760,8 @@ $V(A_{A(t)}) + A_{A(t)}-t$?
 
 
 
-\begin{exercise}  Try to extend the recursions~(\ref{eq:45})  to a situation in which one queue is
-  served by two servers.  (This is a hard problem, only for the interested.)
+\begin{exercise}[\faRocket\faRocket] Try to extend the recursions~(\ref{eq:45})  to a situation in which one queue is
+  served by two servers.  
     \begin{hint} The problem is
       that in a multi-server queueing systems, unlike for
       single-server queues, jobs can overtake each other: a small job
