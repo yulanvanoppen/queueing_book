@@ -1,31 +1,27 @@
+\usepackage{makeidx}
+
+\makeindex
+
+\setcounter{tocdepth}{1}
+
 \usepackage{natbib}
 \usepackage{a4wide}
 \usepackage[english]{babel}
 
 \usepackage{graphicx}
 \usepackage{mathtools,amsthm,amssymb,amsmath}
-\usepackage{changepage} % to change the width of the exercise environment
-\usepackage{mathrsfs}
 \usepackage{verbatim}
-\usepackage{enumitem}
-\usepackage{nicefrac}
-\usepackage[colorlinks=true]{hyperref}
+
+
 
 \numberwithin{equation}{section}
 
-\DeclareMathOperator{\Exp}{Exp}
 
-\usepackage{makeidx}
-\makeindex
+%\usepackage[colorlinks=true]{hyperref}
 
-\usepackage[T1]{fontenc}
+%\usepackage[T1]{fontenc}
 \usepackage{fouriernc}
-\usepackage{manfnt} %for the dangerous bend
 \usepackage{fontawesome} % for the linux hint symbol
-\newcommand{\hintsymbol}{\marginpar{\center{\faLinux}}}
-%\newcommand{\tbdsymbol}{\marginpar{\center{\dbend}}}
-\newcommand{\tbdsymbol}{\dbend}
-\newcommand{\recallsymbol}{\marginpar{\center{\bomb}}}
 
 \usepackage{pgf}
 \usepackage{tikz}
@@ -39,13 +35,13 @@
 % other packages. I don't know which ones, but at this spot it works.
 \usepackage{pythontex}
 
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhead{} % clear all header fields
-\fancyhead[LO, LE]{\rightmark}
-\fancyfoot{} % clear all footer fields
-\fancyfoot[C]{\thepage}
-\setlength{\headheight}{14pt} 
+% \usepackage{fancyhdr}
+% \pagestyle{fancy}
+% \fancyhead{} % clear all header fields
+% \fancyhead[LO, LE]{\rightmark}
+% \fancyfoot{} % clear all footer fields
+% \fancyfoot[C]{\thepage}
+% \setlength{\headheight}{14pt} 
 
 \Newassociation{solution}{Solution}{ans}
 \Newassociation{sol}{Solution}{ans}
@@ -60,66 +56,12 @@
 \newtheorem{exercise}{}[section]
 
 
-% \usepackage{xcolor}
-% \definecolor{light-gray}{gray}{0.9}
-% \usepackage{mdframed}
+%\newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1} \nameref*{#1}}} % One single link
 
-%\newtheorem{exercise}[section][1]{e.#1}
-
-%\usepackage{xparse}
-%\newtheorem{mdexercise}{}[section]
-
-% \NewDocumentEnvironment{exercise}{m}{%
-%   \begin{mdexercise}%
-% }{
-% #1\end{mdexercise}
-% }
-
-%\newtheorem{mdexercise}[section]
-% \newenvironment{exercise}%
-%   {\begin{mdframed}[backgroundcolor=light-gray, hidealllines=true]\begin{mdexercise}}%
-%   {\end{mdexercise}\end{mdframed}}
-
-
-
-
-% \newenvironment{myleftbar}{%
-% \def\FrameCommand{\vrule width 2pt\hspace{0.6em}}%
-% \MakeFramed{\advance\hsize-\width \FrameRestore}}%
-% {\endMakeFramed}
-% \usepackage{thmtools}
-
-% \declaretheorem[numberwithin=section,name={},
-% shaded={bgcolor=light-gray},
-% %postheadhook=\leavevmode\myleftbar, %
-% ]{exercise}
-
-%\usepackage{etoolbox}% necessary for the command below
-%\AtBeginEnvironment{exercise}{\begin{adjustwidth}{0em}{2em}}
-%\AfterBeginEnvironment{exercise}{piet}
-% %\AtEndEnvironment{exercise}{\hspace{\stretch1}\ensuremath\qedsymbol\end{adjustwidth}}
-%\AtBeginEnvironment{exercise}{\leavevmode\myleftbar}
-%\AtEndEnvironment{exercise}{\end{myleftbar}}
-%\AtBeginEnvironment{exercise}{\pagecolor{light-gray}}
-%\AtEndEnvironment{exercise}{}}
-%\BeforeBeginEnvironment{exercise}{\myleftbar}
-%\BeforeBeginEnvironment{exercise}{jaap}
-%\AfterEndEnvironment{exercise}{\endmyleftbar}
-
-
-
-\newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1} \nameref*{#1}}} % One single link
-
-\newcommand{\tbd}{\tbdsymbol}
-\newcommand{\TBD}{\tbdsymbol}
-
-\newcommand{\B}{\mathbb{B}}
-\newcommand{\C}{\mathbb{C}}
 \newcommand{\N}{\mathbb{N}}
-\newcommand{\Nn}{\mathbb{N}_{0}}
-\newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\Exp}{Exp}
 
 \newcommand{\abs}[1]{\left\vert#1\right\vert}
 \newcommand{\given}{\,\middle|\,}
@@ -131,19 +73,17 @@
 \newcommand{\1}[1]{\,\mathbb{1}_{#1}} % indicator
 \renewcommand{\TH}{\mathrm{TH}} % indicator
 
-%\newcommand{\recall}[1]{\emph{#1}}%\recallsymbol}
 \newcommand{\recall}[1]{\emph{#1}\index{#1}}
-\newcommand{\nvf}[1]{\tbdsymbol}
 
-\makeatletter
-\def\integral#1#2{\def\temp@expr{#1\,\mathrm d#2}\int\integral@}
-\def\integral@{%
-    \@ifnextchar{_}{\integral@sub}{%
-    \@ifnextchar{^}{\integral@sup}{\temp@expr}}%
-}%
-\def\integral@sub#1#2{_{#2}\integral@}
-\def\integral@sup#1#2{^{#2}\integral@}
-\makeatother
+% \makeatletter
+% \def\integral#1#2{\def\temp@expr{#1\,\mathrm d#2}\int\integral@}
+% \def\integral@{%
+%     \@ifnextchar{_}{\integral@sub}{%
+%     \@ifnextchar{^}{\integral@sup}{\temp@expr}}%
+% }%
+% \def\integral@sub#1#2{_{#2}\integral@}
+% \def\integral@sup#1#2{^{#2}\integral@}
+% \makeatother
 % example on how to use the above definitions.
 % \[
 %     \integral{x^2}{x} \qquad
@@ -164,7 +104,6 @@
 \def\prob@sup#1#2{^{#2}\prob@}
 \makeatother
 
-\setcounter{tocdepth}{1}
 
 \allowdisplaybreaks
 

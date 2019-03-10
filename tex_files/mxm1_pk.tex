@@ -1,6 +1,6 @@
 \section
-[$M^X/M/1$ Queue: Expected Waiting Time]
-{$\mathbf{M^X/M/1}$ Queue: Expected Waiting Time}
+{$M^X/M/1$ Queue: Expected Waiting Time}
+%{$\mathbf{M^X/M/1}$ Queue: Expected Waiting Time}
 \label{sec:mxm1-queue:-expected}
 
 \subsection*{Theory and Exercises}
@@ -146,45 +146,20 @@ $f_k=q^{k-1}p$ with $q=1-p$. Use generating functions to compute $\E B$ and $\E{
   \end{hint}
 \begin{solution}
   We need $\V B$ and $\E B$. Consider
-  \begin{equation*}
-    \begin{split}
-    \phi(z) 
-&= \E{z^B} = \sum_{k=0}^\infty z^k \P{B=k} = \sum_{k=0}^\infty z^k f_k \\
-&= \sum_{k=0}^\infty z^k p q^{k-1} 
-= \frac p q \sum_{k=0}^\infty (q z)^k = \frac p q \frac1{1-q z}.
-    \end{split}
-  \end{equation*}
-
-Then
-\begin{equation*}
-  \E B = \phi'(1) = \left.\frac p q \frac q{(1-q z)^2}\right|_{z=1}= \frac p{(1-q)^2} = \frac 1 p,
-\end{equation*}
-and
-\begin{equation*}
-  \E{B(B-1)} = \phi''(1) = \left.\frac p q \frac{2q^2}{(1-q z)^3}\right|_{z=1}= 2 \frac{q}{p^2}= \frac2{p^2} - \frac 2p.
-\end{equation*}
-Hence, 
-\begin{equation*}
-  \E{B^2} = \frac2{p^2} - \frac 2p + \E B = \frac2{p^2} - \frac1p,
-\end{equation*}
-and
-\begin{equation*}
-  \V B = \E{B^2} - (\E B)^2 = \frac2{p^2} - \frac1p - \frac1{p^2} = \frac1{p^2}-\frac1p,
-\end{equation*}
-and
-\begin{equation*}
-  C_s^2= \frac{\V B}{(\E B)^2} = p^2 \left(\frac1{p^2}-\frac1p\right)=1-p.
-\end{equation*}
-Then,
-\begin{equation*}
-  (1+C_s^2)/2= 1-p/2.
-\end{equation*}
-and 
-\begin{equation*}
-  \E L = 
+  \begin{align*}
+    M_B(s) 
+&= \E{e^{sB}} = \sum_{k=0}^\infty e^{sk} \P{B=k} \\
+&= \sum_{k=0}^\infty e^{sk} p q^{k-1} 
+= \frac p q \sum_{k=0}^\infty (q e^s)^k = \frac p q \frac1{1-qe^s},\\
+  \E B &= M_B'(0) = \left.\frac p q \frac q{(1-q e^s)^2}\right|_{s=0}= \frac p{(1-q)^2} = \frac 1 p,\\
+  \E{B^2)} &= M_B''(0) = \frac2{p^2} - \frac1p, \\
+  \V B &= \E{B^2} - (\E B)^2 = \frac2{p^2} - \frac1p - \frac1{p^2} = \frac1{p^2}-\frac1p,\\
+  C_s^2&= \frac{\V B}{(\E B)^2} = p^2 \left(\frac1{p^2}-\frac1p\right)=1-p,\\
+  (1+C_s^2)/2 &= 1-p/2\\
+  \E L &= 
 \left(1-\frac p2\right) \frac\rho{1-\rho} \frac 1 p + \frac12\frac\rho{1-\rho}
 =\frac\rho{1-\rho} \frac 1 p.
-\end{equation*}
+\end{align*}
 
 Can we check this in a simple way? If $\P{B=1}=f_1 = p =1$, then
 $\E L=\rho/(1-\rho)$. Thus, we get the result for the $M/M/1$
@@ -328,19 +303,79 @@ Section~\ref{sec:batch-arrivals}.
 We now turn to finding an expression for $\E{B_r}$;  for this we can again use the renewal reward theorem. 
 Let $L_s(s)$ be the number of items (of the batch in service) at the server. Then
 \begin{equation*}
-  Y_i(t) = \int_0^{D_{D(t)}} \1{L_S(s)=i} \d s
+  Y_i(t) = \int_0^t \1{L_S(s)=i} \d s
 \end{equation*}
 is the total time up to time $D(t)$ that there are $i$ items at the server. 
 
 \begin{exercise}
-Let $\tilde A_k$ be the moment the $k$th batch moves to the server and $D_k$ its departure time. Show that, when $S_{k,i}$ is the service time of the $i$th item of this batch,
+  Let $\tilde A_k$ be the moment the $k$th batch moves to the server and $D_k$ its departure time.
+  Use Figure~\ref{fig:remainingservicetime} to show that
 \begin{equation*}
-  \int_{\tilde A_k}^{D_k} \1{L_S(s)=i} \d s = S_{k,i} \1{B_k \geq i}. 
+  \int_{\tilde A_k}^{D_k} \1{L_S(s)=i} \d s = S_{k,i} \1{B_k \geq i},
 \end{equation*}
+where $S_{k,i}$ is the service time of the $i$th item of this batch.
 \begin{solution}
 Only if $B_k \geq i$ there can be an $i$th item of the batch, and then the time this $i$th item spends at the server is its service time $S_{k,i}$.   
 \end{solution}
 \end{exercise}
+
+
+
+
+\begin{figure}[th]
+  \centering
+  \begin{tikzpicture}[yscale=0.8,xscale=0.6,
+  open/.style={shape=circle, fill=white, inner sep=1pt, draw, node contents=},
+  closed/.style={shape=circle, fill=black, inner sep=1pt, draw, node contents=}]
+
+    % y = zero line
+    \draw (-0.5, 0) -- (18.5, 0); 
+    % level crossing
+    \draw (-0.5, 2.5) -- (18.5, 2.5) 
+    node[pos=0.65, fill=white, above]  {$\sum_{k=1}^n \1{B_k \geq i}$}
+    node[pos=0.92, fill=white]  {$y=i$};
+
+
+    \draw node (c1) at (0,3.5) [closed, label={}]
+          node (c2) at (3.5,0)[open, label={}]
+     (c1) to (c2);
+    \draw[dotted] (0,0) -- (0,3.5) node[midway, fill=white] {$B_1$};
+    \draw[dotted, <->] (1, 0.05) -- (1, 2.45) node[fill=white, midway, rotate=90] {$i$};
+
+
+    \draw node (c1) at (3.5,1.5) [closed, label={}]
+          node (c2) at (5,0)[open, label={}]
+     (c1) to (c2);
+    \draw[dotted] (3.5,0.1) -- (3.5,1.5) node[midway, fill=white] {$B_2$};
+
+    \draw node (c1) at (5,4) [closed, label={}]
+          node (c2) at (9,0)[open, label={}]
+     (c1) to (c2);
+    \draw[dotted] (5,0.1) -- (5,4) node[midway, fill=white] {$B_3$};
+    \draw[dotted, <->] (6.5, 0.05) -- (6.5, 2.45) node[fill=white, midway, rotate=90] {$i$};
+
+    \draw node (c1) at (9,2.3) [closed, label={}]
+          node (c2) at (11.3,0)[open, label={}]
+     (c1) to (c2);
+    \draw[dotted] (9,0.1) -- (9,2.3) node[midway, fill=white] {$B_4$};
+
+    % end
+    \draw node (c1) at (14.5,3.5) [closed, label={}]
+          node (c2) at (18,0)[open, label={}]
+     (c1) to (c2);
+    \draw[dotted] (14.5,0.1) -- (14.5,3.5) node[midway, fill=white ] {$B_n$};
+    \draw[dotted, <->] (15.5, 0.05) -- (15.5, 2.45) node[fill=white, midway, rotate=90] {$i$};
+    
+
+    % bottom line
+    \draw[<->] (0, -0.6) -- (18, -.6) node[fill=white, midway] {$\sum_{k=1}^n B_k$};
+\end{tikzpicture}
+
+\caption{The remaining job size as a function of time. The
+  total number of service periods, which is equal to the number of items arrived, is $\sum_{k=1}^n B_k$. A batch crosses   the line $y=i$ iff it contains at least $i$ items. Thus, during the service of a batch with $i$ or more items, there is precisely one  period during which the $i$-th item of a batch  is waiting in queue. Consequently, $\sum_{k=1}^n \1{B_k\geq i}$ is the number of periods in which there are precisely $i$ items waiting at the server. The fraction of  periods  there are~$i$ items is therefore
+  $\sum_k^n \1{B_k\geq i}/\sum_k^n B_k$.}
+  \label{fig:remainingservicetime}
+\end{figure}
 
 
 \begin{exercise}
@@ -445,62 +480,6 @@ By PASTA this is also the fraction of jobs that see~$i$ items at the server.  Fi
 \end{equation*}
 where  the limits exist by the strong law of large numbers. With  Exercise~\ref{ex:ER} 
 the expected remaining number of items to be served of the batch in service can be simplified to
-
-
-\begin{figure}[th]
-  \centering
-  \begin{tikzpicture}[yscale=0.8,xscale=0.6,
-  open/.style={shape=circle, fill=white, inner sep=1pt, draw, node contents=},
-  closed/.style={shape=circle, fill=black, inner sep=1pt, draw, node contents=}]
-
-    % y = zero line
-    \draw (-0.5, 0) -- (18.5, 0); 
-    % level crossing
-    \draw (-0.5, 2.5) -- (18.5, 2.5) 
-    node[pos=0.65, fill=white, above]  {$\sum_{k=1}^n \1{B_k \geq i}$}
-    node[pos=0.92, fill=white]  {$y=i$};
-
-
-    \draw node (c1) at (0,3.5) [closed, label={}]
-          node (c2) at (3.5,0)[open, label={}]
-     (c1) to (c2);
-    \draw[dotted] (0,0) -- (0,3.5) node[midway, fill=white] {$B_1$};
-    \draw[dotted, <->] (1, 0.05) -- (1, 2.45) node[fill=white, midway, rotate=90] {$i$};
-
-
-    \draw node (c1) at (3.5,1.5) [closed, label={}]
-          node (c2) at (5,0)[open, label={}]
-     (c1) to (c2);
-    \draw[dotted] (3.5,0.1) -- (3.5,1.5) node[midway, fill=white] {$B_2$};
-
-    \draw node (c1) at (5,4) [closed, label={}]
-          node (c2) at (9,0)[open, label={}]
-     (c1) to (c2);
-    \draw[dotted] (5,0.1) -- (5,4) node[midway, fill=white] {$B_3$};
-    \draw[dotted, <->] (6.5, 0.05) -- (6.5, 2.45) node[fill=white, midway, rotate=90] {$i$};
-
-    \draw node (c1) at (9,2.3) [closed, label={}]
-          node (c2) at (11.3,0)[open, label={}]
-     (c1) to (c2);
-    \draw[dotted] (9,0.1) -- (9,2.3) node[midway, fill=white] {$B_4$};
-
-    % end
-    \draw node (c1) at (14.5,3.5) [closed, label={}]
-          node (c2) at (18,0)[open, label={}]
-     (c1) to (c2);
-    \draw[dotted] (14.5,0.1) -- (14.5,3.5) node[midway, fill=white ] {$B_n$};
-    \draw[dotted, <->] (15.5, 0.05) -- (15.5, 2.45) node[fill=white, midway, rotate=90] {$i$};
-    
-
-    % bottom line
-    \draw[<->] (0, -0.6) -- (18, -.6) node[fill=white, midway] {$\sum_{k=1}^n B_k$};
-\end{tikzpicture}
-
-\caption{The remaining job size as a function of time. The
-  total number of service periods, which is equal to the number of items arrived, is $\sum_{k=1}^n B_k$. A batch crosses   the line $y=i$ iff it contains at least $i$ items. Thus, during the service of a batch with $i$ or more items, there is precisely one  period during which the $i$-th item of a batch  is waiting in queue. Consequently, $\sum_{k=1}^n \1{B_k\geq i}$ is the number of periods in which there are precisely $i$ items waiting at the server. The fraction of  periods  there are~$i$ items is therefore
-  $\sum_k^n \1{B_k\geq i}/\sum_k^n B_k$.}
-  \label{fig:remainingservicetime}
-\end{figure}
 \end{comment}
 
 

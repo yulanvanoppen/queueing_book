@@ -3,35 +3,49 @@
 
 \begin{document}
 \maketitle
-
-Changes:
-\begin{itemize}
-\item
-\end{itemize}
+\frontmatter
 
 \tableofcontents
 
-\chapter*{Introduction}\label{sec:introduction}
-\addcontentsline{toc}{chapter}{Introduction}
+\chapter{Introduction}\label{sec:introduction}
+%\addcontentsline{toc}{chapter}{Introduction}
 
 \input{tex_files/intro.tex}
-\input{tex_files/preliminaries.tex}
 
+\mainmatter
 
 \chapter{Construction and Simulation of Queueing Systems}
-
 \label{cha:single-stat-queu}
 
-\input{tex_files/single_station_intro.tex}
+In this chapter we start with a discussion of the Poisson process.
+We then construct queueing processes in discrete time and apply the Poisson process to model the number of arrivals in periods of fixed length.
+In Section~\ref{sec:expon-distr} we relate the exponential distribution to the Poisson distribution.
+The exponential distribution often serves as a good model for inter-arrival times of individual jobs.
+As such this is a key component of the construction of queueing processes in continuous time.
+As it turns out, both ways to construct queueing processes are easily implemented as computer programs, thereby allowing us to use simulation to analyze queueing systems.
+In passing we develop a number of performance measures to provide insight into the (transient and average) behavior of queueing processes.
 
+We assume that you  \emph{know all} results of Section~\ref{sec:preliminaries}. 
+
+\input{tex_files/preliminaries.tex}
 \input{tex_files/poissondistribution.tex}
 \input{tex_files/constructiondiscretetime.tex}
 \input{tex_files/expdistribution.tex}
 \input{tex_files/constructioncontinuoustime.tex}
 
+
 \chapter{Analytical Models}
 \label{cha:analytical-models}
-\input{tex_files/analytic_intro.tex}
+
+In this chapter we focus on developing analytic models for various queueing systems in steady-state.
+In the analysis we use sample-path and level-crossing arguments to count how often certain events occur as a function of time.
+Then we define probabilities in terms of limits of fractions of these counting processes.
+Like this the performance measures can be explicitly computed for the statistical analysis of (simulations of) queueing systems.
+
+We start with developing a useful set of shorthands to distinguish between different queueing models. Then we include a section to motivate why we focus on a steady-state analysis of queueing systems. 
+
+As a reminder, we keep the discussion in these notes mostly at an intuitive level, and refer to \cite{el-taha98:_sampl_path_analy_queuein_system} for proofs and further background.
+
 \input{tex_files/kendall.tex}
 \input{tex_files/random_walk.tex}
 \input{tex_files/ratestability.tex}
@@ -52,6 +66,9 @@ Changes:
 
 
 \chapter{Approximate Models}
+In this chapter we first consider the very useful formula of Sakasegawa to approximate the average waiting time in queue for the $G/G/c$ queue.
+We then illustrate how to use this formula to estimate waiting time in a number of cases including batch queues, servers with interruptions, and so on .
+
 \label{cha:approximate-models}
 \input{tex_files/gg1.tex}
 \input{tex_files/setup_times.tex}
@@ -63,6 +80,7 @@ Changes:
 \chapter{Queueing Networks}
 \label{sec:notes-relat-chapt2}
 
+We refer to the relevant sections of Zijm's book for background. Here we just include the solutions and repair a few typos. 
 %\input{tex_files/deterministic_networks.tex}
 \input{tex_files/open_single_class.tex}
 \input{tex_files/tandem.tex}
@@ -74,29 +92,25 @@ Changes:
 %\input{tex_files/mda.tex}
 
 
-% \appendix
-% \chapter{Appendix}
-% \label{cha:appendix-2}
+\backmatter
 
 \bibliographystyle{plainnat}
 \bibliography{biblio_nicky}
 \addcontentsline{toc}{chapter}{Bibliography}
 
 
-\chapter*{Notation}
+\chapter{Notation}
 \label{sec:notation}
-\addcontentsline{toc}{chapter}{Notation}
+%\addcontentsline{toc}{chapter}{Notation}
 \input{tex_files/notation.tex}
 
-\chapter*{Formula Sheet}
-\addcontentsline{toc}{chapter}{Formula Sheet}
+\chapter{Formula Sheet}
+%\addcontentsline{toc}{chapter}{Formula Sheet}
 \input{tex_files/formula_sheet.tex}
 
-
-
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{chapter}{Index}
-\printindex
+% \cleardoublepage
+% \phantomsection
+% \addcontentsline{toc}{chapter}{Index}
+%\printindex
 
 \end{document}
