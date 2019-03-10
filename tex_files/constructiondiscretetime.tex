@@ -254,7 +254,7 @@ that you practice with modeling, and that you learn from the
 solutions.  If you obtain \emph{reasonable} recursions, but they are
 different from mine, then your answer is just as good.
 
-\begin{exercise}[\faPhoto] (Queue with Blocking) Consider a queueing system
+\begin{exercise}[\faPhoto\/ Queue with Blocking] a queueing system
   under daily review, i.e., at the end of the day the queue length is
   measured. We assume that at the end of the day no jobs are still in
   service. We assume that jobs that arrive at day $k$ cannot be served
@@ -269,11 +269,9 @@ First $d_k = \min\{Q_{k-1}, c_k\}$. Then, $Q_k' = Q_{k-1}+a_k-d_k$ is the queue 
   \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faPhoto]\label{ex:19} (Estimating the lead time distribution.)  Take
-  $d_k = \min\{Q_{k-1}+a_k, c_k\}$, and assume that jobs are served in
-  FIFO sequence. Find an expression for the shortest possible waiting
-  time $W_{-,k}$ of a job that arrives at time $k$, and an expression
-  for the largest possible waiting time $W_{+,k}$.
+\begin{exercise}[\faPhoto\/ Estimating the lead time distribution] 
+  \label{ex:19} Take $d_k = \min\{Q_{k-1}+a_k, c_k\}$, and assume that jobs are served in FIFO sequence.
+  Find an expression for the shortest possible waiting time $W_{-,k}$ of a job that arrives at time $k$, and an expression for the largest possible waiting time $W_{+,k}$.
   \begin{hint}
   Consider a numerical example. Suppose $Q_{k-1}=20$. Suppose
     that the capacity is $c_k=3$ for all $k$. Then a job that arrives
@@ -309,10 +307,9 @@ First $d_k = \min\{Q_{k-1}, c_k\}$. Then, $Q_k' = Q_{k-1}+a_k-d_k$ is the queue 
   \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faPhoto]
-  (Yield loss) A machine produces items, but a fraction $p$ of the
-  items produced in a period turns out to be faulty, and has to be
-  made anew. Develop a set of recursions to cover this case.
+\begin{exercise}[\faPhoto\/ Yield loss]
+  A machine produces items, but a fraction $p$ of the items produced in a period turns out to be faulty, and has to be made anew.
+  Develop a set of recursions to cover this case.
   \begin{solution}
     The amount produced in period $k$ is $d_k$. Thus, $p d_k$ is the
     amount lost, neglecting rounding errors for the moment. Thus,
@@ -332,8 +329,7 @@ First $d_k = \min\{Q_{k-1}, c_k\}$. Then, $Q_k' = Q_{k-1}+a_k-d_k$ is the queue 
       \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faPhoto]
-  (Rework) A machine produces items, but a fraction $p$ of the items
+\begin{exercise}[\faPhoto\/  Rework] A machine produces items, but a fraction $p$ of the items
   does not meet the quality requirements after the first service but
   need some extra service time which is less than an entirely new arriving
   job. Make a model to analyze this case. Compare this case with the
@@ -372,7 +368,7 @@ There are of course many different policies to
 \end{exercise}
 
 
-\begin{exercise}[\faPhoto](Cost models) A single-server queueing station
+\begin{exercise}[\faPhoto\/ Cost models] A single-server queueing station
   processes customers. At the start of a period the server capacity is
   chosen, so that for period $k$ the capacity is $c_k$. Demand that
   arrives in a period can be served in that period. It costs $\beta$
@@ -404,12 +400,11 @@ long-run average cost is
   \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faPhoto](N-policies) A machine can switch on and off. If the
-  queue length hits $N$, the machine switches on, and if the system
-  becomes empty, the machine switches off. It costs $K$ to switch on
-  the machine. There is also a cost $\beta$ per unit time while the
-  machine is switched on, and it costs $h$ per unit time per customer
-  in the system. Make a cost model. 
+\begin{exercise}[\faPhoto\/ N-policies] A machine can switch on and off.
+  If the queue length hits $N$, the machine switches on, and if the system becomes empty, the machine switches off.
+  It costs $K$ to switch on the machine.
+  There is also a cost $\beta$ per unit time while the machine is switched on, and it costs $h$ per unit time per customer in the system.
+  Make a cost model.
   \begin{solution}
     First we need to implement the N-policy. For this we need an extra
     variable to keep track of the state of the server. Let $I_k=1$ if the machine is on in period $k$ and $I_k=0$ if it is off. Then $\{I_k\}$ must satisfy the relation
@@ -447,7 +442,7 @@ we need. The total cost up to time $T$ becomes:
 
 
 
-\begin{exercise}[\faPhoto]
+\begin{exercise}[\faPhoto\/ Queue length dependent server capacity]
   How would you model (in terms of recursions) a server whose capacity
   depends on the queue length? Consider, as an example, a rule such
   that the server only works if the queue is larger than a threshold $t$. 
@@ -459,7 +454,7 @@ we need. The total cost up to time $T$ becomes:
   \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faPhoto](Fair queueing) One server serves two queues. Each
+\begin{exercise}[\faPhoto\/ Fair queueing] One server serves two queues. Each
   queue receives service capacity in proportion to its queue length. Derive a set of recursions to analyze this situation.
   \begin{solution}
     Let $c_k^i$ be the capacity allocated to queue $i$ in period $k$. The fair rule gives that 
@@ -477,8 +472,7 @@ and likewise for the other queue.
   \end{solution}
   \end{exercise}
 
-  \begin{exercise} [\faPhoto]
-(Priority queueing) Another interesting situation is
+  \begin{exercise} [\faPhoto\/ Priority queueing] Another interesting situation is
     a system with two queues served by one server, but such that one
     queue, queue $A$, gets priority over the other
     queue. Again find a set of recursions to describe this case.
@@ -506,8 +500,7 @@ among a number of inheritors, each having a different claim size.
 
 
 
-\begin{exercise} [\faPhoto]
-  (Queues with reserved service capacity) Consider a single-server that
+\begin{exercise} [\faPhoto\/ Queues with reserved service capacity] Consider a single-server that
   serves two parallel queues $A$ and $B$. Each queue has a minimal service
   capacity every period, $r_A$ for queue $A$ and $r_B$ for queue $B$. Reserved capacity unused for one queue can be
   used to serve the other queue. Any extra capacity beyond the
@@ -545,8 +538,7 @@ d_{k,B} &= \min\{Q_{k-1, B}, c_k-d_{k,A}\}.
 \end{exercise}
 
 
-\begin{exercise} [\faPhoto]
-  (Queue with protected service capacity, lost capacity) Consider a
+\begin{exercise} [\faPhoto\/ Queue with protected service capacity and lost capacity] Consider a
   single-server that serves two parallel queues $A$ and $B$. Each queue receives a
   minimal service capacity every period. Reserved capacity unused for
   one queue cannot be used to serve the other queue. Any extra
@@ -588,8 +580,7 @@ but not always, applies to service capacity.
 
 
 
-\begin{exercise}[\faPhoto]
-(Tandem  networks) 
+\begin{exercise}[\faPhoto\/ Tandem  networks]
   Consider a production network with two production stations in
   tandem, that is, the jobs processed by station A are in the next
   period to the downstream Station B.  Extend the recursions of
@@ -615,8 +606,7 @@ d_{k}^A$. Thus,
 \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faPhoto]
- (A tandem queue with blocking)
+\begin{exercise}[\faPhoto\/ A tandem queue with blocking]
   Consider a production network with two production stations in tandem
   with blocking: when the intermediate queue, i.e., the queue in front of
   Station B, exceeds some level $M$, then station A has to stop
@@ -647,8 +637,7 @@ There is still  a small problem: What if for the first initial periods  $M<Q^B_{
 \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faPhoto]
- (Merging departure streams)
+\begin{exercise}[\faPhoto\/ Merging departure streams]
   Consider another production situation with two machines, A and B
   say, that send their products to Station C. Derive a set of
   recursion relations to simulate this system. 
@@ -669,8 +658,7 @@ Realize that Stations A and B have their own arrivals.
 \end{exercise}
 
 
-\begin{exercise}[\faPhoto]
- (Merging incoming streams) 
+\begin{exercise}[\faPhoto \/ Merging incoming streams]
 Consider a   single-server queue that serves two customer `streams' in a FIFO
   discipline. Thus, both streams enter one queue that is served by the
   server. Let $\{a_k^a\}$ be the number of arrivals of stream $a$ in
@@ -738,8 +726,7 @@ It is then sensible to set
 
 
 
-\begin{exercise}[\faPhoto]
- (Splitting streams)
+\begin{exercise}[\faPhoto\/ Splitting streams]
   Consider a machine (a paint mixing machine) that produces products
   for two separate downstream machines A and B (two different paint
   packaging machines), each with its own queue.  Suppose we want to
@@ -774,8 +761,7 @@ It is then sensible to set
 
 
 
-\begin{exercise}[\faPhoto]
-(Inventory control) The recursions used in the
+\begin{exercise}[\faPhoto\/ Inventory control] The recursions used in the
   exercises above can also be applied to analyze inventory control
   policies. Consider a production system that can produce maximally
   $M_k$ items per week during normal working hours, and maximally
@@ -818,7 +804,7 @@ I_k &\geq 0.
   \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faRocket, Queue with setups]
+\begin{exercise}[\faRocket\/ Queue with setups]
   One server serves two parallel queues, one at a time. After serving
    one queue until it is empty,  the server moves to the other
   queue. The change of queue requires one period setup time. 
