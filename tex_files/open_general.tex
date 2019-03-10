@@ -281,60 +281,6 @@ not too way off, we see that we can take $C_{1a}^2=1$. And then, including the r
 \end{exercise}
 
 
-\begin{comment}
-\begin{exercise}[use=false]
-  \begin{enumerate}
-  \item Three M/M/1 FIFO stations in tandem
-  \item $\gamma_1 = 2/h$,  $\gamma_2 = 3/h$, $\gamma_3 = 1/h$
-  \item All jobs from station 1 go to station 2
-  \item jobs that arrive at 2 externally and those from station 1 move
-    on to station 3
-  \item 1 out of 4 jobs that complete service at station 3 need rework
-    at station 2. The other  jobs leave the network
-  \item The jobs that arrive at station 2 from station 3 leave the
-    network after service at station 2.
-  \item Determine the total arrival rates, i.e., $\lambda$, at each
-    station. 
-  \item Determine the routing matrix $P$. 
-  % \item Suppose that at station 2, the average service time jobs from
-  %   station~1 require 1 hour of service, the jobs that arrive directly
-  %   at station 2 require 15 minutes of service, and the `rework' jobs
-  %   require 5 minutes of work.
-  \item Assume that $\E S_1 = 5$ min, $\E S_2 = 8$ min, and $\E S_3 =
-    5$ min. Determine the expected number of jobs in the system. 
-  \item Determine the density of the throughput time in the network
-    of the jobs that arrive at station 1. Realize that part of these
-    jobs have to undergo rework at station 2.
-  \end{enumerate}
-\begin{solution}
-\TBD.
-  \begin{enumerate}
-  \item 
-  The arrival rate at station 1 is $2$ per hour. Hence, $\rho_1 =
-  \lambda_1/\mu_1 = \lambda_1 \E S_1 = 2/60 * 5 = 10/60 =
-  1/10$. Hence, $L_{s,1} = \rho_1/(1-\rho_1)$.
-
-  At station 3, only the jobs arrive from station 2 that did not come
-  from station 3, plus $\gamma_3$. Hence, $\lambda_3 = \gamma_1 +
-  \gamma_2 + \gamma_3 = 6$ per hour. Service time is $\E S_3 = 5$
-  min. Hence, $\rho_3 = 6/60 * 5 = 30/60 = 1/2$. Then, $L_{s,2}$
-  follows straightaway.
-
-  Now station 2. This receives all jobs from station 1,
-  i.e.,$\gamma_1$, plus $\gamma_2$, plus 25\% of the jobs that move on
-  to station 3. Hence, $\lambda_2 = \gamma_1 + \gamma_2 + 1/4
-  \lambda_3 = \gamma_1 + \gamma_2 + 1/4(\gamma_1 + \gamma_2 +
-  \gamma_3) = 2 + 3 + (1+2+3)/4 = 5+6/4 = 5 + 3/2 = 6 1/2 = 13/2$ per
-  hour. Therefore, $\rho_2 = \lambda_2 \E S_2 = 13/2/60 * 8 = 13*8/120
-  = 104/120 = 52/60 = 26/30 = 13/15$.
-\item   Simulate the network, and use the empirical distribution function to
-  estimate the distribution function of the throughput times.
-  \end{enumerate}
-\end{solution}
-\end{exercise}
-\end{comment}
-
-
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}

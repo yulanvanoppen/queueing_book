@@ -379,57 +379,6 @@ With this,
 &= \frac{\lambda}{\lambda + \mu}.
 \end{align*}
 
-\begin{comment}
-Method 2. You only have to study this if you (want to) knowpnnn about conditioning with respect to a random variable with a density, otherwise, skip it.  Start with  the law of total probability in the discrete case: 
-\begin{equation*}
-  \E{A} = \sum_{i=1}^k \E{A\given B_i} \P{B_i},
-\end{equation*}
-where $B_1,\ldots, B_k$ forms a set of events such that $\cup_{i=1}^k B_i$ is equal to the sample space, $B_i\cap B_j = \varnothing$ and $\P{B_i}>0$. Now in \cite{capinski03:_probab_probl} it is shown that this can be extended to random variables $X$ and $Y$ with densities $f_X, f_Y$. The result is
-\begin{equation*}
-  \E{Y} = \int_0^\infty \E{Y\given X=x} f_X(x)\d x.
-\end{equation*}
-Here, conceptually, $f_X(x)\d x \approx \P{X\in \d x}$ plays the role of $\P{B_i}$ in the discrete case above. With this notion, and observing that $f_S(s) = \mu e^{-\mu s} \d s$,
-\begin{equation*}
-\P{X\leq S} = \E{\1{X\leq S}} = \int_0^\infty \E{\1{X\leq S}| S=s} \mu e^{-\mu s} \,  \d s.
-\end{equation*}
-
-Now, $\E{\1{X\leq S}| S=s}$ is a tricky object, as $\P{S=s} = 0$, so that 
-$\E{\1{X\leq S}\given S=s}$ \emph{cannot} be defined as 
-\begin{equation*}
-\frac{\E{\1{X\leq s}}}{\P{S=s}}.
-\end{equation*}
-The way to proceed is to consider the conditional probability density function of $X$ given that $S=s$, which is defined as
-\begin{equation*}
-  f_{X|S}(x|s) = \frac{f_{X, S}( x, s)}{f_S(s)},
-\end{equation*}
-where, as before, $f_{X, S}( x, s)$ is the joint density of $X$ and $S$. With this, we can properly define
-\begin{equation*}
-  \begin{split}
-  \P{X\leq S| S=s } = \E{\1{X \leq S}| S=s } = \int_0^\infty \1{x \leq s}   f_{X|S}(x|s)\, \d x.
-  \end{split}
-\end{equation*}
-Using the definition of $f_{X|S}(x|s)$ and the independence of $X$ and $S$ it follows that
-\begin{equation*}
-  f_{X|S}(x|s) = \frac{f_{X, S}( x, s)}{f_S(s)} = \frac{\lambda e^{-\lambda x} \mu e^{-\mu s}}{\mu e^{-\mu s}} = \lambda e^{-\lambda x},
-\end{equation*}
-from which we get that 
-\begin{align*}
-  \E{\1{X \leq S}| S=s } 
-&= \int_0^\infty \1{x \leq s}   f_{X|S}(x|s)\, \d x \\
-&= \int_0^\infty \1{x \leq s} \lambda e^{-\lambda x}\, \d x \\
-&= \int_0^s \lambda e^{-\lambda x}\, \d x \\
-&= 1 - e^{-\lambda s}.
-\end{align*}
-
-And then,  
-\begin{equation*}
-  \begin{split}
-  \P{X\leq S} &= \int \P{X\leq S| S=s} \mu e^{-\mu s}\d s \\
-&= \mu \int_0^\infty \E{\1{X \leq S}| S=s } e^{-\mu s} \d s= \mu \int_0^\infty (1 - e^{-\lambda s})e^{-\mu s} \d s.
-  \end{split}
-\end{equation*}
-Straightforward integration gives the final result.
-\end{comment}
 \end{solution}
 \end{exercise}
 

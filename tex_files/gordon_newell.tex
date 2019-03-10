@@ -9,6 +9,21 @@
 \Opensolutionfile{ans}
 
 
+\begin{exercise}
+  Provide an interpretation of a single-server queueing server with a
+  finite calling population in terms of a closed network.
+\begin{solution}
+    Consider a closed-queueing network with two stations. Station 1 is
+    a single-server station with exponentially distributed service
+    times with mean $\mu$; station 2 has $N$ parallel exponential
+    servers, each working at rate $\lambda$. If station 1 contains $n$
+    jobs, then Station 2 contains $N-n$ jobs.  The rate at which jobs
+    move from Station 2 to Station 1 is $(N-n)\lambda$, since $N-n$ of
+    the $N$ servers of Station 2 are occupied. Jobs move from Station
+    1 to Station 2 at rate $\mu$, provided $n\geq1$.
+  \end{solution}
+\end{exercise}
+
 The formula with the visit ratios should be like this:
 \begin{equation*}
   V_k = \sum_{j=0}^M V_j P_{jk}, 
@@ -48,15 +63,6 @@ $VP=V$.
     $V_0=1$, it follows that $V_2 = 2V_0$ and $V_1=V_2=2 V_0$.
   \end{solution}
 \end{exercise}
-
-\begin{comment}
-\begin{exercise}
-  What if $P$ has an eigenvalue $\alpha$ whose modulus $|\alpha|>$? What if for all eigenvalues $\alpha_i$ we have that $|\alpha_i|<1$?
-  \begin{solution}
-    TBD.
-  \end{solution}
-\end{exercise}
-\end{comment}
 
 \begin{exercise}
 Zijm.Ex.3.1.1 
