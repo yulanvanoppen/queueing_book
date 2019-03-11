@@ -162,18 +162,38 @@ Look up the relevant
   \citet{hall91:_queuein_method_servic_manuf}.
   \end{hint}
   \begin{solution}
-  \begin{itemize}
-  \item Advantage: SPTF minimizes the number of jobs in queue. Thus,
-    if you want to keep the shop floor free of jobs, then this is certainly a good rule. 
-  \item Disadvantage: large jobs get near to terrible waiting times,
-    and the variance of the waiting time increases. Thus, the $C_s^2$
-    is larger than under FIFO. Also, SPTF does not take due-dates into
-    account, thus giving a reliable due-date quotation to a customer is
-    hard (near to impossible).
-  \end{itemize}
+    Advantage: SPTF minimizes the number of jobs in queue.
+    Thus, if you want to keep the shop floor free of jobs, then this is certainly a good rule.
+    Disadvantage: large jobs get near to terrible waiting times, and the variance of the waiting time increases.
+    Thus, the $C_s^2$ is larger than under FIFO.
+    Also, SPTF does not take due-dates into account, thus giving a reliable due-date quotation to a customer is hard (near to impossible).
   \end{solution}
 \end{exercise}
 
+
+\begin{exercise}[\faCalculator]
+  Suppose for the $G/G/1$ that a job sees $n$ jobs in the system upon arrival.
+  Can you use the central limit theorem to estimate  the distribution of the waiting time in queue for this job?
+  \begin{hint}
+    Let $W_{Q,n} = \sum_{k=1}^n S_k$.
+    Since $\{S_k\}$ are assumed to be i.i.d.
+    for the $G/G/1$ queue,  $W_{Q,n}$ has mean $\mu_n = n \E S$ and $\sigma_n^2 = n\V S$.
+  \end{hint}
+  \begin{solution} Under conditions you can find on the internet,
+    \begin{equation*}
+    \frac{W_{Q,n} - \mu_n}{\sigma_n} \to \mathcal{N}(0,1), \quad\text{as } n\to \infty,
+    \end{equation*}
+    where $\mathcal{N}(0,1)$ is a normally distributed random variable
+    with $\mu=0$ and $\sigma^2=1$. But then 
+    \begin{align*}
+    \frac{W_{Q,n} - \mu_n}{\sigma_n} &\approx  \mathcal{N}(0,1)  \iff\\
+    W_{Q,n} - \mu_n &\approx  \sigma_n \mathcal{N}(0,1)  \iff\\
+    W_{Q,n} - \mu_n &\approx  \mathcal{N}(0,\sigma_n^2)  \iff\\
+    W_{Q,n}  &\approx   \mu_n  + \mathcal{N}(0,\sigma_n^2)  \iff\\
+    W_{Q,n}  &\approx    \mathcal{N}(\mu_n,\sigma_n^2) = \mathcal{N}(n\E X, n \V S).
+    \end{align*}
+\end{solution}
+\end{exercise}
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}
