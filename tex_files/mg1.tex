@@ -45,7 +45,7 @@ any remaining service.
   \begin{equation*}
     Y(t) = \int_0^t (D_{D(s)+1}-s)\1{L(s) > 0} \d s
   \end{equation*}
-is to the total remaining service time as seen by the server up to $t$. 
+is the total remaining service time as seen by the server up to $t$. 
 \begin{solution}
   At time $s$, the number of departures is $D(s)$. Thus, $D(s)+1$ is the first job to depart after time $s$. The departure time of this job is $D_{D(t)+1}$, hence the remaining service time at time $s$ is $D_{D(s)+1}-s$, provided this job is in service. 
 \end{solution}
@@ -82,7 +82,8 @@ Use the renewal reward theorem to prove that
   Choose $T_k=D_k$ as epochs in the renewal reward theorem.
 \end{hint}
 \begin{solution}
-  It is clear that the time-average $Y(t)/t \to \E{S_r}$. Moreover, $X_k = Y(D_k) - Y(D_{k-1})$ is the area under the triangle in Figure~\ref{fig:mg1remainingservicetime}. Thus, $\E X = \E{S^2}/2$. Finally,  $\delta = \lambda$ by rate-stability.
+  It is clear that the time-average $Y(t)/t \to \E{S_r}$. Moreover, $X_k = Y(D_k) - Y(D_{k-1})$ is the area under the triangle in Figure~\ref{fig:mg1remainingservicetime}. Thus,
+  $X=\lim_{n\to\infty} \lim_{k=1}^n S_k^2/ 2 = \E{S^2}/2$. Finally,  $\delta = \lambda$ by rate-stability.
 \end{solution}
 \end{exercise}
 

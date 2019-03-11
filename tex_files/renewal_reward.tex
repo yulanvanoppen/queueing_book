@@ -88,17 +88,15 @@ Define the \recall{load} or \recall{utilization} as the limiting fraction of tim
 \begin{exercise}[\faPhoto]
 Use the renewal reward theorem to prove that $\rho = \lambda \E S$.
 \begin{hint}
-Define
-\begin{equation*}
-  Y(t) = \int_0^t \1{L(s)>0} \d s, 
-\end{equation*}
-as the total amount of time the server has been busy up to the time $t$. 
-
-Then take $X_k = Y(D_k)-Y(D_{k-1})$ and use rate stability. 
+  Define $Y(t) = \int_0^t \1{L(s)>0} \d s$ as the total amount of time the server has been busy up to the time $t$.
+  Then take as epochs $T_k = D_k$ and use rate stability.
 \end{hint}
 \begin{solution}
-  By the renewal reward theorem $\rho = \lim_{t\to\infty} Y(t)/t = \delta \E X$; we use $\delta$ since we consider times $T_k = D_k$. 
-  But $\E X = \E S$, because the expected time the server is busy between two departures is precisely $\E S$, and $\delta= \lambda$.
+  It is evident that $X_k =  Y(D_k)-Y(D_{k-1})=S_k$, hence $X = \lim_{n\to\infty} n^{-1}\sum_{k=1}^n X_k = \E S$.
+  Also $\lim_{t\to\infty} Y(t)/t=\rho$.
+  Finally, in the relation $Y = \lambda X$, the $\lambda$ is $\delta$ since we consider departure epochs $T_k = D_k$, rather than $A_k$.
+  By the renewal reward theorem $Y=\lambda X$ we get that $\rho = \delta \E S$.
+  Finally, by rate-stability, the job arrival rate $\lambda = \delta$, hence $\rho = \lambda \E S$.
 \end{solution}
 \end{exercise}
 
