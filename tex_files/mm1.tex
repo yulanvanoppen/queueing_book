@@ -46,13 +46,15 @@ server is busy, i.e., the utilization, is
 Here the last equation has the interpretation of the fraction of time
 the system contains at least 1 job. 
 
-
-\begin{exercise}[\faCalculator]
-\label{ex:12}
-Show with indicator functions that the average number of jobs in an  $M/M/1$ queue is given by
+We consider three different ways to show that the average number of jobs in an  $M/M/1$ queue is given by
 \begin{equation}\label{eq:el}
   \E L = \sum_{n=0}^\infty n p(n) = \sum_{n=0}^\infty \sum_{i=1}^n \1{i\leq n} p(n) = \frac \rho{1-\rho}.
 \end{equation}
+All three methods are worth knowing. 
+
+\begin{exercise}[\faCalculator]
+\label{ex:12}
+Derive~\eqref{eq:el} with indicator functions.
   \begin{solution}
 A bit long, but I spell out every step:
 \begin{align*}
@@ -75,14 +77,26 @@ to justify the interchange of the summations.
 \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faCalculator]
+\begin{exercise}[\faCalculator] \label{ex:14}
+Derive~\eqref{eq:el} by differentiation the left-hand and right-hand side of
+ the standard formula for a geometric series:  $\sum_{n=0}^{\infty}\rho^n = (1-\rho)^{-1}$ for $|\rho| < 1$. 
+  \begin{solution}
+Differentiate the left and right-hand side with respect to
+$\rho$  and then  multiply with $\rho$ to get
+\begin{equation*}
+\dfrac{\rho}{(1-\rho)^2}=\sum_{n=0}^{\infty}n\rho^n.
+\end{equation*}
+Then multiply both sides by $1-\rho)$ (recall that $p(n) = (1-\rho)\rho^n$).
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[\faCalculator]\label{ex:34}
   Now use moment-generating  functions to derive~\eqref{eq:el}. 
 \begin{solution}
 \begin{equation*}
   \begin{split}
   M_L(s) 
-&= \E{e^{s L}} = \sum_{n=0}^\infty e^{s n}p(n) = (1-\rho) \sum_n e^{s n} \rho^n \\
-&=\frac{1-\rho}{1-e^{s}\rho},
+&= \E{e^{s L}} = \sum_{n=0}^\infty e^{s n}p(n) = (1-\rho) \sum_n e^{s n} \rho^n=\frac{1-\rho}{1-e^{s}\rho},
   \end{split}
 \end{equation*}
 where we assume that $s$ is such that $e^s \rho < 1$. Then, 
@@ -98,26 +112,16 @@ The fact that $\E L \sim (1-\rho)^{-1}$ for $\rho\to 1$ implies that the average
 If we want to avoid long waiting times, this formula tells us that situations with $\rho\approx 1$ should be avoided.
 As a practical guideline, it is typically best to keep $\rho$ quite a bit below 1, and accept that servers are not fully utilized.
 
-We next consider three different ways to show that 
+In the next three exercises we use the same tools  to show that 
 \begin{equation}\label{eq:80}
   \E{L^2}= (1-\rho) \sum_{n=0}^\infty n^2 \rho^n = \frac{2\rho^2}{(1-\rho)^2} + \frac{\rho}{1-\rho}.
 \end{equation}
 Observe that here we just compute the second moment of a geometric random variable.
 We then use this expression to compute $\V L$.
 
-\begin{exercise}[\faCalculator] Derive~\eqref{eq:80} by differentiation the left-hand and right-hand side of
- the standard formula for a geometric series with $\rho < 1$:
-\begin{equation*}
-\dfrac{1}{1-\rho} = \sum_{n=0}^{\infty}\rho^n.
-\end{equation*}
-
+\begin{exercise}[\faCalculator] Derive~\eqref{eq:80} by differentiation the standard formula for a geometric series.
   \begin{solution}
-Differentiate the left and right-hand side with respect to
-$\rho$  and then  multiply with $\rho$ to get
-\begin{equation*}
-\dfrac{\rho}{(1-\rho)^2}=\sum_{n=0}^{\infty}n\rho^n.
-\end{equation*}
-Again, differentiating and multiplying with $\rho$ yields, 
+    Starting from the result of Exercise~\ref{ex:14},  differentiating and multiplying with $\rho$ a second time yields
 \begin{equation*}
   \begin{split}
 \rho \frac{(1-\rho)^2 + \rho2(1-\rho)}{(1-\rho)^4} 
@@ -132,7 +136,6 @@ and hence
 (1-\rho)\sum_{n=0}^{\infty}n^2\rho^n = \rho\dfrac{1+\rho}{(1-\rho)^2}.
 \end{equation*}
 Recall that $p(n) = (1-\rho)\rho^n$. 
-
 \end{solution}
 \end{exercise}
 
@@ -159,10 +162,8 @@ $\sum_n n^2 \rho^n$ and simplify.
 
 \begin{exercise}[\faCalculator] Derive~\eqref{eq:80} by
   using the moment-generating functions.
-  \begin{hint}
-    Use Exercise~\ref{ex:32}
-  \end{hint}
 \begin{solution}
+Using the results of Exercise~\ref{ex:34} gives
 \begin{equation*}
   \E{L^2}= M''(0)= \frac{2\rho^2}{(1-\rho)^2} + \frac{\rho}{1-\rho}.
 \end{equation*}
@@ -277,13 +278,10 @@ average number of customers arriving per hour, cf. Figure~\ref{fig:loadprofile}.
 \end{figure}
 
 
-It is also easy to find the service distribution from the cash
-registers. The first item scanned after a payment determines the start
-of a new service, and the payment closes the service. (As there is
-always a bit of time between the payment and the start of a new
-service we might add 15 seconds, say, to any service.)
-To keep things simple here, we just model the service time distribution as
-exponential with a mean of $1.5$ minutes. 
+It is also easy to find the service distribution from the cash registers.
+The first item scanned after a payment determines the start of a new service, and the payment closes the service.
+(As there is always a bit of time between the payment and the start of a new service we might add 15 seconds, say, to any service.)
+To keep things simple here, we just model the service time distribution as exponential with a mean of $1.5$ minutes.
 
 We also \emph{model} the behavior of all the cashiers together (a multi-server queue) as a single fast server.
 Thus, we neglect any differences between a station with, for instance, 3 cashiers and a single server that works 3 times as fast as a normal cashier.
@@ -371,7 +369,7 @@ In more general terms, in a queueing system or an inventory system, there is alw
 \end{figure}
 
 
-\begin{exercise}\label{ex:7}
+\begin{exercise}[\faPhoto] \label{ex:7}
 Customers of fast-food restaurants prefer to be served from stock. For this reason such
 restaurants often use a `produce-up-to' policy: When the on-hand inventory $I$ is equal to or lower than some threshold $S-1$, the company produces items until the inventory level equals $S$ again. The level $S$ is known as the order-up-to level, and $S-1$ as the reorder level.
 
