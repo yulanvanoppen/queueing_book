@@ -2,8 +2,8 @@
 \title{Analysis of Queueing Systems with  Sample Paths and Simulation }
 
 \begin{document}
-\maketitle
 \frontmatter
+\maketitle
 
 \tableofcontents
 
@@ -66,10 +66,18 @@ As a reminder, we keep the discussion in these notes mostly at an intuitive leve
 
 
 \chapter{Approximate Models}
-In this chapter we first consider the very useful formula of Sakasegawa to approximate the average waiting time in queue for the $G/G/c$ queue.
-We then illustrate how to use this formula to estimate waiting time in a number of cases including batch queues, servers with interruptions, and so on .
-
 \label{cha:approximate-models}
+In this chapter we first consider the very useful formula of Sakasegawa to approximate the average waiting time in queue for the $G/G/c$ queue.
+We then illustrate how to use this formula to estimate waiting time in three examples in which the server is interrupted.
+In the first case the server has to produce jobs from different families, and there is a switch-over time required to change the production family.
+Such setups reduce the time the server has available to serve jobs.
+To reduce the load the server produces in batches of fixed sizes.
+In the second case, the server requires sometime a small adjustment, for instance, to prevent its quality to degrade below a certain level.
+Such adjustments are not necessary to perform during a job's service, however, they can occur at arbitrary moments in time.
+Thus, this is different from batch production in which the batch sizes (the number of jobs served between two interruptions) are constant.
+In the third example, quality problems or break downs can occur during a job's service.
+For each case we develop a model to analyze the influence of the interruption duration and frequency on average waiting times. 
+
 \input{tex_files/gg1.tex}
 \input{tex_files/setup_times.tex}
 \input{tex_files/adjustments.tex}
@@ -96,7 +104,7 @@ We refer to the relevant sections of Zijm's book for background. Here we just in
 
 \bibliographystyle{plainnat}
 \bibliography{biblio_nicky}
-\addcontentsline{toc}{chapter}{Bibliography}
+%\addcontentsline{toc}{chapter}{Bibliography}
 
 
 \chapter{Notation}
@@ -110,7 +118,7 @@ We refer to the relevant sections of Zijm's book for background. Here we just in
 
 % \cleardoublepage
 % \phantomsection
-% \addcontentsline{toc}{chapter}{Index}
-%\printindex
+
+\printindex
 
 \end{document}
