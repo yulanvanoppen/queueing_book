@@ -61,8 +61,8 @@ Thus, with the above,
   \E{S} = \E{S_0 + S_N} = \E{S_0} + \E D \E N.
 \end{equation*}
 To make further progress, we need some additional assumptions.
-A common assumption is that the time between two interruptions is memoryless, hence the time between failures is exponentially distributed with rate $\lambda_f$.
-Consequently, the number of interruptions $N$ that occur during the net service time $S_0$ must be Poisson distributed with mean $\E N = \lambda_f \E{S_0}$.
+A common assumption is that the time between two interruptions is $\Exp(\lambda_f)$, hence is memoryless.
+Consequently, the number of interruptions $N$ that occur during the net service time $S_0$ is  Poisson distributed with mean $\E N = \lambda_f \E{S_0}$.
 
 
 Define the \emph{availability} as
@@ -110,7 +110,7 @@ It is important to realize that
 hence the load increases due to failures. 
 
 
-We can similar ideas to derive an expression for the variance of $S$. The next exercise helps to  understand why this derivation is a bit more involved.
+We can use similar ideas to derive an expression for the variance of $S$. The next exercise helps to  understand why this derivation is a bit more involved.
 \begin{exercise}[\faFlask]
   Why is $\V{S} \neq \V{S_0} + \V{\sum_{i=0}^N D_i}$?
   \begin{solution}
@@ -130,7 +130,7 @@ Show that
 \end{solution}
 \end{exercise}
 
-To simplify this, we  assume at first that $S_0$ is known, so that the number of failures that occur during a service time $S_0$ is Poisson distributed, i.e.,  $N\sim \text{Poisson}(\lambda_f S_0)$.  Hence $\E{N\given S_0} = \lambda_f S_0$ and $\E{N^2\given S_0}= \lambda_f S_0 + \lambda_f^2 S_0^2$. 
+To simplify this, we assume at first that $S_0$ is known, so that the number of failures that occur during a service time $S_0$ is Poisson distributed, i.e., $N\sim P(\lambda_f S_0)$.
 
 \begin{exercise}[\faFlask]
   Show that $\E{S_0 \sum_{i=1}^N D_i\given S_0} = \lambda_f S_0^2 \E{D}$.
@@ -155,7 +155,7 @@ Show that $\E{\sum_{i=1}^N D_i^2\given S_0} = \lambda_f S_0 \E{D^2}$.
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}[\faCalculator]
 Show that 
 $\E{\sum_{i=1}^N \sum_{j\neq i} D_i D_j\given S_0} = \lambda_f^2 S_0^2 (\E{D})^2.$
 \begin{solution}
@@ -216,15 +216,15 @@ C_s^2 &= \frac{\V{S}}{(\E S)^2} =\frac{V(S) A^2}{(\E{S_0})^2} \\
 \end{exercise}
 
 If we assume that repair times are exponentially distributed with mean $\E{D}$, we can simplify this yet further.
-\begin{exercise}
-  Under this condition, show that $\E{D^2}=2(\E D)^2$. 
-\end{exercise}
+
 \begin{exercise}[\faCalculator]
 With the above assumption on the distribution of $D$, show that
   \begin{equation*}
     C_s^2 = C_0^2 + 2 A(1-A) \frac{\E{D}}{\E{S_0}}.
   \end{equation*}
 \begin{solution} 
+When repair times are exponentially distributed with mean $\E{D}$:  $\E{D^2}=2(\E D)^2$. 
+
 Since $A=1/(1+\lambda_f \E D)$, 
   \begin{equation*}
     \begin{split}
