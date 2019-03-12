@@ -168,29 +168,6 @@ What is the rate in, and what is the service capacity?
   \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faPhoto]\label{ex:11}
-  Define a \recall{busy time} as the moment a job arrives at an empty system and the server starts serving until the server becomes idle again.
-  Let $\E{B}$ be the expected busy time and $\E{I}$  the expected idle time. Show that $\E{B} = \E{I} \rho/(1-\rho) $ is the fraction of time the server is busy. Interpret the result.
-  \begin{hint}
-    Use the concept of busy cycle developed in Exercise~\ref{ex:29}. 
-  \end{hint}
-\begin{solution}
-  Consider again a busy cycle, that is, a cycle that starts with the first
-  job that sees an empty system at upon arrival up to the time another
-  job sees an empty system upon arrival. In such one cycle, the server
-  is busy for an expected duration $\E{B}$. The total expected length
-  of the cycle is $\E{B} + \E{I}$, since after the last job of the cycle
-  left, the expected time until the next job is $\E{I}$.
-
-  Since $\rho$ is the utilization of the server,
-  \begin{equation*}
-\rho = \frac{\E B}{\E B + \E I}.
-  \end{equation*}
-  With a bit of algebra the result follows.
-
-  The interpretation is that once we know $\rho$, the ratio between $\E B$ and $\E I$ is fixed. 
-\end{solution}
-\end{exercise}
 
 \Closesolutionfile{hint}
 \Closesolutionfile{ans}

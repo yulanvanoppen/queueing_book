@@ -369,44 +369,20 @@ What is the average time between two
     is also $1/\lambda$.
   \end{hint}
   \begin{solution}
-  Since the inter-arrival times are memoryless, the expected
-      time to the first arrival after a busy time stops is also
-      $\E X=1/\lambda$.
-  \end{solution}
-\end{exercise}
-
-\begin{exercise}[\faFlask]
-  Use Exercise~\ref{ex:11} to show that for the $M/G/1$ queue, the
-  expected busy time is given by $\E B = \E S/(1-\rho)$.
-  \begin{solution}
-  Since $\rho = \lambda \E S$, $\E I= 1/\lambda$ and from Exercise~\ref{ex:11}
-\begin{equation*}
-  \E B = \frac{\rho }{1-\rho} \E I = \frac{\lambda \E S}{1-\rho} \frac1\lambda.
-\end{equation*}
-The result follows.
+    Since the inter-arrival times are memoryless, the expected time to the first arrival after the system becomes empty is also $\E X=1/\lambda$.
   \end{solution}
 \end{exercise}
 
 \begin{exercise}[\faFlask]
   What is the utilization of the $M/G/1/1$ queue?  
-  \begin{hint}
-The job in
-    the system is also in service (it is an $M/G/1/1$ queue\ldots).
-    The average idle time is $1/\lambda$. The average busy time is
-    $\E S$--as there are no jobs in queue. The load $\rho$ must also
-    be equal to the fraction of time the server is busy. 
-  \end{hint}
   \begin{solution}
- The system can contain at most 1 job. Necessarily, if the
-      system contains a job, this job must be in service.  All jobs
-      that arrive while the server is busy are blocked, in other
-      words, rejected.  Just after a departure, the average time until
-      the next arrival is $1/\lambda$, then a service starts with an
-      average duration of $\E S$. After this departure, a new cycle
-      starts. Thus, the utilization is
-      $\E S/(1/\lambda + \E S) = \lambda \E S/ (1 + \lambda \E S)$.
-      Since not all jobs are accepted, the utilization $\rho$ cannot
-      be equal to $\lambda \E S$.
+    The system can contain at most 1 job.
+    Necessarily, if the system contains a job, this job must be in service.
+    All jobs that arrive while the server is busy are rejected.
+    Just after a departure, the average time until the next arrival is $1/\lambda$, and then a new service starts with an average duration of $\E S$.
+    After this departure, a new cycle starts.
+    Thus, the utilization is $\E S/(1/\lambda + \E S) = \lambda \E S/ (1 + \lambda \E S)$.
+    Since not all jobs are accepted, the utilization $\rho$ cannot be equal to $\lambda \E S$.
   \end{solution}
 \end{exercise}
 
