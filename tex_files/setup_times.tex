@@ -8,7 +8,7 @@
 
 With the $G/G/1$ waiting time formula~\eqref{eq:7} we can compute, approximately,  the waiting time in queue for many non-trivial queueing situations. In this section we focus on the effect of change-overs, or setups. Consider, for instance, a  machine that paints red and blue bikes. When the machine requires a color change, a clean-up time is necessary. As we will see it is necessary in such situations to produce in batches.  Other examples are ovens that need  warm up or cool down times when different item types require different temperatures. In service settings, when servers have to move from a part of a building to another,  the time spend moving cannot be spent on serving customers.  
 
-Specifically, we analyze the following queueing situation. There are two job families, e.g., red and blue. Jobs arrive at rate $\lambda_r$ and $\lambda_b$, respectively, so that the arrival rate of jobs is $\lambda= \lambda_b+\lambda_r$. For ease we assume that the job's service time, $S_0$, has the same distribution for both colors. The change-over time is given by a random variable~$T$, which is independent of the normal job service times. 
+Specifically, we analyze the following queueing situation. There are two job families, e.g., red and blue. Jobs arrive at rate $\lambda_r$ and $\lambda_b$, respectively, so that the arrival rate of jobs is $\lambda= \lambda_b+\lambda_r$. For ease we assume that the job's service time, $S_0$, has the same distribution for both colors. The change-over time is given by a random variable~$R$, which is independent of the normal job service times. 
 
 Jobs of each color are assembled into batches of size $B$. Once a batch is complete, the batch enters a queue (of batches). Once a batch reaches the head of the queue, the machine performs a setup, and then starts processing each job individually until the batch is complete. If there is another batch in queue, a new setup time is required. Otherwise the machine just switches off. Finally, once a job is finished, it can leave the system; as a consequence, it does not have to wait for other jobs in the same batch to finish.  
 
@@ -40,26 +40,26 @@ Observe next that the machine not only  serves jobs, part of the time it is  occ
 \begin{exercise}
   Show that
   \begin{equation*}
-    \E{S} = \E{S_0} + \frac{\E{T}} B.
+    \E{S} = \E{S_0} + \frac{\E{R}} B.
   \end{equation*}
   \begin{hint}
-    What fraction of the setup time $\E T$ `belongs' to one job?
+    What fraction of the setup time $\E R$ `belongs' to one job?
   \end{hint}
   \begin{solution}
-    The total service time spent on a batch of size $B$ is $B \E{S_0} + \E T$. The effective time per job is then the average, i.e.,  $(B \E{S_0}+\E T)/B$. 
+    The total service time spent on a batch of size $B$ is $B \E{S_0} + \E R$. The effective time per job is then the average, i.e.,  $(B \E{S_0}+\E R)/B$. 
   \end{solution}
 \end{exercise}
 
 Now that  the batch arrival rate and the service time per batch are known, the load can be written as
 \begin{equation*}
-\rho = \lambda_B (B \E{S_0} + \E T) = \lambda \left(\E{S_0} + \frac{\E{T}}B\right),
+\rho = \lambda_B (B \E{S_0} + \E R) = \lambda \left(\E{S_0} + \frac{\E{R}}B\right),
 \end{equation*}
 where the first equality has the interpretation of the batch arrival rate times the work per batch, while the second is the job arrival rate times the effective work per job. 
 
 \begin{exercise} 
 Show that the requirement $\rho < 1$ leads to the following constraint on the minimal batch size~$B$ 
   \begin{equation*}
- B>\frac{\lambda \E T}{1-\lambda \E{S_0}}.
+ B>\frac{\lambda \E R}{1-\lambda \E{S_0}}.
   \end{equation*}
 \end{exercise}
 
@@ -84,23 +84,23 @@ The last element is to find the SCV $C_{s,B}^2$ of the service times.
 \begin{exercise}
 Show that
 \begin{equation*}
-C_{s, B}^2 = \frac{B \V{S_0} + \V{T}}{(B \E{S_0} + \E T)^2}.
+C_{s, B}^2 = \frac{B \V{S_0} + \V{R}}{(B \E{S_0} + \E R)^2}.
 \end{equation*}
 \begin{hint}
   What is the variance of a batch service time?
 \end{hint}
 \begin{solution}
-  The variance of a batch is $\V{\sum_{i=1}^B S_{0,i} + T} = B\V{S_0} + \V T$, since the normal service times $S_{0,i}, i=1,\ldots, B$ of the job are independent, and also independent of the setup time $T$  of the batch.
+  The variance of a batch is $\V{\sum_{i=1}^B S_{0,i} + R} = B\V{S_0} + \V R$, since the normal service times $S_{0,i}, i=1,\ldots, B$ of the job are independent, and also independent of the setup time $R$  of the batch.
 \end{solution}
 \end{exercise}
 
 
-Finally, when the batch is taken into service, there can be various rules to determine when the job's service finished. If the job has to wait until all jobs in the batch are served, the time a job spends at the server is $B \E{S_0} + \E T$. 
+Finally, when the batch is taken into service, there can be various rules to determine when the job's service finished. If the job has to wait until all jobs in the batch are served, the time a job spends at the server is $B \E{S_0} + \E R$. 
 
 \begin{exercise}
 In our model we assume that jobs can leave right after being served.  Show for this case that the expected time  until a job leaves the server is
 \begin{equation*}
-\E{T}  + \frac{B-1}{2}\E{S_0} +\E{S_0}.
+\E{R}  + \frac{B-1}{2}\E{S_0} +\E{S_0}.
 \end{equation*}
 \begin{solution}
   First, wait until the setup is finished,  then wait (on average) for half of the batch (minus the job itself) to be served, and then the job has to be served itself.
@@ -117,9 +117,9 @@ First check the load.
 labda = 3 # per hour
 ES0 = 15./60 # hour
 ES0
-ET = 2.
+ER = 2.
 B = 30
-ESe = ES0+ ET/B
+ESe = ES0+ ER/B
 ESe
 
 rho = labda*ESe
@@ -129,7 +129,7 @@ Evidently, the load is smaller than $1$.
 
 The minimal batch size is
 \begin{pyconsole}
-Bmin = labda*ET/(1-labda*ES0)
+Bmin = labda*ER/(1-labda*ES0)
 Bmin
 \end{pyconsole}
 So, with $B=30$ we are on the safe side. 
@@ -149,13 +149,13 @@ CaB
 Ce = 1 # SCV of service times
 VS0 = Ce*ES0*ES0
 VS0
-VT = 1*1. # Var setups is sigma squared
-VSe = B*VS0 + VT
+VR = 1*1. # Var setups is sigma squared
+VSe = B*VS0 + VR
 VSe
-ESB = B*ES0+ET
+ESB = B*ES0+ER
 CeB = VSe/(ESB*ESB)
 CeB
-ESb = B*ES0 + ET
+ESb = B*ES0 + ER
 ESb
 EWq = (CaB+CeB)/2 * rho/(1-rho) * ESb
 EWq
@@ -163,7 +163,7 @@ EWq
 
 The time to unpack the batch, i.e., the time at the server. 
 \begin{pyconsole}
-ES = ET + (B-1)/2 * ES0 + ES0  
+ES = ER + (B-1)/2 * ES0 + ES0  
 ES
 \end{pyconsole}
 
