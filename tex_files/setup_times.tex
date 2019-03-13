@@ -152,11 +152,10 @@ VS0
 VR = 1*1. # Var setups is sigma squared
 VSe = B*VS0 + VR
 VSe
-ESB = B*ES0+ER
-CeB = VSe/(ESB*ESB)
-CeB
-ESb = B*ES0 + ER
+ESb = B*ES0+ER
 ESb
+CeB = VSe/(ESb*ESb)
+CeB
 EWq = (CaB+CeB)/2 * rho/(1-rho) * ESb
 EWq
 \end{pyconsole}
