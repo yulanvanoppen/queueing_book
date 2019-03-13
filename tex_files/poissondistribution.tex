@@ -24,7 +24,7 @@ constant~$\lambda$ such that
 The constant $\lambda$ is called the \recall{arrival rate} of the arrival process.
 
 
-The second assumption is that the process $N_\lambda = \{N(t), t\geq 0\}$ has \recall{stationary} and \emph{independent increments}.
+The second assumption is that the process $N_\lambda = \{N(t), t\geq 0\}$ has \recall{stationary and independent increments}.
 Stationarity means that the distributions of the number of arrivals are the same for all intervals of equal length, that is, 
 $N(s,t]$ has the same distribution as $N(u, v]$ if $t-s = v-u$.
 Independence means, roughly speaking, that knowing that $N(s,t]= n$, does not help to make any predictions about the value of $N(u, v]$ if the intervals $(s,t]$ and $(u, v]$ do not overlap.
@@ -116,7 +116,7 @@ $\left(1-\frac{\lambda t}n\right)^{n} \to e^{-\lambda t}$.
   \end{solution}
 \end{exercise}
 
-We say that the random variable $N(t)$ is \recall{Poisson distributed} when 
+We say that the random variable $N(t)$ is \emph{Poisson distributed} when 
 \begin{equation}\label{eq:pois}
   \P{N(t) = k} = 
 e^{-\lambda t} \frac{(\lambda t)^k}{k!}, 
@@ -587,13 +587,10 @@ With  \eqref{eq:77},
 \end{solution}
 \end{exercise}    
 
-The concepts of merging and thinning are  useful to analyze queueing
-  networks. Suppose the departure stream of a machine splits into
-  two sub-streams, e.g., a fraction $p$ of the jobs moves on to another
-  machine and the rest ($1-p$) of the jobs leaves the system. Then we
-  can model the arrival stream at the second machine as a thinned
-  stream (with probability $p$) of the departures of the first
-  machine. Merging occurs where the output streams of various stations arrive at another station. 
+The concepts of merging and thinning are useful to analyze queueing networks.
+Suppose the departure stream of a machine splits into two sub-streams, e.g., a fraction $p$ of the jobs moves on to another machine and the rest ($1-p$) of the jobs leaves the system.
+Then we can model the arrival stream at the second machine as a thinned stream (with probability $p$) of the departures of the first machine.
+Merging occurs where the output streams of various stations arrive at another station.
 
 \begin{exercise}\faFlask
 Use the solution of Exercise~\ref{ex:18888} to prove the result of Exercise~\ref{ex:31}. 

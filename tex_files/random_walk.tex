@@ -228,33 +228,19 @@ warrants two questions: what type of limit is actually meant here, and
 what is the rate of convergence to this limiting situation? We address
 these questions subsequently.
 
-The \emph{long-run limiting behavior} of a queueing system (i.e., the first question) is an
-important topic by itself. The underlying question is what happens if
-we simulate the system for a long time. For instance, does there exist
-a random variable $L$ such that $L_k\to L$ in some sense? The answer
-to this question is in the affirmative, provided some simple stability
-conditions are satisfied, see
-Section~\ref{sec:rate-stability}. However, it requires a considerable
-amount of mathematics to make this procedure precise. To sketch what
-has to be done, first, we need to define $\{L_k\}$ as random variables
-in their own right. Note that up to now we just considered each $L_k$
-as a \emph{number}, i.e., a measurement or simulation of the queue
-length time of the $k$th period. Defining $L_k$ as a random variable
-is not as simple as the definition of, for instance, the number of
-arrivals $\{a_k\}$; these random variables can be safely
-\emph{assumed} to be i.i.d. However, the queue lengths $\{L_k\}$ are
-certainly not i.i.d., but, as should be apparent from
-Eq.~\eqref{eq:59}, they are \emph{constructed} in terms of
-recursions. Next, based on these recursions, we need to show that the
-sequence of distribution functions $\{G_k\}$ associated with the
-random variables $\{L_k\}$ converges to some limiting distribution
-function~$G$, say. Finally, it is necessary to show that it is
-possible to construct a random variable~$L$ that has~$G$ as its
-distribution function.  In this sense, then, we can say
-that~$L_k \to L$. The random variable $L$ is known as the
-\recall{steady-state limit} of the sequence of random variables
-$\{L_k\}$, and the distribution $G$ of~$L$ is known as the
-\recall{limiting distribution} or \recall{stationary distribution} of $\{L_k\}$.
+The \emph{long-run limiting behavior} of a queueing system (i.e., the first question) is an important topic by itself.
+The underlying question is what happens if we simulate the system for a long time.
+For instance, does there exist a random variable $L$ such that $L_k\to L$ in some sense?
+The answer to this question is in the affirmative, provided some simple stability conditions are satisfied, see Section~\ref{sec:rate-stability}.
+However, it requires a considerable amount of mathematics to make this procedure precise.
+To sketch what has to be done, first, we need to define $\{L_k\}$ as random variables in their own right.
+Note that up to now we just considered each $L_k$ as a \emph{number}, i.e., a measurement or simulation of the queue length time of the $k$th period.
+Defining $L_k$ as a random variable is not as simple as the definition of, for instance, the number of arrivals $\{a_k\}$; these random variables can be safely \emph{assumed} to be i.i.d.
+However, the queue lengths $\{L_k\}$ are certainly not i.i.d., but, as should be apparent from Eq.~\eqref{eq:59}, they are \emph{constructed} in terms of recursions.
+Next, based on these recursions, we need to show that the sequence of distribution functions $\{G_k\}$ associated with the random variables $\{L_k\}$ converges to some limiting distribution function~$G$, say.
+Finally, it is necessary to show that it is possible to construct a random variable~$L$ that has~$G$ as its distribution function.
+In this sense, then, we can say that~$L_k \to L$.
+The random variable $L$ is known as the \recall{steady-state limit} of the sequence of random variables $\{L_k\}$, and the distribution $G$ of~$L$ is known as the \recall{limiting distribution} or \emph{stationary distribution} of $\{L_k\}$.
 
 In these notes we sidestep all these fundamental issues, as the
 details require measure theory and more advanced probability theory
