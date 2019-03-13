@@ -15,7 +15,7 @@ Jobs of each color are assembled into batches of size $B$. Once a batch is compl
 We analyze in steps the total average time a job spends in the system. 
 
 First we consider the time it takes to form a batch. 
-\begin{exercise}
+\begin{exercise}[\faFlask]
   Show that the total time to form a red batch is $(B-1)/\lambda_r$. Hence, the average time a red job spends waiting until the batch is complete is
 \begin{equation*}
   \E{W_r} = \frac{B-1}{2\lambda_r}.
@@ -37,7 +37,7 @@ since both job colors have the same batch size.
 
 Observe next that the machine not only  serves jobs, part of the time it is  occupied with setups. This leads to the idea to  \emph{incorporate} the effects of the setup times in the service times. For this we distinguish between a job's \recall{net service time} $S_0$  and its \recall{effective processing time} $S$ which also include setup times. 
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
   Show that
   \begin{equation*}
     \E{S} = \E{S_0} + \frac{\E{R}} B.
@@ -56,7 +56,7 @@ Now that  the batch arrival rate and the service time per batch are known, the l
 \end{equation*}
 where the first equality has the interpretation of the batch arrival rate times the work per batch, while the second is the job arrival rate times the effective work per job. 
 
-\begin{exercise} 
+\begin{exercise}[\faFlask]
 Show that the requirement $\rho < 1$ leads to the following constraint on the minimal batch size~$B$ 
   \begin{equation*}
  B>\frac{\lambda \E R}{1-\lambda \E{S_0}}.
@@ -65,7 +65,7 @@ Show that the requirement $\rho < 1$ leads to the following constraint on the mi
 
 The next element is to find the SCVs. To obtain $C_{a,B}^2$, i.e., the SCV of the inter-arrival times of the batches, recall that jobs are first assembled into batches, and then these batches are sent to the queue.
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
  Show that 
  \begin{equation*}
 C_{a,B}^2 = \frac{C_{a}^2}B,
@@ -81,7 +81,7 @@ The variance of the inter-arrival time of batches is $B$ times the variance of j
 
 The last element is to find the SCV $C_{s,B}^2$ of the service times of the batches.
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
 Show that
 \begin{equation*}
 C_{s, B}^2 = \frac{B \V{S_0} + \V{R}}{(B \E{S_0} + \E R)^2}.
@@ -97,7 +97,7 @@ C_{s, B}^2 = \frac{B \V{S_0} + \V{R}}{(B \E{S_0} + \E R)^2}.
 
 Finally, when the batch is taken into service, there can be various rules to determine when the job's service finished. If the job has to wait until all jobs in the batch are served, the time a job spends at the server is $B \E{S_0} + \E R$. 
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
 In our model we assume that jobs can leave right after being served.  Show for this case that the expected time  until a job leaves the server is
 \begin{equation*}
 \E{R}  + \frac{B-1}{2}\E{S_0} +\E{S_0}.
@@ -109,7 +109,7 @@ In our model we assume that jobs can leave right after being served.  Show for t
 
 Clearly, we now have all elements to compute the average time in the system. Let's illustrate this. 
 
-\begin{exercise}
+\begin{exercise}[\faPhoto]
   Jobs arrive at $\lambda=3$ per hour at a machine with $C_a^2=1$; service times are exponential with average 15 minutes.  Assume $\lambda_r = 0.5$ per hour, hence $\lambda_b = 3-0.5=2.5$ per hour. Between any two batches, the machine requires a cleanup of 2 hours, with a standard deviation of $1$ hour, during which it is unavailable for service.  Suppose the batch size $B=30$ jobs. What is the minimal batch size?  What is the average time, a red job spends in the system? 
   \begin{solution}
 First check the load.
