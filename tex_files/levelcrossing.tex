@@ -39,7 +39,7 @@ must be that
 Hence, when $L(t)/t\to0$, the \recall{up crossing rate}
 $\lim_{t \to \infty} A(t)/t = \lambda$ is equal to the \emph{down-crossing rate}
 $\lim_{t \to \infty} D(t)/t = \delta$.  We will generalize these notions of up- and
-downcrossing in this section to derive the \recall{stationary}---also known as \emph{long-run time average} or \emph{steady-state},
+downcrossing in this section to derive the \emph{stationary}---also known as \emph{long-run time average} or \emph{steady-state},
 distribution---$p(n)$ that the system contains $n$ jobs. 
 
 \begin{exercise}
@@ -136,7 +136,7 @@ What is the difference between $A(n,t)$ and $A(t)$?
     \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise} [\faFlask]
  Show that $A(n,t) \leq A(t)$. 
 \begin{solution}
        Observe that
@@ -301,7 +301,7 @@ node (c3) at (6.3,2)  {};
 \node[right] at (6.3, 1.5) {$A(1,t)$};
 
 \end{tikzpicture}
-  \caption{Plots of $Y(1,t)$ and $A(1,t)$. (For visual clarity, we subtracted $\nicefrac12$ from $A(1,t)$, for otherwise its graph would partly overlap with the graph of $L$.)}
+  \caption{Plots of $Y(1,t)$ and $A(1,t)$. (For visual clarity, we subtracted $1/2$ from $A(1,t)$, for otherwise its graph would partly overlap with the graph of $L$.)}
   \label{fig:Y_1_t}
 \end{figure}
 
@@ -316,13 +316,13 @@ as the \emph{arrival rate in state $n$} and the \emph{long-run fraction of
 definition, observe that $A(n,t)$ counts the number of arrivals that
 see $n$ jobs in the system upon arrival, while $Y(n,t)$ tracks the amount of time
 the system contains $n$ jobs. Suppose that at time~$T$ a job arrives that
-sees $n$ in the system. Then $A(n,T)=A(n, T-)+1$, and this job finishes
+sees $n$ jobs in the system. Then $A(n,T)=A(n, T-)+1$, and this job finishes
 an interval that is tracked by $Y(n,t)$, precisely because this job
-sees $n$ in the system just prior to its arrival. Thus, just as
-$A(t)/t$ is the total number of arrivals during $[0,t]$ divided by~$t$, $A(n,t)/Y(n,t)$ is the number of arrivals that see $n$ divided by
+sees $n$ jobs in the system just prior to its arrival. Thus, just as
+$A(t)/t$ is the total number of arrivals during $[0,t]$ divided by~$t$, $A(n,t)/Y(n,t)$ is the number of arrivals that see $n$ jobs divided by
 the time the system contains $n$ jobs.
 
-\begin{exercise}\label{ex:113} Continuation of Exercises~\ref{ex:111} and~\ref{ex:112}.  Compute $p(n)$  and $\lambda(n)$. 
+\begin{exercise}[\faCalculator] \label{ex:113} Continuation of Exercises~\ref{ex:111} and~\ref{ex:112}.  Compute $p(n)$  and $\lambda(n)$. 
   \begin{solution}
     From the other exercises:
     \begin{align*}
@@ -335,7 +335,7 @@ For the rest $\lambda(n) = 0$, and $p(n)=0$, for $n\geq 2$.
   \end{solution}
 \end{exercise}
 
-Similar as the definition for $A(n,t)$, let
+Similar to the definition for $A(n,t)$, let
 \begin{equation*}
     D(n,t) = \sum_{k=1}^\infty \1{D_k \leq t} \1{L(D_k) = n}
   \end{equation*}
@@ -358,7 +358,7 @@ Should  we take $D(n-1,t)$ or  $D(n,t)$ in the definition of $\mu(n)$?
 \end{solution}
 \end{exercise}
 
-\begin{exercise}\label{ex:4}
+\begin{exercise}[\faCalculator]\label{ex:4}
 
 Continuation of Exercises~\ref{ex:111},~\ref{ex:112}, and~\ref{ex:113}.  Compute 
 $D(n,t)$ and $\mu(n+1)$ for $n\geq 0$.
@@ -396,13 +396,12 @@ Similarly, the departure rate of jobs that leave $n$ jobs behind is
 \lim_{t\to\infty}  \frac{D(n,t)}t =  \lim_{t\to\infty} \frac{D(n,t)}{Y(n+1,t)}\frac{Y(n+1,t)}t = \mu(n+1) p(n+1).
 \end{equation}
 \end{subequations}
-Combining this with~\eqref{eq:15} we arrive at \recall{the
-  level crossing equations}
+Combining this with~\eqref{eq:15} we arrive at the \recall{level crossing equations}
 \begin{equation}\label{eq:12}
   \lambda(n) p(n) = \mu(n+1)p(n+1).
 \end{equation}
 
-\begin{exercise} Continuation of Exercises~\ref{ex:111},~\ref{ex:112}, and~\ref{ex:113}.  Compute 
+\begin{exercise}[\faCalculator] Continuation of Exercises~\ref{ex:111},~\ref{ex:112}, and~\ref{ex:113}.  Compute 
 $\lambda(n) p(n)$ for $n\geq 0$, and check $\lambda(n) p(n) = \mu(n+1) p(n+1)$. 
 \begin{solution}
   $\lambda(0)p(0)=1\cdot 1/2 = 1/2$, $\lambda(n)p(n)= 0$ for $n>1$, as $\lambda(n)=0$ for $n>0$.
@@ -467,7 +466,7 @@ Finally, assuming that the limit $p(n,t) \to p(n)$ exists as
 $t\to\infty$ (and that the summation and limit can be interchanged in
 the above), it follows that 
 \begin{equation*}
-\E L = \lim_{t\to\infty} \frac 1 t \int_0^t L(s) \d s = \sum_{n=0}^\infty n p(n) = \E L.
+\E L = \lim_{t\to\infty} \frac 1 t \int_0^t L(s) \d s = \sum_{n=0}^\infty n p(n).
 \end{equation*}
 In a loose sense we can say that
 $\E L$ is the average number in the system as perceived by the

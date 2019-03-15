@@ -1,6 +1,6 @@
 \section
-[$M/M/1$ queue]
-{$\mathbf{M/M/1}$ queue}
+{$M/M/1$ queue}
+%{$\mathbf{M/M/1}$ queue}
 \label{sec:mm1}
 
 
@@ -46,17 +46,17 @@ server is busy, i.e., the utilization, is
 Here the last equation has the interpretation of the fraction of time
 the system contains at least 1 job. 
 
-
-\begin{exercise}\label{ex:12}
-Show that the average number of jobs in an  $M/M/1$ queue is given by
+We consider three different ways to show that the average number of jobs in an  $M/M/1$ queue is given by
 \begin{equation}\label{eq:el}
-  \E L = \frac \rho{1-\rho}.
+  \E L = \sum_{n=0}^\infty n p(n) = \sum_{n=0}^\infty \sum_{i=1}^n \1{i\leq n} p(n) = \frac \rho{1-\rho}.
 \end{equation}
-\begin{hint}
-There are various ways to get this result, one is with indicator functions, another with moment-generating functions.   
-\end{hint}
+All three methods are worth knowing. 
+
+\begin{exercise}[\faCalculator]
+\label{ex:12}
+Derive~\eqref{eq:el} with indicator functions.
   \begin{solution}
-With indicators, a bit long, but I spell out every step.
+A bit long, but I spell out every step:
 \begin{align*}
 \E L &= \sum_{n=0}^\infty n p(n) \\
 &= \sum_{n=0}^\infty \sum_{i=1}^n \1{i\leq n} p(n)  && n=\sum_{i=1}^n \1{i\leq n}\\
@@ -74,13 +74,29 @@ With indicators, a bit long, but I spell out every step.
 \end{align*}
 Note that, since the summands are positive, we can use Fubini's theorem
 to justify the interchange of the summations.
+\end{solution}
+\end{exercise}
 
-With moment-generating functions it is a bit shorter. 
+\begin{exercise}[\faCalculator] \label{ex:14}
+Derive~\eqref{eq:el} by differentiating the left-hand and right-hand side of
+ the standard formula for a geometric series:  $\sum_{n=0}^{\infty}\rho^n = (1-\rho)^{-1}$ for $|\rho| < 1$. 
+  \begin{solution}
+Differentiate the left and right-hand side with respect to
+$\rho$  and then  multiply with $\rho$ to get
+\begin{equation*}
+\dfrac{\rho}{(1-\rho)^2}=\sum_{n=0}^{\infty}n\rho^n.
+\end{equation*}
+Then multiply both sides by $1-\rho)$ (recall that $p(n) = (1-\rho)\rho^n$).
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[\faCalculator]\label{ex:34}
+  Now use moment-generating  functions to derive~\eqref{eq:el}. 
+\begin{solution}
 \begin{equation*}
   \begin{split}
   M_L(s) 
-&= \E{e^{s L}} = \sum_{n=0}^\infty e^{s n}p(n) = (1-\rho) \sum_n e^{s n} \rho^n \\
-&=\frac{1-\rho}{1-e^{s}\rho},
+&= \E{e^{s L}} = \sum_{n=0}^\infty e^{s n}p(n) = (1-\rho) \sum_n e^{s n} \rho^n=\frac{1-\rho}{1-e^{s}\rho},
   \end{split}
 \end{equation*}
 where we assume that $s$ is such that $e^s \rho < 1$. Then, 
@@ -96,8 +112,91 @@ The fact that $\E L \sim (1-\rho)^{-1}$ for $\rho\to 1$ implies that the average
 If we want to avoid long waiting times, this formula tells us that situations with $\rho\approx 1$ should be avoided.
 As a practical guideline, it is typically best to keep $\rho$ quite a bit below 1, and accept that servers are not fully utilized.
 
+In the next three exercises we use the same tools  to show that 
+\begin{equation}\label{eq:80}
+  \E{L^2}= (1-\rho) \sum_{n=0}^\infty n^2 \rho^n = \frac{2\rho^2}{(1-\rho)^2} + \frac{\rho}{1-\rho}.
+\end{equation}
+Observe that here we just compute the second moment of a geometric random variable.
+We then use this expression to compute $\V L$.
 
-\begin{exercise}
+\begin{exercise}[\faCalculator] Derive~\eqref{eq:80} by differentiation the standard formula for a geometric series.
+  \begin{solution}
+    Starting from the result of Exercise~\ref{ex:14},  differentiating and multiplying with $\rho$ a second time yields
+\begin{equation*}
+  \begin{split}
+\rho \frac{(1-\rho)^2 + \rho2(1-\rho)}{(1-\rho)^4} 
+&= \rho \frac{1-2\rho+\rho^2 + 2\rho-2\rho^2}{(1-\rho)^4} \\
+&= \rho \frac{(1-\rho)^2}{(1-\rho)^4} \\
+&=\rho \dfrac{1+\rho}{(1-\rho)^3}\\
+&=\sum_{n=0}^{\infty}n^2\rho^n,
+  \end{split}
+\end{equation*}
+and hence
+\begin{equation*}
+(1-\rho)\sum_{n=0}^{\infty}n^2\rho^n = \rho\dfrac{1+\rho}{(1-\rho)^2}.
+\end{equation*}
+Recall that $p(n) = (1-\rho)\rho^n$. 
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}[\faCalculator] Show~\eqref{eq:80} by noting that
+$\sum_{i=1}^n i= n(n+1)/2$ from which we get that
+$n^2 = -n + 2\sum_{i=1}^n i$. Substitute this relation into
+$\sum_n n^2 \rho^n$ and simplify.
+\begin{solution}
+\begin{align*}
+    \sum_{n=0}^\infty n^2 \rho^n 
+&=    \sum_{n=0}^\infty \left(\sum_{i=1}^\infty 2i \1{i\leq n}  - n\right)\rho^n 
+=    \sum_{n=0}^\infty \sum_{i=0}^\infty 2i\1{i\leq n}\rho^n  - \sum_{n=0}^\infty n\rho^n \\
+&=    \sum_{i=0}^\infty 2i \sum_{n=i}^\infty \rho^n  - \frac{\E L}{1-\rho} 
+=    \sum_{i=0}^\infty 2i \rho^i \sum_{n=0}^\infty \rho^n  - \frac{\E L}{1-\rho} \\
+&=    \frac2{1-\rho} \sum_{i=0}^\infty i \rho^i   - \frac{\E L}{1-\rho} 
+=    \frac2{(1-\rho)^2} \E L - \frac{\E L}{1-\rho} \\
+&=    \frac{\E L}{1-\rho}  \left(\frac2{1-\rho}  - 1\right) 
+=    \frac{\E L}{1-\rho}  \frac{1+\rho}{1-\rho} \\
+&=    \frac{\rho}{1-\rho}  \frac{1+\rho}{(1-\rho)^2}.
+\end{align*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[\faCalculator] Derive~\eqref{eq:80} by
+  using the moment-generating functions.
+\begin{solution}
+Using the results of Exercise~\ref{ex:34} gives
+\begin{equation*}
+  \E{L^2}= M''(0)= \frac{2\rho^2}{(1-\rho)^2} + \frac{\rho}{1-\rho}.
+\end{equation*}
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}[\faCalculator] Show that for the $M/M/1$ queue $\V L = \rho/(1-\rho)^2$.
+  \begin{solution}
+\begin{equation*}
+\V L = \E{L^2} - (\E L)^2 = \frac{\rho(1+\rho)}{(1-\rho)^2}-\frac{\rho^2}{(1-\rho)^2} = \frac{\rho}{(1-\rho)^2}.
+\end{equation*}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}[\faFlask]
+Show that for the $M/M/1$ queue the SCV of $L$ is $1/\rho$. What do you conclude from this?
+  \begin{solution}
+To see how large this variance is, relative to the mean number of jobs
+in the system, we typically consider the square coefficient of
+variation (SCV). As $\E L = \rho/(1-\rho)$,
+\begin{equation*}
+  \frac{\V L}{(\E{L})^2} = \frac 1 \rho.
+\end{equation*}
+Thus, the SCV becomes smaller as $\rho$ increases, but does not become
+lower than $1$. So, realizing that the SCV of the exponential
+distribution is 1, the distribution of the number of jobs in the
+system has larger relative variability than the exponential
+distribution.
+  \end{solution}
+\end{exercise}
+
+
+\begin{exercise}[\faCalculator]
   Show that the excess probability, i.e., the probability that a long queue occurs, is 
 $\P{L\geq n} = \rho^n$.
   \begin{hint}
@@ -120,63 +219,6 @@ If we make the simple assumption that customers decide to leave (or rather, not 
 % In the context of inventory theory these equations are particularly
 % useful, see one of the questions below.
 
-
-\paragraph{Relation between Inventory and Queueing Systems}
-
-There exists an interesting relation between inventory and queueing systems, cf. Figure~\ref{fig:inv_queue}.  When a job arrives in the queueing system, the virtual workload~$V(t)$ increases by the service time of the job. In the inventory system, the inventory $I(t)$ decreases by the  demand size of the customer. Like this, the demand size of a customer at the inventory system converts into a service time of a job in a queueing  system. In the figure, the demand size $D_1$  of the first customer corresponds to a production time of duration  $S_1=D_1$, and so on. Thus, even though in the inventory system, customers do not have to wait, their demands spawn production times at a server who has to replenish the consumed items. 
-
-Assume now that  the inventory process is controlled by an order-up-to policy: produce (refill the inventory) as long as the inventory level is below $S$ and stop otherwise.  Then the figure shows that the inventory level $I(t)$ is equal to $S-V(t)$.   
-
-In more general terms, in a queueing system or an inventory system, there is always `something' or `somebody'  waiting. Items in a supermarket are produced ahead of the moment they are `consumed', hence they `wait' for customers. In a queueing system, customers are waiting  while their product is `produced' by the server. When there are no customers in a queueing system, the server waits until a new customers comes along. Thus, queueing and inventory theory are both focused on the distribution of waiting times, either by customers, servers, or items, hence  both are related branches of (applied) probability theory.
-
-
-\begin{figure}[th]
-\begin{center}
-\begin{tikzpicture}[yscale=0.5]
-\draw[->] (0,0) -- coordinate (x axis mid) (8.5,0);
-\draw[->] (0,0) -- coordinate (y axis mid) (0,10.5);
-\node[below=0.2cm] at (x axis mid) {$t$};
-
-\draw plot coordinates {(1,0) (1,2) (2,1) (2,4) (4,2) (4,4.2) (7.5,0)};
-\node[left]  at (7,2.5) {$V(t)$};
-\node[fill=white, rotate=90]  at (1,1) {$S_1$};
-\node[fill=white, rotate=90]  at (2,2.5) {$S_2$};
-\node[fill=white, rotate=90]  at (4,3.) {$S_3$};
-
-\node  at (7,5) {$V(t)=S-I(t)$};
-
-\draw[dotted] (0,10)--(8.5,10);
-\node[left]  at (0,10) {$S$};
-\node[left]  at (7,7.5) {$I(t)$};
-\draw plot coordinates {(1,10) (1,8) (2,9) (2,6) (4,8) (4,6.0) (7.5,10)};
-\node[fill=white, rotate=90]  at (1,9) {$D_1$};
-\node[fill=white, rotate=90]  at (2,7.5) {$D_2$};
-\node[fill=white, rotate=90]  at (4,7) {$D_3$};
-\end{tikzpicture}
-\end{center}
-\caption{The relation between inventory and queueing systems. Here $I(t)$ models the evolution of the inventory level in an  inventory system, while $V(t)$ shows the virtual workload, and $S$ is the order-up-to level. When a customer requires $D_1$ items, say, it takes a server of a time $S_1=D_1$ to produce these items. Thus, demands at the inventory system convert into production times in a queueing system.  When the inventory is always replenished to level $S$, then the shortage of the inventory level relative to $S$, i.e., $S-I(t)$, becomes the workload $V(t)$ for the server in terms of amount of items or production time.} \label{fig:inv_queue}
-\end{figure}
-
-
-\begin{exercise}\label{ex:7}
-Customers of fast-food restaurants prefer to be served from stock. For this reason such
-restaurants often use a `produce-up-to' policy: When the on-hand inventory $I$ is equal to or lower than some threshold $S-1$, the company produces items until the inventory level equals $S$ again. The level $S$ is known as the order-up-to level, and $S-1$ as the reorder level.
-
-Suppose that customers arrive as a Poisson process with rate $\lambda$
-and the production times of single items are i.i.d. and exponentially
-distributed with parameter $\mu$. Assume also that customers who
-cannot be served from on-hand stock are backlogged, that is, they wait
-until their item has been produced. What are the average on-hand
-inventory level and the average number of customer in backlog?
-\begin{hint}
-Use Figure~\ref{fig:inv_queue} to realize that the inventory level $I(t)$ (here measured in the number of items on stock) at time $t$ can be
-  modeled as $I(t) = S+1-L(t)$, where $L$ is the number of jobs in an
-  $M/M/1$ queue. Note that the number of jobs in queue corresponds to the number of items to be produced. A customer of an item, i.e., a demand of the inventory system, turns into a job at the queueing system, i.e., the demand becomes a job for the cook to replenish the item.
-\end{hint}
-  \begin{solution}
-In the $M/M/1$ queue, $p(n)$ corresponds to the fraction of time there are $n$ jobs in the system. In the inventory system, it means that the cook has $n$ jobs to satisfy, hence the inventory is $n$ jobs short relative to the order-up-to level $S$.  Hence, the average on-hand inventory is $S$ minus the average number of jobs at the cook, i.e., $\E{I} = \sum_{i=0}^{S} (S-i) p(i)$. The average number of customers in backlog is the fraction of time there are more than $S$ replenishment jobs at the cook, i.e., $\E B = \sum_{i=S+1}^\infty (i-S) p(i)$. 
-  \end{solution}
-\end{exercise}
 
 
 \paragraph{Supermarket Planning}
@@ -236,13 +278,10 @@ average number of customers arriving per hour, cf. Figure~\ref{fig:loadprofile}.
 \end{figure}
 
 
-It is also easy to find the service distribution from the cash
-registers. The first item scanned after a payment determines the start
-of a new service, and the payment closes the service. (As there is
-always a bit of time between the payment and the start of a new
-service we might add 15 seconds, say, to any service.)
-To keep things simple here, we just model the service time distribution as
-exponential with a mean of $1.5$ minutes. 
+It is also easy to find the service distribution from the cash registers.
+The first item scanned after a payment determines the start of a new service, and the payment closes the service.
+(As there is always a bit of time between the payment and the start of a new service we might add 15 seconds, say, to any service.)
+To keep things simple here, we just model the service time distribution as exponential with a mean of $1.5$ minutes.
 
 We also \emph{model} the behavior of all the cashiers together (a multi-server queue) as a single fast server.
 Thus, we neglect any differences between a station with, for instance, 3 cashiers and a single server that works 3 times as fast as a normal cashier.
@@ -292,6 +331,63 @@ such that
 \end{equation*}
 for all hours $t$ the shop is open and $\lambda_t$ is the demand for
 hour $t$.
+
+\paragraph{Relation between Inventory and Queueing Systems}
+
+There exists an interesting relation between inventory and queueing systems, cf. Figure~\ref{fig:inv_queue}.  When a job arrives in the queueing system, the virtual workload~$V(t)$ increases by the service time of the job. In the inventory system, the inventory $I(t)$ decreases by the  demand size of the customer. Like this, the demand size of a customer at the inventory system converts into a service time of a job in a queueing  system. In the figure, the demand size $D_1$  of the first customer corresponds to a production time of duration  $S_1=D_1$, and so on. Thus, even though in the inventory system, customers do not have to wait, their demands spawn production times at a server who has to replenish the consumed items. 
+
+Assume now that  the inventory process is controlled by an order-up-to policy: produce (refill the inventory) as long as the inventory level is below $S$ and stop otherwise.  Then the figure shows that the inventory level $I(t)$ is equal to $S-V(t)$.   
+
+In more general terms, in a queueing system or an inventory system, there is always `something' or `somebody'  waiting. Items in a supermarket are produced ahead of the moment they are `consumed', hence they `wait' for customers. In a queueing system, customers are waiting  while their product is `produced' by the server. When there are no customers in a queueing system, the server waits until a new customers comes along. Thus, queueing and inventory theory are both focused on the distribution of waiting times, either by customers, servers, or items, hence  both are related branches of (applied) probability theory.
+
+
+\begin{figure}[th]
+\begin{center}
+\begin{tikzpicture}[yscale=0.5]
+\draw[->] (0,0) -- coordinate (x axis mid) (8.5,0);
+\draw[->] (0,0) -- coordinate (y axis mid) (0,10.5);
+\node[below=0.2cm] at (x axis mid) {$t$};
+
+\draw plot coordinates {(1,0) (1,2) (2,1) (2,4) (4,2) (4,4.2) (7.5,0)};
+\node[left]  at (7,2.5) {$V(t)$};
+\node[fill=white, rotate=90]  at (1,1) {$S_1$};
+\node[fill=white, rotate=90]  at (2,2.5) {$S_2$};
+\node[fill=white, rotate=90]  at (4,3.) {$S_3$};
+
+\node  at (7,5) {$V(t)=S-I(t)$};
+
+\draw[dotted] (0,10)--(8.5,10);
+\node[left]  at (0,10) {$S$};
+\node[left]  at (7,7.5) {$I(t)$};
+\draw plot coordinates {(1,10) (1,8) (2,9) (2,6) (4,8) (4,6.0) (7.5,10)};
+\node[fill=white, rotate=90]  at (1,9) {$D_1$};
+\node[fill=white, rotate=90]  at (2,7.5) {$D_2$};
+\node[fill=white, rotate=90]  at (4,7) {$D_3$};
+\end{tikzpicture}
+\end{center}
+\caption{The relation between inventory and queueing systems. Here $I(t)$ models the evolution of the inventory level in an  inventory system, while $V(t)$ shows the virtual workload, and $S$ is the order-up-to level. When a customer requires $D_1$ items, say, it takes a server of a time $S_1=D_1$ to produce these items. Thus, demands at the inventory system convert into production times in a queueing system.  When the inventory is always replenished to level $S$, then the shortage of the inventory level relative to $S$, i.e., $S-I(t)$, becomes the workload $V(t)$ for the server in terms of amount of items or production time.} \label{fig:inv_queue}
+\end{figure}
+
+
+\begin{exercise}[\faPhoto] \label{ex:7}
+Customers of fast-food restaurants prefer to be served from stock. For this reason such
+restaurants often use a `produce-up-to' policy: When the on-hand inventory $I$ is equal to or lower than some threshold $S-1$, the company produces items until the inventory level equals $S$ again. The level $S$ is known as the order-up-to level, and $S-1$ as the reorder level.
+
+Suppose that customers arrive as a Poisson process with rate $\lambda$
+and the production times of single items are i.i.d. and exponentially
+distributed with parameter $\mu$. Assume also that customers who
+cannot be served from on-hand stock are backlogged, that is, they wait
+until their item has been produced. What are the average on-hand
+inventory level and the average number of customer in backlog?
+\begin{hint}
+Use Figure~\ref{fig:inv_queue} to realize that the inventory level $I(t)$ (here measured in the number of items on stock) at time $t$ can be
+  modeled as $I(t) = S+1-L(t)$, where $L$ is the number of jobs in an
+  $M/M/1$ queue. Note that the number of jobs in queue corresponds to the number of items to be produced. A customer of an item, i.e., a demand of the inventory system, turns into a job at the queueing system, i.e., the demand becomes a job for the cook to replenish the item.
+\end{hint}
+  \begin{solution}
+In the $M/M/1$ queue, $p(n)$ corresponds to the fraction of time there are $n$ jobs in the system. In the inventory system, it means that the cook has $n$ jobs to satisfy, hence the inventory is $n$ jobs short relative to the order-up-to level $S$.  Hence, the average on-hand inventory is $S$ minus the average number of jobs at the cook, i.e., $\E{I} = \sum_{i=0}^{S} (S-i) p(i)$. The average number of customers in backlog is the fraction of time there are more than $S$ replenishment jobs at the cook, i.e., $\E B = \sum_{i=S+1}^\infty (i-S) p(i)$. 
+  \end{solution}
+\end{exercise}
 
 
 

@@ -1,6 +1,6 @@
 \section
-[$M(n)/M(n)/1$ Queue]
-{$\mathbf{M(n)/M(n)/1}$ Queue}
+{$M(n)/M(n)/1$ Queue}
+%{$\mathbf{M(n)/M(n)/1}$ Queue}
 \label{sec:mnmn1}
 
 \subsection*{Theory and Exercises}
@@ -209,7 +209,7 @@ Observe that the right-hand side is precisely equal to $\rho c G$, and hence,
 \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
   Check that  Eq.\eqref{eq:9} for the $M/M/c$ queue reduces to the $M/M/1$ queue if $c=1$.
   \begin{hint}
 Fill in $c=1$. Realize that this is a check on the formulas.
@@ -262,7 +262,7 @@ This can be explained as follows: $\lambda(1-p(c))$ is the rate of accepted jobs
   \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
 Consider the $M/M/2/3$ queue with arrival rate $\lambda$ and
 service rate $\mu$ (thus, at most 2 jobs can be in service and 1 in queue.)
  Derive first the level-crossing equations for this queueing system, then  derive closed form expressions for the state    probabilities in steady state. 
@@ -322,7 +322,7 @@ p(0) = (1+\rho + \rho^2/2 + \rho^3/4)^{-1}.
 \end{exercise}
 
 
-\begin{exercise}{\faFlask}(Multi-server queue with blocking) Consider the
+\begin{exercise}[\faFlask](Multi-server queue with blocking) Consider the
   $M/M/c/c+K$ queue in which at most $c$ jobs can be in service and $K$ in queue. Try to derive the steady state probabilities
   $p(0)$, $p(1), \ldots$. You do not have to compute the normalization
   constant $G$. 
@@ -382,7 +382,7 @@ prove it---that the same results also hold for the $M/G/\infty$ queue
 with $\lambda \E S$ rather than $\lambda/\mu$.
 
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
  Show that the $M/M/c$ queue converges to the $M/M/\infty$ queue as $c\to\infty$. 
   \begin{hint}
 Use that for any $x$, $x^n/n!\to 0$ as $n\to\infty$.
@@ -394,7 +394,7 @@ Use that for any $x$, $x^n/n!\to 0$ as $n\to\infty$.
 \end{exercise}
 
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
  Show that the $M/M/\infty$ queue is stable for any finite $\lambda$. 
  \begin{solution}
     No matter how many jobs are in service, there is always another
@@ -405,7 +405,7 @@ Use that for any $x$, $x^n/n!\to 0$ as $n\to\infty$.
 \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
  Why is $\E L=\rho$ for the $M/M/\infty$ queue? 
  \begin{solution}
  Write $\rho = \lambda /\mu$. Then, from the formulas for the
@@ -425,7 +425,7 @@ Use that for any $x$, $x^n/n!\to 0$ as $n\to\infty$.
 \end{exercise}
 
 
-\begin{exercise}{\faPhoto}(Hall 5.1) Give two examples of systems that
+\begin{exercise}[\faPhoto](Hall 5.1) Give two examples of systems that
   ordinarily have a finite buffer size. Give two examples of systems
   that have a finite calling population (i.e. a finite number of potential customers).
   \begin{solution}
@@ -444,72 +444,6 @@ Hence, when 2, say, machines are in repair, the number of `customers'
 that can arrive to the queueing system is only 8. 
   \end{solution}
 \end{exercise}
-
-
-\begin{comment}
-\begin{exercise}[use=false]
-  (Hall 5.21) The queueing operator of the previous problem has
-  decided to institute a policy whereby employees are removed from
-  service, to perform cleanup work, whenever they complete service and
-  no one is in queue. Employees are brought back into service when the
-  number of customers in queue, per server, exceed two. Estimate
-  $\E W_Q$, the interruption rate, the expected time between
-  interruption, and the expected number of busy servers. 
-  \begin{solution}
-
-\TBD. 
-
-    This is an interesting exercise. This policy is a so-called
-$N$-policy: as soon as the server becomes idle, remove the
-server from the queue and let him/her do something useful, when the
-queue hits/crosses some threshold (in this case, 2) call it back to
-start serving customers. This policy is one in a class of so-called
-threshold policies. One of the challenges for such policies is compute
-optimal threshold levels.
-
-In Chapter 8 of Ross, Introduction to Probability Models, this problem
-is also analyzed. With a bit of effort you can study this analysis.
-
-First copy some data from the previous problem.
-\begin{pyconsole}
-labda = 11. # per hour
-mu = 6. # per hour
-
-rho = labda/mu
-rho
-\end{pyconsole}
-
-To estimate $\E L_Q$ I use Figure 5.10. Using the line $rho =
-2$, as here $\rho = 11/6 \approx 2$, and $K=2$, we see
-that $L_q \approx 3$. Hence $W_q = 3/11 \approx 3/12 =
-1/4$ hour (note that all units are in hours here).
-
-The interruption rate $I$ follows from Figure 5.11. Reading
-$K=2$ we see that $I\approx 0.1$. The interruption rate
-must then be (by PASTA) the arrival rate times the steady state
-interruption probability, i.e., $\lambda I = 11\cdot 0.1 = 1.1$
-per hour.
-
-Finally, $B \approx 2$, as follows from Figure 5.12.
-
-To find out whether this is a good policy, in particular from the
-customers point of view, we have to compare $W_q$ under this
-policy to the queueing time as computed in Problem 11. This tell us
-that, in Problem 11, $L_q = 9.6$ and $W_q = 0.9$ hours.
-This is unexpected, at least at first. Why is the difference so large?
-
-It must be because the model of Problem 21 assumes that the number of
-available servers is unlimited. Hence, any time the queue up-crosses the
-threshold $K=2$, an extra server is called. Thus, even though in
-both cases the number of busy servers is 2, (i.e., $B\approx 2$
-here, and two servers (the M/M/2 queue ) in Problem 11), more server
-capacity can be added during busy times under the threshold policy
-than under the policy with a fixed number of servers (i.e., the M/M/2
-queue).
-
-  \end{solution}
-\end{exercise}
-\end{comment}
 
 
 \begin{exercise}(Systems with finite calling population)

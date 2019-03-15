@@ -9,93 +9,95 @@
 
 %See section 1.11 of Zijm's book for the theory.
 
-Up to now we assumed that servers are never interrupted while serving a job. In many situations this is not true, a person  might be receive short phone calls while working on a job, a machine may fail in the midst of processing, and so on. In this section we develop a model to account for such \emph{preemptive interruptions}, i.e., interruptions that occur \emph{during} a service, and compute the influence on the mean waiting time. 
+In Sections~\ref{sec:setups-batch-proc} and \ref{sec:non-preempt-interr} we assumed that servers are never interrupted while serving a job.
+However, in many situations this assumption is not satisfied: a person might receive a short phone call while working on a job, a machine may fail in the midst of processing, and so on.
+In this section we develop a model to compute the influence on the mean waiting time of such \emph{preemptive outages}, i.e., interruptions that occur \emph{during} a service. 
 
-Let us assume that a job's normal service, without interruptions, is given by $S_0$. The durations of the interruptions are given by the i.i.d. random variables $\{D_i\}$ and have common mean $\E D$ and variance $\V D$. If $N$ interruptions occur, the effective service time will then be
+Let us assume that a job's normal service time, without interruptions, is given by $S_0$. The durations of the interruptions are given by the i.i.d. random variables $\{R_i\}$ and have common mean $\E R$ and variance $\V R$. If $N$ interruptions occur, the effective service time will then be
 \begin{equation*}
-S= S_0 + \sum_{n=1}^N D_i.
+S= S_0 + \sum_{n=1}^N R_i.
 \end{equation*}
+Observe that to use the $G/G/1$ waiting time formula it suffices to find expressions for $\E S$ and $\V S$.
+Thus, this will be our task for the rest of the section.
+We remark in passing that the results and the derivation are of general interest.
 
-To compute the mean waiting time we can use the $G/G/1$ waiting time formula. From this formula it is clear that it suffices to find expressions for $\E S$ and $\V S$, since $C_s^2 = \V S /(\E S)^2$.  Thus, this will be our task for the rest of the section. We remark in passing that the results and the derivation are of general interest.
+We first aim to find an expression for $\E S$.  Write  $S_N = \sum_{i=1}^N R_i$ for the total duration of the interruptions, so that the total job duration becomes $S = S_0 + S_N$.
 
-We first aim to find an expression for $\E S$.  Write  $S_N = \sum_{i=1}^N D_i$ for the total duration of the interruptions, so that the total job duration becomes $S = S_0 + S_N$.
-
-\begin{exercise}
-  Suppose that $N=n$, show that $\E{S_n}=n\E D$.
-
+\begin{exercise}[\faFlask]
+  Suppose that $N=n$, show that $\E{S_n}=n\E R$.
 \begin{hint}
-    Is it relevant that for the expectation of $S_n$ that $D_1,\ldots, D_n$ are mutually independent?
+    Is it relevant that for the expectation of $S_n$ that $R_1,\ldots, R_n$ are mutually independent?
   \end{hint}
 \begin{solution}
 The expectation of the sum of random variables is the same as the sum of the expectations; independence is irrelevant. Hence,
 \begin{equation*}
-  \E{S_n } =  \E{\sum_{i=1}^n D_i}= \E{D_1} + \E{D_2} + \cdots \E{D_n} = n \E D,
+  \E{S_n } =  \E{\sum_{i=1}^n R_i}=  n \E R, 
 \end{equation*}
-where the last equation follows from the fact that the $D_i$ have the same distribution. 
+since by assumption $\E{R_1} = \cdots = \E{R_n}$. 
 \end{solution}
 \end{exercise}
 
 Let $p_n=\P{N=n}$; then it is reasonable that $\E{S_N}=\sum_{n=0}^\infty \E{S_n}p_n$. (Compare the definition of $\E{f(X)}=\sum_{n} f(n) p_n$.)
 
-\begin{exercise}\label{ex:16}
-Use this expression to show that $\E{S_N}=\E D \E N$.
+\begin{exercise}[\faCalculator]\label{ex:16}
+Use the above to show that $\E{S_N}=\E R \E N$. (This result is known as \recall{Wald's equation}.)
 \begin{hint}
-  Use that $\{D_i\}$ is a sequence of i.i.d. r.v.s. Hence, $\E{\sum_{i=1}^n D_i} = n \E D$. 
+  Use~\eqref{eq:77}. 
 \end{hint}
 \begin{solution}
-Since $\E{S_n} = n \E D$, 
+Since $\E{S_n} = n \E R$, 
 \begin{align*}
-  \E{\sum_{i=1}^N D_i} 
-&=  \E{ \sum_{n=0}^\infty \1{N=n} \left(\sum_{i=1}^n D_i \right)} \\
-&=  \sum_{n=0}^\infty \E{\1{N=n} n\E{D}} \\
-&=  \E{D} \sum_{n=0}^\infty n \E{\1{N=n}} = \E D \sum_{n=0}^\infty p_n n \\
-&= \E D \E N.
+  \E{\sum_{i=1}^N R_i} 
+&=  \E{ \sum_{n=0}^\infty \1{N=n} \left(\sum_{i=1}^n R_i \right)} \\
+&=  \sum_{n=0}^\infty \E{\1{N=n} n\E{R}} \\
+&=  \E{R} \sum_{n=0}^\infty n \E{\1{N=n}} = \E R \sum_{n=0}^\infty n p_n\\
+&= \E R \E N.
 \end{align*}
-This result in known as Wald's equation. 
 \end{solution}
 \end{exercise}
 
-With the above, 
+Thus, with the above, 
 \begin{equation*}
-  \E{S} = \E{S_0 + S_N} = \E{S_0} + \E D \E N.
+  \E{S} = \E{S_0 + S_N} = \E{S_0} + \E R \E N.
 \end{equation*}
-To make further progress, we need some additional assumptions. A common assumption is that the time between two interruptions is memoryless, hence the time between failures is exponentially distributed, with rate $\lambda_f$ say.  Consequently, the number of interruptions $N$ that occur during the net service time $S_0$ must be Poisson distributed with mean $\E N = \lambda_f \E{S_0}$. 
+To make further progress, we need some additional assumptions.
+A common assumption is that the time between two interruptions is $\Exp(\lambda_f)$, hence is memoryless.
+Consequently, the number of interruptions $N$ that occur during the net service time $S_0$ is  Poisson distributed with mean $\E N = \lambda_f \E{S_0}$.
 
 
 Define the \emph{availability} as
 \begin{equation*}
   A=\frac{m_f}{m_f + m_r},
 \end{equation*}
-where $m_f$ is the mean time to fail  and $m_r$ the mean to time to repair. 
-\begin{exercise}
-  Show that 
+where $m_f$ is the mean time to fail and $m_r$ the mean time to repair. 
+\begin{exercise}[\faFlask]
+  Show that  for our model of interruptions,
   \begin{equation*}
-A=\frac 1{1+\lambda_f \E D}
+A=\frac 1{1+\lambda_f \E R}
   \end{equation*}
-for our model of interruptions.
   \begin{hint}
-    Observe that $m_f = 1/\lambda_f$ and $m_r = \E D$?
+    Observe that $m_f = 1/\lambda_f$ and $m_r = \E R$.
   \end{hint}
   \begin{solution}
-The time to fail is the time in between to interruptions. We assumed that these times were exponential with mean $1/\lambda_f$. The duration of an interruption is $D$, which can be interpreted as the time to repair the server, hence $m_r = \E D$. With this
+The time to fail is the time in between two interruptions. We assume that these times are $\Exp(1/\lambda_f)$. The duration of an interruption is $R$, which can be interpreted as the time to repair the server, hence $m_r = \E R$. With this
 \begin{equation*}
-  A=\frac{m_f}{m_r + m_f}=\frac{1/\lambda_f }{1/\lambda_f + \E D}. 
+  A=\frac{m_f}{m_r + m_f}=\frac{1/\lambda_f }{1/\lambda_f + \E R}. 
 \end{equation*}
   \end{solution}
 \end{exercise}
 
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
   Show that 
   \begin{equation*}
-\E{S} = \frac{\E{S_0}} A = \E{S_0} (1+\lambda_f \E D).
+\E{S} = \frac{\E{S_0}} A = \E{S_0} (1+\lambda_f \E R).
   \end{equation*}
   \begin{hint}
     Realize that $\E N = \lambda_f \E{S_0}$.
   \end{hint}
   \begin{solution}
     \begin{equation*}
-      \E S = \E{S_0} + \E N \E D = \E{S_0} +  \lambda_f \E{S_0} \E D= \E{S_0}(1+\lambda_f \E D).
+      \E S = \E{S_0} + \E N \E R = \E{S_0} +  \lambda_f \E{S_0} \E R= \E{S_0}(1+\lambda_f \E R).
     \end{equation*}
   \end{solution}
 \end{exercise}
@@ -108,9 +110,9 @@ It is important to realize that
 hence the load increases due to failures. 
 
 
-We can similar ideas to derive an expression for the variance of $S$. The next exercise helps to  understand why this derivation is a bit more involved.
-\begin{exercise}
-  Why is $\V{S} \neq \V{S_0} + \V{\sum_{i=0}^N D_i}$?
+We can use similar ideas to derive an expression for the variance of $S$. The next exercise helps to  understand why this derivation is a bit more involved.
+\begin{exercise}[\faFlask]
+  Why is $\V{S} \neq \V{S_0} + \V{\sum_{i=0}^N R_i}$?
   \begin{solution}
     Observe that $S_0$ and $N$ are not independent. In fact, when $S_0=s$, the number of failures $N$ is Poisson distributed with mean $\lambda_f s$. 
   \end{solution}
@@ -118,87 +120,87 @@ We can similar ideas to derive an expression for the variance of $S$. The next e
 
 So let us first consider $\E{S^2}$; recall that $\V S = \E{S^2} - (\E S)^2$, and we already know that $\E S = \E{S_0}/A$. 
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
 Show that 
 \begin{equation*}
-  \E{S^2} = \E{S_0^2} + 2\E{S_0 \sum_{i=1}^N D_i} + \E{\sum_{i=1}^N D_i^2} + \E{\sum_{i=1}^N \sum_{j\neq i} D_i D_j}.
+  \E{S^2} = \E{S_0^2} + 2\E{S_0 \sum_{i=1}^N R_i} + \E{\sum_{i=1}^N R_i^2} + \E{\sum_{i=1}^N \sum_{j\neq i} R_i R_j}.
 \end{equation*}
 \begin{solution}
-  Just work out the square of $S_0+\sum_{i=1}^N$ and take expectations. Realize that $(\sum_i D_i)^2 = \sum_i D_i^2 + \sum_i\sum_{j\neq i} D_i D_j$.  
+  Just work out the square of $S_0+\sum_{i=1}^N R_i$ and take expectations. Realize that $(\sum_i R_i)^2 = \sum_i R_i^2 + \sum_i\sum_{j\neq i} R_i R_j$.  
 \end{solution}
 \end{exercise}
 
-To simplify this, we  assume at first that $S_0$ is known, so that the number of failures that occur during a service time $S_0$ is Poisson distributed, i.e.,  $N\sim \text{Poisson}(\lambda_f S_0)$.  Hence $\E{N\given S_0} = \lambda_f S_0$ and $\E{N^2\given S_0}= \lambda_f S_0 + \lambda_f^2 S_0^2$. 
+To simplify this, we assume at first that $S_0$ is known, so that the number of failures that occur during a service time $S_0$ is Poisson distributed, i.e., $N\sim P(\lambda_f S_0)$.
 
-\begin{exercise}
-  Show that $\E{S_0 \sum_{i=1}^N D_i\given S_0} = \lambda_f S_0^2 \E{D}$.
+\begin{exercise}[\faFlask]
+  Show that $\E{S_0 \sum_{i=1}^N R_i\given S_0} = \lambda_f S_0^2 \E{R}$.
 \begin{solution}
-$\E{S_0 \sum_{i=1}^N D_i\given S_0} = 
-S_0 \E{\sum_{i=1}^N D_i\given S_0} = S_0 \E D \E N = \lambda_f \E D S_0^2$.
+$\E{S_0 \sum_{i=1}^N R_i\given S_0} = 
+S_0 \E{\sum_{i=1}^N R_i\given S_0} = S_0 \E R \E N = \lambda_f \E R S_0^2$.
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
-Show that $\E{\sum_{i=1}^N D_i^2\given S_0} = \lambda_f S_0 \E{D^2}$.
+\begin{exercise}[\faFlask]
+Show that $\E{\sum_{i=1}^N R_i^2\given S_0} = \lambda_f S_0 \E{R^2}$.
 \begin{hint}
   Use Wald's equation, which we derived in Exercise~\ref{ex:16}.
 \end{hint}
 \begin{solution}
   \begin{align*}
-    \E{\sum_{i=1}^N D_i^2\given S_0} 
-&= \E{D^2}\E{ \sum_{i=1}^n n \1{N=n}\given S_0}\\
-&= \E{D^2} \E{N\given S_0} \\
-&= \lambda_f S_0 \E{D^2}.
+    \E{\sum_{i=1}^N R_i^2\given S_0} 
+&= \E{R^2}\E{ \sum_{n=0}^\infty n \1{N=n}\given S_0}\\
+&= \E{R^2} \E{N\given S_0} \\
+&= \lambda_f S_0 \E{R^2}.
   \end{align*}
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}[\faCalculator]
 Show that 
-$\E{\sum_{i=1}^N \sum_{j\neq i} D_i D_j\given S_0} = \lambda_f^2 S_0^2 (\E{D})^2.$
+$\E{\sum_{i=1}^N \sum_{j\neq i} R_i R_j\given S_0} = \lambda_f^2 S_0^2 (\E{R})^2.$
 \begin{solution}
-Since the $\{D_i\}$ are i.i.d., 
+Since the $\{R_i\}$ are i.i.d., 
   \begin{equation*}
-\E{\sum_{i=1}^N \sum_{j\neq i} D_i D_j\given S_0}
-= \E{N(N-1)|S_0} (\E{D})^2 
-= (\E{N^2|S_0}-\E{N\given S_0}) (\E{D})^2.
+\E{\sum_{i=1}^N \sum_{j\neq i} R_i R_j\given S_0}
+= \E{N(N-1)|S_0} (\E{R})^2 
+= (\E{N^2|S_0}-\E{N\given S_0}) (\E{R})^2.
   \end{equation*}
 Now $\E{N^2\given S_0}=\lambda_f^2 S_0^2 +\lambda_f S_0$ and $\E{N\given S_0} = \lambda_f S_0$.
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}[\faCalculator]
   Combine the above to see that
-    $\E{S^2\given S_0} = \frac{S_0^2}{A^2} + \lambda_f \E{D^2} S_0$. From this, 
+    $\E{S^2\given S_0} = \frac{S_0^2}{A^2} + \lambda_f \E{R^2} S_0$. From this, 
   \begin{equation*}
-    \E{S^2} = \frac{\E{S_0^2}}{A^2} + \lambda_f \E{D^2} \E{S_0}.
+    \E{S^2} = \frac{\E{S_0^2}}{A^2} + \lambda_f \E{R^2} \E{S_0}.
   \end{equation*}
   \begin{solution}
 For the first equation,
 \begin{equation*}
-  \E{S^2\given S_0} = S_0^2 + 2\lambda_f \E D S_0^2 + \lambda_f \E{D^2} S_0 + \lambda_f^2 (\E D)^2 S_0^2.
+  \E{S^2\given S_0} = S_0^2 + 2\lambda_f \E R S_0^2 + \lambda_f \E{R^2} S_0 + \lambda_f^2 (\E R)^2 S_0^2.
 \end{equation*}
-Assemble all terms with $S_0^2$ and observe that $(1/A) = 1+\lambda_f \E D$. For the second, recall that we assumed at first that $S_0$ was fixed, which we indicated by the condition on $S_0$. When $S_0$ is a random variable, we can just take the expectation at the left and right, and obtain the second result. 
+Assemble all terms with $S_0^2$ and observe that $(1/A) = 1+\lambda_f \E R$. For the second, recall that we assumed at first that $S_0$ was fixed, which we indicated by the condition on $S_0$. When $S_0$ is a random variable, we can just take the expectation at the left and right, and obtain the second result. 
   \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
 Next, show that  
   \begin{equation*}
-    \V{S} = \frac{\V{S_0}}{A^2} + \lambda_f \E{D^2} \E{S_0}.
+    \V{S} = \frac{\V{S_0}}{A^2} + \lambda_f \E{R^2} \E{S_0}.
   \end{equation*}
   \begin{solution}
     \begin{equation*}
     \V{S} = \E{S^2} - (\E S)^2 = 
-\frac{\E{S_0^2}}{A^2} + \lambda_f \E{D^2} \E{S_0} -\frac{(\E{S_0})^2}{A^2}.
+\frac{\E{S_0^2}}{A^2} + \lambda_f \E{R^2} \E{S_0} -\frac{(\E{S_0})^2}{A^2}.
     \end{equation*}
   \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}[\faCalculator]
   Finally, show that
   \begin{equation*}
-    C_s^2 = \frac{\V{S}}{(\E S)^2} = C_0^2 + \frac{\lambda_f \E{D^2} A^2}{\E{S_0}},
+    C_s^2 = \frac{\V{S}}{(\E S)^2} = C_0^2 + \frac{\lambda_f \E{R^2} A^2}{\E{S_0}},
   \end{equation*}
 where $C_0^2$ is the SCV of $S_0$, i.e., the service time without interruptions. 
 \begin{hint} Just realize that $\E{S} = \E{S_0}/A$, and use the above.
@@ -206,30 +208,30 @@ where $C_0^2$ is the SCV of $S_0$, i.e., the service time without interruptions.
 \begin{solution}
   \begin{align*}
 C_s^2 &= \frac{\V{S}}{(\E S)^2} =\frac{V(S) A^2}{(\E{S_0})^2} \\
-&=\frac{\E{S_0^2} + \lambda_f \E{D^2} \E{S_0}A^2 -(\E{S_0})^2}{(\E{S_0})^2} \\
-&=\frac{\E{S_0^2} -(\E{S_0})^2}{(\E{S_0})^2} + \frac{\lambda_f \E{D^2} \E{S_0}A^2}{(\E{S_0})^2} \\
-&=C_0^2 + \frac{\lambda_f \E{D^2}A^2}{\E{S_0}}.
+&=\frac{\E{S_0^2} + \lambda_f \E{R^2} \E{S_0}A^2 -(\E{S_0})^2}{(\E{S_0})^2} \\
+&=\frac{\E{S_0^2} -(\E{S_0})^2}{(\E{S_0})^2} + \frac{\lambda_f \E{R^2} \E{S_0}A^2}{(\E{S_0})^2} \\
+&=C_0^2 + \frac{\lambda_f \E{R^2}A^2}{\E{S_0}}.
   \end{align*}
 \end{solution}
 \end{exercise}
 
-If we assume that repair times are exponentially distributed with mean $\E{D}$, we can simplify this yet further.
-\begin{exercise}
-  Under this condition, show that $\E{D^2}=2(\E D)^2$. 
-\end{exercise}
-\begin{exercise}
-With the above assumption on the distribution of $D$, show that
+If we assume that repair times are exponentially distributed with mean $\E{R}$, we can simplify this yet further.
+
+\begin{exercise}[\faCalculator]
+With the above assumption on the distribution of $R$, show that
   \begin{equation*}
-    C_s^2 = C_0^2 + 2 A(1-A) \frac{\E{D}}{\E{S_0}}.
+    C_s^2 = C_0^2 + 2 A(1-A) \frac{\E{R}}{\E{S_0}}.
   \end{equation*}
 \begin{solution} 
-Since $A=1/(1+\lambda_f \E D)$, 
+When repair times are exponentially distributed with mean $\E{R}$:  $\E{R^2}=2(\E R)^2$. 
+
+Since $A=1/(1+\lambda_f \E R)$, 
   \begin{equation*}
     \begin{split}
-    \lambda \E{D^2} A^2 
-&= 2\lambda (\E D)^2 A^2 = 2 \lambda \E D A A \E D \\
-&= 2 \frac{\lambda \E D }{1+\lambda \E D} A \E D \\
-&= 2 \left(1-\frac{1}{1+\lambda \E D}\right) A \E D  = 2(1-A)A \E D.
+    \lambda_f \E{R^2} A^2 
+&= 2\lambda_f (\E R)^2 A^2 = 2 \lambda_f \E R A A \E R \\
+&= 2 \frac{\lambda_f \E R }{1+\lambda_f \E R} A \E R \\
+&= 2 \left(1-\frac{1}{1+\lambda_f \E R}\right) A \E R  = 2(1-A)A \E R.
     \end{split}
   \end{equation*}
 \end{solution}
@@ -237,10 +239,10 @@ Since $A=1/(1+\lambda_f \E D)$,
 
 Again, we have all elements ready to use the $G/G/1$ waiting time formula. Let's illustrate this. 
 
-\begin{exercise}
-  Suppose we have a machine with memoryless failure behavior, with a mean-time-to-fail of $3$ hours, Regular service times are deterministic with an average of 10 minutes, jobs arrive as a Poisson process with rate of 4 per hour.  Repair times are exponential with a mean duration of 30 minutes. What is the average sojourn time?
+\begin{exercise}[\faPhoto]
+  Suppose we have a machine with memoryless failure behavior, with a mean-time-to-fail of $3$ hours. Regular service times are deterministic with an average of 10 minutes, jobs arrive as a Poisson process with rate of 4 per hour.  Repair times are exponential with a mean duration of 30 minutes. What is the average sojourn time?
   \begin{hint}
-    Mind to work in a consistent set of units, e.g., hours. Its easy to make mistakes. 
+    Mind to work in a consistent set of units, e.g., hours. It is easy to make mistakes. 
   \end{hint}
   \begin{solution}
 Let's first compute the load. If $\rho>1$ we are in trouble.
@@ -248,8 +250,8 @@ Let's first compute the load. If $\rho>1$ we are in trouble.
 labda = 4.
 ES0 = 10./60 # in hours
 labda_f = 1./3
-ED = 30./60 # in hours
-A = 1./(1+labda_f*ED)
+ER = 30./60 # in hours
+A = 1./(1+labda_f*ER)
 A
 ES = ES0/A
 ES
@@ -260,7 +262,7 @@ As $\rho<1$, the system is not in overload. Now for the queueing time.
 \begin{pyconsole}
 Ca2 = 1.
 C02 = 0. # deterministic service times
-Ce2 = C02 + 2*A*(1-A)*ED/ES0
+Ce2 = C02 + 2*A*(1-A)*ER/ES0
 Ce2
 EW = (Ca2+Ce2)/2 * rho/(1-rho) * ES
 EW
@@ -269,7 +271,7 @@ EW + ES # sojourn time
   \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}[\faPhoto]
   Suppose we could buy another machine that never fails. What is the average sojourn time?
   \begin{solution}
 Now we don't need to take availability into account: the machine never fails so $A=1$. 
@@ -286,200 +288,9 @@ EW = (Ca2+C02)/2 * rho/(1.-rho) * ES
 EW
 EW + ES # sojourn time
 \end{pyconsole}
-The average time in queue reduces for $\approx 0.6$ to $\approx 0.17$ hours, a reduction by about a factor 3. 
+The average time in queue reduces from $\approx 0.6$ to $\approx 0.17$ hours, a reduction by about a factor 3. 
 \end{solution}
 \end{exercise}
-
-\begin{comment}
-  
-Consider the compound Poisson process such that $S(t) = \sum_{i=1}^{N(t)} D_i$, where $N(t)$ is the number of customers arrived up to time $t$, and $D_i$ is the service demand of the $i$th customer. The demands $\{D_i\}$ are i.i.d. with mean $\E D$ and variance $\V D$, and $N(t)$ is Poisson distributed with rate $\lambda$. 
-
-\begin{exercise}
-First assume that $N$ is some general random variable. Use the tools you learned above to show that
-\begin{equation*}
-\V{S(t)} = \E{N(t)} \V D + \V{N(t)} (\E D)^2.
-\end{equation*}
-\begin{solution}
-The mean is $\E{S(t)}= \E{N(t)} \E D$.
-
-It remains to compute $\E{S^2(t)}$.  If $N=n$, 
-\begin{equation*}
-  \begin{split}
-  \E{ S_n^2 } 
-&=  \E{\left(\sum_{i=1}^n D_i\right)^2}  
-=  \E{\sum_i D_i^2 + \sum_i \sum_{j\neq i}^n D_i D_j}  \\
-&= \sum_i \E{D^2_i} + \sum_i \sum_{j \neq i} \E{D_i} \E{D_j},
-  \end{split}
-\end{equation*}
-since $\E{D_iD_j} = \E{D_i} \E{D_j}$ by independence. Therefore, using
-that the $\{D_i\}$ are i.i.d. as $D$,
-\begin{equation*}
-  \E{ S_n^2} = n \E{D^2} + n(n-1) (\E D)^2. 
-\end{equation*}
-
-Now take $N$ as a random variable, with $p_n=\P{N=n}$,
-\begin{equation*}
-  \begin{split}
-\E{ S_N^2}  &= 
-\sum_n p_n(n\E{D^2} + n(n-1)(\E D)^2 \\
-&=\E N \E{D^2} + (\E{N^2} - \E N)(\E D)^2 \\
-%& = \E N \E{ D^2} + \E{N^2} (\E D)^2 - \E N (\E D)^2 \\
-& = \E N (\E{ D^2}  - (\E D)^2) + \E{N^2} (\E D)^2 \\
-& = \E N \V D + \E{N^2} (\E D)^2.
-  \end{split}
-\end{equation*}
-
-Hence, 
-\begin{equation}
-  \begin{split}
-  \V{S_N} 
-&= \E{S_N^2}  - (\E{S_N})^2 \\
-&= \E N \V D + \E{N^2} (\E D)^2   - (\E N)^2 (\E D)^2 \\
-&= \E N \V D + \V N (\E D)^2.
-  \end{split}
-\end{equation}
-
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-  Now assume that $N(t)$ is Poisson with rate $\lambda$. Then, show that 
-\begin{equation}
-  \V{S_{N(t)}} = \lambda t \E{D^2}.
-\end{equation}
-\begin{solution}
-\begin{equation}
-  \begin{split}
-  \V{S_{N(t)}}  = \E N \V D + \V N (\E D)^2 =\lambda t \V D + \lambda t (\E D)^2 = \lambda t \E{D^2}.
-  \end{split}
-\end{equation}
-  
-\end{solution}
-\end{exercise}
-\end{comment}
-
-\begin{comment}
-\begin{exercise}
-Zijm.Ex.1.11.1
- \begin{solution}
-Yes. The availability is $93\%$. Since $\E{S} = \E{S_0}/A$, and if $\E{S_0} $ is known, $\E{S_e}$ follows.
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-Zijm.Ex.1.11.2
- \begin{solution}
-   No, from Zijm.Eq.1.51, the average repair time has to be known. The
-   repair time here is of course the time it takes for a mechanic to
-   show up at work again.
-\end{solution}
-\end{exercise}
-\begin{exercise}
-Zijm.Ex.1.11.3
- \begin{solution}
-   It might, but perhaps a normal distribution would be better. It
-   makes sense to make a histogram of the recover times to see whether
-   some clear pattern is present. 
-
-   Besides this, I don't know how sensitive the result for $C_s^2$ is
-   on the distribution of the repair times. Perhaps it is not that
-   sensitive, so in that case it would be ok to simply use the
-   exponential distribution. 
-
-The sensitivity study would be an interesting topic for simulation. 
-\end{solution}
-\end{exercise}
-\begin{exercise}
-Zijm.Ex.1.11.4 and 1.11.5
- \begin{solution}
-   We need to make an assumption about the distribution of the repair
-   times. Inferring from the text, the repair time is always $2$
-   days. Lets also assume that all jobs accumulate in front of the
-   broken machine, in other words, the broken machine is part of the
-   job routing of each job. Then
-   \begin{equation*}
-     \P{N(2) > 20} = 
-\sum_{n=21}^\infty e^{-5\cdot 2} \frac{10^n}{n!}.
-1  - \sum_{n=0}^{20} e^{-5\cdot 2} \frac{10^n}{n!} = 1-0.9984,
-   \end{equation*}
-i.e., very small.  This is the code I used: 
-
-\begin{pyconsole}
-from math import exp, factorial
-exp(-10) * sum((10)**n / factorial(n) for n in range(21))
-\end{pyconsole}
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-Zijm.Ex.1.11.4
-
- \begin{solution}
-If the shop already contains 10 jobs, somewhere upstream of the broken machine, then 
-   \begin{equation*}
-     \P{N(2) > 10} = 1- 0.58.
-   \end{equation*}
-where  I used
-\begin{pyconsole}
-exp(-10) * sum((10)**n / factorial(n) for n in range(11))
-\end{pyconsole}
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-Zijm.Ex.1.11.6
- \begin{solution}
-   Cleaning times will be pretty constant. Changing dies, or other
-   machine parts, is also typically quite predictable, although it can
-   take a lot of time, in particular in case a crane or other heavy
-   machinery is needed to replace parts. If the machine require
-   temporary adjustments, then the variation in setup times may be
-   quite a bit higher.
-\end{solution}
-\end{exercise}
-
-\begin{exercise}
-Zijm.Ex.1.11.7
- \begin{solution}
-   Then the effective service times, and in particular, $C_s^2$ will
-   be quite a bit bigger. It is preferable to avoid such a situation. 
-
-   Mathematically, it is only given that $N_s$ is a random
-   variable. As, however, this does not state anything about its
-   distribution, we cannot make any general claim. The intent of the
-   problem is to have you check the relevant formulas and notice that
-   the variance of $N_s$ appears in the formulas.
-\end{solution}
-\end{exercise}
-
-\end{comment}
-
-\begin{comment}
-  
-\begin{exercise}
-  Suppose a single-machine workstation has to process $n$ different
-  product families. Jobs of family $i$ arrive as a Poisson process
-  with rate $\lambda_i$.  Service times are exponentially distributed
-  with average $\mu_i^{-1}$ for family $i$. A setup of time $S$ is
-  required if the machine switches from one family to another. If the
-  machine works according to a cyclic schedule, i.e., produce family
-  1, then 2, then 3, and so on until family $n$, can you find batch
-  sizes $B_i$ for family $i$ such that an average waiting time can be
-  guaranteed?
-  \begin{solution}
-    \TBD. 
-
-    This problem can be generalized and has been widely studied as one
-    of the core problems in stochastic machine scheduling. For
-    instance, what to do if the setup times are family-dependent, or
-    even more general, dependent on the sequence in which the families
-    are planned? This is a very hard problem. 
-  \end{solution}
-\end{exercise}
-\end{comment}
-
-
-
 
 
 \Closesolutionfile{hint}

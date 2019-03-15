@@ -35,29 +35,7 @@ $\E{L_i} = \lambda_i\E{W_i}$. Filling this into the above,
 where we recognize the visit ratios.
 
 
-
-
-\begin{comment}
-\begin{exercise}[use=false]
-  Use the ideas of Zijm.Eq.2.2 to set up a set of balance equations
-  for a single-server queueing station with two queues such that queue
-  1 is served with strict priority over queue 2, and service of a job
-  of type 2 is preemptive. Assume that type i jobs arrive at rate
-  $\lambda_i$ and require average service time
-  $\mu_i^{-1}$. Inter-arrival times of jobs each type are exponentially distributed,
-  just as the service times.
-
-  Can you find similar equations for the case with multiple servers at
-  the station, all serving type 1 jobs with strict priority over type
-  2 jobs?
-  \begin{solution}
-    TBD.
-  \end{solution}
-\end{exercise}
-  
-\end{comment}
-
-\begin{exercise}(Linear algebra refresher) Can you find an example to
+\begin{exercise}[\faFlask\/ Linear algebra refresher] Can you find an example to
   show for two matrices $A$ and $B$ that $AB\neq BA$, hence
   $x A \neq A x$.
   \begin{hint}
@@ -106,7 +84,7 @@ ones are to the left of a matrix, and the vertical ones to the right.
   \end{solution}
 \end{exercise}
 
-\begin{exercise}(Linear algebra refresher, 2) Suppose the matrix $A$
+\begin{exercise}[\faCalculator\/ Linear algebra refresher 2] Suppose the matrix $A$
   has an eigenvalue $0$. What is the geometric meaning of this fact? 
   \begin{solution}
     Many students think that a matrix is just a bunch of numbers
@@ -141,7 +119,7 @@ y\\
 0
     \end{pmatrix}.
   \end{equation*}
-  We see that $A$ removes any information about the $z$ direction from
+  We see that $A$ removes any information about the $z$-direction from
   the vector $v$. (It projects $v$ on the $x-y$ plane, and throws away
   the $z$ component of $v$.) But then, for a given vector $w=(x,y,0)$
   in the $x-y$ plane, it is impossible to use $A$ to retrieve the
@@ -160,14 +138,14 @@ y\\
 \end{exercise}
 
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
 Zijm.Ex.2.2.1
 \begin{solution}
 Because jobs cannot leave faster than they arrive.
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
 Zijm.Ex.2.2.2
 \begin{solution}
   Observe from Exercise~\ref{ex:dep} that the inter-departure times
@@ -183,7 +161,7 @@ Zijm.Ex.2.2.2
 
 
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
 Zijm.Ex.2.2.3 
 \begin{solution}
   The question is not well specified. We know from Burke's law, see Exercise~\ref{ex:burke}, that
@@ -197,7 +175,7 @@ Zijm.Ex.2.2.3
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
 Zijm.Ex.2.2.4
 \begin{solution}
   Simple algebra.  (I am not going to write it out here. If you are
@@ -205,91 +183,62 @@ Zijm.Ex.2.2.4
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}[\faCalculator]
   Zijm.Ex.2.2.5. The problem is not entirely correctly formulated. It
   should be, if for at least one $i$, $\sum_{j=1}^M P_{i j} <1$ \ldots
 \begin{solution}
 Linear algebra is quite useful here!
 
-Observe that $P_{i j}$ is the probability that a job, after completing
-its service at node $i$, moves to node $j$. Then $\sum_{j=1}^M P_{i j}$
-is the probability that a job moves from node $i$ to another node in
-the network, i.e., stays in the network, while $P_{i0}$ is the
-probability that a job departing from node $i$ leaves the network, in
-other words, the job is finished. When $\sum_{j=1}^M P_{i j} < 1$, then
-more jobs enter node $i$ from the network than that node $i$ sends
-`back' into the network. Conceptually, node $i$ `leaks jobs'.
+Observe that $P_{i j}$ is the probability that a job, after completing its service at node $i$, moves to node $j$.
+Then $\sum_{j=1}^M P_{i j}$ is the probability that a job moves from node $i$ to another node in the network, i.e., stays in the network, while $P_{i0}$ is the probability that a job departing from node $i$ leaves the network, in other words, the job is finished.
+When $\sum_{j=1}^M P_{i j} < 1$, then more jobs enter node $i$ from the network than that node $i$ sends `back' into the network.
+Conceptually, node $i$ `leaks jobs'.
 
-  Now, consider some node $k$ such that $P_{ki} > 0$, then the
-  probability that a job that starts at node $k$, moves to node $i$
-  and then leaves the network is equal to $P_{ki}P{i0}$. Thus, since
-  $P_{ki}>0$ and $P_{i0}>0$, the probability that a job leaves the
-  network from note $k$ in two steps is positive.  More specifically,
-  $P^2_{k0} = \sum_{j=0}^M P_{kj}P_{j0} \geq P_{ki}P_{i0} > 0$. 
+Now, consider some node $k$ such that $P_{ki} > 0$, then the probability that a job that starts at node $k$, moves to node $i$ and then leaves the network is equal to $P_{ki}P{i0}$.
+Thus, since $P_{ki}>0$ and $P_{i0}>0$, the probability that a job leaves the network from node $k$ in two steps is positive.
+More specifically, $P^2_{k0} = \sum_{j=0}^M P_{kj}P_{j0} \geq P_{ki}P_{i0} > 0$.
 
-  The irreducibility assumption implies that in at most $M$ steps it
-  is possible to reach, with positive probability, any node from any
-  other node in the network. Thus, for any node $j$ to any other node
-  $k$ there is a sequence of nodes $j_1, j_2, \ldots, j_{M-1}$ such
-  that  $P^{M}_{jk} \geq P_{j j_1}P_{j_1 j_2}\cdots P_{j_{M-1}k} > 0$.
+The irreducibility assumption implies that in at most $M$ steps it is possible to reach, with positive probability, any node from any other node in the network.
+Thus, for any node $j$ to any other node $k$ there is a sequence of nodes $j_1, j_2, \ldots, j_{M-1}$ such that $P^{M}_{jk} \geq P_{j j_1}P_{j_1 j_2}\cdots P_{j_{M-1}k} > 0$.
 
 
-  Thus, if there is a node $i$ such that $P_{i0}>0$, then it is
-  possible from any node that sends jobs to node $i$ directly to leave
-  the network in two steps. Likewise, when node $i$ can be reached
-  from node $k$ in $n$ steps, say, then
-  $P^{n+1}_{k0} \geq P^n_{ki}P_{i0} > 0$, i.e., in at most $n+1$ steps
-  it is possible to leave the network from such node $k$. This
-  implies, in particular, that for all nodes $k=1,2,\ldots, M$, i.e.,
-  all nodes in the network, $P^{M+1}_{k0} >0$.  For this reason we
-  consider $P^{M+1}$ in the hint.
+Thus, if there is a node $i$ such that $P_{i0}>0$, then it is possible from any node that sends jobs to node $i$ directly to leave the network in two steps.
+Likewise, when node $i$ can be reached from node $k$ in $n$ steps, say, then $P^{n+1}_{k0} \geq P^n_{ki}P_{i0} > 0$, i.e., in at most $n+1$ steps it is possible to leave the network from such node $k$.
+This implies, in particular, that for all nodes $k=1,2,\ldots, M$, i.e., all nodes in the network, $P^{M+1}_{k0} >0$.
+For this reason we consider $P^{M+1}$ in the hint.
 
 
-  As a final remark for students with knowledge of Markov chains,
-  observe that the routing matrix $P$ does not correspond to the
-  transition matrix of a recurrent Markov chain. Since for at least
-  one row $i$, $\sum_{j=1}^N P_{i j}<1$, the matrix $P$ is
-  sub-stochastic. Hence, a Markov chain induced by $P$ cannot be
-  irreducible, because for this to happen, the chain must stay in some
-  absorbing set with probability 1.
+As a final remark for students with knowledge of Markov chains, observe that the routing matrix $P$ does not correspond to the transition matrix of a recurrent Markov chain.
+Since for at least one row $i$, $\sum_{j=1}^N P_{i j}<1$, the matrix $P$ is sub-stochastic.
+Hence, a Markov chain induced by $P$ cannot be irreducible, because for this to happen, the chain must stay in some absorbing set with probability 1.
 \end{solution}
 \end{exercise}
 
-\begin{exercise}\label{ex:20}
+\begin{exercise}[\faCalculator]
+\label{ex:20}
 Zijm.Ex.2.2.6
 \begin{solution}
-  Since $M$ is finite, and $k\leq M$, the set of numbers
-  $P^{M+1}_{k0}$ is finite. This, together with the fact that
-  $P^{M+1}_{k0}>0$ for all $k$, implies that there is some number
-  $\epsilon>0$ such that $P^{M+1}_{k0}>\epsilon$. Hence, for all
-  entries $k=1, 2, \ldots, M$, we have that
-  $P^{M+1}_{kj} < 1- \epsilon$. This, in turn, implies that
-  $P^{2(M+1)}_{kj} < (1- \epsilon)^2$, and so on, so that for any $n$,
-  $P^{n(M+1)}_{kj} < (1- \epsilon)^n$. This implies, in more general
-  terms, that the entries of $P^n$ decrease at some geometric rate to
-  $0$.
+  Since $M$ is finite, and $k\leq M$, the set of numbers $P^{M+1}_{k0}$ is finite.
+  This, together with the fact that $P^{M+1}_{k0}>0$ for all $k$, implies that there is some number $\epsilon>0$ such that $P^{M+1}_{k0}>\epsilon$.
+  Hence, for all entries $k=1, 2, \ldots, M$, we have that $P^{M+1}_{kj} < 1- \epsilon$.
+  This, in turn, implies that $P^{2(M+1)}_{kj} < (1- \epsilon)^2$, and so on, so that for any $n$, $P^{n(M+1)}_{kj} < (1- \epsilon)^n$.
+  This implies, in more general terms, that the entries of $P^n$ decrease at some geometric rate to $0$.
 
   It is well known that for any bounded sequence $x_i$ and
   $0\leq \alpha < 1$, $ \sum_{i=0}^\infty x_i \alpha^i <
   \infty$. Applying this insight to the entries of $P^n$ it follows that 
 $\sum_{n=0}^\infty P^n_{jk} < \infty$. 
 
-Finally, applying  $\lambda = \gamma + \lambda P$ recursively, we get
+Finally, applying $\lambda = \gamma + \lambda P$ recursively, we get
 \begin{equation*}
   \lambda = \gamma + \lambda P = \gamma + (\gamma + \lambda P)P = \gamma (1+P) + \lambda P^2 = \gamma(1+P+P^2) + \lambda P^3 \to \gamma \sum_{n=0}^\infty P^n.
 \end{equation*}
-By the above reasoning this last sum is well defined, and finite.  (By
-the way, the above argument is not necessarily valid for matrices $P$
-that are infinite, since then $\inf\{P^{M}_{ik}\}$ need not be
-strictly positive.)
+By the above reasoning this last sum is well defined, and finite.
+(By the way, the above argument is not necessarily valid for matrices $P$ that are infinite, since then $\inf\{P^{M}_{ik}\}$ need not be strictly positive.)
 
-Another interesting way to see all this is by making the simplifying
-assumption that $P$ is a diagonalizable matrix. (The argument can be
-generalized to include matrices reduced to Jordan normal form, but
-this gives optimal clutter, but does not change the line of reasoning in
-any fundamental way.) In that case, there exists an invertible matrix
-$V$ with the (left) eigenvectors of $P$ as its rows and a diagonal
-matrix $\Lambda$ with the eigenvalues on its diagonal such that
+Another interesting way to see all this is by making the simplifying assumption that $P$ is a diagonalizable matrix.
+(The argument can be generalized to include matrices reduced to Jordan normal form, but this gives optimal clutter, but does not change the line of reasoning in any fundamental way.)
+In that case, there exists an invertible matrix $V$ with the (left) eigenvectors of $P$ as its rows and a diagonal matrix $\Lambda$ with the eigenvalues on its diagonal such that
 \begin{equation*}
   V P = \Lambda V.
 \end{equation*}
@@ -304,18 +253,11 @@ P^2 = V^{-1}\Lambda V \cdot V^{-1}\Lambda V= V^{-1}\Lambda^2 V,
 and in general $P^n = V^{-1}\Lambda^n V$.
 If each eigenvalue $\lambda_i$ is such that its modulus $|\lambda_i| < 1$, then $\Lambda^n \to 0$ geometrically fast, hence $P^n\to 0$ geometrically fast, hence the sequence of partial sums $\sum_{n=0}^N P^n$ converges to a matrix with finite elements as $N\to\infty$.
 
-So, we are left with proving that the eigenvalues of $P$ must have
-modulus less than $1$. This fact follows from Gerschgorin's disk
-theorem, which I include for the interested student. Define the disk
-$B(a,r)=\{z\in \mathbb{C} | |z-a|\leq r\}$, i.e., the set of complex numbers
-such that the distance to the center $a\in \mathbb{C} $ is less than or equal
-to the radius $r$. With this, the Gerschgorin disks of a matrix are
-defined as $B(a_{ii}, \sum_{j\neq i} |a_{i j}|)$, i.e., disks with
-center at the diagonal elements $a_{ii}$ of $A$ and radius equal
-to the sum of the (modulus of the) elements of $A$ on the $i$th row
-except $a_{ii}$. Then Gerschgorin's theorem says that all eigenvalues
-of $A$ lie in the union of these disks, i.e., all eigenvalues
-$\lambda_i \in \bigcup_i B({a_{ii}, \sum_{j\neq i}|a_{i j}})$.
+So, we are left with proving that the eigenvalues of $P$ must have modulus less than $1$.
+This fact follows from Gerschgorin's disk theorem, which I include for the interested student.
+Define the disk $B(a,r)=\{z\in \mathbb{C} | |z-a|\leq r\}$, i.e., the set of complex numbers such that the distance to the center $a\in \mathbb{C} $ is less than or equal to the radius $r$.
+With this, the Gerschgorin disks of a matrix are defined as $B(a_{ii}, \sum_{j\neq i} |a_{i j}|)$, i.e., disks with center at the diagonal elements $a_{ii}$ of $A$ and radius equal to the sum of the (modulus of the) elements of $A$ on the $i$th row except $a_{ii}$.
+Then Gerschgorin's theorem says that all eigenvalues of $A$ lie in the union of these disks, i.e., all eigenvalues $\lambda_i \in \bigcup_i B({a_{ii}, \sum_{j\neq i}|a_{i j}})$.
 
 Assume for notational simplicity that for each row $i$ of $P$ we have
 that $\sum_{j} a_{i j}<1$. (Otherwise apply the argument to $P^{M+1}$.)
@@ -327,17 +269,14 @@ Since all elements of $P$ are non-negative, this also implies that
 \begin{equation*}
 -1 <   a_{ii} - \sum_{j\neq i} a_{i j} \leq  a_{ii} + \sum_{j\neq i} a_{i j} < 1. 
 \end{equation*}
-With this and using that $a_{ii}$ is a real number (so that it lies on
-the real number axis) it follows that all elements in the disk
-$B(a_{ii}, \sum_{j\neq i} a_{i j})$ have modulus smaller than 1.  As
-this applies to any row $i$, all disks lie strictly within the complex
-unit circle. But then, by Gerschgorin's theorem, all eigenvalues of
-$P$ also lie strictly in the unit circle, hence all eigenvalues have
-modulus smaller than 1.
+With this and using that $a_{ii}$ is a real number (so that it lies on the real number axis) it follows that all elements in the disk $B(a_{ii}, \sum_{j\neq i} a_{i j})$ have modulus smaller than 1.
+As this applies to any row $i$, all disks lie strictly within the complex unit circle.
+But then, by Gerschgorin's theorem, all eigenvalues of $P$ also lie strictly in the unit circle, hence all eigenvalues have modulus smaller than 1.
 \end{solution}
 \end{exercise}
 
-\begin{exercise}\label{ex:23}
+\begin{exercise}[\faCalculator]
+\label{ex:23}
   Show that Zijm.Eq.2.13 and 2.14 can be written as
   \begin{equation*}
     f_i(n_i) = \frac{1}{G(i)}\frac{1}{\Pi_{k=1}^{n_i} \min\{k, c_i\}}\left( \frac{\lambda_i}{\mu_i}\right)^{n_i}.
@@ -352,7 +291,7 @@ modulus smaller than 1.
 \end{exercise}
 
 
-\begin{exercise}
+\begin{exercise}[\faCalculator]
 Zijm.Ex.2.2.7
 \begin{solution}
   \begin{equation*}
@@ -391,17 +330,15 @@ Thus,
 
 
 We want of course that $\lambda_1 < \mu_1$ and $\lambda_2 < \mu_2$.
-With the above expressions this leads to conditions on $\alpha$,
-$\beta_1$ and $\beta_2$. Note that we have three parameters, and two
-equations; there is not a single condition from which the stability
-can be guaranteed.
+With the above expressions this leads to conditions on $\alpha$, $\beta_1$ and $\beta_2$.
+Note that we have three parameters, and two equations; there is not a single condition from which the stability can be guaranteed.
 
-If $\alpha\uparrow 1$, the arrival rate at node $1$ explodes. If
-$\beta_1=0$ no jobs are sent from node 2 to node 1.
-
+If $\alpha\uparrow 1$, the arrival rate at node $1$ explodes.
+If $\beta_1=0$ no jobs are sent from node 2 to node 1.
 \end{solution}
 \end{exercise}
-\begin{exercise}
+
+\begin{exercise}[\faFlask]
 Zijm.Ex.2.2.8
 \begin{solution}
   Yes, the network remains a Jackson network. By Burke's law, see Exercise~\ref{ex:burke}, the
@@ -417,8 +354,7 @@ Zijm.Ex.2.2.8
 \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faPhoto}
-  (Hall 5.22). At a large hotel, taxi cabs arrive at a rate of 15 per
+\begin{exercise}[\faPhoto\/ Hall 5.22]. At a large hotel, taxi cabs arrive at a rate of 15 per
   hour, and parties of riders arrive at the rate of 12 per
   hour. Whenever taxicabs are waiting, riders are served immediately
   upon arrival. Whenever riders are waiting, taxicabs are loaded
@@ -434,18 +370,14 @@ This is really a neat problem. Please spend serious time on it to
 solve before looking at the answer. It requires some ingenuity on your part.  Try to adapt the ideas behind Figure 2.2 of Zijm to this case.
   \end{hint}
     \begin{solution}
-Let $p_{ij}$ be the fraction of time that the system contains $i$
-riders and $j$ taxi cabs. I assume that all members of a party of
-riders can be served by a single cab (that is, the parties do not
-exceed the capacity of a cab and all members of a party have the same
-destination). For clarity, write $\mu$ for the rate at which cabs
-arrive, and $\lambda$ for the arrival rate of parties of riders.  Then
-the transitions are as in the figure below. Suppose first that there
-are $3$ taxi cabs. When a group arrives (at rate $\lambda$), there is
-one taxi less, and so on, until there are no more taxis
-left. Finally, if yet more groups arrive, they have to wait. When a
-new taxi arrives, the number of groups is reduced by one, and so on,
-until there are $3$ taxis waiting and no groups of people.
+      Let $p_{ij}$ be the fraction of time that the system contains $i$ riders and $j$ taxi cabs.
+      I assume that all members of a party of riders can be served by a single cab (that is, the parties do not exceed the capacity of a cab and all members of a party have the same destination).
+      For clarity, write $\mu$ for the rate at which cabs arrive, and $\lambda$ for the arrival rate of parties of riders.
+      Then the transitions are as in the figure below.
+      Suppose first that there are $3$ taxi cabs.
+      When a group arrives (at rate $\lambda$), there is one taxi less, and so on, until there are no more taxis left.
+      Finally, if yet more groups arrive, they have to wait.
+      When a new taxi arrives, the number of groups is reduced by one, and so on, until there are $3$ taxis waiting and no groups of people.
 
 
     \begin{center}
@@ -601,33 +533,6 @@ Lp
     \end{solution}
 \end{exercise}
 
-
-
-\begin{comment}
-  
-\begin{exercise}[use=false]
-  Include an question that shows that it is necessary to check the
-  guess for the product form solution everywhere on the state space,
-  that is, in the interior, but also on the boundaries.
-  \begin{solution}
-    TBD
-  \end{solution}
-\end{exercise}
-
-\begin{exercise}[use=false]
-  Apply the formula's of Zijm.Section 2.4 to a tandem queueing network.
-  \begin{solution}
-    TBD.
-  \end{solution}
-\end{exercise}
-
-\begin{exercise}[use=false]
-  Include a case for Section 2.4.
-  \begin{solution}
-    TBD.
-  \end{solution}
-\end{exercise}
-\end{comment}
 
 
 \Closesolutionfile{hint}

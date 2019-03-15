@@ -9,6 +9,21 @@
 \Opensolutionfile{ans}
 
 
+\begin{exercise}
+  Provide an interpretation of a single-server queueing server with a
+  finite calling population in terms of a closed network.
+\begin{solution}
+    Consider a closed-queueing network with two stations. Station 1 is
+    a single-server station with exponentially distributed service
+    times with mean $\mu$; station 2 has $N$ parallel exponential
+    servers, each working at rate $\lambda$. If station 1 contains $n$
+    jobs, then Station 2 contains $N-n$ jobs.  The rate at which jobs
+    move from Station 2 to Station 1 is $(N-n)\lambda$, since $N-n$ of
+    the $N$ servers of Station 2 are occupied. Jobs move from Station
+    1 to Station 2 at rate $\mu$, provided $n\geq1$.
+  \end{solution}
+\end{exercise}
+
 The formula with the visit ratios should be like this:
 \begin{equation*}
   V_k = \sum_{j=0}^M V_j P_{jk}, 
@@ -49,15 +64,6 @@ $VP=V$.
   \end{solution}
 \end{exercise}
 
-\begin{comment}
-\begin{exercise}
-  What if $P$ has an eigenvalue $\alpha$ whose modulus $|\alpha|>$? What if for all eigenvalues $\alpha_i$ we have that $|\alpha_i|<1$?
-  \begin{solution}
-    TBD.
-  \end{solution}
-\end{exercise}
-\end{comment}
-
 \begin{exercise}
 Zijm.Ex.3.1.1 
 \begin{solution}
@@ -97,20 +103,18 @@ We number  station a as 1, and so on.
      1 & 0 & 0 & 0 & 0 & 0\\
   \end{pmatrix}.
 \end{equation*}
-We now solve for $V$ in the equation $V = VP$. Since, by
-definition, $V_1=1$, it suffices to express the other visit ratios in
-terms of $V_1$. From elementary linear algebra, the second column
-implies that $V_2 = V_1$, and the third that $V_3 = 4/5 V_2$, so that
-$V_3 = 4/5 V_1$. From the fourth column $V_4 = 1/3 V_3$, thus,
-$V_4 = 1/3 \cdot 4/5 V_1 = 4/15 V_1$.  From the fifth column
-$V_5 = 2/3 V_4$, hence $V_5 = 8/45 V_1$. Finally, from the sixth
-column, $V_6 = V_4+V_5$, hence $V_6 = (4/15 + 8/45)V_1$.
+We now solve for $V$ in the equation $V = VP$.
+Since, by definition, node $f$ is the load/unload node, we set $V_6=1$, and then we express the other visit ratios in terms of $V_6$.
+From elementary linear algebra, the second column implies that $V_2 = V_1$, and the third that $V_3 = 4/5 V_2$, so that $V_3 = 4/5 V_1$.
+From the fourth column $V_4 = V_3 \cdot 1/3 $, thus, $V_4 = V_1 \cdot 1/3 \cdot 4/5 = V_1 \cdot 4/15$.
+From the fifth column $V_5 = V_4 \cdot 2/3$, hence $V_5 = V_1 \cdot 8/45 $.
+Finally, from the sixth column, $V_6 = V_4+V_5$, hence $V_6 = V_1 (4/15 + 8/45)=V_1 \cdot 4/9$.
+Therefore, $V_1 = V_6 9/4$, and from this we can compute all other visit ratios.
 
-For later courses on Markov chains, it is important to note the
-following. Write the visit ratio equation $V = VP$ as $V(1-P)=0$ where
-$1$ is the indicator matrix. Clearly, $V$ is must be a left
-eigenvector of the matrix $1-P$ with eigenvalue 0 (recall that
-$V(1-P) = 0 = 0\cdot V$). Thus, at least one row or column of the matrix $1-P$ is superfluous to solve for $V$. 
+For later courses on Markov chains, it is important to note the following.
+Write the visit ratio equation $V = VP$ as $V(1-P)=0$ where $1$ is the indicator matrix.
+Clearly, $V$ is a left eigenvector of the matrix $1-P$ with eigenvalue 0 (recall that $V(1-P) = 0 = 0\cdot V$).
+Thus, at least one row or column of the matrix $1-P$ is superfluous to solve for $V$.
 \end{solution}
 \end{exercise}
 

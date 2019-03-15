@@ -16,69 +16,11 @@ where $\pi(n)$ is the long-run fraction of jobs that observe $n$
 customers in the system at the moment of arrival.  It is natural to
 ask whether $\pi(n)$ and $p(n)$, as defined by~\eqref{eq:p(n)}, are related, that is, whether what
 customers see upon arrival is related to the time-average behavior of
-the system. In this section we will derive the famous \recall{Poisson arrivals see time averages (PASTA)} condition  that ensures that  $\pi(n)=p(n)$ if the arrivals follow a Poisson process. 
+the system. In this section we will derive the famous \recall{Poisson arrivals see time averages}(\recall{PASTA}) condition  that ensures that  $\pi(n)=p(n)$ if the arrivals follow a Poisson process. 
 
 
-\begin{comment}
-\begin{hint}
-Check the definitions of $Y(0,t)$, $Y(1,t)$, $A(0,t)$ and so on. Make a drawing of $Y(0, t)$ and $Y(1,t)$ as functions of $t$. 
-\end{hint}
-  \begin{solution}
- $A(t)=\lfloor t\rfloor$ provided the unit of $t$ is in
-  hours. $A(0,t)=A(t)$ and $A(n,t)=0$ for $n>0$.  Next, for $Y(0,t)$ we define, for notational ease, the fractional part of $t$ as $\{t\} = t - \lfloor t \rfloor$. Then,
-  \begin{align*}
-    Y(0,t)&= \frac 1{60} \lfloor t \rfloor + \{t\} \1{ \{t\} \in[59/60, 1)} \approx \frac{1}{60}t, \\
-    Y(1,t)&= \frac{59}{60} \lfloor t \rfloor + \{t\} \1{\{t\}\in[0,59/60)} \approx \frac{59}{60}t. \\
-\lambda(0) &= \lim_t \frac{A(0,t)}{Y(0,t)} = \lim_t \frac{t}{t/60} = 60, \\
-\lambda(1) &= \lim_t \frac{A(1,t)}{Y(1,t)} = \lim_t\frac{0}{59/60 t} = 0 \\
-\lambda(n) &= 0, \quad n\geq 1. \\
-\lambda &= \lim_t \frac{A(t)}t  = 1 \\
-p(0)  &= \frac{1}{60}, \\
-p(1)  &= \frac{59}{60}, \\
-\rho  &= \frac{59}{60}, \\
-\pi(0)  &= 1. \\
-  \end{align*}
-  There is no queue so $\E{L_Q} = 0$, but $\E L = \rho$.  The queue
-  length as observed by customers is equal to 0, because jobs only
-  arrive when the server is free.
-  \end{solution}
-\end{exercise}
-  \end{comment}
-
-\begin{comment}
-\begin{exercise}
- Consider another (theoretical) queueing system in which each
-  customer requires precisely 1 minute. At the start of each hour, 59
-  customers arrive. What is $p(n)$, what is $\pi(n)$? What is the time-average system length $\E{L}$?
-  \begin{solution}
-As in the previous problem, $\rho=59/60$.
-
-For $p(n)$: the fraction of time the system contains $n=0$ jobs is $p(0)=1/60=1-\rho$. Also, as the service time of each job is precisely one minute, $p(n)=1/60$ for $n=1,\ldots, 59$. 
-
-For $\pi(n)$, the first of the $59$ jobs sees a free server, thus $\pi(0)=1/59$. The second job of the $59$ jobs sees one job in system (and this job is in service), hence $\pi(1)=1/59$. More generally then, $\pi(n)=1/59$ for $n=0,\ldots 58$. 
-
-Note in particular $p(59)=1/60 \neq \pi(59) = 0$. 
-
-  Observe now that the average system length is very different from the
-  previous example, even though $\rho = 59/60$ in both cases. Thus,
-  knowledge of the load is not sufficient to make a statement about the
-  average queue length.
-
-  To compute the average queue length, as perceived by the customers,
-  note that the first customer sees no queue, the second sees one
-  customer in front, and so on. Thus, the average queue length as seen
-  by customers is
-  \begin{equation*}
-   \frac{0+1+2+\cdots+58}{59}=\frac{1}{59}\frac{58\cdot 59}{2} = 29.
-  \end{equation*}
-The time average system length is $\E L = 59/60 + 58/60 + \cdots 1/60 + 0/60 = 59/2$. 
-  \end{solution}
-\end{exercise}
-\end{comment}
-
-We can make some progress by rewriting $\pi(n)$ in
-the following way. Since $A(t)\to \infty$ as $t\to\infty$, it is reasonable 
-that\footnote{See below for the proof.}
+We can make some progress by rewriting $\pi(n)$ in the following way.
+Since $A(t)\to \infty$ as $t\to\infty$, it is reasonable that\footnote{See below for the proof.}
 \begin{equation}\label{eq:132}
   \begin{split}
   \pi(n) &= \lim_{t\to\infty} \frac1{A(t)}\sum_{k=1}^{A(t)} \1{L(A_k-) = n} \\
@@ -133,13 +75,10 @@ time-average $p(n)$, i.e., $\pi(n)=p(n)$. But, when $\pi(n)=p(n)$, the
 customer perception at arrival moments, i.e., $\pi(n)$, is the same as
 the server perception, i.e., $p(n)$.
 
-As the exercises above show, this property is not satisfied in
-general.  However,  when the arrival process is
-Poisson we have that $\lambda(n)=\lambda$. This fact is typically called \recall{PASTA:
-  Poisson Arrivals See Time Averages}. Thus, when customers arrive in
-accordance to a Poisson process (hence the inter-arrival times are
-exponentially distributed), it must be that $\pi(n) = p(n)$, and
-for the $M/M/1$ queue,
+As the exercises above show, this property is not satisfied in general.
+However, when the arrival process is Poisson we have that $\lambda(n)=\lambda$.
+This fact is typically called PASTA: Poisson Arrivals See Time Averages.
+Thus, when customers arrive in accordance to a Poisson process (hence the inter-arrival times are exponentially distributed), it must be that $\pi(n) = p(n)$, and for the $M/M/1$ queue,
 \begin{equation*}
   \pi(n) = p(n) = (1-\rho)\rho^n.
 \end{equation*}
@@ -180,7 +119,7 @@ This means that the system as seen by arrivals, i.e., $\pi(n)$, is
 the same as what jobs leave behind, i.e., $\delta(n)$.
 
 
-\begin{exercise}{\faFlask}\label{ex:26}
+\begin{exercise}[\faFlask]\label{ex:26}
   When $\lambda\neq \delta$, is $\pi(n)\geq \delta(n)$ or $\pi(n) < \delta(n)$ true?  (This is a tricky exercise!) 
   \begin{hint}
     Use that    $\lambda \geq \delta$ always holds. Thus, when $\lambda \neq \delta$, it must be that $\lambda > \delta$. What are the consequences of this inequality; how does the queue length behave as a function of time?
@@ -280,76 +219,7 @@ There is a subtle problem in the transition from~\eqref{eq:jaap} to~\eqref{eq:13
 of~\eqref{eq:1333}: $\pi(n)$ is defined as a limit over arrival epochs
 while in $A(n,t)/t$ we take the limit over time. Now the observant
 reader might ask why these limits should relate at all.  The
-resolution lies in the \recall{renewal reward theorem}. This
-theorem is very useful in its own right, and states  intuitively that 
-when customers arrive at rate $\lambda$ and each customer pays an average amount $X$, then the system earns money at rate $Y=\lambda X$.  Figure~\ref{fig:renewal} provides graphical motivation about why this theorem is true; \citet{el-taha98:_sampl_path_analy_queuein_system}
-gives  a (simple) proof.
-
-\begin{theorem}[Renewal Reward Theorem, $Y=\lambda X$]
-  Suppose the counting process $\{N(t), t\geq 0\}$ is such that
-  $N(t)/t\to\lambda$ as $t\to\infty$, where $0<\lambda < \infty$. Let
-  $\{Y(t), t\geq 0\}$ be a non-decreasing right-continuous
-  (deterministic) process. Define $X_k = Y(T_k)-Y(T_{k-1})$,
-  $k\geq 1$, where $T_k$ are the epochs at which $N$ increases, i.e.,
-  $N(t) = \max\{k : T_k \leq t\}$. Then $Y(t)/t$ has a limit iff
-  $n^{-1}\sum_k^n X_k$ has a limit in which case $Y=\lambda X$, i.e.,
-  \begin{equation*}
-  \lim_{t \to \infty} \frac{Y(t)}t=Y \iff \lim_{n \to \infty} \frac 1n\sum_{k=1}^n X_k =X \implies Y=\lambda X.
-  \end{equation*}
-\end{theorem}
-
-\begin{figure}[ht]
-  \centering
-\begin{tikzpicture}[scale=1]
-%axis
-\draw[->] (0,0) -- coordinate (x axis mid) (8.5,0);
-\draw[->] (0,0) -- coordinate (y axis mid) (0,5.5);
-%\node[below=0.2cm] at (x axis mid) {$t$};
-
-\draw plot [smooth] coordinates {(1,0.7) (2,1) (3,1.8) (4,2) (5,3) (6,3.2) (7, 3.4) (7.5,4.0)};
-\node[right]  at (7.1,3.4) {$Y(t)$};
-\node  at (7.,-0.5) {$t$};
-
-\node  at (2.,-0.5) {$T_{k-1}$};
-\draw[dotted] (2,0)--(2,1);
-\draw[dotted] (2,1)--(3,1);
-
-
-\node  at (3.,-0.5) {$T_{k}$};
-\draw[dotted] (3,0)--(3,1.8);
-\draw[dotted] (3,1.8)--(5,1.8);
-
-\draw [
-    thick,
-    decoration={brace, mirror, raise=0.1cm },
-    decorate
-] (3,1) -- (3,1.8)
-node[pos=0.5, xshift=0.6cm]  {$X_k$}; 
-
-
-\node  at (5.,-0.5) {$T_{k+1}$};
-\draw[dotted] (5,0)--(5,3);
-
-\draw [
-    thick,
-    decoration={brace, mirror, raise=0.1cm },
-    decorate
-] (5,1.8) -- (5,3)
-node[pos=0.5, xshift=0.7cm]  {$X_{k+1}$}; 
-
-\node[right] at (0.5,4) {$\frac{Y(t)}t = \frac{\sum_i^n X_i}{\sum_{i}^n T_i} = \frac{n}{\sum_{i}^n T_i} \frac{\sum_i^n X_i}n $};
-
-
-\draw[dotted,<->, =stealth] (7,0.05)--(7,3.35) node[midway, rotate=90, fill=white] {$\sum_{i=1}^n X_i$};
-\draw[dotted,<->, =stealth] (0.05,0.5)--(6.95,0.5) node[pos=0.85, fill=white] {$\sum_{i=1}^n T_i$};
-\end{tikzpicture}
-\caption{A graphical `proof' of $Y=\lambda X$. Here $Y(t)/t\to Y$, $n/\sum^n_i T_i\to \lambda$ and $n^{-1}\sum_i^n X_i \to X$.  (Observe that in the
-  figure $X_k$ does not represent an inter-arrival time; instead it
-  corresponds to the increment of (the graph of) $Y(t)$ between two
-  consecutive epochs $T_{k-1}$ and $T_k$ at which $Y(t)$ is
-  observed.) }
-  \label{fig:renewal}
-\end{figure}
+resolution lies in the renewal reward theorem.
 
 
 \begin{exercise}
@@ -392,7 +262,7 @@ at another station. We chop up this problem into small steps to help you
 find the answer mostly by yourself.
 
 
-\begin{exercise}{\faFlask}\label{ex:dep}
+\begin{exercise}[\faFlask]\label{ex:dep}
 Why is the output rate of the (stable) $M/M/1$ queue equal to~$\lambda$ and not~$\mu$?
 \begin{solution}
 Jobs arrive at rate $\lambda$. For a stable queue, $\mu>\lambda$. Moreover,  jobs can never leave faster than they arrive.
@@ -400,7 +270,7 @@ Jobs arrive at rate $\lambda$. For a stable queue, $\mu>\lambda$. Moreover,  job
 \end{exercise}
 
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
 Why is $\mu e^{-\mu t}$ not a reasonable density for the
     inter-departure times?
     \begin{solution}
@@ -413,7 +283,7 @@ The simplest guess for the inter-departure density might be $\lambda e^{-\lambda
 We will focus on departure moments and use~\eqref{eq:39}, in particular that departures `see' what arrivals `see', i.e., $\delta(n)= \pi(n)$, and PASTA.
 
 
-\begin{exercise}{\faFlask}\label{ex:28}
+\begin{exercise}[\faFlask]\label{ex:28}
 Show that the probability that a job leaves behind a busy station is $\rho$, hence $1-\rho$ is the probability to leave an idle server behind.
     \begin{solution}
 Observe that $\rho$ is the fraction of time the server is busy. Then, from  PASTA, the fraction of jobs that see a busy server is also $\rho$.  This fraction of jobs is $\sum_{n=1}^\infty \pi(n)$. Finally, $\delta(n) = \pi(n)$ , a fraction $\rho$ of the departures leaves a busy system behind.
@@ -422,7 +292,7 @@ Observe that $\rho$ is the fraction of time the server is busy. Then, from  PAST
 \end{exercise}
 
 
-\begin{exercise}{\faCalculator}\label{ex:17}
+\begin{exercise}[\faCalculator]\label{ex:17}
  If job $n-1$, say, leaves behind an empty system, show that the expected time until the next departure is $\E{D_n - D_{n-1}} = 1/\lambda + 1/\mu$. 
     \begin{hint}
       After job $n-1$ left, job $n$ has to arrive, so we need to wait first for this inter-arrival time. Then job $n$ must be served. This adds up to $1/\lambda + 1/\mu$. 
@@ -434,7 +304,7 @@ With the hint, we first have to wait for an inter-arrival
     \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faCalculator}
+\begin{exercise}[\faCalculator]
 Show that the density of $D_{n} - D_{n-1}$ is
     \begin{equation*}
     f_{X+S}(t) = \frac{\lambda \mu}{\lambda - \mu} (e^{-\mu t} - e^{-\lambda t})
@@ -477,14 +347,14 @@ Conditioning is much faster, but requires the concept of conditional density. Yo
 \end{exercise}
 
 
-\begin{exercise}{\faFlask}
+\begin{exercise}[\faFlask]
 Show  that when the queue is not empty at a departure time, the density of the next inter-departure time is $f_D(t) = \mu e^{-\mu t}$.
     \begin{solution}
 After the departure, the server can start right away with the job at the head of the queue. The inter-departure time of this job is $\Exp(\mu)$.
     \end{solution}
 \end{exercise}
 
-\begin{exercise}{\faCalculator}
+\begin{exercise}[\faCalculator]
 Use conditioning on the server being idle or busy at a departure to show that  the density of  the inter-departure time is $\lambda e^{-\lambda t}$.
   \begin{hint}
 Conditioning leads to 
@@ -510,7 +380,7 @@ Conditioning leads to
 
 It can also be shown that the inter-departure times are independent. 
 
-\begin{exercise}{\faFlask}\label{ex:burke}
+\begin{exercise}[\faFlask]\label{ex:burke}
 Explain that the above leads to \recall{Burke's law}  which states that the departure process of the $M/M/1$ queue is a Poisson  process with rate $\lambda$. 
 \begin{solution}
 The above exercises show that inter-departures times have the same density, i.e., $\lambda e^{-\lambda t}$. The remark above states these times are independent. Thus,  the inter-departures times form a set of i.i.d. exponentially distributed random variables with mean $1/\lambda$. Consequently, the departures times form a Poisson process with rate $\lambda$.

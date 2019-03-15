@@ -34,45 +34,6 @@ necessary for an implementation in computer code.
   \end{solution}
 \end{exercise}
 
-\begin{comment}
-\begin{exercise}
-TBD. Relate the following to the arrival theorem below.  The derivation of
-Zijm.Eq.3.8 is particularly interesting. Rewrite Zijm.Eq.3.5 as
-\begin{equation*}
-  \pi_{M,N}(N_i=k) = f_i(k)\frac{G(M\setminus\{i\}, N-k)}{G(M,N)},
-\end{equation*}
-to denote, \emph{ for a network with $M$ stations and $N$ jobs}, the
-(marginal) stationary distribution that station $i$ contains $k$ jobs. With this notation
-\begin{equation*}
-  \begin{split}
-    \TH_i 
-&= \frac{V_i}{G(M,N)} \sum_{k=1}^{N}f_i(k-1) G(M\setminus\{i\}, N-k) \\
-&= \frac{V_i}{G(M,N)} \sum_{k=0}^{N-1}f_i(k-1) G(M\setminus\{i\}, N-k-1) \\
-&= V_i \sum_{k=0}^{N-1}f_i(k-1) \frac{G(M\setminus\{i\}, N-k-1)}{G(M,N)} \\
-&= \sum_{k=0}^{N-1} (V_i \pi_{M,N-1}(N_i=k-1)) \\
-&= V_i \frac{G(M,N-1)}{G(M,N)}.
-  \end{split}
-\end{equation*}
-The second to last equation is the most interesting in fact. This says
-that the throughput of station $i$ is (the sum of) the visit ratio
-$V_i$ times the stationary probabilities of a system with one job
-less, i.e., $N-1$, and that this job is taken away from station $i$,
-i.e., $N_i=k-1$.  
-  \begin{solution}
-    TBD.
-  \end{solution}
-\end{exercise}
-
-
-\begin{exercise}[use=false]
-  Show in the one of the examples below how to compute $\E L_i$
-  \begin{solution}
-    TBD.
-  \end{solution}
-\end{exercise}
-\end{comment}
-
-
 \begin{exercise}
 Zijm.Ex.3.1.6
 \begin{solution}

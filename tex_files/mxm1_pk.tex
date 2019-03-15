@@ -1,6 +1,6 @@
 \section
-[$M^X/M/1$ Queue: Expected Waiting Time]
-{$\mathbf{M^X/M/1}$ Queue: Expected Waiting Time}
+{$M^X/M/1$ Queue: Expected Waiting Time}
+%{$\mathbf{M^X/M/1}$ Queue: Expected Waiting Time}
 \label{sec:mxm1-queue:-expected}
 
 \subsection*{Theory and Exercises}
@@ -13,14 +13,12 @@ also arrive in batches. For instance, when a car and or bus arrives at a fast
 food restaurant, a batch consists of the number of people in the vehicle.  In this section we derive for such queueing processes, denoted by the shorthand $M^X/M/1$, expressions for the load and the expected waiting time and queue length. 
 
 
-Assume that jobs arrive as a Poisson process with rate $\lambda$ and
-each \emph{job} contains multiple \emph{items}.  Let $A_k$ be the
-arrival time of job $k$ and $A(t)$ the number of job arrivals up to
-time $t$. Denote by $B_k$ the batch size, i.e., the number of items that job $k$ brings into
-the system.  We assume that $\{B_k\}$ is a sequence of
-i.i.d. discrete random variables distributed as a generic random variable $B$
-such that $\P{B = k} = f(k)$, where $f(k)$ is a given set of
-probabilities.  We write
+Assume that jobs arrive as a Poisson process with rate $\lambda$ and each \emph{job} contains multiple \emph{items}.
+Let $A_k$ be the arrival time of job $k$ and $A(t)$ the number of job arrivals up to time $t$.
+Denote by $B_k$ the batch size, i.e., the number of items that job $k$ brings into the system.
+We assume that $\{B_k\}$ is a sequence of i.i.d.
+discrete random variables distributed as a generic random variable $B$ such that $\P{B = k} = f(k)$, where $f(k)$ is a given set of probabilities.
+We write
 \begin{equation*}
   G(k) = \P{B>k} = \sum_{m=k+1}^\infty f(m),
 \end{equation*}
@@ -35,44 +33,32 @@ $1/\mu$. Thus, the average time to serve the entire batch is
 
 The first criterion we must check for the $M^X/M/1$ queue is the
 stability: the service rate must be larger than the arrival rate of
-work. To determine the latter, observe that the total number of items $N(t)$
-arrived up to time $t$ must be equal to the number of arrivals $A(t)$
-up to time $t$ times the batch size of each arrival, i.e.,
-\begin{equation*}
-N(t)=  \sum_{k=1}^\infty B_k \1{A_k \leq t} = \sum_{k=1}^{A(t)} B_k.
-\end{equation*}
-The (stochastic) process $\{N(t)\}$ is known as the \recall{compound
-  Poisson process}. Clearly, the rate at which items arrive is
-approximately
-\begin{equation*}
-  \frac{N(t)}t = \frac{A(t)}t \frac1{A(t)}\sum_{k=1}^{A(t)} B_k.
-\end{equation*}
-As in  the limit $A(t)/t \to \lambda$ and $(A(t))^{-1}\sum_{k=1}^{A(t)} B_k \to \E{B}$, we see that
-\begin{align*}
-\frac{N(t)}t \to \lambda \E B.
-\end{align*}
+work. 
 
-\begin{exercise}
-Conclude that   the \recall{load} must satisfy
-$\rho = \lambda \E B/\mu < 1$.
-\begin{solution}
-For stability, it is necessary that the service rate
-$\mu=1/\E S$ for items is larger than the rate at which items
-arrive.  Hence,
+\begin{exercise} Use the renewal reward theorem to explain that work arrives at rate $\lambda \E B$.
+  \begin{hint}
+Observe that the total number of items is given by
 \begin{equation*}
-\rho = \lambda \E B \E S = \frac{\lambda \E B} \mu < 1.
+Y(t)=  \sum_{k=1}^{A(t)} B_k.
 \end{equation*}
+What should you take for the times $\{T_k\}$? 
+  \end{hint}
+\begin{solution}
+Take $T_k = A_k$. Then $X_k = Y(A_k) - Y(A_{k-1}) = B_k$.  Hence $X = \lim_{n\to\infty} n^{-1} \lim_{k=1}^n X_k = \E B$. Clearly, $Y = \lim_{t\to\infty} Y(t)/t$ is the arrival rate of work. , The relation $Y=\lambda  X$ implies that the arrival rate of work is $lambda \E B$. 
 \end{solution}
 \end{exercise}
 
-Let us next find expressions for the waiting time and queue lengths. For this, we need to describe the queueing process in somewhat more detail. A batch joins the end of the queue (if present), and once the queue in front of it is cleared, the entire batch moves from the queue to the server. Then the server starts serving the batch. As the service of the first item of the batch starts right away, this item does not have to wait. The last item, however, must wait for all the other items of the batch to be served before its service can start. Consequently, all items of a batch, except the first, also have to wait at the server before service starts. 
+With this, define the load as
+\begin{equation*}
+\rho = \lambda \E B/\mu.
+\end{equation*}
+We require of course that hence we require $\rho< 1$.
 
 
-For the average waiting time, we use the derivation of $\E{W_Q}=\E{S_r}/(1-\rho)$, i.e., \eqref{eq:35}, as guidance. Suppose a batch finds $\E{L}$ items in the system upon
-arrival. By the memoryless property of the service distribution, the
-expected remaining service time of the item in service (if any) is
-$\E S$. Therefore the expected time the entire batch
-spends in queue is
+Let us next find expressions for the expected time batches wait in queue $\E{W_{Q, b}}$. For this, assume that a batch joins the end of the queue (if present), and once the queue in front of it is cleared, the entire batch moves from the queue to the server.
+% Then the server starts serving the batch. As the service of the first item of the batch starts right away, this item does not have to wait. The last item, however, must wait for all the other items of the batch to be served before its service can start. Consequently, all items of a batch, except the first, also have to wait at the server before service starts. 
+
+Suppose a batch finds $\E{L}$ items in the system upon arrival. Then, by the memoryless property of the service distribution, 
 \begin{equation*}
   \E{W_{Q,b}} = \E{L} \E S;
 \end{equation*}
@@ -80,7 +66,7 @@ compare Eq.~\eqref{eq:wqes}.
 %Note that this is not the same as $\E{W_Q}$, which is the expected time an \emph{item} spends in queue.
 Next, if $B_r$ is the number of items of the batch currently at the server
 ($B_r=0$ if the server is idle), and $L_{Q,b}$ the number of batches
-in queue, then
+in queue, we have that
 \begin{equation*}
   \E{L} = \E{L_{Q,b}}\E B + \E{B_r}.
 \end{equation*}
@@ -105,37 +91,13 @@ hence,
 \end{equation*}
 \end{solution}
 \end{exercise}
-Below we prove that  the expected number of items at the server is given by
-\begin{equation}\label{eq:br}
-  \E{B_r} = \frac 1 2 \frac{\E{B^2}}{\E B}\rho + \frac\rho2.
-\end{equation}
 
-
-\begin{exercise}\label{q:batch}
-To simplify this expression for $\E{B_r}$, show that 
-\begin{equation*}
-  \frac{\E{B^2}}{\E{B}} = (1+C_s^2)\E B, \quad\text{where }
-C_s^2 = \frac{\V B}{(\E B)^2},
-\end{equation*}
-is the square coefficient of variation of the batch sizes.  
-  \begin{solution}
-We have
-\begin{equation*}
-  \begin{split}
-  \frac{\E{B^2}}{\E{B}}
-=    \frac{\E{B^2}}{(\E B)^2} \E B 
-= \frac{(\E B)^2+\V B}{(\E B)^2}\E B = (1+C_s^2)\E B.
-  \end{split}
-\end{equation*}
-  \end{solution}
-\end{exercise}
-
-With the results of the above exercises we can establish two cornerstones of queueing theory. The first is the expected waiting time, 
+Below we will find an expression for $\E{B_r}$. This results in two cornerstone of queueing theory. The first is the expected waiting time, 
 \begin{equation}
-\E{W_{Q,b}} = \frac{\E{B_r}}{1-\rho} \E{S} = 
-\frac{1+C_s^2}2 \frac{\rho}{1-\rho} \E B \E S + \frac12\frac\rho{1-\rho}\E S.
+\E{W_{Q,b}} = \frac{1+C_s^2}2 \frac{\rho}{1-\rho} \E B \E S + \frac12\frac\rho{1-\rho}\E S,
 \end{equation}
-Second, for the expected number of items in the system we find
+where  $C_s^2 = \V B / (\E B)^2$ is the SCV of the batch size distribution.
+For the second, apply  Little's law to find  that the expected number of items in the system is
 \begin{equation}\label{eq:43}
 \E{L}  =\frac{\E{W_{Q,b}}}{\E S} =  
 \frac{1+C_s^2}2 \frac{\rho}{1-\rho} \E B + \frac12\frac\rho{1-\rho}.
@@ -146,10 +108,9 @@ batch size $B$. Thus, no matter how `complicated' the distribution of
 $B$, when its second moment exists, the average queue length and
 waiting time can be computed with the above result. 
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
   Show that  when the batch size is 1, the expression $\E{L(M^X/M/1)}$, i.e., the system length for the $M^X/M/1$ queue, reduces to
   $\E{L(M/M/1)}$, i.e., the system length for the $M/M/1$ queue. 
-(Realize the importance of such checks.)
   \begin{hint}
 What is the    distribution of the batch size $B$ for the $M/M/1$ queue?
   \end{hint}
@@ -158,10 +119,11 @@ What is the    distribution of the batch size $B$ for the $M/M/1$ queue?
     $B\equiv 1$, hence $\P{B=1}=1$, $\E{B^2}=\E B =1$. Therefore,
     $\E{B_r(M/M/1)}= \rho$, and $\E{L(M/M/1)}=\rho/(1-\rho)$. 
   \end{solution}
+Realize the importance of such checks.
 \end{exercise}
 
 
-\begin{exercise}
+\begin{exercise}[\faCalculator]
   What is $\E L$ in case $B_k=3$ always, and $\lambda=1$, $\mu=6$?  
   \begin{hint}
 Use Eq.~\eqref{eq:43}. What are $\E{B^2}$, $\E B$ and $\V B$ for this case?
@@ -175,52 +137,27 @@ Use Eq.~\eqref{eq:43}. What are $\E{B^2}$, $\E B$ and $\V B$ for this case?
   \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}[\faCalculator]
   If the batch size is $p$ geometrically distributed, what is $\E L$?
   \begin{hint}
 $f_k=q^{k-1}p$ with $q=1-p$. Use generating functions to compute $\E B$ and $\E{B^2}$.
   \end{hint}
 \begin{solution}
   We need $\V B$ and $\E B$. Consider
-  \begin{equation*}
-    \begin{split}
-    \phi(z) 
-&= \E{z^B} = \sum_{k=0}^\infty z^k \P{B=k} = \sum_{k=0}^\infty z^k f_k \\
-&= \sum_{k=0}^\infty z^k p q^{k-1} 
-= \frac p q \sum_{k=0}^\infty (q z)^k = \frac p q \frac1{1-q z}.
-    \end{split}
-  \end{equation*}
-
-Then
-\begin{equation*}
-  \E B = \phi'(1) = \left.\frac p q \frac q{(1-q z)^2}\right|_{z=1}= \frac p{(1-q)^2} = \frac 1 p,
-\end{equation*}
-and
-\begin{equation*}
-  \E{B(B-1)} = \phi''(1) = \left.\frac p q \frac{2q^2}{(1-q z)^3}\right|_{z=1}= 2 \frac{q}{p^2}= \frac2{p^2} - \frac 2p.
-\end{equation*}
-Hence, 
-\begin{equation*}
-  \E{B^2} = \frac2{p^2} - \frac 2p + \E B = \frac2{p^2} - \frac1p,
-\end{equation*}
-and
-\begin{equation*}
-  \V B = \E{B^2} - (\E B)^2 = \frac2{p^2} - \frac1p - \frac1{p^2} = \frac1{p^2}-\frac1p,
-\end{equation*}
-and
-\begin{equation*}
-  C_s^2= \frac{\V B}{(\E B)^2} = p^2 \left(\frac1{p^2}-\frac1p\right)=1-p.
-\end{equation*}
-Then,
-\begin{equation*}
-  (1+C_s^2)/2= 1-p/2.
-\end{equation*}
-and 
-\begin{equation*}
-  \E L = 
+  \begin{align*}
+    M_B(s) 
+&= \E{e^{sB}} = \sum_{k=0}^\infty e^{sk} \P{B=k} \\
+&= \sum_{k=0}^\infty e^{sk} p q^{k-1} 
+= \frac p q \sum_{k=0}^\infty (q e^s)^k = \frac p q \frac1{1-qe^s},\\
+  \E B &= M_B'(0) = \left.\frac p q \frac q{(1-q e^s)^2}\right|_{s=0}= \frac p{(1-q)^2} = \frac 1 p,\\
+  \E{B^2)} &= M_B''(0) = \frac2{p^2} - \frac1p, \\
+  \V B &= \E{B^2} - (\E B)^2 = \frac2{p^2} - \frac1p - \frac1{p^2} = \frac1{p^2}-\frac1p,\\
+  C_s^2&= \frac{\V B}{(\E B)^2} = p^2 \left(\frac1{p^2}-\frac1p\right)=1-p,\\
+  (1+C_s^2)/2 &= 1-p/2\\
+  \E L &= 
 \left(1-\frac p2\right) \frac\rho{1-\rho} \frac 1 p + \frac12\frac\rho{1-\rho}
 =\frac\rho{1-\rho} \frac 1 p.
-\end{equation*}
+\end{align*}
 
 Can we check this in a simple way? If $\P{B=1}=f_1 = p =1$, then
 $\E L=\rho/(1-\rho)$. Thus, we get the result for the $M/M/1$
@@ -228,7 +165,7 @@ queue. The result is at least consistent with earlier work.
 \end{solution}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}[\faPhoto]
   A common operational problem is a machine that receives batches of
   various sizes. Management likes to know how a reduction of the
   variability of the batch sizes would affect the average queueing time.
@@ -269,7 +206,7 @@ management to decide whether such reductions outweigh any efforts to
 reduce the variation in batch sizes. 
 
 
-\begin{exercise}
+\begin{exercise}[\faFlask]
   Show that $\E{L(M^X/M/1)} \geq \E{L(M/M/1)}$ when the loads are the
     same. What do you conclude?
   \begin{solution}
@@ -319,7 +256,7 @@ in the system increases, hence the average waiting time increases.
 
 
 
-\begin{exercise}
+\begin{exercise}[\faPhoto]
   In a production environment, a machine replenishes an inventory of
   items (e.g., hamburgers) at a fixed rate of $1$ per 3 minutes. If
   the inventory reaches the \emph{produce-up-to} level $S$, the machine stops.  Customers
@@ -361,43 +298,27 @@ Section~\ref{sec:batch-arrivals}.
 
 
 
-We now turn to proving~\eqref{eq:br} with sample-path arguments and
-counting; it is an elegant line of reasoning. Moreover, this derivation of the distribution of  the \emph{remaining lifetime   distribution} or the \emph{residual life} is useful in its own right and used in, for instance, maintenance planning. 
+We now turn to finding an expression for $\E{B_r}$;  for this we can again use the renewal reward theorem. 
+Let $L_s(s)$ be the number of items (of the batch in service) at the server. Then
+\begin{equation*}
+  Y_i(t) = \int_0^t \1{L_S(s)=i} \d s
+\end{equation*}
+is the total time up to $t$  there are $i$ items at the server. 
+
+\begin{exercise}
+  Let $\tilde A_k$ be the moment the $k$th batch moves to the server and $D_k$ its departure time.
+  Use Figure~\ref{fig:remainingservicetime} to show that
+\begin{equation*}
+  \int_{\tilde A_k}^{D_k} \1{L_S(s)=i} \d s = S_{k,i} \1{B_k \geq i},
+\end{equation*}
+where $S_{k,i}$ is the service time of the $i$th item of this batch.
+\begin{solution}
+Only if $B_k \geq i$ there can be an $i$th item of the batch, and then the time this $i$th item spends at the server is its service time $S_{k,i}$.   
+\end{solution}
+\end{exercise}
 
 
-For this purpose, consider  the start and finish times of the batches in service.  Then, remove all idle periods of the server, so that we paste together the times during which the server is busy, and plot the remaining job size as a function of time, 
-cf., Figure~\ref{fig:remainingservicetime}.  Define $R$ as the
-remaining number of items to be served of the batch in service at some
-arbitrary point in time. Let us show with Figure~\ref{fig:remainingservicetime} that
-\begin{equation*}
-  \P{R=i} =\frac{\P{B\geq i}}{\E B} = \frac{G(i-1)}{\E B}.
-\end{equation*}
 
-In Figure~\ref{fig:remainingservicetime} concentrate on level
-$i$. Only jobs whose initial batch size is larger or equal to~$i$ can
-produce  $i$ items at the server.
-Thus, by counting, we see in Figure~\ref{fig:remainingservicetime}
-that $\sum_{k=1}^n \1{B_k \geq i}$ is the number of times there are
-precisely~$i$  items at the server.  We also see that $\sum_{k=1}^n B_k$ is
-the total number of items served while the server is busy. Thus, the fraction of time there
-are $i$ remaining items is
-\begin{equation*}
-  \frac{\sum_{k=1}^n \1{B_k \geq i}}{\sum_{k=1}^n B_k}.
-\end{equation*}
-By PASTA this is also the fraction of jobs that see~$i$ items at the server.  Finally, 
-\begin{equation*}
-\P{R=i} = \lim_{n\to\infty} \frac{\sum_{k=1}^n \1{B_k \geq i}}{\sum_{k=1}^n B_k} 
-= \lim_{n\to\infty}  \frac{n^{-1}\sum_{k=1}^n \1{B_k \geq i}}{n^{-1}\sum_{k=1}^n B_k} = \frac{G(i-1)}{\E B},
-\end{equation*}
-where  the limits exist by the strong law of large numbers. With  Exercise~\ref{ex:ER} 
-the expected remaining number of items to be served of the batch in service can be simplified to
-\begin{equation*}
-  \E{R} 
-= \sum_{i=1}^\infty i \P{R=i} = \frac1{\E B}\sum_{i=1}^\infty i G(i-1) 
-= \frac{\E{B^2}}{2\E B} + \frac{1}2.
-\end{equation*}
-Finally, recalling that in the above we conditioned on the server
-being busy, we get that $\E{B_r} = \rho \E R$, thereby yielding~\eqref{eq:br}.
 
 \begin{figure}[th]
   \centering
@@ -455,147 +376,84 @@ being busy, we get that $\E{B_r} = \rho \E R$, thereby yielding~\eqref{eq:br}.
 \end{figure}
 
 
-\begin{exercise}\label{ex:ER}
-  Show that $2 \sum_{i=1}^\infty i G(i-1)= \E{B^2} + \E B.$
-  \begin{hint}
-    Use Exercises~\ref{ex:6} and \ref{ex:66}.
-  \end{hint}
-  \begin{solution}
-\begin{equation*}
-  \begin{split}
-2 \sum_{i=1}^\infty i G(i-1) 
-&=2\sum_{i=0}^\infty (i+1) G(i) 
-=2\sum_{i=0}^\infty i G(i) +
-2\sum_{i=0}^\infty G(i)\\
-&= \E{B^2} - \E B + 2\E B.
-  \end{split}
-\end{equation*}
-  \end{solution}
-\end{exercise}
-
-
-\paragraph{Alternative derivation}
-Here is an alternative derivation of the fraction of jobs that see $i$ items at the server. Perhaps this is easier. If so, let me know. This is not obligatory reading, BTW. 
-
-Let $L_s(s)$ be the number of items (of the batch in service) at the server. Then, 
-\begin{equation*}
-  Y_S(i, t) = \int_0^t \1{L_S(s)=i} \d s
-\end{equation*}
-is the total time up to time $t$ that there are $i$ items at the server. 
-
-\begin{exercise}
-Let $\tilde A_k$ be the moment the $k$th batch moves to the server and $D_k$ its departure time. Show that, when $S_{k,i}$ is the service time of the $i$th item of batch~$k$,  
-\begin{equation*}
-  \int_{\tilde A_k}^{D_k} \1{L_S(s)=i} \d s = S_{k,i} \1{B_k \geq i}. 
-\end{equation*}
-\begin{solution}
-Only if $B_k \geq i$ there can be an $i$th item of the batch, and the time this $i$th item spends at the server is its service time $S_{k,i}$.   
-\end{solution}
-\end{exercise}
-
-
 \begin{exercise}
 Use the previous exercise to show that 
 \begin{equation*}
-  Y_S(i, D_n) = \sum_{k=1}^n \1{B_k\geq i} S_{k,i}.
+  Y_i(D_n) = \sum_{k=1}^n \1{B_k\geq i} S_{k,i}.
 \end{equation*}
 \begin{hint}
   Observe that $n$ batches have been served at time $D_n$.
 \end{hint}
 \begin{solution}
-At the departure time $D_n$ of the $n$th batch, precisely $n$ batches have been served. Thus, each batch with more than $i$ items, contributed to the integral $\int_0^{D_n} \1{L_S(s) =i} \d s$ with the service time $S_{k,i}$. 
+  At the departure time $D_n$ of the $n$th batch, precisely $n$ batches have been served.
+  Thus, each batch $k$ with more than $i$ items contributed to $Y_i(D_n)$ with the service time $S_{k,i}$.
 \end{solution}
 \end{exercise}
-
-
-In Exercise~\ref{ex:14} we will use the result that
-\begin{equation*}
-\lim_{n\to\infty} \frac{\sum_{k=1}^n \1{B_k\geq i} S_{k,i}}{\sum_{k=1}^n \1{B_k\geq i}} = 
-\E{S \given B\geq i} = \E{S}
- \end{equation*}
-where the last equality follows from independence.  The next exercise is meant to help understand this.
 
 \begin{exercise}
-We are given two i.i.d. sequences $A_1, A_2, \ldots $ and $H_1, H_2, \ldots$, where $A_k$ is the  $k$th person's age and $H_k$ the height. Show that
-\begin{equation*}
-\lim_{n\to\infty} 
-\frac{  \sum_{k=1}^n \1{A_k\leq 15, H_k \leq 1.8}}{\sum_{k=1}^n \1{A_k \leq 15}} 
-= \P{H\leq 1.8 \given A \leq 15},
-\end{equation*}
-where $H$ and $A$ are the limiting r.v.s. associated with $\{H_k\}$ and $\{A_k\}$, respectively. With this, show that
-\begin{equation*}
-  \lim_{n\to\infty} \frac{ \sum_{k=1}^n H_k \1{A_k\leq 15}}{\sum_{k=1}^n \1{A_k \leq 15}} = \E{H \given A\leq 15}.
-\end{equation*}
-\begin{hint}
-  Divide and multiply by $1/n$. 
-\end{hint}
-\begin{solution}
-\begin{equation*}
-  \begin{split}
-\frac{  \sum_{k=1}^n \1{A_k\leq 15, H_k \leq 1.8}}{\sum_{k=1}^n \1{A_k \leq 15}} 
-&= \frac{ n^{-1} \sum_{k=1}^n \1{A_k\leq 15, H_k \leq 1.8}}{n^{-1}\sum_{k=1}^n \1{A_k \leq 15}} \\
-&\to \frac{\P{H\leq 1.8, A\leq 15}}{\P{A\leq 15}} = \P{H\leq 1.8 \given A\leq 15}.
-  \end{split}
-\end{equation*}
-
-The next equation is more subtle. Take some $\delta>0$. It is simple to see that
-\begin{equation*}
-\delta \sum_{m=0}^\infty m \1{H_k \in [m\delta, (m+1)\delta)}
-\leq H_k \leq \delta \sum_{m=0}^\infty (m+1) \1{H_k \in [m\delta, (m+1)\delta)}.
-\end{equation*}
-Moreover, if $\delta\to 0$, the left and right-hand side converge. Let us use the left hand side as an approximation for $H_k$. 
-
-\begin{align*}
-\frac{ \sum_{k=1}^n H_k \1{A_k\leq 15}}{\sum_{k=1}^n \1{A_k \leq 15}} 
-&\approx
-\delta \frac{ \sum_{k=1}^n  \sum_{m=0}^\infty m \1{A_k\leq 15, H_k \in [m\delta, (m+1)\delta)}}{\sum_{k=1}^n \1{A_k \leq 15}}  \\
-&= \delta \sum_{m=0}^\infty m \frac{ \sum_{k=1}^n   \1{A_k\leq 15, H_k \in [m\delta, (m+1)\delta)}}{\sum_{k=1}^n \1{A_k \leq 15}}  \\
-&\stackrel{n\to\infty}{\longrightarrow} \delta \sum_{m=0}^\infty m \frac{ \P{{A\leq 15, H \in [m\delta, (m+1)\delta)}}}{\P{A \leq 15}}  \\
-&=\delta \sum_{m=0}^\infty m \P{H \in [m\delta, (m+1)\delta)\given A \leq 15} \\
-&\stackrel{\delta\to0}{\longrightarrow}  \E{H\given A \leq 15}.
-\end{align*}
-Finally, if $H$ and $A$ would be independent (which they are not), then it is easy  in the above to take out the condition on $A\leq 15$ and conclude that $\E{H\given A\leq 15} = \E{H}$. 
-\end{solution}
-\end{exercise}
-
-
-\begin{exercise}\label{ex:14}
-By taking the time average, show that
-\begin{equation*}
-\P{Y_S=i} =\lim_n  \frac{Y_S(i, D_n)}{D_n} = \rho \frac{G(i-1)}{\E B}.
-\end{equation*}
-\begin{hint}
-  Take the middle term and divide and multiply by suitable other counting functions along the sample path, such as $\sum_{k=1}^n \1{B_k \geq i}$ and $D_n$. Also use rate stability, i.e., $\lambda=\delta$. 
-\end{hint}
+  Now use the renewal reward theorem to see that the (time-average) fraction of time there are $i$ items at the server is equal to
+  \begin{equation*}
+    \P{B_r = i} = \lambda \E{S} G(i-1) = \rho \frac{G(i-1)}{\E B}.
+  \end{equation*}
   \begin{solution}
-By taking the time average and assuming that all limits exists, we get
-\begin{equation*}
-  \begin{split}
-\P{Y_S=i} &=\lim_n  \frac{Y_S(i, D_n)}{D_n} \\
-&= \lim_n \frac{n}{D_n} \cdot \frac{\sum_{k=1}^n \1{B_k\geq i}}n \cdot
-\frac{\sum_{k=1}^n \1{B_k\geq i} S_{k,i}}{\sum_{k=1}^n \1{B_k\geq i}}.
-  \end{split}
-\end{equation*}
-Observe now that the first fraction becomes the departure rate $\delta$, the second is the fraction of batches containing at least $i$ items, and the third converges to $\E S$ as the service times of  the items are i.i.d.  Thus, by rate stability and using that $G(i)=\P{B>i}$, 
-\begin{equation*}
-\P{Y_S=i} = \delta \P{B\geq i} \E S = \lambda G(i-1) \E S = \rho \frac{G(i-1)}{\E B},
-\end{equation*}
-where in the last step we use $\rho=\lambda \E S \E B$.
+    By construction, $Y_i(t)/t \to \P{B_r=i}$.
+    Let $X_k = Y_i(D_k) - Y_i(D_{k-1})$.
+    Then, since the $\{S_{k, i}\}$ are i.i.d. with $\E{S_{k,i}} = \E S$, 
+      and the $\{B_k\}$ are i.i.d.,  we obtain from the previous exercise that $X = \lim_{n\to\infty} n^{-1}\sum_{k=1}^n (S_{k,i} \1{B_{k} \geq i}) = \E{S \1{B\geq i}}$.
+      Now $B$ and $S$ are independent by assumption, hence $X = \E{S} \E{\1{B\geq i}} = \E S \P{B\geq i}$.
+      The result follows by using rate stability ($\delta = \lambda$) in the renewal reward theorem.
   \end{solution}
-\end{exercise}
-
-\begin{exercise}
-Show that $\P{B_r=i} =\P{Y_S=i}$, i.e.,  the probability that a batch arriving at the system sees  $B_r=i$ items at the server is equal to the fraction of time that $Y_s=i$.
-\begin{solution}
-Follows right away from the PASTA property.
-\end{solution}
 \end{exercise}
 
 With the above exercises we conclude that
 \begin{equation*}
   \E{B_r} = \sum_{i=0}^\infty i \P{B_r=i} = \frac{\rho}{\E B} \sum_{i=1}^\infty i G(i-1).
 \end{equation*}
+It remains to brush up this formula.
 
+
+\begin{exercise}\label{ex:ER}
+  Show that
+  \begin{equation*}
+  \sum_{i=1}^\infty i G(i-1)= \frac{\E{B^2} + \E B}{2},
+\end{equation*}
+so that
+\begin{equation*}
+  \E{B_r} = \rho \frac{\E{B^2}}{2 \E B} + \frac{\rho}{2}.
+\end{equation*}
+
+  \begin{hint}
+    Use Exercises~\ref{ex:6} and \ref{ex:66}.
+  \end{hint}
+  \begin{solution}
+\begin{equation*}
+  \begin{split}
+ \sum_{i=1}^\infty i G(i-1) 
+&=\sum_{i=0}^\infty (i+1) G(i) 
+=\sum_{i=0}^\infty i G(i) +
+\sum_{i=0}^\infty G(i)\\
+&= (\E{B^2} - \E B + 2\E B)/2.
+  \end{split}
+\end{equation*}
+  \end{solution}
+\end{exercise}
+
+
+\begin{exercise}\label{q:batch}
+Finally, 
+\begin{equation*}
+\rho  \frac{\E{B^2}}{2\E{B}} = \frac{1+C_s^2}{2} \rho \E B.
+\end{equation*}
+  \begin{solution}
+We have
+\begin{align*}
+  \frac{\E{B^2}}{\E{B}}
+&=    \frac{\E{B^2}}{(\E B)^2} \E B 
+=    \frac{\E{B^2} - (\E B)^2 + (\E B)^2}{(\E B)^2} \E B  \\
+&= \frac{\V B + (\E B)^2}{(\E B)^2}\E B = (C_s^2+1)\E B.
+\end{align*}
+  \end{solution}
+\end{exercise}
 
 
 

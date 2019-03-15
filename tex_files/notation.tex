@@ -1,7 +1,8 @@
 \begin{align*}
-  a_n &= \text{Number of arrivals in the $n$th period} \\
+  a_k &= \text{Number of arrivals in the $k$th period} \\
   A(t) &= \text{Number of arrivals in $[0,t]$} \\
   A_k &= \text{Arrival time of $k$th job} \\
+  \tilde A_{k} &= \text{Start of service of $k$th job} \\
   c_n &= \text{Service/production capacity in the $n$th period} \\
   d_n &= \text{Number of departures in the $n$th period} \\
   c &= \text{Number of servers} \\
@@ -9,8 +10,7 @@
   C_s^2 &= \text{Squared coefficient of variation of the service times} \\
   D(t) &= \text{Number of departures in $[0,t]$} \\
   D_Q(t) &= \text{Number of customers/jobs that departed from the queue in $[0,t]$} \\
-  D_n &= \text{Departure time of $n$th job} \\
-  \tilde A_{n} &= \text{Departure time of the queue of $n$th job} \\
+  D_k &= \text{Departure time of $k$th job} \\
   F &= \text{Distribution of the service time of a job} \\
   L(t) &= \text{Number of customers/jobs in the system at time $t$} \\
   Q(t) &= \text{Number of customers/jobs in queue at time $t$} \\
@@ -21,13 +21,13 @@
   N(t) &= \text{Number of arrivals in $[0,t]$} \\
   N(s,t) &= \text{Number of arrivals in $(s,t]$} \\
   p(n)  &= \text{Long-run time average that the system contains $n$ jobs} \\
-  Q_n &= \text{Queue length as seen by the $n$th job, or at the \textit{end} of the $n$th period} \\
+  Q_k &= \text{Queue length as seen by the $k$th job, or at the \textit{end} of the $k$th period} \\
   S_k &= \text{Service time required by the $k$th job} \\
   S(t) &= \text{Total service time available in $[0,t]$} \\
   S &= \text{Generic service time of a job} \\
   t &= \text{Time} \\
-  W_n &= \text{Time in the system of $n$th job} \\
-  W_{Q,n} &= \text{Time in the queue of $n$th job} \\
+  W_k &= \text{Time in the system of $k$th job} \\
+  W_{Q,k} &= \text{Time in the queue of $k$th job} \\
   \E W &= \text{Sample average of the sojourn time} \\
   \E{W_Q} &= \text{Sample average of the time in queue} \\
   X_k &= \text{Inter-arrival time between job $k-1$ and job  $k$} \\

@@ -1,10 +1,12 @@
+\documentclass{book}
+\usepackage{classicthesis}
 %\documentclass[a4paper,12pt]{report}
 %\documentclass[a4paper,11pt]{book}
-\documentclass[a4paper,11pt]{scrbook}
+%\documentclass[a4paper,11pt]{scrbook}
 
-\newif\ifFilterExercises
+%^\newif\ifFilterExercises
 
-\FilterExercisestrue
+%\FilterExercisestrue
 %\FilterExercisesfalse
 
 
@@ -16,16 +18,18 @@
 % \fi
 
 \usepackage[solutionfiles]{optional}
-%\opt{nosolutionfiles}{\usepackage[nosolutionfiles]{answers}}
+%\usepackage[nosolutionfiles]{optional}
+
+\opt{nosolutionfiles}{\usepackage[nosolutionfiles]{answers}}
 \opt{solutionfiles}{\usepackage{answers}}
 
 
-\usepackage{preamble_tmp}
+\usepackage{preamble}
 
 % handle indentation below figure captions
 %\setcapwidth[c]{.8\textwidth}
-\setcapwidth{0.95\textwidth}
-\setcapindent{0pt}
+% \setcapwidth{0.95\textwidth}
+% \setcapindent{0pt}
 %\addtokomafont{caption}{\centering}
 
 % include  book references
@@ -34,34 +38,56 @@
 
 \title{Formulas for Queueing Theory and Simulation}
 
-
+\makeindex
 \begin{document}
+
+\frontmatter
 \maketitle
 
 \tableofcontents
 
-\ifFilterExercises
-\Opensolutionfile{exercises}
-\fi
+% \ifFilterExercises
+% \Opensolutionfile{exercises}
+% \fi
 
+\chapter{Introduction}\label{sec:introduction}
 
 %\include{organization}
-%\include{tex_files/intro}
+%\input{tex_files/intro.tex}
+%\input{tex_files/preliminaries.tex}
 
-%\chapter{Single-Station Queueing Systems}
+\mainmatter
+\chapter{Single-Station Queueing Systems}
 
+\chapter{Construction and Simulation of Queueing Systems}
+\label{cha:single-stat-queu}
+
+In this chapter we start with a discussion of the Poisson process.
+We then construct queueing processes in discrete time and apply the Poisson process to model the number of arrivals in periods of fixed length.
+In Section~\ref{sec:expon-distr} we relate the exponential distribution to the Poisson distribution.
+The exponential distribution often serves as a good model for inter-arrival times of individual jobs.
+As such this is a key component of the construction of queueing processes in continuous time.
+As it turns out, both ways to construct queueing processes are easily implemented as computer programs, thereby allowing us to use simulation to analyze queueing systems.
+In passing we develop a number of performance measures to provide insight into the (transient and average) behavior of queueing processes.
+
+We assume that you  \emph{know all} results of Section~\ref{sec:preliminaries}. 
+
+%\input{tex_files/preliminaries.tex}
+
+%\input{tex_files/poissondistribution.tex}
+% \input{tex_files/constructiondiscretetime.tex}
+%\input{tex_files/expdistribution.tex}
+%\input{tex_files/constructioncontinuoustime.tex}
 %\input{tex_files/failures.tex}
 %\input{tex_files/adjustments.tex}
 %\input{tex_files/setup_times.tex}
-%\input{tex_files/poissondistribution.tex}
-\input{tex_files/expdistribution.tex}
 %\input{tex_files/random_walk.tex}
 %\input{tex_files/ratestability.tex}
-%\input{tex_files/constructiondiscretetime.tex}
-%\input{tex_files/constructioncontinuoustime.tex}
+%\input{tex_files/renewal_reward.tex}
 % \input{tex_files/empericalperfmeasures.tex}
 %\input{tex_files/levelcrossing.tex}
-%\input{tex_files/mm1.tex}
+% \input{tex_files/kendall.tex}
+% \input{tex_files/mm1.tex}
 %\input{tex_files/mnmn1.tex}
 % \input{tex_files/pasta.tex}
 %\input{tex_files/little.tex}
@@ -75,55 +101,24 @@
 %\input{tex_files/failures.tex}
 %\input{tex_files/deterministic_networks.tex}
 %\input{tex_files/formula_sheet}
-%\input{tex_files/open_single_class.tex}
-
-\begin{comment}
-\input{tex_files/single_station_intro.tex}
-\input{tex_files/expdistribution.tex}
-\input{tex_files/poissondistribution.tex}
-\input{tex_files/kendall.tex}
-\input{tex_files/constructiondiscretetime.tex}
-\input{tex_files/constructioncontinuoustime.tex}
-\input{tex_files/random_walk.tex}
-\input{tex_files/ratestability.tex}
-\input{tex_files/empericalperfmeasures.tex}
-\input{tex_files/levelcrossing.tex}
-\input{tex_files/mm1.tex}
-\input{tex_files/mnmn1.tex}
-\input{tex_files/pasta.tex}
-\input{tex_files/little.tex}
-\input{tex_files/usefulidentities.tex}
-\input{tex_files/mxm1_pk.tex}
-\input{tex_files/mg1.tex}
-\input{tex_files/batcharrivals.tex}
-\input{tex_files/mg1distributionqueuelength.tex}
-%\input{tex_files/relationmxm1andmg1.tex}
- \input{tex_files/gg1.tex}
-\input{tex_files/failures.tex}
- \input{tex_files/process_batches.tex}
-\input{tex_files/deterministic_networks.tex}
 \input{tex_files/open_single_class.tex}
-\input{tex_files/tandem.tex}
-\input{tex_files/open_general.tex}
-\input{tex_files/gordon_newell.tex}
-\input{tex_files/convolution.tex}
-\input{tex_files/mva.tex}
-\input{tex_files/mda.tex}
-\input{tex_files/notation}
-\input{tex_files/formula_sheet}
-\end{comment}
-
-\ifFilterExercises
-\Closesolutionfile{exercises}
-\fi
+%\input{tex_files/gordon_newell.tex}
 
 
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{chapter}{Index}
+% \ifFilterExercises
+% \Closesolutionfile{exercises}
+% \fi
+
+
+
+\backmatter
+% \cleardoublepage
+
+%\addcontentsline{toc}{chapter}{Index}
+\chapter{Index}
+%\phantomsection
 \printindex
 
-%\printindex
 % \bibliographystyle{plainnat}
 % \bibliography{biblio_nicky}
 \end{document}
