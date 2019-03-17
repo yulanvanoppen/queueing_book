@@ -313,8 +313,8 @@ Substitute the
   \mu \E L
   &=\sum_{n=0}^\infty n\, \mu \pi(n), \quad \text{now substitute for $\mu \pi(n)$ the above recursion}, \\
 & =\lambda \sum_{n=0}^\infty n \sum_{i=0}^{n-1} \pi(i) G(n-1-i) 
-  =\lambda \sum_{n=0}^\infty n \sum_{i=0}^\infty \1{i<n\} \pi(i) G(n-1-i) \\
-& =\lambda \sum_{i=0}^\infty \pi(i) \sum_{n=0}^\infty \1{i<n\} n G(n-1-i) 
+  =\lambda \sum_{n=0}^\infty n \sum_{i=0}^\infty \1{i<n} \pi(i) G(n-1-i) \\
+& =\lambda \sum_{i=0}^\infty \pi(i) \sum_{n=0}^\infty \1{i<n} n G(n-1-i) 
   =\lambda \sum_{i=0}^\infty \pi(i) \sum_{n=i+1}^\infty n G(n-1-i) \\
 & =\lambda \sum_{i=0}^\infty \pi(i) \sum_{n=0}^\infty (n+i+1) G(n) 
   =\lambda \sum_{i=0}^\infty \pi(i) \left[\sum_{n=0}^\infty n G(n) +(i+1) \sum_{n=0}^\infty G(n)\right]  \\
