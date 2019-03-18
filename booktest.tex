@@ -23,8 +23,7 @@
 \opt{nosolutionfiles}{\usepackage[nosolutionfiles]{answers}}
 \opt{solutionfiles}{\usepackage{answers}}
 
-
-\usepackage{preamble}
+\usepackage{preamble_test}
 
 % handle indentation below figure captions
 %\setcapwidth[c]{.8\textwidth}
@@ -44,6 +43,10 @@
 \frontmatter
 \maketitle
 
+\input{henk}
+
+\end{document}
+
 \tableofcontents
 
 % \ifFilterExercises
@@ -51,6 +54,7 @@
 % \fi
 
 \chapter{Introduction}\label{sec:introduction}
+\Opensolutionfile{jaap}
 
 %\include{organization}
 %\input{tex_files/intro.tex}
@@ -74,7 +78,7 @@ We assume that you  \emph{know all} results of Section~\ref{sec:preliminaries}.
 
 %\input{tex_files/preliminaries.tex}
 
-%\input{tex_files/poissondistribution.tex}
+\input{tex_files/poissondistribution.tex}
 % \input{tex_files/constructiondiscretetime.tex}
 %\input{tex_files/expdistribution.tex}
 %\input{tex_files/constructioncontinuoustime.tex}
@@ -101,9 +105,11 @@ We assume that you  \emph{know all} results of Section~\ref{sec:preliminaries}.
 %\input{tex_files/failures.tex}
 %\input{tex_files/deterministic_networks.tex}
 %\input{tex_files/formula_sheet}
-\input{tex_files/open_single_class.tex}
+%\input{tex_files/open_single_class.tex}
 %\input{tex_files/gordon_newell.tex}
 
+\Closesolutionfile{jaap}
+%\input{jaap}
 
 % \ifFilterExercises
 % \Closesolutionfile{exercises}
