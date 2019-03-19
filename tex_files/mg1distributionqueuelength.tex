@@ -1,6 +1,5 @@
-\section
-[$M/G/1$ Queue Length Distribution]
-{$\mathbf{M/G/1}$ Queue Length Distribution}
+\section{$M/G/1$ Queue Length Distribution}
+%{$\mathbf{M/G/1}$ Queue Length Distribution}
 \label{sec:distr-queue-length}
 
 
@@ -474,23 +473,24 @@ state probabilities, and follow the approach sketched below Exercise~\ref{ex:13}
 
 
 
-\begin{exercise}
-  Clearly, the $M/M/1$ queue is a special case of the $M/G/1$
-  queue. Apply Eq.~\eqref{eq:72} to the $M/M/1$ queue to obtain $p(n)=(1-\rho)\rho^n$. 
+\begin{exercise}[\faCalculator]
+  Clearly, the $M/M/1$ queue is a special case of the $M/G/1$ queue.
+  Check that the queue length distribution of the $M/M/1$ queue satisfies~\eqref{eq:72}.
   \begin{hint}
- Define shorthands
-    such as $\alpha=\lambda/(\lambda+\mu)$, so that
-    $1-\alpha = \mu/(\lambda+\mu)$, and
-    $\alpha/(1-\alpha) = \lambda /\mu = \rho$.  Then, with Eq.~\eqref{eq:41}, $f(n) = \alpha^n(1-\alpha)$ and $G(n) = \alpha^{n+1}$.  (These results do not 'come for
-    free'. Of course, it's just algebra, but please try to derive this
-    yourself. It's good to hone your computational skills.)
+    To simplify the computations, define shorthands such as $\alpha=\lambda/(\lambda+\mu)$, so that $1-\alpha = \mu/(\lambda+\mu)$, and $\alpha/(1-\alpha) = \lambda /\mu = \rho$.
+    Then, with Eq.~\eqref{eq:41}, $f(n) = \alpha^n(1-\alpha)$ and $G(n) = \alpha^{n+1}$.
+    (These results do not 'come for free'.
+    Of course, it's just algebra, but please try to derive this yourself.
+    It's good to hone your computational skills.)
   \end{hint}
     \begin{solution}
-      Take $n=0$. Then $f(0) \pi(1) = (1-\alpha)\pi(1)$, and
-      $\pi(0)G(0) = \pi(0)\alpha$. Thus,
-      $\pi(1) = \pi(0)\alpha/(1-\alpha) = \rho \pi(0)$. 
+Use the shorthands of the hint. We work in steps. First we check whether $\pi(0)=1-\rho$ of the $M/M/1$ queue satisfies~\eqref{eq:72}, then we check $\pi(1)$, and finally we check the general case with $n\geq 1$. 
 
-For $n=1$,
+Take $n=0$, so that $f(0)=1-\alpha$.  Hence, the left-hand side becomes $f(0) \pi(1) = (1-\alpha)\pi(1)$. The right-hand side is
+      $\pi(0)G(0) = \pi(0)\alpha$. Thus,
+      $\pi(1) = \pi(0)\alpha/(1-\alpha) = \rho \pi(0)$. And indeed, for the $M/M/1$ queue we know that this is true. 
+
+Now we check it for $n=1$,
 \begin{equation*}
   \begin{split}
   (1-\alpha)  \pi(2) 
@@ -503,9 +503,8 @@ Dividing by $1-\alpha$, we get
   \pi(2) = \pi(0)\rho^2.
 \end{equation*}
 
-Finally, now that we suspect that $\pi(n) = \rho^n \pi(0)$, let's fill
-it in, and see whether it checks. We divide both sides by $\pi(0)$ so
-that we are left with checking that
+Finally, we fill  $\pi(n) = \rho^n \pi(0)$ of the $M/M/1$ queue for $n\geq 1$.
+For ease,  we divide both sides by $\pi(0)$ first.  We are left with checking that
 \begin{align*}
     (1-\alpha)\rho^{n+1} 
 &= \alpha^{n+1} + \sum_{m=1}^n \rho^m \alpha^{n-m+2}  \\
