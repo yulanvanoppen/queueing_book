@@ -87,16 +87,14 @@ ones are to the left of a matrix, and the vertical ones to the right.
 \begin{exercise}[\faCalculator\/ Linear algebra refresher 2] Suppose the matrix $A$
   has an eigenvalue $0$. What is the geometric meaning of this fact? 
   \begin{solution}
-    Many students think that a matrix is just a bunch of numbers
-    ordered in a grid. This is, in my opinion, the most unproductive
-    way to think about matrices. A much more useful way is to see a
-    matrix as an \emph{operator}. For instance, take $A$ to be a
-    $3\times3$ matrix. Then it can be seen as a \emph{mapping} from
-    $\R^3$ to $\R^3$; it takes a vector $x\in\R^3$ and changes $x$
-    into a new vector $Ax\in \R^3$. Thus, a square matrix $A$ typically changes the
- direction of a vector $x$. 
+    Many students think that a matrix is just a bunch of numbers ordered in a grid.
+    This is, in my opinion, the most unproductive way to think about matrices.
+    A much more useful way is to see a matrix as an \emph{operator}.
+    For instance, take $A$ to be a $3\times3$ matrix.
+    Then it can be seen as a \emph{mapping} from $\R^3$ to $\R^3$; it takes a vector $x\in\R^3$ and changes $x$ into a new vector $Ax\in \R^3$.
+    Thus, a square matrix $A$ typically changes the length and direction of a vector $x$.
 
-With this idea, consider the simple example with
+    The next example is meant to illustrate what happens when a matrix has an eigenvalue 0. Consider the simple example with
     \begin{equation*}
 A =
     \begin{pmatrix}
@@ -105,7 +103,7 @@ A =
       0 & 0 & 0 \\ 
     \end{pmatrix}.
   \end{equation*}
-Clearly, $A$ has an eigenvalue $0$. Now take $v=(x,y,z)'$, so that
+Clearly, $A$ has an eigenvalue $0$. Now take $v=(x,y,z)$, so that
     \begin{equation*}
 A v = A
  \begin{pmatrix}
@@ -119,18 +117,14 @@ y\\
 0
     \end{pmatrix}.
   \end{equation*}
-  We see that $A$ removes any information about the $z$-direction from
-  the vector $v$. (It projects $v$ on the $x-y$ plane, and throws away
-  the $z$ component of $v$.) But then, for a given vector $w=(x,y,0)$
-  in the $x-y$ plane, it is impossible to use $A$ to retrieve the
-  original vector $v=(x,y,z)$. Thus, $A$ cannot have an inverse on all
-  of $\R^3$.
+  We see that $A$ removes any information about the $z$-direction from the vector $v$.
+  (It projects $v$ on the $x-y$ plane, and throws away the $z$ component of $v$.)
+  But then, for a given vector $w=(x,y,0)$ in the $x-y$ plane, it is impossible to use $A$ to retrieve the original vector $v=(x,y,z)$.
+  Thus, $A$ cannot have an inverse on all of $\R^3$.
 
-  So, hopefully, with this example, you can memorize that for any
-  matrix $A$ to have an inverse, it is essential that it has no zero
-  eigenvalues. When the \emph{operator} $A$ (don't think of a matrix
-  as a set of numbers) throws away part of the dimension of the space
-  on which it operates (i.e., it has one or more eigenvalue(s) $0$), it is impossible to retrieve the part of the space it throws away. Hence, its inverse cannot be used to get this part of the space back. 
+  So, hopefully, with this example, you can memorize that for any matrix $A$ to have an inverse, it is essential that it has no zero eigenvalues.
+  When the \emph{operator} $A$ (don't think of a matrix as a set of numbers) throws away part of the dimension of the space on which it operates (i.e., it has one or more eigenvalue(s) $0$), it is impossible to retrieve the part of the space it throws away.
+  Hence, its inverse cannot be used to get this part of the space back.
 
 \end{solution}
 
@@ -141,21 +135,16 @@ y\\
 \begin{exercise}[\faFlask]
 Zijm.Ex.2.2.1
 \begin{solution}
-Because jobs cannot leave faster than they arrive.
+Jobs arrive at rate $\lambda$. We always require rate-stability, i.e.,  $\lambda<\mu_1$. Thus, (unless jobs are created at the server (which is not the case)),  the departure rate from station 1 must be $\lambda$. When there are jobs present at station 1, they leave at rate $\mu_1$. (Note that when there are no jobs at the station, there are no departures.) Likewise, the departure rate of station 2 is $\lambda$. 
 \end{solution}
 \end{exercise}
 
 \begin{exercise}[\faFlask]
 Zijm.Ex.2.2.2
 \begin{solution}
-  Observe from Exercise~\ref{ex:dep} that the inter-departure times
-  of the $M/M/1$ queue are also independent and identically
-  exponentially distributed with rate $\lambda$. Since the arrival
-  process at the second station is the departure process of the first
-  station, it must be that arrival process at the second station is
-  also Poisson with rate $\lambda$.  Interestingly, from the
-  perspective of the second station it is as if there is no first
-  station.
+  Observe from Exercise~\ref{ex:dep} that the inter-departure times of the $M/M/1$ queue are also independent and identically exponentially distributed with rate $\lambda$.
+  Since the arrival process at the second station is the departure process of the first station, it must be that the arrival process at the second station is also Poisson with rate $\lambda$.
+  Interestingly, from the perspective of the second station it is as if there is no first station.
 \end{solution}
 \end{exercise}
 
@@ -190,16 +179,16 @@ Zijm.Ex.2.2.4
 Linear algebra is quite useful here!
 
 Observe that $P_{i j}$ is the probability that a job, after completing its service at node $i$, moves to node $j$.
-Then $\sum_{j=1}^M P_{i j}$ is the probability that a job moves from node $i$ to another node in the network, i.e., stays in the network, while $P_{i0}$ is the probability that a job departing from node $i$ leaves the network, in other words, the job is finished.
+Then $\sum_{j=1}^M P_{i j}$ is the probability that a job moves from node $i$ to another node in the network, i.e., stays in the network, while $P_{i0}$ is the probability that a job leaving node $i$ departs the network, in other words, the job is finished.
 When $\sum_{j=1}^M P_{i j} < 1$, then more jobs enter node $i$ from the network than that node $i$ sends `back' into the network.
 Conceptually, node $i$ `leaks jobs'.
 
-Now, consider some node $k$ such that $P_{ki} > 0$, then the probability that a job that starts at node $k$, moves to node $i$ and then leaves the network is equal to $P_{ki}P{i0}$.
+Now, consider some node $k$ such that $P_{ki} > 0$, then the probability that a job that starts at node $k$, moves to node $i$ and then leaves the network is equal to $P_{ki}P_{i0}$.
 Thus, since $P_{ki}>0$ and $P_{i0}>0$, the probability that a job leaves the network from node $k$ in two steps is positive.
 More specifically, $P^2_{k0} = \sum_{j=0}^M P_{kj}P_{j0} \geq P_{ki}P_{i0} > 0$.
 
 The irreducibility assumption implies that in at most $M$ steps it is possible to reach, with positive probability, any node from any other node in the network.
-Thus, for any node $j$ to any other node $k$ there is a sequence of nodes $j_1, j_2, \ldots, j_{M-1}$ such that $P^{M}_{jk} \geq P_{j j_1}P_{j_1 j_2}\cdots P_{j_{M-1}k} > 0$.
+Thus, for any node $j$ to any other node $k$ there is a sequence of nodes $j_1, j_2, \ldots , j_{M-1}$ such that $P^{M}_{jk} \geq P_{j j_1}P_{j_1 j_2}\cdots P_{j_{M-1}k} > 0$.
 
 
 Thus, if there is a node $i$ such that $P_{i0}>0$, then it is possible from any node that sends jobs to node $i$ directly to leave the network in two steps.
@@ -222,19 +211,17 @@ Zijm.Ex.2.2.6
   This, together with the fact that $P^{M+1}_{k0}>0$ for all $k$, implies that there is some number $\epsilon>0$ such that $P^{M+1}_{k0}>\epsilon$.
   Hence, for all entries $k=1, 2, \ldots, M$, we have that $P^{M+1}_{kj} < 1- \epsilon$.
   This, in turn, implies that $P^{2(M+1)}_{kj} < (1- \epsilon)^2$, and so on, so that for any $n$, $P^{n(M+1)}_{kj} < (1- \epsilon)^n$.
-  This implies, in more general terms, that the entries of $P^n$ decrease at some geometric rate to $0$.
+  This implies, in more general terms, that the entries of $P^n$ decrease geometrically fast to $0$.
 
-  It is well known that for any bounded sequence $x_i$ and
-  $0\leq \alpha < 1$, $ \sum_{i=0}^\infty x_i \alpha^i <
-  \infty$. Applying this insight to the entries of $P^n$ it follows that 
-$\sum_{n=0}^\infty P^n_{jk} < \infty$. 
+  It is well known that for any bounded sequence $x_i$ and $0\leq \alpha < 1$, $ \sum_{i=0}^\infty x_i \alpha^i < \infty$.
+  By applying this insight to the entries of $P^n$ it follows that $\sum_{n=0}^\infty P^n_{jk} < \infty$.
 
 Finally, applying $\lambda = \gamma + \lambda P$ recursively, we get
 \begin{equation*}
   \lambda = \gamma + \lambda P = \gamma + (\gamma + \lambda P)P = \gamma (1+P) + \lambda P^2 = \gamma(1+P+P^2) + \lambda P^3 \to \gamma \sum_{n=0}^\infty P^n.
 \end{equation*}
 By the above reasoning this last sum is well defined, and finite.
-(By the way, the above argument is not necessarily valid for matrices $P$ that are infinite, since then $\inf\{P^{M}_{ik}\}$ need not be strictly positive.)
+(For math aficionados:  the above argument is not necessarily valid for matrices $P$ that are infinite, since then $\inf\{P^{M}_{ik}\}$ need not be strictly positive.)
 
 Another interesting way to see all this is by making the simplifying assumption that $P$ is a diagonalizable matrix.
 (The argument can be generalized to include matrices reduced to Jordan normal form, but this gives optimal clutter, but does not change the line of reasoning in any fundamental way.)
@@ -354,184 +341,6 @@ Zijm.Ex.2.2.8
 \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faPhoto\/ Hall 5.22]. At a large hotel, taxi cabs arrive at a rate of 15 per
-  hour, and parties of riders arrive at the rate of 12 per
-  hour. Whenever taxicabs are waiting, riders are served immediately
-  upon arrival. Whenever riders are waiting, taxicabs are loaded
-  immediately upon arrival. A maximum of three cabs can wait at a time (other cabs must go elsewhere).
-  \begin{enumerate}
-  \item Let $p_{ij}$ be the steady-state probability of there being $i$ parties of riders and $j$ taxicabs waiting at the hotel. Write the state transition equation for the system. 
-  \item Calculate the expected number of cabs waiting and the expected number of parties waiting.
-  \item Calculate the expected waiting time for cabs and the expected waiting for parties. (For cabs, compute the average among those that do not go elsewhere.)
-  \item In words, what would be the impact of allowing four cabs to wait at a time?
-  \end{enumerate}
-  \begin{hint}
-This is really a neat problem. Please spend serious time on it to
-solve before looking at the answer. It requires some ingenuity on your part.  Try to adapt the ideas behind Figure 2.2 of Zijm to this case.
-  \end{hint}
-    \begin{solution}
-      Let $p_{ij}$ be the fraction of time that the system contains $i$ riders and $j$ taxi cabs.
-      I assume that all members of a party of riders can be served by a single cab (that is, the parties do not exceed the capacity of a cab and all members of a party have the same destination).
-      For clarity, write $\mu$ for the rate at which cabs arrive, and $\lambda$ for the arrival rate of parties of riders.
-      Then the transitions are as in the figure below.
-      Suppose first that there are $3$ taxi cabs.
-      When a group arrives (at rate $\lambda$), there is one taxi less, and so on, until there are no more taxis left.
-      Finally, if yet more groups arrive, they have to wait.
-      When a new taxi arrives, the number of groups is reduced by one, and so on, until there are $3$ taxis waiting and no groups of people.
-
-
-    \begin{center}
-
-\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.8cm,
-                    semithick]
-  \node[state] (0) {$p(0,3)$} ;
-  \node[state] (1) [right of=0] {$p(0,2)$};
-  \node[state] (2) [right of=1] {$p(0,1)$};
-  \node[state] (3) [right of=2] {$p(0,0)$};
-  \node[state] (4) [right of=3] {$p(1,0)$};
-  \node[state] (5) [right of=4] {$p(2,0)$};
-  \node[state] (6) [right of=5] {$p(\cdot, 0)$};
-
-\path 
- (0) edge [bend left] node {$\lambda$} (1)
- (1) edge [bend left] node {$\mu$} (0)
- (1) edge [bend left] node {$\lambda$} (2)
- (2) edge [bend left] node {$\mu$} (1)
- (2) edge [bend left] node {$\lambda$} (3)
- (3) edge [bend left] node {$\mu$} (2)
- (3) edge [bend left] node {$\lambda$} (4)
- (4) edge [bend left] node {$\mu$} (3)
- (4) edge [bend left] node {$\lambda$} (5)
- (5) edge [bend left] node {$\mu$} (4)
- (5) edge [bend left] node {$\lambda$} (6)
- (6) edge [bend left] node {$\mu$} (5)
-;
-\end{tikzpicture}
-      
-    \end{center}
-
-From this figure, we see that
-\begin{align*}
-\lambda p_{0,3} &= \mu p_{0,2} \\
-(\lambda+\mu) p_{0,2} &= \mu p_{0,1} + \lambda p_{0,3}\\
-(\lambda+\mu) p_{0,1} &= \mu p_{0,0} + \lambda p_{0,2}\\
-(\lambda+\mu) p_{0,0} &= \mu p_{1,0} + \lambda p_{0,1}\\
-(\lambda+\mu) p_{1,0} &= \mu p_{2,0} + \lambda p_{0,0}\\
-(\lambda+\mu) p_{2,0} &= \mu p_{3,0} + \lambda p_{1,0}\\
-\end{align*}
-and so on. Thus, it is left to compute $p_{ij}$. Observe from this
-scheme, or the above figure, that the situation with the taxi's
-correspond to an $M/M/1$ queue, only the states have a `different
-name'. Let $q$ be the number of jobs in an M/M/1 queue. Some thought
-will reveal that the queueing system with cabs and parties can be
-mapped to an equivalent M/M/1 queueing system. In fact, consider the
-following table
-\begin{center}
-\begin{tabular}{ccc}
-$j$ & $i$ & $q$\\
-3&         0 &         0\\
-2 &        0&          1\\
-1 &        0&          2\\
-0&         0&          3\\
-0&         1&          4\\
-0&         2&          5\\
-\end{tabular}
-\end{center}
-and so on. Therefore, in general, it must be that 
-
-\begin{equation*}
-q = 3 - j +i.
-\end{equation*}
-From the M/M/1 queue we know right away that $p_q = \rho^q
-(1-\rho)$.  With the above relation we can therefore immediately find
-that $p_{ij} = \rho^{3-j+i}(1-\rho)$, save that $i$ and
-$j$ must satisfy the constraints imposed by the model.
-
-Second, the expected number of cabs waiting must be 
-\begin{equation*}
-1p_{0,1} + 2 p_{0,2} + 3p_{0,3}
-\end{equation*}
-and the expected number of parties waiting must be $\sum_{j=1}^\infty j p_{j,0}$.
-
-\begin{pyconsole}
-labda = 12. # per hour
-mu = 15. # per hour
-rho = labda/mu
-
-def p(i,j):
-    q  = 3 - j + i
-    return rho**q*(1.-rho)
-
-\end{pyconsole}
-Expected number of  cabs waiting:
-\begin{pyconsole}
-Lc = sum(j*p(0,j) for j in range(0,4)) 
-# Recall this sums up to 4, not including 4
-Lc
-  
-\end{pyconsole}
-
-
-To compute the expected number of parties waiting we formally have to
-sum to infinity. Rather than doing the algebra, I chose to truncate
-the summation at an $i$ such that $\rho^i \ll 1$, i.e.,
-negligible.  Truncating at 30 seems reasonable enough:
-
-\begin{pyconsole}
-trunc = 30
-rho**trunc
-\end{pyconsole}
-
-At second thought this is not yet really small. 
-
-\begin{pyconsole}
-trunc = 50
-rho**trunc
-\end{pyconsole}
-
-
-This is better. Now go for what we want to know:
-
-\begin{pyconsole}
-Lp = sum(i*p(i,0) for i in range(trunc))
-Lp
-\end{pyconsole}
-
-For the last part: This is tricky. I first, naively, computed $W_q = L_c/\mu$. This
-seems to make sense, as cabs arrive at rate $\mu$, so that this
-expression follows from a standard application of Little's
-law. However, this is wrong, of course. When using Little's law to
-relate the number of jobs in queue (i.e., in the M/M/1 queue) and the
-queueing time we need to use $\lambda$, not
-$\mu$. Similarly (and more formally by the mapping developed in
-part a), for our cab system we also need to use $\lambda$.
-
-\begin{pyconsole}
-Wq = Lc/labda
-Wq
-\end{pyconsole}
-
-Thinking in templates is often useful, but makes one sloppy\ldots
-
-What would be the impact of allowing 4 cabs? Funny question, and with the above, trivial to answer.
-
-\begin{pyconsole}
-def p(i,j):
-    q  = 4 - j + i
-    return rho**q*(1.-rho)
-  
-\end{pyconsole}
-
-\begin{pyconsole}
-Lc = sum(j*p(0,j) for j in range(0,4))
-Lc
-
-Lp = sum(i*p(i,0) for i in range(trunc))
-Lp
-  
-\end{pyconsole}
-    \end{solution}
-\end{exercise}
 
 
 

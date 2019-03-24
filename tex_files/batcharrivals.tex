@@ -180,7 +180,7 @@ Show that $\P{B>n-m\given L(A-)=m}=\P{B>n-m}$.
 
 By the above exercise,
 \begin{equation*}
-\lim_{t\to\infty} \frac{A(m,n,t)}{A(n,t)} = \P{B>n-m} = G(n-m).
+\lim_{t\to\infty} \frac{A(m,n,t)}{A(m,t)} = \P{B>n-m} = G(n-m).
 \end{equation*} 
 By combining the above and making the usual assumptions about the
 existence of all limits involved we find
@@ -285,8 +285,8 @@ Substitute the
   \mu \E L
   &=\sum_{n=0}^\infty n\, \mu \pi(n), \quad \text{now substitute for $\mu \pi(n)$ the above recursion}, \\
 & =\lambda \sum_{n=0}^\infty n \sum_{i=0}^{n-1} \pi(i) G(n-1-i) 
-  =\lambda \sum_{n=0}^\infty n \sum_{i=0}^\infty 1\{i<n\} \pi(i) G(n-1-i) \\
-& =\lambda \sum_{i=0}^\infty \pi(i) \sum_{n=0}^\infty 1\{i<n\} n G(n-1-i) 
+  =\lambda \sum_{n=0}^\infty n \sum_{i=0}^\infty \1{i<n} \pi(i) G(n-1-i) \\
+& =\lambda \sum_{i=0}^\infty \pi(i) \sum_{n=0}^\infty \1{i<n} n G(n-1-i) 
   =\lambda \sum_{i=0}^\infty \pi(i) \sum_{n=i+1}^\infty n G(n-1-i) \\
 & =\lambda \sum_{i=0}^\infty \pi(i) \sum_{n=0}^\infty (n+i+1) G(n) 
   =\lambda \sum_{i=0}^\infty \pi(i) \left[\sum_{n=0}^\infty n G(n) +(i+1) \sum_{n=0}^\infty G(n)\right]  \\
@@ -546,11 +546,9 @@ where we use that
 
 
 \begin{exercise}[\faRocket]
-An interesting extension is to consider a queueing process with batch
-services, i.e., the $M/M^Y/1$ queue. Construction a recursion for the
-steady-state probabilities $\pi(n)$ for this case is not hard, in fact,
-mostly analogous to Eq.~(\ref{eq:42}).  However, solving the recursion
-appears to be quite a bit harder; we will not discuss this further here.
+  An interesting extension is to consider a queueing process with batch services, i.e., the $M/M^Y/1$ queue.
+  Constructing a recursion for the steady-state probabilities $\pi(n)$ for this case is not hard, in fact, mostly analogous to Eq.~(\ref{eq:42}).
+  However, solving the recursion appears to be quite a bit harder; we will not discuss this further here.
 \end{exercise}
 
 

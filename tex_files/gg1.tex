@@ -236,46 +236,37 @@ However, when for instance the number of arrivals per day have been logged for s
 The relation we present here to compute $C_a^2$ from $\{a_n\}$ can of course also be applied to estimate $C_s^2$.
 
 \begin{theorem} The SCV of the inter-arrival times can be estimated
-  with the following formula
+  with the formula
 \begin{equation*}
 C_a^2 \approx \frac{\tilde \sigma^2}{\tilde \lambda},
 \end{equation*}
 where 
 \begin{equation*}
 \tilde  \lambda = \lim_{n\to\infty} \frac 1n  \sum_{i=1}^n a_i,\quad  
-\tilde  \sigma^2 = \lim_{n\to\infty} \frac 1 n \sum_{i=1}^n a_i^2 - \tilde \lambda^2,
+\tilde  \sigma^2 = \lim_{n\to\infty} \frac 1 n \sum_{i=1}^n a_i^2 - \tilde \lambda^2.
 \end{equation*}
-in words, $\tilde \lambda$ is the average number of arrivals per
-period, e.g., per day, and $\tilde \sigma^2 $ is the variance of the
-number of arrivals per period.
+In words, $\tilde \lambda$ is the average number of arrivals per period, e.g., per day, and $\tilde \sigma^2 $ is the variance of the number of arrivals per period.
 \end{theorem}
 
 \begin{proof}
-  The proof is based on an argument in \cite{cox62:_renew_theor}. We
-  use quite a bit of the notation developed in
-  Section~\ref{sec:rate-stability}. Let $\{A(t), t\geq 0\}$ be the
-  number of arrivals that occur up to (and including) time $t$. We
-  assume that $\{A(t)\}$ is a renewal process such that the
-  inter-arrival times $\{X_k, k=1, 2, \ldots\}$ with
-  $X_k = A_{k}-A_{k-1}$, are i.i.d. with mean $1/\lambda$ and standard
-  deviation~$\sigma$. (Observe that $\sigma$ is not the same as
-  $\tilde \sigma$ above.) Note that $C_a^2$ is defined in terms of
-  $\lambda$ and $\sigma$ as:
+  The proof is based on an argument in \cite{cox62:_renew_theor}.
+  We use quite a bit of the notation developed in Section~\ref{sec:rate-stability}.
+  Let $\{A(t), t\geq 0\}$ be the number of arrivals that occur up to (and including) time $t$.
+  We assume that $\{A(t)\}$ is a renewal process such that the inter-arrival times $\{X_k, k=1, 2, \ldots\}$ with $X_k = A_{k}-A_{k-1}$, are i.i.d.
+  with mean $1/\lambda$ and standard deviation~$\sigma$.
+  (Observe that $\sigma$ is not the same as $\tilde \sigma$ above.)
+  Note that $C_a^2$ is defined in terms of $\lambda$ and $\sigma$ as:
 \begin{equation*}
 C_a^2 = \frac{\V{X_i}}{(\E{X_i})^2} = \frac{\sigma^2}{1/\lambda^2} = \lambda^2 \sigma^2.
 \end{equation*}
 
-Next, let $A_k$ be the arrival time of the $k$th arrival. The
-following useful relation between $A(t)$ and $A_k$ enables us to prove
-our result (recall that we used a similar relation in the derivation
-of the Poisson process):
+Next, let $A_k$ be the arrival time of the $k$th arrival.
+The following useful relation between $A(t)$ and $A_k$ enables us to prove our result (recall that we used a similar relation in the derivation of the Poisson process):
 \begin{equation*}
 \P{A(t) < k} = \P{A_k > t}.
 \end{equation*}
 
-Since the inter-arrival times have finite mean and second moment by
-assumption, we can apply the central limit law to obtain that, as
-$k\to\infty$,
+Since the inter-arrival times have finite mean and second moment by assumption, we can apply the central limit law to obtain that, as $k\to\infty$,
 \begin{equation*}
 \frac{A_k -k/\lambda}{\sigma \sqrt k} \to N(0,1),
 \end{equation*}
@@ -335,7 +326,8 @@ Finally, for $t$ large (or, by the same token $k$ large),
 \frac{\sigma_k^2}{\lambda_k} = \frac{\V{A(t)}}{\E{A(t)}} \approx \frac{\alpha^2 t}{\lambda t} 
 = \frac{\alpha^2}{\lambda} = \frac{\lambda^3\sigma^2}{\lambda} = \lambda^2 \sigma^2 = C_a^2,
 \end{equation*}
-where the last equation follows from the above definition of $C_a^2$.  The proof is complete.
+where the last equation follows from the above definition of $C_a^2$.
+The proof is complete.
 \end{proof}
 
 
