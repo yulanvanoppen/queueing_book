@@ -50,16 +50,12 @@ And so on.
 \begin{exercise}
 Zijm.Ex.3.1.13. Assume that all stations have just one server.
 \begin{solution}
-  Since there are quite a lot of jobs, and station 0 is the
-  bottleneck, i.e., the station with the highest load, most of the
-  time there will be a queue at station 0. In fact, most of the jobs
-  will be in queue in front of station 0. Therefore the rate out of
-  station 0 will be approximately equal to its service rate, i.e.,
-  $\mu_0$. Thus, station 1 will receive jobs at a rate
-  $\lambda_1\approx\mu_0$, i.e., $\lambda_1 \approx 2$. Now I simply
-  approximate the queueing process at station 1 as an $M/M/1$ queue
-  with $\mu_1=2.5$. Hence, $\rho_1 = \lambda_1/\mu_1=2/2.5 = 4/5$,
-  hence E$(L_1) = \rho_1/(1-\rho_1) = (4/5)/(1/5) = 4$.
+  Since there are quite a lot of jobs, and station 0 is the bottleneck, i.e., the station with the highest load, most of the time there will be a queue at station 0.
+  In fact, most of the jobs will be in queue in front of station 0.
+  Therefore the rate out of station 0 will be approximately equal to its service rate, i.e., $\mu_0$.
+  Thus, station 1 will receive jobs at a rate $\lambda_1\approx\mu_0$, i.e., $\lambda_1 \approx 2$.
+  Now I simply model the queueing process at station 1 as an $M/M/1$ queue with $\mu_1=2.5$.
+  Hence, $\rho_1 = \lambda_1/\mu_1=2/2.5 = 4/5$, hence $\E{L_1} = \rho_1/(1-\rho_1) = (4/5)/(1/5) = 4$.
 \end{solution}
 \end{exercise}
 
