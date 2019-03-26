@@ -329,21 +329,17 @@ First $d_k = \min\{L_{k-1}, c_k\}$. Then, $L_k' = L_{k-1}+a_k-d_k$ is the queue 
       \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faPhoto\/  Rework] A machine produces items, but a fraction $p$ of the items
-  does not meet the quality requirements after the first service but
-  need some extra service time which is less than an entirely new arriving
-  job. Make a model to analyze this case. Compare this case with the
-  yield loss problem above. 
+\begin{exercise}[\faPhoto\/ Rework] 
 
-  Let's assume that the repair of a faulty item requires half of the work
-  of a new job, and that the faulty jobs are processed with priority
-  over the new jobs.  Also assume that faulty items do not need more than one repair (hence, faulty items that are repaired cannot be faulty anymore).
+  A machine produces items, but a fraction $p$ of the items does not meet the quality requirements after the first pass at the server, but it requires a second pass.
+  Assume that the repair of a faulty item requires half of the work of a new job, and that the faulty jobs are processed with priority over the new jobs.
+  Also assume that faulty items do not need more than one repair (hence, faulty items that are repaired cannot be faulty anymore).
+  Make a model to analyze this case.
+  Compare this case with the yield loss problem above.
 
-There are of course many different policies to
-  treat rework.   Another possibility is that faulty items are processed at the end of
-  the day. Yet another possibility is that faulty items are collected
-  until there are $N$, say, and then the entire batch of $N$ is
-  repaired.
+
+  We remark that there are of course many different policies to treat rework.
+  One possibility is that faulty items are collected until there are $N$, say, and then the entire batch of $N$ is repaired.
   \begin{solution}
     Suppose again that a fraction $p$ is faulty. Since these faulty
     items require less processing time than a new job, the service
