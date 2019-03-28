@@ -165,10 +165,11 @@ Checking the dimensions in the formula  prevents painful mistakes.
 
 
 \begin{exercise}[\faBalanceScale]\label{ex:37}
-  %As a useful first application, consider the server of a $G/G/1$ queue as a system by itself.
-By applying Little's law in a suitable way we can prove for the $G/G/1$ queue that $\E{L_S} = \rho = \lambda \E S$.
+
+  Consider the server of the $G/G/1$ queue as a system by itself.
+  The time jobs stay in this system is $\E S$, and jobs arrive at rate $\lambda$.
+  It follows from Little's law that $\rho = \lambda \E S$.
 \begin{solution}
-  Assume the system is rate-stable, for otherwise all relevant limits do not exist.
   The arrival rate at the server must be $\lambda$ and the time a job remains at the server is $\E S$.
   The fraction of time the server is busy is precisely the fraction of time there is a job present at the server.
   Thus, applying Little's law to the server itself, we see that $\rho = \E{L_S} = \lambda \E S$.

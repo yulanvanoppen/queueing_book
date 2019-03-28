@@ -8,7 +8,10 @@
 
 In the analysis of any queueing process the first step should be to check the relations between the arrival, service and departure rates.
 The concept of rate is crucial because it captures our intuition that when, on the long run, jobs arrive faster than they can leave, the system must `explode'.
-Thus, the first performance measures we need to estimate when analyzing a queueing system are the arrival and departure rate, and then we need to check that the arrival rate is smaller than the departure rate.
+As we will see, when the arrival rate is smaller than the service rate the system is stable.
+Thus, the first performance measure we need to estimate for a queueing system is the ratio between the arrival and service rate.
+In this section we develop some concepts and notation to formalize these ideas.
+We will use these concepts throughout the remainder of the book.
 
 We first formalize the \emph{arrival rate} and \emph{departure rate} in terms of the \emph{counting processes} $\{A(t)\}$ and $\{D(t)\}$.
 The \recall{arrival rate} is the long-run average number of jobs that arrive per unit time, i.e.,
@@ -111,36 +114,25 @@ to be done to put everything on solid ground.
   Observe first that $f(t)$ is increasing, and $f(t)\in\{0,1\}$.
   Thus, if $f(t)=1$ then $f(u)=1$ for all $u\geq t$, and if $f(t)=0$ then $f(u) = 0$ for all $u\leq t$.
 
-    You may skip the rest of the prove below, but the above is
-    essential to memorize; make a plot of $f(t)$, in particular the
-    behavior around $A_1$ is important.
+  You may skip the rest of the proof below, but the above is essential to memorize; make a plot of $f(t)$, in particular the behavior around $A_1$ is important.
 
-    We need to prove, for right-continuity, that $f(u)\to f(t) $ as
-    $u\downarrow t$. When $f(t)=1$, $f(u)=1$ for any $u>1$, by the
-    definition of $f(x)$. When $f(t)=0$ we have to do a bit more
-    work. Formally, we have to prove that, for fixed $t$ and for all
-    $\epsilon > 0$, there is a $\delta>0$ such that
-    $u\in(t, t+\delta) \Rightarrow |f(u) -f(t)| < \epsilon$. (Note the
-    differences with the regular definition of continuity.) Since, by
-    assumption, $t$ is such that $f(t)=0$, and $f\in\{0,1\}$ we need
-    to show that $f(u)=0$ for $u\in(t, t+\delta)$. Now, clearly, 
-    $f(t)=0$ only if $t < A_1$.  But, then for any $u\in(t, A_1)$, we
-    have that $f(u) = 0$. Thus, taking $\delta = A_1 - t$ suffices.
+  We need to prove, for right-continuity, that $f(u)\to f(t) $ as $u\downarrow t$.
+  When $f(t)=1$, $f(u)=1$ for any $u>1$, by the definition of $f(x)$.
+  When $f(t)=0$ we have to do a bit more work.
+  Formally, we have to prove that, for fixed $t$ and for all $\epsilon > 0$, there is a $\delta>0$ such that $u\in(t, t+\delta) \Rightarrow |f(u) -f(t)| < \epsilon$.
+  (Note the differences with the regular definition of continuity.)
+  Since, by assumption, $t$ is such that $f(t)=0$, and $f\in\{0,1\}$ we need to show that $f(u)=0$ for $u\in(t, t+\delta)$.
+  Now, clearly, $f(t)=0$ only if $t < A_1$.
+  But, then for any $u\in(t, A_1)$, we have that $f(u) = 0$.
+  Thus, taking $\delta = A_1 - t$ suffices.
 
-    The next step is to observe that $A(t)$ is a sum of
-    right-continuous functions whose steps do not overlap since by
-    assumption $0<A_1 < A_2 < \cdots$. As $A$ is (almost surely)
-    a finite sum of bounded, increasing and right-continuous functions,
-    it is also right-continuous.
+  The next step is to observe that $A(t)$ is a sum of right-continuous functions whose steps do not overlap since by assumption $0<A_1 < A_2 < \cdots$.
+  As $A$ is (almost surely) a finite sum of bounded, increasing and right-continuous functions, it is also right-continuous.
 
     If you like, you can try to prove this last step too. 
 
-  Hopefully this problem, and its solution, clarifies that even such
-  small details require attention. If we want to make some progress
-  with respect to developing some queueing theory, we have to skip
-  most of the proofs and mathematical problems; we simply don't have
-  enough time in this course  to be concerned with all theorems
-  and proofs.
+    Hopefully this problem, and its solution, clarifies that even such small details require attention.
+    If we want to make some progress with respect to developing some queueing theory, we have to skip most of the proofs and mathematical problems; we simply don't have enough time in this course to be concerned with all theorems and proofs.
 
     % For finite sums it is simple. Suppose that $f$ and $g$ are
     % right-continuous, then
@@ -221,8 +213,7 @@ fact that $\delta \leq \lambda$, we get
 \begin{equation*}
   \delta \leq \min\{\lambda, \mu\}.
 \end{equation*}
-When $\mu \geq \lambda$ the above inequality reduces to $\delta = \lambda$ for rate-stable systems.
-(It is interesting to prove this.)
+When $\mu \geq \lambda$ the above inequality reduces to $\delta = \lambda$ for rate-stable systems\footnote{It would be interesting to prove this.}.
 As it turns out, when $\mu = \lambda$ and the variance of the service time $\V{S} > 0$ or $\V{X} >0$ the queue length process behaves in a very peculiar way.
 For this reason we henceforth (and implicitly) require that $\mu > \lambda$.
 

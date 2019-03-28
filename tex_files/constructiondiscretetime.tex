@@ -312,7 +312,7 @@ First $d_k = \min\{L_{k-1}, c_k\}$. Then, $L_k' = L_{k-1}+a_k-d_k$ is the queue 
 
 \begin{exercise}[\faPhoto\/ Yield loss]
   A machine produces items, but a fraction $p$ of the items produced in a period turns out to be faulty, and has to be made anew.
-  Develop a set of recursions to cover this case.
+  Develop a set of recursions to model this case.
   \begin{solution}
     The amount produced in period $k$ is $d_k$. Thus, $p d_k$ is the
     amount lost, neglecting rounding errors for the moment. Thus,
@@ -337,8 +337,7 @@ First $d_k = \min\{L_{k-1}, c_k\}$. Then, $L_k' = L_{k-1}+a_k-d_k$ is the queue 
   A machine produces items, but a fraction $p$ of the items does not meet the quality requirements after the first pass at the server, but it requires a second pass.
   Assume that the repair of a faulty item requires half of the work of a new job, and that the faulty jobs are processed with priority over the new jobs.
   Also assume that faulty items do not need more than one repair (hence, faulty items that are repaired cannot be faulty anymore).
-  Make a model to analyze this case.
-  Compare this case with the yield loss problem above.
+  Develop a set of recursions to model this case.
 
 
   We remark that there are of course many different policies to treat rework.
@@ -441,7 +440,7 @@ we need. The total cost up to time $T$ becomes:
 
 
 
-\begin{exercise}[\faPhoto\/ Queue length dependent server capacity]
+\begin{exercise}[\faPhoto\/ Queue length dependent server capacity]\label{ex:50}
   How would you model (in terms of recursions) a server whose capacity
   depends on the queue length? Consider, as an example, a rule such
   that the server only works if the queue is larger than a threshold $t$. 
@@ -453,8 +452,11 @@ we need. The total cost up to time $T$ becomes:
   \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faPhoto\/ Fair queueing] One server serves two queues. Each
-  queue receives service capacity in proportion to its queue length. Derive a set of recursions to analyze this situation.
+\begin{exercise}[\faPhoto\/ Fair queueing] \label{ex:51}
+
+  One server serves two queues.
+  Each queue receives service capacity in proportion to the queue length.
+  Derive a set of recursions to analyze this situation.
   \begin{solution}
     Let $c_k^i$ be the capacity allocated to queue $i$ in period $k$. The fair rule gives that 
     \begin{equation*}
