@@ -33,7 +33,7 @@ For the $M/M/1/K$, i.e., a system that cannot contain more than $K$ jobs, take
 \mu(n) &= \mu.
   \end{align*}
 
-\begin{exercise} ($M/M/1/K$ queue)
+\begin{exercise}[\faCalculator, $M/M/1/K$ queue]
  Derive 
 \begin{subequations}\label{eq:8}
  \begin{align}
@@ -58,7 +58,7 @@ and the result follows.
   \end{solution}
 \end{exercise}
 
-\begin{exercise} 
+\begin{exercise}[\faFlask]\label{ex:40}
    Show that as $K\to\infty$, the performance measures of the $M/M/1/K$ converge to those of the $M/M/1$ queue. 
   \begin{hint}
 Use that $\sum_{i=0}^n x^i = (1-x^{n+1})/(1-x)$. BTW, is it
@@ -94,7 +94,7 @@ For the $M/M/c$ queue we can take
   \end{align*}
 This model is also known as the \recall{Erlang $C$}-formula. 
 
-\begin{exercise}($M/M/c$)
+\begin{exercise}[\faCalculator, $M/M/c$]
 Define the load as 
 \begin{subequations}\label{eq:9}
 \begin{equation}
@@ -322,10 +322,11 @@ p(0) = (1+\rho + \rho^2/2 + \rho^3/4)^{-1}.
 \end{exercise}
 
 
-\begin{exercise}[\faFlask](Multi-server queue with blocking) Consider the
-  $M/M/c/c+K$ queue in which at most $c$ jobs can be in service and $K$ in queue. Try to derive the steady state probabilities
-  $p(0)$, $p(1), \ldots$. You do not have to compute the normalization
-  constant $G$. 
+\begin{exercise}[\faFlask, Multi-server queue with blocking]\label{ex:41}
+
+  Consider the $M/M/c/c+K$ queue in which at most $c$ jobs can be in service and $K$ in queue.
+  Try to derive the steady state probabilities $p(0)$, $p(1), \ldots$.
+  You do not have to compute the normalization constant $G$.
   \begin{hint}
 Use $\lambda(n) p(n) = \mu(n+1)p(n+1)$ and
     find suitable expressions for $\lambda(n)$ and $\mu(n+1)$. 

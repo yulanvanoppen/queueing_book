@@ -129,8 +129,11 @@ Hence,
 \end{exercise}
 
 
-\begin{exercise}[\faFlask]
-Show that  $\E {S_r\given S_r>0} = \alpha/2$  when $\V{S} = 0$ (hence $\E S = \alpha$).
+\begin{exercise}[\faBalanceScale]\label{ex:45}
+\begin{equation*}
+\E{S_r\given S_r>0} = \frac{\E{S^2}}{2 \E S} \implies \E {S_r\given S_r>0} = \frac \alpha 2
+\end{equation*}
+when $\V{S} = 0$. 
   \begin{hint}
     $\V S = 0$ implies that $S$ is deterministic.
   \end{hint}
@@ -308,13 +311,14 @@ L
 \end{exercise}
 
 
-\begin{exercise}[\faPhoto]
-  (Hall 5.16) The manager of a small firm would like to determine
-  which of two people to hire. One employee is fast, on average, but
-  is somewhat inconsistent. The other is a bit slower, but very
-  consistent. The first has a mean service time of $2$ minutes, with a
-  standard deviation of 1 minute. The second has a mean service time
-  of $2.1$ minutes, with a standard deviation of $0.1$ minutes. If the arrival rate is Poisson with rate 20 per hour, which employee would minimize $\E{L_Q}$? Which would minimize $\E L$? 
+\begin{exercise}[\faPhoto] \label{ex:46}
+  (Hall 5.16) The manager of a small firm would like to determine which of two people to hire.
+  One employee is fast, on average, but is somewhat inconsistent.
+  The other is a bit slower, but very consistent.
+  The first has a mean service time of $2$ minutes, with a standard deviation of 1 minute.
+  The second has a mean service time of $2.1$ minutes, with a standard deviation of $0.1$ minutes.
+  If the arrival rate is Poisson with rate 20 per hour, which employee would minimize $\E{L_Q}$?
+  Which would minimize $\E L$?
   \begin{solution}
     The arrival process is assumed to be Poisson. There is also
     just one server. Hence, we can use the PK formula to compute the average queue length.

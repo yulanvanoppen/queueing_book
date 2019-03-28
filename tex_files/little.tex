@@ -148,7 +148,7 @@ Hence, Little's law follows.
 \end{exercise}
 
 
-\begin{exercise}
+\begin{exercise}[\faFlask]\label{ex:42}
   Use the dimensions of the components of Little's law to check that $\E{W} \neq \lambda \E{L}$.
   \begin{hint}
 Checking the dimensions in the formula  prevents painful mistakes.
@@ -164,45 +164,35 @@ Checking the dimensions in the formula  prevents painful mistakes.
 
 
 
-\begin{exercise}
-As a useful first application, consider the server of a $G/G/1$ queue
-as a system by itself. Show that the average number of jobs in service~$\E{L_S}$ is equal to the utilization~$\rho$. 
+\begin{exercise}[\faBalanceScale]\label{ex:37}
+  %As a useful first application, consider the server of a $G/G/1$ queue as a system by itself.
+By applying Little's law in a suitable way we can prove for the $G/G/1$ queue that $\E{L_S} = \rho = \lambda \E S$.
 \begin{solution}
- Assume the system is rate-stable, for otherwise
-all relevant limits do not exist.  The arrival rate at the server is
-$\lambda$ and the time a job remains at the server is $\E S$. Thus, the average time a job remains in the `box' that identifies the server is $\E S$, and then the average number of jobs at the server is $\E{L_S} = \lambda \E S$, by Little's law. As $\lambda \E{S} = \rho$, we get
-$\E{L_S} = \rho$.
+  Assume the system is rate-stable, for otherwise all relevant limits do not exist.
+  The arrival rate at the server must be $\lambda$ and the time a job remains at the server is $\E S$.
+  The fraction of time the server is busy is precisely the fraction of time there is a job present at the server.
+  Thus, applying Little's law to the server itself, we see that $\rho = \E{L_S} = \lambda \E S$.
 \end{solution}
 \end{exercise}
 
 
-\begin{exercise}
-  For a given single-server queueing system the average number of
-  customers in the system is $\E L = 10$, customers arrive at rate
-  $\lambda=5$ per hour and are served at rate $\mu=6$ per hour.
- What is the average time customers spend in the system?
+\begin{exercise}[\faFlask]\label{ex:43}
+  For a given single-server queueing system the average number of customers in the system is $\E L = 10$, customers arrive at rate $\lambda=5$ per hour and are served at rate $\mu=6$ per hour.
+  What is the average time customers spend in the system?
   \begin{hint}
 Start with checking the units when applying Little's law.
   \end{hint}
     \begin{solution}
- This was my initial answer (which is wrong):
-        `$\E W = \lambda \E L = \lambda 10$'.  Interestingly, I typed
-        in Little's law in the wrong way\ldots So, be aware! It's all
-        too easy to make mistakes with Little's law.
-
-    This is correct: 
     \begin{equation*}
       \E W = \E L/\lambda = 10/\lambda = 10/5 = 2.
     \end{equation*}
     \end{solution}
 \end{exercise}
 
-\begin{exercise}
-  For the  single-server queueing system of the previous exercise, 
- suppose that at the moment you join the system, the number of
-    customers in the system is 10. What is your expected time in the
-    system? 
- Why is this answer different from the answer of the previous exercises?
+\begin{exercise}[\faBalanceScale]\label{ex:44}
+  For the single-server queueing system of Ex.~\ref{ex:43}, suppose that at the moment you join the system, the number of customers in the system is 10.
+  What is your expected time in the system?
+  Why is this answer different from the answer of the previous exercises?
     \begin{solution}
 If you arrive at a queueing system, you first have to wait until the job in service is finished.  Then you need to wait until the 9 jobs in queue are finished. This takes, in expectation, $9/\mu$. (Recall, 1 job is in service at the moment you arrive, so 9 are in queue.) Assuming that service times are exponential, so that, by the memoryless property, the remaining service time of the job in service is still $\E S$ when you arrive, you spend $10/\mu + 1/\mu = 11/6 \neq 2$. (To account for the last $+1/\mu$, observe that yourself also have to be served to compute the time you spend in the system.)
 

@@ -103,10 +103,7 @@ The  above exercises can also be easily solved with the moment-generating functi
 \end{equation}
 
 \begin{exercise}[\faBalanceScale]\label{ex:11}
-It is necessary to require that $t < \lambda$ in the moment-generating function
-\begin{equation*}
-  M_X(t) = \E{e^{t X}} = \int_0^\infty e^{t x} \lambda e^{-\lambda x} \d x.
-\end{equation*}
+It is necessary to require that $t < \lambda$ in the moment-generating function $M_X(t)$ when $X\sim\Exp(\lambda)$. 
 \begin{solution} True, because
   if $t - \lambda \geq 0$, the integral becomes $\infty$. 
 \end{solution}
@@ -147,9 +144,12 @@ Use~\eqref{eq:69} and \eqref{eq:64}.
 \end{solution}
   \end{exercise}
 
-\begin{exercise}[\faCalculator]
-Use~\eqref{eq:62} to   prove that SCV $1$ for $X\sim\Exp(\lambda)$. 
-\begin{solution}
+\begin{exercise}[\faBalanceScale]\label{ex:29}
+When  $X\sim\Exp(\lambda)$ the SCV is larger than $1$.
+  \begin{hint}
+  Use~\eqref{eq:62} 
+  \end{hint}
+  \begin{solution}
   By the previous problems, $\V X = 1/\lambda^2$ and $\E X=1/\lambda$, hence
   \begin{equation*}
     C^2= \frac{\V X}{(\E X)^2} = \frac{1/\lambda^2}{1/\lambda^2} = 1.
@@ -383,7 +383,7 @@ With this,
 
 
 
-\begin{exercise}[\faCalculator]
+\begin{exercise}[\faCalculator]\label{ex:49}
   A machine serves two types of jobs. The processing time of jobs of
   type $i$, $i=1,2$, is exponentially distributed with parameter
   $\mu_i$. The type $T$ of a job is random and independent of anything
