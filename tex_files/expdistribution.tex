@@ -292,9 +292,6 @@ In words, the probability that $X$ is larger than some time $t+h$, conditional o
 
 \begin{exercise}
   Show that $X\sim \Exp(\lambda)$ is memoryless.
-  In fact, it can be shown that only exponential random variables have the memoryless property.
-  The proof of this fact requires quite some work; we refer the reader to the literature if s/he wants to check this, see e.g.
-  \citet[Appendix 3]{yushkevich69:_markov_proces}.
 
   \begin{hint}
 Condition on the event ${X>t}$. 
@@ -307,14 +304,14 @@ By  the definition of conditional probability
 
 Thus, no matter how long we have been waiting for the next arrival to occur, the probability that it will occur in the next $h$ seconds remains the same.
 
-
 This property seems to be vindicated also in practice: suppose that a patient with a broken arm just arrived at the emergency room of a hospital, what does that tell us about the time the next patient will be brought in?
 Not much, as most of us will agree.
-
-
   \end{solution}
 \end{exercise}
 
+In fact, it can be shown that only exponential random variables have the memoryless property.
+The proof of this fact requires quite some work; we refer the reader to the literature if s/he wants to check this, see e.g.
+\citet[Appendix 3]{yushkevich69:_markov_proces}.
 
 \begin{extra}\label{ex:10}
   If $X\sim\Exp(\lambda)$ and $S\sim\Exp(\mu)$, and $X$ and $S$ are

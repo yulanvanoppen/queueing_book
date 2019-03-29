@@ -176,128 +176,6 @@ node[midway, fill=white] {$X_{k}$};
   \label{fig:waitingtimegg1}
 \end{figure}
 
-The time job $k$ \emph{leaves the queue and moves to the server} is given by
-\begin{equation*}
- \tilde A_k = A_k + W_{Q,k},
-\end{equation*}
-because a job can only move to the server after its arrival plus the time it needs to wait in queue.
-Note that we here explicitly use the FIFO assumption.
-Right after the job moves from the queue to the server, its service starts.
-Thus,~$\tilde A_{k}$ is also the epoch at which the service of job~$k$ starts.
-
-After completing its service, the job leaves the system.
-Hence, the \recall{departure time of the system} is
-\begin{equation*}
-  D_k = \tilde A_{k} + S_k.
-\end{equation*}
-This in turn specifies the departure process $\{D(t)\}$ as
-\begin{equation*}
-  D(t) = \max\{k : D_k \leq t\} = \sum_{k=1}^\infty \1{D_k \leq t}.
-\end{equation*}
-
-Finally, the \recall{sojourn time}, or \emph{waiting time in the system}, $W_k$, is the time a job spends in the entire system.
-With the above relations we see that
-\begin{equation}
-  W_k = D_k - A_k = \tilde A_{k} + S_k -A_k = W_{Q,k} + S_k,
-\end{equation}
-where each of these equations has its own interpretation. 
-
-Finally, the \recall{virtual waiting time process} $\{V(t)\}$ is the amount of waiting that an arrival would see if it would arrive at time $t$.
-To construct $\{V(t)\}$, we simply draw lines that start at points $(A_k, W_k)$ and have slope -1, unless the line hits the $x$-axis, in which case the virtual waiting time remains zero until the next arrival occurs.
-Thus, the lines with slope $-1$ in Figure~\ref{fig:waitingtimegg1} show (a sample path of) the virtual waiting time.
-
-
-Observe that, just as in Section~\ref{sec:constr-discr-time}, we have obtained a set of recursions by which we can run a simulation of a queueing process of whatever length we need, provided we have a sequence of inter-arrival times $\{X_k\}$ and service times $\{S_k\}$.
-A bit of experimentation with computer programs such as $R$ or Python will reveal that this is easy.
-
-
-
-
-
-\begin{exercise}[\faPhoto]
-  Provide a specification of the virtual waiting time process $\{V(t)\}$ for
-    all $t$.
-    \begin{hint}Make a plot of the function $A_{A(t)}-t$. What is the meaning of $V(A_{A(t)})?$ What is
-$V(A_{A(t)}) + A_{A(t)}-t$?
-    \end{hint}
-    \begin{solution}
-      There is a funny way to do this. Recall from a previous exercise
-      that if $A(t)=n$, then $A_n$ is the arrival time of the $n$th
-      job. Thus, the function $A_{A(t)}$ provides us with arrival
-      times as a function of $t$. When $t=A_{A(t)}$, i.e., when $t$ is
-      the arrival time of the $A(t)$th job, we set
-      $V(t) = V(A_{A(t)}) = W_{A(t)}$, i.e., the virtual waiting time
-      at the arrival time $t=A_{A(t)}$ is equal to the waiting time of
-      the $A(t)$th job. Between arrival moments, the virtual waiting
-      time decreases with slope $1$, until it hits 0.  Thus,
-      \begin{equation*}
-        V(t) 
-= [V(A_{A(t)}) - (t-A_{A(t)})]^+= [W_{A(t)} + (A_{A(t)}-t)]^+.
-      \end{equation*}
-      The notation may be a bit confusing, but it is in fact very
-      simple. Take some $t$, look back at the last arrival time before
-      time $t$, which is written as $A_{A(t)}$. (In computer code these
-      times are easy to find.) Then draw a line with slope $-1$ from
-      the waiting time that the last arrival saw.
-    \end{solution}
-\end{exercise}
-
-
-
-
-\begin{extra}
-  Explain that for the $G/G/1$ the following recursion for~$W_k$ is valid:
-\begin{align}
-  \label{eq:59}
-  W_{Q,k} &= [W_{k-1} - X_k]^+, &
-  W_{k} &= W_{Q,k} + S_k = [W_{k-1} - X_k]^+ + S_k,
-\end{align}
-from which follows a recursion for $D_k$:
-\begin{equation}
-  D_k = A_k + W_k.
-\end{equation}
-\end{extra}
-
-\begin{extra}
-  Assume that $X_1=10$, $X_2=5$, $X_3=6$ and $S_1 = 17$, $S_2=20$ and $S_3=5$, compute the arrival times, waiting times in queue, the sojourn times and the departure times for these three customers.
-  \begin{hint}
-    The intent of this exercise is to make you familiar with the notation.
-
-    BTW, such simple test cases are also very useful to test computer code.
-    The numbers in the exercise are one such simple case.
-    You can check the results by hand; if the results of the simulator are different, there is a problem.
-    \end{hint}
-    \begin{solution} Let's feed it to the computer. Mind that in Python (just like in C, and so on), arrays start at index 0, not at index 1. 
-\begin{pyconsole}
-X = [0, 10, 5, 6] 
-S = [0, 17, 20, 5]
-A = [0, 0, 0, 0]
-for i in range(1, len(X)):
-    A[i] = A[i-1] + X[i]
-
-A
-
-WQ = [0, 0, 0, 0]
-for i in range(1, len(X)):
-    WQ[i] = max(WQ[i-1] + S[i-1] - X[i], 0)
-
-WQ
-
-ST = [0,0,0,0]
-for i in range(1, len(X)):
-    ST[i] = WQ[i] + S[i]
-
-ST
-
-D = [0, 0, 0, 0]
-for i in range(1, len(X)):
-    D[i] = A[i] + WQ[i] + S[i]
-
-D
-\end{pyconsole}
-      
-    \end{solution}
-  \end{extra}
 
 
 
@@ -397,6 +275,94 @@ If you fill this in at Wolfram, you'll get the results that we obtained above in
 \end{solution}
 \end{exercise}
 
+The time job $k$ \emph{leaves the queue and moves to the server} is given by
+\begin{equation*}
+ \tilde A_k = A_k + W_{Q,k},
+\end{equation*}
+because a job can only move to the server after its arrival plus the time it needs to wait in queue.
+Note that we here explicitly use the FIFO assumption.
+Right after the job moves from the queue to the server, its service starts.
+Thus,~$\tilde A_{k}$ is also the epoch at which the service of job~$k$ starts.
+
+After completing its service, the job leaves the system.
+Hence, the \recall{departure time of the system} is
+\begin{equation*}
+  D_k = \tilde A_{k} + S_k.
+\end{equation*}
+This in turn specifies the departure process $\{D(t)\}$ as
+\begin{equation*}
+  D(t) = \max\{k : D_k \leq t\} = \sum_{k=1}^\infty \1{D_k \leq t}.
+\end{equation*}
+
+
+
+The \recall{sojourn time}, or \emph{waiting time in the system}, $W_k$, is the time a job spends in the entire system.
+With the above relations we see that
+\begin{equation}
+  W_k = D_k - A_k = \tilde A_{k} + S_k -A_k = W_{Q,k} + S_k,
+\end{equation}
+where each of these equations has its own interpretation. 
+
+
+
+
+
+
+
+\begin{extra}
+  Explain that for the $G/G/1$ the following recursion for~$W_k$ is valid:
+\begin{align}
+  \label{eq:59}
+  W_{Q,k} &= [W_{k-1} - X_k]^+, &
+  W_{k} &= W_{Q,k} + S_k = [W_{k-1} - X_k]^+ + S_k,
+\end{align}
+from which follows a recursion for $D_k$:
+\begin{equation}
+  D_k = A_k + W_k.
+\end{equation}
+\end{extra}
+
+\begin{extra}
+  Assume that $X_1=10$, $X_2=5$, $X_3=6$ and $S_1 = 17$, $S_2=20$ and $S_3=5$, compute the arrival times, waiting times in queue, the sojourn times and the departure times for these three customers.
+  \begin{hint}
+    The intent of this exercise is to make you familiar with the notation.
+
+    BTW, such simple test cases are also very useful to test computer code.
+    The numbers in the exercise are one such simple case.
+    You can check the results by hand; if the results of the simulator are different, there is a problem.
+    \end{hint}
+    \begin{solution} Let's feed it to the computer. Mind that in Python (just like in C, and so on), arrays start at index 0, not at index 1. 
+\begin{pyconsole}
+X = [0, 10, 5, 6] 
+S = [0, 17, 20, 5]
+A = [0, 0, 0, 0]
+for i in range(1, len(X)):
+    A[i] = A[i-1] + X[i]
+
+A
+
+WQ = [0, 0, 0, 0]
+for i in range(1, len(X)):
+    WQ[i] = max(WQ[i-1] + S[i-1] - X[i], 0)
+
+WQ
+
+ST = [0,0,0,0]
+for i in range(1, len(X)):
+    ST[i] = WQ[i] + S[i]
+
+ST
+
+D = [0, 0, 0, 0]
+for i in range(1, len(X)):
+    D[i] = A[i] + WQ[i] + S[i]
+
+D
+\end{pyconsole}
+      
+    \end{solution}
+  \end{extra}
+
 
 
 \begin{extra}\label{ex:25}
@@ -487,7 +453,7 @@ Great! Our handiwork matches with the computer's results.
 
 
 
-\begin{exercise} [\faFlask] Explain the following recursions for the $G/G/1$ queue:
+\begin{exercise} Explain the following recursions for the $G/G/1$ queue:
 \begin{equation}
   \label{eq:45}
   \begin{split}
@@ -509,6 +475,35 @@ Great! Our handiwork matches with the computer's results.
     \end{solution}
 \end{exercise}
 
+The \recall{virtual waiting time process} $\{V(t)\}$ is the amount of waiting that an arrival would see if it would arrive at time $t$.
+To construct $\{V(t)\}$, we simply draw lines that start at points $(A_k, W_k)$ and have slope -1, unless the line hits the $x$-axis, in which case the virtual waiting time remains zero until the next arrival occurs.
+%Thus, the lines with slope $-1$ in Figure~\ref{fig:waitingtimegg1} show (a sample path of) the virtual waiting time.
+
+
+\begin{exercise}
+  Provide a specification of the virtual waiting time process $\{V(t)\}$ for
+    all $t$.
+    \begin{hint}Make a plot of the function $A_{A(t)}-t$. What is the meaning of $V(A_{A(t)})?$ What is
+$V(A_{A(t)}) + A_{A(t)}-t$?
+    \end{hint}
+    \begin{solution}
+      There is a funny way to do this.
+      Recall from a previous exercise that if $A(t)=n$, then $A_n$ is the arrival time of the $n$th job.
+      Thus, the function $A_{A(t)}$ provides us with arrival times as a function of $t$.
+      When $t=A_{A(t)}$, i.e., when $t$ is the arrival time of the $A(t)$th job, we set $V(t) = V(A_{A(t)}) = W_{A(t)}$, i.e., the virtual waiting time at the arrival time $t=A_{A(t)}$ is equal to the waiting time of the $A(t)$th job.
+      Between arrival moments, the virtual waiting time decreases with slope $1$, until it hits 0.
+      Thus,
+      \begin{equation*}
+        V(t) 
+= [V(A_{A(t)}) - (t-A_{A(t)})]^+= [W_{A(t)} + (A_{A(t)}-t)]^+.
+      \end{equation*}
+      The notation may be a bit confusing, but it is in fact very simple.
+      Take some $t$, look back at the last arrival time before time $t$, which is written as $A_{A(t)}$.
+      (In computer code these times are easy to find.)
+      Then draw a line with slope $-1$ from the waiting time that the last arrival saw.
+    \end{solution}
+\end{exercise}
+
 Once we have the arrival and departure processes it is easy to compute the \recall{number of jobs in the system} at time $t$ as, cf.
 Figure~\ref{fig:atltdt},
 \begin{equation}\label{eq:14}
@@ -516,6 +511,9 @@ Figure~\ref{fig:atltdt},
 \end{equation}
 where $L(0)$ is the number of jobs in the system at time $t=0$; typically we assume that $L(0)=0$.
 As in a queueing system, jobs can be in queue or in service, we distinguish between the number in the system $L(t)$, the number in queue $L_Q(t)$, and the number of jobs in service $L_s(t)$.
+
+
+In summary, starting from a sequence of inter-arrival times $\{X_k\}$ and service times $\{S_k\}$ we can obtain a set of recursions by which we simulate a queueing process in continuous time, A bit of experimentation with computer programs such as $R$ or Python will reveal that this is easy.
 
 \begin{extra}
   Explain that if we know $\tilde A(t)$, i.e.
@@ -529,7 +527,8 @@ L_s(t) &= \tilde A(t) - D(t) = L(t) - L_Q(t).
 \end{extra}
 
 
-\begin{figure}[t]
+
+\begin{figure}[ht]
   \centering
 \begin{tikzpicture}[scale=0.9,
   open/.style={shape=circle, fill=white, inner sep=1pt, draw, node contents=},
@@ -613,8 +612,8 @@ L_s(t) &= \tilde A(t) - D(t) = L(t) - L_Q(t).
 \end{extra}
 
 
-\begin{exercise} It is clear that $L(t) = A(t)-D(t)$.
-  Show that, when the system starts empty, this implies that $L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}$.
+\begin{exercise}
+  Show that, when the system starts empty, $L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}$.
   \begin{hint}
     Use Boolean algebra.
     Write, for notational ease, $A=\1{A_k \leq t}$ and $\bar A = 1- A = \1{A_k > t}$, and define something similar for $D$.
@@ -672,21 +671,19 @@ L_s(t) &= \tilde A(t) - D(t) = L(t) - L_Q(t).
 \end{solution}
 \end{extra}
 
-Since in queueing systems we are concerned with processes with jumps, we need to be quite particular about left and right limits at jump epochs.
-
-
-\begin{exercise} [\faPhoto]
 Define the number of jobs in the system as seen by the $k$th arrival  as
 \begin{equation}
   \label{eq:Lk}
   L(A_k-).
 \end{equation}
-(Observe that the $k$th job arrives at time $A_k$ and $\{L(s)\}$ is right-continuous.)
-Can you derive the following (algorithmic efficient) procedure to
-    compute the number of jobs in the system as seen by arrivals,
+(Since in queueing systems we are concerned with processes with jumps, we need to be quite particular about left and right limits at jump epochs.)
+
+
+\begin{exercise}\label{ex:55}
+  Explain the following (algorithmic efficient) procedure to compute the number of jobs in the system as seen by arrivals:
   \begin{equation*}
-    L(A_k-) = L(A_{k-1}-)+1 - \sum_{i= k-1 - L(A_{k-1}-)}^{k-1} \1{D_i< A_k}?
-  \end{equation*} Why do we take $i=k-1-L(A_{k-1}-)$ in  the sum, and not $i=k-2-L(A_{k-1}-)$?
+    L(A_k-) = L(A_{k-1}-)+1 - \sum_{i= k-1 - L(A_{k-1}-)}^{k-1} \1{D_i< A_k}.
+  \end{equation*}
 % \hint{ Realize that $L_k = k - 1 - D(A_k)$. 
 % what happens to job k-1?
 % }
@@ -711,19 +708,25 @@ Can you derive the following (algorithmic efficient) procedure to
     with the formula.  Also, if $L(A_{k-1}-)=0$ and $D_{k-1}< A_k$ then
     $L(A_k-) = 0$. This also checks with the formula. 
 
+\end{solution}
+\end{exercise}
+
+
+\begin{extra}
+  In Exercise~\ref{ex:55},   why do we take $i=k-1-L(A_{k-1}-)$ in  the sum, and not $i=k-2-L(A_{k-1}-)$?
+  \begin{solution}
     The reason to start at $k-1-L(A_{k-1}-)$ is that the number in the
     system as seen by job $k$ is $k-1 - D(A_k)$ (not
     $k-2-D(A_k)$). Hence, the jobs with index from
     $k-1-L(A_{k-1}-), k-L(A_{k-1}-), \ldots, k-1$, could have left the system
     between the arrival of job $k-1$ and job $k$.
-\end{solution}
-\end{exercise}
+  \end{solution}
+\end{extra}
 
 
 
 
-
-\begin{exercise}[\faRocket] Try to extend the recursions~(\ref{eq:45})  to a situation in which one queue is
+\begin{extra}[\faRocket] Try to extend the recursions~(\ref{eq:45})  to a situation in which one queue is
   served by two servers.  
     \begin{hint} The problem is
       that in a multi-server queueing systems, unlike for
@@ -778,7 +781,7 @@ In an attempt to   extend the above to $m>2$ servers, I came up with this scheme
       \end{equation*}
       but it is not correct. Can you find a counterexample?
   \end{solution}
-\end{exercise}
+\end{extra}
 
 
 
