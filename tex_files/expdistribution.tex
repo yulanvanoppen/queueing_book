@@ -30,7 +30,7 @@ X_i\sim \Exp(\lambda) \Leftrightarrow N(t) \sim P(\lambda t).
 We next provide further relations between the Poisson distribution and the exponential distribution. 
 
 
-\begin{exercise}[\faFlask]
+\begin{extra}
 In the above expression for $\P{X\leq t}$ we require that $\lambda>0$. What would happen if you would allow $\lambda$ to be zero or negative?
 \begin{hint}
   The interpretation of the function $1-e^{-\lambda t}$ is a probability. What are the consequences of this? What happens if $\lambda=0$?
@@ -40,10 +40,10 @@ In the above expression for $\P{X\leq t}$ we require that $\lambda>0$. What woul
 
 Suppose $\lambda=0$. Then $\P{X\leq t} = 1-e^{0} = 0$. In words, this would mean that the probability of a finite inter-arrival time between any two customers is zero. So, no customers can arrive in this case. 
 \end{solution}
-\end{exercise}
+\end{extra}
 
 
-\begin{exercise}[\faCalculator] \label{exer:lambda}
+\begin{exercise}\label{exer:lambda}
   If the random variable $X\sim\Exp(\lambda)$, show that its mean $\E X = \frac{1}\lambda$. 
   \begin{hint}
  \begin{equation*}
@@ -63,7 +63,7 @@ Suppose $\lambda=0$. Then $\P{X\leq t} = 1-e^{0} = 0$. In words, this would mean
   \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faCalculator]\label{ex:15} 
+\begin{extra}\label{ex:15} 
   If $X\sim\Exp(\lambda)$, show that its second moment $\E{X^2} =  \frac{2}{\lambda^2}$.
   \begin{hint}
   \begin{equation*}
@@ -81,10 +81,10 @@ Suppose $\lambda=0$. Then $\P{X\leq t} = 1-e^{0} = 0$. In words, this would mean
 &=  2/\lambda^2.
     \end{align*}
   \end{solution}
-\end{exercise}
+\end{extra}
 
 
-\begin{exercise}[\faCalculator]
+\begin{extra}
   If $X\sim\Exp(\lambda)$, show that the \recall{variance}
 $\V X = \lambda^{-2}$.
 \begin{hint} Use~\eqref{eq:68}. 
@@ -96,21 +96,21 @@ $\V X = \lambda^{-2}$.
   \begin{solution}
     By the previous problems, $\E{X^2}=2/\lambda^2$ and $\E X = 1/\lambda$. Hence the variance $\V X = \E{X^2} - (\E X)^2 = \frac{2}{\lambda^2} - (\frac{1}{\lambda})^2 = \lambda^{-2}.$
   \end{solution}
-\end{exercise}
+\end{extra}
 
 The  above exercises can also be easily solved with the moment-generating function of $X$:
 \begin{equation}\label{eq:60}
   M_X(t) = \E{e^{t X}} = \int_0^\infty e^{t x} \lambda e^{-\lambda x} \d x.
 \end{equation}
 
-\begin{exercise}[\faBalanceScale]\label{ex:11}
+\begin{extra}[\faBalanceScale]\label{ex:11}
   Suppose $X\sim\Exp(\lambda)$.
   Only when $t < \lambda$ the moment-generating function $M_X(t)$ is finite.
 \begin{solution} The claim is true. 
 \end{solution}
-\end{exercise}
+\end{extra}
 
-\begin{exercise}[\faCalculator]\label{ex:33}
+\begin{extra}\label{ex:33}
  If $X\sim\Exp(\lambda)$, show that its moment-generating function
     \begin{equation*}
     M_X(t) = \frac{\lambda}{\lambda-t}.
@@ -129,9 +129,9 @@ The  above exercises can also be easily solved with the moment-generating functi
 =\frac{\lambda}{\lambda -t}.
     \end{align*}
     \end{solution}
-  \end{exercise}
+  \end{extra}
 
-\begin{exercise}[\faCalculator]\label{ex:21}
+\begin{exercise}\label{ex:21}
 Use the moment-generating function  of $X\sim\Exp(\lambda)$  to show that
     \begin{align*}
       \E{X} &=\frac1\lambda, & 
@@ -145,7 +145,7 @@ Use~\eqref{eq:69} and \eqref{eq:64}.
 \end{solution}
   \end{exercise}
 
-\begin{exercise}[\faBalanceScale]\label{ex:29}
+\begin{extra}[\faBalanceScale]\label{ex:29}
 When  $X\sim\Exp(\lambda)$ the SCV is larger than $1$.
   \begin{hint}
   Use~\eqref{eq:62} 
@@ -156,12 +156,12 @@ When  $X\sim\Exp(\lambda)$ the SCV is larger than $1$.
     C^2= \frac{\V X}{(\E X)^2} = \frac{1/\lambda^2}{1/\lambda^2} = 1.
   \end{equation*}
 \end{solution}
-\end{exercise}
+\end{extra}
 
 We now provide a number of relations between the Poisson distribution and the exponential distribution  to conclude that a process $N_\lambda$ is a Poisson process with rate $\lambda$ iff the inter-arrival times $\{X_i\}$ between individual jobs are i.i.d. $\sim\Exp(\lambda)$. 
 
 
-\begin{exercise}[\faPhoto]
+\begin{exercise}
   If $N_\lambda$ is a Poisson process with rate $\lambda$, show that the time $X_1$ to the first arriving job is $\Exp(\lambda$).
   \begin{hint}
     What is the meaning of $\P{N(t)=0}$?
@@ -175,7 +175,7 @@ must be that $N(t) = 0$. Hence, for the first inter-arrival time $X_1$:
   \end{solution}
 \end{exercise}
 
-  \begin{exercise}[\faCalculator]
+  \begin{extra}
     Assume that inter-arrival times $\{X_i\}$ are i.i.d. and $\sim\Exp(\lambda)$. Let
 the arrival time of the $i$th job be  $A_i=\sum_{k=1}^i X_k$. Show that %We do not need the MGF here.
  \begin{equation*}
@@ -191,13 +191,13 @@ The simplest way to obtain the answer is to use that the expectation is a linear
 (Just as a reminder, $\E{X Y} \neq \E X \E Y$ in general. Only when $X$ and $Y$ are uncorrelated (which is implied by independence), the product of the expectations is the expectation of the products.)
 
   \end{solution}
-\end{exercise}
+\end{extra}
 
-  \begin{exercise}[\faCalculator]
- Let $A_i$ be the arrival time of customer $i$ and set $A_0=0$.
-    Assume that the inter-arrival times $\{X_i\}$ are i.i.d.  with
-    exponential distribution with mean $1/\lambda$ for some
-    $\lambda>0$.  Prove that $A_i$ has density
+  \begin{extra}\label{ex:54}
+    Let $A_i$ be the arrival time of customer $i$ and set $A_0=0$.
+    Assume that the inter-arrival times $\{X_i\}$ are i.i.d.
+    with exponential distribution with mean $1/\lambda$ for some $\lambda>0$.
+    Prove that $A_i$ has density
 \begin{equation*}
 f_{A_i}(t) = \lambda e^{-\lambda t} \frac{(\lambda t)^{i-1}}{(i-1)!}.
 \end{equation*}
@@ -209,11 +209,10 @@ f_{A_i}(t) = \lambda e^{-\lambda t} \frac{(\lambda t)^{i-1}}{(i-1)!}.
      $X_i$ are independent. Use the moment-generating function  of $X_i$.
 \end{hint}
 \begin{solution}
- One way to find the distribution of $A_i$ is by using the
-    moment-generating function $M_{A_i}(t) = \E{e^{t A_i}}$ of
-    $A_i$. Let $X_i$ be the inter-arrival time between customers $i$
-    and $i-1$, and $M_X(t)$ the associated moment-generating
-    function. Using the i.i.d. property of the $\{X_i\}$,
+  One way to find the distribution of $A_i$ is by using the moment-generating function $M_{A_i}(t) = \E{e^{t A_i}}$ of $A_i$.
+  Let $X_i$ be the inter-arrival time between customers $i$ and $i-1$, and $M_X(t)$ the associated moment-generating function.
+  Using the i.i.d.
+  property of the $\{X_i\}$,
 \begin{align*}
   M_{A_i}(t) &= \E{e^{t A_i}} = \E{\exp\left(t\sum_{k=1}^{i} X_k\right)} \\
 & = \prod_{k=1}^{i} \E{e^{tX_k}} = 
@@ -224,10 +223,10 @@ f_{A_i}(t) = \lambda e^{-\lambda t} \frac{(\lambda t)^{i-1}}{(i-1)!}.
 From a table of moment-generating functions it follows immediately that
 $A_i \sim \Gamma(i,\lambda)$, i.e., $A_i$ is Gamma distributed.
 \end{solution}
-\end{exercise}
+\end{extra}
 
-\begin{exercise}[\faCalculator]
-  Use the density $f_{A_i}$ of the previous exercise to show that $\E{A_i}=i/\lambda$. 
+\begin{extra}
+  Use the density $f_{A_i}$ of exercise~\ref{ex:54} to show that $\E{A_i}=i/\lambda$. 
   \begin{hint}
 Use the standard integral 
     $\int_0^\infty x^n e^{-\alpha x} \d x =
@@ -258,9 +257,9 @@ What if we would use the moment-generating function, as derived by the previous 
 
 
 \end{solution}
-\end{exercise}
+\end{extra}
 
-\begin{exercise}[\faCalculator]
+\begin{exercise}
   If the inter-arrival times $\{X_i\}$ are i.i.d.
   $\sim \Exp(\lambda)$, prove that the number $N(t)$ of arrivals during interval $[0,t]$ is Poisson distributed.
   \begin{hint}
@@ -272,10 +271,8 @@ What if we would use the moment-generating function, as derived by the previous 
     \begin{equation*}
       \P{N(t)=k} = e^{-\lambda t}\frac{(\lambda t)^k}{k!}.
     \end{equation*}
-    Now observe that
-    $\P{N(t)=k} = \P{A_k \leq t} - \P{A_{k+1} \leq t}$.  Using the
-    density of $A_{k+1}$ as obtained previously and applying partial
-    integration leads to
+    Now observe that $\P{N(t)=k} = \P{A_k \leq t} - \P{A_{k+1} \leq t}$.
+    Using the density of $A_{k+1}$ and applying partial integration leads to
 \begin{align*}
 \P{A_{k+1} \leq t} 
 &= \lambda \int_0^t \frac{(\lambda s)^{k}}{k!}e^{-\lambda s}\, \d s \\
@@ -293,8 +290,11 @@ A random variable $X$ is called \recall{memoryless} when it satisfies
 \end{equation*}
 In words, the probability that $X$ is larger than some time $t+h$, conditional on it being larger than a time~$t$, is equal to the probability that $X$ is larger than $h$.
 
-\begin{exercise}[\faCalculator]
-  Show that $X\sim \Exp(\lambda)$ is  memoryless.  
+\begin{exercise}
+  Show that $X\sim \Exp(\lambda)$ is memoryless.
+  In fact, it can be shown that only exponential random variables have the memoryless property.
+  The proof of this fact requires quite some work; we refer the reader to the literature if s/he wants to check this, see e.g.
+  \citet[Appendix 3]{yushkevich69:_markov_proces}.
 
   \begin{hint}
 Condition on the event ${X>t}$. 
@@ -308,22 +308,15 @@ By  the definition of conditional probability
 Thus, no matter how long we have been waiting for the next arrival to occur, the probability that it will occur in the next $h$ seconds remains the same.
 
 
-This property
-seems to be vindicated also in practice: suppose that a patient with a
-broken arm just arrived at the emergency room of a hospital, what does
-that tell us about the time the next patient will be brought in? Not
-much, as most of us will agree.
+This property seems to be vindicated also in practice: suppose that a patient with a broken arm just arrived at the emergency room of a hospital, what does that tell us about the time the next patient will be brought in?
+Not much, as most of us will agree.
 
 
-As an aside,  it can be shown that only exponential random variables have the
-memoryless property. The proof of this fact requires quite some work;
-we refer the reader to the literature if s/he wants to check this, see
-e.g. \citet[Appendix 3]{yushkevich69:_markov_proces}.
   \end{solution}
 \end{exercise}
 
 
-\begin{exercise}[\faCalculator]\label{ex:10}
+\begin{extra}\label{ex:10}
   If $X\sim\Exp(\lambda)$ and $S\sim\Exp(\mu)$, and $X$ and $S$ are
   independent, show that 
   \begin{equation*}
@@ -344,9 +337,9 @@ Use that $X$ and $S$ are independent to get
       \end{split}
     \end{equation*}
   \end{solution}
-\end{exercise}
+\end{extra}
 
-\begin{exercise}[\faCalculator]\label{ex:3}
+\begin{extra}\label{ex:3}
    If $X\sim \Exp(\lambda)$, $S\sim\Exp(\mu)$, and $X$ and $S$ are independent, show that 
     \begin{equation*}
       \P{X\leq S} = \frac{\lambda}{\lambda+\mu}.
@@ -380,11 +373,11 @@ With this,
 \end{align*}
 
 \end{solution}
-\end{exercise}
+\end{extra}
 
 
 
-\begin{exercise}[\faCalculator]\label{ex:49}
+\begin{extra}\label{ex:49}
   A machine serves two types of jobs. The processing time of jobs of
   type $i$, $i=1,2$, is exponentially distributed with parameter
   $\mu_i$. The type $T$ of a job is random and independent of anything
@@ -447,7 +440,7 @@ we get
 + pq(\E{X_1} - \E{X_2})^2.
 \end{align*}
 \end{solution}
-\end{exercise}
+\end{extra}
 
 
 
