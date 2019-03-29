@@ -10,63 +10,62 @@
 \Opensolutionfile{ans}
 }
 
-In Section~\ref{sec:constr-discr-time} we considered time in discrete `chunks':
-minutes, hours, days, and so on. For given numbers of arrivals and
-capacity per period we use the recursions~\eqref{eq:31} to
-compute the departures and queue length per period.  However, we can also model time in a continuous way, and assume that jobs can come in at any moment.
-In this section we consider a single-server FIFO queueing process in continuous time. 
+In Section~\ref{sec:constr-discr-time} we modeled time as progressing in discrete `chunks': minutes, hours, days, and so on.
+For given numbers of arrivals and capacity per period we use the recursions~\eqref{eq:31} to compute the departures and queue length per period.
+However, we can also model time in a continuous way, so that  jobs can arrive at any moment and have arbitrary service times. 
+In this section we consider a single-server FIFO queueing process in continuous time.
 
-Assume we are given, as basic data, the \recall{arrival process}
-$\{A(t); t\geq 0\}$: the number of jobs that arrived during $[0,t]$.
+Assume we are given the \recall{arrival process} $\{A(t); t\geq 0\}$, i.e., the number of jobs that arrived during $[0,t]$.
 Thus, $\{A(t); t\geq 0\}$ is a \emph{counting process}.
 
-From this arrival process we can derive various other interesting
-concepts, such as the arrival times of individual jobs. Specially, if
-we know that $A(s) = k-1$ and $A(t) = k$, then the arrival time $A_k$
-of the $k$th job must lie somewhere in $(s,t]$. Thus, from $\{A(t)\}$, we can define
+From this arrival process we can derive various other interesting concepts, such as the \recall{arrival times} of individual jobs.
+Specially, if we know that $A(s) = k-1$ and $A(t) = k$, then the arrival time $A_k$ of the $k$th job must lie somewhere in $(s,t]$.
+Thus, from $\{A(t)\}$, we can define
 \begin{equation}\label{eq:27}
-  A_k = \inf\{t: A(t) \geq k\},
+  A_k = \min\{t: A(t) \geq k\},
 \end{equation}
-and set $A_0 = 0$. Once we have the set of arrival times $\{A_k\}$,
-the \recall{inter-arrival times} $\{X_k, k=1, 2, \ldots\}$ between
-consecutive customers can be constructed as
+and set $A_0 = 0$\footnote{If we want to be mathematically precise, we must take $\inf$ rather than $\min$.
+  However, in this set of notes we do not want to distinguish between  subtleties.}.
+Once we have the set of arrival times $\{A_k\}$, the set of \recall{inter-arrival times} $\{X_k, k=1, 2, \ldots\}$ between consecutive customers can be constructed as
 \begin{equation}
   X_k = A_k - A_{k-1}.
 \end{equation}
 
-Often the basic data consists of the inter-arrival times
-$\{X_k; k=1,2,\ldots\}$ rather than the arrival times $\{A_k\}$ or
-the arrival process~$\{A(t)\}$. Then we  construct the arrival
-times as
+However, often the basic data consists of the inter-arrival times $\{X_k; k=1,2,\ldots\}$ rather than the arrival times $\{A_k\}$ or the arrival process~$\{A(t)\}$.
+Then we construct the arrival times as
 \begin{equation*}
   A_k = A_{k-1} + X_k,
 \end{equation*}
-with $A_0 = 0$.  From the arrival times $\{A_k\}$ we can, in
-turn, construct the arrival process $\{A(t)\}$ as 
-\begin{subequations}
-  \label{eq:2}
-\begin{equation}
-  A(t) = \sum_{k=1}^\infty \1{A_k \leq t},
-\end{equation}
-where $\1{\cdot}$ is the indicator function. Thus, in the above we count
-all arrivals that occur up to and including time~$t$. Another, equivalent, way to
-define $A(t)$ is\footnote{For the mathematically inclined: formally we should use here $\sup$ rather than $\max$. However, in any practical setting such details are irrelevant. Hence we ignore them.}
-\begin{equation}
+with $A_0 = 0$.
+From the arrival times $\{A_k\}$ we can, in turn, construct the arrival process $\{A(t)\}$ as
+\begin{equation}  \label{eq:2}
   A(t) = \max\{k: A_k \leq t\}.
 \end{equation}
-\end{subequations}
+Thus, from the inter-arrival times $\{X_k\}$ it is possible to construct $\{A_k\}$ and $\{A(t)\}$, and the other way around, from $\{A(t)\}$ we can find $\{A_k\}$ and $\{X_k\}$.
 
-Clearly, we see that from the inter-arrival times $\{X_k\}$ it is
-possible to construct $\{A_k\}$ and $\{A(t)\}$, and the other way
-around, from $\{A(t)\}$ we can find $\{A_k\}$ and $\{X_k\}$.
-Figure~\ref{fig:waitingtimegg1} shows these relations graphically. To
-memorize this, it may be helpful to write it like this:
+
+\begin{extra}
+Show that we can also define $A(t)$ as
+\begin{equation}
+  A(t) = \sum_{k=1}^\infty \1{A_k \leq t}.
+\end{equation}
+Thus, we just count all arrivals that occur up to and including time~$t$.
+\end{extra}
+
+
+%Figure~\ref{fig:waitingtimegg1} shows these relations graphically.
+\begin{extra}[\faBalanceScale]
+The following mappings are correct:
 \begin{align*}
   A_k : \N \to \R, \quad{\text{job id (integer) to arrival time (real number)}}, \\
   A(t) : \R\to \N, \quad{\text{time (real number) to number of jobs (integer)}}.
 \end{align*}
+\begin{solution}
+  True. 
+\end{solution}
+\end{extra}
 
-\begin{exercise}[\faFlask]
+\begin{extra}
  What are  the meanings of $A_{A(t)}$ and $A(A_n)$?
  \begin{solution}
   $A(t)$ is the number of arrivals during $[0,t]$. Suppose that
@@ -76,9 +75,9 @@ memorize this, it may be helpful to write it like this:
     job. Thus, the number of arrivals up to time $A_n$, i.e., $A(A_n)$,
     must be $n$.
   \end{solution}
-\end{exercise}
+\end{extra}
 
-\begin{exercise}[\faFlask]\label{ex:22}
+\begin{extra}\label{ex:22}
   In view of the above, can  $A(t)$ be defined as $\min\{k : A_k \geq t\}$ or as $\min\{k: A_k > t\}$?
   \begin{hint}
 Compare this to the definition in (\ref{eq:2}).
@@ -89,17 +88,21 @@ Compare this to the definition in (\ref{eq:2}).
     other hand $\max\{k : A_k \leq t\} = 3$. And, indeed, at time $t=15$, 3 jobs arrived, not 4. So defining $A(t)$ as $\min\{k : A_k \geq t\}$ is not OK.  This example also shows that in general $A(t) \neq \min\{k : A_k > t\}$. So, neither definition is correct. 
 
   \end{solution}
-\end{exercise}
+\end{extra}
 
-To compute the departure times $\{D_k\}$ we proceed in stages.
-The first stage is to construct the \recall{waiting time in queue} $\{W_{Q,k}\}$ as seen by the arrivals.
-Observe in Figure~\ref{fig:waitingtimegg1} that the waiting time of the $k$th arrival must be equal to the waiting time of the $k-1$th customer plus the amount of \recall{service time} required by job $k-1$ minus the time that elapses between the arrival of job $k-1$ and job $k$, unless the server becomes idle between jobs $k-1$ and $k$.
-In other words,
+We next construct the \recall{waiting time in queue} $\{W_{Q,k}\}$ as seen by the arrivals.
+From  Figure~\ref{fig:waitingtimegg1} it is evident that 
 \begin{equation}\label{eq:56}
-  W_{Q,k} = [W_{Q,k-1} + S_{k-1}-X_k]^+,
+  W_{Q,k} = [W_{Q,k-1} + S_{k-1}-X_k]^+.
 \end{equation}
-where $[x]^+ = \max\{x, 0\}$. If we set $W_{Q,0}=0$, we can compute
-$W_{Q,1}$ from this formula, and then $W_{Q,2}$ and so on.
+To use this, set $W_{Q,0}=0$, from which we can compute $W_{Q,1}$, and then $W_{Q,2}$ and so on.
+
+\begin{extra}
+Explain that  $W_{Q,k} = [W_{Q,k-1} + S_{k-1}-X_k]^+$. 
+  \begin{solution}
+The waiting time of the $k$th arrival must be equal to the waiting time of the $k-1$th customer plus the amount of \recall{service time} required by job $k-1$ minus the time that elapses between the arrival of job $k-1$ and job $k$, unless the server becomes idle between jobs $k-1$ and $k$.
+  \end{solution}
+\end{extra}
 
 \begin{figure}[t]
   \centering
@@ -165,40 +168,85 @@ node[right] (c2) at (5,-1.5) {$A_{k}$}
 (c1) -- (c2)
 node[midway, fill=white] {$X_{k}$};
 \end{tikzpicture}
-\caption{Construction of the single-server queue in continuous time. The
-  sojourn time~$W_{k}$ of the~$k$th job is the sum of the work in queue~$W_{Q,k}$ at its arrival epoch~$A_k$ and its service time~$S_k$;
-  its departure time is then $D_k=A_k + W_k$. The waiting time of job
-  $k$ is clearly equal to $W_{k-1}-X_{k}$. We also see that job~$k+1$
-  arrives at an empty system, hence its sojourn time
-  $W_{k+1}=S_{k+1}$. Finally, the virtual waiting time process is
-  shown by the lines with slope~$-1$.}
+\caption{Construction of the single-server queue in continuous time.
+  The sojourn time~$W_{k}$ of the~$k$th job is the sum of the work in queue~$W_{Q,k}$ at its arrival epoch~$A_k$ and its service time~$S_k$; its departure time is then $D_k=A_k + W_k$.
+  The waiting time of job $k$ is clearly equal to $W_{k-1}-X_{k}$.
+  We also see that job~$k+1$ arrives at an empty system, hence its sojourn time $W_{k+1}=S_{k+1}$.
+  Finally, the virtual waiting time process is shown by the lines with slope~$-1$.}
   \label{fig:waitingtimegg1}
 \end{figure}
 
-The time job $k$ \emph{leaves the queue and moves to the server} is
+The time job $k$ \emph{leaves the queue and moves to the server} is given by
 \begin{equation*}
  \tilde A_k = A_k + W_{Q,k},
 \end{equation*}
-because a job can only move to the server after its arrival plus the
-time it needs to wait in queue.  Note that we here explicitly use the
-FIFO assumption.
+because a job can only move to the server after its arrival plus the time it needs to wait in queue.
+Note that we here explicitly use the FIFO assumption.
+Right after the job moves from the queue to the server, its service starts.
+Thus,~$\tilde A_{k}$ is also the epoch at which the service of job~$k$ starts.
 
-Right after the job moves from the queue to the server, its service starts.  Thus,~$\tilde A_{k}$ is the epoch at which the service of job~$k$ starts. After completing its service,
-the job leaves the system. Hence, the \recall{departure time of the
-  system} is
+After completing its service, the job leaves the system.
+Hence, the \recall{departure time of the system} is
 \begin{equation*}
   D_k = \tilde A_{k} + S_k.
 \end{equation*}
+This in turn specifies the departure process $\{D(t)\}$ as
+\begin{equation*}
+  D(t) = \max\{k : D_k \leq t\} = \sum_{k=1}^\infty \1{D_k \leq t}.
+\end{equation*}
 
-The \recall{sojourn time}, or \emph{waiting time in the system}, $W_k$, is the
-time a job spends in the entire system. With the above relations we
-see that
+Finally, the \recall{sojourn time}, or \emph{waiting time in the system}, $W_k$, is the time a job spends in the entire system.
+With the above relations we see that
 \begin{equation}
   W_k = D_k - A_k = \tilde A_{k} + S_k -A_k = W_{Q,k} + S_k,
 \end{equation}
 where each of these equations has its own interpretation. 
 
-A bit of similar reasoning gives another recursion for~$W_k$:
+Finally, the \recall{virtual waiting time process} $\{V(t)\}$ is the amount of waiting that an arrival would see if it would arrive at time $t$.
+To construct $\{V(t)\}$, we simply draw lines that start at points $(A_k, W_k)$ and have slope -1, unless the line hits the $x$-axis, in which case the virtual waiting time remains zero until the next arrival occurs.
+Thus, the lines with slope $-1$ in Figure~\ref{fig:waitingtimegg1} show (a sample path of) the virtual waiting time.
+
+
+Observe that, just as in Section~\ref{sec:constr-discr-time}, we have obtained a set of recursions by which we can run a simulation of a queueing process of whatever length we need, provided we have a sequence of inter-arrival times $\{X_k\}$ and service times $\{S_k\}$.
+A bit of experimentation with computer programs such as $R$ or Python will reveal that this is easy.
+
+
+
+
+
+\begin{exercise}[\faPhoto]
+  Provide a specification of the virtual waiting time process $\{V(t)\}$ for
+    all $t$.
+    \begin{hint}Make a plot of the function $A_{A(t)}-t$. What is the meaning of $V(A_{A(t)})?$ What is
+$V(A_{A(t)}) + A_{A(t)}-t$?
+    \end{hint}
+    \begin{solution}
+      There is a funny way to do this. Recall from a previous exercise
+      that if $A(t)=n$, then $A_n$ is the arrival time of the $n$th
+      job. Thus, the function $A_{A(t)}$ provides us with arrival
+      times as a function of $t$. When $t=A_{A(t)}$, i.e., when $t$ is
+      the arrival time of the $A(t)$th job, we set
+      $V(t) = V(A_{A(t)}) = W_{A(t)}$, i.e., the virtual waiting time
+      at the arrival time $t=A_{A(t)}$ is equal to the waiting time of
+      the $A(t)$th job. Between arrival moments, the virtual waiting
+      time decreases with slope $1$, until it hits 0.  Thus,
+      \begin{equation*}
+        V(t) 
+= [V(A_{A(t)}) - (t-A_{A(t)})]^+= [W_{A(t)} + (A_{A(t)}-t)]^+.
+      \end{equation*}
+      The notation may be a bit confusing, but it is in fact very
+      simple. Take some $t$, look back at the last arrival time before
+      time $t$, which is written as $A_{A(t)}$. (In computer code these
+      times are easy to find.) Then draw a line with slope $-1$ from
+      the waiting time that the last arrival saw.
+    \end{solution}
+\end{exercise}
+
+
+
+
+\begin{extra}
+  Explain that for the $G/G/1$ the following recursion for~$W_k$ is valid:
 \begin{align}
   \label{eq:59}
   W_{Q,k} &= [W_{k-1} - X_k]^+, &
@@ -208,24 +256,16 @@ from which follows a recursion for $D_k$:
 \begin{equation}
   D_k = A_k + W_k.
 \end{equation}
-This in turn specifies the departure process $\{D(t)\}$ as
-\begin{equation*}
-  D(t) = \max\{k : D_k \leq t\} = \sum_{k=1}^\infty \1{D_k \leq t}.
-\end{equation*}
+\end{extra}
 
-\begin{exercise}[\faFlask]
- Assume that $X_1=10$, $X_2=5$, $X_3=6$ and $S_1 = 17$,
-    $S_2=20$ and $S_3=5$, compute the arrival times, waiting times in
-    queue, the sojourn times and the departure times for these three
-    customers.
+\begin{extra}
+  Assume that $X_1=10$, $X_2=5$, $X_3=6$ and $S_1 = 17$, $S_2=20$ and $S_3=5$, compute the arrival times, waiting times in queue, the sojourn times and the departure times for these three customers.
   \begin{hint}
-     The intent of this exercise is
-      to make you familiar with the notation.
+    The intent of this exercise is to make you familiar with the notation.
 
-      BTW, such simple test cases are also very useful to test
-      computer code. The numbers in the exercise are one such simple
-      case. You can check the results by hand; if the results of the
-      simulator are different, there is a problem.
+    BTW, such simple test cases are also very useful to test computer code.
+    The numbers in the exercise are one such simple case.
+    You can check the results by hand; if the results of the simulator are different, there is a problem.
     \end{hint}
     \begin{solution} Let's feed it to the computer. Mind that in Python (just like in C, and so on), arrays start at index 0, not at index 1. 
 \begin{pyconsole}
@@ -257,11 +297,11 @@ D
 \end{pyconsole}
       
     \end{solution}
-  \end{exercise}
+  \end{extra}
 
 
 
-\begin{exercise}[\faFlask]
+\begin{exercise}
   If $S\sim U[0,7]$ and $X\sim U[0,10]$, where $U[I]$ stands for the
   uniform distribution concentrated on the interval $I$, compute
   $\P{S-X\leq u}$, for  $S$ and $X$ independent.
@@ -359,7 +399,7 @@ If you fill this in at Wolfram, you'll get the results that we obtained above in
 
 
 
-\begin{exercise}[\faFlask]\label{ex:25}
+\begin{extra}\label{ex:25}
  Assume that $X_k = 10$ minutes and $S_k = 11$ minutes for all
     $k$, i.e., $X_k$ and $S_k$ are deterministic and constant. What
     are $\lambda$ and $\mu$?  Compute $A_k$, $W_k$, $D_k$ as functions of $k$. Then find expressions for $A(t)$, $D(t)$, and  $L(A_k-)$. 
@@ -381,21 +421,10 @@ If you fill this in at Wolfram, you'll get the results that we obtained above in
 
 From this example you can infer that it is necessary that the service rate is greater than the arrival rate, i.e.,  $\mu > \lambda$,  for otherwise the queue length keeps on increasing (on the long run).
   \end{solution}
-\end{exercise}
+\end{extra}
 
 
-\begin{exercise}[\faFlask]
- Yet another simple case is to take $X_k=10$ minutes and
-    $S_k=9$ minutes for all $k$. Answer the same questions as in the
-    previous exercise.
-  \begin{solution}
- Trivial.
-  \end{solution}
-\end{exercise}
-
-
-
-\begin{exercise}[\faCalculator]
+\begin{extra}
   Suppose that $X_k\in\{1,3\}$ such that $\P{X_k=1}=\P{X_k=3}$ and
   $S_k\in\{1,2\}$ with $\P{S_k=1}=\P{S_k=2}$. If $W_{Q,0}=3$, what are
   the distributions of $W_{Q,1}$ and $W_{Q,2}$?  
@@ -454,10 +483,11 @@ W
 Great! Our handiwork matches with the computer's results. 
 
 \end{solution}
-\end{exercise}
+\end{extra}
 
 
-Another set of recursions to compute the arrival and departure times for the single-server queue is the following:
+
+\begin{exercise} [\faFlask] Explain the following recursions for the $G/G/1$ queue:
 \begin{equation}
   \label{eq:45}
   \begin{split}
@@ -467,31 +497,36 @@ Another set of recursions to compute the arrival and departure times for the sin
   \end{split}
 \end{equation}
 
-\begin{exercise} [\faFlask] Why do the recursions of Eq.~(\ref{eq:45}) work? 
   \begin{solution}
- Of course, the service of job $k$ cannot start before it
-      arrives. Hence, it cannot leave before $A_k + S_k$. Therefore it
-      must be that $D_k \geq A_k +S_k$. But the service of job $k$ can
-      also not start before the previous job, i.e. job $k-1$, left the
-      server. Thus job $k$ cannot start before $D_{k-1}$. To clarify
-      it somewhat further, define $S_k'$ as the earliest start of job
-      $k$. Then it must be that $S_k' = \max\{A_k, D_{k-1}\}$---don't
-      confuse the earliest start $S_k'$ and the service time
-      $S_k$---and $D_k = S_k' + S_k$.
+    Of course, the service of job $k$ cannot start before it arrives.
+    Hence, it cannot leave before $A_k + S_k$.
+    Therefore it must be that $D_k \geq A_k +S_k$.
+    But the service of job $k$ can also not start before the previous job, i.e.
+    job $k-1$, left the server.
+    Thus job $k$ cannot start before $D_{k-1}$.
+    To clarify it somewhat further, define $S_k'$ as the earliest start of job $k$.
+    Then it must be that $S_k' = \max\{A_k, D_{k-1}\}$---don't confuse the earliest start $S_k'$ and the service time $S_k$---and $D_k = S_k' + S_k$.
     \end{solution}
 \end{exercise}
 
-Once we have the arrival and departure processes it is easy to compute
-the \recall{number of jobs in the system} at time $t$ as
+Once we have the arrival and departure processes it is easy to compute the \recall{number of jobs in the system} at time $t$ as, cf.
+Figure~\ref{fig:atltdt},
 \begin{equation}\label{eq:14}
   L(t) = A(t) - D(t) + L(0),
 \end{equation}
-where $L(0)$ is the number of jobs in the system at time $t=0$;
-typically we assume that $L(0)=0$. Thus, if we were to plot $A(t)$ and
-$D(t)$ as functions of $t$, then the difference $L(t)$ between the
-graphs of $A(t)$ and $D(t)$ tracks the number in the system, see
-Figure~\ref{fig:atltdt}. 
+where $L(0)$ is the number of jobs in the system at time $t=0$; typically we assume that $L(0)=0$.
+As in a queueing system, jobs can be in queue or in service, we distinguish between the number in the system $L(t)$, the number in queue $L_Q(t)$, and the number of jobs in service $L_s(t)$.
 
+\begin{extra}
+  Explain that if we know $\tilde A(t)$, i.e.
+  the number of jobs that departed from the queue up to time $t$, then
+\begin{align*}
+  L_Q(t) &= A(t) - \tilde A(t), \\
+L_s(t) &= \tilde A(t) - D(t) = L(t) - L_Q(t).
+\end{align*}
+\begin{equation*}
+\end{equation*}
+\end{extra}
 
 
 \begin{figure}[t]
@@ -539,71 +574,52 @@ Figure~\ref{fig:atltdt}.
 \end{tikzpicture}
 
   
-  \caption{Relation between the arrival process $\{A(t)\}$, the
-    departure process $\{D(t)\}$, the number in the system $\{L(t)\}$
-    and the waiting times $\{W_k\}$.}
+\caption{Relation between the arrival process $\{A(t)\}$, the departure process $\{D(t)\}$, the number in the system $\{L(t)\}$ and the waiting times $\{W_k\}$.
+  In particular, $L(t)$ is the difference graphs of $A(t)$ and $D(t)$.
+}
   \label{fig:atltdt}
 \end{figure}
 
-Observe that in a queueing system, jobs can be in queue or in
-service. For this reason we distinguish between the number in the
-system $L(t)$, the number in queue $L_Q(t)$, and the number of jobs in
-service $L_s(t)$. If we know $\tilde A(t)$, i.e. the number of jobs that
-departed from the queue up to time $t$, then
-\begin{equation*}
-  L_Q(t) = A(t) - \tilde A(t)
-\end{equation*}
-must be the number of jobs in queue. The above expressions for $L(t)$
-and $L_Q(t)$ then show that the number in service must be
-\begin{equation*}
-L_s(t) = \tilde A(t) - D(t) = L(t) - L_Q(t).
-\end{equation*}
 
 
 
-\begin{exercise}[\faFlask]
-Why don't we need separate notation for $D_s(t)$, the number
-    of jobs that departed from the server? 
+\begin{extra}
+  Why don't we need separate notation for $D_s(t)$, the number of jobs that departed from the server?
 \begin{solution}
  Because $D_s(t) = D(t)$. Once customers leave the server,
     their service is completed, and they leave the queueing system.
   \end{solution}
-\end{exercise}
+\end{extra}
 
-
-
-\begin{exercise}[\faFlask]
+\begin{extra}
  Is $\tilde A(t) \leq D(t)$ or $\tilde A(t) \geq D(t)$?
 \begin{solution}
  All customers that left the system must have left the
     queue. Thus, $\tilde A(t) \geq D(t)$.
   \end{solution}
-\end{exercise}
+\end{extra}
 
 
 
-
-
-\begin{exercise}[\faFlask]
- Consider a multi-server queue with $m$ servers. Suppose that
-    at some time~$t$ it happens that $\tilde A(t) - D(t) < m$ even though
-    $A(t) - D(t) > m$. How can this occur? 
+\begin{extra}
+  Consider a multi-server queue with $m$ servers.
+  Suppose that at some time~$t$ it happens that $\tilde A(t) - D(t) < m$ even though $A(t) - D(t) > m$.
+  How can this occur?
 \begin{solution}
  In this case, there are servers idling while there are still
     customers in queue. If such events occur, we say that the server
     is not work-conservative.
 \end{solution}
-\end{exercise}
+\end{extra}
 
 
-\begin{exercise}[\faCalculator] It is clear  that $L(t) = A(t)-D(t)$. Show that, when the system starts empty, this implies that
-$L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}$.
+\begin{exercise} It is clear that $L(t) = A(t)-D(t)$.
+  Show that, when the system starts empty, this implies that $L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}$.
   \begin{hint}
-  Use Boolean algebra.  Write, for notational ease,
-    $A=\1{A_k \leq t}$ and $\bar A = 1- A = \1{A_k > t}$, and define
-    something similar for $D$.  Then show that
-    $A - D = A \bar D - \bar A D$, and show that $\bar A D
-    =0$. Finally sum over $k$.
+    Use Boolean algebra.
+    Write, for notational ease, $A=\1{A_k \leq t}$ and $\bar A = 1- A = \1{A_k > t}$, and define something similar for $D$.
+    Then show that $A - D = A \bar D - \bar A D$, and show that $\bar A D =0$.
+    Finally sum over $k$.
   \end{hint}
 
 \begin{solution}
@@ -631,23 +647,20 @@ $L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}$.
 &= \sum_{k=1}^\infty \1{A_k \leq t < D_k}.
     \end{split}
   \end{equation*}
-
-  Boolean algebra is actually a really nice way to solve logical
-  puzzles. If you are interested you can find some examples on my
-  homepage. 
+  Boolean algebra is actually a really nice way to solve logical puzzles.
+  If you are interested you can find some examples on my homepage.
 \end{solution}
 
 \end{exercise}
 
-\begin{exercise}[\faFlask] Show  that $L(A_k)>0 \implies A_k \leq D_{k-1}$.
-  \begin{hint} Use that $L(A_k)>0$ means that the system contains at least one
-  job at the time of the $k$th arrival, and that $A_k \leq D_{k-1}$ means that
-  job $k$ arrives before job $k-1$ departs.
+\begin{extra} Show  that $L(A_k)>0 \implies A_k \leq D_{k-1}$.
+  \begin{hint} Use that $L(A_k)>0$ means that the system contains at least one job at the time of the $k$th arrival, and that $A_k \leq D_{k-1}$ means that job $k$ arrives before job $k-1$ departs.
   \end{hint}
-\begin{solution}  In a sense, the claim is evident, for, if the system contains a
-  job when job $k$ arrives, it cannot be empty. But if it is not
-  empty, then at least the last job that arrived before job $k$, i.e.,
-  job $k-1$, must still be in the system. That is, $D_{k-1} \geq A_k$. A more formal proof proceeds along the following lines. Using that $A(A_k) = k$ and $D(D_{k-1})= k-1$, 
+  \begin{solution} In a sense, the claim is evident, for, if the system contains a job when job $k$ arrives, it cannot be empty.
+    But if it is not empty, then at least the last job that arrived before job $k$, i.e., job $k-1$, must still be in the system.
+    That is, $D_{k-1} \geq A_k$.
+    A more formal proof proceeds along the following lines.
+    Using that $A(A_k) = k$ and $D(D_{k-1})= k-1$,
   \begin{equation*}
     \begin{split}
       L(A_k) &> 0 \Leftrightarrow A(A_k) - D(A_k) > 0   \Leftrightarrow k - D(A_k) > 0 \Leftrightarrow k > D(A_k) \\
@@ -657,11 +670,8 @@ $L(t) = \sum_{k=1}^\infty \1{A_k \leq t < D_k}$.
   where the last relation follows from the fact that $D(t)$ is a
   counting process, hence monotone non-decreasing.
 \end{solution}
-\end{exercise}
+\end{extra}
 
-For the next exercise we need an important definition.
-Write $f(x+) = \lim_{h\downarrow0} f(x+h)$ for the right limit of a function $f$ at $x$ and $f(x-) = \lim_{h\downarrow0} f(x-h)$ for the left limit.
-Note that $f$ is continuous at $x$ when $f(x-)=f(x+)$.
 Since in queueing systems we are concerned with processes with jumps, we need to be quite particular about left and right limits at jump epochs.
 
 
@@ -709,55 +719,6 @@ Can you derive the following (algorithmic efficient) procedure to
 \end{solution}
 \end{exercise}
 
-
-Finally, the \recall{virtual waiting time process} $\{V(t)\}$ is the
-amount of waiting that an arrival would see if it would arrive at time
-$t$. To construct $\{V(t)\}$, we simply draw lines that start at
-points $(A_k, W_k)$ and have slope -1, unless the line hits the
-$x$-axis, in which case the virtual waiting time remains zero until
-the next arrival occurs.  Thus, the lines with slope $-1$ in
-Figure~\ref{fig:waitingtimegg1} show (a sample path of) the virtual
-waiting time.
-
-
-Observe that, just as in Section~\ref{sec:constr-discr-time}, we have
-obtained a set of recursions by which we can run a simulation of a
-queueing process of whatever length we need, provided we have a
-sequence of inter-arrival times $\{X_k\}$ and service times
-$\{S_k\}$.  A bit of experimentation with computer programs such as
-$R$ or Python will reveal that this is easy.
-
-
-
-
-
-\begin{exercise}[\faPhoto]
-  Provide a specification of the virtual waiting time process $\{V(t)\}$ for
-    all $t$.
-    \begin{hint}Make a plot of the function $A_{A(t)}-t$. What is the meaning of $V(A_{A(t)})?$ What is
-$V(A_{A(t)}) + A_{A(t)}-t$?
-    \end{hint}
-    \begin{solution}
-      There is a funny way to do this. Recall from a previous exercise
-      that if $A(t)=n$, then $A_n$ is the arrival time of the $n$th
-      job. Thus, the function $A_{A(t)}$ provides us with arrival
-      times as a function of $t$. When $t=A_{A(t)}$, i.e., when $t$ is
-      the arrival time of the $A(t)$th job, we set
-      $V(t) = V(A_{A(t)}) = W_{A(t)}$, i.e., the virtual waiting time
-      at the arrival time $t=A_{A(t)}$ is equal to the waiting time of
-      the $A(t)$th job. Between arrival moments, the virtual waiting
-      time decreases with slope $1$, until it hits 0.  Thus,
-      \begin{equation*}
-        V(t) 
-= [V(A_{A(t)}) - (t-A_{A(t)})]^+= [W_{A(t)} + (A_{A(t)}-t)]^+.
-      \end{equation*}
-      The notation may be a bit confusing, but it is in fact very
-      simple. Take some $t$, look back at the last arrival time before
-      time $t$, which is written as $A_{A(t)}$. (In computer code these
-      times are easy to find.) Then draw a line with slope $-1$ from
-      the waiting time that the last arrival saw.
-    \end{solution}
-\end{exercise}
 
 
 
