@@ -2,17 +2,16 @@
 \label{sec:level-cross-balance}
 
 
-\subsection*{Theory and Exercises}
 
 \opt{solutionfiles}{
+\subsection*{Theory and Exercises}
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 }
 
-Consider a system at which customers arrive and depart in single
-entities, such as customers in a shop or jobs at some machine.  If the
-system starts empty, then we know that the number $L(t)$ in the system
-at time $t$ is equal to $A(t) - D(t)$. To illustrate:
+Consider a system at which customers arrive and depart in single entities, such as customers in a shop or jobs at some machine.
+If the system starts empty, then we know that the number $L(t)$ in the system at time $t$ is equal to $A(t) - D(t)$.
+To illustrate:
 
 \begin{figure}[h]
   \centering
@@ -28,22 +27,17 @@ at time $t$ is equal to $A(t) - D(t)$. To illustrate:
 
 
 
-Let us denote an arrival as an `up-crossing' and a departure as a
-`down-crossing'.  Then, clearly $L(t)$ is the number of up-crossings
-up to time $t$ minus the number of down-crossings up to time $t$. If
-$L(t)$ remains finite, or, more generally, $L(t)/t \to 0$ as $t\to\infty$, then it
-must be that
+  Let us denote an arrival as an `up-crossing' and a departure as a `down-crossing'.
+  Then, clearly $L(t)$ is the number of up-crossings up to time $t$ minus the number of down-crossings up to time $t$.
+  If $L(t)$ remains finite, or, more generally, $L(t)/t \to 0$ as $t\to\infty$, then it must be that
 \begin{equation*}
   \lambda =  \lim_{t \to \infty} \frac{A(t)}t  = \lim_{t \to \infty} \frac{D(t)+L(t)}t =  \lim_{t \to \infty} \frac{D(t)}t + \lim_{t \to \infty} \frac{L(t)}t 
   = \delta.  
 \end{equation*}
-Hence, when $L(t)/t\to0$, the \recall{up crossing rate}
-$\lim_{t \to \infty} A(t)/t = \lambda$ is equal to the \emph{down-crossing rate}
-$\lim_{t \to \infty} D(t)/t = \delta$.  We will generalize these notions of up- and
-downcrossing in this section to derive the \emph{stationary}---also known as \emph{long-run time average} or \emph{steady-state},
-distribution---$p(n)$ that the system contains $n$ jobs. 
+Hence, when $L(t)/t\to0$, the \recall{up crossing rate} $\lim_{t \to \infty} A(t)/t = \lambda$ is equal to the \emph{down-crossing rate} $\lim_{t \to \infty} D(t)/t = \delta$.
+We will generalize these notions of up- and downcrossing in this section to derive the \emph{stationary}, or \emph{long-run time average} or \emph{steady-state}, distribution $p(n)$ that the system contains $n$ jobs.
 
-\begin{exercise}
+\begin{extra}
   If $L(t)/t \to 0$ as $t\to\infty$, can it still be true that $\E{L}>0$? 
   \begin{solution}
     \begin{equation*}
@@ -51,13 +45,11 @@ distribution---$p(n)$ that the system contains $n$ jobs.
     \end{equation*}
 If $L(t)=1$ for all $t$, $\E{L} =1 $, but $L(t)/t \to 0$. 
   \end{solution}
-\end{exercise}
+\end{extra}
 
-
-Let us say that the system is in \emph{state $n$} at time $t$ when it contains $n$
-  jobs at that moment, i.e., when $L(t) = n$.  The system \emph{crosses}
-level $n$ at time $t$ when its state changes from $n$ to $n+1$, either `from
-below' due to an  arrival, or `from above' due to  a departure, cf. Figure~\ref{fig:A_n_t}.
+Let us say that the system is in \emph{state $n$} at time $t$ when it contains $n$ jobs at that moment, i.e., when $L(t) = n$.
+The system \emph{crosses} level $n$ at time $t$ when its state changes from $n$ to $n+1$, either `from below' due to an arrival, or `from above' due to a departure, cf.
+Figure~\ref{fig:A_n_t}.
 
 \begin{figure}[th]
   \centering
@@ -96,11 +88,9 @@ It is evident that the number of times this
 \end{figure}
 
 
-To establish the section's main result Eq.~\eqref{eq:12}  we need a few definitions
-that are quite subtle and might seem a bit abstract, but below we will
-provide intuitive interpretations in terms of system KPIs. Once we
-have the proper definitions, the above result will follow
-straightaway. Figure~\ref{fig:summaries} at the end of the section summarizes all concepts we  develop here.
+To establish the section's main result Eq.~\eqref{eq:12} we need a few definitions that are quite subtle and might seem a bit abstract, but below we will provide intuitive interpretations in terms of system KPIs.
+Once we have the proper definitions, the above result will follow straightaway.
+Figure~\ref{fig:summaries} at the end of the section summarizes all concepts we develop here.
 
 \paragraph{Level crossing}
 
@@ -114,30 +104,29 @@ Define
 \end{equation}
 as the number of arrivals up to time $t$ that saw $n$ customers in the system at their arrival.
 
-\begin{exercise}
+\begin{extra}
   Why do we  take $L(A_k-)=n$ rather than $L(A_k)$ in the definition of $A(n,t)$?
   \begin{hint}
 Recall that $L(t)$ is \emph{right-continuous}.
   \end{hint}
     \begin{solution}
-    $L(t)$ is the number of customers in the system at time $t$. As
-    such the function $t\to L(t)$ is \textsl{right-continuous}. The
-    definition of $L(A_k-) = \lim_{t\uparrow A_k} L(t)$ is the
-    limit from the left.  The customer therefore `sees' $L(A_k-)$ just
-    before he/she arrives. 
+      $L(t)$ is the number of customers in the system at time $t$.
+      As such the function $t\to L(t)$ is \textsl{right-continuous}.
+      The definition of $L(A_k-) = \lim_{t\uparrow A_k} L(t)$ is the limit from the left.
+      The customer therefore `sees' $L(A_k-)$ just before he/she arrives.
 \end{solution}  
-\end{exercise}
+\end{extra}
 
-\begin{exercise}[\faBalanceScale]\label{ex:36}
+\begin{extra}\label{ex:36}
 If   $A(n,t) = \sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = n}$, is  $A(t) =\sum_{n=0}^\infty A(n,t)$?
 \begin{solution}
   $A(t)$ counts all customers that arrive up to time $t$, i.e., during
   $[0,t]$. Note that this \textsl{includes} time $t$. $A(n,t)$ counts
   the jobs that see $n$ jobs in the system just before they arrive. As there either $0$, or $1$, or $2$, etc., jobs in the system upon arrival the summation covers all possible outcomes. Therefore the claim is true. 
     \end{solution}
-\end{exercise}
+\end{extra}
 
-\begin{exercise} [\faFlask]
+\begin{extra}
  Show that $A(n,t) \leq A(t)$. 
 \begin{solution}
        Observe that
@@ -151,22 +140,18 @@ If   $A(n,t) = \sum_{k=1}^\infty \1{A_k \leq t}\1{L(A_k-) = n}$, is  $A(t) =\sum
     For any `normal' queueing system, $A(t) > A(n,t)$, because the
     queue length fluctuates.
     \end{solution}
-\end{exercise}
+\end{extra}
 
-
-
-\begin{exercise}[\faBalanceScale]\label{ex:38}
+\begin{extra}\label{ex:38}
 If $\lambda>\delta$ it can happen that  $ \lim_{t\to\infty} A(n,t)/t > 0$ for some (finite) $n$. 
   \begin{solution}
- If $\lambda > \delta$, then $L(t)\to\infty$. But then there
-      must be a last time, $s$ say, that $L(s) = n+1$, and $L(t) > n+1$
-      for all $t>s$. Hence, after time $s$ no job will see the system
-      with $n$ jobs. Thus $A(n,t) = A(n,s)$ for all $t>s$.  This is a
-      finite number, while $t\to\infty$, so that $A(n,t)/t \to 0$.
+    If $\lambda > \delta$, then $L(t)\to\infty$.
+    But then there must be a last time, $s$ say, that $L(s) = n+1$, and $L(t) > n+1$ for all $t>s$.
+    Hence, after time $s$ no job will see the system with $n$ jobs.
+    Thus $A(n,t) = A(n,s)$ for all $t>s$.
+    This is a finite number, while $t\to\infty$, so that $A(n,t)/t \to 0$.
   \end{solution}
- \end{exercise}
-
-
+ \end{extra}
 
 
 Next, let 
@@ -180,7 +165,7 @@ be  the total time the system contains $n$ jobs during $[0,t]$, and
 \end{subequations}
 be the fraction of time that $L(s) =n$ in $[0,t]$. Figure~\ref{fig:Y_1_t} illustrates the relation between $Y(n,t)$ and $A(n,t)$.
   
- \begin{exercise}[\faPhoto] \label{ex:111} Consider the following (silly) queueing process.
+ \begin{exercise} \label{ex:111} Consider the following (silly) queueing process.
    At times $0, 2,4, \ldots$ customers arrive, each customer requires $1$ unit of service, and there is one server.
    Find an expression for $A(n,t)$.
    (What acronym would describe this queueing situation?)
@@ -200,7 +185,7 @@ be the fraction of time that $L(s) =n$ in $[0,t]$. Figure~\ref{fig:Y_1_t} illust
 \end{exercise}
 
 
-\begin{exercise}[\faPhoto,  Continuation of~\ref{ex:111}] \label{ex:112} 
+\begin{exercise}[Continuation of~\ref{ex:111}] \label{ex:112} 
   Find an expression for $Y(n,t)$.
     \begin{solution}
       Next, to get $Y(n,t)$, observe that the system never contains
@@ -344,17 +329,16 @@ confused here: to leave $n$ jobs behind, the system must contain $n+1$
 jobs just prior to the departure.) Figure~\ref{fig:A_n_t} shows how
 $A(n,t)$ and~$\lambda(n)$ relate to $D(n+1,t)$ and $\mu(n)$.
 
-\begin{exercise}[\faFlask]\label{ex:39}
+\begin{extra}\label{ex:39}
 Should  we take $D(n-1,t)$ or  $D(n,t)$ in the definition of $\mu(n)$?
     \begin{solution}
       $D(n-1,t)$ counts the departures that leave $n-1$ behind. Thus,
       just before the customer leaves, the system contains $n$
       customers.
 \end{solution}
-\end{exercise}
+\end{extra}
 
-\begin{exercise}[\faCalculator]\label{ex:4}
-
+\begin{exercise}\label{ex:4}
 Continuation of Exercises~\ref{ex:111},~\ref{ex:112}, and~\ref{ex:113}.  Compute 
 $D(n,t)$ and $\mu(n+1)$ for $n\geq 0$.
 \begin{solution}
@@ -480,8 +464,7 @@ In the next few sections we will make suitable choices for $\lambda(n)$ and $\mu
 
 Finally, the following two exercises show that level crossing arguments extend well beyond the queueing systems modeled by Figure~\ref{fig:A_n_t}.
 
-\begin{exercise}[\faPhoto] 
-
+\begin{exercise} \label{ex:55}
 Consider a single server that serves one queue and serves only in batches of 2 jobs at a time (so never 1 job or more than 2 jobs), i.e., the $M/M^2/1/3$ queue.
   Single jobs arrive at rate $\lambda$ and the inter-arrival times are exponentially distributed so that we can assume that $\lambda(n) = \lambda$.
   The batch service times are exponentially distributed with mean $1/\mu$.
@@ -511,8 +494,8 @@ See the figure below.
   \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faPhoto] 
-  Use the graph of the previous question and a level crossing argument to express the steady-state probabilities $p(n), n=0,\ldots, 3$ in terms of $\lambda$ and $\mu$.
+\begin{exercise}
+  Use the graph of exercise~\ref{ex:55} and a level crossing argument to express the steady-state probabilities $p(n), n=0,\ldots, 3$ in terms of $\lambda$ and $\mu$.
   \begin{hint}
 First balance the rates across the levels. Then solve this in terms of $p(0)$.
   \end{hint}

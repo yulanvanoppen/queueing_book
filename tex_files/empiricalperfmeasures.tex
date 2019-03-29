@@ -2,23 +2,21 @@
 \label{sec:limits-of-emperical}
 
 
-\subsection*{Theory and Exercises}
 
 \opt{solutionfiles}{
+\subsection*{Theory and Exercises}
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 }
 
 If the arrival and service processes are such that the queueing system is rate-stable, we can sensibly define other performance measures such as the average waiting time.
-In this section we define the second most important performance measures; the most important being the utilization $\rho$.
-We provide an overview of the relations between these performance measures in Figure~\ref{fig:constructiongg1}.
+In this section we define the second most important performance measures; recall that the most important is the utilization $\rho$.
+At the end we provide an overview of the relations between these performance measures in Figure~\ref{fig:constructiongg1}.
 
 
-With the construction of queueing processes in
-Section~\ref{sec:constr-gg1-queu} we can compute the waiting time as
-observed by the first $n$, say, jobs. Thus, the average waiting time
-of the first $n$ arrivals is given by $n^{-1}\sum_{k=1}^n W_k$. We
-therefore define the \recall{expected waiting time} as
+With the construction of queueing processes in Section~\ref{sec:constr-gg1-queu} we can compute the waiting time as observed by the first $n$, say, jobs.
+Thus, the average waiting time of the first $n$ arrivals is given by $n^{-1}\sum_{k=1}^n W_k$.
+We therefore define the \recall{expected waiting time} as
 \begin{equation}\label{eq:49}
   \E W = \lim_{n\to\infty} \frac 1n\sum_{k=1}^n W_k,
 \end{equation}

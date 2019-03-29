@@ -1,9 +1,9 @@
 \section{Rate Stability and Utilization}
 \label{sec:rate-stability}
 
-\subsection*{Theory and Exercises}
 
 \opt{solutionfiles}{
+\subsection*{Theory and Exercises}
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 }
@@ -23,9 +23,9 @@ The \recall{arrival rate} is the long-run average number of jobs that arrive per
 \end{equation}
 We remark in passing that this limit does not necessarily exist if $A(t)$ is some pathological function.
 If, however, the inter-arrival times $\{X_k\}$ are the basic data, and $\{X_k\}$ are \emph{independent and identically distributed (i.i.d.)}
-and distributed as a generic random variable $X$ with finite mean $\E{X}$, we can construct $\{A_k\}$ and $\{A(t)\}$ as described in Section~\ref{sec:constr-gg1-queu}; the strong law of large numbers guarantees that the above limit exists.
+and distributed as a generic random variable $X$ with finite mean $\E{X}$, we can construct $\{A_k\}$ and $\{A(t)\}$ as described in Section~\ref{sec:constr-gg1-queu}; the strong law of large numbers then guarantees that the above limit exists.
 
-\begin{exercise}[\faFlask]
+\begin{extra}
   Can you make an arrival process such that $A(t)/t$ does not have a
   limit?  
   \begin{hint}
@@ -57,61 +57,47 @@ As a start, the function $\sin(t)$ does not have a limit as
 For the mathematically interested, we seek a
     function for which its Ces\`aro limit does not exist.
   \end{solution}
-\end{exercise}
+\end{extra}
 
 
 
-Observe that at time $t=A_n$, precisely $n$ arrivals occurred. Thus,
-by applying the definition of $A(t)$ at the epochs $A_n$, we see that
-$A(A_n) = n$. Thus,
+Observe that at time $t=A_n$, precisely $n$ arrivals occurred.
+Thus,
+% by applying the definition of $A(t)$ at the epochs $A_n$,
+we see that $A(A_n) = n$, and therefore
 \begin{equation*}
   \frac{1}n\sum_{k=1}^n X_k = \frac{A_n}n = \frac{A_n}{A(A_n)}. 
 \end{equation*}
-But since $A_n\to\infty$ if $n\to\infty$, it follows from
-Eq.~(\ref{eq:3}) that the average inter-arrival time between two
-consecutive jobs is
+But since $A_n\to\infty$ if $n\to\infty$, it follows from Eq.~(\ref{eq:3}) that the average inter-arrival time between two consecutive jobs is
 \begin{equation}\label{eq:54}
   \E X = \lim_{n\to\infty}  \frac{1}n\sum_{k=1}^n X_k = \lim_{n\to \infty} \frac{A_n}{A(A_n)} = \lim_{t\to\infty} \frac t{A(t)} = \frac 1 \lambda,
 \end{equation}
-where we take $t=A_n$ in the limit for $t\to\infty$.  In words, the
-above states that the arrival rate $\lambda$ is the inverse of the
-expected inter-arrival time.
+where we take $t=A_n$ in the limit for $t\to\infty$.
+In words, the above states that the arrival rate $\lambda$ is the inverse of the expected inter-arrival time.
 
-\begin{exercise}[\faRocket]
-   In  Eq. (\ref{eq:54}) we replaced the limit with respect to $n$ by a
-    limit with respect to $t$.  Use
-    the notation $A_{A(t)}$ to show that  this is allowed.
-  Show next that the function $t\to A(t)$ as defined by Eqs.~(\ref{eq:2})
-  is right-continuous. 
+\begin{extra}[\faRocket]
+  In \eqref{eq:54} we replaced the limit with respect to $n$ by a limit with respect to $t$.
+  Use the notation $A_{A(t)}$ to show that this is allowed.
+  Show next that the function $t\to A(t)$ as defined by \eqref{eq:2} is right-continuous.
     \begin{hint}
- Use that $A_{A(t)} \leq t < A_{A(t)+1}$. Divide by $A(t)$
-      and take suitable limits. BTW, such type of proof is used quite
-      often to show that the existence of one limit implies, and is
-      implied by, the existence of another type of limit.  
+      Use that $A_{A(t)} \leq t < A_{A(t)+1}$.
+      Divide by $A(t)$ and take suitable limits.
+      BTW, such type of proof is used quite often to show that the existence of one limit implies, and is implied by, the existence of another type of limit.
     \end{hint}
  \begin{solution}
-This exercise is meant to provide some insight into what needs
-to be done to put everything on solid ground.
+   This exercise is meant to provide some insight into what needs to be done to put everything on solid ground.
 
 
- Observing that $A_{A(t)}$ is the arrival time of the last job
-    before time $t$ and that $A_{A(t)+1}$ is the arrival time of the
-    first job after time $t$: 
+   Observing that $A_{A(t)}$ is the arrival time of the last job before time $t$ and that $A_{A(t)+1}$ is the arrival time of the first job after time $t$:
   \begin{equation*}
     A_{A(t)}  \leq t  < A_{A(t)+1} \Leftrightarrow 
     \frac{A_{A(t)}} {A(t)}  \leq \frac{t}{A(t)}  <\frac{A_{A(t)+1}}{A(t)} = \frac{A_{A(t)+1}}{A(t)+1}\frac{A(t)+1}{A(t)}.
   \end{equation*}
-  Now $A(t)$ is a counting process such that $A(t)\to\infty$ as
-  $t\to\infty$. Therefore, $\lim_t A_{A(t)}/A(t) = \lim_n
-  A_n/n$.
-  Moreover, it is evident that
-  $\lim_t A_{A(t)+1}/(A(t)+1) = \lim_t A_{A(t)}/A(t)$, and that
-  $(A(t)+1)/A(t)\to 1$ as $t\to\infty$. Thus it follows from the above
-  inequalities that $\lim_n A_n/n = \lim_t t/A(t)$.
+  Now $A(t)$ is a counting process such that $A(t)\to\infty$ as $t\to\infty$.
+  Therefore, $\lim_t A_{A(t)}/A(t) = \lim_n A_n/n$.
+  Moreover, it is evident that $\lim_t A_{A(t)+1}/(A(t)+1) = \lim_t A_{A(t)}/A(t)$, and that $(A(t)+1)/A(t)\to 1$ as $t\to\infty$.
+  Thus it follows from the above inequalities that $\lim_n A_n/n = \lim_t t/A(t)$.
      
-
-
-
   For the right-continuity of $A(t)$, define $f(t) = \1{A_1 \leq t}$.
   Observe first that $f(t)$ is increasing, and $f(t)\in\{0,1\}$.
   Thus, if $f(t)=1$ then $f(u)=1$ for all $u\geq t$, and if $f(t)=0$ then $f(u) = 0$ for all $u\leq t$.
@@ -152,31 +138,19 @@ to be done to put everything on solid ground.
     % our situation by taking $f_n(t) = 1\{A_n \leq t\}$, then this
     % limit certainly exists.
  \end{solution}
-\end{exercise}
+\end{extra}
 
-The development of the departure times $\{D_k\}$ is entirely analogous
-to that of the arrival times; we leave it to the reader to provide the
-details. As a result we can define the \recall{departure rate} as
+The development of the departure times $\{D_k\}$ is entirely analogous to that of the arrival times; define the \recall{departure rate} as
 \begin{equation}\label{eq:28}
   \delta = \lim_{t\to\infty} \frac{D(t)}t.
 \end{equation}
 
+\begin{extra}
+Provide the details behind~\eqref{eq:28}.
+\end{extra}
 
-\begin{exercise}[\faFlask]
-  Define the departure time $D_{k}$ of the $k$th job in terms of
-  $\{D(t)\}$. 
-  \begin{hint}
-Use the analogy with Eq.~\eqref{eq:27}.
-  \end{hint}
-\begin{solution}
-  \begin{equation*}
- D_{k} = \inf\{t: D(t) \geq k\}.
-  \end{equation*}
-\end{solution}
-\end{exercise}
-
-Assume now that there is a single server. Let $S_k$ be the required
-service time of the $k$th job to be served, and define
+Assume now that there is a single server.
+Let $S_k$ be the required service time of the $k$th job to be served, and define
 \begin{equation*}
 U_n = \sum_{k=1}^n S_k
 \end{equation*}
@@ -216,12 +190,12 @@ fact that $\delta \leq \lambda$, we get
   \delta \leq \min\{\lambda, \mu\}.
 \end{equation*}
 When $\mu \geq \lambda$ the above inequality reduces to $\delta = \lambda$ for rate-stable systems\footnote{It would be interesting to prove this.}.
-As it turns out, when $\mu = \lambda$ and the variance of the service time $\V{S} > 0$ or $\V{X} >0$ the queue length process behaves in a very peculiar way.
+As it turns out, when $\mu = \lambda$ and the variance of the service time $\V{S} > 0$ or $\V{X} >0$ the queue length process can behave in a very peculiar way.
 For this reason we henceforth (and implicitly) require that $\mu > \lambda$.
 
 
 
-\begin{exercise} [\faFlask]
+\begin{extra}
 Define the random variables $\{\tilde X_k,k=1,\ldots\}$ as $\tilde X_k = S_{k-1}-X_k$.
   For stability of the queueing process it is essential that
   $\tilde X_k$ has negative expectation, i.e.,
@@ -232,9 +206,9 @@ Define the random variables $\{\tilde X_k,k=1,\ldots\}$ as $\tilde X_k = S_{k-1}
       than the average time between the arrival of two subsequent
       jobs. 
   \end{solution}
-\end{exercise}
+\end{extra}
 
-\begin{exercise} [\faFlask]
+\begin{exercise}
 Define $\tilde X_k = S_{k-1}-X_k$.
  Show that $\E{\tilde X_k} <0$ implies that $\lambda<\mu$. 
  \begin{hint}
@@ -250,14 +224,11 @@ Remember that $\{X_k\}$ and $\{S_k\}$ are sequences of i.i.d. random variables. 
 \end{exercise}
 
 
-\begin{exercise}[\faPhoto]
-  Consider a paint factory which contains a paint mixing machine that
-  serves two classes of jobs, A and B. The processing times of jobs of
-  types A and B are constant and require $t_A$ and $t_B$ hours. The
-  job arrival rate is $\lambda_A$ for type A and $\lambda_B$ for type
-  $B$ jobs. It takes a setup time of $S$ hours to clean the mixing
-  station when changing from paint type A to type B, and there is no
-  time required to change from type B to A.
+\begin{exercise}
+  Consider a paint factory which contains a paint mixing machine that serves two classes of jobs, A and B.
+  The processing times of jobs of types A and B are constant and require $t_A$ and $t_B$ hours.
+  The job arrival rate is $\lambda_A$ for type A and $\lambda_B$ for type $B$ jobs.
+  It takes a setup time of $S$ hours to clean the mixing station when changing from paint type A to type B, and there is no time required to change from type B to A.
 
   To keep the system (rate) stable, it is necessary to produce the
   jobs in batches, for otherwise the server, i.e., the mixing machine,

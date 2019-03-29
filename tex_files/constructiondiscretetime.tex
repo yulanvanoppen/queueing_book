@@ -107,6 +107,32 @@ $L_2=6-6+4=4$, $d_3 = 4$, $L_3=4-4+9=9$, and so on.
 \end{extra}
 
 
+\begin{exercise}\label{ex:24}
+  Show that the scheme
+\begin{equation}\label{eq:5}
+  \begin{split}
+  L_k &= [L_{k-1}+a_k - c_k]^+,\\
+  d_k &= L_{k-1} +a_k- L_{k}.
+  \end{split}
+\end{equation}
+is equivalent to a modification of~\eqref{eq:31} in which we assume that jobs can be served in the period they arrive.
+\begin{solution}
+Starting from ,
+  \begin{align*}
+    d_k &= \min\{L_{k-1}+a_k, c_k\}, \\
+    L_k &= L_{k-1} + a_k - d_k,
+  \end{align*}
+  we get
+  \begin{align*}
+    L_k &= L_{k-1} + a_k - d_k \\ 
+        &= L_{k-1} + a_k - \min\{L_{k-1}+a_k, c_k\} \\
+        &= \max\{L_{k-1} + a_k - c_k, 0 \}.
+  \end{align*}
+\end{solution}
+\end{exercise}
+
+
+
 Of course we are not going to carry out these computations by hand.
 Typically we use company data to model the arrival process $\{a_k\}_{k=1,2,\ldots}$ and the capacity $\{c_k\}_{k=1,2,\ldots}$ and feed this data into a computer to carry out the recursions~\eqref{eq:31}.
 If we do not have sufficient data we make a probability model for these data and use the computer to generate random numbers with, hopefully, similar characteristics as the real data.
