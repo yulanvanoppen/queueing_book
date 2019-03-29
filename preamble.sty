@@ -12,13 +12,10 @@
 \usepackage{graphicx}
 \usepackage{mathtools,amsthm,amssymb,amsmath}
 \usepackage{verbatim}
-
-
+\usepackage{ifthen}
 
 \numberwithin{equation}{section}
 
-
-%\usepackage[colorlinks=true]{hyperref}
 
 %\usepackage[T1]{fontenc}
 \usepackage{fouriernc}
@@ -35,20 +32,39 @@
 % I don't know why, pythontext should appear somewhere above some
 % other packages. I don't know which ones, but at this spot it works.
 \usepackage{pythontex}
+\usepackage{environ}
 
-
-
+\opt{solutionfiles}{
+\usepackage{answers}
 \Newassociation{solution}{Solution}{ans}
-%\Newassociation{sol}{Solution}{ans}
 \Newassociation{hint}{Hint}{hint}
 \renewcommand{\Hintlabel}[1]{\textbf{h.#1.}}
 \renewcommand{\Solutionlabel}[1]{\textbf{s.#1.}}
+}
+
+\opt{nosolutionfiles}{
+\NewEnviron{hint}{}
+\NewEnviron{solution}{}
+}
+
 
 \theoremstyle{definition} % font type for theorems and related environments
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
 \newtheorem{exercise}{}[section]
+
+\newenvironment{extra}%
+        {%
+            \ifthenelse{\isundefined{\showextra}}%
+                    {\expandafter\comment}%
+                    {\expandafter\exercise}%
+                    }%
+         {%
+            \ifthenelse{\isundefined{\showextra}}%
+                    {\expandafter\endcomment}%
+                    {\expandafter\endexercise}%
+          }
 
 
 %\newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1} \nameref*{#1}}} % One single link

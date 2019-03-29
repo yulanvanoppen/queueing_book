@@ -4,8 +4,10 @@
 
 \subsection*{Theory and Exercises}
 
+\opt{solutionfiles}{
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
+}
 
 In Section~\ref{sec:poisson-distribution} we introduced the Poisson process as a natural model of the (random) number of jobs arriving during intervals of time.
 As we will see in the sections to come, we can model single-server queueing system in continuous time if we specify the (probability) distribution of the inter-arrival times, i.e., the time between consecutive arrival epochs of jobs.
@@ -61,7 +63,6 @@ Suppose $\lambda=0$. Then $\P{X\leq t} = 1-e^{0} = 0$. In words, this would mean
   \end{solution}
 \end{exercise}
 
-
 \begin{exercise}[\faCalculator]\label{ex:15} 
   If $X\sim\Exp(\lambda)$, show that its second moment $\E{X^2} =  \frac{2}{\lambda^2}$.
   \begin{hint}
@@ -103,9 +104,9 @@ The  above exercises can also be easily solved with the moment-generating functi
 \end{equation}
 
 \begin{exercise}[\faBalanceScale]\label{ex:11}
-It is necessary to require that $t < \lambda$ in the moment-generating function $M_X(t)$ when $X\sim\Exp(\lambda)$. 
-\begin{solution} True, because
-  if $t - \lambda \geq 0$, the integral becomes $\infty$. 
+  Suppose $X\sim\Exp(\lambda)$.
+  Only when $t < \lambda$ the moment-generating function $M_X(t)$ is finite.
+\begin{solution} The claim is true. 
 \end{solution}
 \end{exercise}
 
@@ -450,10 +451,10 @@ we get
 
 
 
-\Closesolutionfile{hint}
-\Closesolutionfile{ans}
 
 \opt{solutionfiles}{
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
 \subsection*{Hints}
 \input{hint}
 \subsection*{Solutions}

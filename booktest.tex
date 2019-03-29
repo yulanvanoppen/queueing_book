@@ -17,13 +17,15 @@
 % \usepackage[nosolutionfiles]{optional}
 % \fi
 
-\usepackage[solutionfiles]{optional}
-%\usepackage[nosolutionfiles]{optional}
+%\newcommand{\showextra}{include extra}  % comment this line if you don't % want to see the extra exercises
+%\usepackage[solutionfiles]{optional}
+\usepackage[nosolutionfiles]{optional}
 
-\opt{nosolutionfiles}{\usepackage[nosolutionfiles]{answers}}
-\opt{solutionfiles}{\usepackage{answers}}
+%\opt{nosolutionfiles}{\usepackage[nosolutionfiles]{answers}}
+%\opt{solutionfiles}{\usepackage{answers}}
 
-\usepackage{preamble_test}
+%\usepackage{preamble_test}
+\usepackage{preamble}
 
 % handle indentation below figure captions
 %\setcapwidth[c]{.8\textwidth}
@@ -74,8 +76,10 @@ We assume that you  \emph{know all} results of Section~\ref{sec:preliminaries}.
 
 %\input{tex_files/preliminaries.tex}
 
+
+%\input{tex_files/preliminaries}
 %\input{tex_files/poissondistribution.tex}
-% \input{tex_files/constructiondiscretetime.tex}
+%\input{tex_files/constructiondiscretetime.tex}
 %\input{tex_files/expdistribution.tex}
 %\input{tex_files/constructioncontinuoustime.tex}
 %\input{tex_files/failures.tex}
@@ -84,31 +88,28 @@ We assume that you  \emph{know all} results of Section~\ref{sec:preliminaries}.
 %\input{tex_files/random_walk.tex}
 %\input{tex_files/ratestability.tex}
 %\input{tex_files/renewal_reward.tex}
-% \input{tex_files/empericalperfmeasures.tex}
-%\input{tex_files/levelcrossing.tex}
+%\input{tex_files/empiricalperfmeasures.tex}
+% \input{tex_files/levelcrossing.tex}
 % \input{tex_files/kendall.tex}
 % \input{tex_files/mm1.tex}
-%\input{tex_files/mnmn1.tex}
+% \input{tex_files/mnmn1.tex}
 % \input{tex_files/pasta.tex}
-%\input{tex_files/little.tex}
-%\input{tex_files/usefulidentities.tex}
-%\input{tex_files/mxm1_pk.tex}
-%\input{tex_files/mg1.tex}
-%\input{tex_files/batcharrivals.tex}
-%\input{tex_files/mg1distributionqueuelength.tex}
+% \input{tex_files/little.tex}
+% \input{tex_files/usefulidentities.tex}
+% \input{tex_files/mxm1_pk.tex}
+% \input{tex_files/mg1.tex}
+\input{tex_files/batcharrivals.tex}
+\input{tex_files/mg1distributionqueuelength.tex}
 \input{tex_files/mg1density.tex}
-%\input{tex_files/setup_times.tex}
-%\input{tex_files/adjustments.tex}
-%\input{tex_files/failures.tex}
-%\input{tex_files/deterministic_networks.tex}
-%\input{tex_files/formula_sheet}
-%\input{tex_files/open_single_class.tex}
+\input{tex_files/setup_times.tex}
+\input{tex_files/adjustments.tex}
+\input{tex_files/failures.tex}
+\input{tex_files/deterministic_networks.tex}
+\input{tex_files/formula_sheet}
+\input{tex_files/open_single_class.tex}
 \input{tex_files/gordon_newell.tex}
 
 
-% \ifFilterExercises
-% \Closesolutionfile{exercises}
-% \fi
 
 
 

@@ -2,8 +2,11 @@
 \section{Queueing Processes in Discrete-Time}
 \label{sec:constr-discr-time}
 
+
+\opt{solutionfiles}{
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
+}
 
 We start with a description of a case to provide motivation to study queueing systems.
 Then we develop a set of recursions of fundamental importance to construct and simulate queueing systems.
@@ -83,16 +86,16 @@ Like this, if we are given $L_0$,  we can obtain $L_1$, and from this  $L_2$, an
 
 Note that in this type of queueing system there is not a job in service, we only count the jobs in the system at the end of a period. Thus, the number of jobs in the system and in queue coincide; in this section `queue length' and `number of jobs in the system' coincide.
 
-\begin{exercise}[\faFlask]
+\begin{extra}
 Suppose that $c_k= 7$ for all $k$, and $a_1=5$, $a_2=4$
 and $a_3=9$; also $L_0=8$. What are $d_k$ and $L_k$ for $k\geq 1$? 
 \begin{solution}
 $d_1=7$, $L_1=8-7+5=6$, $d_2 = 6$,
 $L_2=6-6+4=4$, $d_3 = 4$, $L_3=4-4+9=9$, and so on. 
 \end{solution}
-\end{exercise}
+\end{extra}
 
-\begin{exercise}[\faFlask]
+\begin{extra}
  What is the interpretation of setting
     $d_k = \min\{L_{k-1}+a_k,  c_k\}$ rather than definition~\eqref{eq:d_k}?
 \begin{solution}
@@ -101,7 +104,7 @@ $L_2=6-6+4=4$, $d_3 = 4$, $L_3=4-4+9=9$, and so on.
     of the period. Therefore the arrivals at period $k$ can also be
     served during period $k$.
 \end{solution}
-\end{exercise}
+\end{extra}
 
 
 Of course we are not going to carry out these computations by hand.
@@ -237,27 +240,17 @@ With simulation it is easy to study the effect of, hence evaluate, such decision
 \label{sec:exercises-1}
 
 
-The reader should understand from the above case that, once we have
-the recursions, we can analyze the system and make plots to evaluate
-suggestions for improvement.  Thus, getting the recursions is crucial
-to construct, i.e., model, queueing processes. For this reason, most
-of the exercises below focus on obtaining recursions for many
-different queueing systems. 
+The reader should understand from the above case that, once we have the recursions, we can analyze the system and make plots to evaluate suggestions for improvement.
+Thus, getting the recursions is crucial to construct, i.e., model, queueing processes.
+For this reason, most of the exercises below focus on obtaining recursions for many different queueing systems.\footnote{It may be that the recursions you find are not identical to the recursions in the solution; the reason is that the assumptions you make might not be equal to the ones I make.
+  I don't quite know how to get out of this paradoxical situation.
+  In a sense, to completely specify the model, we need the recursions.
+  However, if the problem statement would contain the recursions, there would be nothing left to practice anymore.
+  Another way is to make the problem description five times as long, but this is also undesirable.
+  So, let's be pragmatic: the aim is that you practice with modeling, and that you learn from the solutions.
+  If you obtain \emph{reasonable} recursions, but they are different from mine, then your answer is just as good.}
 
-A comment is required about the modeling exercises below. It may be
-that the recursions you find are not identical to the recursions in
-the solution; the reason is that the assumptions you make might not be
-equal to the ones I make. I don't quite know how to get out of this
-paradoxical situation.  In a sense, to completely specify the model,
-we need the recursions. However, if the problem statement would
-contain the recursions, there would be nothing left to practice
-anymore. Another way is to make the problem description five times as
-long, but this is also undesirable. So, let's be pragmatic: the aim is
-that you practice with modeling, and that you learn from the
-solutions.  If you obtain \emph{reasonable} recursions, but they are
-different from mine, then your answer is just as good.
-
-\begin{exercise}[\faPhoto\/ Queue with Blocking] a queueing system
+\begin{exercise}[Queue with Blocking] A queueing system
   under daily review, i.e., at the end of the day the queue length is
   measured. We assume that at the end of the day no jobs are still in
   service. We assume that jobs that arrive at day $k$ cannot be served
@@ -272,8 +265,8 @@ First $d_k = \min\{L_{k-1}, c_k\}$. Then, $L_k' = L_{k-1}+a_k-d_k$ is the queue 
   \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faPhoto\/ Estimating the lead time distribution] 
-  \label{ex:19} Take $d_k = \min\{L_{k-1}+a_k, c_k\}$, and assume that jobs are served in FIFO sequence.
+\begin{exercise}[Estimating the lead time distribution] 
+\label{ex:19} Take $d_k = \min\{L_{k-1}+a_k, c_k\}$, and assume that jobs are served in FIFO sequence.
   Find an expression for the shortest possible waiting time $W_{-,k}$ of a job that arrives at time $k$, and an expression for the largest possible waiting time $W_{+,k}$.
   \begin{hint}
   Consider a numerical example. Suppose $L_{k-1}=20$. Suppose
@@ -310,7 +303,7 @@ First $d_k = \min\{L_{k-1}, c_k\}$. Then, $L_k' = L_{k-1}+a_k-d_k$ is the queue 
   \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faPhoto\/ Yield loss]
+\begin{extra}[Yield loss]
   A machine produces items, but a fraction $p$ of the items produced in a period turns out to be faulty, and has to be made anew.
   Develop a set of recursions to model this case.
   \begin{solution}
@@ -330,9 +323,9 @@ First $d_k = \min\{L_{k-1}, c_k\}$. Then, $L_k' = L_{k-1}+a_k-d_k$ is the queue 
     $\{p_k\}$ too. Whether this makes practical sense depends on the
     context of course.
       \end{solution}
-\end{exercise}
+\end{extra}
 
-\begin{exercise}[\faPhoto\/ Rework] 
+\begin{extra}[Rework] \label{ex:52}
 
   A machine produces items, but a fraction $p$ of the items does not meet the quality requirements after the first pass at the server, but it requires a second pass.
   Assume that the repair of a faulty item requires half of the work of a new job, and that the faulty jobs are processed with priority over the new jobs.
@@ -363,10 +356,10 @@ First $d_k = \min\{L_{k-1}, c_k\}$. Then, $L_k' = L_{k-1}+a_k-d_k$ is the queue 
   \end{split}
 \end{equation*}
   \end{solution}
-\end{exercise}
+\end{extra}
 
 
-\begin{exercise}[\faPhoto\/ Cost models] A single-server queueing station
+\begin{exercise}[Cost models] A single-server queueing station
   processes customers. At the start of a period the server capacity is
   chosen, so that for period $k$ the capacity is $c_k$. Demand that
   arrives in a period can be served in that period. It costs $\beta$
@@ -398,7 +391,7 @@ long-run average cost is
   \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faPhoto\/ N-policies] A machine can switch on and off.
+\begin{extra}[ N-policies] A machine can switch on and off.
   If the queue length hits $N$, the machine switches on, and if the system becomes empty, the machine switches off.
   It costs $K$ to switch on the machine.
   There is also a cost $\beta$ per unit time while the machine is switched on, and it costs $h$ per unit time per customer in the system.
@@ -435,12 +428,12 @@ we need. The total cost up to time $T$ becomes:
   \sum_{k=1}^T \left(\beta I_k + h L_k + K\max\{I_k - I_{k-1}, 0\}\right).
 \end{equation*}
   \end{solution}
-\end{exercise}
+\end{extra}
 
 
 
 
-\begin{exercise}[\faPhoto\/ Queue length dependent server capacity]\label{ex:50}
+\begin{extra}[Queue length dependent server capacity]\label{ex:50}
   How would you model (in terms of recursions) a server whose capacity
   depends on the queue length? Consider, as an example, a rule such
   that the server only works if the queue is larger than a threshold $t$. 
@@ -450,10 +443,9 @@ we need. The total cost up to time $T$ becomes:
     works at rate $c$ per period. In that case,
     $c_k = c\1{L_{k-1} > t}$.
   \end{solution}
-\end{exercise}
+\end{extra}
 
-\begin{exercise}[\faPhoto\/ Fair queueing] \label{ex:51}
-
+\begin{extra}[Fair queueing] \label{ex:51}
   One server serves two queues.
   Each queue receives service capacity in proportion to the queue length.
   Derive a set of recursions to analyze this situation.
@@ -471,12 +463,10 @@ L_k^1 &= L_{k-1}^1+a_k^1  - d_k^1,
 \end{equation*}
 and likewise for the other queue.
   \end{solution}
-  \end{exercise}
+  \end{extra}
 
-\begin{exercise} [\faPhoto\/ Priority queueing] Another interesting situation is
-    a system with two queues served by one server, but such that one
-    queue, queue $A$, gets priority over the other
-    queue. Again find a set of recursions to describe this case.
+  \begin{exercise} [Priority queueing] An interesting situation is a system with two queues served by one server, but such that one queue, queue $A$, gets priority over the other queue.
+    Again find a set of recursions to describe this case.
     \begin{solution}
       The rules below implement a strict priority rule for jobs of type
       A, i.e., jobs sent into queue A.
@@ -490,23 +480,19 @@ and likewise for the other queue.
   \end{split}
 \end{equation*}
 
-As an aside, another interesting rule to distribute the capacity $c_k$
-over the queues could be based on the principle of \textit{ equal
-  division of the contested sum}. This principle is based on game
-theoretic ideas. Aumann and Maschler applied this principle to clarify
-certain division rules discussed in the Talmud to divide the legacy
-among a number of inheritors, each having a different claim size.
+As an aside, another interesting rule to distribute the capacity $c_k$ over the queues could be based on the principle of \textit{ equal division of the contested sum}.
+This principle is based on game theoretic ideas.
+Aumann and Maschler applied this principle to clarify certain division rules discussed in the Talmud to divide the legacy among a number of inheritors, each having a different claim size.
     \end{solution}
 \end{exercise}
 
 
 
-\begin{exercise} [\faPhoto\/ Queues with reserved service capacity] Consider a single-server that
-  serves two parallel queues $A$ and $B$. Each queue has a minimal service
-  capacity every period, $r_A$ for queue $A$ and $r_B$ for queue $B$. Reserved capacity unused for one queue can be
-  used to serve the other queue. Any extra capacity beyond the
-  reserved capacity is given to queue A with priority. Formulate a set
-  of recursions to analyze this situation.
+\begin{extra} [ Queues with reserved service capacity] Consider a single-server that serves two parallel queues $A$ and $B$.
+  Each queue has a minimal service capacity every period, $r_A$ for queue $A$ and $r_B$ for queue $B$.
+  Reserved capacity unused for one queue can be used to serve the other queue.
+  Any extra capacity beyond the reserved capacity is given to queue A with priority.
+  Formulate a set of recursions to analyze this situation.
   \begin{solution}
     First determine how much capacity queue $B$ minimally needs in
     period $k$:
@@ -526,20 +512,16 @@ And then we can give any left over capacity to queue B, if needed.
 d_{k,B} &= \min\{L_{k-1, B}, c_k-d_{k,A}\}.
 \end{align*}
 
-    An example is the weekly capacity offered by a psychiatrist at a
-    hospital. Part of the weekly capacity is
-    reserved/allocated/assigned to serve certain patient groups. For
-    instance, each week the psychiatrist does at most five intakes of
-    new patients, provided there are any, and the rest of the capacity
-    is used to treat other patients. The existing patients can also be
-    divided in different groups, each receiving a minimal capacity. If
-    there are less patients of some group, then the capacity can be
-    planned/given to other patient groups. 
+An example is the weekly capacity offered by a psychiatrist at a hospital.
+Part of the weekly capacity is reserved/allocated/assigned to serve certain patient groups.
+For instance, each week the psychiatrist does at most five intakes of new patients, provided there are any, and the rest of the capacity is used to treat other patients.
+The existing patients can also be divided in different groups, each receiving a minimal capacity.
+If there are less patients of some group, then the capacity can be planned/given to other patient groups.
   \end{solution}
-\end{exercise}
+\end{extra}
 
 
-\begin{exercise} [\faPhoto\/ Queue with protected service capacity and lost capacity] Consider a
+\begin{exercise} [Queue with protected service capacity and lost capacity] Consider a
   single-server that serves two parallel queues $A$ and $B$. Each queue receives a
   minimal service capacity every period. Reserved capacity unused for
   one queue cannot be used to serve the other queue. Any extra
@@ -566,11 +548,10 @@ we see that for queue B:
   d_{k,B} = \min\{L_{B, k-1}, c_{k,B}\}.
 \end{equation*}
 
-An example can be the operation room of a hospital. There is a weekly
-capacity, part of the capacity is reserved for emergencies. It might
-not be possible to assign this reserved capacity to other patient
-groups, because it should be available at all times for emergency
-patients. A result of this is that unused capacity is lost.  
+An example can be the operation room of a hospital.
+There is a weekly capacity, part of the capacity is reserved for emergencies.
+It might not be possible to assign this reserved capacity to other patient groups, because it should be available at all times for emergency patients.
+A result of this is that unused capacity is lost.
 
 In practice it may not be as extreme as in the model, but still part
 of the unused capacity is lost. `Use it, or lose it', is what often,
@@ -581,7 +562,7 @@ but not always, applies to service capacity.
 
 
 
-\begin{exercise}[\faPhoto\/ Tandem  networks]
+\begin{exercise}[Tandem  networks]
   Consider a production network with two production stations in
   tandem, that is, the jobs processed by station A are in the next
   period to the downstream Station B.  Extend the recursions of
@@ -607,7 +588,7 @@ d_{k}^A$. Thus,
 \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faPhoto\/ A tandem queue with blocking]
+\begin{extra}[A tandem queue with blocking]
   Consider a production network with two production stations in tandem
   with blocking: when the intermediate queue, i.e., the queue in front of
   Station B, exceeds some level $M$, then station A has to stop
@@ -636,9 +617,9 @@ There is still  a small problem: What if for the first initial periods  $M<L^B_{
   d^A_k = \min\{L_{k-1}^A, c_k^A, \max\{M-L^B_{k-1}, 0\}\}.
 \end{equation*}
 \end{solution}
-\end{exercise}
+\end{extra}
 
-\begin{exercise}[\faPhoto\/ Merging departure streams]
+\begin{exercise}[Merging departure streams]
   Consider another production situation with two machines, A and B
   say, that send their products to Station C. Derive a set of
   recursion relations to simulate this system. 
@@ -659,15 +640,12 @@ Realize that Stations A and B have their own arrivals.
 \end{exercise}
 
 
-\begin{exercise}[\faPhoto \/ Merging incoming streams]
-Consider a   single-server queue that serves two customer `streams' in a FIFO
-  discipline. Thus, both streams enter one queue that is served by the
-  server. Let $\{a_k^a\}$ be the number of arrivals of stream $a$ in
-  period $k$ and $\{a_k^b\}$ be the number of arrivals of stream
-  $b$. Find a set of recursions by which it becomes possible to
-  analyze the waiting time distribution of each of the streams. Assume
-  that the service capacity $c$ is constant for all periods, and that
-  jobs that arrive in period $k$ can also be served in period $k$.
+\begin{extra}[Merging incoming streams]
+  Consider a single-server queue that serves two customer `streams' in a FIFO discipline.
+  Thus, both streams enter one queue that is served by the server.
+  Let $\{a_k^a\}$ be the number of arrivals of stream $a$ in period $k$ and $\{a_k^b\}$ be the number of arrivals of stream $b$.
+  Find a set of recursions by which it becomes possible to analyze the waiting time distribution of each of the streams.
+  Assume that the service capacity $c$ is constant for all periods, and that jobs that arrive in period $k$ can also be served in period $k$.
   \begin{solution}
     The behavior of the queue length  process is easy: 
     \begin{equation*}
@@ -677,14 +655,9 @@ L_k &= L_{k-1}+a_k^a + a_k^b - d_k.
       \end{split}
     \end{equation*}
 
-    To determine the waiting times, observe that any arrival in period
-    $k$, independent of the stream, has to wait until all jobs at the
-    start of the period in queue, i.e., $L_{k-1}-d_k$, are cleared;
-    note that we assume here that the jobs served in period $k$ depart
-    at the start of the interval. Thus, the minimal waiting time is
-    $W_{k,-} = \lfloor L_{k-1}/c\rfloor$.  Similarly, the maximal
-    waiting time is
-    $W_{k,+} = \lfloor (L_{k-1}+a_k^a + a_k^b) /c\rfloor$.
+    To determine the waiting times, observe that any arrival in period $k$, independent of the stream, has to wait until all jobs at the start of the period in queue, i.e., $L_{k-1}-d_k$, are cleared; note that we assume here that the jobs served in period $k$ depart at the start of the interval.
+    Thus, the minimal waiting time is $W_{k,-} = \lfloor L_{k-1}/c\rfloor$.
+    Similarly, the maximal waiting time is $W_{k,+} = \lfloor (L_{k-1}+a_k^a + a_k^b) /c\rfloor$.
 
     The remaining problem is to make a model to `distribute' the
     time between $W_{k,-}$ and~$W_{k,+}$ over the two streams. 
@@ -695,19 +668,14 @@ L_k &= L_{k-1}+a_k^a + a_k^b - d_k.
       \frac{W_{k,-} + W_{k,+}}2.
     \end{equation*}
 
-    Another way is to give priority to $a$ customers, but only for the
-    jobs that arrive in this period. (Hence, this is different from
-    the priority queue. There priority customers can overtake
-    customers that arrived earlier. In the present case this is not
-    allowed, jobs of type $a$ that arrive in period $k$ cannot
-    overtake $b$ jobs that arrived prior to period $k$.)  Making this
-    completely explicit (so that the recursion can be fed to the
-    computer) requires a bit of work however.  It is important to
-    understand the trick we will discuss now because we will use it to
-    model queueing systems with batching. Observe that the first job
-    of the $a$ stream only has to wait for $W_{k,-}$, the second job
-    must wait $W_{k,-}+1$, and so on. Thus, the waiting time $W_{k}^a$
-    for the $a_k^a$ items is such that
+    Another way is to give priority to $a$ customers, but only for the jobs that arrive in this period.
+    (Hence, this is different from the priority queue.
+    There priority customers can overtake customers that arrived earlier.
+    In the present case this is not allowed, jobs of type $a$ that arrive in period $k$ cannot overtake $b$ jobs that arrived prior to period $k$.)
+    Making this completely explicit (so that the recursion can be fed to the computer) requires a bit of work however.
+    It is important to understand the trick we will discuss now because we will use it to model queueing systems with batching.
+    Observe that the first job of the $a$ stream only has to wait for $W_{k,-}$, the second job must wait $W_{k,-}+1$, and so on.
+    Thus, the waiting time $W_{k}^a$ for the $a_k^a$ items is such that
     \begin{equation*}
 W_{k,-}^a:= \lfloor L_{k-1}/c \rfloor \leq  W_{k}^a \leq \lfloor (L_{k-1}+a_k^a)/c \rfloor =: W_{k,+}^a.
     \end{equation*}
@@ -723,18 +691,15 @@ It is then sensible to set
 \end{align*}
 
   \end{solution}
-\end{exercise}
+\end{extra}
 
 
 
-\begin{exercise}[\faPhoto\/ Splitting streams]
-  Consider a machine (a paint mixing machine) that produces products
-  for two separate downstream machines A and B (two different paint
-  packaging machines), each with its own queue.  Suppose we want to
-  analyze the queue in front of station A. For this we need to know
-  the arrivals to station A, that is, the departures of the mixing
-  station that go to station A. Provide a set of recursions to
-  simulate this system.
+\begin{extra}[Splitting streams]
+  Consider a machine (a paint mixing machine) that produces products for two separate downstream machines A and B (two different paint packaging machines), each with its own queue.
+  Suppose we want to analyze the queue in front of station A.
+  For this we need to know the arrivals to station A, that is, the departures of the mixing station that go to station A.
+  Provide a set of recursions to simulate this system.
   \begin{solution}
 \begin{enumerate}
 \item Realize that the recursions of Eq.~\eqref{eq:31} applied to the
@@ -758,11 +723,11 @@ It is then sensible to set
  The rest of the recursions is very similar to what we did in earlier exercises.
 \end{enumerate}
   \end{solution}
-\end{exercise}
+\end{extra}
 
 
 
-\begin{exercise}[\faPhoto\/ Inventory control] The recursions used in the
+\begin{exercise}[Inventory control] The recursions used in the
   exercises above can also be applied to analyze inventory control
   policies. Consider a production system that can produce maximally
   $M_k$ items per week during normal working hours, and maximally
@@ -779,10 +744,9 @@ It is then sensible to set
     h_k &= \text{Holding cost per  item, due at the end of week $k$}, \\
     I_k &= \text{On hand inventory level at the end of week $k$}. \\
   \end{align*}
-  Management needs a production plan that specifies for the next $T$
-  weeks the number of items to be produced per week. Formulate this
-  problem as an LP problem, taking into account the inventory
-  dynamics.  Assume that demand must be met from on-hand inventory.
+  Management needs a production plan that specifies for the next $T$ weeks the number of items to be produced per week.
+  Formulate this problem as an LP problem, taking into account the inventory dynamics.
+  Assume that demand must be met from on-hand inventory.
   \begin{hint}
 Formulate the decision variables/controls, the
     objective and the constraints.    
@@ -805,7 +769,7 @@ I_k &\geq 0.
   \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faRocket\/ Queue with setups]
+\begin{extra}[\faRocket\/ Queue with setups]
   One server serves two parallel queues, one at a time. After serving
    one queue until it is empty,  the server moves to the other
   queue. The change of queue requires one period setup time. 
@@ -834,12 +798,12 @@ we can specify the evolution of the queue length processes. So it remains to dea
 \end{tabular}
 
   \end{solution}
-\end{exercise}
+\end{extra}
 
-\Closesolutionfile{hint}
-\Closesolutionfile{ans}
 
 \opt{solutionfiles}{
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
 \subsection*{Hints}
 \input{hint}
 \subsection*{Solutions}

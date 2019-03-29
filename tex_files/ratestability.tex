@@ -3,8 +3,10 @@
 
 \subsection*{Theory and Exercises}
 
+\opt{solutionfiles}{
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
+}
 
 In the analysis of any queueing process the first step should be to check the relations between the arrival, service and departure rates.
 The concept of rate is crucial because it captures our intuition that when, on the long run, jobs arrive faster than they can leave, the system must `explode'.
@@ -187,7 +189,7 @@ and  define the \recall{service rate} or \recall{processing rate} as
 \begin{equation*}
   \mu = \lim_{t\to\infty} \frac{U(t)}t.
 \end{equation*}
-In the same way as we derived that $\E X= 1/\lambda$, we obtain for the expected (or average service time required by an individual job
+In the same way as we derived that $\E X= 1/\lambda$, we obtain for the expected (or average) service time required by an individual job
 \begin{equation*}
   \E S = \lim_{n\to\infty} \frac 1 n \sum_{k=1}^n S_k = \lim_{n\to\infty} \frac{U_n}{n} = \lim_{n\to\infty} \frac{U_n}{U(U_n)} = \lim_{t\to\infty} \frac t{U(t)} = \frac 1 \mu.
 \end{equation*}
@@ -300,10 +302,10 @@ Here are some questions to help you interpret this formulation.
 
 
 
-\Closesolutionfile{hint}
-\Closesolutionfile{ans}
 
 \opt{solutionfiles}{
+\Closesolutionfile{hint}
+\Closesolutionfile{ans}
 \subsection*{Hints}
 \input{hint}
 \subsection*{Solutions}
