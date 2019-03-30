@@ -47,6 +47,13 @@
 \NewEnviron{solution}{}
 }
 
+\opt{check}{
+\usepackage[nosolutionfiles]{answers}
+\Newassociation{solution}{Solution}{ans}
+\Newassociation{hint}{Hint}{hint}
+\renewcommand{\Hintlabel}[1]{\textbf{h.#1.}}
+\renewcommand{\Solutionlabel}[1]{\textbf{s.#1.}}
+}
 
 \theoremstyle{definition} % font type for theorems and related environments
 \newtheorem{theorem}{Theorem}[section]
