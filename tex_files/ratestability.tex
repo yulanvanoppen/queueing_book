@@ -230,12 +230,9 @@ Remember that $\{X_k\}$ and $\{S_k\}$ are sequences of i.i.d. random variables. 
   The job arrival rate is $\lambda_A$ for type A and $\lambda_B$ for type $B$ jobs.
   It takes a setup time of $S$ hours to clean the mixing station when changing from paint type A to type B, and there is no time required to change from type B to A.
 
-  To keep the system (rate) stable, it is necessary to produce the
-  jobs in batches, for otherwise the server, i.e., the mixing machine,
-  spends a too large fraction of time on setups, so that
-  $\mu < \lambda$. Thus, it is necessary to identify minimal batch
-  sizes to ensure that $\mu > \lambda$.  Motivate that the following linear
-  program  can be used to determine the minimal batch sizes:
+  To keep the system (rate) stable, it is necessary to produce the jobs in batches, for otherwise the server, i.e., the mixing machine, spends a too large fraction of time on setups, so that $\mu < \lambda$.
+  Thus, it is necessary to identify minimal batch sizes to ensure that $\mu > \lambda$.
+  Motivate that the following linear program can be used to determine the minimal batch sizes:
 \begin{equation*}
   \text{minimize }  T
 \end{equation*}

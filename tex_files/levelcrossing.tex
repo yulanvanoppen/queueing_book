@@ -302,7 +302,7 @@ sees $n$ jobs in the system just prior to its arrival. Thus, just as
 $A(t)/t$ is the total number of arrivals during $[0,t]$ divided by~$t$, $A(n,t)/Y(n,t)$ is the number of arrivals that see $n$ jobs divided by
 the time the system contains $n$ jobs.
 
-\begin{exercise}[\faCalculator] \label{ex:113} Continuation of Exercises~\ref{ex:111} and~\ref{ex:112}.  Compute $p(n)$  and $\lambda(n)$. 
+\begin{exercise}[Continuation of \ref{ex:112}] \label{ex:113} Compute $p(n)$ and $\lambda(n)$.
   \begin{solution}
     From the other exercises:
     \begin{align*}
@@ -338,8 +338,8 @@ Should  we take $D(n-1,t)$ or  $D(n,t)$ in the definition of $\mu(n)$?
 \end{solution}
 \end{extra}
 
-\begin{exercise}\label{ex:4}
-Continuation of Exercises~\ref{ex:111},~\ref{ex:112}, and~\ref{ex:113}.  Compute 
+\begin{exercise}[Continuation of~\ref{ex:113}] \label{ex:4}
+Compute 
 $D(n,t)$ and $\mu(n+1)$ for $n\geq 0$.
 \begin{solution}
   $D(0,t) = \sum_{k=1}^\infty\1{D_k\leq t, L(D_k)=0}$. From the graph of $\{L(s)\}$ we see that all jobs leave an empty system behind. Thus, $D(0,t) \approx t/2$, and $D(n,t)=0$ for $n\geq 1$. With this, $D(0,t)/Y(1,t) \sim (t/2)/(t/2) = 1$, and so,
@@ -380,8 +380,7 @@ Combining this with~\eqref{eq:15} we arrive at the \recall{level crossing equati
   \lambda(n) p(n) = \mu(n+1)p(n+1).
 \end{equation}
 
-\begin{exercise}[\faCalculator] Continuation of Exercises~\ref{ex:111},~\ref{ex:112}, and~\ref{ex:113}.  Compute 
-$\lambda(n) p(n)$ for $n\geq 0$, and check $\lambda(n) p(n) = \mu(n+1) p(n+1)$. 
+\begin{exercise}[Continuation of~\ref{ex:4}] Compute $\lambda(n) p(n)$ for $n\geq 0$, and check $\lambda(n) p(n) = \mu(n+1) p(n+1)$.
 \begin{solution}
   $\lambda(0)p(0)=1\cdot 1/2 = 1/2$, $\lambda(n)p(n)= 0$ for $n>1$, as $\lambda(n)=0$ for $n>0$.
 
@@ -404,28 +403,35 @@ follows, and so on. A straightaway iteration then leads to
   p(n+1) = \frac{\lambda(n)\lambda(n-1)\cdots \lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)}p(0).
 \end{equation}
 
-To determine $p(0)$ we can use the fact that the numbers $p(n)$ represent probabilities, which means that the sum of the probabilities should be one. Hence, from the requirement
-\begin{align*}
-1 
-&= \sum_{n=0}^\infty p(n) \\
-&= p(0) \left(1+\sum_{n=0}^\infty \frac{\lambda(n)\lambda(n-1)\cdots\lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)}\right),
-\end{align*}
-we obtain  
-\begin{equation*}
-  p(0) = G^{-1},
-\end{equation*}
-where $G$ is the \recall{normalization constant}
+To determine $p(0)$ we can use the fact that the numbers $p(n)$ represent probabilities.
+Hence, from the normalizing condition $\sum_{n=0}^\infty p(n)=1$, we get $p(0) = G^{-1}$ with
+% \begin{align*}
+% 1 
+% &= \sum_{n=0}^\infty p(n) \\
+% &= p(0) \left(1+\sum_{n=0}^\infty \frac{\lambda(n)\lambda(n-1)\cdots\lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)}\right),
+% \end{align*}
+% we obtain  
+$G$ being the \recall{normalization constant}
 \begin{equation}
   \label{eq:20}
 G = 1+\sum_{n=0}^\infty \frac{\lambda(n)\lambda(n-1)\cdots\lambda(0)}{\mu(n+1)\mu(n)\cdots \mu(1)}.
 \end{equation}
-Now that we know $p(0)$,  $p(n)$ follows from Eq.~\eqref{eq:38}. 
+%Now that we know $p(0)$,  $p(n)$ follows from Eq.~\eqref{eq:38}. 
 
-Let us now express a few important performance measures in terms of
-$p(n)$: the average number of items $\E L$ in the system and the
-fraction of time $\P{L\geq n}$ the system contains at least $n$ jobs.
-As $L(s)$ counts the number of jobs in the system at time $s$ (thus
-$L(s)$ is an integer),
+In the next few sections we will make suitable choices for $\lambda(n)$ and $\mu(n)$ to model many different queueing situations so that, based on \eqref{eq:12}, we can obtain simple expressions for $p(n)$ in terms of the arrival and service rates.
+With $p(n)$ we define  two easy, but important performance measures. The time-average average number of items becomes
+\begin{equation*}
+\E L = \sum_{n=0}^\infty n p(n),
+\end{equation*}
+and the long-run fraction of time the system contains at least $n$ jobs is
+\begin{equation*}
+  \P{ L \geq n} = \sum_{i=n}^\infty p(i).
+\end{equation*}
+
+\begin{exercise}
+  Derive  $\E L = \sum_{n=0}^\infty n p(n)$ from~\eqref{eq:46}. 
+\begin{solution}
+As $L(s)$ counts the number of jobs in the system at time $s$ (thus $L(s)$ is an integer),
 \begin{equation*}
   L(s) = \sum_{n=0}^\infty n\, \1{L(s) = n}.
 \end{equation*}
@@ -443,21 +449,11 @@ where we interchange the integral and the summation\footnote{This is
 \end{equation*}
 Finally, assuming that the limit $p(n,t) \to p(n)$ exists as
 $t\to\infty$ (and that the summation and limit can be interchanged in
-the above), it follows that 
-\begin{equation*}
-\E L = \lim_{t\to\infty} \frac 1 t \int_0^t L(s) \d s = \sum_{n=0}^\infty n p(n).
-\end{equation*}
-In a loose sense we can say that
-$\E L$ is the average number in the system as perceived by the
-\emph{server}. (Recall that this is not necessarily the same as what
-\emph{arriving} jobs `see'.)  Similarly, the probability that the
-system contains at least $n$ jobs is 
-\begin{equation*}
-  \P{ L \geq n} = \sum_{i=n}^\infty p(i).
-\end{equation*}
+the above), the result follows.
+\end{solution}
+\end{exercise}
 
-From the above we conclude that with the probabilities $p(n)$ we can compute numerous performance measures.
-In the next few sections we will make suitable choices for $\lambda(n)$ and $\mu(n)$ to model many different queueing situations so that, based on \eqref{eq:12}, we can analyze the performance of these models.
+
 
 
 
@@ -513,57 +509,6 @@ With level crossing
 hence $p(1) = p(0)(\mu + \lambda)/\mu$. 
   \end{solution}
 \end{exercise}
-
-\paragraph{Interpretation}
-
-The definitions in~(\ref{eq:rates_}) may seem a bit abstract, but they
-obtain an immediate interpretation when relating them to
-applications. To see this, we discuss two examples.
-
-Consider the sorting process of post parcels at a distribution center
-of a post delivery company.  Each day tens of thousands of incoming
-parcels have to be sorted to their final destination. In the first
-stage of the process, parcels are sorted to a region in the
-Netherlands. Incoming parcels are deposited on a conveyor belt. From
-the belt they are carried to outlets (chutes), each chute
-corresponding to a specific region. Employees take out the parcels
-from the chutes and put the parcels in containers.  The arrival rate
-of parcels for a certain chute may temporarily exceed the working
-capacity of the employees, as such the chute serves as a queue.  When
-the chute overflows, parcels are directed to an overflow container and
-are sorted the next day. The target of the sorting center is to
-deliver at least a certain percentage of the parcels within one
-day. Thus, the fraction of parcels rejected at the chute should remain
-small.
-
-Suppose a chute can contain at most 20 parcels, say. Then, each parcel
-on the belt that `sees' 20 parcels in its chute will be blocked. Let
-$L(t)$ be the number of parcels in the chute at time $t$. Then,
-$A(20,t)$ as defined in Eq.~(\ref{eq:19}) is the number of\emph{ blocked
-  parcels} up to time $t$, and $A(20,t)/A(t)$ is the fraction of
-rejected parcels. In fact, $A(20,t)$ and $A(t)$ are continuously
-tracked by the sorting center and used to adapt employee capacity to
-control the fraction of rejected parcels. Thus, in simulations, if one
-wants to estimate loss fractions, $A(n,t)/A(t)$ is the most natural
-concept to consider.
-
-For the second example, suppose there is a cost associated with
-keeping jobs in queue. Let $w$ be the cost per job in queue per unit
-time so that the cost rate is $n w$ when $n$ jobs are in queue. But
-then $ w n Y(n,t)$ is the total cost up to time $t$ to have $n$ jobs in
-queue, hence the total cost up to time $t$ is
-  \begin{equation*}
-C(t) =     w \sum_{n=0}^\infty n Y(n,t),
-  \end{equation*}
-and the average cost is
-\begin{equation*}
-\frac{C(t)}t =    w \sum_{n=0}^\infty n \frac{Y(n,t)}t = w \sum_{n=0}^\infty n p(n,t).
-\end{equation*}
-All in all, the concepts developed above have natural interpretations
-in practical queueing situations; they are useful in theory and in
-simulation, as they relate the theoretical concepts to actual measurements.
-
-
 
 \paragraph{Balance equations}
 
@@ -641,94 +586,43 @@ along any sensible sample path we obtain very useful statistical and
 probabilistic results.
 
 
+\paragraph{Interpretation}
 
+The definitions in~(\ref{eq:rates_}) may seem a bit abstract, but they obtain an immediate interpretation when relating them to applications.
+To see this, we discuss two examples.
 
-\begin{figure}[p]
-  \centering
+Consider the sorting process of post parcels at a distribution center of a post delivery company.
+Each day tens of thousands of incoming parcels have to be sorted to their final destination.
+In the first stage of the process, parcels are sorted to a region in the Netherlands.
+Incoming parcels are deposited on a conveyor belt.
+From the belt they are carried to outlets (chutes), each chute corresponding to a specific region.
+Employees take out the parcels from the chutes and put the parcels in containers.
+The arrival rate of parcels for a certain chute may temporarily exceed the working capacity of the employees, as such the chute serves as a queue.
+When the chute overflows, parcels are directed to an overflow container and are sorted the next day.
+The target of the sorting center is to deliver at least a certain percentage of the parcels within one day.
+Thus, the fraction of parcels rejected at the chute should remain small.
 
-  \begin{tikzpicture}[node distance = 2.5cm]
+Suppose a chute can contain at most 20 parcels, say.
+Then, each parcel on the belt that `sees' 20 parcels in its chute will be blocked.
+Let $L(t)$ be the number of parcels in the chute at time $t$.
+Then, $A(20,t)$ as defined in Eq.~(\ref{eq:19}) is the number of\emph{ blocked parcels} up to time $t$, and $A(20,t)/A(t)$ is the fraction of rejected parcels.
+In fact, $A(20,t)$ and $A(t)$ are continuously tracked by the sorting center and used to adapt employee capacity to control the fraction of rejected parcels.
+Thus, in simulations, if one wants to estimate loss fractions, $A(n,t)/A(t)$ is the most natural concept to consider.
 
-\tikzset{
-    %Define standard arrow tip
-    >=stealth',
-    %Define style for boxes
-    % Define arrow style
-    pil/.style={
-           ->,
-           thick,
-           shorten <=2pt,
-           shorten >=2pt,}
-}
-\tikzstyle{block} = [rectangle, draw,text centered, rounded corners, minimum height=3em]
+For the second example, suppose there is a cost associated with keeping jobs in queue.
+Let $w$ be the cost per job in queue per unit time so that the cost rate is $n w$ when $n$ jobs are in queue.
+But then $ w n Y(n,t)$ is the total cost up to time $t$ to have $n$ jobs in queue, hence the total cost up to time $t$ is
+  \begin{equation*}
+C(t) =     w \sum_{n=0}^\infty n Y(n,t),
+  \end{equation*}
+and the average cost is
+\begin{equation*}
+\frac{C(t)}t =    w \sum_{n=0}^\infty n \frac{Y(n,t)}t = w \sum_{n=0}^\infty n p(n,t).
+\end{equation*}
+All in all, the concepts developed above have natural interpretations
+in practical queueing situations; they are useful in theory and in
+simulation, as they relate the theoretical concepts to actual measurements.
 
-    % nodes
-    \node [block, text width=5.5cm, align=center] (level) {LEVEL CROSSING: Counting up- and downcrossings};
-\node[block, below=1cm of level] (An) {$|A(n,t)-D(n,t)|\leq 1$}
-edge[pil,<-] (level); 
-
-\node[block, left=1.5cm of An] (A) {$A(t)-D(t)=L(t)$} 
-edge[pil,<-] (level); 
-
-\node[block, right=1.5cm of An] (Anm) {$|A(m,n,t)-D(n,t)|\leq 1$}
-edge[pil,<-] (level); 
-
-\node[block, below=1cm of A] (At) {$\frac{A(t)}t \approx \frac{D(t)}t$ if $\frac{L(t)}t \to 0$} 
-edge[pil,<-] (A); 
-
-\node[block, below=1.5cm of At] (lambda) {$\lambda=\delta$} 
-edge[pil,<-] node[fill=white] {$t\to\infty$} (At); 
-
-\node[block, below=1cm of An] (AnDn) {$\frac{A(n,t)}t\approx\frac{D(n,t)}t$}
-edge[pil,<-] (An); 
-
-\node[block, below=1.5cm of AnDn] (AnDn2) {$\frac{A(n,t)}{Y(n,t)}\frac{Y(n,t)}t\approx\frac{D(n,t)}{Y(n+1)}\frac{Y(n+1)}t$}
-edge[pil,<-] (AnDn); 
-
-\node[block, below=1.5cm of AnDn2, text width=4cm] (lp) {Level Crossing: \\
-$\lambda(n)p(n) = \mu(n+1)p(n+1)$}
-edge[pil,<-] node[fill=white] {$t\to\infty$} (AnDn2); 
-
-\node[block, below=1cm of lp, text width=3cm] (poisson) {Poisson: \\
-$\lambda=\lambda(n)$, \\
-$\mu=\mu(n)$}
-edge[pil,<-] (lp);
-
-\node[block, below=1cm of poisson, text width=4cm] (mm1) {$M/M/1$, $M/M/c$, $M/M/c/k$, \ldots} edge[pil,<-] (poisson);
-;
-
-\node[block, right=0.6cm of lp, text width=5cm, align=center] (batch) {Recursion: \\ $\lambda\sum_{m=0}^nG(n-m)p(m) = \mu(n+1)p(n+1)$}
-edge[pil,<-] node[fill=white] {$t\to\infty$} (Anm); 
-
-\node[block, right=2.3cm of mm1] (batch2) {$M^X/M/1$}
-edge[pil,<-]  (poisson)
-edge[pil,<-]  (batch); 
-
-
-\node[block, below=1cm of mm1, text width=4.5cm] (perf) {Performance
-  measures:
-$\E L= \sum_{n=0}^\infty n p(n)$, $\P{L\geq m}$, \ldots} 
-edge[pil,<-] (mm1)
-edge[pil,<-] (batch2);
-
-\node[block, below=1.5cm of lambda] (pasta1) {$\frac{A(t)}t\frac{A(n,t)}{A(t)} = \frac{A(n,t)}{Y(n,t)}\frac{Y(n,t)}t$} 
-edge[pil,<-] (AnDn2)
-edge[pil,<-,bend left=20] (At.south west)
-;
-
-\node[block, below=1.5cm of pasta1] (pasta2) {$\lambda \pi(n) = \lambda(n)p(n)$} 
-edge[pil,<-] node[fill=white] {$t\to\infty$} (pasta1);
-
-\node[block, below=1.5cm of pasta2, text width=3cm] (pasta3) {PASTA: $\pi(n) = p(n)$} 
-edge[pil,<-] (poisson)
-edge[pil,<-] (pasta2)
-edge[pil,->] (perf);
-
-\end{tikzpicture}
-  \caption{With level crossing arguments we can derive a number of
-    useful relations. This figure presents an overview of these
-    relations that we derive in this and the next sections.}
-\label{fig:summaries}
-\end{figure}
 
 
 \opt{solutionfiles}{
