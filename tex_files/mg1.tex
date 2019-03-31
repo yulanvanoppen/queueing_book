@@ -3,9 +3,9 @@
 \label{sec:mg1}
 
 
-\subsection*{Theory and Exercises}
 
 \opt{solutionfiles}{
+\subsection*{Theory and Exercises}
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 }
@@ -15,12 +15,105 @@ What can we say about the average waiting time in queue if service times are not
 One of the celebrated results of queueing theory is the Pollaczek-Khinchine formula by which we can compute the average waiting time formula for the $M/G/1$ queue.
 In this section we derive this result by means of sample path arguments.
 
+To find an expression for $\E{W_Q}$ we need the concept of expected \recall{remaining service time} $\E{S_r}$ which is defined as the expected time it takes to complete the job in service at the time a job arrives.
+In Section~\ref{sec:mg1} we give a precise meaning to this idea.
+
+\begin{exercise}\label{ex:32}
+Show for the $M/G/1$ queue  that the expected time in queue is
+\begin{equation}\label{eq:24}
+  \E{W_Q} = \E{S_r} + \E{L_Q} \E S.
+\end{equation}
+\begin{hint}
+  What happens when you enter a queue? First you have to wait until the job in service (if there is any) completes, and then you have to wait for the queue to clear.
+\end{hint}
+\begin{solution}
+It is evident that the expected waiting time for an arriving customer is the expected
+remaining service time plus the expected time in queue. The expected
+time in queue  must be equal to the expected number of
+customers in queue at an arrival epoch times the expected service time
+per customer, assuming that service times are i.i.d. If the arrival
+process is Poisson, it follows from PASTA that the average number of
+jobs in queue perceived by arriving customers is also the
+\emph{time-average} number of jobs in queue~$\E{L_Q}$.  
+\end{solution}
+\end{exercise}
+
+
+\begin{exercise}($M/G/1$)
+Use  the PASTA property to show that 
+\begin{equation}\label{eq:37}
+\E{S_r} =  \rho \E{S_r\given S_r>0}.
+\end{equation}
+\begin{hint}
+Use Exercise~\ref{ex:28}.
+a free server.  
+\end{hint}
+\begin{solution}
+By the PASTA property we know that $\rho$ is  the probability to find the server busy upon arrival; hence $1- \rho$ is the probability that the server is idle upon arrival. Then,
+\begin{equation*}
+\E{S_r} =   \rho \E{S_r\given S_r >0} + (1-\rho) \E{S_r\given S_r = 0} = \rho \E{S_r\given S_r>0},
+\end{equation*}
+since, evidently, $\E{S_r\given S_r=0}=0$.  
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+  It is an easy mistake to think that $\E{S_r} = \E S$ when service
+  times are exponential. Why is this wrong?
+  \begin{hint}
+Realize again that $\E{S_r}$ includes the jobs that arrive at an empty system.
+  \end{hint}
+  \begin{solution}
+
+    $\E{S_r \given S_r>0} = \E S$ for the $M/M/1$ queue, and
+    $\E{S_r} = \rho \E{S_r \given S_r>0}$ for the $M/G/1$ queue, it
+    follows that
+  \begin{equation*}
+ \E{S_r} = \rho \E{S_r\given S_r>0} = \rho \E S.
+  \end{equation*}
+  \end{solution}
+\end{exercise}
+
+\begin{exercise}
+  What would you guess for $\E{S_r\given S_r>0}$ for the $M/D/1$ queue? 
+  \begin{solution}
+    Since the service times are deterministic (and constant), I would
+    guess that on average half of the service time remains at the
+    moment a job arrives. If the service time is $D$ always, then
+    $\E{S_r\given S_r>0} = D/2$.  
+  \end{solution}
+\end{exercise}
+
+
+\begin{exercise}
+  Use Exercise~\ref{ex:32} and Little's law to derive for the $M/G/1$ queue that 
+\begin{equation}\label{eq:35}
+  \E{W_Q} = \frac{\E{S_r}}{1-\rho}.% = \frac{\rho}{1-\rho} \E{S_r\given S_r>0}.
+\end{equation}
+\begin{hint}
+Use Little's law to see that $\E{L_Q} = \lambda \E{W_Q}$. Substitute this in~(\ref{eq:24}) and simplify.
+\end{hint}
+\begin{solution}
+With  Little's law $\E{L_Q} = \lambda \E{W_Q}$. Using this,
+\begin{equation*}
+  \E{W_Q} = \E{S_r} + \lambda \E{W_Q} \E S  =\E{S_r} + \rho \E{W_Q},
+\end{equation*}
+since $\rho=\lambda \E S$. But this gives for the $M/G/1$ queue that
+\begin{equation*}
+  \E{W_Q} = \frac{\E{S_r}}{1-\rho}.
+\end{equation*}
+\end{solution}
+\end{exercise}
+
+
 Recall that Eq.~\eqref{eq:35} states that
 \begin{equation*}
   \E{W_Q} = \frac{\E{S_r}}{1-\rho}.
 \end{equation*}
 It remains to compute the average remaining service time $\E{S_r}$ for generally distributed service times. For this, we use the renewal reward theorem, again.
 
+
+For the $M/M/1$ queue the situation becomes significantly simpler as then the service times are exponential, hence memoryless, which implies that $\E{S_r\given S_r>0} = \E S$.
 
 Consider the $k$th job of some sample path of the $M/G/1$ queueing process.
 This job requires $S_k$ units of service, let its service time start at time $\tilde A_k$ so that it departs the server at time $D_k=\tilde A_k + S_k$. 

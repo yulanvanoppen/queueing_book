@@ -3,39 +3,32 @@
 %{$\mathbf{M^X/M/1}$ Queue: Expected Waiting Time}
 \label{sec:mxm1-queue:-expected}
 
-\subsection*{Theory and Exercises}
 
 \opt{solutionfiles}{
+\subsection*{Theory and Exercises}
 \Opensolutionfile{hint}
 \Opensolutionfile{ans}
 }
 
-It is not always the case that jobs arrive in single units, they can
-also arrive in batches. For instance, when a car and or bus arrives at a fast
-food restaurant, a batch consists of the number of people in the vehicle.  In this section we derive for such queueing processes, denoted by the shorthand $M^X/M/1$, expressions for the load and the expected waiting time and queue length. 
+It is not always the case that jobs arrive in single units, they can also arrive in batches.
+For instance, when a car and or bus arrives at a fast food restaurant, a batch consists of the number of people in the vehicle.
+When the batches arrive as a Poisson process and the individual items within a batch have exponential service times we denote such queueing systems by the shorthand $M^X/M/1$.
+In this section we derive the expressions for the load and the expected waiting time and queue length of the $M^X/M/1$ queue.
 
 
 Assume that jobs arrive as a Poisson process with rate $\lambda$ and each \emph{job} contains multiple \emph{items}.
 Let $A_k$ be the arrival time of job $k$ and $A(t)$ the number of job arrivals up to time $t$.
 Denote by $B_k$ the batch size, i.e., the number of items that job $k$ brings into the system.
-We assume that $\{B_k\}$ is a sequence of i.i.d.
-discrete random variables distributed as a generic random variable $B$ such that $\P{B = k} = f(k)$, where $f(k)$ is a given set of probabilities.
-We write
+We assume that $\{B_k\}$ is a sequence of independent discrete random variables each distributed as the generic random variable $B$.
+Let the pmf be $\P{B = k} = f(k)$, and $G(k)$ the survivor function.
+The service time of each item $\E S = 1/\mu$.
+Thus, the average time to serve the entire batch is $\E B \E S$.
+ Define the load as
 \begin{equation*}
-  G(k) = \P{B>k} = \sum_{m=k+1}^\infty f(m),
+\rho = \lambda \E B/\mu.
 \end{equation*}
-for the \emph{survivor function} of $B$.  We also assume that the
-service time of each item is exponentially distributed with average
-$1/\mu$. Thus, the average time to serve the entire batch is
-\begin{equation*}
-\E{B}\E{S}=\E B/\mu.
-\end{equation*}
+Henceforth we require that $\rho< 1$.
 
-
-
-The first criterion we must check for the $M^X/M/1$ queue is the
-stability: the service rate must be larger than the arrival rate of
-work. 
 
 \begin{exercise} Use the renewal reward theorem to explain that work arrives at rate $\lambda \E B$.
   \begin{hint}
@@ -50,67 +43,23 @@ Take $T_k = A_k$. Then $X_k = Y(A_k) - Y(A_{k-1}) = B_k$.  Hence $X = \lim_{n\to
 \end{solution}
 \end{exercise}
 
-With this, define the load as
-\begin{equation*}
-\rho = \lambda \E B/\mu.
-\end{equation*}
-We require of course that hence we require $\rho< 1$.
 
-
-Let us next find expressions for the expected time batches wait in queue $\E{W_{Q, b}}$. For this, assume that a batch joins the end of the queue (if present), and once the queue in front of it is cleared, the entire batch moves from the queue to the server.
-% Then the server starts serving the batch. As the service of the first item of the batch starts right away, this item does not have to wait. The last item, however, must wait for all the other items of the batch to be served before its service can start. Consequently, all items of a batch, except the first, also have to wait at the server before service starts. 
-
-Suppose a batch finds $\E{L}$ items in the system upon arrival. Then, by the memoryless property of the service distribution, 
-\begin{equation*}
-  \E{W_{Q,b}} = \E{L} \E S;
-\end{equation*}
-compare Eq.~\eqref{eq:wqes}. 
-%Note that this is not the same as $\E{W_Q}$, which is the expected time an \emph{item} spends in queue.
-Next, if $B_r$ is the number of items of the batch currently at the server
-($B_r=0$ if the server is idle), and $L_{Q,b}$ the number of batches
-in queue, we have that
-\begin{equation*}
-  \E{L} = \E{L_{Q,b}}\E B + \E{B_r}.
-\end{equation*}
-\begin{exercise}
-  Combine the above with  Little's law to show that
-  \begin{equation*}
-  \E{W_{Q,b}} = \frac{\E{B_r}}{1-\rho}\E{S}.
-  \end{equation*}
-\begin{solution}
-\begin{equation*}
-  \E{W_{Q,b}} 
-= \E{L} \E S  = (\E{L_{Q,b}}\E B + \E{B_r})\E S.
-\end{equation*}
-With  Little's law, $\E{L_{Q,b}} = \lambda \E{W_{Q,b}}$,
-\begin{equation*}
-  \E{W_{Q,b}} 
-= \lambda \E S \E B \E{W_{Q,b}} + \E S \E{B_r} = \rho \E{W_{Q,b}} + \E S \E{B_r},
-\end{equation*}
-hence,
-\begin{equation*}
-  \E{W_{Q,b}} = \frac{\E{B_r}}{1-\rho}\E S.
-\end{equation*}
-\end{solution}
-\end{exercise}
-
-Below we will find an expression for $\E{B_r}$. This results in two cornerstones of queueing theory. The first is the expected waiting time, 
-\begin{equation}
-\E{W_{Q,b}} = \frac{1+C_s^2}2 \frac{\rho}{1-\rho} \E B \E S + \frac12\frac\rho{1-\rho}\E S,
+The aim of the remainder of the section is to derive two cornerstones of queueing theory.
+The first is the expected  time an item spends in queue:
+\begin{equation}\label{eq:32}
+\E{W_{Q}} = \frac{1+C_s^2}2 \frac{\rho}{1-\rho} \E B \E S + \frac12\frac\rho{1-\rho}\E S,
 \end{equation}
-where  $C_s^2 = \V B / (\E B)^2$ is the SCV of the batch size distribution.
-For the second, apply  Little's law to find  that the expected number of items in the system is
+where $C_s^2$ is the SCV of the batch size distribution.
+We obtain the second by applying~\eqref{eq:wqes}, which evidently also applies here, to the above to find that the expected number of items in the system is
 \begin{equation}\label{eq:43}
-\E{L}  =\frac{\E{W_{Q,b}}}{\E S} =  
+\E{L}  =\frac{\E{W_{Q}}}{\E S} =  
 \frac{1+C_s^2}2 \frac{\rho}{1-\rho} \E B + \frac12\frac\rho{1-\rho}.
 \end{equation}
-Thus, to compute the average number of items in the system, we only
-need to know the first and second moment (or the variance) of the
-batch size $B$. Thus, no matter how `complicated' the distribution of
-$B$, when its second moment exists, the average queue length and
-waiting time can be computed with the above result. 
+Thus, to compute the average number of items in the system, we only need to know the first and second moment (or the variance) of the batch size $B$.
 
-\begin{exercise}[\faFlask]
+
+
+\begin{exercise}\label{ex:5}
   Show that  when the batch size is 1, the expression $\E{L(M^X/M/1)}$, i.e., the system length for the $M^X/M/1$ queue, reduces to
   $\E{L(M/M/1)}$, i.e., the system length for the $M/M/1$ queue. 
   \begin{hint}
@@ -125,10 +74,10 @@ Realize the importance of such checks.
 \end{exercise}
 
 
-\begin{exercise}[\faCalculator]
+\begin{extra}
   What is $\E L$ in case $B_k=3$ always, and $\lambda=1$, $\mu=6$?  
   \begin{hint}
-Use Eq.~\eqref{eq:43}. What are $\E{B^2}$, $\E B$ and $\V B$ for this case?
+Use Eq.~\cref{eq:43}. What are $\E{B^2}$, $\E B$ and $\V B$ for this case?
   \end{hint}
 \begin{solution}
   As $B$ is constant and equal to 3, $\E{B^2}=9$. Hence, $\V B=0$, which implies
@@ -137,9 +86,9 @@ Use Eq.~\eqref{eq:43}. What are $\E{B^2}$, $\E B$ and $\V B$ for this case?
     \E L = \frac 1 2 \frac{1/2}{1-1/2}\cdot 3 + \frac12\frac{1/2}{1-1/2}.
   \end{equation*}
   \end{solution}
-\end{exercise}
+\end{extra}
 
-\begin{exercise}[\faCalculator]
+\begin{exercise}
   If the batch size is $p$ geometrically distributed, what is $\E L$?
   \begin{hint}
 $f_k=q^{k-1}p$ with $q=1-p$. Use generating functions to compute $\E B$ and $\E{B^2}$.
@@ -167,7 +116,7 @@ queue. The result is at least consistent with earlier work.
 \end{solution}
 \end{exercise}
 
-\begin{exercise}[\faPhoto]
+\begin{exercise}\label{ex:64}
   A common operational problem is a machine that receives batches of
   various sizes. Management likes to know how a reduction of the
   variability of the batch sizes would affect the average queueing time.
@@ -175,9 +124,9 @@ queue. The result is at least consistent with earlier work.
   \begin{equation*}
     \P{B=1} = \P{B=2} = \P{B=3} = \frac 13.
   \end{equation*}
-  Batches arrive at rate 1 per hour. The average processing time for an
-  item is $25$ minutes.  By how much would the number of items in de system decrease if
-  batch sizes are constant and equal to~$2$ (observe that in both cases $\E B =2$).
+  Batches arrive at rate 1 per hour.
+  The average processing time for an item is $25$ minutes.
+  Compute by how much the number of items in de system would decreases if batch sizes were constant and equal to~$2$; hence the load is the same in both cases.
   \begin{solution}
     Start with the simple case, $B\equiv 2$. Then $\V{B}=0$ and
     $\E B = 2$. The load is $\rho=\lambda \E B \E S = 1\cdot 2 \cdot 25/60 = 5/6$.  Hence,
@@ -197,119 +146,56 @@ And thus,
     $\E{L}$ for both answers is $10/9$. In other words, we can
     reduce about 10\% of the number of items in the system by working
     in fixed batch sizes. 
+
+Observe how easy it is with these models to get insight into the order of magnitude of queue length reductions or waiting times that can be achieved with changing work habits, such as making batch sizes constant rather than allowing them to vary.
+Observe also that it is up to management to decide whether such reductions outweigh any efforts to reduce the variation in batch sizes.
+
   \end{solution}
-\end{exercise}
 
-Observe how easy it is with these models to get insight into the order
-of magnitude of queue length reductions or waiting times that can be
-achieved with changing work habits, such as making batch sizes constant
-rather than allowing them to vary. Observe also that it is up to
-management to decide whether such reductions outweigh any efforts to
-reduce the variation in batch sizes. 
-
-
-\begin{exercise}[\faFlask]
-  Show that $\E{L(M^X/M/1)} \geq \E{L(M/M/1)}$ when the loads are the
-    same. What do you conclude?
-  \begin{solution}
-    \begin{equation*}
-    \frac{\E{L(M^X/M/1)}}{\E{L(M/M/1)}} = \frac{\E{B_r}}{\rho} = 
-\frac{\E{B^2}}{2\E B} + \frac 12.
-    \end{equation*}
-With this we can check whether this condition
-    \begin{equation*}
-    1\leq \frac{\E{L(M^X/M/1)}}{\E{L(M/M/1)}} = \frac{\E{B^2}}{2\E B} + \frac 12
-    \end{equation*}
-    is always true. Clearly, it reduces to
-\begin{equation*}
-\E B \leq  \E{B^2}.
-\end{equation*}
-Multiply this by $\E B$ for reasons to become clear presently to get
-\begin{equation*}
-(\E B)^2 \leq  \E{B^2} \E B.
-\end{equation*}
-So, the initial inequality is converted to this, and we like to know
-whether this always true.
-
-
-To see this, we can use Jensen's inequality
-$\phi(\E X) \leq \E{\phi(X)}$ when $\phi$ is convex. In this case take
-$\phi(x)=x^2$, so that Jensen's inequality states that
-$(\E B)^2 \leq \E{B^2}$. (BTW, note that Jensen's inequality implies
-that $\V X = \E{X^2} - (\E X)^2\geq 0$.)  Now noting that $B\geq 1$, as a
-job minimally contains one item, we get
-\begin{equation*}
-  \begin{split}
-(\E B)^2 
-&\leq  \E{B^2}, \quad{\text{by Jensen's inequality}} \\
-&\leq   \E{B^2} \E B, \quad{\text{ as } B \geq 1}.
-  \end{split}
-\end{equation*}
-Clearly, this is the inequality we tried to show. As a result,
-    \begin{equation*}
-    1\leq \frac{\E{L(M^X/M/1)}}{\E{L(M/M/1)}}
-    \end{equation*}
-for all $B$. 
-
-In conclusion, if work arrives in batches, the average number of jobs
-in the system increases, hence the average waiting time increases.
-  \end{solution}
 \end{exercise}
 
 
+Let us now focus on deriving expressions for the expected time batches wait in queue $\E{W_{Q}}$.
+Assume that a batch upon arrival joins the end of the queue (if present), and once the queue is cleared, the entire batch moves from the queue to the server.
+Thus, all items in one batch spends the same time in queue.
+Once the batch moves to the server, the server processes the items one after another until the batch is empty.
+Let $\E{L_S}$ be the average number of items of a batch at the server.
 
-\begin{exercise}[\faPhoto]
-  In a production environment, a machine replenishes an inventory of
-  items (e.g., hamburgers) at a fixed rate of $1$ per 3 minutes. If
-  the inventory reaches the \emph{produce-up-to} level $S$, the machine stops.  Customers
-  arrive at rate of 6 per hour. A customer can buy items in different
-  quantities, $B=1,2,3,4$, all with equal probability. What is a
-  sensible value for the produce-up-to level $S$?   
+\begin{exercise}\label{ex:57}
+Show that
+  \begin{equation*}
+  \E{W_{Q}} = \frac{\E{L_S}}{1-\rho}\E{S}.
+  \end{equation*}
   \begin{hint}
-Realize that the inventory process $I(t)$ behaves as     $I(t)=S-L(t)$ where $L(t)$ is a suitable queueing process. Refer to Ex.~\ref{ex:7} for further background.
+    Use~\eqref{eq:wqes}, $\E{L} = \E{L_{Q}}\E B + \E{L_S}$, where $\E{L_{Q}}$ is the number of batches in queue, and Little's law.
   \end{hint}
-  \begin{solution}
-Consider a queueing system with job
-arrival rate $\lambda=6$ per hour and the jobs have batch sizes as
-indicated in the problem. The average number of items in the system
-follows like this:
-    \begin{align*}
-      \E B &= \frac{1+2+3+4}{4} = \frac 52, \\
-      \E{B^2} &= \frac{1+4+9+16}{4} = \frac{30}4,\\
-      \V{B} &= \frac{30}4 - \frac{25}4 = \frac 5 4,\\
-      C_s^2 &= \frac{5/4}{25/4} = \frac 15,\\
-      \rho &= \lambda \E B \E S = 6 \frac 52 \frac 1{20} = \frac 34.
-    \end{align*}
-Hence, 
+\begin{solution}
 \begin{equation*}
-  \E{L} = \frac {1+1/5}2 \frac{3/4}{1/4} \frac 52 + \frac 12 \frac{3/4}{1/4} = 6.
+  \E{W_{Q}} 
+= \E{L} \E S  = (\E{L_{Q}}\E B + \E{L_S})\E S.
 \end{equation*}
-
-Thus, if the level is set to $S=4$, then on average there will be two
-items short. Clearly, then, $S$ should be at least $6$. However,
-$\E{L}$ is just the average. Roughly speaking, in this case half of
-the demand will then be lost. So, if we take variability into account,
-$S$ should be quite a bit bigger than 6. 
-
-A more detailed analysis is
-necessary to determine the right value of $S$ such that not more than
-a certain fraction of demand is lost. We will address this issue in
-Section~\ref{sec:batch-arrivals}.
-  \end{solution}
+With  Little's law, $\E{L_{Q}} = \lambda \E{W_{Q}}$, hence,
+\begin{equation*}
+  \E{W_{Q}} 
+= \lambda \E S \E B \E{W_{Q}} + \E S \E{L_S} = \rho \E{W_{Q}} + \E S \E{L_S},
+\end{equation*}
+hence,
+\begin{equation*}
+  \E{W_{Q}} = \frac{\E{L_S}}{1-\rho}\E S.
+\end{equation*}
+\end{solution}
 \end{exercise}
 
-
-
-We now turn to finding an expression for $\E{B_r}$;  for this we can again use the renewal reward theorem. 
-Let $L_s(s)$ be the number of items (of the batch in service) at the server. Then
+Clearly, it remains to find an expression for $\E{L_S}$; for this we can again use the renewal reward theorem.
+Let $L_S(s)$ be the number of items (of the batch in service) at the server, so that
 \begin{equation*}
   Y_i(t) = \int_0^t \1{L_S(s)=i} \d s
 \end{equation*}
-is the total time up to $t$  there are $i$ items at the server. 
+is the total time up to $t$  there are~$i$ items at the server. 
 
 \begin{exercise}
   Let $\tilde A_k$ be the moment the $k$th batch moves to the server and $D_k$ its departure time.
-  Use Figure~\ref{fig:remainingservicetime} to show that
+  Use~\cref{fig:remainingservicetime} to show that
 \begin{equation*}
   \int_{\tilde A_k}^{D_k} \1{L_S(s)=i} \d s = S_{k,i} \1{B_k \geq i},
 \end{equation*}
@@ -393,12 +279,12 @@ Use the previous exercise to show that
 \end{exercise}
 
 \begin{exercise}
-  Now use the renewal reward theorem to see that the (time-average) fraction of time there are $i$ items at the server is equal to
+  Now use the renewal reward theorem to show that the (time-average) fraction of time there are~$i$ items at the server is equal to
   \begin{equation*}
-    \P{B_r = i} = \lambda \E{S} G(i-1) = \rho \frac{G(i-1)}{\E B}.
+    \P{L_S = i} = \lambda \E{S} G(i-1) = \rho \frac{G(i-1)}{\E B}.
   \end{equation*}
   \begin{solution}
-    By construction, $Y_i(t)/t \to \P{B_r=i}$.
+    By construction, $Y_i(t)/t \to \P{L_S=i}$.
     Let $X_k = Y_i(D_k) - Y_i(D_{k-1})$.
     Then, since the $\{S_{k, i}\}$ are i.i.d. with $\E{S_{k,i}} = \E S$, 
       and the $\{B_k\}$ are i.i.d.,  we obtain from the previous exercise that $X = \lim_{n\to\infty} n^{-1}\sum_{k=1}^n (S_{k,i} \1{B_{k} \geq i}) = \E{S \1{B\geq i}}$.
@@ -409,23 +295,29 @@ Use the previous exercise to show that
 
 With the above exercises we conclude that
 \begin{equation*}
-  \E{B_r} = \sum_{i=0}^\infty i \P{B_r=i} = \frac{\rho}{\E B} \sum_{i=1}^\infty i G(i-1).
+  \E{L_S} = \sum_{i=0}^\infty i \P{L_S=i} = \frac{\rho}{\E B} \sum_{i=1}^\infty i G(i-1).
 \end{equation*}
-It remains to brush up this formula.
+
+\begin{exercise}
+  Brush up the above expression for $\E{L_S}$  to arrive at~\cref{eq:32}.
+  \begin{solution}
+    See \cref{eq:ER}--\cref{q:batch}.
+  \end{solution}
+\end{exercise}
 
 
-\begin{exercise}\label{ex:ER}
+\begin{extra}\label{ex:ER}
   Show that
   \begin{equation*}
   \sum_{i=1}^\infty i G(i-1)= \frac{\E{B^2} + \E B}{2},
 \end{equation*}
 so that
 \begin{equation*}
-  \E{B_r} = \rho \frac{\E{B^2}}{2 \E B} + \frac{\rho}{2}.
+  \E{L_S} = \rho \frac{\E{B^2}}{2 \E B} + \frac{\rho}{2}.
 \end{equation*}
 
   \begin{hint}
-    Use Exercises~\ref{ex:6} and \ref{ex:66}.
+    Use \cref{ex:6} and \cref{ex:66}.
   \end{hint}
   \begin{solution}
 \begin{equation*}
@@ -438,10 +330,10 @@ so that
   \end{split}
 \end{equation*}
   \end{solution}
-\end{exercise}
+\end{extra}
 
 
-\begin{exercise}\label{q:batch}
+\begin{extra}\label{q:batch}
 Finally, 
 \begin{equation*}
 \rho  \frac{\E{B^2}}{2\E{B}} = \frac{1+C_s^2}{2} \rho \E B.
@@ -455,8 +347,57 @@ We have
 &= \frac{\V B + (\E B)^2}{(\E B)^2}\E B = (C_s^2+1)\E B.
 \end{align*}
   \end{solution}
-\end{exercise}
+\end{extra}
 
+
+\begin{exercise}
+  Show that $\E{W_Q(M^X/M/1)} \geq \E{W_Q(M/M/1)}$ when the loads are the same.
+  What do you conclude?
+  \begin{hint}
+Use \cref{ex:5,ex:57}
+  \end{hint}
+  \begin{solution}
+    \begin{equation*}
+    \frac{\E{W_Q(M^X/M/1)}}{\E{W_Q(M/M/1)}} = \frac{\E{L_S(M^X/M/1)}}{\E{L_S(M/M/1)}} = \frac{\E{L_S(M^X/M/1)}}{\rho} = 
+\frac{\E{B^2}}{2\E B} + \frac 12.
+    \end{equation*}
+With this we can check whether this condition
+    \begin{equation*}
+    1\leq \frac{\E{W_Q(M^X/M/1)}}{\E{W_Q(M/M/1)}} = \frac{\E{B^2}}{2\E B} + \frac 12
+    \end{equation*}
+    is always true. Clearly, it reduces to
+\begin{equation*}
+\E B \leq  \E{B^2}.
+\end{equation*}
+Multiply this by $\E B$ for reasons to become clear presently to get
+\begin{equation*}
+(\E B)^2 \leq  \E{B^2} \E B.
+\end{equation*}
+So, the initial inequality is converted to this, and we like to know
+whether this always true.
+
+
+To see this, we can use Jensen's inequality $\phi(\E X) \leq \E{\phi(X)}$ when $\phi$ is convex.
+In this case take $\phi(x)=x^2$, so that Jensen's inequality states that $(\E B)^2 \leq \E{B^2}$.
+(BTW, note that Jensen's inequality implies that $\V X = \E{X^2} - (\E X)^2\geq 0$.)
+Now noting that $B\geq 1$, as a job minimally contains one item, we get
+\begin{equation*}
+  \begin{split}
+(\E B)^2 
+&\leq  \E{B^2}, \quad{\text{by Jensen's inequality}} \\
+&\leq   \E{B^2} \E B, \quad{\text{ as } B \geq 1}.
+  \end{split}
+\end{equation*}
+Clearly, this is the inequality we tried to show. As a result,
+    \begin{equation*}
+    1\leq \frac{\E{W_Q(M^X/M/1)}}{\E{W_Q(M/M/1)}}
+    \end{equation*}
+for all $B$. 
+
+In conclusion, if work arrives in batches, the average number of jobs
+in the system increases, hence the average waiting time increases.
+  \end{solution}
+\end{exercise}
 
 
 

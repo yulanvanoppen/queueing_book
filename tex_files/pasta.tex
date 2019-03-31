@@ -15,12 +15,12 @@ Suppose the following limit exists:
 \frac1m\sum_{k=1}^m \1{L(A_k-) = n},
 \end{equation}
 then $\pi(n)$ is the long-run fraction of jobs that observe $n$ customers in the system at the moment an arbitrary job arrives.
-It is natural to ask whether $\pi(n)$ and $p(n)$, as defined by~\eqref{eq:p(n)}, are related, that is, whether what customers see upon arrival is related to the time-average behavior of the system.
+It is natural to ask whether $\pi(n)$ and $p(n)$, as defined by~\cref{eq:p(n)}, are related, that is, whether what customers see upon arrival is related to the time-average behavior of the system.
 In this section we will derive the famous \recall{Poisson arrivals see time averages} (\recall{PASTA}) condition that ensures that $\pi(n)=p(n)$ if jobs arrive in accordance with a Poisson process.
 
 
 %We can make some progress by rewriting $\pi(n)$ in the following way.
-Since $A(t)\to \infty$ as $t\to\infty$, it is reasonable that (see Exercise~\ref{ex:18} for a proof)
+Since $A(t)\to \infty$ as $t\to\infty$, it is reasonable that (see \cref{ex:18} for a proof)
 \begin{equation}\label{eq:132}
   \begin{split}
   \pi(n) &= \lim_{t\to\infty} \frac1{A(t)}\sum_{k=1}^{A(t)} \1{L(A_k-) = n} 
@@ -28,13 +28,13 @@ Since $A(t)\to \infty$ as $t\to\infty$, it is reasonable that (see Exercise~\ref
   &= \lim_{t\to\infty} \frac{A(n,t)}{A(t)},
   \end{split}
 \end{equation}
-where we use~\eqref{eq:19} in the last row. But,  with~\eqref{eq:3}, 
+where we use~\cref{eq:19} in the last row. But,  with~\cref{eq:3}, 
 \begin{equation}\label{eq:1333}
  \frac{A(n,t)}{t} 
 = \frac{A(t)}t \frac{A(n,t)}{A(t)}
 \to \lambda  \pi(n), \quad\text{as } t \to \infty, 
 \end{equation}
-while by ~\eqref{eq:21}, 
+while by ~\cref{eq:21}, 
 \begin{equation*}
 \frac{A(n,t)}t = \frac{A(n,t)}{Y(n,t)}\frac{Y(n,t)}t \to \lambda(n) p(n), \quad\text{as } t \to \infty.
 \end{equation*}
@@ -57,7 +57,7 @@ Thus, for the $M/M/1$ queue in particular,
   \pi(n) = p(n) = (1-\rho)\rho^n.
 \end{equation*}
 
-\begin{exercise}\label{ex:8} Show that for the case of Exercise~\ref{ex:112} $\pi(0)=1$ and $\pi(n)=0$, for $n>0$.
+\begin{exercise}\label{ex:8} Show for the case of~\cref{ex:112} that $\pi(0)=1$ and $\pi(n)=0$, for $n>0$.
 \begin{solution}
   All arrivals see an empty system. Hence $A(0,t)/A(t) \approx (t/2)/(t/2) = 1$, and $A(n,t)=0$ for $n>0$. Thus, $\pi(0) = \lim_t A(0,t)/A(t) = 1$ and $\pi(n)=0$ for $n>0$. Recall from the other exercises that $p(0)=1/2$. Hence, time average statistics are not the same as statistics at arrival moments. 
 \end{solution}
@@ -65,7 +65,7 @@ Thus, for the $M/M/1$ queue in particular,
 \end{exercise}
 
 \begin{exercise}
-  Check that~(\ref{eq:13})  holds for the system of Exercise~\ref{ex:8}.
+  Check that~\cref{eq:13}  holds for the system of~\cref{ex:8}.
   \begin{solution}
 From the relevant previous exercises, $\lambda = \lim_t A(t)/t = 1/2$. $\lambda(0)=1$, $p(0)=1/2$, and $\pi(0)=1$. Hence,
 \begin{equation*}
@@ -80,23 +80,23 @@ For $n>0$ it's easy, everything is 0.
 
 
 With the above reasoning, we can also establish a relation between $\pi(n)$ and the statistics of the system as obtained by the departures.
-Define, analogous to \eqref{eq:132}, 
+Define, analogous to \cref{eq:132}, 
 \begin{equation}
   \label{eq:33}
   \delta(n) = \lim_{t\to\infty} \frac{D(n,t)}{D(t)}
 \end{equation}
 as the long-run fraction of jobs that leave $n$ jobs \emph{behind}.
-From Eq.~\eqref{eq:15}
+From Eq.~\cref{eq:15}
 %, i.e., $|A(n,t) - D(n,t)| \leq 1$.
 
-%To obtain Eq.~\eqref{eq:12} we divided both sides of this equation by the time the system spends in a certain state.
+%To obtain Eq.~\cref{eq:12} we divided both sides of this equation by the time the system spends in a certain state.
 
 %We can also use another form:
 \begin{equation*}
 \frac{A(t)}t \frac{A(n,t)}{A(t)} = \frac{A(n,t)}t \approx \frac{D(n,t)}t 
 = \frac{D(t)}t \frac{D(n,t)}{D(t)}.
 \end{equation*}
-Taking limits at the left and right, and using~\eqref{eq:28}, we obtain for (queueing) systems in which customers arrive and leave as single units that
+Taking limits at the left and right, and using~\cref{eq:28}, we obtain for (queueing) systems in which customers arrive and leave as single units that
 \begin{equation}
   \label{eq:36}
   \lambda \pi(n) = \delta \delta(n).
@@ -109,12 +109,12 @@ Thus, if the system is rate-stable, statistics obtained  by arrivals is the same
 
 
 \begin{exercise}\label{ex:26}
-  When $\lambda\neq \delta$, is $\pi(n)\geq \delta(n)$ or $\pi(n) < \delta(n)$ true? 
+  When $\lambda\neq \delta$, is $\pi(n)\geq \delta(n)$? 
   \begin{hint}
     Use that    $\lambda \geq \delta$ always holds. Thus, when $\lambda \neq \delta$, it must be that $\lambda > \delta$. What are the consequences of this inequality; how does the queue length behave as a function of time?
   \end{hint}
   \begin{solution}
-    The assumptions lead us to conclude that $\lambda > \delta$. As a consequence, the queue length must increase on the long run (jobs come in faster than they leave). Therefore, $A(n,t)/t \to 0$ for all $n$, and also $D(n,t)/t\to 0$. Consequenly, $\pi(n) = \delta(n) = 0$, which is the only sensible reconciliation with~\eqref{eq:36}. 
+    The assumptions lead us to conclude that $\lambda > \delta$. As a consequence, the queue length must increase on the long run (jobs come in faster than they leave). Therefore, $A(n,t)/t \to 0$ for all $n$, and also $D(n,t)/t\to 0$. Consequenly, $\pi(n) = \delta(n) = 0$, which is the only sensible reconciliation with~\cref{eq:36}. 
   \end{solution}
 \end{exercise}
 
@@ -141,32 +141,7 @@ Check all definitions of $Y(n,t)/t$ and so on.
 \end{solution}
 \end{extra}
 
-
-
-\begin{exercise}
-  Why is $\mu(n) = \mu$ for the $M/M/1$ queue?  
-  \begin{hint}
-Think about the
-    construction of the $M/M/1$ queue as a random walk, see
-    Section~\ref{sec:queu-proc-as}.
-  \end{hint}
- \begin{solution}
-   The $M/M/1$-queue can be constructed as a reflection of the random
-   walk $Z(t) = Z(0) + N_\lambda(t) - N_\mu(t)$. Clearly,
-   down crossings can only occur when $N_\mu$ fires. The rate at which
-   the transitions of $N_\mu$ occur is constant, and, in particular,
-   independent of the history of $Z$. 
-
-   More specifically, for the interested, define
-   $\sigma\{X(t) : t\in I\}$ as the $\sigma$-algebra generated by the
-   stochastic processes $\{X(t), t\in I\}$ on the index set $I$. Then,
-   by construction of $\{N_\lambda(t)\}$ and $\{Z(t)\}$, we have that
-   $\sigma\{Z(s) : s\in[0,t]\}$  and $\sigma\{N_\lambda(u) : u > t\}$ are independent.
- \end{solution}
-\end{exercise}
-
-
-\begin{exercise}
+\begin{extra}\label{ex:58}
   Use PASTA and the balance equations of the $M/M/1$ queue to derive that $(\lambda + \mu) \pi(n) = \lambda \pi(n-1) + \mu \pi(n+1)$.
   \begin{hint}
     Consider some state $n$ (not a level) and count all transitions that `go in and out of' this state.
@@ -184,7 +159,7 @@ By  the hint,  the difference between the `out
       \frac{A(n,t) + D(n-1,t)}t &\approx \frac{A(n-1,t) + D(n, t)}t \iff \\
       \frac{A(n,t)}t + \frac{D(n-1,t)}t &\approx \frac{A(n-1,t)}t + \frac{D(n,t)}t.
     \end{align*}
-Using the ideas of Section~\ref{sec:level-cross-balance} this becomes for $t\to\infty$, 
+Using the ideas of~\cref{sec:level-cross-balance} this becomes for $t\to\infty$, 
 \begin{equation*}
   (\lambda(n) +\mu(n))p(n) = \lambda(n-1)p(n-1) + \mu(n+1)p(n+1).
 \end{equation*}
@@ -192,18 +167,18 @@ Since we are concerned here with the $M/M/1$ queue we have that
 $ \lambda(n) = \lambda$ and $\mu(n) = \mu$, and using PASTA we have
 that $p(n) = \pi(n)$. We are done.
   \end{solution}
-\end{exercise}
+\end{extra}
 
 
 
 
 
 \begin{exercise}\label{ex:18}
-  There is a subtle problem in the transition from~\eqref{eq:jaap} to~\eqref{eq:132} and the derivation of~\eqref{eq:1333}: $\pi(n)$ is defined as a limit over arrival epochs while in $A(n,t)/t$ we take the limit over time.
+  There is a subtle problem in the transition from~\cref{eq:jaap} to~\cref{eq:132} and the derivation of~\cref{eq:1333}: $\pi(n)$ is defined as a limit over arrival epochs while in $A(n,t)/t$ we take the limit over time.
   Now the observant reader might ask why these limits should relate at all.
-  Use the renewal reward theorem to show that~(\ref{eq:132}) is valid.
+  Use the renewal reward theorem to show that~\cref{eq:132} is valid.
 \begin{hint}
-Check that the conditions of the renewal reward theorem are satisfied in the above proof~\eqref{eq:1333}. Then define  
+Check that the conditions of the renewal reward theorem are satisfied in the above proof of~\cref{eq:1333}. Then define  
 \begin{align*}
   Y(t) &:= A(n,t) = \sum_{k=1}^{A(t)} \1{L(A_k-) = n} \\
 X_k &:= Y(A_k) - Y(A_{k-1}) = A(n, A_k) - A(n, A_{k-1}) = \1{L(A_k-)=n}.
@@ -226,7 +201,7 @@ Since $Y=\lim_t Y(t)/t = \lim_t A(n,t)/t$ it follows from the renewal reward the
 \begin{equation*}
   Y=\lambda X \implies \lim_t \frac{A(n,t)} t = \lambda X = \lambda \pi(n).
 \end{equation*}
-Thus, Eq.~\eqref{eq:1333} follows from the renewal reward theorem.
+Thus, Eq.~\cref{eq:1333} follows from the renewal reward theorem.
 \end{solution}
 \end{exercise}
 
@@ -236,7 +211,7 @@ Observing that in a network of queues the departures from one queueing station f
 \begin{exercise}\label{ex:burke}
   Try to prove \recall{Burke's law} which states that the departure process of the $M/M/1$ queue is a Poisson process with rate $\lambda$.
 \begin{solution}
-  The list of extra exercises, see the companion file, show that inter-departures times have the same density, i.e., $\lambda e^{-\lambda t}$.
+  \cref{ex:dep} to \cref{ex:63} show that inter-departures times have the same density, i.e., $\lambda e^{-\lambda t}$.
   It can also be shown that the inter-departure times are independent.
 
 Thus, the inter-departures times form a set of i.i.d.
@@ -259,7 +234,7 @@ Jobs arrive at rate $\lambda$. For a stable queue, $\mu>\lambda$. Moreover,  job
 \begin{extra}
   Why is $\mu e^{-\mu t}$ not a reasonable density for the inter-departure times?
   In fact, the simplest guess for the inter-departure density might be $\lambda e^{-\lambda t}$; so this is what we will try to prove below.
-We will focus on departure moments and use~\eqref{eq:39}, in particular that departures `see' what arrivals `see', i.e., $\delta(n)= \pi(n)$, and PASTA.
+We will focus on departure moments and use~\cref{eq:39}, in particular that departures `see' what arrivals `see', i.e., $\delta(n)= \pi(n)$, and PASTA.
 \begin{solution}
          Because jobs do not leave at rate $\mu$. 
     \end{solution}
@@ -339,7 +314,7 @@ After the departure, the server can start right away with the job at the head of
     \end{solution}
 \end{extra}
 
-\begin{extra}
+\begin{extra}\label{ex:63}
 Use conditioning on the server being idle or busy at a departure to show that  the density of  the inter-departure time is $\lambda e^{-\lambda t}$.
   \begin{hint}
 Conditioning leads to 

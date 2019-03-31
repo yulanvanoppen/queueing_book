@@ -58,12 +58,12 @@ e^x &= \lim_{n\to\infty} (1+x/n)^n, \label{eq:65}\\
 \end{align}
 \end{subequations}
 
-\begin{exercise}%\[faFlask]
+\begin{extra}
   Why is $e^{x} = 1 +x + o(x)$?
   \begin{solution}
-    When $|x|\ll 1$, the  terms with $n\geq 2$ in~\eqref{eq:76} are $x^n = o(x)$. Then applying $x^n + x^m = o(x)$ to the Taylor series gives the result.
+    When $|x|\ll 1$, the  terms with $n\geq 2$ in~\cref{eq:76} are $x^n = o(x)$. Then applying $x^n + x^m = o(x)$ to the Taylor series gives the result.
   \end{solution}
-\end{exercise}
+\end{extra}
 
 
 You should know that for a non-negative, integer-valued random variable $X$ with  \recall{probability mass function} $f(k)= \P{X = k} = f(k)$, 
@@ -77,14 +77,14 @@ X&=\sum_{n=0}^\infty X\1{X=n} = \sum_{n=0}^\infty n \1{X=n},   \label{eq:77} \\
 \end{align}
 \end{subequations}
 
-\begin{exercise}%\[faFlask]
-  Why is~\eqref{eq:77} true?
+\begin{extra}
+  Why is~\cref{eq:77} true?
   \begin{solution}
-To see~\eqref{eq:77}, note first that $X\1{X=n} = n\1{X=n}$ because $X=n$ when $\1{X=n} =1$, and second that $\sum_{n=0}^\infty \1{X=n} =1$, since $X$ takes one of the values in $\N$, and events $\{X=n\}$ and $\{X=m\}$ are non-overlapping when $n\neq m$. 
+To see~\cref{eq:77}, note first that $X\1{X=n} = n\1{X=n}$ because $X=n$ when $\1{X=n} =1$, and second that $\sum_{n=0}^\infty \1{X=n} =1$, since $X$ takes one of the values in $\N$, and events $\{X=n\}$ and $\{X=m\}$ are non-overlapping when $n\neq m$. 
   \end{solution}
-\end{exercise}
+\end{extra}
 
-\begin{exercise}%\[faFlask]
+\begin{exercise}
 Define  \recall{survivor function} of $X$ as $G(k) = \P{X>k}$. Show that
 \begin{equation*}
   G(k) = \sum_{m=0}^\infty \1{m>k} f(m).
@@ -92,7 +92,7 @@ Define  \recall{survivor function} of $X$ as $G(k) = \P{X>k}$. Show that
 As you will see, this idea  makes the computation of certain expressions quite a bit easier. 
 \end{exercise}
 
-\begin{exercise}\label{ex:5}
+\begin{extra}
   Express the probability mass  $f(k)$ and the survivor function $G(k)$ in terms of the \recall{distribution function} $F(k)=\P{X\leq k}$ of $X$.
   \begin{hint}
 This exercise is just meant to become familiar with the notation.
@@ -103,9 +103,9 @@ This exercise is just meant to become familiar with the notation.
     G(k) &= \P{X>k} = 1 - \P{X\leq k} = 1-F(k).        
     \end{align*}
   \end{solution}
-\end{exercise}
+\end{extra}
 
-\begin{extra}%\[faFlask]
+\begin{extra}
   Which of the following is true: $G(k) = 1-F(k)$, $G(k) = 1-F(k-1)$, or $G(k) = 1-F(k+1)$?
   \begin{solution}
   $G(k) = 1- F(k) = 1-\P{X\leq k} = \P{X>k}$. 
@@ -117,7 +117,7 @@ This exercise is just meant to become familiar with the notation.
 \end{extra}
 
 
-\begin{exercise}\label{ex:6}
+\begin{extra}\label{ex:6}
  Use indicator functions to prove that $\E X =  \sum_{k=0}^\infty G(k)$.
     \begin{hint}
 Write 
@@ -140,7 +140,7 @@ In case you are interested in mathematical justifications: the interchange of th
 (Interchanging the order of summations or integration is not always allowed because the results can be different when part of the integrand is negative.
 Check Fubini's theorem for more on this if you are interested.)
 \end{solution}
-\end{exercise}
+\end{extra}
 
 \begin{exercise}\label{ex:66}
  Use indicator functions to prove that
@@ -173,7 +173,7 @@ for the expectation of $X$. Here $\d F(x)$ acts as a shorthand for $f(x) \d x$\f
 
 
 
-\begin{exercise}%\[faCalculator]
+\begin{exercise}
  Use indicator functions to prove that 
 $   \E X = \int_0^\infty x \d F(x)  = \int_0^\infty G(y) \d y,$
 where $G(x) = 1 - F(x)$. 
@@ -193,11 +193,8 @@ $\E X = \int_0^\infty x \d F(x)  = \int_0^\infty \int_0^\infty 1_{y\leq x} \d y 
 
 You should be able to use indicator functions and integration by parts to show that $\E{X^2} = 2\int_0^\infty y G(y) \d y$, where $G(x) = 1- F(x)$, provide the second moment exists.
 
-\begin{exercise}%\[faCalculator]
- Use \emph{indicator functions} to prove that for a continuous non-negative random
-    variable $X$ with distribution function $F$, 
-$    \E{X^2} = \int_0^\infty x^2 \d F(x)  = 2 \int_0^\infty y G(y) \d y,$
-where $G(x) = 1 - F(x)$. 
+\begin{extra}
+  Use indicator functions to prove that for a continuous non-negative random variable $X$ with distribution function $F$, $ \E{X^2} = \int_0^\infty x^2 \d F(x) = 2 \int_0^\infty y G(y) \d y,$ where $G(x) = 1 - F(x)$.
 \begin{hint}
 $\int_0^\infty y G(y) \d y = \int_0^\infty y \int_0^\infty \1{y\leq x}f(x)\, \d x \d y$.
 \end{hint}
@@ -210,12 +207,10 @@ $\int_0^\infty y G(y) \d y = \int_0^\infty y \int_0^\infty \1{y\leq x}f(x)\, \d 
 &=  \int_0^\infty f(x) \frac{x^2}2 \d x =\frac{\E{X^2}}2.
   \end{align*}
 \end{solution}
-\end{exercise}
+\end{extra}
 
-\begin{exercise}%\[faCalculator]
- Now use \emph{integration by parts} to show that for a continuous non-negative random
-    variable $X$ with distribution function $F$ and survivor function $G=1-F$, 
-$\int_0^\infty y G(y) \d y = \E{X^2}/2,$
+\begin{exercise}
+  Now use integration by parts to show that for a continuous non-negative random variable $X$ with distribution function $F$ and survivor function $G=1-F$, $\int_0^\infty y G(y) \d y = \E{X^2}/2$.
 \begin{solution}
   \begin{equation}
       \int_0^\infty y G(y) \d y 
@@ -237,12 +232,12 @@ M_{X+Y}(s) &= M_X(s)\cdot M_Y(s), \quad \text{  if $X$ and $Y$ are independent},
 \end{align}
 \end{subequations}
 
-\begin{exercise}%\[faFlask]
+\begin{extra}
   What is $M_X(0)?$
   \begin{solution}
     $M_X(0) = \E{e^{0 X}} = \E{e^0} = \E{1} = 1.$
   \end{solution}
-\end{exercise}
+\end{extra}
 
 To help you recall the concept of \recall{conditional probability} consider the following question.
 \begin{exercise}%\[faPhoto]

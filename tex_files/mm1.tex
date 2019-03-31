@@ -219,6 +219,38 @@ $\P{L\geq n} = \sum_{k\geq n} p(k)$.
 \end{extra}
 
 
+\begin{extra}
+  Explain that for the $M/M/1$ queue $\E{L_Q} = \sum_{n=1}^\infty (n-1)\pi(n)$ and use this to find that $\E{L_Q}=\rho^2/(1-\rho)$.
+  \begin{solution}
+    The fraction of time the system contains $n$ jobs is $\pi(n)$ (by
+    PASTA). When the system contains $n>0$ jobs, the number in queue
+    is one less, i.e., $n-1$.
+
+    \begin{equation*}
+      \begin{split}
+\E{L_Q} 
+&= \sum_{n=1}^\infty (n-1)\pi(n) 
+= (1-\rho)\sum_{n=1}^\infty (n-1) \rho^n\\
+&= \rho (1-\rho)\sum_{n=1}^\infty (n-1) \rho^{n-1}
+= \rho \sum_{n=1}^\infty (n-1) \pi(n-1)\\
+&= \rho \sum_{n=0}^\infty n \pi(n)
+= \rho \frac{\rho}{1-\rho}.
+      \end{split}
+    \end{equation*}
+
+Another way to get the same result is by splitting: 
+\begin{equation*}
+  \begin{split}
+\E{L_Q} 
+&= \sum_{n=1}^\infty (n-1)\pi(n) 
+=\sum_{n=1}^\infty n\pi(n) -\sum_{n=1}^\infty \pi(n)\\
+&= \E L - (1-\pi(0)) = \E L - \rho.
+  \end{split}
+\end{equation*}
+  \end{solution}
+\end{extra}
+
+
 Let us interpret expression~\eqref{eq:el}.
 The fact that $\E L \sim (1-\rho)^{-1}$ for $\rho\to 1$ implies that the average waiting time increases very fast when $\rho\to1$.
 If we want to avoid long waiting times, this formula tells us that situations with $\rho\approx 1$ should be avoided.
